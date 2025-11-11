@@ -1,3 +1,12 @@
 LLM:
   model_name: "deepseek-r1:latest"
-  api_url_gen: "http://192.168.0.169:11434/api/generate"
+  api_url_chat: "http://192.168.0.169:11434/api/chat"
+  fix_retries: 10
+prompts:
+  testcase_gen: "prompts/testcase_gen"
+  fix_testcase: "prompts/fix_testcase"
+commands:
+  cargo: "cargo"
+testcase:
+  count: 3
+  base_path: "testcases"

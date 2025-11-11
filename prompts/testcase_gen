@@ -1,0 +1,27 @@
+# Task Description
+
+As a professional Rust developer, you are given an API documentation of a rust library. You need to generate a program that uses this library satisfying the following requirements:
+
+- The program should cover the main functionalities of the library.
+- The program should read input from the user and produce output based on that input.
+- The program should only be written in one file with function `main`.
+- Both the program and the dependencies should be outputted.
+
+# Output Format
+
+The output should be in json format with two fields: "code" and "dependencies". The code field should contain the complete code of the program. The dependencies field should list all the dependencies required to run the code.
+
+The format of dependencies should be in toml format as used in Cargo.toml files.
+
+## Example output
+
+```json
+{
+  "code": "use tokio;\n\n#[tokio::main]\nasync fn main() {\n    println!(\"Hello, world!\");\n}\n",
+  "dependencies": "[dependencies]\ntokio = { version = \"1\", features = [\"full\"] }\n"
+}
+```
+
+# API documentation:
+
+{api_doc}
