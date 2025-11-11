@@ -1,4 +1,4 @@
-use tracing::{error, info, span};
+use tracing::{error, info, span, warn};
 use tracing_subscriber::{EnvFilter, fmt::writer::MakeWriterExt};
 
 use crate::error::Result;
@@ -20,24 +20,35 @@ async fn main() {
 }
 
 async fn test_crate(crate_name: &str) -> Result<()> {
+    info!("Preparing to generate testcases for crate {}", crate_name);
     let count = utils::config().get_int("testcase.count")? as u32;
     let base_path = utils::config().get_string("testcase.base_path")?;
     let base_path = std::path::Path::new(&base_path);
     let llm_model = utils::config().get_string("LLM.model_name")?;
     let llm_api_url = utils::config().get_string("LLM.api_url_chat")?;
 
+    info!("Preparation complete, starting testcase generation for crate {}", crate_name);
     let mut testcases = vec![];
     for i in 0..count {
         info!("Generating testcase {}/{} for crate {}", i + 1, count, crate_name);
         span!(tracing::Level::INFO, "Testcase", testcase_index = i + 1, total_testcases = count, crate = crate_name);
         let llm_client = llm::LLMClient::new(&llm_model, &llm_api_url);        
-        let testcase = testcase::Testcase::new(base_path, &format!("{}_{}", crate_name, i), crate_name, llm_client).await?;
-        testcases.push(testcase);
+        let testcase = testcase::Testcase::new(base_path, &format!("{}_{}", crate_name, i), crate_name, llm_client).await;
+        if let Err(e) = &testcase {
+            warn!("Error occurred while generating testcase: {}, skipping...", e);
+            continue;
+        }
+        testcases.push(testcase.unwrap());
     }
-
+    info!("{} testcases generated successfully for crate {}",testcases.len(), crate_name);
     let merged = testcase::Testcase::merge_from(&testcases, llm::LLMClient::new(&llm_model, &llm_api_url)).await?;
     testcases.push(merged);
 
+    info!("Generating inputs for all testcases");
+    for testcase in &testcases {
+        testcase.generate_inputs(std::path::Path::new("inputs"), llm::LLMClient::new(&llm_model, &llm_api_url)).await?;
+    }
+    info!("Input generation completed for all testcases");
     Ok(())
 }
 

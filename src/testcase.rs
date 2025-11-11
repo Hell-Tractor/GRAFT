@@ -92,6 +92,49 @@ impl Testcase {
 
     #[allow(unused)]
     pub async fn merge_from(testcases: &[Testcase], mut llm: LLMClient) -> Result<Self> {
+        info!("Merging {} testcases", testcases.len());
+        info!("Successfully merged testcases");
         todo!()
+    }
+
+    pub async fn generate_inputs(&self, relative_dir: &Path, mut llm: LLMClient) -> Result<()> {
+        // read prompt template
+        let prompt_path = utils::config().get_string("prompts.input_gen")?;
+        let mut prompt_template = String::new();
+        let mut file = File::open(prompt_path)?;
+        file.read_to_string(&mut prompt_template)?;
+
+        let input_count = utils::config().get_int("testcase.input_count")? as u32;
+
+        // read code snippet from main.rs
+        let path = self.path.join("src").join("main.rs");
+        let mut code_snippet = String::new();
+        let mut file = File::open(&path)?;
+        file.read_to_string(&mut code_snippet)?;
+
+        let prompt = prompt_template
+            .replace("{crate_name}", &self.target_crate)
+            .replace("{count}", &input_count.to_string())
+            .replace("{code_snippet}", &code_snippet);
+
+        let retries = utils::config().get_int("LLM.input_gen_retries")? as u32;
+        for i in 0..retries {
+            let response = llm.generate_response(&prompt).await?;
+            let Ok(inputs) = serde_json::from_str::<Vec<String>>(&response.message.content) else {
+                info!("LLM response for input generation is not valid JSON, retrying...({} time(s) left)", retries - i - 1);
+                continue;
+            };
+
+            let input_dir = self.path.join(relative_dir);
+            if !input_dir.exists() {
+                std::fs::create_dir_all(&input_dir)?;
+            }
+            for (index, input) in inputs.iter().enumerate() {
+                let input_path = input_dir.join(format!("input_{}", index));
+                std::fs::write(input_path, input)?;
+            }
+            break;
+        }
+        Ok(())
     }
 }

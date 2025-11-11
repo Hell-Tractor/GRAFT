@@ -1,0 +1,28 @@
+# Task Description
+
+As a professional Rust developer, you're given the following code snippets which is used to test Rust crate `{crate_name}`. The code read some inputs from stdin. Your task is to generate {count} different test inputs that can be used to test the crate. All the following requirements should be met:
+
+- Each input should be unique and not a duplicate of any other input.
+- Each input should be valid according to the expected input format of the program.
+- The inputs should cover a wide range of scenarios, including edge cases, typical cases, and error cases.
+- Each input should be concise, ideally not exceeding 200 characters.
+
+# Output Format
+
+The output should be in json array format, where each element is a string representing a test input.
+
+## Example output
+
+```json
+[
+  "input1",
+  "input2",
+  "input3"
+]
+```
+
+# Code Snippet
+
+```rust
+{code_snippet}
+```
