@@ -1,5 +1,8 @@
+use std::{collections::BTreeMap, sync::Arc};
+
 use tracing::{error, info, span, warn};
 use tracing_subscriber::{EnvFilter, fmt::writer::MakeWriterExt};
+use trustfall::FieldValue;
 
 use crate::{document::get_api_documentation, error::Result};
 
@@ -11,13 +14,13 @@ mod document;
 
 #[tokio::main]
 async fn main() {
-    let _ = init_logger();
-    // test().await;
+    init_logger();
+    test().await;
 
-    const TARGET_CRATE: &str = "base64";
-    if let Err(e) = test_crate(TARGET_CRATE).await {
-        error!("Error occurred: {}", e);
-    }
+    // const TARGET_CRATE: &str = "base64";
+    // if let Err(e) = test_crate(TARGET_CRATE).await {
+    //     error!("Error occurred: {}", e);
+    // }
 }
 
 #[allow(unused)]
@@ -28,8 +31,61 @@ async fn test() {
     } else {
         println!("Documentation fetched successfully");
         let mut result = result.unwrap();
-        // save to temp.html
-        std::fs::write("temp.html", &result).unwrap();
+        // std::fs::write("temp.json", &result).unwrap();
+        use trustfall_rustdoc_adapter::*;
+        let krate: trustfall_rustdoc_adapter::Crate = serde_json::from_str(&result).unwrap();
+        let current_index = PackageIndex::from_crate(&krate);
+        let adapter = Arc::new(RustdocAdapter::new(&current_index, None));
+        let query = r###"
+{
+  Crate {
+    item {
+      ... on Struct {
+        canonical_path {
+            path @output(name: "full_path")
+        }
+        impl {
+            # 假设 Impl 块内部的方法通过 'associated_item' 边访问
+            method {
+                public_api_eligible @filter(op: "=", value: ["$v"])
+                signature @output(name: "method")
+                name @output(name: "method_name")
+                #path @output(name: "full_path")
+            }
+        }
+      }
+    }
+  }
+}
+"###;
+
+/*
+      ... on Function {
+        importable_path {
+          public_api @filter(op: "=", value: ["$v"])
+          path @output(name: "full_path")
+        }
+      }
+       */
+        let mut variables: BTreeMap<Arc<str>, FieldValue> = BTreeMap::new();
+        variables.insert("v".into(), FieldValue::Boolean(true));
+        // variables.insert("$kind".into(), FieldValue::String("function".into()));
+        let results = trustfall::execute_query(RustdocAdapter::schema(), (&*adapter).into(), query, variables);
+        match results {
+            Ok(mut results) => {
+                for result in results {
+                    let path = result.get("full_path").unwrap().as_slice().unwrap().iter()
+                        .map(|s| s.as_str().unwrap().to_string())
+                        .collect::<Vec<String>>()
+                        .join("::");
+                    let name = result.get("method_name").unwrap().as_str().unwrap();
+                    println!("{}::{}", path, name);
+                }
+            }
+            Err(e) => {
+                println!("Query error: {}", e);
+            }
+        }
     }
 }
 
@@ -46,7 +102,8 @@ async fn test_crate(crate_name: &str) -> Result<()> {
     let mut testcases = vec![];
     for i in 0..count {
         info!("Generating testcase {}/{} for crate {}", i + 1, count, crate_name);
-        span!(tracing::Level::INFO, "Testcase", testcase_index = i + 1, total_testcases = count, crate = crate_name);
+        let span = span!(tracing::Level::INFO, "Testcase", testcase_index = i + 1, total_testcases = count, crate = crate_name);
+        let _ = span.enter();
         let llm_client = llm::LLMClient::new(&llm_model, &llm_api_url);        
         let testcase = testcase::Testcase::new(base_path, &format!("{}_{}", crate_name, i), crate_name, llm_client).await;
         if let Err(e) = &testcase {
@@ -81,9 +138,10 @@ async fn test_crate(crate_name: &str) -> Result<()> {
     Ok(())
 }
 
-fn init_logger() -> tracing_appender::non_blocking::WorkerGuard {
+fn init_logger() {
     let file_appender = tracing_appender::rolling::daily("logs", "latest.log");
     let (file_writer, guard) = tracing_appender::non_blocking(file_appender);
+    std::mem::forget(guard);
     let subscriber = tracing_subscriber::fmt()
         .with_writer(file_writer.and(std::io::stderr))
         .with_max_level(tracing::Level::DEBUG)
@@ -91,5 +149,4 @@ fn init_logger() -> tracing_appender::non_blocking::WorkerGuard {
         .finish();
     tracing::subscriber::set_global_default(subscriber).expect("Failed to set global subscriber");
     info!("Logger initialized");
-    guard
 }

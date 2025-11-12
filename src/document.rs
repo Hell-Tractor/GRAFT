@@ -1,38 +1,12 @@
-use std::{io::Read, path::Path};
+use std::path::Path;
 
 use tracing::{info, instrument};
 
 use crate::{error::Result, utils};
 
-struct TempProject {
-    project_path: Box<Path>,
-}
+mod query;
+mod api;
 
-impl TempProject {
-    fn new(base_path: &Path, name: &str) -> Result<Self> {
-        let cargo = utils::config().get_string("commands.cargo")?;
-        // create a temporary rust project
-        let output = std::process::Command::new(&cargo)
-            .arg("new").arg(&name).arg("--vcs").arg("none")
-            .current_dir(base_path)
-            .output()?;
-        if !output.status.success() {
-            return Err(crate::error::Error::CommandError(format!("Failed to create temporary project: {}", String::from_utf8_lossy(&output.stderr))));
-        }
-        Ok(TempProject { project_path: base_path.join(name).into() })
-    }
-}
-
-impl Drop for TempProject {
-    fn drop(&mut self) {
-        // clean up the temporary project
-        if self.project_path.exists() {
-            let _ = std::fs::remove_dir_all(&self.project_path);
-        }
-    }
-}
-
-// * TESTED
 /// Fetch the API documentation of a crate in JSON format
 /// # Arguments
 /// * `crate_name` - The name of the crate to fetch documentation for
@@ -65,21 +39,42 @@ pub fn get_api_documentation(crate_name: &str) -> Result<String> {
         .arg("--output-format").arg("json").arg("-Z").arg("unstable-options")
         .current_dir(&project_path)
         .output()?;
-    // let output = std::process::Command::new(&cargo)
-    //     .arg("doc").arg("-p").arg(crate_name).arg("--no-deps")
-    //     .arg("--color").arg("never")
-    //     .current_dir(&project_path)
-    //     .output()?;
     if !output.status.success() {
         return Err(crate::error::Error::CommandError(format!("Failed to generate documentation: {}", String::from_utf8_lossy(&output.stderr))));
     }
 
     // read the generated JSON file
     let doc_path = project_path.join("target/doc").join(format!("{}.json", crate_name.replace("-", "_")));
-    let mut doc_file = std::fs::File::open(&doc_path)?;
-    let mut doc_content = String::new();
-    doc_file.read_to_string(&mut doc_content)?;
+    let doc_content = utils::read_file_to_string(doc_path)?;
     
     info!("Successfully fetched API documentation for crate");
     Ok(doc_content)
+}
+
+struct TempProject {
+    project_path: Box<Path>,
+}
+
+impl TempProject {
+    fn new(base_path: &Path, name: &str) -> Result<Self> {
+        let cargo = utils::config().get_string("commands.cargo")?;
+        // create a temporary rust project
+        let output = std::process::Command::new(&cargo)
+            .arg("new").arg(&name).arg("--vcs").arg("none")
+            .current_dir(base_path)
+            .output()?;
+        if !output.status.success() {
+            return Err(crate::error::Error::CommandError(format!("Failed to create temporary project: {}", String::from_utf8_lossy(&output.stderr))));
+        }
+        Ok(TempProject { project_path: base_path.join(name).into() })
+    }
+}
+
+impl Drop for TempProject {
+    fn drop(&mut self) {
+        // clean up the temporary project
+        if self.project_path.exists() {
+            let _ = std::fs::remove_dir_all(&self.project_path);
+        }
+    }
 }

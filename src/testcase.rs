@@ -2,6 +2,7 @@ use std::fs::File;
 use std::io::Read;
 use std::path::Path;
 use tracing::{debug, info, span};
+use tracing_subscriber::util;
 
 use crate::document::get_api_documentation;
 use crate::error::{Error, Result};
@@ -23,17 +24,11 @@ struct CodeAndDependencies {
 
 impl Testcase {
     pub async fn new(path: &Path, name: &str, target_crate: &str, mut llm: LLMClient) -> Result<Self> {
-        // create path if not exists
-        if !path.exists() {
-            std::fs::create_dir_all(path)?;
-        }
-
-        // remove project if exists
         let project_path = path.join(name);
         if path.exists() {
-            info!("Project path {} already exists, removing...", project_path.display());
-            std::fs::remove_dir_all(&project_path)?;
+            std::fs::remove_dir_all(path)?;
         }
+        std::fs::create_dir_all(path)?;
 
         // create project
         info!("Creating new cargo project `{}` at {}", name, project_path.display());
@@ -58,18 +53,13 @@ impl Testcase {
     async fn generate(name: &str, main_path: &Path, cargo_path: &Path, api_doc: &str, llm: &mut LLMClient) -> Result<()>{
         let prompt_path = utils::config().get_string("prompts.testcase_gen")?;
         // read prompt template
-        let mut prompt = String::new();
-        let mut file = File::open(prompt_path)?;
-        file.read_to_string(&mut prompt)?;
+        let prompt = utils::read_file_to_string(prompt_path)?;
 
         // read fix prompt template
         let fix_prompt_path = utils::config().get_string("prompts.fix_testcase")?;
-        let mut fix_prompt = String::new();
-        let mut fix_file = File::open(fix_prompt_path)?;
-        fix_file.read_to_string(&mut fix_prompt)?;
-        let fix_prompt = fix_prompt;
+        let fix_prompt = utils::read_file_to_string(fix_prompt_path)?;
 
-        prompt = prompt.replace("{api_doc}", api_doc);
+        let mut prompt = prompt.replace("{api_doc}", api_doc);
         let cargo = utils::config().get_string("commands.cargo")?;
         let retries = utils::config().get_int("LLM.fix_retries")? as u32;
         for i in 0..retries {
@@ -116,17 +106,13 @@ impl Testcase {
     pub async fn generate_inputs(&self, relative_dir: &Path, mut llm: LLMClient) -> Result<()> {
         // read prompt template
         let prompt_path = utils::config().get_string("prompts.input_gen")?;
-        let mut prompt_template = String::new();
-        let mut file = File::open(prompt_path)?;
-        file.read_to_string(&mut prompt_template)?;
+        let prompt_template = utils::read_file_to_string(prompt_path)?;
 
         let input_count = utils::config().get_int("testcase.input_count")? as u32;
 
         // read code snippet from main.rs
         let path = self.path.join("src").join("main.rs");
-        let mut code_snippet = String::new();
-        let mut file = File::open(&path)?;
-        file.read_to_string(&mut code_snippet)?;
+        let code_snippet = utils::read_file_to_string(path)?;
 
         let prompt = prompt_template
             .replace("{crate_name}", &self.target_crate)

@@ -11,3 +11,12 @@ pub fn config() -> &'static Config {
             .build().unwrap()
     })
 }
+
+pub fn read_file_to_string<P>(path: P) -> std::io::Result<String>
+    where P: AsRef<std::path::Path> {
+    let mut file = std::fs::File::open(path)?;
+    let mut contents = String::new();
+    use std::io::Read;
+    file.read_to_string(&mut contents)?;
+    Ok(contents)
+}

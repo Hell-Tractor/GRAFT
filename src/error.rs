@@ -10,6 +10,10 @@ pub enum Error {
     CodeGenerationError(String, u32),
     #[error("Command execution failed: {0}")]
     CommandError(String),
+    #[error(transparent)]
+    SerdeError(#[from] serde_json::Error),
+    #[error("{0}")]
+    TrustfallQueryError(String),
 }
 
 pub type Result<T> = std::result::Result<T, Error>;
