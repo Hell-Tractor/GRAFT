@@ -1,7 +1,7 @@
 use tracing::{error, info, span, warn};
 use tracing_subscriber::{EnvFilter, fmt::writer::MakeWriterExt};
 
-use crate::error::Result;
+use crate::{document::get_api_documentation, error::Result};
 
 mod utils;
 mod llm;
@@ -12,13 +12,28 @@ mod document;
 #[tokio::main]
 async fn main() {
     let _ = init_logger();
-    
-    const TARGET_CRATE: &str = "serde";
-    if let Err(e) = test_crate(TARGET_CRATE).await {
-        error!("Error occurred: {}", e);
+    test().await;
+
+    // const TARGET_CRATE: &str = "base64";
+    // if let Err(e) = test_crate(TARGET_CRATE).await {
+    //     error!("Error occurred: {}", e);
+    // }
+}
+
+#[allow(unused)]
+async fn test() {
+    let result = get_api_documentation("base64");
+    if let Err(e) = result {
+        println!("Error: {}", e);
+    } else {
+        println!("Documentation fetched successfully");
+        let mut result = result.unwrap();
+        // save to temp.html
+        std::fs::write("temp.html", &result).unwrap();
     }
 }
 
+#[allow(unused)]
 async fn test_crate(crate_name: &str) -> Result<()> {
     info!("Preparing to generate testcases for crate {}", crate_name);
     let count = utils::config().get_int("testcase.count")? as u32;

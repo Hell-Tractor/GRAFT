@@ -7,7 +7,9 @@ pub enum Error {
     #[error(transparent)]
     IoError(#[from] std::io::Error),
     #[error("LLM generation failed for project `{0}` after {1} retries")]
-    CodeGenerationError(String, u32)
+    CodeGenerationError(String, u32),
+    #[error("Command execution failed: {0}")]
+    CommandError(String),
 }
 
 pub type Result<T> = std::result::Result<T, Error>;

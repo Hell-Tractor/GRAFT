@@ -13,3 +13,6 @@ testcase:
   count: 3
   input_count: 10
   base_path: "testcases"
+doc:
+  temp_project_path: "./"
+  temp_project_name: "temp_doc_project"

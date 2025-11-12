@@ -28,18 +28,29 @@ impl Testcase {
             std::fs::create_dir_all(path)?;
         }
 
+        // remove project if exists
+        let project_path = path.join(name);
+        if path.exists() {
+            info!("Project path {} already exists, removing...", project_path.display());
+            std::fs::remove_dir_all(&project_path)?;
+        }
+
         // create project
+        info!("Creating new cargo project `{}` at {}", name, project_path.display());
         let cargo = utils::config().get_string("commands.cargo")?;
         std::process::Command::new(&cargo)
             .arg("new").arg(name).arg("--vcs").arg("none")
             .current_dir(path)
             .output()?;
+        info!("Project `{}` created successfully", name);
         
         // generate testcase
+        info!("Generating testcase for project `{}`", name);
         let api_doc = get_api_documentation(target_crate)?;
-        let main_path = path.join(name).join("src/main.rs");
-        let cargo_path = path.join(name).join("Cargo.toml");
+        let main_path = project_path.join("src/main.rs");
+        let cargo_path = project_path.join("Cargo.toml");
         Testcase::generate(name, &main_path, &cargo_path, &api_doc, &mut llm).await?;
+        info!("Testcase for project `{}` generated successfully", name);
 
         Ok(Testcase { path: path.join(name).into(), target_crate: target_crate.to_string() })
     }
@@ -63,10 +74,15 @@ impl Testcase {
         let retries = utils::config().get_int("LLM.fix_retries")? as u32;
         for i in 0..retries {
             let response = llm.generate_response(&prompt).await?;
-            let Ok(code_and_deps) = serde_json::from_str::<CodeAndDependencies>(&response.message.content) else {
+            let code_and_deps = serde_json::from_str::<CodeAndDependencies>(&response.message.content);
+            if let Err(e) = &code_and_deps {
                 info!("LLM response of project `{}` is not valid JSON, retrying...({} time(s) left)", name, retries - i - 1);
+                debug!("LLM response content: {}", response.message.content);
+                debug!("JSON parsing error: {}", e);
+                llm.clear();
                 continue;
             };
+            let code_and_deps = code_and_deps.unwrap();
             // write code and dependencies
             std::fs::write(main_path, code_and_deps.code)?;
             std::fs::write(cargo_path, code_and_deps.dependencies)?;

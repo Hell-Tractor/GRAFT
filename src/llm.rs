@@ -1,3 +1,5 @@
+use tracing::{debug, info};
+
 use crate::error::Result;
 
 #[derive(serde::Deserialize, serde::Serialize, Clone, Debug)]
@@ -60,6 +62,7 @@ impl LLMClient {
                 "think": true,
                 "format": "json",
             });
+        info!("Requesting LLM with model `{}`, it may take some time...", self.model_name);
         let resp: LLMResponse = self.client.post(&self.api_url_chat)
             .json(&request_body).send()
             .await?
@@ -67,5 +70,10 @@ impl LLMClient {
             .await?;
         self.messages.push(resp.message.clone());
         Ok(resp)
+    }
+
+    pub fn clear(&mut self) {
+        debug!("Clearing LLM client messages");
+        self.messages.clear();
     }
 }
