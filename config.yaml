@@ -16,3 +16,5 @@ testcase:
 doc:
   temp_project_path: "./"
   temp_project_name: "temp_doc_project"
+AFL:
+  timeout: 120 # in seconds

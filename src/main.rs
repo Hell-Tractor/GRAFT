@@ -12,12 +12,12 @@ mod document;
 #[tokio::main]
 async fn main() {
     let _ = init_logger();
-    test().await;
+    // test().await;
 
-    // const TARGET_CRATE: &str = "base64";
-    // if let Err(e) = test_crate(TARGET_CRATE).await {
-    //     error!("Error occurred: {}", e);
-    // }
+    const TARGET_CRATE: &str = "base64";
+    if let Err(e) = test_crate(TARGET_CRATE).await {
+        error!("Error occurred: {}", e);
+    }
 }
 
 #[allow(unused)]
@@ -60,10 +60,24 @@ async fn test_crate(crate_name: &str) -> Result<()> {
     testcases.push(merged);
 
     info!("Generating inputs for all testcases");
+    let input_dir = std::path::Path::new("inputs");
+    let output_dir = std::path::Path::new("outputs");
     for testcase in &testcases {
-        testcase.generate_inputs(std::path::Path::new("inputs"), llm::LLMClient::new(&llm_model, &llm_api_url)).await?;
+        testcase.generate_inputs(input_dir, llm::LLMClient::new(&llm_model, &llm_api_url)).await?;
     }
     info!("Input generation completed for all testcases");
+
+    info!("Running all testcases with AFL");
+    let mut success_count = 0;
+    for testcase in &testcases {
+        if let Err(e) = testcase.run(input_dir, output_dir) {
+            warn!("Error occurred while running testcase: {}, skipping...", e);
+        } else {
+            success_count += 1;
+        }
+    }
+    info!("{}/{} testcases ran successfully with AFL", success_count, testcases.len());
+
     Ok(())
 }
 

@@ -1,7 +1,7 @@
 use std::fs::File;
 use std::io::Read;
 use std::path::Path;
-use tracing::{debug, info};
+use tracing::{debug, info, span};
 
 use crate::document::get_api_documentation;
 use crate::error::{Error, Result};
@@ -151,6 +151,28 @@ impl Testcase {
             }
             break;
         }
+        Ok(())
+    }
+
+    pub fn run(&self, relative_input_dir: &Path, relative_output_dir: &Path) -> Result<()> {
+        let project_name = self.path.file_name().unwrap().to_string_lossy();
+        let s = span!(tracing::Level::INFO, "Testcase", project = %project_name);
+        let _ = s.enter();
+        let timeout = utils::config().get_int("AFL.timeout")? as u32;
+        let cargo = utils::config().get_string("commands.cargo")?;
+        
+        info!("Starting AFL fuzzing with timeout of {} seconds", timeout);
+        let output = std::process::Command::new(&cargo)
+            .arg("afl").arg("fuzz").arg("-i").arg(relative_input_dir)
+            .arg("-o").arg(relative_output_dir).arg(format!("target/debug/{}", project_name))
+            .env("AFL_TIMEOUT", timeout.to_string())
+            .current_dir(&self.path)
+            .output()?;
+        if !output.status.success() {
+            return Err(Error::CommandError(format!("AFL fuzzing failed: {}", String::from_utf8_lossy(&output.stderr))));
+        }
+        info!("AFL fuzzing completed");
+
         Ok(())
     }
 }
