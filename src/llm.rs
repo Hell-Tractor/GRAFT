@@ -28,7 +28,7 @@ pub struct LLMClient {
 }
 
 #[derive(serde::Deserialize, Debug)]
-#[allow(dead_code)]
+#[allow(unused)]
 pub struct LLMResponse {
     pub model: String,
     pub created_at: String,

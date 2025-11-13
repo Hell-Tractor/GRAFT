@@ -1,0 +1,33 @@
+{
+    Crate {
+        item {
+            ... on Struct {
+                __typename @output(name: "item_type")
+                name @output(name: "struct_name")
+                span {
+                    filename @output(name: "file")
+                    begin_line @output(name: "line" )
+                }
+                canonical_path {
+                    path @output(name: "module_path")
+                }
+                impl {
+                    method {
+                        docs @output(name: "doc_comment")
+                        public_api_eligible @filter(op: "=", value: ["$v"])
+                        signature @output(name: "signature")
+                        name @output(name: "name")
+                        # generic_parameter @fold {
+                        #     ... on GenericTypeParameter {
+                        #         name @output(name: "generic_type_param_name")
+                        #         type_bound @fold {
+                        #             instantiated_name @output(name: "type_bound_name")
+                        #         }
+                        #     }
+                        # }
+                    }
+                }
+            }
+        }
+    }
+}

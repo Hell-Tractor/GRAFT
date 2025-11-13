@@ -5,7 +5,7 @@ use tracing::{info, instrument};
 use crate::{error::Result, utils};
 
 mod query;
-mod api;
+pub mod api;
 
 /// Fetch the API documentation of a crate in JSON format
 /// # Arguments

@@ -1,8 +1,5 @@
-use std::fs::File;
-use std::io::Read;
 use std::path::Path;
 use tracing::{debug, info, span};
-use tracing_subscriber::util;
 
 use crate::document::get_api_documentation;
 use crate::error::{Error, Result};
@@ -10,7 +7,6 @@ use crate::error::{Error, Result};
 use crate::llm::LLMClient;
 use crate::utils;
 
-#[allow(unused)]
 pub struct Testcase {
     path: Box<Path>,
     target_crate: String,

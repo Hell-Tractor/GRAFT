@@ -19,7 +19,7 @@ impl DocQuerier {
         let krate: Crate = serde_json::from_str(doc)?;
         Ok(DocQuerier { krate })
     }
-    pub fn query<K, V>(&self) -> QueryBuilder<K, V> {
+    pub fn query<'a, K, V>(&'a self) -> QueryBuilder<'a, K, V> {
         QueryBuilder {
             krate: &self.krate,
             variables: BTreeMap::new(),

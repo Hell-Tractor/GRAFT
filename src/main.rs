@@ -1,10 +1,7 @@
-use std::{collections::BTreeMap, sync::Arc};
-
 use tracing::{error, info, span, warn};
 use tracing_subscriber::{EnvFilter, fmt::writer::MakeWriterExt};
-use trustfall::FieldValue;
 
-use crate::{document::get_api_documentation, error::Result};
+use crate::{document::{api, get_api_documentation}, error::Result};
 
 mod utils;
 mod llm;
@@ -32,60 +29,9 @@ async fn test() {
         println!("Documentation fetched successfully");
         let mut result = result.unwrap();
         // std::fs::write("temp.json", &result).unwrap();
-        use trustfall_rustdoc_adapter::*;
-        let krate: trustfall_rustdoc_adapter::Crate = serde_json::from_str(&result).unwrap();
-        let current_index = PackageIndex::from_crate(&krate);
-        let adapter = Arc::new(RustdocAdapter::new(&current_index, None));
-        let query = r###"
-{
-  Crate {
-    item {
-      ... on Struct {
-        canonical_path {
-            path @output(name: "full_path")
-        }
-        impl {
-            # 假设 Impl 块内部的方法通过 'associated_item' 边访问
-            method {
-                public_api_eligible @filter(op: "=", value: ["$v"])
-                signature @output(name: "method")
-                name @output(name: "method_name")
-                #path @output(name: "full_path")
-            }
-        }
-      }
-    }
-  }
-}
-"###;
-
-/*
-      ... on Function {
-        importable_path {
-          public_api @filter(op: "=", value: ["$v"])
-          path @output(name: "full_path")
-        }
-      }
-       */
-        let mut variables: BTreeMap<Arc<str>, FieldValue> = BTreeMap::new();
-        variables.insert("v".into(), FieldValue::Boolean(true));
-        // variables.insert("$kind".into(), FieldValue::String("function".into()));
-        let results = trustfall::execute_query(RustdocAdapter::schema(), (&*adapter).into(), query, variables);
-        match results {
-            Ok(mut results) => {
-                for result in results {
-                    let path = result.get("full_path").unwrap().as_slice().unwrap().iter()
-                        .map(|s| s.as_str().unwrap().to_string())
-                        .collect::<Vec<String>>()
-                        .join("::");
-                    let name = result.get("method_name").unwrap().as_str().unwrap();
-                    println!("{}::{}", path, name);
-                }
-            }
-            Err(e) => {
-                println!("Query error: {}", e);
-            }
-        }
+        let apis = api::API::from_api_doc(&result).unwrap();
+        let json = serde_json::to_string_pretty(&apis).unwrap();
+        std::fs::write("temp_apis.json", &json).unwrap();
     }
 }
 

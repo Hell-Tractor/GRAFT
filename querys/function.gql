@@ -1,0 +1,21 @@
+{
+    Crate {
+        item {
+            ... on Function {
+                __typename @output(name: "item_type")
+                docs @output(name: "doc_comment")
+                name @output(name: "name")
+                signature @output(name: "signature")
+                public_api_eligible @filter(op: "=", value: ["$v"])
+
+                span {
+                    filename @output(name: "file")
+                    begin_line @output(name: "line" )
+                }
+                canonical_path {
+                    path @output(name: "module_path")
+                }
+            }
+        }
+    }
+}
