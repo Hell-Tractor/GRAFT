@@ -17,14 +17,14 @@
                         public_api_eligible @filter(op: "=", value: ["$v"])
                         signature @output(name: "signature")
                         name @output(name: "name")
-                        # generic_parameter @fold {
-                        #     ... on GenericTypeParameter {
-                        #         name @output(name: "generic_type_param_name")
-                        #         type_bound @fold {
-                        #             instantiated_name @output(name: "type_bound_name")
-                        #         }
-                        #     }
-                        # }
+                        generic_parameter @fold {
+                            ... on GenericTypeParameter {
+                                name @output(name: "generic_type_param_name")
+                                type_bound @fold {
+                                    instantiated_name @output(name: "type_bound_name")
+                                }
+                            }
+                        }
                     }
                 }
             }

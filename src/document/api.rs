@@ -1,7 +1,7 @@
-use std::{collections::BTreeMap, sync::Arc};
+use std::{collections::{BTreeMap, HashMap}, io::Write, sync::Arc};
 
 use serde::Serialize;
-use tracing::info;
+use tracing::{info, warn};
 
 use crate::{document::query::DocQuerier, error::{Error, Result}, utils};
 
@@ -13,6 +13,7 @@ pub struct API {
     pub module_path: String,
     pub doc_comment: String,
     pub location: Location,
+    pub generics: HashMap<String, String>, // generic parameter name -> type bound
     // pub inputs: Vec<Parameter>,
     // pub output: ReturnValue,
     // pub is_public: bool,
@@ -46,7 +47,10 @@ impl API {
         let method = querier.query()
             .add_variable("v", true)
             .execute(&method_query, |results| -> Result<Vec<API>> {
+                let debugfile = std::fs::File::create("temp_query_result").unwrap();
+                let mut debugwriter = std::io::BufWriter::new(debugfile);
                 results.map(|result| {
+                    writeln!(debugwriter, "{:#?}", result).unwrap();
                     let struct_name = result.get("struct_name").ok_or(Error::TrustfallQueryError("Missing key `struct_name` in result".to_string()))?.as_str().ok_or(Error::TrustfallQueryError("Key `struct_name` is not a string".to_string()))?.to_string();
                     API::try_from(result).map(|mut api| {
                         api.signature = api.signature.replace("Self", &struct_name);
@@ -69,6 +73,22 @@ impl TryFrom<BTreeMap<Arc<str>, trustfall::FieldValue>> for API {
     type Error = Error;
     
     fn try_from(value: BTreeMap<Arc<str>, trustfall::FieldValue>) -> std::result::Result<Self, Self::Error> {
+        let mut generics = HashMap::new();
+        let generic_params = value.get("generic_type_param_name").ok_or(Error::TrustfallQueryError("Missing key `generic_type_param_name` in result".to_string()))?.as_slice().ok_or(Error::TrustfallQueryError("Key `generic_type_param_name` is not a slice".to_string()))?;
+        let type_bounds = value.get("type_bound_name").ok_or(Error::TrustfallQueryError("Missing key `type_bound_name` in result".to_string()))?.as_slice().ok_or(Error::TrustfallQueryError("Key `type_bound_name` is not a slice".to_string()))?;
+        if generic_params.len() != type_bounds.len() {
+            warn!("Length of `generic_type_param_name` and `type_bound_name` do not match. This isn't expected to happen.");
+            return Err(Error::TrustfallQueryError("Length of `generic_type_param_name` and `type_bound_name` do not match".to_string()));
+        }
+        for i in 0..generic_params.len() {
+            let param = generic_params[i].as_str().ok_or(Error::TrustfallQueryError("Element in `generic_type_param_name` is not a string".to_string()))?.to_string();
+            let bound = type_bounds[i].as_slice().ok_or(Error::TrustfallQueryError("Element in `type_bound_name` is not a slice".to_string()))?
+                .iter()
+                .map(|s| s.as_str().ok_or(Error::TrustfallQueryError("Element in `type_bound_name` slice is not a string".to_string())).map(|s| s.to_string()))
+                .collect::<Result<Vec<String>>>()?
+                .join(" + ");
+            generics.insert(param, bound);
+        }
         let mut api = API {
             name: value.get("name").ok_or(Error::TrustfallQueryError("Missing key `name` in result".to_string()))?.as_str().ok_or(Error::TrustfallQueryError("Key `name` is not a string".to_string()))?.to_string(),
             kind: {
@@ -89,6 +109,7 @@ impl TryFrom<BTreeMap<Arc<str>, trustfall::FieldValue>> for API {
                 file: value.get("file").ok_or(Error::TrustfallQueryError("Missing key `file` in result".to_string()))?.as_str().ok_or(Error::TrustfallQueryError("Key `file` is not a string".to_string()))?.to_string(),
                 line: value.get("line").ok_or(Error::TrustfallQueryError("Missing key `line` in result".to_string()))?.as_u64().ok_or(Error::TrustfallQueryError("Key `line` is not a u64".to_string()))? as usize,
             },
+            generics
         };
         // remove file path before "src/"
         api.location.file = api.location.file.split("src/").skip(2).map(|s| format!("src/{}", s)).next().unwrap_or(api.location.file);

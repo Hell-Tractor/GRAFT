@@ -15,6 +15,14 @@
                 canonical_path {
                     path @output(name: "module_path")
                 }
+                generic_parameter @fold {
+                    ... on GenericTypeParameter {
+                        name @output(name: "generic_type_param_name")
+                        type_bound @fold {
+                            instantiated_name @output(name: "type_bound_name")
+                        }
+                    }
+                }
             }
         }
     }
