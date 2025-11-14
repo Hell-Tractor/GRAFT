@@ -6,13 +6,20 @@
                 docs @output(name: "doc_comment")
                 name @output(name: "name")
                 signature @output(name: "signature")
-                public_api_eligible @filter(op: "=", value: ["$v"])
+                public_api_eligible @filter(op: "=", value: ["$public"])
+                deprecated @filter(op: "=", value: ["$deprecated"])
 
                 span {
                     filename @output(name: "file")
                     begin_line @output(name: "line" )
                 }
                 canonical_path {
+                    # used only when there is no public importable_path
+                    path @output(name: "canonical_path")
+                }
+                importable_path @fold {
+                    public_api @filter(op: "=", value: ["$public"])
+                    deprecated @filter(op: "=", value: ["$deprecated"])
                     path @output(name: "module_path")
                 }
                 generic_parameter @fold {
@@ -22,6 +29,13 @@
                             instantiated_name @output(name: "type_bound_name")
                         }
                     }
+                }
+                parameter @fold {
+                    name @output(name: "param_name")
+                    type @output(name: "param_type")
+                }
+                return_value {
+                    type @output(name: "return_type")   
                 }
             }
         }

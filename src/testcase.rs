@@ -1,7 +1,9 @@
+use std::io::Write;
 use std::path::Path;
+use rand::seq::IndexedRandom;
 use tracing::{debug, info, span};
 
-use crate::document::get_api_documentation;
+use crate::document::{self, get_api_documentation};
 use crate::error::{Error, Result};
 
 use crate::llm::LLMClient;
@@ -15,16 +17,19 @@ pub struct Testcase {
 #[derive(serde::Deserialize)]
 struct CodeAndDependencies {
     code: String,
-    dependencies: String,
+    // dependencies: String,
 }
 
 impl Testcase {
     pub async fn new(path: &Path, name: &str, target_crate: &str, mut llm: LLMClient) -> Result<Self> {
         let project_path = path.join(name);
-        if path.exists() {
-            std::fs::remove_dir_all(path)?;
+        if project_path.exists() {
+            debug!("Removing existing directory at {}", project_path.display());
+            std::fs::remove_dir_all(&project_path)?;
         }
-        std::fs::create_dir_all(path)?;
+        if !path.exists() {
+            std::fs::create_dir_all(&path)?;
+        }
 
         // create project
         info!("Creating new cargo project `{}` at {}", name, project_path.display());
@@ -34,10 +39,43 @@ impl Testcase {
             .current_dir(path)
             .output()?;
         info!("Project `{}` created successfully", name);
+
+        // add dependency
+        info!("Adding dependency `{}` to project `{}`", target_crate, name);
+        let output = std::process::Command::new(&cargo)
+            .arg("add").arg(target_crate)
+            .current_dir(&project_path)
+            .output()?;
+        if !output.status.success() {
+            return Err(Error::CommandError(format!("Failed to add dependency: {}", String::from_utf8_lossy(&output.stderr))));
+        }
+        info!("Dependency `{}` added successfully to project `{}`", target_crate, name);
         
         // generate testcase
         info!("Generating testcase for project `{}`", name);
-        let api_doc = get_api_documentation(target_crate)?;
+        let origin_api_doc = get_api_documentation(target_crate)?;
+        let api_doc = document::api::API::from_api_doc(&origin_api_doc)?;
+
+        // write to temp_apis.json for debug
+        let file = std::fs::File::create("temp_apis.json")?;
+        let mut writer = std::io::BufWriter::new(file);
+        serde_json::to_writer_pretty(&mut writer, &api_doc)?;
+        writer.flush()?;
+
+        // random select some apis
+        let count = utils::config().get_int("LLM.max_used_api_count")? as usize;
+        let api_doc = {
+            let mut res = vec![];
+            let mut rng = rand::rng();
+            let selected_apis = api_doc
+                .choose_multiple(&mut rng, count);
+            for api in selected_apis {
+                res.push(api);
+            }
+            res
+        };
+
+        let api_doc = serde_json::to_string(&api_doc)?;
         let main_path = project_path.join("src/main.rs");
         let cargo_path = project_path.join("Cargo.toml");
         Testcase::generate(name, &main_path, &cargo_path, &api_doc, &mut llm).await?;
@@ -56,6 +94,8 @@ impl Testcase {
         let fix_prompt = utils::read_file_to_string(fix_prompt_path)?;
 
         let mut prompt = prompt.replace("{api_doc}", api_doc);
+        // save prompt to temp_prompt.txt for debug
+        std::fs::write("temp_prompt.txt", &prompt)?;
         let cargo = utils::config().get_string("commands.cargo")?;
         let retries = utils::config().get_int("LLM.fix_retries")? as u32;
         for i in 0..retries {
@@ -69,9 +109,14 @@ impl Testcase {
                 continue;
             };
             let code_and_deps = code_and_deps.unwrap();
-            // write code and dependencies
+            // write code
             std::fs::write(main_path, code_and_deps.code)?;
-            std::fs::write(cargo_path, code_and_deps.dependencies)?;
+
+            // load origin cargo.toml
+            // let origin_cargo_toml = utils::read_file_to_string(cargo_path)?;
+            // let new_cargo_toml = origin_cargo_toml.split("[dependencies]").next().unwrap().to_string()
+            //     + &code_and_deps.dependencies;
+            // std::fs::write(cargo_path, new_cargo_toml)?;
 
             // try to build the project
             let output = std::process::Command::new(&cargo)

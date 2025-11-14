@@ -1,6 +1,6 @@
 use std::path::Path;
 
-use tracing::{info, instrument};
+use tracing::{debug, info, instrument};
 
 use crate::{error::Result, utils};
 
@@ -32,6 +32,7 @@ pub fn get_api_documentation(crate_name: &str) -> Result<String> {
     if !output.status.success() {
         return Err(crate::error::Error::CommandError(format!("Failed to add dependency: {}", String::from_utf8_lossy(&output.stderr))));
     }
+    // debug!("Cargo add output: {}", String::from_utf8_lossy(&output.stderr));
 
     // generate documentation
     let output = std::process::Command::new(&cargo)

@@ -9,14 +9,21 @@
                     begin_line @output(name: "line" )
                 }
                 canonical_path {
+                    # used only when there is no public importable_path
+                    path @output(name: "canonical_path")
+                }
+                importable_path @fold {
+                    public_api @filter(op: "=", value: ["$public"])
+                    deprecated @filter(op: "=", value: ["$deprecated"])
                     path @output(name: "module_path")
                 }
                 impl {
                     method {
                         docs @output(name: "doc_comment")
-                        public_api_eligible @filter(op: "=", value: ["$v"])
+                        public_api_eligible @filter(op: "=", value: ["$public"])
                         signature @output(name: "signature")
                         name @output(name: "name")
+                        deprecated @filter(op: "=", value: ["$deprecated"])
                         generic_parameter @fold {
                             ... on GenericTypeParameter {
                                 name @output(name: "generic_type_param_name")
@@ -24,6 +31,13 @@
                                     instantiated_name @output(name: "type_bound_name")
                                 }
                             }
+                        }
+                        parameter @fold {
+                            name @output(name: "param_name")
+                            type @output(name: "param_type")
+                        }
+                        return_value {
+                            type @output(name: "return_type")   
                         }
                     }
                 }

@@ -1,8 +1,9 @@
 LLM:
-  model_name: "deepseek-r1:latest"
+  model_name: "codellama:13b"
   api_url_chat: "http://192.168.0.169:11434/api/chat"
   fix_retries: 10
   input_gen_retries: 5
+  max_used_api_count: 10000
 prompts:
   testcase_gen: "prompts/testcase_gen"
   fix_testcase: "prompts/fix_testcase"

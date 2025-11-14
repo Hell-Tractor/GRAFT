@@ -12,12 +12,12 @@ mod document;
 #[tokio::main]
 async fn main() {
     init_logger();
-    test().await;
+    // test().await;
 
-    // const TARGET_CRATE: &str = "base64";
-    // if let Err(e) = test_crate(TARGET_CRATE).await {
-    //     error!("Error occurred: {}", e);
-    // }
+    const TARGET_CRATE: &str = "base64";
+    if let Err(e) = test_crate(TARGET_CRATE).await {
+        error!("Error occurred: {}", e);
+    }
 }
 
 #[allow(unused)]

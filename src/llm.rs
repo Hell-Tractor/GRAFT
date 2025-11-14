@@ -54,12 +54,14 @@ impl LLMClient {
     }
 
     pub async fn generate_response(&mut self, prompt: &str) -> Result<LLMResponse> {
+        // debug!("Generating LLM response for prompt:\n{}", prompt);
+        std::io::stdin().read_line(&mut String::new()).unwrap();
         self.messages.push(LLMMessage::user(prompt));
         let request_body = serde_json::json!({
                 "model": self.model_name,
                 "messages": self.messages,
                 "stream": false,
-                "think": true,
+                // "think": true,
                 "format": "json",
             });
         info!("Requesting LLM with model `{}`, it may take some time...", self.model_name);
@@ -68,7 +70,9 @@ impl LLMClient {
             .await?
             .json()
             .await?;
+        // debug!("LLM response received: {}", resp);
         self.messages.push(resp.message.clone());
+        debug!("messages updated, total {} messages", self.messages.len());
         Ok(resp)
     }
 
