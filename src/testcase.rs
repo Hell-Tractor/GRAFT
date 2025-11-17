@@ -6,7 +6,7 @@ use tracing::{debug, info, span};
 use crate::document::{self, get_api_documentation};
 use crate::error::{Error, Result};
 
-use crate::llm::LLMClient;
+use crate::llm::LLM;
 use crate::utils;
 
 pub struct Testcase {
@@ -21,7 +21,7 @@ struct CodeAndDependencies {
 }
 
 impl Testcase {
-    pub async fn new(path: &Path, name: &str, target_crate: &str, mut llm: LLMClient) -> Result<Self> {
+    pub async fn new(path: &Path, name: &str, target_crate: &str, mut llm: Box<dyn LLM>) -> Result<Self> {
         let project_path = path.join(name);
         if project_path.exists() {
             debug!("Removing existing directory at {}", project_path.display());
@@ -50,7 +50,7 @@ impl Testcase {
             return Err(Error::CommandError(format!("Failed to add dependency: {}", String::from_utf8_lossy(&output.stderr))));
         }
         info!("Dependency `{}` added successfully to project `{}`", target_crate, name);
-        
+
         // generate testcase
         info!("Generating testcase for project `{}`", name);
         let origin_api_doc = get_api_documentation(target_crate)?;
@@ -84,7 +84,7 @@ impl Testcase {
         Ok(Testcase { path: path.join(name).into(), target_crate: target_crate.to_string() })
     }
 
-    async fn generate(name: &str, main_path: &Path, cargo_path: &Path, api_doc: &str, llm: &mut LLMClient) -> Result<()>{
+    async fn generate(name: &str, main_path: &Path, cargo_path: &Path, api_doc: &str, llm: &mut Box<dyn LLM>) -> Result<()>{
         let prompt_path = utils::config().get_string("prompts.testcase_gen")?;
         // read prompt template
         let prompt = utils::read_file_to_string(prompt_path)?;
@@ -100,10 +100,10 @@ impl Testcase {
         let retries = utils::config().get_int("LLM.fix_retries")? as u32;
         for i in 0..retries {
             let response = llm.generate_response(&prompt).await?;
-            let code_and_deps = serde_json::from_str::<CodeAndDependencies>(&response.message.content);
+            let code_and_deps = serde_json::from_str::<CodeAndDependencies>(&response.content);
             if let Err(e) = &code_and_deps {
                 info!("LLM response of project `{}` is not valid JSON, retrying...({} time(s) left)", name, retries - i - 1);
-                debug!("LLM response content: {}", response.message.content);
+                debug!("LLM response content: {}", response.content);
                 debug!("JSON parsing error: {}", e);
                 llm.clear();
                 continue;
@@ -138,13 +138,13 @@ impl Testcase {
     }
 
     #[allow(unused)]
-    pub async fn merge_from(testcases: &[Testcase], mut llm: LLMClient) -> Result<Self> {
+    pub async fn merge_from(testcases: &[Testcase], mut llm: Box<dyn LLM>) -> Result<Self> {
         info!("Merging {} testcases", testcases.len());
         info!("Successfully merged testcases");
         todo!()
     }
 
-    pub async fn generate_inputs(&self, relative_dir: &Path, mut llm: LLMClient) -> Result<()> {
+    pub async fn generate_inputs(&self, relative_dir: &Path, mut llm: Box<dyn LLM>) -> Result<()> {
         // read prompt template
         let prompt_path = utils::config().get_string("prompts.input_gen")?;
         let prompt_template = utils::read_file_to_string(prompt_path)?;
@@ -163,7 +163,7 @@ impl Testcase {
         let retries = utils::config().get_int("LLM.input_gen_retries")? as u32;
         for i in 0..retries {
             let response = llm.generate_response(&prompt).await?;
-            let Ok(inputs) = serde_json::from_str::<Vec<String>>(&response.message.content) else {
+            let Ok(inputs) = serde_json::from_str::<Vec<String>>(&response.content) else {
                 info!("LLM response for input generation is not valid JSON, retrying...({} time(s) left)", retries - i - 1);
                 continue;
             };
@@ -187,7 +187,7 @@ impl Testcase {
         let _ = s.enter();
         let timeout = utils::config().get_int("AFL.timeout")? as u32;
         let cargo = utils::config().get_string("commands.cargo")?;
-        
+
         info!("Starting AFL fuzzing with timeout of {} seconds", timeout);
         let output = std::process::Command::new(&cargo)
             .arg("afl").arg("fuzz").arg("-i").arg(relative_input_dir)

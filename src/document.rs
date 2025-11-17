@@ -20,7 +20,7 @@ pub fn get_api_documentation(crate_name: &str) -> Result<String> {
     let temp_project_path = utils::config().get_string("doc.temp_project_path")?;
     let temp_project_path = std::path::Path::new(&temp_project_path);
     let temp_project_name = utils::config().get_string("doc.temp_project_name")?;
-    
+
     // create temporary project
     let _temp_project = TempProject::new(temp_project_path, &temp_project_name)?;
     // add the target crate as dependency
@@ -47,7 +47,7 @@ pub fn get_api_documentation(crate_name: &str) -> Result<String> {
     // read the generated JSON file
     let doc_path = project_path.join("target/doc").join(format!("{}.json", crate_name.replace("-", "_")));
     let doc_content = utils::read_file_to_string(doc_path)?;
-    
+
     info!("Successfully fetched API documentation for crate");
     Ok(doc_content)
 }

@@ -1,4 +1,5 @@
 LLM:
+  type: "Local"
   model_name: "codellama:13b"
   api_url_chat: "http://192.168.0.169:11434/api/chat"
   fix_retries: 10

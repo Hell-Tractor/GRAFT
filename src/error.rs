@@ -14,6 +14,8 @@ pub enum Error {
     SerdeError(#[from] serde_json::Error),
     #[error("{0}")]
     TrustfallQueryError(String),
+    #[error("Unsupported LLM type: {0}")]
+    UnsupportedLLMType(String),
 }
 
 pub type Result<T> = std::result::Result<T, Error>;

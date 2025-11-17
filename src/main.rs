@@ -43,6 +43,7 @@ async fn test_crate(crate_name: &str) -> Result<()> {
     let base_path = std::path::Path::new(&base_path);
     let llm_model = utils::config().get_string("LLM.model_name")?;
     let llm_api_url = utils::config().get_string("LLM.api_url_chat")?;
+    let llm_type =  utils::config().get_string("llm.type")?.as_str().try_into()?;
 
     info!("Preparation complete, starting testcase generation for crate {}", crate_name);
     let mut testcases = vec![];
@@ -50,7 +51,7 @@ async fn test_crate(crate_name: &str) -> Result<()> {
         info!("Generating testcase {}/{} for crate {}", i + 1, count, crate_name);
         let span = span!(tracing::Level::INFO, "Testcase", testcase_index = i + 1, total_testcases = count, crate = crate_name);
         let _ = span.enter();
-        let llm_client = llm::LLMClient::new(&llm_model, &llm_api_url);        
+        let llm_client = llm::LLMFactory::create_llm(&llm_type, &llm_model, &llm_api_url);
         let testcase = testcase::Testcase::new(base_path, &format!("{}_{}", crate_name, i), crate_name, llm_client).await;
         if let Err(e) = &testcase {
             warn!("Error occurred while generating testcase: {}, skipping...", e);
@@ -58,15 +59,20 @@ async fn test_crate(crate_name: &str) -> Result<()> {
         }
         testcases.push(testcase.unwrap());
     }
-    info!("{} testcases generated successfully for crate {}",testcases.len(), crate_name);
-    let merged = testcase::Testcase::merge_from(&testcases, llm::LLMClient::new(&llm_model, &llm_api_url)).await?;
-    testcases.push(merged);
+
+    {
+        info!("{} testcases generated successfully for crate {}",testcases.len(), crate_name);
+        let llm_client = llm::LLMFactory::create_llm(&llm_type, &llm_model, &llm_api_url);
+        let merged = testcase::Testcase::merge_from(&testcases, llm_client).await?;
+        testcases.push(merged);
+    }
 
     info!("Generating inputs for all testcases");
     let input_dir = std::path::Path::new("inputs");
     let output_dir = std::path::Path::new("outputs");
     for testcase in &testcases {
-        testcase.generate_inputs(input_dir, llm::LLMClient::new(&llm_model, &llm_api_url)).await?;
+        let llm_client = llm::LLMFactory::create_llm(&llm_type, &llm_model, &llm_api_url);
+        testcase.generate_inputs(input_dir, llm_client).await?;
     }
     info!("Input generation completed for all testcases");
 
