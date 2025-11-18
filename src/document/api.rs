@@ -25,10 +25,8 @@ pub struct API {
 }
 
 impl TryFromApiDoc<Vec<API>> for API {
-    fn try_from_api_doc(doc: &str) -> Result<Vec<Self>> {
+    fn try_from_api_doc(querier: &query::DocQuerier) -> Result<Vec<Self>> {
         info!("Parsing API documentation");
-        // init querier
-        let querier = DocQuerier::new(doc)?;
 
         // query functions
         info!("Querying functions from API documentation");

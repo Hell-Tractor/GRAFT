@@ -1,17 +1,6 @@
 use serde::Serialize;
 
-#[derive(Serialize)]
-pub enum Type {
-}
-
-#[derive(Serialize)]
-pub struct Struct {
-    pub name: String,
-    #[serde(rename = "type")]
-    pub type_: TypeKind,
-    pub path: String,
-    pub traits: Vec<String>
-}
+pub mod r#struct;
 
 #[derive(Serialize)]
 pub enum TypeKind {

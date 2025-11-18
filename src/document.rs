@@ -11,7 +11,7 @@ mod utils;
 pub mod api;
 
 trait TryFromApiDoc<T> {
-    fn try_from_api_doc(doc: &str) -> Result<T>;
+    fn try_from_api_doc(querier: &query::DocQuerier) -> Result<T>;
 }
 
 #[derive(Serialize)]
@@ -22,14 +22,14 @@ pub struct APIDoc {
 
 #[derive(Serialize)]
 pub struct Types {
-    pub structs: Vec<r#type::Struct>,
+    pub structs: Vec<r#type::r#struct::Struct>,
     // enums, traits, etc can be added later
 }
 
 impl TryFromApiDoc<APIDoc> for APIDoc {
-    fn try_from_api_doc(doc: &str) -> Result<Self> {
+    fn try_from_api_doc(querier: &query::DocQuerier) -> Result<Self> {
         info!("Converting raw API documentation to structured APIDoc");
-        let apis = api::API::try_from_api_doc(doc)?;
+        let apis = api::API::try_from_api_doc(querier)?;
         // let types = r#type::Types::try_from_api_doc(doc)?;
         Ok(APIDoc {
             apis,
@@ -46,7 +46,8 @@ impl ToString for APIDoc {
 
 pub fn get_api_documentation(crate_name: &str) -> Result<APIDoc> {
     let raw_doc = get_raw_api_documentation(crate_name)?;
-    let api_doc = APIDoc::try_from_api_doc(&raw_doc)?;
+    let querier = query::DocQuerier::new(&raw_doc)?;
+    let api_doc = APIDoc::try_from_api_doc(&querier)?;
     Ok(api_doc)
 }
 
