@@ -37,7 +37,7 @@
                             type @output(name: "param_type")
                         }
                         return_value {
-                            type @output(name: "return_type")   
+                            type @output(name: "return_type")
                         }
                     }
                 }

@@ -14,6 +14,10 @@ pub enum Error {
     SerdeError(#[from] serde_json::Error),
     #[error("{0}")]
     TrustfallQueryError(String),
+    #[error("Missing key `{0}` in Trustfall query result.")]
+    TrustfallQueryResultMissingKey(String),
+    #[error("Type mismatch for key `{0}` in Trustfall query result: expected `{1}`.")]
+    TrustfallQueryResultTypeMismatch(String, String),
     #[error("Unsupported LLM type: {0}")]
     UnsupportedLLMType(String),
 }

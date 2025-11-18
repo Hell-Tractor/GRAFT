@@ -14,6 +14,8 @@ pub struct QueryBuilder<'a, K, V>
     variables: BTreeMap<K, V>,
 }
 
+pub type QueryResult = BTreeMap<Arc<str>, trustfall::FieldValue>;
+
 impl DocQuerier {
     pub fn new(doc: &str) -> Result<Self> {
         let krate: Crate = serde_json::from_str(doc)?;
@@ -38,7 +40,7 @@ where
     }
     pub fn execute<F, R>(self, gql: &str, f: F) -> Result<R>
     where
-        F: for<'m> FnOnce(Box<dyn Iterator<Item = BTreeMap<Arc<str>, trustfall::FieldValue>> + 'm>) -> R {
+        F: for<'m> FnOnce(Box<dyn Iterator<Item = QueryResult> + 'm>) -> R {
         let index = PackageIndex::from_crate(self.krate);
         let adapter = Arc::new(RustdocAdapter::new(&index, None)); // 这一步很慢，最好想办法缓存
         let result = trustfall::execute_query(

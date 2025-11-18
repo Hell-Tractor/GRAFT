@@ -1,13 +1,15 @@
 use std::path::Path;
 
-use tracing::{debug, info, instrument};
+use tracing::{info, instrument};
 
-use crate::{error::Result, utils};
+use crate::{error::Result};
 
+mod r#type;
 mod query;
+mod utils;
 pub mod api;
 
-/// Fetch the API documentation of a crate in JSON format
+/// Fetch the API documentations of a crate in JSON format
 /// # Arguments
 /// * `crate_name` - The name of the crate to fetch documentation for
 /// # Returns
@@ -16,10 +18,10 @@ pub mod api;
 #[instrument]
 pub fn get_api_documentation(crate_name: &str) -> Result<String> {
     info!("Fetching API documentation for crate");
-    let cargo = utils::config().get_string("commands.cargo")?;
-    let temp_project_path = utils::config().get_string("doc.temp_project_path")?;
+    let cargo = crate::utils::config().get_string("commands.cargo")?;
+    let temp_project_path = crate::utils::config().get_string("doc.temp_project_path")?;
     let temp_project_path = std::path::Path::new(&temp_project_path);
-    let temp_project_name = utils::config().get_string("doc.temp_project_name")?;
+    let temp_project_name = crate::utils::config().get_string("doc.temp_project_name")?;
 
     // create temporary project
     let _temp_project = TempProject::new(temp_project_path, &temp_project_name)?;
@@ -46,7 +48,7 @@ pub fn get_api_documentation(crate_name: &str) -> Result<String> {
 
     // read the generated JSON file
     let doc_path = project_path.join("target/doc").join(format!("{}.json", crate_name.replace("-", "_")));
-    let doc_content = utils::read_file_to_string(doc_path)?;
+    let doc_content = crate::utils::read_file_to_string(doc_path)?;
 
     info!("Successfully fetched API documentation for crate");
     Ok(doc_content)
@@ -58,7 +60,7 @@ struct TempProject {
 
 impl TempProject {
     fn new(base_path: &Path, name: &str) -> Result<Self> {
-        let cargo = utils::config().get_string("commands.cargo")?;
+        let cargo = crate::utils::config().get_string("commands.cargo")?;
         // create a temporary rust project
         let output = std::process::Command::new(&cargo)
             .arg("new").arg(&name).arg("--vcs").arg("none")

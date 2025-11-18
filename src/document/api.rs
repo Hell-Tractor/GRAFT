@@ -1,9 +1,10 @@
-use std::{collections::{BTreeMap, HashMap}, io::Write, sync::Arc};
+use std::{collections::HashMap, io::Write};
 
 use serde::Serialize;
 use tracing::{info, warn};
 
-use crate::{document::query::DocQuerier, error::{Error, Result}, utils};
+use crate::{error::{Error, Result}, utils};
+use super::query::{self, DocQuerier};
 
 #[derive(Serialize)]
 pub struct API {
@@ -76,10 +77,10 @@ impl API {
     }
 }
 
-impl TryFrom<BTreeMap<Arc<str>, trustfall::FieldValue>> for API {
+impl TryFrom<query::QueryResult> for API {
     type Error = Error;
-    
-    fn try_from(value: BTreeMap<Arc<str>, trustfall::FieldValue>) -> std::result::Result<Self, Self::Error> {
+
+    fn try_from(value: query::QueryResult) -> std::result::Result<Self, Self::Error> {
         // parse generics
         let mut generics = HashMap::new();
         let generic_params = value.get("generic_type_param_name").ok_or(Error::TrustfallQueryError("Missing key `generic_type_param_name` in result".to_string()))?.as_slice().ok_or(Error::TrustfallQueryError("Key `generic_type_param_name` is not a slice".to_string()))?;
