@@ -1,9 +1,8 @@
 use std::io::Write;
 use std::path::Path;
-use rand::seq::IndexedRandom;
 use tracing::{debug, info, span};
 
-use crate::document::{self, get_api_documentation};
+use crate::document;
 use crate::error::{Error, Result};
 
 use crate::llm::LLM;
@@ -53,8 +52,7 @@ impl Testcase {
 
         // generate testcase
         info!("Generating testcase for project `{}`", name);
-        let origin_api_doc = get_api_documentation(target_crate)?;
-        let api_doc = document::api::API::from_api_doc(&origin_api_doc)?;
+        let api_doc = document::get_api_documentation(target_crate)?;
 
         // write to temp_apis.json for debug
         let file = std::fs::File::create("temp_apis.json")?;
@@ -63,17 +61,19 @@ impl Testcase {
         writer.flush()?;
 
         // random select some apis
-        let count = utils::config().get_int("LLM.max_used_api_count")? as usize;
-        let api_doc = {
-            let mut res = vec![];
-            let mut rng = rand::rng();
-            let selected_apis = api_doc
-                .choose_multiple(&mut rng, count);
-            for api in selected_apis {
-                res.push(api);
-            }
-            res
-        };
+        // let count = utils::config().get_int("LLM.max_used_api_count")? as usize;
+        // let api_doc = document::APIDoc {
+        //     apis: {
+        //         let mut res = vec![];
+        //         let mut rng = rand::rng();
+        //         let selected_apis = api_doc.apis
+        //             .choose_multiple(&mut rng, count);
+        //         for api in selected_apis {
+        //             res.push(*api);
+        //         }
+        //         res
+        //     },
+        // };
 
         let api_doc = serde_json::to_string(&api_doc)?;
         let main_path = project_path.join("src/main.rs");

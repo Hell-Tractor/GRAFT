@@ -4,7 +4,7 @@ use serde::Serialize;
 use tracing::{info, warn};
 
 use crate::{error::{Error, Result}, utils};
-use super::query::{self, DocQuerier};
+use super::{TryFromApiDoc, query::{self, DocQuerier}};
 
 #[derive(Serialize)]
 pub struct API {
@@ -24,8 +24,8 @@ pub struct API {
     // pub notes_for_fuzzer: String,
 }
 
-impl API {
-    pub fn from_api_doc(doc: &str) -> Result<Vec<Self>> {
+impl TryFromApiDoc<Vec<API>> for API {
+    fn try_from_api_doc(doc: &str) -> Result<Vec<Self>> {
         info!("Parsing API documentation");
         // init querier
         let querier = DocQuerier::new(doc)?;
@@ -42,7 +42,7 @@ impl API {
                 let mut debugwriter = std::io::BufWriter::new(debugfile);
                 results.map(|result| {
                     writeln!(debugwriter, "{:#?}", result).unwrap();
-                    API::try_from(result)
+                    API::try_from(&result)
                 }).collect()
             })??;
         info!("Found {} public functions in API documentation", function.len());
@@ -60,7 +60,7 @@ impl API {
                 results.map(|result| {
                     writeln!(debugwriter, "{:#?}", result).unwrap();
                     let struct_name = result.get("struct_name").ok_or(Error::TrustfallQueryError("Missing key `struct_name` in result".to_string()))?.as_str().ok_or(Error::TrustfallQueryError("Key `struct_name` is not a string".to_string()))?.to_string();
-                    API::try_from(result).map(|mut api| {
+                    API::try_from(&result).map(|mut api| {
                         api.signature = api.signature.replace("Self", &struct_name);
                         api
                     })
@@ -77,14 +77,14 @@ impl API {
     }
 }
 
-impl TryFrom<query::QueryResult> for API {
+impl TryFrom<&query::QueryResult> for API {
     type Error = Error;
 
-    fn try_from(value: query::QueryResult) -> std::result::Result<Self, Self::Error> {
+    fn try_from(value: &query::QueryResult) -> std::result::Result<Self, Self::Error> {
         // parse generics
         let mut generics = HashMap::new();
-        let generic_params = super::utils::get_key_as_slice(&value, "generic_type_param_name")?;
-        let type_bounds = super::utils::get_key_as_slice(&value, "type_bound_name")?;
+        let generic_params = super::utils::get_key_as_slice(value, "generic_type_param_name")?;
+        let type_bounds = super::utils::get_key_as_slice(value, "type_bound_name")?;
         if generic_params.len() != type_bounds.len() {
             warn!("Length of `generic_type_param_name` and `type_bound_name` do not match. This isn't expected to happen.");
             return Err(Error::TrustfallQueryResultLengthMissmatch("generic_type_param_name".into(), "type_bound_name".into()));
@@ -105,8 +105,8 @@ impl TryFrom<query::QueryResult> for API {
 
         // parse inputs
         let mut inputs = Vec::new();
-        let param_names = super::utils::get_key_as_slice(&value, "param_name")?;
-        let param_types = super::utils::get_key_as_slice(&value, "param_type")?;
+        let param_names = super::utils::get_key_as_slice(value, "param_name")?;
+        let param_types = super::utils::get_key_as_slice(value, "param_type")?;
         if param_names.len() != param_types.len() {
             warn!("Length of `param_name` and `param_type` do not match. This isn't expected to happen.");
             return Err(Error::TrustfallQueryResultLengthMissmatch("param_name".into(), "param_type".into()));
@@ -120,33 +120,33 @@ impl TryFrom<query::QueryResult> for API {
         }
 
         let api = API {
-            name: super::utils::get_key_as_str(&value, "name")?.to_string(),
+            name: super::utils::get_key_as_str(value, "name")?.to_string(),
             kind: {
-                let item_type = super::utils::get_key_as_str(&value, "item_type")?;
+                let item_type = super::utils::get_key_as_str(value, "item_type")?;
                 match item_type {
                     "Function" => Ok(APIKind::Function),
                     "Struct" => Ok(APIKind::Method),
                     _ => Err(Error::TrustfallQueryError(format!("Unknown item type `{}`", item_type))),
                 }
             }?,
-            signature: super::utils::get_key_as_str(&value, "signature")?.to_string(),
-            module_path: super::utils::parse_path(&value, "module_path", "canonical_path")?,
-            doc_comment: super::utils::get_key_as_str(&value, "doc_comment")?.to_string(),
+            signature: super::utils::get_key_as_str(value, "signature")?.to_string(),
+            module_path: super::utils::parse_path(value, "module_path", "canonical_path")?,
+            doc_comment: super::utils::get_key_as_str(value, "doc_comment")?.to_string(),
             location: Location {
                 file: {
-                    let raw_path = super::utils::get_key_as_str(&value, "file")?.to_string();
+                    let raw_path = super::utils::get_key_as_str(value, "file")?.to_string();
                     // remove file path before "src/"
                     raw_path.split("src/").skip(2)
                         .map(|s| format!("src/{}", s))
                         .next()
                         .unwrap_or(raw_path)
                 },
-                line: super::utils::get_key_as_usize(&value, "line")?,
+                line: super::utils::get_key_as_usize(value, "line")?,
             },
             generics,
             inputs,
             output: ReturnValue {
-                type_: super::utils::get_key_as_str(&value, "return_type")?.to_string(),
+                type_: super::utils::get_key_as_str(value, "return_type")?.to_string(),
             },
         };
         Ok(api)

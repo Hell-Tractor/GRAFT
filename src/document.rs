@@ -1,5 +1,6 @@
 use std::path::Path;
 
+use serde::{Serialize};
 use tracing::{info, instrument};
 
 use crate::{error::Result};
@@ -9,15 +10,49 @@ mod query;
 mod utils;
 pub mod api;
 
-/// Fetch the API documentations of a crate in JSON format
-/// # Arguments
-/// * `crate_name` - The name of the crate to fetch documentation for
-/// # Returns
-/// A Result containing the JSON documentation as a String
-/// or an Error if the operation fails
+trait TryFromApiDoc<T> {
+    fn try_from_api_doc(doc: &str) -> Result<T>;
+}
+
+#[derive(Serialize)]
+pub struct APIDoc {
+    pub apis: Vec<api::API>,
+    // types: Types,
+}
+
+#[derive(Serialize)]
+pub struct Types {
+    pub structs: Vec<r#type::Struct>,
+    // enums, traits, etc can be added later
+}
+
+impl TryFromApiDoc<APIDoc> for APIDoc {
+    fn try_from_api_doc(doc: &str) -> Result<Self> {
+        info!("Converting raw API documentation to structured APIDoc");
+        let apis = api::API::try_from_api_doc(doc)?;
+        // let types = r#type::Types::try_from_api_doc(doc)?;
+        Ok(APIDoc {
+            apis,
+            // types,
+        })
+    }
+}
+
+impl ToString for APIDoc {
+    fn to_string(&self) -> String {
+        serde_json::to_string(self).unwrap_or("Serialization Failed".into())
+    }
+}
+
+pub fn get_api_documentation(crate_name: &str) -> Result<APIDoc> {
+    let raw_doc = get_raw_api_documentation(crate_name)?;
+    let api_doc = APIDoc::try_from_api_doc(&raw_doc)?;
+    Ok(api_doc)
+}
+
 #[instrument]
-pub fn get_api_documentation(crate_name: &str) -> Result<String> {
-    info!("Fetching API documentation for crate");
+fn get_raw_api_documentation(crate_name: &str) -> Result<String> {
+    info!("Fetching raw API documentation for crate");
     let cargo = crate::utils::config().get_string("commands.cargo")?;
     let temp_project_path = crate::utils::config().get_string("doc.temp_project_path")?;
     let temp_project_path = std::path::Path::new(&temp_project_path);
@@ -50,7 +85,7 @@ pub fn get_api_documentation(crate_name: &str) -> Result<String> {
     let doc_path = project_path.join("target/doc").join(format!("{}.json", crate_name.replace("-", "_")));
     let doc_content = crate::utils::read_file_to_string(doc_path)?;
 
-    info!("Successfully fetched API documentation for crate");
+    info!("Successfully fetched raw API documentation for crate");
     Ok(doc_content)
 }
 

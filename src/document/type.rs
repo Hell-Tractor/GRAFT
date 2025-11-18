@@ -1,7 +1,11 @@
 use serde::Serialize;
 
 #[derive(Serialize)]
-pub struct Type {
+pub enum Type {
+}
+
+#[derive(Serialize)]
+pub struct Struct {
     pub name: String,
     #[serde(rename = "type")]
     pub type_: TypeKind,

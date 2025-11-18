@@ -1,7 +1,7 @@
 use tracing::{error, info, span, warn};
 use tracing_subscriber::{EnvFilter, fmt::writer::MakeWriterExt};
 
-use crate::{document::{api, get_api_documentation}, error::Result};
+use crate::{document::get_api_documentation, error::Result};
 
 mod utils;
 mod llm;
@@ -22,17 +22,8 @@ async fn main() {
 
 #[allow(unused)]
 async fn test() {
-    let result = get_api_documentation("base64");
-    if let Err(e) = result {
-        println!("Error: {}", e);
-    } else {
-        println!("Documentation fetched successfully");
-        let mut result = result.unwrap();
-        // std::fs::write("temp.json", &result).unwrap();
-        let apis = api::API::from_api_doc(&result).unwrap();
-        let json = serde_json::to_string_pretty(&apis).unwrap();
-        std::fs::write("temp_apis.json", &json).unwrap();
-    }
+    let json = get_api_documentation("base64").unwrap().to_string();
+    std::fs::write("temp_apis.json", &json).unwrap();
 }
 
 #[allow(unused)]
