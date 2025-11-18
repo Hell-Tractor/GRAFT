@@ -83,17 +83,21 @@ impl TryFrom<query::QueryResult> for API {
     fn try_from(value: query::QueryResult) -> std::result::Result<Self, Self::Error> {
         // parse generics
         let mut generics = HashMap::new();
-        let generic_params = value.get("generic_type_param_name").ok_or(Error::TrustfallQueryError("Missing key `generic_type_param_name` in result".to_string()))?.as_slice().ok_or(Error::TrustfallQueryError("Key `generic_type_param_name` is not a slice".to_string()))?;
-        let type_bounds = value.get("type_bound_name").ok_or(Error::TrustfallQueryError("Missing key `type_bound_name` in result".to_string()))?.as_slice().ok_or(Error::TrustfallQueryError("Key `type_bound_name` is not a slice".to_string()))?;
+        let generic_params = super::utils::get_key_as_slice(&value, "generic_type_param_name")?;
+        let type_bounds = super::utils::get_key_as_slice(&value, "type_bound_name")?;
         if generic_params.len() != type_bounds.len() {
             warn!("Length of `generic_type_param_name` and `type_bound_name` do not match. This isn't expected to happen.");
-            return Err(Error::TrustfallQueryError("Length of `generic_type_param_name` and `type_bound_name` do not match".to_string()));
+            return Err(Error::TrustfallQueryResultLengthMissmatch("generic_type_param_name".into(), "type_bound_name".into()));
         }
         for i in 0..generic_params.len() {
-            let param = generic_params[i].as_str().ok_or(Error::TrustfallQueryError("Element in `generic_type_param_name` is not a string".to_string()))?.to_string();
-            let bound = type_bounds[i].as_slice().ok_or(Error::TrustfallQueryError("Element in `type_bound_name` is not a slice".to_string()))?
+            let param = generic_params[i].as_str()
+                .ok_or(Error::TrustfallQueryResultTypeMismatch(format!("generic_type_param_name[{}]", i), "string".into()))?
+                .to_string();
+            let bound = type_bounds[i].as_slice()
+                .ok_or(Error::TrustfallQueryResultTypeMismatch(format!("type_bound_name[{}]", i), "slice".into()))?
                 .iter()
-                .map(|s| s.as_str().ok_or(Error::TrustfallQueryError("Element in `type_bound_name` slice is not a string".to_string())).map(|s| s.to_string()))
+                .map(|s| s.as_str().ok_or(Error::TrustfallQueryResultTypeMismatch(format!("type_bound_name[{}][*]", i), "string".into()))
+                .map(|s| s.to_string()))
                 .collect::<Result<Vec<String>>>()?
                 .join(" + ");
             generics.insert(param, bound);
@@ -101,52 +105,50 @@ impl TryFrom<query::QueryResult> for API {
 
         // parse inputs
         let mut inputs = Vec::new();
-        let param_names = value.get("param_name").ok_or(Error::TrustfallQueryError("Missing key `param_name` in result".to_string()))?.as_slice().ok_or(Error::TrustfallQueryError("Key `param_name` is not a slice".to_string()))?;
-        let param_types = value.get("param_type").ok_or(Error::TrustfallQueryError("Missing key `param_type` in result".to_string()))?.as_slice().ok_or(Error::TrustfallQueryError("Key `param_type` is not a slice".to_string()))?;
+        let param_names = super::utils::get_key_as_slice(&value, "param_name")?;
+        let param_types = super::utils::get_key_as_slice(&value, "param_type")?;
         if param_names.len() != param_types.len() {
             warn!("Length of `param_name` and `param_type` do not match. This isn't expected to happen.");
-            return Err(Error::TrustfallQueryError("Length of `param_name` and `param_type` do not match".to_string()));
+            return Err(Error::TrustfallQueryResultLengthMissmatch("param_name".into(), "param_type".into()));
         }
         for i in 0..param_names.len() {
-            let name = param_names[i].as_str().ok_or(Error::TrustfallQueryError("Element in `param_name` is not a string".to_string()))?.to_string();
-            let type_ = param_types[i].as_str().ok_or(Error::TrustfallQueryError("Element in `param_type` is not a string".to_string()))?.to_string();
+            let name = param_names[i].as_str()
+                .ok_or(Error::TrustfallQueryResultTypeMismatch("param_name".into(), "string".into()))?.to_string();
+            let type_ = param_types[i].as_str()
+                .ok_or(Error::TrustfallQueryResultTypeMismatch("param_type".into(), "string".into()))?.to_string();
             inputs.push(Parameter { name, type_ });
         }
 
-        // parse module path
-        let canonical_path = value.get("canonical_path").ok_or(Error::TrustfallQueryError("Missing key `canonical_path` in result".to_string()))?.as_slice().ok_or(Error::TrustfallQueryError("Key `canonical_path` is not a slice".to_string()))?;
-        let module_path = value.get("module_path").ok_or(Error::TrustfallQueryError("Missing key `module_path` in result".to_string()))?.as_slice().ok_or(Error::TrustfallQueryError("Key `module_path` is not a slice".to_string()))?.iter()
-            .next().map_or(Ok(canonical_path), |path| path.as_slice().ok_or(Error::TrustfallQueryError("Element in `module_path` is not a slice".to_string())))?
-            .iter()
-            .map(|path| path.as_str().ok_or(Error::TrustfallQueryError("Element in `module_path` slice is not a string".to_string())).map(|s| s.to_string()))
-            .collect::<Result<Vec<String>>>()?
-            .join("::");
-
-        let mut api = API {
-            name: value.get("name").ok_or(Error::TrustfallQueryError("Missing key `name` in result".to_string()))?.as_str().ok_or(Error::TrustfallQueryError("Key `name` is not a string".to_string()))?.to_string(),
+        let api = API {
+            name: super::utils::get_key_as_str(&value, "name")?.to_string(),
             kind: {
-                let item_type = value.get("item_type").ok_or(Error::TrustfallQueryError("Missing key `item_type` in result".to_string()))?.as_str().ok_or(Error::TrustfallQueryError("Key `item_type` is not a string".to_string()))?;
+                let item_type = super::utils::get_key_as_str(&value, "item_type")?;
                 match item_type {
                     "Function" => Ok(APIKind::Function),
                     "Struct" => Ok(APIKind::Method),
                     _ => Err(Error::TrustfallQueryError(format!("Unknown item type `{}`", item_type))),
                 }
             }?,
-            signature: value.get("signature").ok_or(Error::TrustfallQueryError("Missing key `signature` in result".to_string()))?.as_str().ok_or(Error::TrustfallQueryError("Key `signature` is not a string".to_string()))?.to_string(),
-            module_path,
-            doc_comment: value.get("doc_comment").ok_or(Error::TrustfallQueryError("Missing key `doc_comment` in result".to_string()))?.as_str().unwrap_or("").to_string(),
+            signature: super::utils::get_key_as_str(&value, "signature")?.to_string(),
+            module_path: super::utils::parse_path(&value, "module_path", "canonical_path")?,
+            doc_comment: super::utils::get_key_as_str(&value, "doc_comment")?.to_string(),
             location: Location {
-                file: value.get("file").ok_or(Error::TrustfallQueryError("Missing key `file` in result".to_string()))?.as_str().ok_or(Error::TrustfallQueryError("Key `file` is not a string".to_string()))?.to_string(),
-                line: value.get("line").ok_or(Error::TrustfallQueryError("Missing key `line` in result".to_string()))?.as_u64().ok_or(Error::TrustfallQueryError("Key `line` is not a u64".to_string()))? as usize,
+                file: {
+                    let raw_path = super::utils::get_key_as_str(&value, "file")?.to_string();
+                    // remove file path before "src/"
+                    raw_path.split("src/").skip(2)
+                        .map(|s| format!("src/{}", s))
+                        .next()
+                        .unwrap_or(raw_path)
+                },
+                line: super::utils::get_key_as_usize(&value, "line")?,
             },
             generics,
             inputs,
             output: ReturnValue {
-                type_: value.get("return_type").ok_or(Error::TrustfallQueryError("Missing key `return_type` in result".to_string()))?.as_str().ok_or(Error::TrustfallQueryError("Key `return_type` is not a string".to_string()))?.to_string(),
+                type_: super::utils::get_key_as_str(&value, "return_type")?.to_string(),
             },
         };
-        // remove file path before "src/"
-        api.location.file = api.location.file.split("src/").skip(2).map(|s| format!("src/{}", s)).next().unwrap_or(api.location.file);
         Ok(api)
     }
 }

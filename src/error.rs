@@ -12,11 +12,13 @@ pub enum Error {
     CommandError(String),
     #[error(transparent)]
     SerdeError(#[from] serde_json::Error),
-    #[error("{0}")]
+    #[error("Trustfall query error: {0}")]
     TrustfallQueryError(String),
+    #[error("Length of slice `{0}` and `{1}` do not match in Trustfall query result.")]
+    TrustfallQueryResultLengthMissmatch(String, String),
     #[error("Missing key `{0}` in Trustfall query result.")]
     TrustfallQueryResultMissingKey(String),
-    #[error("Type mismatch for key `{0}` in Trustfall query result: expected `{1}`.")]
+    #[error("Element `{0}` in Trustfall query result is not a {1}.")]
     TrustfallQueryResultTypeMismatch(String, String),
     #[error("Unsupported LLM type: {0}")]
     UnsupportedLLMType(String),
