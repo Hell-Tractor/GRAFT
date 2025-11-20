@@ -17,7 +17,7 @@ trait TryFromApiDoc<T> {
 #[derive(Serialize)]
 pub struct APIDoc {
     pub apis: Vec<api::API>,
-    // types: Types,
+    types: Types,
 }
 
 #[derive(Serialize)]
@@ -30,10 +30,20 @@ impl TryFromApiDoc<APIDoc> for APIDoc {
     fn try_from_api_doc(querier: &query::DocQuerier) -> Result<Self> {
         info!("Converting raw API documentation to structured APIDoc");
         let apis = api::API::try_from_api_doc(querier)?;
-        // let types = r#type::Types::try_from_api_doc(doc)?;
+        let types = Types::try_from_api_doc(querier)?;
         Ok(APIDoc {
             apis,
-            // types,
+            types,
+        })
+    }
+}
+
+impl TryFromApiDoc<Types> for Types {
+    fn try_from_api_doc(querier: &query::DocQuerier) -> Result<Self> {
+        info!("Parsing Types documentation");
+        let structs = r#type::r#struct::Struct::try_from_api_doc(querier)?;
+        Ok(Types {
+            structs,
         })
     }
 }

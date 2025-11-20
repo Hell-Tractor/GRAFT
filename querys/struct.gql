@@ -2,8 +2,9 @@
     Crate {
         item {
             ... on Struct {
-                __typename @output(name: "item_type")
+                # __typename @output(name: "item_type")
                 name @output(name: "struct_name")
+                docs @output(name: "struct_docs")
                 public_api_eligible @filter(op: "=", value: ["$public"])
                 canonical_path {
                     # used only when there is no public importable_path
@@ -17,6 +18,15 @@
                 impl @fold {
                     implemented_trait {
                         instantiated_name @output(name: "trait_name")
+                    }
+                }
+                field @fold {
+                    name @output(name: "field_name")
+                    docs @output(name: "field_docs")
+                    public_api_eligible @filter(op: "=", value: ["$public"])
+                    deprecated @filter(op: "=", value: ["$deprecated"])
+                    raw_type {
+                        name @output(name: "field_type_name")
                     }
                 }
             }

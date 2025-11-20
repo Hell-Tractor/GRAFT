@@ -65,3 +65,47 @@ impl_field_value_try_into_T!(
     as_str, &str,
     as_usize, usize,
 );
+
+macro_rules! impl_field_value_slice_try_into_T_vec {
+    () => {};
+
+    ( $Name:ident, & $T:ty $(, $($rest:tt)*)? ) => {
+        paste! {
+            pub fn [<parse_slice_elem_ $Name>]<'a>(
+                slice: &'a [FieldValue],
+                slice_name: Option<&str>,
+            ) -> Result<Vec<&'a $T>> {
+                slice.iter()
+                    .map(|v| v.$Name()
+                        .ok_or(Error::TrustfallQueryResultTypeMismatch(
+                            format!("{}[*]", slice_name.unwrap_or("slice")),
+                            stringify!($T).into(),
+                        )))
+                    .collect::<Result<Vec<&'a $T>>>()
+            }
+        }
+        $(impl_field_value_slice_try_into_T_vec!($($rest)*);)?
+    };
+
+    ( $Name:ident, $T:ty $(, $($rest:tt)*)? ) => {
+        paste! {
+            pub fn [<parse_slice_elem_ $Name>](
+                slice: &[FieldValue],
+                slice_name: Option<&str>,
+            ) -> Result<Vec<$T>> {
+                slice.iter()
+                    .map(|v| v.$Name()
+                        .ok_or(Error::TrustfallQueryResultTypeMismatch(
+                            format!("{}[*]", slice_name.unwrap_or("slice")),
+                            stringify!($T).into(),
+                        )))
+                    .collect::<Result<Vec<$T>>>()
+            }
+        }
+        $(impl_field_value_slice_try_into_T_vec!($($rest)*);)?
+    };
+}
+
+impl_field_value_slice_try_into_T_vec!(
+    as_str, &str,
+);
