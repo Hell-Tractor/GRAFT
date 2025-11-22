@@ -4,7 +4,7 @@ use serde::Serialize;
 use tracing::{info, warn};
 
 use crate::{error::{Error, Result}, utils};
-use super::{TryFromApiDoc, query::{self, DocQuerier}};
+use super::{TryFromApiDoc, query};
 
 #[derive(Serialize)]
 pub struct API {

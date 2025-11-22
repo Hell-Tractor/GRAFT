@@ -48,12 +48,9 @@ impl TryFrom<&QueryResult> for Struct {
             type_: TypeKind::Struct,
             path: doc_utils::parse_path(value, "importable_path", "canonical_path")?,
             traits: {
-                doc_utils::get_key_as_slice(value, "trait_name")?
-                    .iter()
-                    .map(|v| doc_utils::parse_field_value_as_str(v, "trait_name"))
-                    .collect::<Result<Vec<&str>>>()?
-                    .into_iter().map(|s| s.to_string())
-                    .collect()
+                doc_utils::get_key_as_vec_with(value, "trait_name", |fv| {
+                    doc_utils::parse_field_value_as_str(fv, "trait_name[*]").map(str::to_string)
+                })?
             },
             fields: parse_struct_fields(value, "field_name", "field_docs", "field_type_name")?,
         })
