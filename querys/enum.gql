@@ -1,0 +1,41 @@
+{
+    Crate {
+        item {
+            ... on Enum {
+                name @output(name: "enum_name")
+                docs @output(name: "enum_docs")
+                public_api_eligible @filter(op: "=", value: ["$public"])
+                deprecated @filter(op: "=", value: ["$deprecated"])
+                canonical_path {
+                    # used only when there is no public importable_path
+                    path @output(name: "canonical_path")
+                }
+                importable_path @fold {
+                    public_api @filter(op: "=", value: ["$public"])
+                    deprecated @filter(op: "=", value: ["$deprecated"])
+                    path @output(name: "module_path")
+                }
+                impl @fold {
+                    implemented_trait {
+                        instantiated_name @output(name: "trait_name")
+                    }
+                }
+                variant @fold {
+                    name @output(name: "variant_name")
+                    docs @output(name: "variant_docs")
+                    public_api_eligible @filter(op: "=", value: ["$public"])
+                    deprecated @filter(op: "=", value: ["$deprecated"])
+                    field @fold {
+                        name @output(name: "field_name")
+                        docs @output(name: "field_docs")
+                        public_api_eligible @filter(op: "=", value: ["$public"])
+                        deprecated @filter(op: "=", value: ["$deprecated"])
+                        raw_type {
+                            name @output(name: "field_type_name")
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

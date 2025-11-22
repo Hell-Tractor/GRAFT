@@ -20,3 +20,13 @@ pub fn read_file_to_string<P>(path: P) -> std::io::Result<String>
     file.read_to_string(&mut contents)?;
     Ok(contents)
 }
+
+#[macro_export]
+macro_rules! is_same_len {
+    ($first: expr $(, $rest: expr)* $(,)?) => {
+        {
+            let len = $first.len();
+            true $(&& len == $rest.len())*
+        }
+    };
+}

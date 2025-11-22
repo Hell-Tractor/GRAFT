@@ -6,6 +6,7 @@
                 name @output(name: "struct_name")
                 docs @output(name: "struct_docs")
                 public_api_eligible @filter(op: "=", value: ["$public"])
+                deprecated @filter(op: "=", value: ["$deprecated"])
                 canonical_path {
                     # used only when there is no public importable_path
                     path @output(name: "canonical_path")

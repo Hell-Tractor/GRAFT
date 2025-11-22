@@ -3,6 +3,7 @@ use tracing_subscriber::{EnvFilter, fmt::writer::MakeWriterExt};
 
 use crate::{document::get_api_documentation, error::Result};
 
+#[macro_use]
 mod utils;
 mod llm;
 mod error;

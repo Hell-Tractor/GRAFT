@@ -23,6 +23,7 @@ pub struct APIDoc {
 #[derive(Serialize)]
 pub struct Types {
     pub structs: Vec<r#type::r#struct::Struct>,
+    pub enums: Vec<r#type::r#enum::Enum>,
     // enums, traits, etc can be added later
 }
 
@@ -42,8 +43,10 @@ impl TryFromApiDoc<Types> for Types {
     fn try_from_api_doc(querier: &query::DocQuerier) -> Result<Self> {
         info!("Parsing Types documentation");
         let structs = r#type::r#struct::Struct::try_from_api_doc(querier)?;
+        let enums = r#type::r#enum::Enum::try_from_api_doc(querier)?;
         Ok(Types {
             structs,
+            enums,
         })
     }
 }
