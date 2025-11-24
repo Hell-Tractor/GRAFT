@@ -24,3 +24,4 @@ querys:
   function: "querys/function.gql"
   method: "querys/method.gql"
   struct: "querys/struct.gql"
+  enum: "querys/enum.gql"

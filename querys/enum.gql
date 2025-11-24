@@ -13,7 +13,7 @@
                 importable_path @fold {
                     public_api @filter(op: "=", value: ["$public"])
                     deprecated @filter(op: "=", value: ["$deprecated"])
-                    path @output(name: "module_path")
+                    path @output(name: "importable_path")
                 }
                 impl @fold {
                     implemented_trait {

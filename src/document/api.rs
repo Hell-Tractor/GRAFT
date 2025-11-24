@@ -80,17 +80,17 @@ impl TryFrom<&query::QueryResult> for API {
 
     fn try_from(value: &query::QueryResult) -> std::result::Result<Self, Self::Error> {
         // parse generics
-        let generic_names = super::utils::get_key_as_vec_with(value, "generic_name", |fv| {
-            super::utils::parse_field_value_as_str(fv, "generic_name[*]").map(str::to_string)
+        let generic_names = super::utils::get_key_as_vec_with(value, "generic_type_param_name", |fv| {
+            super::utils::parse_field_value_as_str(fv, "generic_type_param_name[*]").map(str::to_string)
         })?;
-        let generic_type_bounds = super::utils::get_key_as_vec_with(value, "generic_type_bound", |fv| {
-            super::utils::parse_field_value_as_vec_with(fv, "generic_type_bound[*]", |fv| {
-                super::utils::parse_field_value_as_str(fv, "generic_type_bound[*][*]").map(str::to_string)
+        let generic_type_bounds = super::utils::get_key_as_vec_with(value, "type_bound_name", |fv| {
+            super::utils::parse_field_value_as_vec_with(fv, "type_bound_name[*]", |fv| {
+                super::utils::parse_field_value_as_str(fv, "type_bound_name[*][*]").map(str::to_string)
             })
         })?;
         if !is_same_len!(generic_names, generic_type_bounds) {
-            warn!("Length of `generic_name` and `generic_type_bound` do not match. This isn't expected to happen.");
-            return Err(Error::TrustfallQueryResultLengthMissmatch("generic_name".into(), "generic_type_bound".into()));
+            warn!("Length of `generic_type_param_name` and `type_bound_name` do not match. This isn't expected to happen.");
+            return Err(Error::TrustfallQueryResultLengthMissmatch("generic_type_param_name".into(), "type_bound_name".into()));
         }
         let generics = generic_names.into_iter().zip(generic_type_bounds.into_iter())
             .map(|(name, type_bound)| APIGeneric {
@@ -128,7 +128,7 @@ impl TryFrom<&query::QueryResult> for API {
             }?,
             signature: super::utils::get_key_as_str(value, "signature")?.to_string(),
             module_path: super::utils::parse_path(value, "module_path", "canonical_path")?,
-            doc_comment: super::utils::get_key_as_str(value, "doc_comment")?.to_string(),
+            doc_comment: super::utils::get_key_as_str(value, "doc_comment").unwrap_or("").to_string(),
             location: Location {
                 file: {
                     let raw_path = super::utils::get_key_as_str(value, "file")?.to_string();

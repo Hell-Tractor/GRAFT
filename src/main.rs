@@ -1,7 +1,7 @@
 use tracing::{error, info, span, warn};
 use tracing_subscriber::{EnvFilter, fmt::writer::MakeWriterExt};
 
-use crate::{document::get_api_documentation, error::Result};
+use crate::{error::Result};
 
 #[macro_use]
 mod utils;
@@ -13,17 +13,19 @@ mod document;
 #[tokio::main]
 async fn main() {
     init_logger();
-    // test().await;
+    test().await;
 
-    const TARGET_CRATE: &str = "base64";
-    if let Err(e) = test_crate(TARGET_CRATE).await {
-        error!("Error occurred: {}", e);
-    }
+    // const TARGET_CRATE: &str = "base64";
+    // if let Err(e) = test_crate(TARGET_CRATE).await {
+    //     error!("Error occurred: {}", e);
+    // }
 }
 
 #[allow(unused)]
 async fn test() {
-    let json = get_api_documentation("base64").unwrap().to_string();
+    let json = document::APIDoc::builder("base64")
+        .unwrap().filter_api().filter_types()
+        .build().to_string();
     std::fs::write("temp_apis.json", &json).unwrap();
 }
 

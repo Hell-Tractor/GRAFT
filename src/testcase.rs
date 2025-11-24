@@ -52,7 +52,10 @@ impl Testcase {
 
         // generate testcase
         info!("Generating testcase for project `{}`", name);
-        let api_doc = document::get_api_documentation(target_crate)?;
+        let api_doc = document::APIDoc::builder(target_crate)?
+            .filter_api()
+            .filter_types()
+            .build();
 
         // write to temp_apis.json for debug
         let file = std::fs::File::create("temp_apis.json")?;

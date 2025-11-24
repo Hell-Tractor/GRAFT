@@ -41,7 +41,7 @@ impl TryFrom<&QueryResult> for Enum {
     fn try_from(value: &QueryResult) -> Result<Self> {
         Ok(Enum {
             name: doc_utils::get_key_as_str(value, "enum_name")?.to_string(),
-            docs: doc_utils::get_key_as_str(value, "enum_docs")?.to_string(),
+            docs: doc_utils::get_key_as_str(value, "enum_docs").unwrap_or("").to_string(),
             type_: TypeKind::Enum,
             path: doc_utils::parse_path(value, "importable_path", "canonical_path")?,
             traits: {
@@ -57,7 +57,7 @@ impl TryFrom<&QueryResult> for Enum {
                     doc_utils::parse_field_value_as_str(fv, "variant_name[*]").map(str::to_string)
                 })?;
                 let variant_docs = doc_utils::get_key_as_vec_with(value, "variant_docs", |fv| {
-                    doc_utils::parse_field_value_as_str(fv, "variant_docs[*]").map(str::to_string)
+                    Ok(doc_utils::parse_field_value_as_str(fv, "variant_docs[*]").unwrap_or("").to_string())
                 })?;
                 let variant_field_names = doc_utils::get_key_as_vec_with(value, "field_name", |fv| {
                     doc_utils::parse_field_value_as_vec_with(fv, "field_name[*]", |fv| {
@@ -66,7 +66,7 @@ impl TryFrom<&QueryResult> for Enum {
                 })?;
                 let variant_field_docs = doc_utils::get_key_as_vec_with(value, "field_docs", |fv| {
                     doc_utils::parse_field_value_as_vec_with(fv, "field_docs[*]", |fv| {
-                        doc_utils::parse_field_value_as_str(fv, "field_docs[*][*]").map(str::to_string)
+                        Ok(doc_utils::parse_field_value_as_str(fv, "field_docs[*][*]").unwrap_or("").to_string())
                     })
                 })?;
                 let variant_field_type_names = doc_utils::get_key_as_vec_with(value, "field_type_name", |fv| {

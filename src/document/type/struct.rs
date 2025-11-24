@@ -44,7 +44,7 @@ impl TryFrom<&QueryResult> for Struct {
     fn try_from(value: &QueryResult) -> Result<Self> {
         Ok(Struct {
             name: doc_utils::get_key_as_str(value, "struct_name")?.to_string(),
-            docs: doc_utils::get_key_as_str(value, "struct_docs")?.to_string(),
+            docs: doc_utils::get_key_as_str(value, "struct_docs").unwrap_or("").to_string(),
             type_: TypeKind::Struct,
             path: doc_utils::parse_path(value, "importable_path", "canonical_path")?,
             traits: {

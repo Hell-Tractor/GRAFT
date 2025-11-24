@@ -43,7 +43,7 @@ pub fn parse_struct_fields(value: &QueryResult, field_name_key: &str, field_docs
         parse_field_value_as_str(fv, &format!("{}[*]", field_name_key)).map(str::to_string)
     })?;
     let field_docs = get_key_as_vec_with(value, field_docs_key, |fv| {
-        parse_field_value_as_str(fv, &format!("{}[*]", field_docs_key)).map(str::to_string)
+        Ok(parse_field_value_as_str(fv, &format!("{}[*]", field_docs_key)).unwrap_or("").to_string())
     })?;
     let field_type_names = get_key_as_vec_with(value, field_type_name_key, |fv| {
         parse_field_value_as_str(fv, &format!("{}[*]", field_type_name_key)).map(str::to_string)
@@ -54,9 +54,9 @@ pub fn parse_struct_fields(value: &QueryResult, field_name_key: &str, field_docs
 
     let fields = field_names.into_iter().zip(field_docs.into_iter()).zip(field_type_names.into_iter())
         .map(|((name, docs), type_name)| StructField {
-            name: name.to_string(),
-            docs: docs.to_string(),
-            type_: type_name.to_string(),
+            name: name,
+            docs: docs,
+            type_: type_name,
         })
         .collect();
     Ok(fields)
