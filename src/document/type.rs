@@ -7,8 +7,8 @@ pub mod r#enum;
 pub enum TypeKind {
     Struct,
     Enum,
-    Variant,
-    Primitive,
+    // Union,
+    // Constant,
 }
 
 #[derive(Serialize)]

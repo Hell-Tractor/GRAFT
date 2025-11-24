@@ -1,4 +1,4 @@
-use std::{collections::HashMap, io::Write};
+use std::io::Write;
 
 use serde::Serialize;
 use tracing::{info, warn};
@@ -14,7 +14,7 @@ pub struct API {
     pub module_path: String,
     pub doc_comment: String,
     pub location: Location,
-    pub generics: HashMap<String, String>, // generic parameter name -> type bound
+    pub generics: Vec<APIGeneric>,
     pub inputs: Vec<Parameter>,
     pub output: ReturnValue,
     // pub is_public: bool,
@@ -80,26 +80,25 @@ impl TryFrom<&query::QueryResult> for API {
 
     fn try_from(value: &query::QueryResult) -> std::result::Result<Self, Self::Error> {
         // parse generics
-        let mut generics = HashMap::new();
-        let generic_params = super::utils::get_key_as_slice(value, "generic_type_param_name")?;
-        let type_bounds = super::utils::get_key_as_slice(value, "type_bound_name")?;
-        if generic_params.len() != type_bounds.len() {
-            warn!("Length of `generic_type_param_name` and `type_bound_name` do not match. This isn't expected to happen.");
-            return Err(Error::TrustfallQueryResultLengthMissmatch("generic_type_param_name".into(), "type_bound_name".into()));
+        let generic_names = super::utils::get_key_as_vec_with(value, "generic_name", |fv| {
+            super::utils::parse_field_value_as_str(fv, "generic_name[*]").map(str::to_string)
+        })?;
+        let generic_type_bounds = super::utils::get_key_as_vec_with(value, "generic_type_bound", |fv| {
+            super::utils::parse_field_value_as_vec_with(fv, "generic_type_bound[*]", |fv| {
+                super::utils::parse_field_value_as_str(fv, "generic_type_bound[*][*]").map(str::to_string)
+            })
+        })?;
+        if !is_same_len!(generic_names, generic_type_bounds) {
+            warn!("Length of `generic_name` and `generic_type_bound` do not match. This isn't expected to happen.");
+            return Err(Error::TrustfallQueryResultLengthMissmatch("generic_name".into(), "generic_type_bound".into()));
         }
-        for i in 0..generic_params.len() {
-            let param = generic_params[i].as_str()
-                .ok_or(Error::TrustfallQueryResultTypeMismatch(format!("generic_type_param_name[{}]", i), "string".into()))?
-                .to_string();
-            let bound = type_bounds[i].as_slice()
-                .ok_or(Error::TrustfallQueryResultTypeMismatch(format!("type_bound_name[{}]", i), "slice".into()))?
-                .iter()
-                .map(|s| s.as_str().ok_or(Error::TrustfallQueryResultTypeMismatch(format!("type_bound_name[{}][*]", i), "string".into()))
-                .map(|s| s.to_string()))
-                .collect::<Result<Vec<String>>>()?
-                .join(" + ");
-            generics.insert(param, bound);
-        }
+        let generics = generic_names.into_iter().zip(generic_type_bounds.into_iter())
+            .map(|(name, type_bound)| APIGeneric {
+                name,
+                type_bound,
+                // allowed_types: Vec::new(), // calculated later
+            })
+            .collect::<Vec<_>>();
 
         // parse inputs
         let mut inputs = Vec::new();
@@ -184,3 +183,19 @@ pub struct ReturnValue {
     #[serde(rename = "type")]
     pub type_: String,
 }
+
+#[derive(Serialize)]
+pub struct APIGeneric {
+    pub name: String,
+    pub type_bound: Vec<String>,
+    // pub allowed_types: Vec<String>,
+}
+
+// impl APIGeneric {
+//     pub fn calculate_allowed_types(&mut self, types: &Types) {
+//         self.allowed_types = types.structs.iter()
+//             .filter(|type_| self.type_bound.iter().all(|bound| type_.traits.contains(bound)))
+//             .map(|type_| type_.name.clone())
+//             .collect();
+//     }
+// }

@@ -27,6 +27,16 @@ pub struct Types {
     // enums, traits, etc can be added later
 }
 
+// impl APIDoc {
+//     fn calculate_api_generic_allowed_types(&mut self) {
+//         for api in &mut self.apis {
+//             for generic in &mut api.generics {
+//                 generic.calculate_allowed_types(&self.types);
+//             }
+//         }
+//     }
+// }
+
 impl TryFromApiDoc<APIDoc> for APIDoc {
     fn try_from_api_doc(querier: &query::DocQuerier) -> Result<Self> {
         info!("Converting raw API documentation to structured APIDoc");
