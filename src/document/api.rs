@@ -60,6 +60,10 @@ impl TryFromApiDoc<Vec<API>> for API {
                     let struct_name = result.get("struct_name").ok_or(Error::TrustfallQueryError("Missing key `struct_name` in result".to_string()))?.as_str().ok_or(Error::TrustfallQueryError("Key `struct_name` is not a string".to_string()))?.to_string();
                     API::try_from(&result).map(|mut api| {
                         api.signature = api.signature.replace("Self", &struct_name);
+                        api.inputs.iter_mut().for_each(|param| {
+                            param.type_ = param.type_.replace("Self", &struct_name);
+                        });
+                        api.output.type_ = api.output.type_.replace("Self", &struct_name);
                         api
                     })
                 }).collect()
@@ -92,13 +96,36 @@ impl TryFrom<&query::QueryResult> for API {
             warn!("Length of `generic_type_param_name` and `type_bound_name` do not match. This isn't expected to happen.");
             return Err(Error::TrustfallQueryResultLengthMissmatch("generic_type_param_name".into(), "type_bound_name".into()));
         }
-        let generics = generic_names.into_iter().zip(generic_type_bounds.into_iter())
+        let mut generics = generic_names.into_iter().zip(generic_type_bounds.into_iter())
             .map(|(name, type_bound)| APIGeneric {
                 name,
                 type_bound,
                 // allowed_types: Vec::new(), // calculated later
             })
             .collect::<Vec<_>>();
+        // parse struct generics
+        if value.contains_key("struct_generic_type_param_name") {
+            let struct_generic_names = super::utils::get_key_as_vec_with(value, "struct_generic_type_param_name", |fv| {
+                super::utils::parse_field_value_as_str(fv, "struct_generic_type_param_name[*]").map(str::to_string)
+            })?;
+            let struct_generic_type_bounds = super::utils::get_key_as_vec_with(value, "struct_type_bound_name", |fv| {
+                super::utils::parse_field_value_as_vec_with(fv, "struct_type_bound_name[*]", |fv| {
+                    super::utils::parse_field_value_as_str(fv, "struct_type_bound_name[*][*]").map(str::to_string)
+                })
+            })?;
+            if !is_same_len!(struct_generic_names, struct_generic_type_bounds) {
+                warn!("Length of `struct_generic_type_param_name` and `struct_type_bound_name` do not match. This isn't expected to happen.");
+                return Err(Error::TrustfallQueryResultLengthMissmatch("struct_generic_type_param_name".into(), "struct_type_bound_name".into()));
+            }
+            let struct_generics = struct_generic_names.into_iter().zip(struct_generic_type_bounds.into_iter())
+                .map(|(name, type_bound)| APIGeneric {
+                    name,
+                    type_bound,
+                    // allowed_types: Vec::new(), // calculated later
+                })
+                .collect::<Vec<_>>();
+            generics.extend(struct_generics);
+        }
 
         // parse inputs
         let mut inputs = Vec::new();

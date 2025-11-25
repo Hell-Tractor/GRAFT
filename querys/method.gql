@@ -17,6 +17,14 @@
                     deprecated @filter(op: "=", value: ["$deprecated"])
                     path @output(name: "module_path")
                 }
+                generic_parameter @fold {
+                    ... on GenericTypeParameter {
+                        name @output(name: "struct_generic_type_param_name")
+                        type_bound @fold {
+                            instantiated_name @output(name: "struct_type_bound_name")
+                        }
+                    }
+                }
                 impl {
                     method {
                         docs @output(name: "doc_comment")

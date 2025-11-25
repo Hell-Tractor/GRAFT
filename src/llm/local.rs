@@ -42,6 +42,7 @@ impl LLMClient {
 impl LLM for LLMClient {
     async fn generate_response(&mut self, prompt: &str) -> Result<LLMMessage> {
         // debug!("Generating LLM response for prompt:\n{}", prompt);
+        debug!("Press Enter to request LLM...");
         std::io::stdin().read_line(&mut String::new()).unwrap();
         self.messages.push(LLMMessage::user(prompt));
         let request_body = serde_json::json!({

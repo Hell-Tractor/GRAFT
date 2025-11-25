@@ -22,6 +22,12 @@ pub enum Error {
     TrustfallQueryResultTypeMismatch(String, String),
     #[error("Unsupported LLM type: {0}")]
     UnsupportedLLMType(String),
+    #[error("LLM response does not contain content")]
+    LLMResponseNoContent,
+    #[error("Failed to deserialize string: {0}")]
+    DeserializeError(String),
+    #[error("Missing API key for LLM service")]
+    MissingApiKey,
 }
 
 pub type Result<T> = std::result::Result<T, Error>;

@@ -13,12 +13,12 @@ mod document;
 #[tokio::main]
 async fn main() {
     init_logger();
-    test().await;
+    // test().await;
 
-    // const TARGET_CRATE: &str = "base64";
-    // if let Err(e) = test_crate(TARGET_CRATE).await {
-    //     error!("Error occurred: {}", e);
-    // }
+    const TARGET_CRATE: &str = "base64";
+    if let Err(e) = test_crate(TARGET_CRATE).await {
+        error!("Error occurred: {}", e);
+    }
 }
 
 #[allow(unused)]
@@ -37,7 +37,7 @@ async fn test_crate(crate_name: &str) -> Result<()> {
     let base_path = std::path::Path::new(&base_path);
     let llm_model = utils::config().get_string("LLM.model_name")?;
     let llm_api_url = utils::config().get_string("LLM.api_url_chat")?;
-    let llm_type =  utils::config().get_string("llm.type")?.as_str().try_into()?;
+    let llm_type =  utils::config().get_string("LLM.type")?.as_str().try_into()?;
 
     info!("Preparation complete, starting testcase generation for crate {}", crate_name);
     let mut testcases = vec![];
