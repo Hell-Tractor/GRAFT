@@ -42,10 +42,10 @@
                         }
                         parameter @fold {
                             name @output(name: "param_name")
-                            type @output(name: "param_type")
+                            json_type @output(name: "param_type")
                         }
                         return_value {
-                            type @output(name: "return_type")
+                            json_type @output(name: "return_type")
                         }
                     }
                 }

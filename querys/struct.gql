@@ -18,7 +18,7 @@
                 }
                 impl @fold {
                     implemented_trait {
-                        instantiated_name @output(name: "trait_name")
+                        json @output(name: "trait_name")
                     }
                 }
                 field @fold {

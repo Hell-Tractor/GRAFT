@@ -60,10 +60,10 @@ impl TryFromApiDoc<Vec<API>> for API {
                     let struct_name = result.get("struct_name").ok_or(Error::TrustfallQueryError("Missing key `struct_name` in result".to_string()))?.as_str().ok_or(Error::TrustfallQueryError("Key `struct_name` is not a string".to_string()))?.to_string();
                     API::try_from(&result).map(|mut api| {
                         api.signature = api.signature.replace("Self", &struct_name);
-                        api.inputs.iter_mut().for_each(|param| {
-                            param.type_ = param.type_.replace("Self", &struct_name);
-                        });
-                        api.output.type_ = api.output.type_.replace("Self", &struct_name);
+                        // api.inputs.iter_mut().for_each(|param| {
+                        //     param.type_ = param.type_.replace("Self", &struct_name);
+                        // });
+                        // api.output.type_ = api.output.type_.replace("Self", &struct_name);
                         api
                     })
                 }).collect()
@@ -139,7 +139,9 @@ impl TryFrom<&query::QueryResult> for API {
             let name = param_names[i].as_str()
                 .ok_or(Error::TrustfallQueryResultTypeMismatch("param_name".into(), "string".into()))?.to_string();
             let type_ = param_types[i].as_str()
-                .ok_or(Error::TrustfallQueryResultTypeMismatch("param_type".into(), "string".into()))?.to_string();
+                .ok_or(Error::TrustfallQueryResultTypeMismatch("param_type".into(), "string".into()))?;
+            let type_ = serde_json::from_str::<rustdoc_types::Type>(type_)
+                .map_err(|e| Error::TrustfallQueryError(format!("Param `{}` deserialization error: {}", name, e)))?;
             inputs.push(Parameter { name, type_ });
         }
 
@@ -170,7 +172,12 @@ impl TryFrom<&query::QueryResult> for API {
             generics,
             inputs,
             output: ReturnValue {
-                type_: super::utils::get_key_as_str(value, "return_type")?.to_string(),
+                type_: {
+                    let type_ = super::utils::get_key_as_str(value, "return_type")?;
+                    let type_ = serde_json::from_str(type_)
+                        .map_err(|e| Error::TrustfallQueryError(format!("Return value deserialization error: {}", e)))?;
+                    type_
+                },
             },
         };
         Ok(api)
@@ -202,13 +209,13 @@ pub struct Location {
 pub struct Parameter {
     pub name: String,
     #[serde(rename = "type")]
-    pub type_: String,
+    pub type_: rustdoc_types::Type,
 }
 
 #[derive(Serialize)]
 pub struct ReturnValue {
     #[serde(rename = "type")]
-    pub type_: String,
+    pub type_: Option<rustdoc_types::Type>,
 }
 
 #[derive(Serialize)]

@@ -67,28 +67,28 @@ impl APIDocBuilder {
         info!("Filtered out {} error enums (Origin: {}, After: {})", before_count - after_count, before_count, after_count);
 
         // filter out trivial traits
-        const FILTER_TRAIT_NAMES: &[&str] = &[
-            "Debug", "Display", "Clone", "Copy", "Default", "PartialEq", "Eq",
-            "PartialOrd", "Ord", "Hash", "From", "Into", "AsRef", "AsMut",
-            "Deref", "DerefMut", "Drop", "ToString", "TryFrom", "TryInto",
-            "Sync", "Send",
-            "Borrow", "BorrowMut", "ToOwned", "Any",
-            "Freeze", "Unpin", "UnwindSafe", "RefUnwindSafe",
-        ];
-        info!("Filtering out trivial traits from documentation");
-        self.doc.types.structs.iter_mut().for_each(|struct_| {
-            struct_.traits.retain(|t| !FILTER_TRAIT_NAMES.contains(&APIDocBuilder::get_raw_trait_name(t)));
-        });
-        self.doc.types.enums.iter_mut().for_each(|enm| {
-            enm.traits.retain(|t| !FILTER_TRAIT_NAMES.contains(&APIDocBuilder::get_raw_trait_name(t)));
-        });
-        info!("Filtered out trivial traits from structs and enums");
+        // const FILTER_TRAIT_NAMES: &[&str] = &[
+        //     "Debug", "Display", "Clone", "Copy", "Default", "PartialEq", "Eq",
+        //     "PartialOrd", "Ord", "Hash", "From", "Into", "AsRef", "AsMut",
+        //     "Deref", "DerefMut", "Drop", "ToString", "TryFrom", "TryInto",
+        //     "Sync", "Send",
+        //     "Borrow", "BorrowMut", "ToOwned", "Any",
+        //     "Freeze", "Unpin", "UnwindSafe", "RefUnwindSafe",
+        // ];
+        // info!("Filtering out trivial traits from documentation");
+        // self.doc.types.structs.iter_mut().for_each(|struct_| {
+        //     struct_.traits.retain(|t| !FILTER_TRAIT_NAMES.contains(&APIDocBuilder::get_raw_trait_name(t)));
+        // });
+        // self.doc.types.enums.iter_mut().for_each(|enm| {
+        //     enm.traits.retain(|t| !FILTER_TRAIT_NAMES.contains(&APIDocBuilder::get_raw_trait_name(t)));
+        // });
+        // info!("Filtered out trivial traits from structs and enums");
         self
     }
 
-    fn get_raw_trait_name(t: &str) -> &str {
-        t.split('<').next().unwrap_or(t)
-    }
+    // fn get_raw_trait_name(t: &str) -> &str {
+    //     t.split('<').next().unwrap_or(t)
+    // }
 }
 
 impl APIDoc {

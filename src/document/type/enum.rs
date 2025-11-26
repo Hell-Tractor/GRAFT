@@ -12,7 +12,7 @@ pub struct Enum {
     #[serde(rename = "type")]
     pub type_: TypeKind,
     pub path: String,
-    pub traits: Vec<String>,
+    pub traits: Vec<rustdoc_types::GenericBound>,
     pub variants: Vec<EnumVariant>,
 }
 
@@ -47,10 +47,12 @@ impl TryFrom<&QueryResult> for Enum {
             traits: {
                 doc_utils::get_key_as_slice(value, "trait_name")?
                     .iter()
-                    .map(|v| doc_utils::parse_field_value_as_str(v, "trait_name"))
-                    .collect::<Result<Vec<&str>>>()?
-                    .into_iter().map(|s| s.to_string())
-                    .collect()
+                    .map(|v| {
+                        let s = doc_utils::parse_field_value_as_str(v, "trait_name")?;
+                        let trait_bound = serde_json::from_str(s)?;
+                        Ok(trait_bound)
+                    })
+                    .collect::<Result<Vec<rustdoc_types::GenericBound>>>()?
             },
             variants: {
                 let variant_names = doc_utils::get_key_as_vec_with(value, "variant_name", |fv| {
