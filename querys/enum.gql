@@ -3,6 +3,7 @@
         item {
             ... on Enum {
                 name @output(name: "enum_name")
+                id @output(name: "id")
                 docs @output(name: "enum_docs")
                 public_api_eligible @filter(op: "=", value: ["$public"])
                 deprecated @filter(op: "=", value: ["$deprecated"])

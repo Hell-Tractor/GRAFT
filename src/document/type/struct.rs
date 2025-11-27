@@ -10,6 +10,7 @@ use super::super::utils as doc_utils;
 
 #[derive(Serialize)]
 pub struct Struct {
+    pub id: u32,
     pub name: String,
     pub docs: String,
     #[serde(rename = "type")]
@@ -43,6 +44,7 @@ impl TryFrom<&QueryResult> for Struct {
 
     fn try_from(value: &QueryResult) -> Result<Self> {
         Ok(Struct {
+            id: doc_utils::get_key_as_str(value, "id")?.parse().expect("Id of struct is not a number."),
             name: doc_utils::get_key_as_str(value, "struct_name")?.to_string(),
             docs: doc_utils::get_key_as_str(value, "struct_docs").unwrap_or("").to_string(),
             type_: TypeKind::Struct,

@@ -40,7 +40,7 @@ impl APIDocBuilder {
             "into", "from", "try_into", "try_from",
             "as_ref", "as_mut", "deref", "deref_mut",
             "clone", "clone_from", "clone_into",
-            "default",
+            "default", "type_id",
             "eq", "ne", "lt", "le", "gt", "ge",
             "add", "sub", "mul", "div", "rem",
             "bit_and", "bit_or", "bit_xor", "shl", "shr",
@@ -99,8 +99,15 @@ impl APIDoc {
     //         }
     //     }
     // }
-    pub fn builder(crate_name: &str) -> Result<APIDocBuilder> {
+    pub fn from_crate_name(crate_name: &str) -> Result<APIDocBuilder> {
         let raw_doc = get_raw_api_documentation(crate_name)?;
+        let querier = query::DocQuerier::new(&raw_doc)?;
+        let api_doc = APIDoc::try_from_api_doc(&querier)?;
+        Ok(APIDocBuilder { doc: api_doc })
+    }
+
+    pub fn from_file(path: &Path) -> Result<APIDocBuilder> {
+        let raw_doc = crate::utils::read_file_to_string(path)?;
         let querier = query::DocQuerier::new(&raw_doc)?;
         let api_doc = APIDoc::try_from_api_doc(&querier)?;
         Ok(APIDocBuilder { doc: api_doc })

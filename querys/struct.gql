@@ -4,6 +4,7 @@
             ... on Struct {
                 # __typename @output(name: "item_type")
                 name @output(name: "struct_name")
+                id @output(name: "id")
                 docs @output(name: "struct_docs")
                 public_api_eligible @filter(op: "=", value: ["$public"])
                 deprecated @filter(op: "=", value: ["$deprecated"])

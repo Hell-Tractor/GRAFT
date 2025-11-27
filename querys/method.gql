@@ -21,7 +21,7 @@
                     ... on GenericTypeParameter {
                         name @output(name: "struct_generic_type_param_name")
                         type_bound @fold {
-                            instantiated_name @output(name: "struct_type_bound_name")
+                            json @output(name: "struct_type_bound_name")
                         }
                     }
                 }
@@ -36,7 +36,7 @@
                             ... on GenericTypeParameter {
                                 name @output(name: "generic_type_param_name")
                                 type_bound @fold {
-                                    instantiated_name @output(name: "type_bound_name")
+                                    json @output(name: "type_bound_name")
                                 }
                             }
                         }

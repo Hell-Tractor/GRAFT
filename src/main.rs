@@ -9,11 +9,11 @@ mod llm;
 mod error;
 mod testcase;
 mod document;
+mod generic_bound;
 
 #[tokio::main]
 async fn main() {
     init_logger();
-    // test().await;
 
     const TARGET_CRATE: &str = "base64";
     if let Err(e) = test_crate(TARGET_CRATE).await {
@@ -23,7 +23,7 @@ async fn main() {
 
 #[allow(unused)]
 async fn test() {
-    let json = document::APIDoc::builder("base64")
+    let json = document::APIDoc::from_file(&std::path::Path::new("localdata/test_data/generic_bound_satisfy_check/rustdoc.json"))
         .unwrap().filter_api().filter_types()
         .build().to_string();
     std::fs::write("temp_apis.json", &json).unwrap();

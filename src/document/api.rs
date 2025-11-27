@@ -89,7 +89,10 @@ impl TryFrom<&query::QueryResult> for API {
         })?;
         let generic_type_bounds = super::utils::get_key_as_vec_with(value, "type_bound_name", |fv| {
             super::utils::parse_field_value_as_vec_with(fv, "type_bound_name[*]", |fv| {
-                super::utils::parse_field_value_as_str(fv, "type_bound_name[*][*]").map(str::to_string)
+                let bound = super::utils::parse_field_value_as_str(fv, "type_bound_name[*][*]").map(str::to_string)?;
+                // deserialize to GenericBound
+                serde_json::from_str(&bound)
+                    .map_err(|e| Error::DeserializeError(format!("API Generic bound deserialization error: {}\nOrigin strnig: {}", e, bound)))
             })
         })?;
         if !is_same_len!(generic_names, generic_type_bounds) {
@@ -105,12 +108,17 @@ impl TryFrom<&query::QueryResult> for API {
             .collect::<Vec<_>>();
         // parse struct generics
         if value.contains_key("struct_generic_type_param_name") {
+        // stop doing this for now.
+        // if false {
             let struct_generic_names = super::utils::get_key_as_vec_with(value, "struct_generic_type_param_name", |fv| {
                 super::utils::parse_field_value_as_str(fv, "struct_generic_type_param_name[*]").map(str::to_string)
             })?;
             let struct_generic_type_bounds = super::utils::get_key_as_vec_with(value, "struct_type_bound_name", |fv| {
                 super::utils::parse_field_value_as_vec_with(fv, "struct_type_bound_name[*]", |fv| {
-                    super::utils::parse_field_value_as_str(fv, "struct_type_bound_name[*][*]").map(str::to_string)
+                    let bound = super::utils::parse_field_value_as_str(fv, "struct_type_bound_name[*][*]").map(str::to_string)?;
+                    // deserialize to GenericBound
+                    serde_json::from_str(&bound)
+                        .map_err(|e| Error::DeserializeError(format!("API Struct Generic bound deserialization error: {}\nOrigin string: {}", e, bound)))
                 })
             })?;
             if !is_same_len!(struct_generic_names, struct_generic_type_bounds) {
@@ -221,7 +229,7 @@ pub struct ReturnValue {
 #[derive(Serialize)]
 pub struct APIGeneric {
     pub name: String,
-    pub type_bound: Vec<String>,
+    pub type_bound: Vec<rustdoc_types::GenericBound>,
     // pub allowed_types: Vec<String>,
 }
 

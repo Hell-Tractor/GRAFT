@@ -52,7 +52,7 @@ impl Testcase {
 
         // generate testcase
         info!("Generating testcase for project `{}`", name);
-        let api_doc = document::APIDoc::builder(target_crate)?
+        let api_doc = document::APIDoc::from_crate_name(target_crate)?
             .filter_api()
             .filter_types()
             .build();

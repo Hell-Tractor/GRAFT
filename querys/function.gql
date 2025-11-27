@@ -26,7 +26,7 @@
                     ... on GenericTypeParameter {
                         name @output(name: "generic_type_param_name")
                         type_bound @fold {
-                            instantiated_name @output(name: "type_bound_name")
+                            json @output(name: "type_bound_name")
                         }
                     }
                 }
@@ -35,7 +35,7 @@
                     json_type @output(name: "param_type")
                 }
                 return_value {
-                    json_type @output(name: "return_type")   
+                    json_type @output(name: "return_type")
                 }
             }
         }
