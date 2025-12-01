@@ -10,6 +10,7 @@ mod error;
 mod testcase;
 mod document;
 mod generic_bound;
+mod api_graph;
 
 #[tokio::main]
 async fn main() {

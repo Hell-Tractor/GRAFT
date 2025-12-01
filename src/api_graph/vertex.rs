@@ -1,0 +1,76 @@
+use std::sync::{Arc, Mutex, Weak};
+
+use rustdoc_types::Type;
+use crate::document::api::APIGeneric;
+
+use super::edge::RefType;
+
+pub struct APIParam {
+    pub name: String,
+    pub type_: Type,
+    pub api: Weak<Mutex<API>>,
+    pub id: usize, // ID in the APIGraph
+}
+
+pub struct API {
+    pub signature: String,
+    pub params: Vec<Arc<Mutex<APIParam>>>,
+    pub return_type: Option<Type>,
+    pub id: usize, // ID in the APIGraph
+    pub generics: Vec<APIGeneric>,
+}
+
+impl APIParam {
+    pub fn new(name: String, type_: Type, api: &Arc<Mutex<API>>) -> Self {
+        Self {
+            name,
+            type_,
+            api: Arc::downgrade(api),
+            id: 0,
+        }
+    }
+
+    pub fn get_ref_type(&self) -> RefType {
+        match &self.type_ {
+            Type::BorrowedRef { is_mutable, ..} => {
+                if *is_mutable {
+                    RefType::BorrowMut
+                } else {
+                    RefType::Borrow
+                }
+            },
+            _ => RefType::Move,
+        }
+    }
+
+    pub fn is_primitive(&self) -> bool {
+        match &self.type_ {
+            Type::Primitive(_) => true,
+            _ => false,
+        }
+    }
+
+    pub fn set_id(&mut self, id: usize) {
+        self.id = id;
+    }
+}
+
+impl API {
+    pub fn new(signature: String, return_type: Option<Type>, generics: Vec<APIGeneric>) -> Self {
+        Self {
+            signature,
+            params: vec![],
+            id: 0,
+            return_type,
+            generics,
+        }
+    }
+
+    pub fn add_param(&mut self, param: Arc<Mutex<APIParam>>) {
+        self.params.push(param);
+    }
+
+    pub fn set_id(&mut self, id: usize) {
+        self.id = id;
+    }
+}

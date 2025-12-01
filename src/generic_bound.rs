@@ -92,7 +92,7 @@ impl<'a> GenericBoundChecker<'a> {
         }
     }
 
-    fn type_satisfies(&self, actual: &rustdoc_types::Type, required: &rustdoc_types::Type) -> bool {
+    pub fn type_satisfies(&self, actual: &rustdoc_types::Type, required: &rustdoc_types::Type) -> bool {
         let actual_is_generic = GenericBoundChecker::get_generic_type(actual);
         let required_is_generic = GenericBoundChecker::get_generic_type(required);
 
