@@ -1,4 +1,5 @@
 use rustdoc_types::{GenericArg, GenericArgs, GenericBound, Path};
+use tracing::debug;
 
 use crate::document::{self, api::APIGeneric};
 
@@ -6,15 +7,21 @@ mod constants;
 mod test;
 
 pub struct GenericBoundChecker<'a> {
-    all_required_generics: &'a Vec<APIGeneric>,
+    return_generics: &'a Vec<APIGeneric>,
+    param_generics: &'a Vec<APIGeneric>,
     all_types: &'a document::Types,
+    return_self: Option<&'a rustdoc_types::Type>,
+    param_self: Option<&'a rustdoc_types::Type>,
 }
 
 impl<'a> GenericBoundChecker<'a> {
-    pub fn new(all_required_generics: &'a Vec<APIGeneric>, all_types: &'a document::Types) -> Self {
+    pub fn new(return_generics: &'a Vec<APIGeneric>, param_generics: &'a Vec<APIGeneric>, all_types: &'a document::Types, return_self: Option<&'a rustdoc_types::Type>, param_self: Option<&'a rustdoc_types::Type>) -> Self {
         Self {
-            all_required_generics,
+            return_generics,
+            param_generics,
             all_types,
+            return_self,
+            param_self,
         }
     }
 
@@ -92,19 +99,51 @@ impl<'a> GenericBoundChecker<'a> {
         }
     }
 
+    fn strip_ref(ty: &rustdoc_types::Type) -> &rustdoc_types::Type {
+        use rustdoc_types::Type;
+        match ty {
+            Type::BorrowedRef { type_, .. } => Self::strip_ref(type_),
+            Type::Array { type_, .. } => Self::strip_ref(type_),
+            Type::Slice(type_) => Self::strip_ref(type_),
+            Type::RawPointer { type_, .. } => Self::strip_ref(type_),
+            _ => ty,
+        }
+    }
+
     pub fn type_satisfies(&self, actual: &rustdoc_types::Type, required: &rustdoc_types::Type) -> bool {
+        use rustdoc_types::Type;
+
+        let actual_name = trustfall_rustdoc_adapter::rust_type_name(actual);
+        let required_name = trustfall_rustdoc_adapter::rust_type_name(required);
+        debug!("    Checking if type `{}` satisfies required type `{}`", actual_name, required_name);
         let actual_is_generic = GenericBoundChecker::get_generic_type(actual);
         let required_is_generic = GenericBoundChecker::get_generic_type(required);
 
         match (actual_is_generic, required_is_generic) {
             // both not generic, check equality
-            (None, None) => actual == required,
+            (None, None) => {
+                if let Type::Tuple(types) = actual {
+                    types.iter().any(|t| self.type_satisfies(t, required))
+                } else {
+                    let actual = GenericBoundChecker::strip_ref(actual);
+                    let required = GenericBoundChecker::strip_ref(required);
+                    actual == required
+                }
+            },
 
             // check if actual satisfies the required generic
             (None, Some(t)) => {
-                let required_bounds = self.get_generic_bounds(t);
-                let implemented_bounds = self.get_implemented_traits_of_type(actual);
-                self.is_bounds_satisfy_bounds(&implemented_bounds, required_bounds)
+                match t.as_str() {
+                    "Self" => {
+                        let self_type = self.param_self.expect("`Self` type required but `impl_for` is None");
+                        self.type_satisfies(actual, self_type)
+                    },
+                    _ => {
+                        let required_bounds = self.get_param_generic_bounds(t);
+                        let implemented_bounds = self.get_implemented_traits_of_type(actual);
+                        self.is_bounds_satisfy_bounds(&implemented_bounds, required_bounds)
+                    }
+                }
             },
 
             // actual is generic, required is not -> not satisfy
@@ -112,9 +151,25 @@ impl<'a> GenericBoundChecker<'a> {
 
             // both generic -> check generic constraints
             (Some(t), Some(rt)) => {
-                let implemented_bounds = self.get_generic_bounds(t);
-                let required_bounds = self.get_generic_bounds(rt);
-                self.is_bounds_satisfy_bounds(&implemented_bounds, required_bounds)
+                match t.as_str() {
+                    "Self" => {
+                        let self_type = self.return_self.expect("`Self` type required but `impl_for` is None");
+                        self.type_satisfies(self_type, required)
+                    },
+                    _ => {
+                        match rt.as_str() {
+                            "Self" => {
+                                let self_type = self.param_self.expect("`Self` type required but `impl_for` is None");
+                                self.type_satisfies(actual, self_type)
+                            },
+                            _ => {
+                                let implemented_bounds = self.get_return_generic_bounds(t);
+                                let required_bounds = self.get_param_generic_bounds(rt);
+                                self.is_bounds_satisfy_bounds(&implemented_bounds, required_bounds)
+                            }
+                        }
+                    }
+                }
             },
         }
     }
@@ -123,24 +178,33 @@ impl<'a> GenericBoundChecker<'a> {
         use rustdoc_types::Type;
         match ty {
             Type::Generic(t) => Some(t),
+            Type::BorrowedRef { type_, .. } => Self::get_generic_type(type_),
             _ => None,
         }
     }
 
-    fn get_generic_bounds(&self, generic_name: &str) -> &Vec<GenericBound> {
-        &self.all_required_generics.iter()
+    fn get_return_generic_bounds(&self, generic_name: &str) -> &Vec<GenericBound> {
+        &self.return_generics.iter()
             .find(|g| &g.name == generic_name)
-            .expect("Generic type not found in required generics")
+            .expect(&format!("Generic `{}` not found in all_required_generics", generic_name))
+            .type_bound
+    }
+
+    fn get_param_generic_bounds(&self, generic_name: &str) -> &Vec<GenericBound> {
+        &self.param_generics.iter()
+            .find(|g| &g.name == generic_name)
+            .expect(&format!("Generic `{}` not found in all_required_generics", generic_name))
             .type_bound
     }
 
     /// 获取某个类型实现的所有 trait 列表
+    /// 注意该函数不用于获取某个函数参数所需的 trait 列表
     ///
     /// - 对于数组、切片：[T]，会递归获取 T 实现的 trait 列表
     /// - 对于DynTrait： dyn Trait1 + Trait2，会直接返回 Trait1、Trait2 列表
     /// - 对于函数： fn(...) -> T，返回空
     /// - 对于基本类型，返回预定义的 trait 列表
-    /// - 对于泛型类型 T，查找 all_required_generics 获取其约束的 trait 列表
+    /// - 对于泛型类型 T，查找 return_generics 获取其约束的 trait 列表
     /// - 对于 ImplTrait，返回其包含的 trait 列表
     /// - 对于裸指针，会递归获取其指向类型实现的 trait 列表
     /// - 对于元组，会递归获取每个元素类型实现的 trait 列表并合并返回
@@ -149,13 +213,33 @@ impl<'a> GenericBoundChecker<'a> {
         use rustdoc_types::Type;
         match type_ {
             Type::ResolvedPath(path) => {
+                if constants::STD_STRUCT_LIST.contains(&path.path.as_str()) {
+                    let mut bounds = constants::get_std_struct_traits(&path.path);
+                    if constants::AUTO_UNWRAP_TYPES.contains(&path.path.as_str()) {
+                        // for auto-unwrap types, also add the traits of the first inner type
+                        if let Some(args) = &path.args {
+                            match &**args {
+                                GenericArgs::AngleBracketed { args, .. } => {
+                                    if let Some(arg) = args.iter().next() {
+                                        if let GenericArg::Type(t) = arg {
+                                            let inner_bounds = self.get_implemented_traits_of_type(t);
+                                            bounds.extend(inner_bounds);
+                                        }
+                                    }
+                                }
+                                _ => {}
+                            }
+                        }
+                    }
+                    return bounds;
+                }
                 let structs = self.all_types.structs.iter()
                     .filter(|s| s.id == path.id.0)
                     .map(|s| &s.traits);
                 let enums = self.all_types.enums.iter()
                     .filter(|e| e.id == path.id.0)
                     .map(|e| &e.traits);
-                structs.chain(enums).next().expect("Type not found in documented types").clone()
+                structs.chain(enums).next().expect(&format!("Type `{}` not found in documented types", path.path)).clone()
             },
             Type::Array { type_, .. } => self.get_implemented_traits_of_type(type_),
             Type::BorrowedRef { type_ , .. } => self.get_implemented_traits_of_type(type_),
@@ -167,7 +251,7 @@ impl<'a> GenericBoundChecker<'a> {
                     modifier: rustdoc_types::TraitBoundModifier::None,
                 }).collect::<Vec<GenericBound>>(),
             Type::FunctionPointer(_) => vec![],
-            Type::Generic(t) => self.get_generic_bounds(t).clone(),
+            Type::Generic(t) => self.get_return_generic_bounds(t).clone(),
             Type::ImplTrait(bound) => bound.clone(),
             Type::Infer => panic!("Type inference should not appear here"),
             Type::Pat { type_, .. } => self.get_implemented_traits_of_type(type_),

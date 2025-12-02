@@ -29,12 +29,13 @@ fn get_type_bounds_by_name<'a>(api_doc: &'a document::APIDoc, name: &str) -> &'a
 #[test]
 fn test_generic_bound_satisfy_check() {
     let api_doc = get_api_doc!("generic_bound_satisfy_check");
+    let empty_vec = vec![];
     let f1 = get_api_by_name(&api_doc, "f1");
-    let f1checker = GenericBoundChecker::new(&f1.generics, &api_doc.types);
+    let f1checker = GenericBoundChecker::new(&empty_vec, &f1.generics, &api_doc.types, None, f1.impl_for.as_ref());
     let f2 = get_api_by_name(&api_doc, "f2");
-    let f2checker = GenericBoundChecker::new(&f2.generics, &api_doc.types);
+    let f2checker = GenericBoundChecker::new(&empty_vec, &f2.generics, &api_doc.types, None, f1.impl_for.as_ref());
     let f3 = get_api_by_name(&api_doc, "f3");
-    let f3checker = GenericBoundChecker::new(&f3.generics, &api_doc.types);
+    let f3checker = GenericBoundChecker::new(&empty_vec, &f3.generics, &api_doc.types, None, f1.impl_for.as_ref());
     let s1 = get_type_bounds_by_name(&api_doc, "S1");
     assert!(f1checker.is_bounds_satisfy_bounds(s1, &f1.generics[0].type_bound));
     assert!(f3checker.is_bounds_satisfy_bounds(s1, &f3.generics[0].type_bound));

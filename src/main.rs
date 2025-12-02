@@ -1,7 +1,7 @@
 use tracing::{error, info, span, warn};
 use tracing_subscriber::{EnvFilter, fmt::writer::MakeWriterExt};
 
-use crate::{error::Result};
+use crate::{error::Result, llm::LLMType};
 
 #[macro_use]
 mod utils;
@@ -38,49 +38,42 @@ async fn test_crate(crate_name: &str) -> Result<()> {
     let base_path = std::path::Path::new(&base_path);
     let llm_model = utils::config().get_string("LLM.model_name")?;
     let llm_api_url = utils::config().get_string("LLM.api_url_chat")?;
-    let llm_type =  utils::config().get_string("LLM.type")?.as_str().try_into()?;
+    let llm_type: LLMType =  utils::config().get_string("LLM.type")?.as_str().try_into()?;
+    info!("Preparation completed.");
 
-    info!("Preparation complete, starting testcase generation for crate {}", crate_name);
-    let mut testcases = vec![];
-    for i in 0..count {
-        info!("Generating testcase {}/{} for crate {}", i + 1, count, crate_name);
-        let span = span!(tracing::Level::INFO, "Testcase", testcase_index = i + 1, total_testcases = count, crate = crate_name);
-        let _ = span.enter();
-        let llm_client = llm::LLMFactory::create_llm(&llm_type, &llm_model, &llm_api_url);
-        let testcase = testcase::Testcase::new(base_path, &format!("{}_{}", crate_name, i), crate_name, llm_client).await;
-        if let Err(e) = &testcase {
-            warn!("Error occurred while generating testcase: {}, skipping...", e);
-            continue;
-        }
-        testcases.push(testcase.unwrap());
-    }
+    info!("Generating api graph...");
+    let api_doc = document::APIDoc::from_crate_name(crate_name)?
+        .filter_api().filter_types()
+        .build();
+    // write api_doc to temp_apis.json for debug
+    let json = api_doc.to_string();
+    std::fs::write("temp_apis.json", &json)?;
+    let api_graph = api_graph::APIGraph::from(api_doc);
+    info!("API graph generation completed.");
 
-    {
-        info!("{} testcases generated successfully for crate {}",testcases.len(), crate_name);
-        let llm_client = llm::LLMFactory::create_llm(&llm_type, &llm_model, &llm_api_url);
-        let merged = testcase::Testcase::merge_from(&testcases, llm_client).await?;
-        testcases.push(merged);
-    }
+    let dot_file = "temp.dot";
+    let mut dot_file = std::io::BufWriter::new(std::fs::File::create(dot_file)?);
+    api_graph.to_dot_file(&mut dot_file);
 
-    info!("Generating inputs for all testcases");
-    let input_dir = std::path::Path::new("inputs");
-    let output_dir = std::path::Path::new("outputs");
-    for testcase in &testcases {
-        let llm_client = llm::LLMFactory::create_llm(&llm_type, &llm_model, &llm_api_url);
-        testcase.generate_inputs(input_dir, llm_client).await?;
-    }
-    info!("Input generation completed for all testcases");
+    // info!("Generating inputs for all testcases");
+    // let input_dir = std::path::Path::new("inputs");
+    // let output_dir = std::path::Path::new("outputs");
+    // for testcase in &testcases {
+    //     let llm_client = llm::LLMFactory::create_llm(&llm_type, &llm_model, &llm_api_url);
+    //     testcase.generate_inputs(input_dir, llm_client).await?;
+    // }
+    // info!("Input generation completed for all testcases");
 
-    info!("Running all testcases with AFL");
-    let mut success_count = 0;
-    for testcase in &testcases {
-        if let Err(e) = testcase.run(input_dir, output_dir) {
-            warn!("Error occurred while running testcase: {}, skipping...", e);
-        } else {
-            success_count += 1;
-        }
-    }
-    info!("{}/{} testcases ran successfully with AFL", success_count, testcases.len());
+    // info!("Running all testcases with AFL");
+    // let mut success_count = 0;
+    // for testcase in &testcases {
+    //     if let Err(e) = testcase.run(input_dir, output_dir) {
+    //         warn!("Error occurred while running testcase: {}, skipping...", e);
+    //     } else {
+    //         success_count += 1;
+    //     }
+    // }
+    // info!("{}/{} testcases ran successfully with AFL", success_count, testcases.len());
 
     Ok(())
 }

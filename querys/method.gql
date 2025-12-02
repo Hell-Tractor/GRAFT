@@ -26,6 +26,7 @@
                     }
                 }
                 impl {
+                    for @output(name: "impl_for")
                     method {
                         docs @output(name: "doc_comment")
                         public_api_eligible @filter(op: "=", value: ["$public"])

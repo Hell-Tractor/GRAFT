@@ -1,6 +1,7 @@
 use std::sync::OnceLock;
 
 use rustdoc_types::{GenericBound, Id};
+use tracing::warn;
 
 const VERY_BIG_ID: u32 = 1000000;
 const INT_TRAITS: &[&str] = &[
@@ -58,10 +59,12 @@ const UNIT_TRAITS: &[&str] = &[
     "Debug", "Display",
     "Send", "Sync",
 ];
+const STR_TRAITS: &[&str] = &[
+    "Debug", "Display", "PartialEq", "Eq", "PartialOrd", "Ord", "Hash", "Send", "Sync",
+];
 
 macro_rules! trait_bounds {
     ( $StartId: expr, $( $TraitName: expr ),+ $(,)? ) => {
-        #[allow(unused_assignments)] // suppress warnings for id_counter
         {
             let mut bounds = Vec::new();
             let mut id_counter = $StartId as u32;
@@ -75,7 +78,10 @@ macro_rules! trait_bounds {
                     generic_params: vec![],
                     modifier: rustdoc_types::TraitBoundModifier::None,
                 });
-                id_counter += 1;
+                #[allow(unused_assignments)] // suppress warnings for id_counter
+                {
+                    id_counter += 1;
+                }
             )+
             bounds
         }
@@ -112,10 +118,49 @@ pub fn get_primitive_traits(t: &str) -> Vec<GenericBound> {
                 "bool" => BOOL_TRAITS.contains(&trait_.path.as_str()),
                 "char" => CHAR_TRAITS.contains(&trait_.path.as_str()),
                 "()" => UNIT_TRAITS.contains(&trait_.path.as_str()),
-                _ => panic!("Only primitive types are expected here"),
+                "str" => STR_TRAITS.contains(&trait_.path.as_str()),
+                _ => panic!("Only primitive types are expected here, found `{}`", t),
             }
         })
         .collect()
+}
+
+pub const AUTO_UNWRAP_TYPES: &[&str] = &[
+    "Option",
+    "Result",
+    "Vec",
+];
+
+pub const STD_STRUCT_LIST: &[&str] = &[
+    "String",
+    "Vec",
+    "Option",
+    "Result",
+];
+
+pub fn get_std_struct_traits(name: &str) -> Vec<GenericBound> {
+    match name {
+        "String" => trait_bounds!(
+            VERY_BIG_ID + 100,
+            "Clone", "Debug", "Default", "PartialEq", "Eq", "PartialOrd", "Ord", "Hash", "Send", "Sync",
+        ),
+        "Vec" => trait_bounds!(
+            VERY_BIG_ID + 200,
+            "Clone", "Debug", "Default", "PartialEq", "Eq", "PartialOrd", "Ord", "Hash", "Send", "Sync",
+        ),
+        "Option" => trait_bounds!(
+            VERY_BIG_ID + 300,
+            "Clone", "Debug", "Default", "PartialEq", "Eq", "PartialOrd", "Ord", "Hash", "Send", "Sync",
+        ),
+        "Result" => trait_bounds!(
+            VERY_BIG_ID + 400,
+            "Clone", "Debug", "PartialEq", "Eq", "PartialOrd", "Ord", "Hash", "Send", "Sync",
+        ),
+        _ => {
+            warn!("No predefined traits for std struct `{}`", name);
+            vec![]
+        },
+    }
 }
 
 #[cfg(test)]

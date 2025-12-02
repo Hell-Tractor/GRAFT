@@ -17,6 +17,7 @@ pub struct API {
     pub generics: Vec<APIGeneric>,
     pub inputs: Vec<Parameter>,
     pub output: ReturnValue,
+    pub impl_for: Option<rustdoc_types::Type>,
     // pub is_public: bool,
     // pub is_safe: bool,
     // pub has_unsafe: bool,
@@ -153,6 +154,14 @@ impl TryFrom<&query::QueryResult> for API {
             inputs.push(Parameter { name, type_ });
         }
 
+        // parse impl_for
+        let impl_for = value.get("impl_for")
+            .map(|fv| fv.as_str().expect("impl_for should be a string"))
+            .map(|type_| {
+                serde_json::from_str::<rustdoc_types::Type>(type_)
+                    .expect("Impl for type deserialization error")
+            });
+
         let api = API {
             name: super::utils::get_key_as_str(value, "name")?.to_string(),
             kind: {
@@ -187,6 +196,7 @@ impl TryFrom<&query::QueryResult> for API {
                     type_
                 },
             },
+            impl_for,
         };
         Ok(api)
     }
@@ -224,6 +234,33 @@ pub struct Parameter {
 pub struct ReturnValue {
     #[serde(rename = "type")]
     pub type_: Option<rustdoc_types::Type>,
+}
+
+impl ReturnValue {
+    /// 获取被包装的类型，例如 Option<T> 返回 T，Result<T, E> 返回 T
+    pub fn get_wrapped_type(&self) -> Option<rustdoc_types::Type> {
+        match &self.type_ {
+            Some(rustdoc_types::Type::ResolvedPath(path)) => {
+                let type_name = path.path.split("::").last().unwrap_or(&path.path);
+                if type_name == "Option" || type_name == "Result" {
+                    if let Some(args) = &path.args {
+                        if let rustdoc_types::GenericArgs::AngleBracketed { args, .. } = &**args {
+                            if let rustdoc_types::GenericArg::Type(ty) = &args[0] {
+                                return Some(ty.clone());
+                            }
+                            panic!("Unexpected GenericArg in Option/Result");
+                        }
+                        panic!("Unexpected GenericArgs in Option/Result");
+                    } else {
+                        self.type_.clone()
+                    }
+                } else {
+                    self.type_.clone()
+                }
+            }
+            _ => self.type_.clone(),
+        }
+    }
 }
 
 #[derive(Serialize)]

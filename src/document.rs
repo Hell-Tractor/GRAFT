@@ -47,7 +47,8 @@ impl APIDocBuilder {
             "not", "neg",
             "borrow", "borrow_mut",
             "to_string",
-            "drop", "to_owned"
+            "drop", "to_owned",
+            "fmt"
         ];
 
         info!("Filtering out trivial APIs from documentation");
