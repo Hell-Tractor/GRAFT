@@ -5,6 +5,12 @@ use crate::document::api::APIGeneric;
 
 use super::edge::RefType;
 
+pub enum Vertex {
+    APIParam(Arc<Mutex<APIParam>>),
+    API(Arc<Mutex<API>>),
+    Constant(Constant),
+}
+
 pub struct APIParam {
     pub name: String,
     pub type_: Type,
@@ -19,6 +25,12 @@ pub struct API {
     pub id: usize, // ID in the APIGraph
     pub generics: Vec<APIGeneric>,
     pub impl_for: Option<Type>,
+}
+
+pub struct Constant {
+    pub name: String,
+    pub type_: Type,
+    pub id: usize, // ID in the APIGraph
 }
 
 impl APIParam {

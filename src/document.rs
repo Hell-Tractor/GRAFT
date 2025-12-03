@@ -3,7 +3,7 @@ use std::path::Path;
 use serde::{Serialize};
 use tracing::{info, instrument};
 
-use crate::{error::Result};
+use crate::{document::r#type::constant::Constant, error::Result};
 
 mod r#type;
 mod query;
@@ -18,6 +18,7 @@ trait TryFromApiDoc<T> {
 pub struct APIDoc {
     pub apis: Vec<api::API>,
     pub types: Types,
+    pub constants: Vec<Constant>,
 }
 
 #[derive(Serialize)]
@@ -120,9 +121,11 @@ impl TryFromApiDoc<APIDoc> for APIDoc {
         info!("Converting raw API documentation to structured APIDoc");
         let apis = api::API::try_from_api_doc(querier)?;
         let types = Types::try_from_api_doc(querier)?;
+        let constants = Constant::try_from_api_doc(querier)?;
         Ok(APIDoc {
             apis,
             types,
+            constants,
         })
     }
 }

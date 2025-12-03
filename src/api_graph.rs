@@ -5,7 +5,7 @@ use tracing::info;
 use vertex::APIParam;
 use edge::Edge;
 
-use crate::{api_graph::vertex::API, document::{self, api::APIGeneric}, generic_bound::GenericBoundChecker};
+use crate::{api_graph::vertex::{API, Constant, Vertex}, document, generic_bound::GenericBoundChecker};
 
 mod vertex;
 mod edge;
@@ -16,20 +16,7 @@ pub struct APIGraph {
     // apis: Vec<Arc<Mutex<API>>>,
 }
 
-pub enum Vertex {
-    APIParam(Arc<Mutex<APIParam>>),
-    API(Arc<Mutex<API>>),
-}
-
 impl APIGraph {
-    pub fn new() -> Self {
-        Self {
-            vertices: vec![],
-            edges: vec![],
-            // apis: vec![],
-        }
-    }
-
     pub fn to_dot_file(&self, writer: &mut dyn std::io::Write) -> std::io::Result<()> {
         writeln!(writer, "digraph APIGraph {{")?;
         // write vertices
@@ -41,7 +28,7 @@ impl APIGraph {
                     writeln!(writer, "  {} [label=\"Param: {}\\nType: {}\"];", param.id, param.name, type_str)?;
                     // write edge from param to api
                     writeln!(writer, "  {} -> {};", param.id, param.api.upgrade().unwrap().lock().unwrap().id)?;
-                }
+                },
                 Vertex::API(api) => {
                     let api = api.lock().unwrap();
                     let type_str = if let Some(ret_type) = &api.return_type {
@@ -50,6 +37,10 @@ impl APIGraph {
                         "()".to_owned()
                     };
                     writeln!(writer, "  {} [label=\"API: {}\\nReturn Type: {}\"];", api.id, api.signature, type_str)?;
+                },
+                Vertex::Constant(constant) => {
+                    let type_str = trustfall_rustdoc_adapter::rust_type_name(&constant.type_);
+                    writeln!(writer, "  {} [label=\"Constant: {}\\nType: {}\"];", constant.id, constant.name, type_str)?;
                 }
             }
         }
@@ -87,7 +78,18 @@ impl From<document::APIDoc> for APIGraph {
         }
         info!("Total APIs extracted: {}", vertices.len());
 
+        info!("Extracting Constants from APIDoc");
+        for constant in doc.constants {
+            let constant_vertex = Constant {
+                name: constant.name,
+                type_: constant.type_,
+                id: vertices.len(),
+            };
+            vertices.push(Vertex::Constant(constant_vertex));
+        }
+
         info!("Building API graph edges based on type compatibility");
+        info!("Processing edges from api to api");
         let mut edges: Vec<Vec<Edge>> = vec![];
         edges.resize_with(vertices.len(), || vec![]);
         for (from_id, from_api) in apis.iter().enumerate() {
@@ -133,6 +135,38 @@ impl From<document::APIDoc> for APIGraph {
                 }
             }
         }
+        info!("Processing edges from constants to api");
+        for vertex in &vertices {
+            if let Vertex::Constant(constant) = vertex {
+                for to_api in &apis {
+                    let to_api = to_api.lock().unwrap();
+                    info!("  Checking compatibility from Constant: {} (ID: {}) to target API: {} (ID: {})", constant.name, constant.id, to_api.signature, to_api.id);
+                    let empty_vec = vec![];
+                    let checker = GenericBoundChecker::new(
+                        &empty_vec,
+                        &to_api.generics,
+                        &all_types,
+                        None,
+                        to_api.impl_for.as_ref(),
+                    );
+                    for input_type in &to_api.params {
+                        let input_type = input_type.lock().unwrap();
+                        info!("    Comparing with input param: {} (ID: {})", input_type.name, input_type.id);
+                        if input_type.is_primitive() {
+                            continue;
+                        }
+                        if checker.type_satisfies(&constant.type_, &input_type.type_) {
+                            info!("      Compatible! Adding edge from Constant {} to API {}", constant.id, to_api.id);
+                            edges[constant.id].push(Edge::new(input_type.id, input_type.get_ref_type()));
+                        } else {
+                            info!("      Not compatible.");
+                        }
+                    }
+                }
+            }
+        }
+
+        info!("API graph construction completed.");
 
         APIGraph {
             vertices,
