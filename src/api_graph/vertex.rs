@@ -25,6 +25,8 @@ pub struct API {
     pub id: usize, // ID in the APIGraph
     pub generics: Vec<APIGeneric>,
     pub impl_for: Option<Type>,
+    pub module_path: String,
+    pub doc_comment: String,
 }
 
 pub struct Constant {
@@ -69,7 +71,7 @@ impl APIParam {
 }
 
 impl API {
-    pub fn new(signature: String, return_type: Option<Type>, generics: Vec<APIGeneric>, impl_for: Option<Type>) -> Self {
+    pub fn new(signature: String, return_type: Option<Type>, generics: Vec<APIGeneric>, impl_for: Option<Type>, module_path: String, doc_comment: String) -> Self {
         Self {
             signature,
             params: vec![],
@@ -77,6 +79,8 @@ impl API {
             return_type,
             generics,
             impl_for,
+            module_path,
+            doc_comment,
         }
     }
 

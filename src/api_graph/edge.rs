@@ -3,7 +3,7 @@ pub struct Edge {
     pub ref_type: RefType,
 }
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq, Eq)]
 pub enum RefType {
     Borrow,
     BorrowMut,

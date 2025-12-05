@@ -1,18 +1,22 @@
 use std::sync::{Arc, Mutex};
 
 use rustdoc_types::Type;
-use tracing::info;
+use tracing::{debug, info};
 use vertex::APIParam;
 use edge::Edge;
 
-use crate::{api_graph::vertex::{API, Constant, Vertex}, document, generic_bound::GenericBoundChecker};
+use crate::{api_graph::vertex::{Constant, Vertex}, document, generic_bound::GenericBoundChecker};
 
 mod vertex;
 mod edge;
+pub mod algorithm;
+
+pub use vertex::API;
 
 pub struct APIGraph {
     vertices: Vec<Vertex>,
     edges: Vec<Vec<Edge>>,
+    rev_edges: Vec<Vec<Edge>>,
     // apis: Vec<Arc<Mutex<API>>>,
 }
 
@@ -64,7 +68,7 @@ impl From<document::APIDoc> for APIGraph {
         let mut vertices = vec![];
         info!("Extracting APIs and API parameters from APIDoc");
         for api in doc.apis {
-            let api_vertex = Arc::new(Mutex::new(API::new(api.signature, api.output.get_wrapped_type(), api.generics, api.impl_for)));
+            let api_vertex = Arc::new(Mutex::new(API::new(api.signature, api.output.get_wrapped_type(), api.generics, api.impl_for, api.module_path, api.doc_comment)));
             for param in api.inputs {
                 let api_param = APIParam::new(param.name, param.type_, &api_vertex);
                 let api_param = Arc::new(Mutex::new(api_param));
@@ -90,11 +94,13 @@ impl From<document::APIDoc> for APIGraph {
 
         info!("Building API graph edges based on type compatibility");
         info!("Processing edges from api to api");
-        let mut edges: Vec<Vec<Edge>> = vec![];
+        let mut edges = vec![];
+        let mut rev_edges = vec![];
         edges.resize_with(vertices.len(), || vec![]);
+        rev_edges.resize_with(vertices.len(), || vec![]);
         for (from_id, from_api) in apis.iter().enumerate() {
             let from_api = from_api.lock().unwrap();
-            info!("Processing start API: {} (ID: {})", from_api.signature, from_api.id);
+            debug!("Processing start API: {} (ID: {})", from_api.signature, from_api.id);
             let output_type = &from_api.return_type;
             let Some(output_type) = output_type else {
                 continue;
@@ -112,7 +118,7 @@ impl From<document::APIDoc> for APIGraph {
                     continue;
                 }
                 let to_api = to_api.lock().unwrap();
-                info!("  Checking compatibility to target API: {} (ID: {})", to_api.signature, to_api.id);
+                debug!("  Checking compatibility to target API: {} (ID: {})", to_api.signature, to_api.id);
                 let checker = GenericBoundChecker::new(
                     &from_api.generics,
                     &to_api.generics,
@@ -122,15 +128,16 @@ impl From<document::APIDoc> for APIGraph {
                 );
                 for input_type in &to_api.params {
                     let input_type = input_type.lock().unwrap();
-                    info!("    Comparing with input param: {} (ID: {})", input_type.name, input_type.id);
+                    debug!("    Comparing with input param: {} (ID: {})", input_type.name, input_type.id);
                     if input_type.is_primitive() {
                         continue;
                     }
                     if checker.type_satisfies(&output_type, &input_type.type_) {
-                        info!("      Compatible! Adding edge from API {} to API {}", from_api.id, to_api.id);
+                        debug!("      Compatible! Adding edge from API {} to API {}", from_api.id, to_api.id);
                         edges[from_api.id].push(Edge::new(input_type.id, input_type.get_ref_type()));
+                        rev_edges[input_type.id].push(Edge::new(from_api.id, input_type.get_ref_type()));
                     } else {
-                        info!("      Not compatible.");
+                        debug!("      Not compatible.");
                     }
                 }
             }
@@ -158,6 +165,7 @@ impl From<document::APIDoc> for APIGraph {
                         if checker.type_satisfies(&constant.type_, &input_type.type_) {
                             info!("      Compatible! Adding edge from Constant {} to API {}", constant.id, to_api.id);
                             edges[constant.id].push(Edge::new(input_type.id, input_type.get_ref_type()));
+                            rev_edges[input_type.id].push(Edge::new(constant.id, input_type.get_ref_type()));
                         } else {
                             info!("      Not compatible.");
                         }
@@ -171,6 +179,7 @@ impl From<document::APIDoc> for APIGraph {
         APIGraph {
             vertices,
             edges,
+            rev_edges,
         }
     }
 }
