@@ -1,4 +1,4 @@
-use std::sync::{Arc, Mutex};
+use std::sync::{Arc, RwLock};
 
 use rustdoc_types::Type;
 use tracing::{debug, info};
@@ -27,14 +27,14 @@ impl APIGraph {
         for vertex in &self.vertices {
             match vertex {
                 Vertex::APIParam(param) => {
-                    let param = param.lock().unwrap();
+                    let param = param.read().unwrap();
                     let type_str = trustfall_rustdoc_adapter::rust_type_name(&param.type_);
                     writeln!(writer, "  {} [label=\"Param: {}\\nType: {}\"];", param.id, param.name, type_str)?;
                     // write edge from param to api
-                    writeln!(writer, "  {} -> {};", param.id, param.api.upgrade().unwrap().lock().unwrap().id)?;
+                    writeln!(writer, "  {} -> {};", param.id, param.api.upgrade().unwrap().read().unwrap().id)?;
                 },
                 Vertex::API(api) => {
-                    let api = api.lock().unwrap();
+                    let api = api.read().unwrap();
                     let type_str = if let Some(ret_type) = &api.return_type {
                         trustfall_rustdoc_adapter::rust_type_name(ret_type)
                     } else {
@@ -68,17 +68,17 @@ impl From<document::APIDoc> for APIGraph {
         let mut vertices = vec![];
         info!("Extracting APIs and API parameters from APIDoc");
         for api in doc.apis {
-            let api_vertex = Arc::new(Mutex::new(API::new(api.signature, api.output.get_wrapped_type(), api.generics, api.impl_for, api.module_path, api.doc_comment)));
+            let api_vertex = Arc::new(RwLock::new(API::new(api.signature, api.output.get_wrapped_type(), api.generics, api.impl_for, api.module_path, api.doc_comment)));
             for param in api.inputs {
                 let api_param = APIParam::new(param.name, param.type_, &api_vertex);
-                let api_param = Arc::new(Mutex::new(api_param));
-                api_vertex.lock().unwrap().add_param(api_param.clone());
+                let api_param = Arc::new(RwLock::new(api_param));
+                api_vertex.write().unwrap().add_param(api_param.clone());
                 vertices.push(Vertex::APIParam(api_param.clone()));
-                api_param.lock().unwrap().set_id(vertices.len() - 1);
+                api_param.write().unwrap().set_id(vertices.len() - 1);
             }
             apis.push(api_vertex.clone());
             vertices.push(Vertex::API(api_vertex.clone()));
-            api_vertex.lock().unwrap().set_id(vertices.len() - 1);
+            api_vertex.write().unwrap().set_id(vertices.len() - 1);
         }
         info!("Total APIs extracted: {}", vertices.len());
 
@@ -101,7 +101,7 @@ impl From<document::APIDoc> for APIGraph {
         edges.resize_with(vertices.len(), || vec![]);
         rev_edges.resize_with(vertices.len(), || vec![]);
         for (from_id, from_api) in apis.iter().enumerate() {
-            let from_api = from_api.lock().unwrap();
+            let from_api = from_api.read().unwrap();
             debug!("Processing start API: {} (ID: {})", from_api.signature, from_api.id);
             let output_type = &from_api.return_type;
             let Some(output_type) = output_type else {
@@ -119,7 +119,7 @@ impl From<document::APIDoc> for APIGraph {
                 if from_id == to_id {
                     continue;
                 }
-                let to_api = to_api.lock().unwrap();
+                let to_api = to_api.read().unwrap();
                 debug!("  Checking compatibility to target API: {} (ID: {})", to_api.signature, to_api.id);
                 let checker = GenericBoundChecker::new(
                     &from_api.generics,
@@ -129,7 +129,7 @@ impl From<document::APIDoc> for APIGraph {
                     to_api.impl_for.as_ref()
                 );
                 for input_type in &to_api.params {
-                    let input_type = input_type.lock().unwrap();
+                    let input_type = input_type.read().unwrap();
                     debug!("    Comparing with input param: {} (ID: {})", input_type.name, input_type.id);
                     if input_type.is_fuzzer_generable() {
                         continue;
@@ -148,7 +148,7 @@ impl From<document::APIDoc> for APIGraph {
         for vertex in &vertices {
             if let Vertex::Constant(constant) = vertex {
                 for to_api in &apis {
-                    let to_api = to_api.lock().unwrap();
+                    let to_api = to_api.read().unwrap();
                     info!("  Checking compatibility from Constant: {} (ID: {}) to target API: {} (ID: {})", constant.name, constant.id, to_api.signature, to_api.id);
                     let empty_vec = vec![];
                     let checker = GenericBoundChecker::new(
@@ -159,7 +159,7 @@ impl From<document::APIDoc> for APIGraph {
                         to_api.impl_for.as_ref(),
                     );
                     for input_type in &to_api.params {
-                        let input_type = input_type.lock().unwrap();
+                        let input_type = input_type.read().unwrap();
                         info!("    Comparing with input param: {} (ID: {})", input_type.name, input_type.id);
                         if input_type.is_fuzzer_generable() {
                             continue;

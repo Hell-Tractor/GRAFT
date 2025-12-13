@@ -1,27 +1,26 @@
-use std::sync::{Arc, Mutex, Weak};
+use std::sync::{Arc, RwLock, Weak};
 
 use rustdoc_types::Type;
 use crate::{document::api::APIGeneric, generic_bound::GenericBoundChecker};
 
 use super::edge::RefType;
 
-// TODO: change mutex to rwlock
 pub enum Vertex {
-    APIParam(Arc<Mutex<APIParam>>),
-    API(Arc<Mutex<API>>),
+    APIParam(Arc<RwLock<APIParam>>),
+    API(Arc<RwLock<API>>),
     Constant(Constant),
 }
 
 pub struct APIParam {
     pub name: String,
     pub type_: Type,
-    pub api: Weak<Mutex<API>>,
+    pub api: Weak<RwLock<API>>,
     pub id: usize, // ID in the APIGraph
 }
 
 pub struct API {
     pub signature: String,
-    pub params: Vec<Arc<Mutex<APIParam>>>,
+    pub params: Vec<Arc<RwLock<APIParam>>>,
     pub return_type: Option<Type>,
     pub id: usize, // ID in the APIGraph
     pub generics: Vec<APIGeneric>,
@@ -39,7 +38,7 @@ pub struct Constant {
 }
 
 impl APIParam {
-    pub fn new(name: String, type_: Type, api: &Arc<Mutex<API>>) -> Self {
+    pub fn new(name: String, type_: Type, api: &Arc<RwLock<API>>) -> Self {
         Self {
             name,
             type_,
@@ -84,7 +83,7 @@ impl API {
         }
     }
 
-    pub fn add_param(&mut self, param: Arc<Mutex<APIParam>>) {
+    pub fn add_param(&mut self, param: Arc<RwLock<APIParam>>) {
         self.params.push(param);
     }
 

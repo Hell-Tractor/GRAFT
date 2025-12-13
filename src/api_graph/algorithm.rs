@@ -1,4 +1,4 @@
-use std::{collections::{HashSet, VecDeque}, sync::{Arc, Mutex}};
+use std::{collections::{HashSet, VecDeque}, sync::{Arc, RwLock}};
 
 use tracing::{debug, info};
 
@@ -32,9 +32,9 @@ impl<'a> APISequeceGenerator<'a> {
         let mut indegrees = graph.vertices.iter().map(|vertex| {
             match vertex {
                 Vertex::API(api) => {
-                    api.lock().unwrap().params.iter()
+                    api.read().unwrap().params.iter()
                         .filter(|param| {
-                            !param.lock().unwrap().is_fuzzer_generable()
+                            !param.read().unwrap().is_fuzzer_generable()
                         })
                         .count() as i32
                 },
@@ -57,14 +57,14 @@ impl<'a> APISequeceGenerator<'a> {
         while !q.is_empty() {
             let from_id = q.pop_front().unwrap(); // guaranteed to be exist
             debug!("Starting from api: {}, depth: {}", match &graph.vertices[from_id] {
-                Vertex::API(api) => api.lock().unwrap().signature.clone(),
+                Vertex::API(api) => api.read().unwrap().signature.clone(),
                 Vertex::Constant(constant) => constant.name.clone(),
                 Vertex::APIParam(_) => unreachable!("Should not start from APIParam"),
             }, depth[from_id]);
             // edges link from api/constant to api_param
             for edge in &graph.edges[from_id] {
                 debug!("  Edge to api_param: {}", match &graph.vertices[edge.to] {
-                    Vertex::APIParam(param) => param.lock().unwrap().name.clone(),
+                    Vertex::APIParam(param) => param.read().unwrap().name.clone(),
                     _ => unreachable!("Edge should point to APIParam"),
                 });
                 let to_id = edge.to;
@@ -77,14 +77,14 @@ impl<'a> APISequeceGenerator<'a> {
                 let Vertex::APIParam(param) = &graph.vertices[to_id] else {
                     unreachable!("Edge should point to APIParam");
                 };
-                let api = param.lock().unwrap().api.upgrade().unwrap();
-                debug!("    api_param belongs to api: {}", api.lock().unwrap().signature);
-                let api_id = api.lock().unwrap().id;
+                let api = param.read().unwrap().api.upgrade().unwrap();
+                debug!("    api_param belongs to api: {}", api.read().unwrap().signature);
+                let api_id = api.read().unwrap().id;
                 indegrees[api_id] -= 1;
                 if indegrees[api_id] == 0 {
                     depth[api_id] = depth[to_id];
                     q.push_back(api_id);
-                    debug!("API: {}, depth: {}", api.lock().unwrap().signature, depth[api_id]);
+                    debug!("API: {}, depth: {}", api.read().unwrap().signature, depth[api_id]);
                 }
             }
         }
@@ -95,7 +95,7 @@ impl<'a> APISequeceGenerator<'a> {
         use std::io::Write;
         for (idx, d) in depth.iter().enumerate() {
             let signature = match &graph.vertices[idx] {
-                Vertex::API(api) => api.lock().unwrap().signature.clone(),
+                Vertex::API(api) => api.read().unwrap().signature.clone(),
                 Vertex::APIParam(_) => continue,
                 Vertex::Constant(constant) => constant.name.clone(),
             };
@@ -105,7 +105,7 @@ impl<'a> APISequeceGenerator<'a> {
         depth
     }
 
-    pub fn generate(&mut self) -> Vec<Arc<Mutex<API>>> {
+    pub fn generate(&mut self) -> Vec<Arc<RwLock<API>>> {
         let target_api = self.graph.vertices.iter().filter_map(|vertex| {
             if let Vertex::API(api) = vertex {
                 Some(api.clone())
@@ -113,8 +113,8 @@ impl<'a> APISequeceGenerator<'a> {
                 None
             }
         }).min_by(|a, b| {
-            let a = a.lock().unwrap();
-            let b = b.lock().unwrap();
+            let a = a.read().unwrap();
+            let b = b.read().unwrap();
             // first by used_times asc, then by depth desc
             if self.used_times[a.id] != self.used_times[b.id] {
                 self.used_times[a.id].cmp(&self.used_times[b.id])
@@ -123,17 +123,17 @@ impl<'a> APISequeceGenerator<'a> {
             }
         }).expect("Should be at least one API in graph");
         {
-            let api = target_api.lock().unwrap();
+            let api = target_api.read().unwrap();
             info!("Selected target API(used = {}): {}", self.used_times[api.id], api.signature);
         }
         self.generate_with_target(target_api)
     }
 
-    pub fn generate_with_target(&mut self, target_api: Arc<Mutex<API>>) -> Vec<Arc<Mutex<API>>> {
+    pub fn generate_with_target(&mut self, target_api: Arc<RwLock<API>>) -> Vec<Arc<RwLock<API>>> {
         let mut sequence = vec![target_api.clone()];
         let mut count = vec![0; self.graph.vertices.len()];
-        count[target_api.lock().unwrap().id] += 1;
-        self.used_times[target_api.lock().unwrap().id] += 1;
+        count[target_api.read().unwrap().id] += 1;
+        self.used_times[target_api.read().unwrap().id] += 1;
         let api_max_usage = config().get_int("testcase.each_api_max_usage").expect("Missing configuration key `testcase.each_api_max_usage`");
         // 保存已生成类型对应的api id
         let mut type_pool: HashSet<usize> = HashSet::new();
@@ -142,10 +142,10 @@ impl<'a> APISequeceGenerator<'a> {
 
         while !q.is_empty() {
             let api = q.pop_front().unwrap();
-            let api = api.lock().unwrap();
+            let api = api.read().unwrap();
             debug!("Generating for API: {}", api.signature);
             for param in &api.params {
-                let param = param.lock().unwrap();
+                let param = param.read().unwrap();
                 if param.is_fuzzer_generable() {
                     continue;
                 }
@@ -158,7 +158,7 @@ impl<'a> APISequeceGenerator<'a> {
                         let Vertex::API(api) = &self.graph.vertices[edge.to] else {
                             unreachable!("Reverse edge should point to API");
                         };
-                        type_pool.contains(&api.lock().unwrap().id)
+                        type_pool.contains(&api.read().unwrap().id)
                     });
                     if exists {
                         continue;
@@ -168,22 +168,22 @@ impl<'a> APISequeceGenerator<'a> {
                 let new_api = self.graph.rev_edges[param.id].iter()
                     .map(|edge| {
                         if let Vertex::Constant(constant) = &self.graph.vertices[edge.to] {
-                            return Arc::new(Mutex::new(API { signature: format!("const {}: {}", constant.name, trustfall_rustdoc_adapter::rust_type_name(&constant.type_)), params: vec![], return_type: Some(constant.type_.clone()), id: constant.id, generics: vec![], impl_for: None, module_path: constant.module_path.clone(), doc_comment: constant.doc_comment.clone() }));
+                            return Arc::new(RwLock::new(API { signature: format!("const {}: {}", constant.name, trustfall_rustdoc_adapter::rust_type_name(&constant.type_)), params: vec![], return_type: Some(constant.type_.clone()), id: constant.id, generics: vec![], impl_for: None, module_path: constant.module_path.clone(), doc_comment: constant.doc_comment.clone() }));
                         }
                         let Vertex::API(api) = &self.graph.vertices[edge.to] else {
                             unreachable!("Reverse edge should point to API");
                         };
                         api.clone()
                     }).filter(|api_ptr| {
-                        let api = api_ptr.lock().unwrap();
+                        let api = api_ptr.read().unwrap();
                         count[api.id] < api_max_usage
                     }).min_by(|a, b| {
-                        let a = a.lock().unwrap();
-                        let b = b.lock().unwrap();
+                        let a = a.read().unwrap();
+                        let b = b.read().unwrap();
                         self.used_times[a.id].cmp(&self.used_times[b.id])
                     });
                 if let Some(api_ptr) = new_api {
-                    let new_api = api_ptr.lock().unwrap();
+                    let new_api = api_ptr.read().unwrap();
                     sequence.push(api_ptr.clone());
                     q.push_back(api_ptr.clone());
                     self.used_times[new_api.id] += 1;

@@ -65,7 +65,7 @@ async fn test_crate(crate_name: &str) -> Result<()> {
         let debug_file = format!("debug/api_sequence_{}.txt", i);
         let mut debug_file = std::io::BufWriter::new(std::fs::File::create(debug_file)?);
         for api in &seq {
-            let api = api.lock().unwrap();
+            let api = api.read().unwrap();
             use std::io::Write;
             writeln!(debug_file, "{}", api.signature).unwrap();
         }
