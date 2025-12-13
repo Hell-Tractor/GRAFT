@@ -106,7 +106,58 @@ impl<'a> GenericBoundChecker<'a> {
             Type::Array { type_, .. } => Self::strip_ref(type_),
             Type::Slice(type_) => Self::strip_ref(type_),
             Type::RawPointer { type_, .. } => Self::strip_ref(type_),
+            Type::ResolvedPath(path) => {
+                if constants::AUTO_UNWRAP_REF_TYPES.contains(&path.path.as_str()) {
+                    if let Some(args) = &path.args {
+                        match &**args {
+                            GenericArgs::AngleBracketed { args, .. } => {
+                                if let Some(arg) = args.iter().next() {
+                                    if let GenericArg::Type(t) = arg {
+                                        return Self::strip_ref(t);
+                                    }
+                                }
+                            }
+                            _ => {}
+                        }
+                    }
+                }
+                ty
+            }
             _ => ty,
+        }
+    }
+
+    pub fn is_type_primitive(type_: &rustdoc_types::Type) -> bool {
+        use rustdoc_types::Type;
+        match type_ {
+            Type::Primitive(_) => true,
+            Type::RawPointer { type_, .. } => Self::is_type_primitive(type_),
+            Type::BorrowedRef { type_, .. } => Self::is_type_primitive(type_),
+            Type::Array { type_, .. } => Self::is_type_primitive(type_),
+            Type::Slice(type_) => Self::is_type_primitive(type_),
+            Type::Pat { type_, .. } => Self::is_type_primitive(type_),
+            Type::Tuple(types) => types.iter().all(|t| Self::is_type_primitive(t)),
+            Type::ResolvedPath(path) => {
+                if constants::PRIMITIVE_STRUCTS.contains(&path.path.as_str()) {
+                    return true;
+                }
+                if constants::AUTO_UNWRAP_REF_TYPES.contains(&path.path.as_str()) {
+                    if let Some(args) = &path.args {
+                        match &**args {
+                            GenericArgs::AngleBracketed { args, .. } => {
+                                if let Some(arg) = args.iter().next() {
+                                    if let GenericArg::Type(t) = arg {
+                                        return Self::is_type_primitive(t);
+                                    }
+                                }
+                            }
+                            _ => {}
+                        }
+                    }
+                }
+                false
+            },
+            _ => false,
         }
     }
 

@@ -1,16 +1,16 @@
 use std::{collections::{HashSet, VecDeque}, sync::{Arc, Mutex}};
 
-use rustdoc_types::Type;
+use tracing::{debug, info};
 
-use crate::api_graph::{API, APIGraph, edge::RefType, vertex::Vertex};
+use crate::{api_graph::{API, APIGraph, edge::RefType, vertex::Vertex}, utils::config};
 
 /// 生成方法：
 /// 1. 通过拓扑排序，标记每个API的深度，深度 $depth[i] = \max\limits_{ p \in api[i].params}\{\min\limits_{api[j].return\_value = p}\{depth[j]\} + 1\}$
 /// 2. 选择深度最深、使用次数最少的API，加入序列，开始反向生成
-/// 3. 维护一个类型池，包含目前所有的类型、生成该类型的API ID以及被引用的方式（不可变引用、可变引用、移动）
+/// 3. 维护一个类型池，包含目前所有的类型、生成该类型的API ID
 /// 4. 对于当前API的每个参数
-///     若其在类型池中且可以被使用（没有被可变引用或移动）：直接使用该类型（跳过该参数）
-///     否则：选择可以产生此参数的，使用次数最少的API，加入序列，更新类型池，继续反向生成，直到生成完毕
+///     若其在类型池中且该处为不可变引用：直接使用该类型（跳过该参数）
+///     否则：选择可以产生此参数的，使用次数最少的API，加入序列，若为不可变引用则更新类型池，继续反向生成，直到生成完毕
 /// 5. 返回生成结果。保留使用次数信息，供下一次生成使用。类型池不保留。
 ///
 /// 这样可以生成树状API调用序列，同时尽可能覆盖更多的API，以提高Fuzzing覆盖率。
@@ -33,7 +33,9 @@ impl<'a> APISequeceGenerator<'a> {
             match vertex {
                 Vertex::API(api) => {
                     api.lock().unwrap().params.iter()
-                        .filter(|param| !param.lock().unwrap().is_primitive())
+                        .filter(|param| {
+                            !param.lock().unwrap().is_fuzzer_generable()
+                        })
                         .count() as i32
                 },
                 Vertex::APIParam(_) => -1,
@@ -54,10 +56,20 @@ impl<'a> APISequeceGenerator<'a> {
         // Topo-sort
         while !q.is_empty() {
             let from_id = q.pop_front().unwrap(); // guaranteed to be exist
+            debug!("Starting from api: {}, depth: {}", match &graph.vertices[from_id] {
+                Vertex::API(api) => api.lock().unwrap().signature.clone(),
+                Vertex::Constant(constant) => constant.name.clone(),
+                Vertex::APIParam(_) => unreachable!("Should not start from APIParam"),
+            }, depth[from_id]);
             // edges link from api/constant to api_param
             for edge in &graph.edges[from_id] {
+                debug!("  Edge to api_param: {}", match &graph.vertices[edge.to] {
+                    Vertex::APIParam(param) => param.lock().unwrap().name.clone(),
+                    _ => unreachable!("Edge should point to APIParam"),
+                });
                 let to_id = edge.to;
                 if depth[to_id] != -1 {
+                    debug!("api_param already visited, skip");
                     // already visited api_param, skip
                     continue;
                 }
@@ -66,13 +78,28 @@ impl<'a> APISequeceGenerator<'a> {
                     unreachable!("Edge should point to APIParam");
                 };
                 let api = param.lock().unwrap().api.upgrade().unwrap();
+                debug!("    api_param belongs to api: {}", api.lock().unwrap().signature);
                 let api_id = api.lock().unwrap().id;
                 indegrees[api_id] -= 1;
                 if indegrees[api_id] == 0 {
                     depth[api_id] = depth[to_id];
                     q.push_back(api_id);
+                    debug!("API: {}, depth: {}", api.lock().unwrap().signature, depth[api_id]);
                 }
             }
+        }
+
+        let debug_file = "debug/graph.txt";
+        std::fs::create_dir_all("debug").unwrap();
+        let mut f = std::fs::File::create(debug_file).unwrap();
+        use std::io::Write;
+        for (idx, d) in depth.iter().enumerate() {
+            let signature = match &graph.vertices[idx] {
+                Vertex::API(api) => api.lock().unwrap().signature.clone(),
+                Vertex::APIParam(_) => continue,
+                Vertex::Constant(constant) => constant.name.clone(),
+            };
+            writeln!(f, "Vertex {}: Depth {}", signature, d).unwrap();
         }
 
         depth
@@ -85,7 +112,7 @@ impl<'a> APISequeceGenerator<'a> {
             } else {
                 None
             }
-        }).max_by(|a, b| {
+        }).min_by(|a, b| {
             let a = a.lock().unwrap();
             let b = b.lock().unwrap();
             // first by used_times asc, then by depth desc
@@ -95,11 +122,19 @@ impl<'a> APISequeceGenerator<'a> {
                 self.depth[b.id].cmp(&self.depth[a.id])
             }
         }).expect("Should be at least one API in graph");
+        {
+            let api = target_api.lock().unwrap();
+            info!("Selected target API(used = {}): {}", self.used_times[api.id], api.signature);
+        }
         self.generate_with_target(target_api)
     }
 
     pub fn generate_with_target(&mut self, target_api: Arc<Mutex<API>>) -> Vec<Arc<Mutex<API>>> {
         let mut sequence = vec![target_api.clone()];
+        let mut count = vec![0; self.graph.vertices.len()];
+        count[target_api.lock().unwrap().id] += 1;
+        self.used_times[target_api.lock().unwrap().id] += 1;
+        let api_max_usage = config().get_int("testcase.each_api_max_usage").expect("Missing configuration key `testcase.each_api_max_usage`");
         // 保存已生成类型对应的api id
         let mut type_pool: HashSet<usize> = HashSet::new();
         let mut q = VecDeque::new();
@@ -108,14 +143,18 @@ impl<'a> APISequeceGenerator<'a> {
         while !q.is_empty() {
             let api = q.pop_front().unwrap();
             let api = api.lock().unwrap();
+            debug!("Generating for API: {}", api.signature);
             for param in &api.params {
                 let param = param.lock().unwrap();
-                if param.is_primitive() {
+                if param.is_fuzzer_generable() {
                     continue;
                 }
                 // check if any return-type already exists in type pool
                 if param.get_ref_type() == RefType::Borrow {
                     let exists = self.graph.rev_edges[param.id].iter().any(|edge| {
+                        if let Vertex::Constant(constant) = &self.graph.vertices[edge.to] {
+                            return type_pool.contains(&constant.id);
+                        }
                         let Vertex::API(api) = &self.graph.vertices[edge.to] else {
                             unreachable!("Reverse edge should point to API");
                         };
@@ -128,10 +167,16 @@ impl<'a> APISequeceGenerator<'a> {
                 // need to generate this param
                 let new_api = self.graph.rev_edges[param.id].iter()
                     .map(|edge| {
+                        if let Vertex::Constant(constant) = &self.graph.vertices[edge.to] {
+                            return Arc::new(Mutex::new(API { signature: format!("const {}: {}", constant.name, trustfall_rustdoc_adapter::rust_type_name(&constant.type_)), params: vec![], return_type: Some(constant.type_.clone()), id: constant.id, generics: vec![], impl_for: None, module_path: constant.module_path.clone(), doc_comment: constant.doc_comment.clone() }));
+                        }
                         let Vertex::API(api) = &self.graph.vertices[edge.to] else {
                             unreachable!("Reverse edge should point to API");
                         };
                         api.clone()
+                    }).filter(|api_ptr| {
+                        let api = api_ptr.lock().unwrap();
+                        count[api.id] < api_max_usage
                     }).min_by(|a, b| {
                         let a = a.lock().unwrap();
                         let b = b.lock().unwrap();
@@ -140,7 +185,9 @@ impl<'a> APISequeceGenerator<'a> {
                 if let Some(api_ptr) = new_api {
                     let new_api = api_ptr.lock().unwrap();
                     sequence.push(api_ptr.clone());
+                    q.push_back(api_ptr.clone());
                     self.used_times[new_api.id] += 1;
+                    count[new_api.id] += 1;
                     if param.get_ref_type() == RefType::Borrow {
                         type_pool.insert(new_api.id);
                     }

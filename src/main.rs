@@ -55,6 +55,23 @@ async fn test_crate(crate_name: &str) -> Result<()> {
     let mut dot_file = std::io::BufWriter::new(std::fs::File::create(dot_file)?);
     api_graph.to_dot_file(&mut dot_file);
 
+    info!("Initializing API sequence generator...");
+    let mut generator = api_graph::algorithm::APISequeceGenerator::new(&api_graph);
+    info!("API sequence generator initialized.");
+    info!("Generating api sequences...");
+    let count = utils::config().get_int("testcase.count")? as u32;
+    for i in 0..count {
+        let seq = generator.generate();
+        let debug_file = format!("debug/api_sequence_{}.txt", i);
+        let mut debug_file = std::io::BufWriter::new(std::fs::File::create(debug_file)?);
+        for api in &seq {
+            let api = api.lock().unwrap();
+            use std::io::Write;
+            writeln!(debug_file, "{}", api.signature).unwrap();
+        }
+    }
+    info!("API sequence generation completed.");
+
     // info!("Generating inputs for all testcases");
     // let input_dir = std::path::Path::new("inputs");
     // let output_dir = std::path::Path::new("outputs");

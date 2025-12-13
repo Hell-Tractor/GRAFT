@@ -88,6 +88,8 @@ impl From<document::APIDoc> for APIGraph {
                 name: constant.name,
                 type_: constant.type_,
                 id: vertices.len(),
+                module_path: constant.path,
+                doc_comment: constant.docs,
             };
             vertices.push(Vertex::Constant(constant_vertex));
         }
@@ -129,7 +131,7 @@ impl From<document::APIDoc> for APIGraph {
                 for input_type in &to_api.params {
                     let input_type = input_type.lock().unwrap();
                     debug!("    Comparing with input param: {} (ID: {})", input_type.name, input_type.id);
-                    if input_type.is_primitive() {
+                    if input_type.is_fuzzer_generable() {
                         continue;
                     }
                     if checker.type_satisfies(&output_type, &input_type.type_) {
@@ -159,7 +161,7 @@ impl From<document::APIDoc> for APIGraph {
                     for input_type in &to_api.params {
                         let input_type = input_type.lock().unwrap();
                         info!("    Comparing with input param: {} (ID: {})", input_type.name, input_type.id);
-                        if input_type.is_primitive() {
+                        if input_type.is_fuzzer_generable() {
                             continue;
                         }
                         if checker.type_satisfies(&constant.type_, &input_type.type_) {

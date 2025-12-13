@@ -132,10 +132,19 @@ pub const AUTO_UNWRAP_TYPES: &[&str] = &[
 ];
 
 pub const STD_STRUCT_LIST: &[&str] = &[
-    "String",
+    "String", "alloc::string::String",
     "Vec",
     "Option",
     "Result",
+];
+
+pub const AUTO_UNWRAP_REF_TYPES: &[&str] = &[
+    "AsRef", "Deref",
+    "Arc", "Rc", "Box", "Cell", "RefCell", "Mutex", "RwLock", "Cow", "Pin"
+];
+
+pub const PRIMITIVE_STRUCTS: &[&str] = &[
+    "String",
 ];
 
 pub fn get_std_struct_traits(name: &str) -> Vec<GenericBound> {

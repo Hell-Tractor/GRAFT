@@ -1,10 +1,11 @@
 use std::sync::{Arc, Mutex, Weak};
 
 use rustdoc_types::Type;
-use crate::document::api::APIGeneric;
+use crate::{document::api::APIGeneric, generic_bound::GenericBoundChecker};
 
 use super::edge::RefType;
 
+// TODO: change mutex to rwlock
 pub enum Vertex {
     APIParam(Arc<Mutex<APIParam>>),
     API(Arc<Mutex<API>>),
@@ -33,6 +34,8 @@ pub struct Constant {
     pub name: String,
     pub type_: Type,
     pub id: usize, // ID in the APIGraph
+    pub module_path: String,
+    pub doc_comment: String,
 }
 
 impl APIParam {
@@ -58,11 +61,8 @@ impl APIParam {
         }
     }
 
-    pub fn is_primitive(&self) -> bool {
-        match &self.type_ {
-            Type::Primitive(_) => true,
-            _ => false,
-        }
+    pub fn is_fuzzer_generable(&self) -> bool {
+        GenericBoundChecker::is_type_primitive(&self.type_)
     }
 
     pub fn set_id(&mut self, id: usize) {

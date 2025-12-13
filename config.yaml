@@ -13,9 +13,10 @@ prompts:
 commands:
   cargo: "cargo"
 testcase:
-  count: 1
+  count: 10
   input_count: 1
   base_path: "testcases"
+  each_api_max_usage: 3
 doc:
   temp_project_path: "./"
   temp_project_name: "temp_doc_project"
