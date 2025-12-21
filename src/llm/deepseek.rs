@@ -37,9 +37,6 @@ impl LLM for LLMClient {
                 "messages": self.messages,
                 "stream": false,
                 "temperature": 0.0,
-                "response_format": {
-                    "type": "json_object"
-                }
             });
         info!("Requesting LLM with model `{}`, it may take some time...", self.model_name);
         let api_key = config().llm.api_key.as_ref()

@@ -26,7 +26,6 @@ pub struct LLMConfig {
     pub fix_retries: u32,
     pub input_gen_retries: u32,
     pub max_used_api_count: u32,
-    #[serde(rename = "key")]
     #[serde(default)]
     pub api_key: Option<String>,
 }
@@ -76,11 +75,16 @@ pub struct QueryConfig {
 pub fn config() -> &'static Config {
     static CONFIG: OnceLock<Config> = OnceLock::new();
     CONFIG.get_or_init(|| {
-        config::Config::builder()
+        let mut config: Config = config::Config::builder()
             .add_source(config::File::with_name("config.yaml"))
-            .add_source(config::Environment::with_prefix("PLF").separator("_"))
             .build().unwrap()
-            .try_deserialize().unwrap()
+            .try_deserialize().unwrap();
+        let env_config = config::Config::builder()
+            .add_source(config::Environment::with_prefix("PLF").separator("_"))
+            .build().unwrap();
+        config.llm.api_key = env_config.get_string("api.key").ok();
+
+        config
     })
 }
 

@@ -1,25 +1,32 @@
 # Task Description
 
-As a professional Rust developer, you are given an API documentation of a rust library. You need to generate a program that uses this library satisfying the following requirements:
+As a professional Rust developer, you are tasked to convert an api calling sequence of crate `{crate_name}` into a complete Rust program. The program should match the following requirements:
 
-- The program should cover the main functionalities of the library.
-- The program should read some input from the stdin.
+- The program should call all the apis in api sequence and keep the calling order.
+- The program should be syntactically correct and compile without errors.
+- The program should read all primitive parameters from stdin.
 - The program should only be written in one file with function `main`.
-- All generics without constraints can be replaced with concrete types.
+- All generics without constraints can be replaced with any concrete types.
 - No other dependencies should be used except those mentioned in the API documentation.
 
 # Output Format
 
-The output should be in json format with one field: "code", which contains the complete Rust program as a string.
+The output should be in plain text format, given the Rust code directly. No explanations or additional text should be included. No markdown formatting.
 
-## Example output
+## Example Output
 
-```json
-{
-  "code": "fn main() {\n    println!(\"Hello, world!\");\n}\n",
+fn main() {
+  println!("Hello, world!");
 }
-```
 
-# API documentation:
+# API Sequence:
 
-{api_doc}
+## Format
+
+- `signature`: The signature of the API. Includes function name, parameters, generics, and return type.
+- `doc_comment`: The documentation comment of the API. Provides a brief description of the API's functionality.
+- `module_path`: The module path where the API is located.
+
+## Sequence
+
+{api_sequence}

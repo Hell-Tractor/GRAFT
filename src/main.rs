@@ -69,6 +69,27 @@ async fn test_crate(crate_name: &str) -> Result<()> {
     }
     info!("API sequence generation completed.");
 
+    info!("Converting API sequences to testcases...");
+    let llm_type = &utils::config().llm.type_;
+    let llm_model = &utils::config().llm.model_name;
+    let llm_api_url = &utils::config().llm.api_url_chat;
+    let mut testcases = Vec::new();
+    let api_sequence_count = api_sequences.len();
+    for (i, api_sequence) in api_sequences.iter().enumerate() {
+        info!("Converting API sequence {} / {} to testcase...", i + 1, api_sequence_count);
+        let name = format!("{}_test{}", crate_name, i);
+        let llm = llm::LLMFactory::create_llm(&llm_type, &llm_model, &llm_api_url);
+        let tc = testcase::Testcase::new(
+            &utils::config().testcase.base_path,
+            &name,
+            crate_name,
+            api_sequence,
+            llm,
+        ).await?;
+        testcases.push(tc);
+        info!("API sequence {} / {} converted to testcase.", i + 1, api_sequence_count);
+    }
+
     // info!("Generating inputs for all testcases");
     // let input_dir = std::path::Path::new("inputs");
     // let output_dir = std::path::Path::new("outputs");

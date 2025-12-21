@@ -13,7 +13,7 @@ prompts:
 commands:
   cargo: "cargo"
 testcase:
-  count: 10
+  count: 1
   input_count: 1
   base_path: "testcases"
   each_api_max_usage: 3

@@ -1,7 +1,9 @@
 use std::io::Write;
 use std::path::Path;
+use std::sync::{Arc, RwLock};
 use tracing::{debug, enabled, info, span};
 
+use crate::api_graph;
 use crate::document;
 use crate::error::{Error, Result};
 
@@ -19,8 +21,25 @@ struct CodeAndDependencies {
     // dependencies: String,
 }
 
+#[derive(serde::Serialize)]
+struct API {
+    signature: String,
+    doc_comment: String,
+    module_path: String,
+}
+
+impl From<&api_graph::API> for API {
+    fn from(api: &api_graph::API) -> Self {
+        API {
+            signature: api.signature.clone(),
+            doc_comment: api.doc_comment.clone(),
+            module_path: api.module_path.clone(),
+        }
+    }
+}
+
 impl Testcase {
-    pub async fn new(path: &Path, name: &str, target_crate: &str, mut llm: Box<dyn LLM>) -> Result<Self> {
+    pub async fn new(path: &Path, name: &str, target_crate: &str, api_sequence: &Vec<Arc<RwLock<api_graph::API>>>, mut llm: Box<dyn LLM>) -> Result<Self> {
         let project_path = path.join(name);
         if project_path.exists() {
             debug!("Removing existing directory at {}", project_path.display());
@@ -50,46 +69,23 @@ impl Testcase {
         }
         info!("Dependency `{}` added successfully to project `{}`", target_crate, name);
 
-        // generate testcase
-        info!("Generating testcase for project `{}`", name);
-        let api_doc = document::APIDoc::from_crate_name(target_crate)?
-            .filter_api()
-            .filter_types()
-            .build();
-
-        // write to temp_apis.json for debug
-        if enabled!(tracing::Level::DEBUG) {
-            let file = std::fs::File::create("temp_apis.json")?;
-            let mut writer = std::io::BufWriter::new(file);
-            serde_json::to_writer_pretty(&mut writer, &api_doc)?;
-            writer.flush()?;
-        }
-
-        // random select some apis
-        // let count = utils::config().get_int("LLM.max_used_api_count")? as usize;
-        // let api_doc = document::APIDoc {
-        //     apis: {
-        //         let mut res = vec![];
-        //         let mut rng = rand::rng();
-        //         let selected_apis = api_doc.apis
-        //             .choose_multiple(&mut rng, count);
-        //         for api in selected_apis {
-        //             res.push(*api);
-        //         }
-        //         res
-        //     },
-        // };
-
-        let api_doc = serde_json::to_string(&api_doc)?;
+        let api_sequence = api_sequence.iter()
+            .map(|api| {
+                let api = api.read().unwrap();
+                API::from(&*api)
+            })
+            .collect::<Vec<API>>();
+        let api_doc = serde_json::to_string(&api_sequence)?;
         let main_path = project_path.join("src/main.rs");
         let cargo_path = project_path.join("Cargo.toml");
-        Testcase::generate(name, &main_path, &cargo_path, &api_doc, &mut llm).await?;
+        Testcase::generate(name, target_crate, &main_path, &cargo_path, &api_doc, &mut llm).await?;
         info!("Testcase for project `{}` generated successfully", name);
 
         Ok(Testcase { path: path.join(name).into(), target_crate: target_crate.to_string() })
     }
 
-    async fn generate(name: &str, main_path: &Path, cargo_path: &Path, api_doc: &str, llm: &mut Box<dyn LLM>) -> Result<()> {
+    async fn generate(name: &str, crate_name: &str, main_path: &Path, cargo_path: &Path, api_doc: &str, llm: &mut Box<dyn LLM>) -> Result<()> {
+        info!("Generating testcase for project `{}` using LLM...", name);
         // read prompt template
         let prompt_path = &utils::config().prompts.testcase_gen;
         let prompt = utils::read_file_to_string(prompt_path)?;
@@ -98,7 +94,9 @@ impl Testcase {
         let fix_prompt_path = &utils::config().prompts.fix_testcase;
         let fix_prompt = utils::read_file_to_string(fix_prompt_path)?;
 
-        let mut prompt = prompt.replace("{api_doc}", api_doc);
+        let mut prompt = prompt
+            .replace("{crate_name}", crate_name)
+            .replace("{api_sequence}", api_doc);
         // save prompt to temp_prompt.txt for debug
         if enabled!(tracing::Level::DEBUG) {
             std::fs::write("temp_prompt.txt", &prompt)?;
@@ -107,17 +105,18 @@ impl Testcase {
         let retries = utils::config().llm.fix_retries;
         for i in 0..retries {
             let response = llm.generate_response(&prompt).await?;
-            let code_and_deps = serde_json::from_str::<CodeAndDependencies>(&response.content);
-            if let Err(e) = &code_and_deps {
-                info!("LLM response of project `{}` is not valid JSON, retrying...({} time(s) left)", name, retries - i - 1);
-                debug!("LLM response content: {}", response.content);
-                debug!("JSON parsing error: {}", e);
-                llm.clear();
-                continue;
-            };
-            let code_and_deps = code_and_deps.unwrap();
+            // let code_and_deps = serde_json::from_str::<CodeAndDependencies>(&response.content);
+            // if let Err(e) = &code_and_deps {
+            //     info!("LLM response of project `{}` is not valid JSON, retrying...({} time(s) left)", name, retries - i - 1);
+            //     debug!("LLM response content: {}", response.content);
+            //     debug!("JSON parsing error: {}", e);
+            //     llm.clear();
+            //     continue;
+            // };
+            // let code_and_deps = code_and_deps.unwrap();
             // write code
-            std::fs::write(main_path, code_and_deps.code)?;
+            // std::fs::write(main_path, code_and_deps.code)?;
+            std::fs::write(main_path, response.content)?;
 
             // load origin cargo.toml
             // let origin_cargo_toml = utils::read_file_to_string(cargo_path)?;
@@ -142,13 +141,6 @@ impl Testcase {
         }
 
         Err(Error::CodeGenerationError(name.to_string(), retries))
-    }
-
-    #[allow(unused)]
-    pub async fn merge_from(testcases: &[Testcase], mut llm: Box<dyn LLM>) -> Result<Self> {
-        info!("Merging {} testcases", testcases.len());
-        info!("Successfully merged testcases");
-        todo!()
     }
 
     pub async fn generate_inputs(&self, relative_dir: &Path, mut llm: Box<dyn LLM>) -> Result<()> {
