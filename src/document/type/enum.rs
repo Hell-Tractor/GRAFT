@@ -22,7 +22,7 @@ impl TryFromApiDoc<Vec<Enum>> for Enum {
         info!("Parsing Enum documentation");
 
         info!("Querying enums from documentation");
-        let enum_query = utils::config().get_string("querys.enum")?;
+        let enum_query = &utils::config().querys.enum_;
         let enum_query = utils::read_file_to_string(enum_query)?;
         let enums = querier.query()
             .add_variable("public", true)

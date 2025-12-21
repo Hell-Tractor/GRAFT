@@ -1,6 +1,6 @@
 use std::io::Write;
 use std::path::Path;
-use tracing::{debug, info, span};
+use tracing::{debug, enabled, info, span};
 
 use crate::document;
 use crate::error::{Error, Result};
@@ -32,8 +32,8 @@ impl Testcase {
 
         // create project
         info!("Creating new cargo project `{}` at {}", name, project_path.display());
-        let cargo = utils::config().get_string("commands.cargo")?;
-        std::process::Command::new(&cargo)
+        let cargo = &utils::config().commands.cargo;
+        std::process::Command::new(cargo)
             .arg("new").arg(name).arg("--vcs").arg("none")
             .current_dir(path)
             .output()?;
@@ -58,10 +58,12 @@ impl Testcase {
             .build();
 
         // write to temp_apis.json for debug
-        let file = std::fs::File::create("temp_apis.json")?;
-        let mut writer = std::io::BufWriter::new(file);
-        serde_json::to_writer_pretty(&mut writer, &api_doc)?;
-        writer.flush()?;
+        if enabled!(tracing::Level::DEBUG) {
+            let file = std::fs::File::create("temp_apis.json")?;
+            let mut writer = std::io::BufWriter::new(file);
+            serde_json::to_writer_pretty(&mut writer, &api_doc)?;
+            writer.flush()?;
+        }
 
         // random select some apis
         // let count = utils::config().get_int("LLM.max_used_api_count")? as usize;
@@ -87,20 +89,22 @@ impl Testcase {
         Ok(Testcase { path: path.join(name).into(), target_crate: target_crate.to_string() })
     }
 
-    async fn generate(name: &str, main_path: &Path, cargo_path: &Path, api_doc: &str, llm: &mut Box<dyn LLM>) -> Result<()>{
-        let prompt_path = utils::config().get_string("prompts.testcase_gen")?;
+    async fn generate(name: &str, main_path: &Path, cargo_path: &Path, api_doc: &str, llm: &mut Box<dyn LLM>) -> Result<()> {
         // read prompt template
+        let prompt_path = &utils::config().prompts.testcase_gen;
         let prompt = utils::read_file_to_string(prompt_path)?;
 
         // read fix prompt template
-        let fix_prompt_path = utils::config().get_string("prompts.fix_testcase")?;
+        let fix_prompt_path = &utils::config().prompts.fix_testcase;
         let fix_prompt = utils::read_file_to_string(fix_prompt_path)?;
 
         let mut prompt = prompt.replace("{api_doc}", api_doc);
         // save prompt to temp_prompt.txt for debug
-        std::fs::write("temp_prompt.txt", &prompt)?;
-        let cargo = utils::config().get_string("commands.cargo")?;
-        let retries = utils::config().get_int("LLM.fix_retries")? as u32;
+        if enabled!(tracing::Level::DEBUG) {
+            std::fs::write("temp_prompt.txt", &prompt)?;
+        }
+        let cargo = &utils::config().commands.cargo;
+        let retries = utils::config().llm.fix_retries;
         for i in 0..retries {
             let response = llm.generate_response(&prompt).await?;
             let code_and_deps = serde_json::from_str::<CodeAndDependencies>(&response.content);
@@ -149,10 +153,10 @@ impl Testcase {
 
     pub async fn generate_inputs(&self, relative_dir: &Path, mut llm: Box<dyn LLM>) -> Result<()> {
         // read prompt template
-        let prompt_path = utils::config().get_string("prompts.input_gen")?;
+        let prompt_path = &utils::config().prompts.input_gen;
         let prompt_template = utils::read_file_to_string(prompt_path)?;
 
-        let input_count = utils::config().get_int("testcase.input_count")? as u32;
+        let input_count = utils::config().testcase.input_count;
 
         // read code snippet from main.rs
         let path = self.path.join("src").join("main.rs");
@@ -163,7 +167,7 @@ impl Testcase {
             .replace("{count}", &input_count.to_string())
             .replace("{code_snippet}", &code_snippet);
 
-        let retries = utils::config().get_int("LLM.input_gen_retries")? as u32;
+        let retries = utils::config().llm.input_gen_retries;
         for i in 0..retries {
             let response = llm.generate_response(&prompt).await?;
             let Ok(inputs) = serde_json::from_str::<Vec<String>>(&response.content) else {
@@ -188,8 +192,8 @@ impl Testcase {
         let project_name = self.path.file_name().unwrap().to_string_lossy();
         let s = span!(tracing::Level::INFO, "Testcase", project = %project_name);
         let _ = s.enter();
-        let timeout = utils::config().get_int("AFL.timeout")? as u32;
-        let cargo = utils::config().get_string("commands.cargo")?;
+        let timeout = utils::config().afl.timeout;
+        let cargo = &utils::config().commands.cargo;
 
         info!("Starting AFL fuzzing with timeout of {} seconds", timeout);
         let output = std::process::Command::new(&cargo)

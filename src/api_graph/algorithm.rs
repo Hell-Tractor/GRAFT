@@ -134,7 +134,7 @@ impl<'a> APISequeceGenerator<'a> {
         let mut count = vec![0; self.graph.vertices.len()];
         count[target_api.read().unwrap().id] += 1;
         self.used_times[target_api.read().unwrap().id] += 1;
-        let api_max_usage = config().get_int("testcase.each_api_max_usage").expect("Missing configuration key `testcase.each_api_max_usage`");
+        let api_max_usage = config().testcase.each_api_max_usage;
         // 保存已生成类型对应的api id
         let mut type_pool: HashSet<usize> = HashSet::new();
         let mut q = VecDeque::new();

@@ -31,7 +31,7 @@ impl TryFromApiDoc<Vec<API>> for API {
 
         // query functions
         info!("Querying functions from API documentation");
-        let function_query = utils::config().get_string("querys.function")?;
+        let function_query = &utils::config().querys.function;
         let function_query = utils::read_file_to_string(function_query)?;
         let function = querier.query()
             .add_variable("public", true)
@@ -48,7 +48,7 @@ impl TryFromApiDoc<Vec<API>> for API {
 
         // query methods
         info!("Querying methods from API documentation");
-        let method_query = utils::config().get_string("querys.method")?;
+        let method_query = &utils::config().querys.method;
         let method_query = utils::read_file_to_string(method_query)?;
         let method = querier.query()
             .add_variable("public", true)

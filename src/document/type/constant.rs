@@ -20,7 +20,7 @@ impl TryFromApiDoc<Vec<Constant>> for Constant {
         info!("Parsing Constant documentation");
 
         info!("Querying constants from documentation");
-        let constant_query = utils::config().get_string("querys.constant")?;
+        let constant_query = &utils::config().querys.constant;
         let constant_query = utils::read_file_to_string(constant_query)?;
         let constants = querier.query()
             .add_variable("public", true)

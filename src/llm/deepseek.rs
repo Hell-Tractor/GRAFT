@@ -42,8 +42,8 @@ impl LLM for LLMClient {
                 }
             });
         info!("Requesting LLM with model `{}`, it may take some time...", self.model_name);
-        let api_key = config().get_string("api.key")
-            .map_err(|_| Error::MissingApiKey)?;
+        let api_key = config().llm.api_key.as_ref()
+            .ok_or(Error::MissingApiKey)?;
         let resp_str = self.client.post(&self.api_url_chat)
             .header("Authorization", format!("Bearer {}", api_key))
             .json(&request_body).send()

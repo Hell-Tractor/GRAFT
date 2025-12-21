@@ -1,4 +1,4 @@
-use tracing::{error, info, span, warn};
+use tracing::{enabled, error, info, span, warn};
 use tracing_subscriber::{EnvFilter, fmt::writer::MakeWriterExt};
 
 use crate::{error::Result, llm::LLMType};
@@ -32,14 +32,7 @@ async fn test() {
 
 #[allow(unused)]
 async fn test_crate(crate_name: &str) -> Result<()> {
-    info!("Preparing to generate testcases for crate {}", crate_name);
-    let count = utils::config().get_int("testcase.count")? as u32;
-    let base_path = utils::config().get_string("testcase.base_path")?;
-    let base_path = std::path::Path::new(&base_path);
-    let llm_model = utils::config().get_string("LLM.model_name")?;
-    let llm_api_url = utils::config().get_string("LLM.api_url_chat")?;
-    let llm_type: LLMType =  utils::config().get_string("LLM.type")?.as_str().try_into()?;
-    info!("Preparation completed.");
+    info!("Start testing crate `{}`", crate_name);
 
     info!("Generating api graph...");
     let api_doc = document::APIDoc::from_crate_name(crate_name)?
@@ -59,16 +52,20 @@ async fn test_crate(crate_name: &str) -> Result<()> {
     let mut generator = api_graph::algorithm::APISequeceGenerator::new(&api_graph);
     info!("API sequence generator initialized.");
     info!("Generating api sequences...");
-    let count = utils::config().get_int("testcase.count")? as u32;
+    let count = utils::config().testcase.count;
+    let mut api_sequences = vec![];
     for i in 0..count {
         let seq = generator.generate();
-        let debug_file = format!("debug/api_sequence_{}.txt", i);
-        let mut debug_file = std::io::BufWriter::new(std::fs::File::create(debug_file)?);
-        for api in &seq {
-            let api = api.read().unwrap();
-            use std::io::Write;
-            writeln!(debug_file, "{}", api.signature).unwrap();
+        if enabled!(tracing::Level::DEBUG) {
+            let debug_file = format!("debug/api_sequence_{}.txt", i);
+            let mut debug_file = std::io::BufWriter::new(std::fs::File::create(debug_file)?);
+            for api in &seq {
+                let api = api.read().unwrap();
+                use std::io::Write;
+                writeln!(debug_file, "{}", api.signature).unwrap();
+            }
         }
+        api_sequences.push(seq);
     }
     info!("API sequence generation completed.");
 

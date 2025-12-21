@@ -1,5 +1,6 @@
 use crate::error::Result;
 use async_trait::async_trait;
+use serde::Deserialize;
 
 pub mod local;
 pub mod openai;
@@ -11,7 +12,8 @@ pub trait LLM {
     fn clear(&mut self);
 }
 
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Deserialize)]
+#[serde(try_from = "String")]
 pub enum LLMType {
     Local,
     OpenAI,
@@ -28,6 +30,14 @@ impl TryFrom<&str> for LLMType {
             "deepseek" => Ok(LLMType::DeepSeek),
             _ => Err(crate::error::Error::UnsupportedLLMType(value.into())),
         }
+    }
+}
+
+impl TryFrom<String> for LLMType {
+    type Error = crate::error::Error;
+
+    fn try_from(value: String) -> std::result::Result<Self, Self::Error> {
+        LLMType::try_from(value.as_str())
     }
 }
 

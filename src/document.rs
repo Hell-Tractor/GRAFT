@@ -152,10 +152,10 @@ impl ToString for APIDoc {
 #[instrument]
 fn get_raw_api_documentation(crate_name: &str) -> Result<String> {
     info!("Fetching raw API documentation for crate");
-    let cargo = crate::utils::config().get_string("commands.cargo")?;
-    let temp_project_path = crate::utils::config().get_string("doc.temp_project_path")?;
+    let cargo = &crate::utils::config().commands.cargo;
+    let temp_project_path = &crate::utils::config().doc.temp_project_path;
     let temp_project_path = std::path::Path::new(&temp_project_path);
-    let temp_project_name = crate::utils::config().get_string("doc.temp_project_name")?;
+    let temp_project_name = &crate::utils::config().doc.temp_project_name;
 
     // create temporary project
     let _temp_project = TempProject::new(temp_project_path, &temp_project_name)?;
@@ -194,7 +194,7 @@ struct TempProject {
 
 impl TempProject {
     fn new(base_path: &Path, name: &str) -> Result<Self> {
-        let cargo = crate::utils::config().get_string("commands.cargo")?;
+        let cargo = &crate::utils::config().commands.cargo;
         // create a temporary rust project
         let output = std::process::Command::new(&cargo)
             .arg("new").arg(&name).arg("--vcs").arg("none")

@@ -1,14 +1,86 @@
-use std::sync::OnceLock;
+use std::{path::PathBuf, sync::OnceLock};
 
-use config::Config;
+use serde::Deserialize;
+
+use crate::llm::LLMType;
+
+#[derive(Deserialize)]
+pub struct Config {
+    #[serde(rename = "LLM")]
+    pub llm: LLMConfig,
+    pub prompts: PromptConfig,
+    pub commands: CommandConfig,
+    pub testcase: TestcaseConfig,
+    pub doc: DocConfig,
+    #[serde(rename = "AFL")]
+    pub afl: AFLConfig,
+    pub querys: QueryConfig,
+}
+
+#[derive(Deserialize)]
+pub struct LLMConfig {
+    #[serde(rename = "type")]
+    pub type_: LLMType,
+    pub model_name: String,
+    pub api_url_chat: String,
+    pub fix_retries: u32,
+    pub input_gen_retries: u32,
+    pub max_used_api_count: u32,
+    #[serde(rename = "key")]
+    #[serde(default)]
+    pub api_key: Option<String>,
+}
+
+#[derive(Deserialize)]
+pub struct PromptConfig {
+    pub testcase_gen: String,
+    pub fix_testcase: String,
+    pub input_gen: String,
+}
+
+#[derive(Deserialize)]
+pub struct CommandConfig {
+    pub cargo: String,
+}
+
+#[derive(Deserialize)]
+pub struct TestcaseConfig {
+    pub count: u32,
+    pub input_count: u32,
+    pub base_path: PathBuf,
+    pub each_api_max_usage: u32,
+}
+
+#[derive(Deserialize)]
+pub struct DocConfig {
+    pub temp_project_path: String,
+    pub temp_project_name: String,
+}
+
+#[derive(Deserialize)]
+pub struct AFLConfig {
+    pub timeout: u32, // in seconds
+}
+
+#[derive(Deserialize)]
+pub struct QueryConfig {
+    pub function: String,
+    pub method: String,
+    #[serde(rename = "struct")]
+    pub struct_: String,
+    #[serde(rename = "enum")]
+    pub enum_: String,
+    pub constant: String,
+}
 
 pub fn config() -> &'static Config {
     static CONFIG: OnceLock<Config> = OnceLock::new();
     CONFIG.get_or_init(|| {
-        Config::builder()
+        config::Config::builder()
             .add_source(config::File::with_name("config.yaml"))
             .add_source(config::Environment::with_prefix("PLF").separator("_"))
             .build().unwrap()
+            .try_deserialize().unwrap()
     })
 }
 

@@ -25,7 +25,7 @@ impl TryFromApiDoc<Vec<Struct>> for Struct {
         info!("Parsing Struct documentation");
 
         info!("Querying structs from documentation");
-        let struct_query = utils::config().get_string("querys.struct")?;
+        let struct_query = &utils::config().querys.struct_;
         let struct_query = utils::read_file_to_string(struct_query)?;
         let structs = querier.query()
             .add_variable("public", true)
