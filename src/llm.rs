@@ -9,6 +9,7 @@ pub mod deepseek;
 #[async_trait]
 pub trait LLM {
     async fn generate_response(&mut self, prompt: &str) -> Result<LLMMessage>;
+    #[allow(unused)]
     fn clear(&mut self);
 }
 

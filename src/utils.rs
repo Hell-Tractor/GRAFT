@@ -25,7 +25,6 @@ pub struct LLMConfig {
     pub api_url_chat: String,
     pub fix_retries: u32,
     pub input_gen_retries: u32,
-    pub max_used_api_count: u32,
     #[serde(default)]
     pub api_key: Option<String>,
 }

@@ -1,7 +1,7 @@
 use std::path::{Path, PathBuf};
 use std::sync::{Arc, RwLock};
-use std::thread;
 use std::time::Duration;
+use tokio::process::Command;
 use tracing::{debug, enabled, info, span};
 
 use crate::api_graph;
@@ -14,12 +14,6 @@ use crate::utils;
 pub struct Testcase {
     path: PathBuf,
     target_crate: String,
-}
-
-#[derive(serde::Deserialize)]
-struct CodeAndDependencies {
-    code: String,
-    // dependencies: String,
 }
 
 #[derive(serde::Serialize)]
@@ -60,18 +54,18 @@ impl Testcase {
         // create project
         info!("Creating new cargo project `{}` at {}", name, project_path.display());
         let cargo = &utils::config().commands.cargo;
-        std::process::Command::new(cargo)
+        Command::new(cargo)
             .arg("new").arg(name).arg("--vcs").arg("none")
             .current_dir(path)
-            .output()?;
+            .status().await?;
         info!("Project `{}` created successfully", name);
 
         // add dependency
         info!("Adding dependency `{}` to project `{}`", target_crate, name);
-        let output = std::process::Command::new(&cargo)
+        let output = Command::new(&cargo)
             .arg("add").arg(target_crate)
             .current_dir(&project_path)
-            .output()?;
+            .output().await?;
         if !output.status.success() {
             return Err(Error::CommandError(format!("Failed to add dependency: {}", String::from_utf8_lossy(&output.stderr))));
         }
@@ -137,10 +131,10 @@ impl Testcase {
             // std::fs::write(cargo_path, new_cargo_toml)?;
 
             // try to build the project
-            let output = std::process::Command::new(&cargo)
+            let output = Command::new(&cargo)
                 .arg("afl").arg("build")
                 .current_dir(cargo_path.parent().unwrap())
-                .output()?;
+                .output().await?;
             if output.status.success() {
                 info!("Successfully generated testcase for project `{}`", name);
                 return Ok(());
@@ -196,24 +190,24 @@ impl Testcase {
         Ok(())
     }
 
-    pub fn run(&self, relative_input_dir: &Path, relative_output_dir: &Path) -> Result<()> {
+    pub async fn run(&self, relative_input_dir: &Path, relative_output_dir: &Path) -> Result<()> {
         let project_name = self.path.file_name().unwrap().to_string_lossy();
         let s = span!(tracing::Level::INFO, "Testcase", project = %project_name);
         let _ = s.enter();
         let timeout = utils::config().afl.timeout;
         let cargo = &utils::config().commands.cargo;
         info!("Building project...");
-        let output = std::process::Command::new(&cargo)
+        let output = Command::new(&cargo)
             .arg("afl").arg("build")
             .current_dir(&self.path)
-            .output()?;
+            .output().await?;
         if !output.status.success() {
             return Err(Error::CommandError(format!("AFL build failed: {}", String::from_utf8_lossy(&output.stderr))));
         }
         info!("Build completed successfully");
 
         info!("Starting AFL fuzzing for {} seconds", timeout);
-        let mut fuzz_process = std::process::Command::new(&cargo)
+        let mut fuzz_process = Command::new(&cargo)
             .arg("afl").arg("fuzz").arg("-i").arg(relative_input_dir)
             .arg("-o").arg(relative_output_dir).arg(format!("target/debug/{}", project_name))
             // .env("AFL_TIMEOUT", timeout.to_string())
@@ -224,11 +218,18 @@ impl Testcase {
             .spawn()?;
             // .output()?;
         let timeout = Duration::from_secs(timeout as u64);
-        thread::sleep(timeout);
-        fuzz_process.kill()?;
-        let output = fuzz_process.wait_with_output()?;
-        if !output.status.success() {
-            return Err(Error::CommandError(format!("AFL fuzzing failed: {}", String::from_utf8_lossy(&output.stderr))));
+        let timer = tokio::time::sleep(timeout);
+        tokio::select! {
+            status = fuzz_process.wait() => {
+                let status = status?;
+                if !status.success() {
+                    return Err(Error::CommandError(format!("AFL fuzzing failed with status: {}", status)));
+                }
+            }
+            _ = timer => {
+                fuzz_process.kill().await?;
+                fuzz_process.wait().await?;
+            }
         }
         info!("AFL fuzzing completed");
 

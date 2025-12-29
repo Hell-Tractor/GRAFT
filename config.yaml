@@ -5,7 +5,6 @@ LLM:
   api_url_chat: "https://api.deepseek.com/chat/completions"
   fix_retries: 1
   input_gen_retries: 1
-  max_used_api_count: 10000
 prompts:
   testcase_gen: "prompts/testcase_gen"
   fix_testcase: "prompts/fix_testcase"

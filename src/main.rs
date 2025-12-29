@@ -1,6 +1,7 @@
 use std::{path::PathBuf, sync::{Arc, RwLock}};
 
-use clap::{Parser, Subcommand};
+use clap::{ArgGroup, Args, Parser, Subcommand};
+use tokio::task::JoinSet;
 use tracing::{debug, enabled, error, info, warn};
 use tracing_subscriber::{EnvFilter, fmt::writer::MakeWriterExt};
 
@@ -25,13 +26,7 @@ struct Cli {
 #[derive(Subcommand)]
 enum Commands {
     /// Generate API documentation for a crate
-    Doc {
-        /// Crate name to analyze, should be available on crates.io
-        crate_name: String,
-        /// Output file path for the generated API documentation in JSON format
-        #[arg(short, long, value_name = "FILE")]
-        output: PathBuf,
-    },
+    Doc(DocArgs),
     /// Generate API graph from API documentation
     ApiGraph {
         /// Input API documentation file in JSON format
@@ -86,6 +81,24 @@ enum Commands {
     },
 }
 
+#[derive(Args)]
+#[command(group(
+    ArgGroup::new("input")
+        .required(true)
+        .args(["name", "path"]),
+))]
+struct DocArgs {
+    /// Crate name to analyze, should be available on crates.io
+    #[arg(short, long)]
+    name: Option<String>,
+    /// Path to local Rust Doc JSON file
+    #[arg(short, long)]
+    path: Option<PathBuf>,
+    /// Output file path for the generated API documentation in JSON format
+    #[arg(short, long, value_name = "FILE")]
+    output: PathBuf,
+}
+
 #[tokio::main]
 async fn main() {
     let cli = Cli::parse();
@@ -93,7 +106,15 @@ async fn main() {
     init_logger();
 
     let result = match &cli.command {
-        Commands::Doc { crate_name, output } => generate_doc(crate_name, output),
+        Commands::Doc(args) => {
+            if let Some(crate_name) = &args.name {
+                generate_doc(crate_name, &args.output)
+            } else if let Some(path) = &args.path {
+                generate_doc_from_file(path, &args.output)
+            } else {
+                unreachable!("Either crate name or path must be provided");
+            }
+        },
         Commands::ApiGraph { input, output } => generate_api_graph(input, output),
         Commands::ApiSequence { input, output, count } => generate_api_sequence(input, output, *count),
         Commands::Testcase { crate_name, input, output } => generate_testcases(crate_name, input, output).await,
@@ -109,6 +130,18 @@ async fn main() {
 fn generate_doc(crate_name: &str, output: &PathBuf) -> Result<()> {
     info!("Generating API documentation for crate `{}`", crate_name);
     let api_doc = document::APIDoc::from_crate_name(crate_name)?
+        .filter_api().filter_types()
+        .build();
+    info!("Generation completed. Serializing to `{}`...", output.display());
+    let json = api_doc.to_string();
+    std::fs::write(output, &json)?;
+    info!("Done.");
+    Ok(())
+}
+
+fn generate_doc_from_file(path: &PathBuf, output: &PathBuf) -> Result<()> {
+    info!("Generating API documentation from file `{}`", path.display());
+    let api_doc = document::APIDoc::from_file(path)?
         .filter_api().filter_types()
         .build();
     info!("Generation completed. Serializing to `{}`...", output.display());
@@ -221,12 +254,18 @@ async fn fuzz(crate_name: &str, dir: &PathBuf, count: usize) -> Result<()> {
 
     let input_dir = std::path::Path::new("inputs");
     let output_dir = std::path::Path::new("outputs");
+    let mut fuzz_task_set = JoinSet::new();
+    for (i, testcase) in testcases.into_iter().enumerate() {
+        info!("Starting testcase {} / {}...", i + 1, count);
+        fuzz_task_set.spawn(async move { (testcase.run(input_dir, output_dir).await, i) });
+    }
     let mut success_count = 0;
-    for (i, testcase) in testcases.iter().enumerate() {
-        info!("Running testcase {} / {}...", i + 1, count);
-        if let Err(e) = testcase.run(input_dir, output_dir) {
-            warn!("Error occurred while running testcase: {}, skipping...", e);
+    while let Some(res) = fuzz_task_set.join_next().await {
+        let (res, id) = res.expect("JoinError occurred in JoinSet");
+        if let Err(e) = res {
+            warn!("Error occurred while running testcase(id = {}): {}, skipping...", id, e);
         } else {
+            info!("Testcase(id = {}) completed successfully.", id);
             success_count += 1;
         }
     }

@@ -1,7 +1,6 @@
 use std::sync::{Arc, RwLock};
 
 use rustdoc_types::Type;
-use serde::{Deserialize, Serialize};
 use tracing::{debug, info};
 use vertex::APIParam;
 use edge::Edge;
