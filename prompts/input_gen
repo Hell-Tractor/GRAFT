@@ -6,6 +6,7 @@ As a professional Rust developer, you're given the following code snippets which
 - Each input should be valid according to the expected input format of the program.
 - The inputs should cover a wide range of scenarios, including edge cases, typical cases, and error cases.
 - Each input should be concise, ideally not exceeding 200 characters.
+- You should generate exactly {count} test inputs.
 
 # Output Format
 

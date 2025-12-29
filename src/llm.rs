@@ -7,7 +7,7 @@ pub mod openai;
 pub mod deepseek;
 
 #[async_trait]
-pub trait LLM {
+pub trait LLM: Send {
     async fn generate_response(&mut self, prompt: &str) -> Result<LLMMessage>;
     #[allow(unused)]
     fn clear(&mut self);

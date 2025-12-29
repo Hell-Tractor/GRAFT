@@ -207,29 +207,35 @@ impl Testcase {
         info!("Build completed successfully");
 
         info!("Starting AFL fuzzing for {} seconds", timeout);
-        let mut fuzz_process = Command::new(&cargo)
-            .arg("afl").arg("fuzz").arg("-i").arg(relative_input_dir)
+        // let mut fuzz_process = Command::new(&cargo)
+        let fuzz_process = Command::new(&cargo)
+            .arg("afl").arg("fuzz")
+            .arg("-V").arg(timeout.to_string())
+            .arg("-i").arg(relative_input_dir)
             .arg("-o").arg(relative_output_dir).arg(format!("target/debug/{}", project_name))
             // .env("AFL_TIMEOUT", timeout.to_string())
-            // .arg("-V").arg(timeout.to_string())
             .current_dir(&self.path)
             .stdout(std::process::Stdio::inherit())
             .stderr(std::process::Stdio::inherit())
-            .spawn()?;
-            // .output()?;
-        let timeout = Duration::from_secs(timeout as u64);
-        let timer = tokio::time::sleep(timeout);
-        tokio::select! {
-            status = fuzz_process.wait() => {
-                let status = status?;
-                if !status.success() {
-                    return Err(Error::CommandError(format!("AFL fuzzing failed with status: {}", status)));
-                }
-            }
-            _ = timer => {
-                fuzz_process.kill().await?;
-                fuzz_process.wait().await?;
-            }
+            .spawn()?
+            .wait_with_output().await?;
+        // let timeout = Duration::from_secs(timeout as u64);
+        // let timer = tokio::time::sleep(timeout);
+        // tokio::select! {
+        //     status = fuzz_process.wait() => {
+        //         let status = status?;
+        //         if !status.success() {
+        //             return Err(Error::CommandError(format!("AFL fuzzing failed with status: {}", status)));
+        //         }
+        //     }
+        //     _ = timer => {
+        //         fuzz_process.kill().await?;
+        //         fuzz_process.wait().await?;
+        //     }
+        // }
+        let status = &fuzz_process.status;
+        if !status.success() {
+            return Err(Error::CommandError(format!("AFL fuzzing failed with status: {}", status)));
         }
         info!("AFL fuzzing completed");
 
