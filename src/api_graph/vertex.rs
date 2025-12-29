@@ -1,6 +1,7 @@
 use std::sync::{Arc, RwLock, Weak};
 
 use rustdoc_types::Type;
+use serde::{Deserialize, Serialize};
 use crate::{document::api::APIGeneric, generic_bound::GenericBoundChecker};
 
 use super::edge::RefType;
@@ -11,13 +12,16 @@ pub enum Vertex {
     Constant(Constant),
 }
 
+#[derive(Serialize, Deserialize)]
 pub struct APIParam {
     pub name: String,
     pub type_: Type,
+    #[serde(skip)]
     pub api: Weak<RwLock<API>>,
     pub id: usize, // ID in the APIGraph
 }
 
+#[derive(Serialize, Deserialize)]
 pub struct API {
     pub signature: String,
     pub params: Vec<Arc<RwLock<APIParam>>>,

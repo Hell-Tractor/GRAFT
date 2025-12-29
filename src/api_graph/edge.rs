@@ -1,9 +1,11 @@
+use serde::{Deserialize, Serialize};
+
 pub struct Edge {
     pub to: usize,
     pub ref_type: RefType,
 }
 
-#[derive(Debug, PartialEq, Eq)]
+#[derive(Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub enum RefType {
     Borrow,
     BorrowMut,

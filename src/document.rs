@@ -1,6 +1,6 @@
 use std::path::Path;
 
-use serde::{Serialize};
+use serde::{Deserialize, Serialize};
 use tracing::{info, instrument};
 
 use crate::{document::r#type::constant::Constant, error::Result};
@@ -14,14 +14,14 @@ trait TryFromApiDoc<T> {
     fn try_from_api_doc(querier: &query::DocQuerier) -> Result<T>;
 }
 
-#[derive(Serialize)]
+#[derive(Serialize, Deserialize)]
 pub struct APIDoc {
     pub apis: Vec<api::API>,
     pub types: Types,
     pub constants: Vec<Constant>,
 }
 
-#[derive(Serialize)]
+#[derive(Serialize, Deserialize)]
 pub struct Types {
     pub structs: Vec<r#type::r#struct::Struct>,
     pub enums: Vec<r#type::r#enum::Enum>,

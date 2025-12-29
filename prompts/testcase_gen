@@ -6,6 +6,7 @@ As a professional Rust developer, you are tasked to convert an api calling seque
 - The program should be syntactically correct and compile without errors.
 - The program should read all primitive parameters from stdin.
 - The program should only be written in one file with function `main`.
+- The program should be suitable for fuzzing.
 - All generics without constraints can be replaced with any concrete types.
 - No other dependencies should be used except those mentioned in the API documentation.
 

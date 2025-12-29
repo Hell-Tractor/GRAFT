@@ -1,11 +1,11 @@
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use tracing::info;
 
 use crate::{document::{TryFromApiDoc, query::{DocQuerier, QueryResult}, r#type::{StructField, TypeKind}}, utils};
 use crate::error::*;
 use super::super::utils as doc_utils;
 
-#[derive(Serialize)]
+#[derive(Serialize,Deserialize)]
 pub struct Enum {
     pub id: u32,
     pub name: String,
@@ -112,7 +112,7 @@ impl TryFrom<&QueryResult> for Enum {
     }
 }
 
-#[derive(Serialize)]
+#[derive(Serialize, Deserialize)]
 pub struct EnumVariant {
     pub name: String,
     pub docs: String,

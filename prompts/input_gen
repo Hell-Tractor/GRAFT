@@ -9,7 +9,7 @@ As a professional Rust developer, you're given the following code snippets which
 
 # Output Format
 
-The output should be in json array format, where each element is a string representing a test input.
+The output should be in json array format, where each element is a string representing a test input. No markdown formatting should be used.
 
 ## Example output
 

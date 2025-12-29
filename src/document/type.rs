@@ -1,10 +1,10 @@
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 
 pub mod r#struct;
 pub mod r#enum;
 pub mod constant;
 
-#[derive(Serialize)]
+#[derive(Serialize, Deserialize)]
 pub enum TypeKind {
     Struct,
     Enum,
@@ -12,7 +12,7 @@ pub enum TypeKind {
     // Constant,
 }
 
-#[derive(Serialize)]
+#[derive(Serialize, Deserialize)]
 pub struct StructField {
     pub name: String,
     pub docs: String,

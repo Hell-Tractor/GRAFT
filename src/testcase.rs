@@ -1,17 +1,18 @@
-use std::io::Write;
-use std::path::Path;
+use std::path::{Path, PathBuf};
 use std::sync::{Arc, RwLock};
+use std::thread;
+use std::time::Duration;
 use tracing::{debug, enabled, info, span};
 
 use crate::api_graph;
-use crate::document;
 use crate::error::{Error, Result};
 
 use crate::llm::LLM;
 use crate::utils;
 
+#[derive(serde::Deserialize, serde::Serialize)]
 pub struct Testcase {
-    path: Box<Path>,
+    path: PathBuf,
     target_crate: String,
 }
 
@@ -39,6 +40,13 @@ impl From<&api_graph::API> for API {
 }
 
 impl Testcase {
+    pub fn from_existing(path: &Path, target_crate: &str) -> Self {
+        Testcase {
+            path: path.to_owned(),
+            target_crate: target_crate.to_owned(),
+        }
+    }
+
     pub async fn new(path: &Path, name: &str, target_crate: &str, api_sequence: &Vec<Arc<RwLock<api_graph::API>>>, mut llm: Box<dyn LLM>) -> Result<Self> {
         let project_path = path.join(name);
         if project_path.exists() {
@@ -116,7 +124,11 @@ impl Testcase {
             // let code_and_deps = code_and_deps.unwrap();
             // write code
             // std::fs::write(main_path, code_and_deps.code)?;
-            std::fs::write(main_path, response.content)?;
+            let code = response.content
+                .trim_start_matches("```rust")
+                .trim_start_matches("```")
+                .trim_end_matches("```");
+            std::fs::write(main_path, code)?;
 
             // load origin cargo.toml
             // let origin_cargo_toml = utils::read_file_to_string(cargo_path)?;
@@ -162,7 +174,11 @@ impl Testcase {
         let retries = utils::config().llm.input_gen_retries;
         for i in 0..retries {
             let response = llm.generate_response(&prompt).await?;
-            let Ok(inputs) = serde_json::from_str::<Vec<String>>(&response.content) else {
+            let content = response.content
+                .trim_start_matches("```json")
+                .trim_start_matches("```")
+                .trim_end_matches("```");
+            let Ok(inputs) = serde_json::from_str::<Vec<String>>(content) else {
                 info!("LLM response for input generation is not valid JSON, retrying...({} time(s) left)", retries - i - 1);
                 continue;
             };
@@ -186,14 +202,31 @@ impl Testcase {
         let _ = s.enter();
         let timeout = utils::config().afl.timeout;
         let cargo = &utils::config().commands.cargo;
-
-        info!("Starting AFL fuzzing with timeout of {} seconds", timeout);
+        info!("Building project...");
         let output = std::process::Command::new(&cargo)
-            .arg("afl").arg("fuzz").arg("-i").arg(relative_input_dir)
-            .arg("-o").arg(relative_output_dir).arg(format!("target/debug/{}", project_name))
-            .env("AFL_TIMEOUT", timeout.to_string())
+            .arg("afl").arg("build")
             .current_dir(&self.path)
             .output()?;
+        if !output.status.success() {
+            return Err(Error::CommandError(format!("AFL build failed: {}", String::from_utf8_lossy(&output.stderr))));
+        }
+        info!("Build completed successfully");
+
+        info!("Starting AFL fuzzing for {} seconds", timeout);
+        let mut fuzz_process = std::process::Command::new(&cargo)
+            .arg("afl").arg("fuzz").arg("-i").arg(relative_input_dir)
+            .arg("-o").arg(relative_output_dir).arg(format!("target/debug/{}", project_name))
+            // .env("AFL_TIMEOUT", timeout.to_string())
+            // .arg("-V").arg(timeout.to_string())
+            .current_dir(&self.path)
+            .stdout(std::process::Stdio::inherit())
+            .stderr(std::process::Stdio::inherit())
+            .spawn()?;
+            // .output()?;
+        let timeout = Duration::from_secs(timeout as u64);
+        thread::sleep(timeout);
+        fuzz_process.kill()?;
+        let output = fuzz_process.wait_with_output()?;
         if !output.status.success() {
             return Err(Error::CommandError(format!("AFL fuzzing failed: {}", String::from_utf8_lossy(&output.stderr))));
         }

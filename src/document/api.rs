@@ -1,12 +1,12 @@
 use std::io::Write;
 
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use tracing::{info, warn};
 
 use crate::{error::{Error, Result}, utils};
 use super::{TryFromApiDoc, query};
 
-#[derive(Serialize)]
+#[derive(Serialize, Deserialize)]
 pub struct API {
     pub name: String,
     pub kind: APIKind,
@@ -202,35 +202,34 @@ impl TryFrom<&query::QueryResult> for API {
     }
 }
 
-#[derive(Serialize)]
+#[derive(Serialize, Deserialize)]
 pub enum APIKind {
     Function,
     Method,
 }
 
-#[allow(unused)]
-#[derive(Serialize)]
-pub enum FuzzType {
-    String,
-    Custom,
-    Bytes,
-    Integer,
-}
+// #[derive(Serialize, Deserialize)]
+// pub enum FuzzType {
+//     String,
+//     Custom,
+//     Bytes,
+//     Integer,
+// }
 
-#[derive(Serialize)]
+#[derive(Serialize, Deserialize)]
 pub struct Location {
     pub file: String,
     pub line: usize,
 }
 
-#[derive(Serialize)]
+#[derive(Serialize, Deserialize)]
 pub struct Parameter {
     pub name: String,
     #[serde(rename = "type")]
     pub type_: rustdoc_types::Type,
 }
 
-#[derive(Serialize)]
+#[derive(Serialize, Deserialize)]
 pub struct ReturnValue {
     #[serde(rename = "type")]
     pub type_: Option<rustdoc_types::Type>,
@@ -263,7 +262,7 @@ impl ReturnValue {
     }
 }
 
-#[derive(Serialize)]
+#[derive(Serialize, Deserialize)]
 pub struct APIGeneric {
     pub name: String,
     pub type_bound: Vec<rustdoc_types::GenericBound>,

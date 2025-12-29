@@ -1,11 +1,11 @@
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use tracing::info;
 
 use crate::document::{TryFromApiDoc, query::QueryResult};
 use crate::{error::*, utils};
 use crate::document::utils as doc_utils;
 
-#[derive(Serialize)]
+#[derive(Serialize, Deserialize)]
 pub struct Constant {
     pub id: u32,
     pub name: String,

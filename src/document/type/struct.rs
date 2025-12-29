@@ -1,4 +1,4 @@
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use tracing::info;
 
 use crate::document::query::QueryResult;
@@ -8,7 +8,7 @@ use crate::document::{TryFromApiDoc, query::DocQuerier, r#type::TypeKind};
 use crate::{error::*, utils};
 use super::super::utils as doc_utils;
 
-#[derive(Serialize)]
+#[derive(Serialize, Deserialize)]
 pub struct Struct {
     pub id: u32,
     pub name: String,

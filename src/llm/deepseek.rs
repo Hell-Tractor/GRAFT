@@ -1,6 +1,6 @@
 use async_trait::async_trait;
 use serde::Deserialize;
-use tracing::{debug, info};
+use tracing::{debug, enabled, info};
 
 use crate::{error::{Error, Result}, llm::{LLM, LLMMessage}, utils::config};
 
@@ -28,8 +28,10 @@ struct LLMResponseChoice {
 #[async_trait]
 impl LLM for LLMClient {
     async fn generate_response(&mut self, prompt: &str) -> Result<LLMMessage> {
-        debug!("Press Enter to request LLM...");
-        std::io::stdin().read_line(&mut String::new()).unwrap();
+        if enabled!(tracing::Level::DEBUG) {
+            debug!("Press Enter to request LLM...");
+            std::io::stdin().read_line(&mut String::new()).unwrap();
+        }
 
         self.messages.push(LLMMessage::user(prompt));
         let request_body = serde_json::json!({
