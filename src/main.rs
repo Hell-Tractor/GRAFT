@@ -79,6 +79,9 @@ enum Commands {
         /// Number of testcases to generate seed inputs for
         #[arg(short, long)]
         count: usize,
+        /// Resume previous fuzzing session. Error if no previous session found.
+        #[arg(short, long)]
+        resume: bool,
     },
 }
 
@@ -120,7 +123,7 @@ async fn main() {
         Commands::ApiSequence { input, output, count } => generate_api_sequence(input, output, *count),
         Commands::Testcase { crate_name, input, output } => generate_testcases(crate_name, input, output).await,
         Commands::SeedGen { crate_name, dir, count } => generate_seed_inputs(crate_name, dir, *count).await,
-        Commands::Fuzz { crate_name, dir, count } => fuzz(crate_name, dir, *count).await,
+        Commands::Fuzz { crate_name, dir, count, resume } => fuzz(crate_name, dir, *count, *resume).await,
     };
 
     if let Err(e) = result {
@@ -281,7 +284,7 @@ async fn generate_seed_inputs(crate_name: &str, dir: &PathBuf, count: usize) -> 
     Ok(())
 }
 
-async fn fuzz(crate_name: &str, dir: &PathBuf, count: usize) -> Result<()> {
+async fn fuzz(crate_name: &str, dir: &PathBuf, count: usize, resume: bool) -> Result<()> {
     info!("Running all testcases with AFL");
     let testcases = (0..count).map(|i| {
         let testcase_dir = dir.join(format!("{}_test{}", crate_name, i));
@@ -293,7 +296,7 @@ async fn fuzz(crate_name: &str, dir: &PathBuf, count: usize) -> Result<()> {
     let mut fuzz_task_set = JoinSet::new();
     for (i, testcase) in testcases.into_iter().enumerate() {
         info!("Starting testcase {} / {}...", i + 1, count);
-        fuzz_task_set.spawn(async move { (testcase.run(input_dir, output_dir).await, i) });
+        fuzz_task_set.spawn(async move { (testcase.run(input_dir, output_dir, resume).await, i) });
     }
     let mut success_count = 0;
     while let Some(res) = fuzz_task_set.join_next().await {

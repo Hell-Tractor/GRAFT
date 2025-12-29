@@ -1,3 +1,4 @@
+use std::ffi::OsStr;
 use std::path::{Path, PathBuf};
 use std::sync::{Arc, RwLock};
 use std::time::Duration;
@@ -190,49 +191,42 @@ impl Testcase {
         Ok(())
     }
 
-    pub async fn run(&self, relative_input_dir: &Path, relative_output_dir: &Path) -> Result<()> {
+    pub async fn run(&self, relative_input_dir: &Path, relative_output_dir: &Path, resume: bool) -> Result<()> {
         let project_name = self.path.file_name().unwrap().to_string_lossy();
         let s = span!(tracing::Level::INFO, "Testcase", project = %project_name);
         let _ = s.enter();
         let timeout = utils::config().afl.timeout;
         let cargo = &utils::config().commands.cargo;
-        info!("Building project...");
-        let output = Command::new(&cargo)
-            .arg("afl").arg("build")
-            .current_dir(&self.path)
-            .output().await?;
-        if !output.status.success() {
-            return Err(Error::CommandError(format!("AFL build failed: {}", String::from_utf8_lossy(&output.stderr))));
+        if !resume {
+            info!("Building project...");
+            let output = Command::new(&cargo)
+                .arg("afl").arg("build")
+                .current_dir(&self.path)
+                .output().await?;
+            if !output.status.success() {
+                return Err(Error::CommandError(format!("AFL build failed: {}", String::from_utf8_lossy(&output.stderr))));
+            }
+            info!("Build completed successfully");
+            info!("Starting AFL fuzzing for {} seconds", timeout);
+        } else {
+            info!("Resuming AFL fuzzing for {} seconds", timeout);
         }
-        info!("Build completed successfully");
 
-        info!("Starting AFL fuzzing for {} seconds", timeout);
         // let mut fuzz_process = Command::new(&cargo)
-        let fuzz_process = Command::new(&cargo)
-            .arg("afl").arg("fuzz")
-            .arg("-V").arg(timeout.to_string())
-            .arg("-i").arg(relative_input_dir)
-            .arg("-o").arg(relative_output_dir).arg(format!("target/debug/{}", project_name))
-            // .env("AFL_TIMEOUT", timeout.to_string())
+        let mut fuzz_process = Command::new(&cargo);
+        fuzz_process.arg("afl").arg("fuzz")
+            .arg("-V").arg(timeout.to_string());
+        if resume {
+            fuzz_process.arg("-i").arg("-");
+        } else {
+            fuzz_process.arg("-i").arg(relative_input_dir);
+        }
+        let fuzz_process = fuzz_process.arg("-o").arg(relative_output_dir).arg(format!("target/debug/{}", project_name))
             .current_dir(&self.path)
             .stdout(std::process::Stdio::inherit())
             .stderr(std::process::Stdio::inherit())
             .spawn()?
             .wait_with_output().await?;
-        // let timeout = Duration::from_secs(timeout as u64);
-        // let timer = tokio::time::sleep(timeout);
-        // tokio::select! {
-        //     status = fuzz_process.wait() => {
-        //         let status = status?;
-        //         if !status.success() {
-        //             return Err(Error::CommandError(format!("AFL fuzzing failed with status: {}", status)));
-        //         }
-        //     }
-        //     _ = timer => {
-        //         fuzz_process.kill().await?;
-        //         fuzz_process.wait().await?;
-        //     }
-        // }
         let status = &fuzz_process.status;
         if !status.success() {
             return Err(Error::CommandError(format!("AFL fuzzing failed with status: {}", status)));
