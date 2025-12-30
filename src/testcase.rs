@@ -1,7 +1,5 @@
-use std::ffi::OsStr;
 use std::path::{Path, PathBuf};
 use std::sync::{Arc, RwLock};
-use std::time::Duration;
 use tokio::process::Command;
 use tracing::{debug, enabled, info, span};
 
