@@ -69,6 +69,9 @@ enum Commands {
         /// Number of testcases to generate seed inputs for
         #[arg(short, long)]
         count: usize,
+        /// Number of seeds to generate for each testcase
+        #[arg(short, long)]
+        seed_count: usize,
     },
     /// Fuzz all testcases with AFL
     Fuzz {
@@ -76,7 +79,7 @@ enum Commands {
         crate_name: String,
         /// Testcase directory
         dir: PathBuf,
-        /// Number of testcases to generate seed inputs for
+        /// Number of testcases to fuzz
         #[arg(short, long)]
         count: usize,
         /// Resume previous fuzzing session. Error if no previous session found.
@@ -125,7 +128,7 @@ async fn main() {
         Commands::ApiGraph { input, output } => generate_api_graph(input, output),
         Commands::ApiSequence { input, output, count } => generate_api_sequence(input, output, *count),
         Commands::Testcase { crate_name, input, output } => generate_testcases(crate_name, input, output).await,
-        Commands::SeedGen { crate_name, dir, count } => generate_seed_inputs(crate_name, dir, *count).await,
+        Commands::SeedGen { crate_name, dir, count, seed_count } => generate_seed_inputs(crate_name, dir, *count, *seed_count).await,
         Commands::Fuzz { crate_name, dir, count, resume, timeout } => fuzz(crate_name, dir, *count, *resume, *timeout).await,
     };
 
@@ -253,7 +256,7 @@ async fn generate_testcases(crate_name: &str, input: &PathBuf, output: &PathBuf)
     Ok(())
 }
 
-async fn generate_seed_inputs(crate_name: &str, dir: &PathBuf, count: usize) -> Result<()> {
+async fn generate_seed_inputs(crate_name: &str, dir: &PathBuf, count: usize, seed_count: usize) -> Result<()> {
     info!("Generating inputs for all testcases");
     let testcases = (0..count).map(|i| {
         let testcase_dir = dir.join(format!("{}_test{}", crate_name, i));
@@ -269,7 +272,7 @@ async fn generate_seed_inputs(crate_name: &str, dir: &PathBuf, count: usize) -> 
         info!("Generating inputs for testcase {} / {}...", i + 1, count);
         task_set.spawn(async move {
             let llm_client = llm::LLMFactory::create_llm(&llm_type, &llm_model, &llm_api_url);
-            let res = testcase.generate_inputs(input_dir, llm_client).await;
+            let res = testcase.generate_inputs(input_dir, llm_client, seed_count).await;
             (res, i)
         });
     }

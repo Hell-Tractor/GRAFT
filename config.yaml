@@ -12,7 +12,6 @@ prompts:
 commands:
   cargo: "cargo"
 testcase:
-  input_count: 8
   each_api_max_usage: 3
 doc:
   temp_project_path: "./"

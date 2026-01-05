@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
 pause(){
-    local prompt="${1:-Press any key to continue...}"
-    read -n 1 -s -r -p "$prompt"
-    echo ""
+    if [ ! -z $DEBUG ]; then
+        local prompt="${1:-Press any key to continue...}"
+        read -n 1 -s -r -p "$prompt"
+        echo ""
+    fi
 }
 
 # Fail on first error, on undefined variables, and on failures in pipelines.
@@ -11,7 +13,8 @@ set -euo pipefail
 
 CRATE_NAME=$1
 TESTCASE_COUNT=$2
-FUZZ_TIMEOUT=$3
+SEED_COUNT=$3
+FUZZ_TIMEOUT=$4
 
 TOPLEVEL="$(git rev-parse --show-toplevel)"
 OUTPUT_DIR="$TOPLEVEL/output/$CRATE_NAME/"
@@ -71,7 +74,7 @@ pause
 
 # Generate seed for testcases
 echo "Generating seed for test cases..."
-$EXE seed-gen $CRATE_NAME "${OUTPUT_DIR}/testcases/" -c $TESTCASE_COUNT
+$EXE seed-gen $CRATE_NAME "${OUTPUT_DIR}/testcases/" -c $TESTCASE_COUNT -s $SEED_COUNT
 echo "Seed generation completed."
 pause
 

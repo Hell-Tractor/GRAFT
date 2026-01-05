@@ -148,12 +148,12 @@ impl Testcase {
         Err(Error::CodeGenerationError(name.to_string(), retries))
     }
 
-    pub async fn generate_inputs(&self, relative_dir: &Path, mut llm: Box<dyn LLM>) -> Result<()> {
+    pub async fn generate_inputs(&self, relative_dir: &Path, mut llm: Box<dyn LLM>, seed_count: usize) -> Result<()> {
         // read prompt template
         let prompt_path = &utils::config().prompts.input_gen;
         let prompt_template = utils::read_file_to_string(prompt_path)?;
 
-        let input_count = utils::config().testcase.input_count;
+        let input_count = seed_count;
 
         // read code snippet from main.rs
         let path = self.path.join("src").join("main.rs");
