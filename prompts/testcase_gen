@@ -9,6 +9,9 @@ As a professional Rust developer, you are tasked to convert an api calling seque
 - The program should be suitable for fuzzing.
 - All generics without constraints can be replaced with any concrete types.
 - No other dependencies should be used except those mentioned in the API documentation.
+- Strictly follow all documented safety guidelines when using unsafe blocks to ensure the code remains sound and memory-safe.
+- Always include a // SAFETY: comment explaining why the requirements are met.
+- Ensure that the input transformation logic is robust and panic-free. Avoid using .unwrap(), .expect(), or direct indexing that could go out of bounds. Instead, use safe pattern matching (if let, match) to handle malformed inputs gracefully.
 
 # Output Format
 

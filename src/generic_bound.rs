@@ -1,5 +1,5 @@
 use rustdoc_types::{GenericArg, GenericArgs, GenericBound, Path};
-use tracing::debug;
+use tracing::{debug, warn};
 
 use crate::document::{self, api::APIGeneric};
 
@@ -13,6 +13,8 @@ pub struct GenericBoundChecker<'a> {
     return_self: Option<&'a rustdoc_types::Type>,
     param_self: Option<&'a rustdoc_types::Type>,
 }
+
+static NOT_FOUND_GENERIC_BOUND: Vec<GenericBound> = vec![];
 
 impl<'a> GenericBoundChecker<'a> {
     pub fn new(return_generics: &'a Vec<APIGeneric>, param_generics: &'a Vec<APIGeneric>, all_types: &'a document::Types, return_self: Option<&'a rustdoc_types::Type>, param_self: Option<&'a rustdoc_types::Type>) -> Self {
@@ -237,15 +239,21 @@ impl<'a> GenericBoundChecker<'a> {
     fn get_return_generic_bounds(&self, generic_name: &str) -> &Vec<GenericBound> {
         &self.return_generics.iter()
             .find(|g| &g.name == generic_name)
-            .expect(&format!("Generic `{}` not found in all_required_generics", generic_name))
-            .type_bound
+            .map(|generic| &generic.type_bound)
+            .unwrap_or_else(|| {
+                warn!("Generic `{}` not found in all_required_generics", generic_name);
+                &NOT_FOUND_GENERIC_BOUND
+            })
     }
 
     fn get_param_generic_bounds(&self, generic_name: &str) -> &Vec<GenericBound> {
         &self.param_generics.iter()
             .find(|g| &g.name == generic_name)
-            .expect(&format!("Generic `{}` not found in all_required_generics", generic_name))
-            .type_bound
+            .map(|generic| &generic.type_bound)
+            .unwrap_or_else(|| {
+                warn!("Generic `{}` not found in all_required_generics", generic_name);
+                &NOT_FOUND_GENERIC_BOUND
+            })
     }
 
     /// 获取某个类型实现的所有 trait 列表
@@ -290,7 +298,13 @@ impl<'a> GenericBoundChecker<'a> {
                 let enums = self.all_types.enums.iter()
                     .filter(|e| e.id == path.id.0)
                     .map(|e| &e.traits);
-                structs.chain(enums).next().expect(&format!("Type `{}` not found in documented types", path.path)).clone()
+                structs.chain(enums)
+                    .next()
+                    .unwrap_or_else(|| {
+                        warn!("Type `{}` not found in documented types", path.path);
+                        &NOT_FOUND_GENERIC_BOUND
+                    })
+                    .clone()
             },
             Type::Array { type_, .. } => self.get_implemented_traits_of_type(type_),
             Type::BorrowedRef { type_ , .. } => self.get_implemented_traits_of_type(type_),

@@ -21,6 +21,14 @@
                     implemented_trait {
                         json @output(name: "trait_name")
                     }
+                    # generic_parameter @fold {
+                    #     ... on GenericTypeParameter {
+                    #         name @output(name: "generic_type_param_name")
+                    #         type_bound @fold {
+                    #             json @output(name: "type_bound_name")
+                    #         }
+                    #     }
+                    # }
                 }
                 field @fold {
                     name @output(name: "field_name")

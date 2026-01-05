@@ -1,7 +1,7 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 pause(){
-    if [ ! -z $DEBUG ]; then
+    if [ ! -z "$DEBUG" ]; then
         local prompt="${1:-Press any key to continue...}"
         read -n 1 -s -r -p "$prompt"
         echo ""
