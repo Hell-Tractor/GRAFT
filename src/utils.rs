@@ -12,8 +12,6 @@ pub struct Config {
     pub commands: CommandConfig,
     pub testcase: TestcaseConfig,
     pub doc: DocConfig,
-    #[serde(rename = "AFL")]
-    pub afl: AFLConfig,
     pub querys: QueryConfig,
 }
 
@@ -51,11 +49,6 @@ pub struct TestcaseConfig {
 pub struct DocConfig {
     pub temp_project_path: String,
     pub temp_project_name: String,
-}
-
-#[derive(Deserialize)]
-pub struct AFLConfig {
-    pub timeout: u32, // in seconds
 }
 
 #[derive(Deserialize)]

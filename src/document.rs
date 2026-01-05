@@ -51,6 +51,7 @@ impl APIDocBuilder {
             "drop", "to_owned",
             "fmt",
             "into_iter", "iter", "iter_mut",
+            "clone_to_uninit" // unstable method, skip for now
         ];
 
         info!("Filtering out trivial APIs from documentation");

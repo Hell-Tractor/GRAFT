@@ -12,13 +12,11 @@ prompts:
 commands:
   cargo: "cargo"
 testcase:
-  input_count: 1
+  input_count: 8
   each_api_max_usage: 3
 doc:
   temp_project_path: "./"
   temp_project_name: "temp_doc_project"
-AFL:
-  timeout: 10 # in seconds
 querys:
   function: "querys/function.gql"
   method: "querys/method.gql"

@@ -189,11 +189,10 @@ impl Testcase {
         Ok(())
     }
 
-    pub async fn run(&self, relative_input_dir: &Path, relative_output_dir: &Path, resume: bool) -> Result<()> {
+    pub async fn run(&self, relative_input_dir: &Path, relative_output_dir: &Path, resume: bool, timeout: u64) -> Result<()> {
         let project_name = self.path.file_name().unwrap().to_string_lossy();
         let s = span!(tracing::Level::INFO, "Testcase", project = %project_name);
         let _ = s.enter();
-        let timeout = utils::config().afl.timeout;
         let cargo = &utils::config().commands.cargo;
         if !resume {
             info!("Building project...");
