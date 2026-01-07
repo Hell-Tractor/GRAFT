@@ -9,12 +9,12 @@ pause(){
 }
 
 # Fail on first error, on undefined variables, and on failures in pipelines.
-set -euo pipefail
+set -eo pipefail
 
 CRATE_NAME=$1
-# TESTCASE_COUNT=$2
-SEED_COUNT=$2
-FUZZ_TIMEOUT=$3
+TESTCASE_COUNT=$2 # if small than 1, generate testcases with suggested count(may be large)
+SEED_COUNT=$3
+FUZZ_TIMEOUT=$4
 
 TOPLEVEL="$(git rev-parse --show-toplevel)"
 OUTPUT_DIR="$TOPLEVEL/output/$CRATE_NAME/"
@@ -58,7 +58,11 @@ pause
 
 # Generate API sequences
 echo "Generating API sequences..."
-TESTCASE_COUNT=$($EXE api-sequence -i "${OUTPUT_DIR}doc.json" -o "${OUTPUT_DIR}seqs.json")
+if [ $TESTCASE_COUNT -lt 1 ]; then
+    TESTCASE_COUNT=$($EXE api-sequence -i "${OUTPUT_DIR}doc.json" -o "${OUTPUT_DIR}seqs.json")
+else
+    TESTCASE_COUNT=$($EXE api-sequence -i "${OUTPUT_DIR}doc.json" -o "${OUTPUT_DIR}seqs.json" -c $TESTCASE_COUNT)
+fi
 if [ ! -e "${OUTPUT_DIR}seqs.json" ]; then
     echo "API sequence generation failed."
     exit 1
