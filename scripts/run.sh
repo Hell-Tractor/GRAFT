@@ -17,7 +17,7 @@ SEED_COUNT=$3
 FUZZ_TIMEOUT=$4
 
 TOPLEVEL="$(git rev-parse --show-toplevel)"
-OUTPUT_DIR="$TOPLEVEL/output/$CRATE_NAME/"
+OUTPUT_DIR="$TOPLEVEL/output/$CRATE_NAME"
 if [ -d $OUTPUT_DIR ]; then
     echo "Output directory $OUTPUT_DIR already exists."
     echo "Enter 'y' to delete it and continue, or any other key to exit."
@@ -48,31 +48,31 @@ pause
 
 # Generate Docs
 echo "Generating documentation..."
-$EXE doc -n $CRATE_NAME -o "${OUTPUT_DIR}doc.json"
-if [ ! -e "${OUTPUT_DIR}doc.json" ]; then
+$EXE doc -n $CRATE_NAME -o "${OUTPUT_DIR}/doc.json"
+if [ ! -e "${OUTPUT_DIR}/doc.json" ]; then
     echo "Documentation generation failed."
     exit 1
 fi
-echo "Documentation generated at ${OUTPUT_DIR}doc.json."
+echo "Documentation generated at ${OUTPUT_DIR}/doc.json."
 pause
 
 # Generate API sequences
 echo "Generating API sequences..."
 if [ $TESTCASE_COUNT -lt 1 ]; then
-    TESTCASE_COUNT=$($EXE api-sequence -i "${OUTPUT_DIR}doc.json" -o "${OUTPUT_DIR}seqs.json")
+    TESTCASE_COUNT=$($EXE api-sequence -i "${OUTPUT_DIR}/doc.json" -o "${OUTPUT_DIR}/seqs.json")
 else
-    TESTCASE_COUNT=$($EXE api-sequence -i "${OUTPUT_DIR}doc.json" -o "${OUTPUT_DIR}seqs.json" -c $TESTCASE_COUNT)
+    TESTCASE_COUNT=$($EXE api-sequence -i "${OUTPUT_DIR}/doc.json" -o "${OUTPUT_DIR}/seqs.json" -c $TESTCASE_COUNT)
 fi
-if [ ! -e "${OUTPUT_DIR}seqs.json" ]; then
+if [ ! -e "${OUTPUT_DIR}/seqs.json" ]; then
     echo "API sequence generation failed."
     exit 1
 fi
-echo "API sequences(count = ${TESTCASE_COUNT}) generated at ${OUTPUT_DIR}seqs.json."
+echo "API sequences(count = ${TESTCASE_COUNT}) generated at ${OUTPUT_DIR}/seqs.json."
 pause
 
 # Generate test cases
 echo "Generating test cases..."
-$EXE testcase $CRATE_NAME -i "${OUTPUT_DIR}seqs.json" -o "${OUTPUT_DIR}/testcases/"
+$EXE testcase $CRATE_NAME -i "${OUTPUT_DIR}/seqs.json" -o "${OUTPUT_DIR}/testcases/"
 echo "Test cases generated at ${OUTPUT_DIR}/testcases/."
 pause
 

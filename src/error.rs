@@ -24,6 +24,8 @@ pub enum Error {
     UnsupportedLLMType(String),
     #[error("LLM response does not contain content")]
     LLMResponseNoContent,
+    #[error("LLM response has invalid format")]
+    LLMResponseInvalidFormat,
     #[error("Failed to deserialize string: {0}")]
     DeserializeError(String),
     #[error("Missing API key for LLM service")]

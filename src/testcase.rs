@@ -1,7 +1,7 @@
 use std::path::{Path, PathBuf};
 use std::sync::{Arc, RwLock};
 use tokio::process::Command;
-use tracing::{debug, enabled, info, span};
+use tracing::{debug, enabled, info, span, warn};
 
 use crate::api_graph;
 use crate::error::{Error, Result};
@@ -105,43 +105,36 @@ impl Testcase {
         let cargo = &utils::config().commands.cargo;
         let retries = utils::config().llm.fix_retries;
         for i in 0..retries {
-            let response = llm.generate_response(&prompt).await?;
-            // let code_and_deps = serde_json::from_str::<CodeAndDependencies>(&response.content);
-            // if let Err(e) = &code_and_deps {
-            //     info!("LLM response of project `{}` is not valid JSON, retrying...({} time(s) left)", name, retries - i - 1);
-            //     debug!("LLM response content: {}", response.content);
-            //     debug!("JSON parsing error: {}", e);
-            //     llm.clear();
-            //     continue;
-            // };
-            // let code_and_deps = code_and_deps.unwrap();
-            // write code
-            // std::fs::write(main_path, code_and_deps.code)?;
-            let code = response.content
-                .trim_start_matches("```rust")
-                .trim_start_matches("```")
-                .trim_end_matches("```");
-            std::fs::write(main_path, code)?;
+            let mut attempt = async || -> Result<()> {
+                let response = llm.generate_response(&prompt).await?;
+                let code = response.content
+                    .trim_start_matches("```rust")
+                    .trim_start_matches("```")
+                    .trim_end_matches("```");
+                std::fs::write(main_path, code)?;
 
-            // load origin cargo.toml
-            // let origin_cargo_toml = utils::read_file_to_string(cargo_path)?;
-            // let new_cargo_toml = origin_cargo_toml.split("[dependencies]").next().unwrap().to_string()
-            //     + &code_and_deps.dependencies;
-            // std::fs::write(cargo_path, new_cargo_toml)?;
+                // try to build the project
+                let output = Command::new(&cargo)
+                    .arg("afl").arg("build")
+                    .current_dir(cargo_path.parent().unwrap())
+                    .output().await?;
+                if output.status.success() {
+                    Ok(())
+                } else {
+                    let error_message = String::from_utf8_lossy(&output.stderr);
+                    debug!("Build error: {}", error_message);
+                    prompt = fix_prompt.replace("{errors}", &error_message);
+                    Err(Error::CommandError("cargo build failed".to_string()))
+                }
+            };
 
-            // try to build the project
-            let output = Command::new(&cargo)
-                .arg("afl").arg("build")
-                .current_dir(cargo_path.parent().unwrap())
-                .output().await?;
-            if output.status.success() {
-                info!("Successfully generated testcase for project `{}`", name);
-                return Ok(());
+            if let Err(e) = attempt().await {
+                warn!("Failed to generate testcase `{}`", name);
+                warn!("Error: {}", e);
+                warn!("Retrying...({} time(s) left)", retries - i - 1);
             } else {
-                info!("Failed to build project `{}`, retrying...({} time(s) left)", name, retries - i - 1);
-                let error_message = String::from_utf8_lossy(&output.stderr);
-                debug!("Build error: {}", error_message);
-                prompt = fix_prompt.replace("{errors}", &error_message);
+                // info!("Successfully generated testcase for project `{}`", name);
+                return Ok(());
             }
         }
 
@@ -166,25 +159,37 @@ impl Testcase {
 
         let retries = utils::config().llm.input_gen_retries;
         for i in 0..retries {
-            let response = llm.generate_response(&prompt).await?;
-            let content = response.content
-                .trim_start_matches("```json")
-                .trim_start_matches("```")
-                .trim_end_matches("```");
-            let Ok(inputs) = serde_json::from_str::<Vec<String>>(content) else {
-                info!("LLM response for input generation is not valid JSON, retrying...({} time(s) left)", retries - i - 1);
-                continue;
+            let mut attempt = async || -> Result<()> {
+                let response = llm.generate_response(&prompt).await?;
+                let content = response.content
+                    .trim_start_matches("```json")
+                    .trim_start_matches("```")
+                    .trim_end_matches("```");
+                let Ok(inputs) = serde_json::from_str::<Vec<String>>(content) else {
+                    return Err(Error::LLMResponseInvalidFormat);
+                    // info!("LLM response for input generation is not valid JSON, retrying...({} time(s) left)", retries - i - 1);
+                    // continue;
+                };
+
+                let input_dir = self.path.join(relative_dir);
+                if !input_dir.exists() {
+                    std::fs::create_dir_all(&input_dir)?;
+                }
+                for (index, input) in inputs.iter().enumerate() {
+                    let input_path = input_dir.join(format!("input_{}", index));
+                    std::fs::write(input_path, input)?;
+                }
+                Ok(())
             };
 
-            let input_dir = self.path.join(relative_dir);
-            if !input_dir.exists() {
-                std::fs::create_dir_all(&input_dir)?;
+            if let Err(e) = attempt().await {
+                warn!("Failed to generate inputs for project `{}`", self.path.iter().last().and_then(|name| name.to_str()).unwrap_or("unknown"));
+                warn!("Error: {}", e);
+                warn!("Retrying...({} time(s) left)", retries - i - 1);
+            } else {
+                // info!("Successfully generated inputs for project `{}`", self.path.display());
+                return Ok(());
             }
-            for (index, input) in inputs.iter().enumerate() {
-                let input_path = input_dir.join(format!("input_{}", index));
-                std::fs::write(input_path, input)?;
-            }
-            break;
         }
         Ok(())
     }
