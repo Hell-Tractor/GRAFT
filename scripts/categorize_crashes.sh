@@ -46,23 +46,24 @@ categorize_bug() {
     fi
 }
 
-id=0
 total_count=0
 staged_count=0
 for folder in "$TESTCASES_BASE"/*/; do
-    echo "Processing test binary ID: $id in folder: $folder"
+    echo "Processing test binary in folder: $folder"
 
-    BINARY_PATH="${folder}target/debug/${CRATE_NAME}_test${id}"
+    BINARY_NAME=$(basename "$folder")
+    BINARY_PATH="${folder}target/debug/${BINARY_NAME}"
     STAGING_DIR="${folder}filtered_crashes"
     [ -d "$STAGING_DIR" ] && rm -rf "$STAGING_DIR"
     mkdir -p "$STAGING_DIR"
 
     if [ ! -f "$BINARY_PATH" ]; then
         echo "Warning: Binary $BINARY_PATH not found, skipping..."
-        id=$((id + 1))
         continue
     fi
 
+    total_count_this_testcase=0
+    staged_count_this_testcase=0
     while read -r crash_file; do
         crash_file="/${crash_file#/}"
         error_log=$(timeout $TIME_OUT $BINARY_PATH < "$crash_file" 2>&1)
@@ -79,11 +80,13 @@ for folder in "$TESTCASES_BASE"/*/; do
             mkdir -p "$STAGING_DIR/$category"
             cp "$crash_file" "$STAGING_DIR/$category/"
 
-            staged_count=$((staged_count + 1))
+            staged_count_this_testcase=$((staged_count_this_testcase + 1))
         fi
-        total_count=$((total_count + 1))
+        total_count_this_testcase=$((total_count_this_testcase + 1))
     done < <(find "${folder}outputs/default/crashes" -maxdepth 1 -type f ! -name "*.txt")
-    id=$((id + 1))
+    echo "Testcase $BINARY_NAME: total crashes = $total_count_this_testcase, staged crashes = $staged_count_this_testcase"
+    total_count=$((total_count + total_count_this_testcase))
+    staged_count=$((staged_count + staged_count_this_testcase))
 done
 
 echo "Total crashes processed: $total_count"
