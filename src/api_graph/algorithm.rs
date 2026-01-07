@@ -198,4 +198,19 @@ impl<'a> APISequeceGenerator<'a> {
         sequence.reverse();
         sequence
     }
+
+    /// Suggest whether to generate a new API sequence based on usage times and depth
+    ///
+    /// If all reachable APIs have been used, return false
+    /// else return true
+    pub fn suggest_generate(&self) -> bool {
+        self.graph.vertices.iter().any(|vertex| {
+            if let Vertex::API(api) = vertex {
+                let api = api.read().unwrap();
+                self.depth[api.id] >= 0 && self.used_times[api.id] == 0
+            } else {
+                false
+            }
+        })
+    }
 }

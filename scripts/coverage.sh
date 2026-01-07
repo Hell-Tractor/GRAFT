@@ -43,10 +43,10 @@ for folder in "$TESTCASES_BASE"/*/; do
     echo "[INFO] Directory: $folder"
 
     COVERAGE_TARGET_DIR="${folder}target/coverage"
-    
+
     echo "[INFO] Compiling coverage-instrumented binary..."
     cargo build --manifest-path "${folder}Cargo.toml" --target-dir "$COVERAGE_TARGET_DIR" > /dev/null 2>&1
-    
+
     BINARY_PATH="${COVERAGE_TARGET_DIR}/debug/${CRATE_NAME}_test${id}"
 
     if [ ! -f "$BINARY_PATH" ]; then

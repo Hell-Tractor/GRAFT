@@ -46,8 +46,9 @@ enum Commands {
         output: PathBuf,
         /// Number of API sequences to generate.
         /// Suggested to be same with cpu cores for better performance.
-        #[arg(short, long, default_value_t = 10)]
-        count: usize,
+        /// Default is calculated by api coverage.
+        #[arg(short, long)]
+        count: Option<usize>,
     },
     /// Convert API sequences to executable testcases
     Testcase {
@@ -126,7 +127,7 @@ async fn main() {
             }
         },
         Commands::ApiGraph { input, output } => generate_api_graph(input, output),
-        Commands::ApiSequence { input, output, count } => generate_api_sequence(input, output, *count),
+        Commands::ApiSequence { input, output, count } => generate_api_sequence(input, output, count),
         Commands::Testcase { crate_name, input, output } => generate_testcases(crate_name, input, output).await,
         Commands::SeedGen { crate_name, dir, count, seed_count } => generate_seed_inputs(crate_name, dir, *count, *seed_count).await,
         Commands::Fuzz { crate_name, dir, count, resume, timeout } => fuzz(crate_name, dir, *count, *resume, *timeout).await,
@@ -173,7 +174,21 @@ fn generate_api_graph(input: &PathBuf, output: &PathBuf) -> Result<()> {
     Ok(())
 }
 
-fn generate_api_sequence(input: &PathBuf, output: &PathBuf, count: usize) -> Result<()> {
+fn generate_api_sequence_once(id: usize, generator: &mut api_graph::algorithm::APISequeceGenerator) -> Vec<Arc<RwLock<api_graph::API>>> {
+    let seq = generator.generate();
+    if enabled!(tracing::Level::DEBUG) {
+        let debug_file = format!("debug/api_sequence_{}.txt", id);
+        let mut debug_file = std::io::BufWriter::new(std::fs::File::create(debug_file).expect("Failed to create debug file"));
+        for api in &seq {
+            let api = api.read().unwrap();
+            use std::io::Write;
+            writeln!(debug_file, "{}", api.signature).unwrap();
+        }
+    }
+    seq
+}
+
+fn generate_api_sequence(input: &PathBuf, output: &PathBuf, count: &Option<usize>) -> Result<()> {
     info!("Initializing API sequence generator...");
     let api_graph = {
         let reader = std::io::BufReader::new(std::fs::File::open(input)?);
@@ -184,20 +199,19 @@ fn generate_api_sequence(input: &PathBuf, output: &PathBuf, count: usize) -> Res
     info!("API sequence generator initialized.");
     info!("Generating api sequences...");
     let mut api_sequences = vec![];
-    for i in 0..count {
-        let seq = generator.generate();
-        if enabled!(tracing::Level::DEBUG) {
-            let debug_file = format!("debug/api_sequence_{}.txt", i);
-            let mut debug_file = std::io::BufWriter::new(std::fs::File::create(debug_file)?);
-            for api in &seq {
-                let api = api.read().unwrap();
-                use std::io::Write;
-                writeln!(debug_file, "{}", api.signature).unwrap();
-            }
+    if let Some(count) = count {
+        for i in 0..*count {
+            let seq = generate_api_sequence_once(i, &mut generator);
+            api_sequences.push(seq);
         }
-        api_sequences.push(seq);
+    } else {
+        while generator.suggest_generate() {
+            let seq = generate_api_sequence_once(api_sequences.len(), &mut generator);
+            api_sequences.push(seq);
+        }
     }
-    info!("API sequence generation completed. Serializing to `{}`...", output.display());
+    info!("API sequence(count = {}) generation completed. Serializing to `{}`...", api_sequences.len(), output.display());
+    println!("{}", api_sequences.len());
     let json = serde_json::to_string(&api_sequences)?;
     std::fs::write(output, &json)?;
     info!("Done.");

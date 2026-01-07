@@ -12,9 +12,9 @@ pause(){
 set -euo pipefail
 
 CRATE_NAME=$1
-TESTCASE_COUNT=$2
-SEED_COUNT=$3
-FUZZ_TIMEOUT=$4
+# TESTCASE_COUNT=$2
+SEED_COUNT=$2
+FUZZ_TIMEOUT=$3
 
 TOPLEVEL="$(git rev-parse --show-toplevel)"
 OUTPUT_DIR="$TOPLEVEL/output/$CRATE_NAME/"
@@ -58,12 +58,12 @@ pause
 
 # Generate API sequences
 echo "Generating API sequences..."
-$EXE api-sequence -i "${OUTPUT_DIR}doc.json" -o "${OUTPUT_DIR}seqs.json" -c $TESTCASE_COUNT
+TESTCASE_COUNT=$($EXE api-sequence -i "${OUTPUT_DIR}doc.json" -o "${OUTPUT_DIR}seqs.json")
 if [ ! -e "${OUTPUT_DIR}seqs.json" ]; then
     echo "API sequence generation failed."
     exit 1
 fi
-echo "API sequences generated at ${OUTPUT_DIR}seqs.json."
+echo "API sequences(count = ${TESTCASE_COUNT}) generated at ${OUTPUT_DIR}seqs.json."
 pause
 
 # Generate test cases
