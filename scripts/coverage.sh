@@ -33,11 +33,12 @@ rm -f "$COV_RAW_DIR"/*.profraw
 export LLVM_PROFILE_FILE="$COV_RAW_DIR/test-%p-%m.profraw"
 export RUSTFLAGS="-C instrument-coverage"
 
-id=0
 object_files=()
 
 # 2. Iterative Compilation and Data Collection
 for folder in "$TESTCASES_BASE"/*/; do
+    BINARY_NAME=$(basename "$folder")
+    id=${BINARY_NAME##*_test}  # Extract ID from folder name
     echo "==============================================="
     echo "[INFO] Processing Testcase ID: $id"
     echo "[INFO] Directory: $folder"
@@ -51,7 +52,6 @@ for folder in "$TESTCASES_BASE"/*/; do
 
     if [ ! -f "$BINARY_PATH" ]; then
         echo "[ERROR] Compilation failed or binary not found: $BINARY_PATH"
-        id=$((id + 1))
         continue
     fi
 
@@ -62,8 +62,6 @@ for folder in "$TESTCASES_BASE"/*/; do
     find "${folder}outputs/default/queue" "${folder}outputs/default/crashes" -maxdepth 1 -type f ! -name "*.txt" 2>/dev/null | while read -r input_file; do
         $BINARY_PATH < "$input_file" > /dev/null 2>&1
     done
-
-    id=$((id + 1))
 done
 
 # 3. Data Aggregation
