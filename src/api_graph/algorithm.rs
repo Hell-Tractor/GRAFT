@@ -213,4 +213,23 @@ impl<'a> APISequeceGenerator<'a> {
             }
         })
     }
+
+    pub fn max_api_coverage(&self) -> (usize, usize) {
+        let total = self.graph.vertices.iter().filter(|vertex| {
+            if let Vertex::API(_) = vertex {
+                true
+            } else {
+                false
+            }
+        }).count();
+        let used = self.graph.vertices.iter().filter(|vertex| {
+            if let Vertex::API(api) = vertex {
+                let api = api.read().unwrap();
+                self.depth[api.id] >= 0
+            } else {
+                false
+            }
+        }).count();
+        (used, total)
+    }
 }

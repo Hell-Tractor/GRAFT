@@ -1,3 +1,5 @@
+use std::{collections::HashSet, sync::{Mutex, OnceLock}};
+
 use rustdoc_types::{GenericArg, GenericArgs, GenericBound, Path};
 use tracing::{debug, warn};
 
@@ -15,6 +17,11 @@ pub struct GenericBoundChecker<'a> {
 }
 
 static NOT_FOUND_GENERIC_BOUND: Vec<GenericBound> = vec![];
+
+fn not_found_types() -> &'static Mutex<HashSet<String>> {
+    static INSTANCE: OnceLock<Mutex<HashSet<String>>> = OnceLock::new();
+    INSTANCE.get_or_init(|| Mutex::new(HashSet::new()))
+}
 
 impl<'a> GenericBoundChecker<'a> {
     pub fn new(return_generics: &'a Vec<APIGeneric>, param_generics: &'a Vec<APIGeneric>, all_types: &'a document::Types, return_self: Option<&'a rustdoc_types::Type>, param_self: Option<&'a rustdoc_types::Type>) -> Self {
@@ -241,7 +248,9 @@ impl<'a> GenericBoundChecker<'a> {
             .find(|g| &g.name == generic_name)
             .map(|generic| &generic.type_bound)
             .unwrap_or_else(|| {
-                warn!("Generic `{}` not found in all_required_generics", generic_name);
+                if not_found_types().lock().unwrap().insert(generic_name.to_owned()) {
+                    warn!("Generic `{}` not found in all_required_generics", generic_name);
+                }
                 &NOT_FOUND_GENERIC_BOUND
             })
     }
@@ -251,7 +260,9 @@ impl<'a> GenericBoundChecker<'a> {
             .find(|g| &g.name == generic_name)
             .map(|generic| &generic.type_bound)
             .unwrap_or_else(|| {
-                warn!("Generic `{}` not found in all_required_generics", generic_name);
+                if not_found_types().lock().unwrap().insert(generic_name.to_owned()) {
+                    warn!("Generic `{}` not found in all_required_generics", generic_name);
+                }
                 &NOT_FOUND_GENERIC_BOUND
             })
     }
@@ -301,7 +312,9 @@ impl<'a> GenericBoundChecker<'a> {
                 structs.chain(enums)
                     .next()
                     .unwrap_or_else(|| {
-                        warn!("Type `{}` not found in documented types", path.path);
+                        if not_found_types().lock().unwrap().insert(path.path.clone()) {
+                            warn!("Type `{}` not found in documented types.", path.path);
+                        }
                         &NOT_FOUND_GENERIC_BOUND
                     })
                     .clone()

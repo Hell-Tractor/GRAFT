@@ -144,12 +144,12 @@ impl From<document::APIDoc> for APIGraph {
                 }
             }
         }
-        info!("Processing edges from constants to api");
+        debug!("Processing edges from constants to api");
         for vertex in &vertices {
             if let Vertex::Constant(constant) = vertex {
                 for to_api in &apis {
                     let to_api = to_api.read().unwrap();
-                    info!("  Checking compatibility from Constant: {} (ID: {}) to target API: {} (ID: {})", constant.name, constant.id, to_api.signature, to_api.id);
+                    debug!("  Checking compatibility from Constant: {} (ID: {}) to target API: {} (ID: {})", constant.name, constant.id, to_api.signature, to_api.id);
                     let empty_vec = vec![];
                     let checker = GenericBoundChecker::new(
                         &empty_vec,
@@ -160,16 +160,16 @@ impl From<document::APIDoc> for APIGraph {
                     );
                     for input_type in &to_api.params {
                         let input_type = input_type.read().unwrap();
-                        info!("    Comparing with input param: {} (ID: {})", input_type.name, input_type.id);
+                        debug!("    Comparing with input param: {} (ID: {})", input_type.name, input_type.id);
                         if input_type.is_fuzzer_generable() {
                             continue;
                         }
                         if checker.type_satisfies(&constant.type_, &input_type.type_) {
-                            info!("      Compatible! Adding edge from Constant {} to API {}", constant.id, to_api.id);
+                            debug!("      Compatible! Adding edge from Constant {} to API {}", constant.id, to_api.id);
                             edges[constant.id].push(Edge::new(input_type.id, input_type.get_ref_type()));
                             rev_edges[input_type.id].push(Edge::new(constant.id, input_type.get_ref_type()));
                         } else {
-                            info!("      Not compatible.");
+                            debug!("      Not compatible.");
                         }
                     }
                 }

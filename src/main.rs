@@ -36,6 +36,12 @@ enum Commands {
         #[arg(short, long, value_name = "FILE")]
         output: PathBuf,
     },
+    /// Process a quick measure of target crate.
+    /// Calculating possible max API coverage.
+    Measure {
+        /// Crate name to analyze, should be available on crates.io
+        crate_name: String,
+    },
     /// Generate API sequences from API graph
     ApiSequence {
         /// Input API documentation file in JSON format
@@ -127,6 +133,7 @@ async fn main() {
             }
         },
         Commands::ApiGraph { input, output } => generate_api_graph(input, output),
+        Commands::Measure { crate_name } => measure_crate(crate_name),
         Commands::ApiSequence { input, output, count } => generate_api_sequence(input, output, count),
         Commands::Testcase { crate_name, input, output } => generate_testcases(crate_name, input, output).await,
         Commands::SeedGen { crate_name, dir, count, seed_count } => generate_seed_inputs(crate_name, dir, *count, *seed_count).await,
@@ -174,6 +181,18 @@ fn generate_api_graph(input: &PathBuf, output: &PathBuf) -> Result<()> {
     Ok(())
 }
 
+fn measure_crate(crate_name: &str) -> Result<()> {
+    info!("Measuring crate `{}` for possible max API coverage", crate_name);
+    let api_doc = document::APIDoc::from_crate_name(crate_name)?
+        .filter_api().filter_types()
+        .build();
+    let api_graph = api_graph::APIGraph::from(api_doc);
+    let generator = api_graph::algorithm::APISequeceGenerator::new(&api_graph);
+    let (max_covered, total) = generator.max_api_coverage();
+    info!("Max API coverage for crate `{}`: {}/{} ({:.2}%)", crate_name, max_covered, total, max_covered as f64 / total as f64 * 100.0);
+    Ok(())
+}
+
 fn generate_api_sequence_once(id: usize, generator: &mut api_graph::algorithm::APISequeceGenerator) -> Vec<Arc<RwLock<api_graph::API>>> {
     let seq = generator.generate();
     if enabled!(tracing::Level::DEBUG) {
@@ -197,6 +216,8 @@ fn generate_api_sequence(input: &PathBuf, output: &PathBuf, count: &Option<usize
     };
     let mut generator = api_graph::algorithm::APISequeceGenerator::new(&api_graph);
     info!("API sequence generator initialized.");
+    let (max_covered, total) = generator.max_api_coverage();
+    info!("Max API coverage: {}/{} ({:.2}%)", max_covered, total, max_covered as f64 / total as f64 * 100.0);
     info!("Generating api sequences...");
     let mut api_sequences = vec![];
     if let Some(count) = count {

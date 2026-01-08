@@ -129,6 +129,7 @@ pub const AUTO_UNWRAP_TYPES: &[&str] = &[
     "Option",
     "Result",
     "Vec",
+    "Box", "Arc", "Rc", "Mutex", "RwLock", "Cell", "RefCell", "Cow", "Pin",
 ];
 
 pub const STD_STRUCT_LIST: &[&str] = &[
@@ -136,6 +137,7 @@ pub const STD_STRUCT_LIST: &[&str] = &[
     "Vec",
     "Option",
     "Result",
+    "Box", "Arc", "Rc", "Mutex", "RwLock", "Cell", "RefCell", "Cow", "Pin",
 ];
 
 pub const AUTO_UNWRAP_REF_TYPES: &[&str] = &[
@@ -149,7 +151,7 @@ pub const PRIMITIVE_STRUCTS: &[&str] = &[
 
 pub fn get_std_struct_traits(name: &str) -> Vec<GenericBound> {
     match name {
-        "String" => trait_bounds!(
+        "String" | "alloc::string::String" => trait_bounds!(
             VERY_BIG_ID + 100,
             "Clone", "Debug", "Default", "PartialEq", "Eq", "PartialOrd", "Ord", "Hash", "Send", "Sync",
         ),
@@ -164,6 +166,42 @@ pub fn get_std_struct_traits(name: &str) -> Vec<GenericBound> {
         "Result" => trait_bounds!(
             VERY_BIG_ID + 400,
             "Clone", "Debug", "PartialEq", "Eq", "PartialOrd", "Ord", "Hash", "Send", "Sync",
+        ),
+        "Box" => trait_bounds!(
+            VERY_BIG_ID + 500,
+            "Clone", "Debug", "Default", "PartialEq", "Eq", "PartialOrd", "Ord", "Hash", "Send", "Sync",
+        ),
+        "Arc" => trait_bounds!(
+            VERY_BIG_ID + 600,
+            "Clone", "Debug", "Default", "PartialEq", "Eq", "PartialOrd", "Ord", "Hash", "Send", "Sync",
+        ),
+        "Rc" => trait_bounds!(
+            VERY_BIG_ID + 700,
+            "Clone", "Debug", "Default", "PartialEq", "Eq", "PartialOrd", "Ord", "Hash",
+        ),
+        "Mutex" => trait_bounds!(
+            VERY_BIG_ID + 800,
+            "Send", "Sync",
+        ),
+        "RwLock" => trait_bounds!(
+            VERY_BIG_ID + 900,
+            "Send", "Sync",
+        ),
+        "Cell" => trait_bounds!(
+            VERY_BIG_ID + 1000,
+            "Send", "Sync",
+        ),
+        "RefCell" => trait_bounds!(
+            VERY_BIG_ID + 1100,
+            "Send", "Sync",
+        ),
+        "Cow" => trait_bounds!(
+            VERY_BIG_ID + 1200,
+            "Clone", "Debug", "Default", "PartialEq", "Eq", "PartialOrd", "Ord", "Hash", "Send", "Sync",
+        ),
+        "Pin" => trait_bounds!(
+            VERY_BIG_ID + 1300,
+            "Send", "Sync",
         ),
         _ => {
             warn!("No predefined traits for std struct `{}`", name);
