@@ -36,9 +36,9 @@ async fn main() {
                 unreachable!("Either crate name or path must be provided");
             }
         },
-        Commands::ApiGraph { input, output } => generate_api_graph(input, output),
-        Commands::Measure { crate_name } => measure_crate(crate_name),
-        Commands::ApiSequence { input, output, count } => generate_api_sequence(input, output, count),
+        Commands::ApiGraph { input, std, output } => generate_api_graph(input, std, output),
+        Commands::Measure { crate_name, std } => measure_crate(crate_name, std),
+        Commands::ApiSequence { input, std, output, count } => generate_api_sequence(input, std, output, count),
         Commands::Testcase { crate_name, input, output } => generate_testcases(crate_name, input, output).await,
         Commands::SeedGen { crate_name, dir, count, seed_count } => generate_seed_inputs(crate_name, dir, *count, *seed_count).await,
         Commands::Fuzz { crate_name, dir, count, resume, timeout } => fuzz(crate_name, dir, *count, *resume, *timeout).await,
@@ -73,11 +73,13 @@ fn generate_doc_from_file(path: &PathBuf, output: &PathBuf) -> Result<()> {
     Ok(())
 }
 
-fn generate_api_graph(input: &PathBuf, output: &PathBuf) -> Result<()> {
+fn generate_api_graph(input: &PathBuf, std: &PathBuf, output: &PathBuf) -> Result<()> {
     info!("Generating API graph from file `{}`", input.display());
     let reader = std::io::BufReader::new(std::fs::File::open(input)?);
     let api_doc: document::APIDoc = serde_json::from_reader(reader)?;
-    let graph = api_graph::APIGraph::from(api_doc);
+    let reader = std::io::BufReader::new(std::fs::File::open(std)?);
+    let std_doc: document::APIDoc = serde_json::from_reader(reader)?;
+    let graph = api_graph::APIGraph::new(api_doc, std_doc);
     info!("API graph generation completed. Serializing to `{}`...", output.display());
     let mut writer = std::io::BufWriter::new(std::fs::File::create(output)?);
     graph.to_dot_file(&mut writer)?;
@@ -85,12 +87,16 @@ fn generate_api_graph(input: &PathBuf, output: &PathBuf) -> Result<()> {
     Ok(())
 }
 
-fn measure_crate(crate_name: &str) -> Result<()> {
+fn measure_crate(crate_name: &str, std: &PathBuf) -> Result<()> {
     info!("Measuring crate `{}` for possible max API coverage", crate_name);
     let api_doc = document::APIDoc::from_crate_name(crate_name)?
         .filter_api().filter_types()
         .build();
-    let api_graph = api_graph::APIGraph::from(api_doc);
+    let std_doc = {
+        let reader = std::io::BufReader::new(std::fs::File::open(std)?);
+        serde_json::from_reader(reader)?
+    };
+    let api_graph = api_graph::APIGraph::new(api_doc, std_doc);
     let generator = api_graph::algorithm::APISequeceGenerator::new(&api_graph);
     let (max_covered, total) = generator.max_api_coverage();
     info!("Max API coverage for crate `{}`: {}/{} ({:.2}%)", crate_name, max_covered, total, max_covered as f64 / total as f64 * 100.0);
@@ -111,12 +117,14 @@ fn generate_api_sequence_once(id: usize, generator: &mut api_graph::algorithm::A
     seq
 }
 
-fn generate_api_sequence(input: &PathBuf, output: &PathBuf, count: &Option<usize>) -> Result<()> {
+fn generate_api_sequence(input: &PathBuf, std: &PathBuf, output: &PathBuf, count: &Option<usize>) -> Result<()> {
     info!("Initializing API sequence generator...");
     let api_graph = {
         let reader = std::io::BufReader::new(std::fs::File::open(input)?);
         let api_doc: document::APIDoc = serde_json::from_reader(reader)?;
-        api_graph::APIGraph::from(api_doc)
+        let reader = std::io::BufReader::new(std::fs::File::open(std)?);
+        let std_doc: document::APIDoc = serde_json::from_reader(reader)?;
+        api_graph::APIGraph::new(api_doc, std_doc)
     };
     let mut generator = api_graph::algorithm::APISequeceGenerator::new(&api_graph);
     info!("API sequence generator initialized.");

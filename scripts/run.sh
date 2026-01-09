@@ -18,6 +18,8 @@ FUZZ_TIMEOUT=$4
 
 TOPLEVEL="$(git rev-parse --show-toplevel)"
 OUTPUT_DIR="$TOPLEVEL/output/$CRATE_NAME"
+STD_DOC="$TOPLEVEL/localdata/std_pretty.json"
+OUTPUT_ROOT="$TOPLEVEL/output"
 if [ -d $OUTPUT_DIR ]; then
     echo "Output directory $OUTPUT_DIR already exists."
     echo "Enter 'y' to delete it and continue, or any other key to exit."
@@ -30,6 +32,11 @@ if [ -d $OUTPUT_DIR ]; then
     fi
 fi
 mkdir -p $OUTPUT_DIR
+if [ ! -e $STD_DOC ]; then
+    echo "Standard library documentation not found at $STD_DOC"
+    echo "Please generate it first by running 'scripts/gen_std_doc.sh'"
+    exit 1
+fi
 
 # build project
 echo "Building project..."
@@ -56,12 +63,20 @@ fi
 echo "Documentation generated at ${OUTPUT_DIR}/doc.json."
 pause
 
+# Generate STD Docs
+echo "Generating standard library documentation..."
+if [ ! -e "$OUTPUT_ROOT/std_doc.json" ]; then
+    $EXE doc -p $STD_DOC -o "${OUTPUT_ROOT}/std_doc.json"
+fi
+echo "Standard library documentation generated at ${OUTPUT_ROOT}/std_doc.json."
+pause
+
 # Generate API sequences
 echo "Generating API sequences..."
 if [ $TESTCASE_COUNT -lt 1 ]; then
-    TESTCASE_COUNT=$($EXE api-sequence -i "${OUTPUT_DIR}/doc.json" -o "${OUTPUT_DIR}/seqs.json")
+    TESTCASE_COUNT=$($EXE api-sequence -i "${OUTPUT_DIR}/doc.json" --std "${OUTPUT_ROOT}/std_doc.json" -o "${OUTPUT_DIR}/seqs.json")
 else
-    TESTCASE_COUNT=$($EXE api-sequence -i "${OUTPUT_DIR}/doc.json" -o "${OUTPUT_DIR}/seqs.json" -c $TESTCASE_COUNT)
+    TESTCASE_COUNT=$($EXE api-sequence -i "${OUTPUT_DIR}/doc.json" --std "${OUTPUT_ROOT}/std_doc.json" -o "${OUTPUT_DIR}/seqs.json" -c $TESTCASE_COUNT)
 fi
 if [ ! -e "${OUTPUT_DIR}/seqs.json" ]; then
     echo "API sequence generation failed."

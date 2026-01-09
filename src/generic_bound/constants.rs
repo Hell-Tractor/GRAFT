@@ -133,11 +133,11 @@ pub const AUTO_UNWRAP_TYPES: &[&str] = &[
 ];
 
 pub const STD_STRUCT_LIST: &[&str] = &[
-    "String", "alloc::string::String",
+    // "String", "alloc::string::String",
     "Vec",
     "Option",
     "Result",
-    "Box", "Arc", "Rc", "Mutex", "RwLock", "Cell", "RefCell", "Cow", "Pin",
+    // "Box", "Arc", "Rc", "Mutex", "RwLock", "Cell", "RefCell", "Cow", "Pin",
 ];
 
 pub const AUTO_UNWRAP_REF_TYPES: &[&str] = &[

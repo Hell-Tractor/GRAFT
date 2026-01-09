@@ -18,6 +18,9 @@ pub enum Commands {
         /// Input API documentation file in JSON format
         #[arg(short, long, value_name = "FILE")]
         input: PathBuf,
+        /// Standard library API documentation file in JSON format
+        #[arg(long, value_name = "FILE")]
+        std: PathBuf,
         /// Output API graph file in DOT format(based on extension)
         #[arg(short, long, value_name = "FILE")]
         output: PathBuf,
@@ -27,12 +30,18 @@ pub enum Commands {
     Measure {
         /// Crate name to analyze, should be available on crates.io
         crate_name: String,
+        /// Standard library API documentation file in JSON format
+        #[arg(long, value_name = "FILE")]
+        std: PathBuf,
     },
     /// Generate API sequences from API graph
     ApiSequence {
         /// Input API documentation file in JSON format
         #[arg(short, long, value_name = "FILE")]
         input: PathBuf,
+        /// Standard library API documentation file in JSON format
+        #[arg(long, value_name = "FILE")]
+        std: PathBuf,
         /// Output file in JSON format for generated API sequences
         #[arg(short, long, value_name = "FILE")]
         output: PathBuf,

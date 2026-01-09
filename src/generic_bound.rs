@@ -1,4 +1,4 @@
-use std::{collections::HashSet, sync::{Mutex, OnceLock}};
+use std::{cell::RefCell, collections::{HashMap, HashSet}, sync::{Mutex, OnceLock}};
 
 use rustdoc_types::{GenericArg, GenericArgs, GenericBound, Path};
 use tracing::{debug, warn};
@@ -14,6 +14,9 @@ pub struct GenericBoundChecker<'a> {
     all_types: &'a document::Types,
     return_self: Option<&'a rustdoc_types::Type>,
     param_self: Option<&'a rustdoc_types::Type>,
+    std_types: &'a document::Types,
+
+    cache: RefCell<HashMap<(String, String), bool>>,
 }
 
 static NOT_FOUND_GENERIC_BOUND: Vec<GenericBound> = vec![];
@@ -24,13 +27,16 @@ fn not_found_types() -> &'static Mutex<HashSet<String>> {
 }
 
 impl<'a> GenericBoundChecker<'a> {
-    pub fn new(return_generics: &'a Vec<APIGeneric>, param_generics: &'a Vec<APIGeneric>, all_types: &'a document::Types, return_self: Option<&'a rustdoc_types::Type>, param_self: Option<&'a rustdoc_types::Type>) -> Self {
+    pub fn new(return_generics: &'a Vec<APIGeneric>, param_generics: &'a Vec<APIGeneric>, all_types: &'a document::Types, return_self: Option<&'a rustdoc_types::Type>, param_self: Option<&'a rustdoc_types::Type>, std_types: &'a document::Types) -> Self {
         Self {
             return_generics,
             param_generics,
             all_types,
             return_self,
             param_self,
+            std_types,
+
+            cache: RefCell::new(HashMap::new()),
         }
     }
 
@@ -176,10 +182,14 @@ impl<'a> GenericBoundChecker<'a> {
         let actual_name = trustfall_rustdoc_adapter::rust_type_name(actual);
         let required_name = trustfall_rustdoc_adapter::rust_type_name(required);
         debug!("    Checking if type `{}` satisfies required type `{}`", actual_name, required_name);
+        let key = (actual_name, required_name);
+        if let Some(result) = self.cache.borrow().get(&key) {
+            return *result;
+        }
         let actual_is_generic = GenericBoundChecker::get_generic_type(actual);
         let required_is_generic = GenericBoundChecker::get_generic_type(required);
 
-        match (actual_is_generic, required_is_generic) {
+        let result = match (actual_is_generic, required_is_generic) {
             // both not generic, check equality
             (None, None) => {
                 if let Type::Tuple(types) = actual {
@@ -231,7 +241,11 @@ impl<'a> GenericBoundChecker<'a> {
                     }
                 }
             },
-        }
+        };
+
+        // update cache
+        self.cache.borrow_mut().insert(key, result);
+        result
     }
 
     fn get_generic_type(ty: &rustdoc_types::Type) -> Option<&String> {
@@ -312,8 +326,24 @@ impl<'a> GenericBoundChecker<'a> {
                 structs.chain(enums)
                     .next()
                     .unwrap_or_else(|| {
+                        let mut flag = false;
                         if not_found_types().lock().unwrap().insert(path.path.clone()) {
-                            warn!("Type `{}` not found in documented types.", path.path);
+                            debug!("Type {} not found in documented types, searching in std...", path.path);
+                            flag = true;
+                        }
+                        // try to find in std types
+                        let std_structs = self.std_types.structs.iter()
+                            .filter(|s| s.id == path.id.0)
+                            .map(|s| &s.traits);
+                        let std_enums = self.std_types.enums.iter()
+                            .filter(|e| e.id == path.id.0)
+                            .map(|e| &e.traits);
+                        let result = std_structs.chain(std_enums).next();
+                        if let Some(bound) = result {
+                            return bound;
+                        }
+                        if flag || not_found_types().lock().unwrap().insert(path.path.clone()) {
+                            warn!("Type `{}` not found in documented types and std types.", path.path);
                         }
                         &NOT_FOUND_GENERIC_BOUND
                     })

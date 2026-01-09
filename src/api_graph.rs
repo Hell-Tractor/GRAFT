@@ -58,10 +58,8 @@ impl APIGraph {
         writeln!(writer, "}}")?;
         Ok(())
     }
-}
 
-impl From<document::APIDoc> for APIGraph {
-    fn from(doc: document::APIDoc) -> Self {
+    pub fn new(doc: document::APIDoc, std_doc: document::APIDoc) -> Self {
         let all_types = doc.types;
 
         let mut apis = vec![];
@@ -126,7 +124,8 @@ impl From<document::APIDoc> for APIGraph {
                     &to_api.generics,
                     &all_types,
                     from_api.impl_for.as_ref(),
-                    to_api.impl_for.as_ref()
+                    to_api.impl_for.as_ref(),
+                    &std_doc.types,
                 );
                 for input_type in &to_api.params {
                     let input_type = input_type.read().unwrap();
@@ -157,6 +156,7 @@ impl From<document::APIDoc> for APIGraph {
                         &all_types,
                         None,
                         to_api.impl_for.as_ref(),
+                        &std_doc.types,
                     );
                     for input_type in &to_api.params {
                         let input_type = input_type.read().unwrap();

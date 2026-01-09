@@ -28,8 +28,8 @@ pub enum Error {
     LLMResponseInvalidFormat,
     #[error("Failed to deserialize string: {0}")]
     DeserializeError(String),
-    #[error("Missing API key for LLM service")]
-    MissingApiKey,
+    // #[error("Missing API key for LLM service")]
+    // MissingApiKey,
 }
 
 pub type Result<T> = std::result::Result<T, Error>;
