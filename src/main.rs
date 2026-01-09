@@ -1,9 +1,10 @@
 use std::{path::PathBuf, sync::{Arc, RwLock}};
 
-use clap::{ArgGroup, Args, Parser, Subcommand};
-use tokio::task::JoinSet;
-use tracing::{debug, enabled, error, info, warn};
-use tracing_subscriber::{EnvFilter, fmt::writer::MakeWriterExt};
+use clap::Parser;
+use indicatif::{MultiProgress, ProgressBar, ProgressStyle};
+use tokio::{sync::Semaphore, task::JoinSet};
+use tracing::{enabled, error, info, warn};
+use tracing_indicatif::span_ext::IndicatifSpanExt;
 
 use crate::error::Result;
 
@@ -15,113 +16,16 @@ mod testcase;
 mod document;
 mod generic_bound;
 mod api_graph;
-
-#[derive(Parser)]
-#[command(version, about, long_about = None)]
-struct Cli {
-    #[command(subcommand)]
-    command: Commands,
-}
-
-#[derive(Subcommand)]
-enum Commands {
-    /// Generate API documentation for a crate
-    Doc(DocArgs),
-    /// Generate API graph from API documentation
-    ApiGraph {
-        /// Input API documentation file in JSON format
-        #[arg(short, long, value_name = "FILE")]
-        input: PathBuf,
-        /// Output API graph file in DOT format(based on extension)
-        #[arg(short, long, value_name = "FILE")]
-        output: PathBuf,
-    },
-    /// Process a quick measure of target crate.
-    /// Calculating possible max API coverage.
-    Measure {
-        /// Crate name to analyze, should be available on crates.io
-        crate_name: String,
-    },
-    /// Generate API sequences from API graph
-    ApiSequence {
-        /// Input API documentation file in JSON format
-        #[arg(short, long, value_name = "FILE")]
-        input: PathBuf,
-        /// Output file in JSON format for generated API sequences
-        #[arg(short, long, value_name = "FILE")]
-        output: PathBuf,
-        /// Number of API sequences to generate.
-        /// Suggested to be same with cpu cores for better performance.
-        /// Default is calculated by api coverage.
-        #[arg(short, long)]
-        count: Option<usize>,
-    },
-    /// Convert API sequences to executable testcases
-    Testcase {
-        /// Crate name to analyze, should be available on crates.io
-        crate_name: String,
-        /// Input API sequenecs file in JSON format
-        #[arg(short, long, value_name = "FILE")]
-        input: PathBuf,
-        /// Output directory for generated testcases
-        #[arg(short, long, value_name = "DIR")]
-        output: PathBuf,
-    },
-    /// Generate seed inputs for all testcases
-    SeedGen {
-        /// Crate name to analyze, should be available on crates.io
-        crate_name: String,
-        /// Testcase directory
-        dir: PathBuf,
-        /// Number of testcases to generate seed inputs for
-        #[arg(short, long)]
-        count: usize,
-        /// Number of seeds to generate for each testcase
-        #[arg(short, long)]
-        seed_count: usize,
-    },
-    /// Fuzz all testcases with AFL
-    Fuzz {
-        /// Crate name to analyze, should be available on crates.io
-        crate_name: String,
-        /// Testcase directory
-        dir: PathBuf,
-        /// Number of testcases to fuzz
-        #[arg(short, long)]
-        count: usize,
-        /// Resume previous fuzzing session. Error if no previous session found.
-        #[arg(short, long)]
-        resume: bool,
-        /// Fuzzing task execution time(in seconds).
-        #[arg(short, long)]
-        timeout: u64,
-    },
-}
-
-#[derive(Args)]
-#[command(group(
-    ArgGroup::new("input")
-        .required(true)
-        .args(["name", "path"]),
-))]
-struct DocArgs {
-    /// Crate name to analyze, should be available on crates.io
-    #[arg(short, long)]
-    name: Option<String>,
-    /// Path to local Rust Doc JSON file
-    #[arg(short, long)]
-    path: Option<PathBuf>,
-    /// Output file path for the generated API documentation in JSON format
-    #[arg(short, long, value_name = "FILE")]
-    output: PathBuf,
-}
+mod cli;
+mod log;
 
 #[tokio::main]
 async fn main() {
-    let cli = Cli::parse();
+    let cli = cli::Cli::parse();
 
-    init_logger();
+    let _guard = log::Logger::init();
 
+    use cli::Commands;
     let result = match &cli.command {
         Commands::Doc(args) => {
             if let Some(crate_name) = &args.name {
@@ -252,9 +156,14 @@ async fn generate_testcases(crate_name: &str, input: &PathBuf, output: &PathBuf)
     let mut testcases = Vec::new();
     let api_sequence_count = api_sequences.len();
 
+    let span = tracing::info_span!("Generate Testcases", crate_name, api_sequence_count);
+    span.pb_set_length(api_sequence_count as u64);
+    span.pb_set_style(&log::pb_style());
+    let _enter = span.enter();
+
     let mut task_set = JoinSet::new();
     for (i, api_sequence) in api_sequences.into_iter().enumerate() {
-        info!("Converting API sequence {} / {} to testcase...", i + 1, api_sequence_count);
+        // info!("Converting API sequence {} / {} to testcase...", i + 1, api_sequence_count);
         let name = format!("{}_test{}", crate_name, i);
         let output = output.clone();
         let crate_name = crate_name.to_string();
@@ -269,7 +178,7 @@ async fn generate_testcases(crate_name: &str, input: &PathBuf, output: &PathBuf)
             ).await;
             (tc, i)
         });
-        info!("API sequence {} / {} converted to testcase.", i + 1, api_sequence_count);
+        // info!("API sequence {} / {} converted to testcase.", i + 1, api_sequence_count);
     }
     let mut successed_count = 0;
     while let Some(res) = task_set.join_next().await {
@@ -284,6 +193,7 @@ async fn generate_testcases(crate_name: &str, input: &PathBuf, output: &PathBuf)
                 warn!("Error occurred while generating testcase for API sequence {}: {}, skipping...", i, e);
             }
         }
+        span.pb_inc(1);
     }
     info!("{} / {} API sequences converted to testcases.", successed_count, api_sequence_count);
     info!("Done.");
@@ -302,9 +212,15 @@ async fn generate_seed_inputs(crate_name: &str, dir: &PathBuf, count: usize, see
     let llm_type = &utils::config().llm.type_;
     let llm_model = &utils::config().llm.model_name;
     let llm_api_url = &utils::config().llm.api_url_chat;
+
+    let span = tracing::info_span!("Seed Inputs", crate_name, count, seed_count);
+    span.pb_set_length(count as u64);
+    span.pb_set_style(&log::pb_style());
+    let _enter = span.enter();
+
     let mut task_set = JoinSet::new();
     for (i, testcase) in testcases.into_iter().enumerate() {
-        info!("Generating inputs for testcase {} / {}...", i + 1, count);
+        // info!("Generating inputs for testcase {} / {}...", i + 1, count);
         task_set.spawn(async move {
             let llm_client = llm::LLMFactory::create_llm(&llm_type, &llm_model, &llm_api_url);
             let res = testcase.generate_inputs(input_dir, llm_client, seed_count).await;
@@ -320,6 +236,7 @@ async fn generate_seed_inputs(crate_name: &str, dir: &PathBuf, count: usize, see
             successed_count += 1;
             info!("Input generation for testcase(id = {}) completed successfully.", id);
         }
+        span.pb_inc(1);
     }
     info!("Input generation completed for all testcases: {}/{} succeeded.", successed_count, count);
     Ok(())
@@ -327,18 +244,41 @@ async fn generate_seed_inputs(crate_name: &str, dir: &PathBuf, count: usize, see
 
 async fn fuzz(crate_name: &str, dir: &PathBuf, count: usize, resume: bool, timeout: u64) -> Result<()> {
     info!("Running all testcases with AFL");
+    let multi_pb = MultiProgress::new();
+    let summary_pb = multi_pb.add(ProgressBar::new(count as u64));
+    summary_pb.set_style(
+        ProgressStyle::with_template(
+            " {prefix:.bold}: [{bar:40.green/white}] {pos}/{len} ({percent}%) | {msg}"
+        )
+        .unwrap()
+        .progress_chars("#>-")
+    );
+    summary_pb.set_prefix("Global Progress");
+    summary_pb.set_message("Starting afl fuzz...");
+
+    let max_concurrent = std::thread::available_parallelism()?.get();
+    let semaphore = Arc::new(Semaphore::new(max_concurrent));
+    info!("Max concurrent fuzzing tasks set to {}", max_concurrent);
+
     let testcases = (0..count).map(|i| {
         let testcase_dir = dir.join(format!("{}_test{}", crate_name, i));
         testcase::Testcase::from_existing(&testcase_dir, crate_name)
+            .with_pb(multi_pb.clone()/* , summary_pb.clone() */)
     }).collect::<Vec<testcase::Testcase>>();
 
     let input_dir = std::path::Path::new("inputs");
     let output_dir = std::path::Path::new("outputs");
     let mut fuzz_task_set = JoinSet::new();
     for (i, testcase) in testcases.into_iter().enumerate() {
-        info!("Starting testcase {} / {}...", i + 1, count);
-        fuzz_task_set.spawn(async move { (testcase.run(input_dir, output_dir, resume, timeout).await, i) });
+        // info!("Starting testcase {} / {}...", i + 1, count);
+        let sem = semaphore.clone();
+        fuzz_task_set.spawn(async move {
+            let _permit = sem.acquire().await.expect("Failed to acquire semaphore permit");
+            let res = testcase.run(input_dir, output_dir, resume, timeout).await;
+            (res, i)
+        });
     }
+    summary_pb.set_message("Fuzzing in progress...");
     let mut success_count = 0;
     while let Some(res) = fuzz_task_set.join_next().await {
         let (res, id) = res.expect("JoinError occurred in JoinSet");
@@ -348,20 +288,9 @@ async fn fuzz(crate_name: &str, dir: &PathBuf, count: usize, resume: bool, timeo
             info!("Testcase(id = {}) completed successfully.", id);
             success_count += 1;
         }
+        summary_pb.inc(1);
     }
+    summary_pb.finish_with_message("Fuzzing completed.");
     info!("{}/{} testcases ran successfully with AFL", success_count, count);
     Ok(())
-}
-
-fn init_logger() {
-    let file_appender = tracing_appender::rolling::daily("logs", "latest.log");
-    let (file_writer, guard) = tracing_appender::non_blocking(file_appender);
-    std::mem::forget(guard);
-    let subscriber = tracing_subscriber::fmt()
-        .with_writer(file_writer.and(std::io::stderr))
-        .with_max_level(tracing::Level::INFO)
-        .with_env_filter(EnvFilter::try_from_default_env().unwrap_or_else(|_| EnvFilter::new("PLFuzz=info")))
-        .finish();
-    tracing::subscriber::set_global_default(subscriber).expect("Failed to set global subscriber");
-    debug!("Logger initialized");
 }

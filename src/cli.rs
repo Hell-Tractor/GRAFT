@@ -1,0 +1,103 @@
+use std::path::PathBuf;
+
+use clap::{ArgGroup, Args, Parser, Subcommand};
+
+#[derive(Parser)]
+#[command(version, about, long_about = None)]
+pub struct Cli {
+    #[command(subcommand)]
+    pub command: Commands,
+}
+
+#[derive(Subcommand)]
+pub enum Commands {
+    /// Generate API documentation for a crate
+    Doc(DocArgs),
+    /// Generate API graph from API documentation
+    ApiGraph {
+        /// Input API documentation file in JSON format
+        #[arg(short, long, value_name = "FILE")]
+        input: PathBuf,
+        /// Output API graph file in DOT format(based on extension)
+        #[arg(short, long, value_name = "FILE")]
+        output: PathBuf,
+    },
+    /// Process a quick measure of target crate.
+    /// Calculating possible max API coverage.
+    Measure {
+        /// Crate name to analyze, should be available on crates.io
+        crate_name: String,
+    },
+    /// Generate API sequences from API graph
+    ApiSequence {
+        /// Input API documentation file in JSON format
+        #[arg(short, long, value_name = "FILE")]
+        input: PathBuf,
+        /// Output file in JSON format for generated API sequences
+        #[arg(short, long, value_name = "FILE")]
+        output: PathBuf,
+        /// Number of API sequences to generate.
+        /// Suggested to be same with cpu cores for better performance.
+        /// Default is calculated by api coverage.
+        #[arg(short, long)]
+        count: Option<usize>,
+    },
+    /// Convert API sequences to executable testcases
+    Testcase {
+        /// Crate name to analyze, should be available on crates.io
+        crate_name: String,
+        /// Input API sequenecs file in JSON format
+        #[arg(short, long, value_name = "FILE")]
+        input: PathBuf,
+        /// Output directory for generated testcases
+        #[arg(short, long, value_name = "DIR")]
+        output: PathBuf,
+    },
+    /// Generate seed inputs for all testcases
+    SeedGen {
+        /// Crate name to analyze, should be available on crates.io
+        crate_name: String,
+        /// Testcase directory
+        dir: PathBuf,
+        /// Number of testcases to generate seed inputs for
+        #[arg(short, long)]
+        count: usize,
+        /// Number of seeds to generate for each testcase
+        #[arg(short, long)]
+        seed_count: usize,
+    },
+    /// Fuzz all testcases with AFL
+    Fuzz {
+        /// Crate name to analyze, should be available on crates.io
+        crate_name: String,
+        /// Testcase directory
+        dir: PathBuf,
+        /// Number of testcases to fuzz
+        #[arg(short, long)]
+        count: usize,
+        /// Resume previous fuzzing session. Error if no previous session found.
+        #[arg(short, long)]
+        resume: bool,
+        /// Fuzzing task execution time(in seconds).
+        #[arg(short, long)]
+        timeout: u64,
+    },
+}
+
+#[derive(Args)]
+#[command(group(
+    ArgGroup::new("input")
+        .required(true)
+        .args(["name", "path"]),
+))]
+pub struct DocArgs {
+    /// Crate name to analyze, should be available on crates.io
+    #[arg(short, long)]
+    pub name: Option<String>,
+    /// Path to local Rust Doc JSON file
+    #[arg(short, long)]
+    pub path: Option<PathBuf>,
+    /// Output file path for the generated API documentation in JSON format
+    #[arg(short, long, value_name = "FILE")]
+    pub output: PathBuf,
+}

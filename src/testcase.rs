@@ -1,7 +1,9 @@
 use std::path::{Path, PathBuf};
 use std::sync::{Arc, RwLock};
+use std::time::Duration;
+use indicatif::{MultiProgress, ProgressDrawTarget, ProgressStyle};
 use tokio::process::Command;
-use tracing::{debug, enabled, info, span, warn};
+use tracing::{debug, enabled, info, warn};
 
 use crate::api_graph;
 use crate::error::{Error, Result};
@@ -13,6 +15,13 @@ use crate::utils;
 pub struct Testcase {
     path: PathBuf,
     target_crate: String,
+    #[serde(skip)]
+    pb: Option<ProgressBar>,
+}
+
+struct ProgressBar {
+    multi: MultiProgress,
+    // summary: indicatif::ProgressBar,
 }
 
 #[derive(serde::Serialize)]
@@ -37,7 +46,13 @@ impl Testcase {
         Testcase {
             path: path.to_owned(),
             target_crate: target_crate.to_owned(),
+            pb: None,
         }
+    }
+
+    pub fn with_pb(mut self, multi: MultiProgress/* , summary: indicatif::ProgressBar */) -> Self {
+        self.pb = Some(ProgressBar { multi/* , summary */ });
+        self
     }
 
     pub async fn new(path: &Path, name: &str, target_crate: &str, api_sequence: &Vec<Arc<RwLock<api_graph::API>>>, mut llm: Box<dyn LLM>) -> Result<Self> {
@@ -82,7 +97,7 @@ impl Testcase {
         Testcase::generate(name, target_crate, &main_path, &cargo_path, &api_doc, &mut llm).await?;
         info!("Testcase for project `{}` generated successfully", name);
 
-        Ok(Testcase { path: path.join(name).into(), target_crate: target_crate.to_string() })
+        Ok(Testcase { path: path.join(name).into(), target_crate: target_crate.to_string(), pb: None })
     }
 
     async fn generate(name: &str, crate_name: &str, main_path: &Path, cargo_path: &Path, api_doc: &str, llm: &mut Box<dyn LLM>) -> Result<()> {
@@ -196,8 +211,6 @@ impl Testcase {
 
     pub async fn run(&self, relative_input_dir: &Path, relative_output_dir: &Path, resume: bool, timeout: u64) -> Result<()> {
         let project_name = self.path.file_name().unwrap().to_string_lossy();
-        let s = span!(tracing::Level::INFO, "Testcase", project = %project_name);
-        let _ = s.enter();
         let cargo = &utils::config().commands.cargo;
         if !resume {
             info!("Building project...");
@@ -214,27 +227,109 @@ impl Testcase {
             info!("Resuming AFL fuzzing for {} seconds", timeout);
         }
 
+        // pb init
+        let pb = self.pb.as_ref().map(|_| {
+            let pb = indicatif::ProgressBar::with_draw_target(Some(timeout), ProgressDrawTarget::hidden());
+            pb.set_style(
+                ProgressStyle::with_template("{prefix:.bold} {bar:30.cyan} | {msg}")
+                    .unwrap()
+            );
+            pb.set_prefix(project_name.to_string());
+            pb
+        });
+
         // let mut fuzz_process = Command::new(&cargo)
         let mut fuzz_process = Command::new(&cargo);
         fuzz_process.arg("afl").arg("fuzz")
+            .env("AFL_NO_UI", "1")
             .arg("-V").arg(timeout.to_string());
         if resume {
             fuzz_process.arg("-i").arg("-");
         } else {
             fuzz_process.arg("-i").arg(relative_input_dir);
         }
-        let fuzz_process = fuzz_process.arg("-o").arg(relative_output_dir).arg(format!("target/debug/{}", project_name))
-            .current_dir(&self.path)
-            .stdout(std::process::Stdio::inherit())
-            .stderr(std::process::Stdio::inherit())
-            .spawn()?
-            .wait_with_output().await?;
-        let status = &fuzz_process.status;
+        fuzz_process.arg("-o")
+            .arg(relative_output_dir)
+            .arg(format!("target/debug/{}", project_name))
+            .current_dir(&self.path);
+        if let Some(_) = self.pb {
+            fuzz_process
+                .stdout(std::process::Stdio::null())
+                .stderr(std::process::Stdio::null());
+        } else {
+            fuzz_process
+                .stdout(std::process::Stdio::inherit())
+                .stderr(std::process::Stdio::inherit());
+        }
+        let mut fuzz_process = fuzz_process.spawn()?;
+
+        // if no pb, inherit stdout/stderr and wait
+        if let Some(pb) = pb {
+            let start = std::time::Instant::now();
+            let mut is_visible = false;
+            let stats_file = self.path.join(relative_output_dir).join("fuzzer_stats");
+            loop {
+                let elapsed = start.elapsed().as_secs();
+                pb.set_position(elapsed);
+
+                let found_crash = get_crash_count(&stats_file).await;
+                if found_crash > 0 {
+                    if !is_visible {
+                        let pb = self.pb.as_ref().unwrap().multi.add(pb.clone());
+                        pb.set_draw_target(ProgressDrawTarget::stderr());
+                        is_visible = true;
+                        warn!("Crash found(project = `{}`)! ", project_name);
+                    }
+                    pb.set_message(format!("Found {} crash(es)!", found_crash));
+                } else {
+                    pb.set_message("Fuzzing...");
+                }
+
+                if let Ok(Some(_)) = fuzz_process.try_wait() {
+                    break;
+                }
+                if elapsed >= timeout {
+                    break;
+                }
+
+                tokio::time::sleep(Duration::from_millis(500)).await;
+            }
+
+            if is_visible {
+                pb.finish_and_clear();
+            } else {
+                pb.finish();
+            }
+            // self.pb.as_ref().unwrap().summary.inc(1);
+        }
+
+        let status = &fuzz_process.wait_with_output().await?.status;
         if !status.success() {
             return Err(Error::CommandError(format!("AFL fuzzing failed with status: {}", status)));
         }
+
         info!("AFL fuzzing completed");
 
         Ok(())
     }
+}
+
+async fn get_crash_count(stats_path: &Path) -> u64 {
+    let content = match tokio::fs::read_to_string(stats_path).await {
+        Ok(c) => c,
+        Err(_) => return 0,
+    };
+
+    for line in content.lines() {
+        if line.starts_with("saved_crashes") {
+            let parts: Vec<&str> = line.split(':').map(|s| s.trim()).collect();
+            if parts.len() == 2 {
+                if let Ok(crashes) = parts[1].parse::<u64>() {
+                    return crashes;
+                }
+            }
+        }
+    }
+
+    0
 }
