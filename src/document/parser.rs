@@ -1,6 +1,6 @@
 use tracing::info;
 
-use crate::{document::{APIDoc, APIDocParser, APIDocParsers, Types, r#type::{r#enum::Enum, r#struct::Struct}}, error::Result};
+use crate::{document::{APIDoc, APIDocParser, Types, r#type::{r#enum::Enum, r#struct::Struct}}, error::Result};
 
 mod trustfall;
 
