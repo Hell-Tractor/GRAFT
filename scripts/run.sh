@@ -15,6 +15,14 @@ CRATE_NAME=$1
 TESTCASE_COUNT=$2 # if small than 1, generate testcases with suggested count(may be large)
 SEED_COUNT=$3
 FUZZ_TIMEOUT=$4
+if [ $# -lt 4 ]; then
+    echo "Usage: $0 <crate_name> <testcase_count> <seed_count> <fuzz_timeout>"
+    echo "  <crate_name>: Name of the Rust crate to fuzz."
+    echo "  <testcase_count>: Number of test cases to generate. If less than 1, use suggested count."
+    echo "  <seed_count>: Number of seeds to generate for each test case."
+    echo "  <fuzz_timeout>: Timeout for each fuzzing session in seconds."
+    exit 1
+fi
 
 TOPLEVEL="$(git rev-parse --show-toplevel)"
 OUTPUT_DIR="$TOPLEVEL/output/$CRATE_NAME"

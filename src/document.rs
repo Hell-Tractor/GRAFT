@@ -9,16 +9,24 @@ mod r#type;
 mod query;
 mod utils;
 pub mod api;
-
-trait TryFromApiDoc<T> {
-    fn try_from_api_doc(querier: &query::DocQuerier) -> Result<T>;
-}
+mod parser;
 
 #[derive(Serialize, Deserialize)]
 pub struct APIDoc {
     pub apis: Vec<api::API>,
     pub types: Types,
     pub constants: Vec<Constant>,
+}
+
+pub trait APIDocParser<T> : Send {
+    type Parser;
+    fn parse(parser: &Self::Parser) -> Result<T>;
+}
+
+#[derive(Deserialize)]
+pub enum APIDocParsers {
+    TrustFall,
+    RustDoc,
 }
 
 #[derive(Serialize, Deserialize)]
@@ -105,42 +113,28 @@ impl APIDoc {
     // }
     pub fn from_crate_name(crate_name: &str) -> Result<APIDocBuilder> {
         let raw_doc = get_raw_api_documentation(crate_name)?;
-        let querier = query::DocQuerier::new(&raw_doc)?;
-        let api_doc = APIDoc::try_from_api_doc(&querier)?;
-        Ok(APIDocBuilder { doc: api_doc })
+        let api_doc = APIDoc::from_raw_doc(&raw_doc)?;
+        Ok(api_doc)
     }
 
     pub fn from_file(path: &Path) -> Result<APIDocBuilder> {
         let raw_doc = crate::utils::read_file_to_string(path)?;
-        let querier = query::DocQuerier::new(&raw_doc)?;
-        let api_doc = APIDoc::try_from_api_doc(&querier)?;
-        Ok(APIDocBuilder { doc: api_doc })
+        let api_doc = APIDoc::from_raw_doc(&raw_doc)?;
+        Ok(api_doc)
     }
-}
 
-impl TryFromApiDoc<APIDoc> for APIDoc {
-    fn try_from_api_doc(querier: &query::DocQuerier) -> Result<Self> {
-        info!("Converting raw API documentation to structured APIDoc");
-        let apis = api::API::try_from_api_doc(querier)?;
-        let types = Types::try_from_api_doc(querier)?;
-        let constants = Constant::try_from_api_doc(querier)?;
-        Ok(APIDoc {
-            apis,
-            types,
-            constants,
-        })
-    }
-}
-
-impl TryFromApiDoc<Types> for Types {
-    fn try_from_api_doc(querier: &query::DocQuerier) -> Result<Self> {
-        info!("Parsing Types documentation");
-        let structs = r#type::r#struct::Struct::try_from_api_doc(querier)?;
-        let enums = r#type::r#enum::Enum::try_from_api_doc(querier)?;
-        Ok(Types {
-            structs,
-            enums,
-        })
+    fn from_raw_doc(raw_doc: &str) -> Result<APIDocBuilder> {
+        let parser_type = &crate::utils::config().doc.parser;
+        match parser_type {
+            APIDocParsers::TrustFall => {
+                let querier = query::DocQuerier::new(raw_doc)?;
+                let api_doc = APIDoc::parse(&querier)?;
+                Ok(APIDocBuilder { doc: api_doc })
+            },
+            APIDocParsers::RustDoc => {
+                unimplemented!("RustDoc parser is not implemented yet");
+            },
+        }
     }
 }
 

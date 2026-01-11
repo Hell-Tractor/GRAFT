@@ -2,7 +2,7 @@ use std::sync::OnceLock;
 
 use serde::Deserialize;
 
-use crate::llm::LLMType;
+use crate::{document::APIDocParsers, llm::LLMType};
 
 #[derive(Deserialize)]
 pub struct Config {
@@ -49,6 +49,7 @@ pub struct TestcaseConfig {
 pub struct DocConfig {
     pub temp_project_path: String,
     pub temp_project_name: String,
+    pub parser: APIDocParsers,
 }
 
 #[derive(Deserialize)]
