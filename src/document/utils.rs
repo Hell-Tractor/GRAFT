@@ -1,3 +1,5 @@
+use std::path::Display;
+
 use trustfall::FieldValue;
 
 use crate::{document::r#type::StructField, error::*};
@@ -53,12 +55,16 @@ pub fn parse_struct_fields(value: &QueryResult, field_name_key: &str, field_docs
     }
 
     let fields = field_names.into_iter().zip(field_docs.into_iter()).zip(field_type_names.into_iter())
-        .map(|((name, docs), type_name)| StructField {
-            name: name,
-            docs: docs,
-            type_: type_name,
+        .map(|((name, docs), type_name)| -> Result<StructField> {
+            let type_ = serde_json::from_str::<rustdoc_types::Type>(&type_name)
+                .map_err(|e| Error::TrustfallQueryError(format!("Struct field type deserialization error: {}", e)))?;
+            Ok(StructField {
+                name: name,
+                docs: docs,
+                type_,
+            })
         })
-        .collect();
+        .collect::<Result<Vec<StructField>>>()?;
     Ok(fields)
 }
 

@@ -1,14 +1,17 @@
 use serde::{Deserialize, Serialize};
 
+use crate::document::r#type::GenericParamBound;
+
 #[derive(Serialize, Deserialize)]
 pub struct API {
+    pub id: u32,
     pub name: String,
     pub kind: APIKind,
     pub signature: String,
     pub module_path: String,
     pub doc_comment: String,
-    pub location: Location,
-    pub generics: Vec<APIGeneric>,
+    // pub location: Location,
+    pub generics: Vec<GenericParamBound>,
     pub inputs: Vec<Parameter>,
     pub output: ReturnValue,
     pub impl_for: Option<rustdoc_types::Type>,

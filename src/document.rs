@@ -10,6 +10,7 @@ mod query;
 mod utils;
 pub mod api;
 mod parser;
+mod rust_type_names;
 
 #[derive(Serialize, Deserialize)]
 pub struct APIDoc {
@@ -18,9 +19,8 @@ pub struct APIDoc {
     pub constants: Vec<Constant>,
 }
 
-pub trait APIDocParser<T> : Send {
-    type Parser;
-    fn parse(parser: &Self::Parser) -> Result<T>;
+pub trait APIDocParser<T, P> : Send {
+    fn parse(parser: &P) -> Result<T>;
 }
 
 #[derive(Deserialize)]
@@ -127,9 +127,7 @@ impl APIDoc {
         let parser_type = &crate::utils::config().doc.parser;
         match parser_type {
             APIDocParsers::TrustFall => {
-                let querier = query::DocQuerier::new(raw_doc)?;
-                let api_doc = APIDoc::parse(&querier)?;
-                Ok(APIDocBuilder { doc: api_doc })
+                panic!("Deprecated: TrustFall parser is no longer supported");
             },
             APIDocParsers::RustDoc => {
                 unimplemented!("RustDoc parser is not implemented yet");

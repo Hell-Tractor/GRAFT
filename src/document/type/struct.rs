@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-use crate::document::r#type::{StructField, TypeKind};
+use crate::document::r#type::{GenericParamBound, ImplementedTrait, StructField, TypeKind};
 
 #[derive(Serialize, Deserialize)]
 pub struct Struct {
@@ -10,6 +10,8 @@ pub struct Struct {
     #[serde(rename = "type")]
     pub type_: TypeKind,
     pub path: String,
-    pub traits: Vec<rustdoc_types::GenericBound>,
+    // pub traits: Vec<rustdoc_types::GenericBound>,
+    pub traits: Vec<ImplementedTrait>, // implemented traits of this struct
+    pub bounds: Vec<GenericParamBound>, // generic parameter bounds of this enum
     pub fields: Vec<StructField>,
 }
