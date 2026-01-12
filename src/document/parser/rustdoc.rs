@@ -4,7 +4,7 @@ use std::collections::{HashMap, HashSet};
 use rustdoc_types as rd;
 use trustfall_rustdoc_adapter::rust_type_name;
 
-use crate::{document::{APIDocParser, api::{API, APIKind, Parameter, ReturnValue}, rust_type_names, r#type::{GenericParamBound, ImplementedTrait, StructField, TypeKind, TypeWithArgs, constant::Constant, r#enum::{Enum, EnumVariant}, r#struct::Struct}}, error::Result};
+use crate::{document::{APIDocParser, api::{API, APIKind, Parameter, ReturnValue}, rust_type_names, r#type::{GenericParamBound, ImplementedTrait, StructField, TypeKind, TypeWithArgs, constant::Constant, r#enum::{Enum, EnumVariant}, r#struct::Struct}, type_alias::TypeAlias}, error::Result};
 
 pub struct RustDocParser {
     krate: rustdoc_types::Crate,
@@ -332,6 +332,14 @@ impl RustDocParser {
         }).collect()
     }
 
+    fn parse_type_alias(&self, ta: &rd::TypeAlias) -> TypeAlias {
+        let generics = self.generics_to_generic_param_bounds(&ta.generics);
+        TypeAlias {
+            type_: ta.type_.clone(),
+            generics,
+        }
+    }
+
 }
 
 fn is_item_valid(item: &rd::Item) -> bool {
@@ -451,5 +459,21 @@ impl APIDocParser<Vec<API>, RustDocParser> for API {
         });
         methods.extend(functions);
         Ok(methods)
+    }
+}
+
+impl APIDocParser<Vec<TypeAlias>, RustDocParser> for TypeAlias {
+    fn parse(parser: &RustDocParser) -> Result<Vec<TypeAlias>> {
+        let result = parser.krate.index.values().filter_map(|item| {
+            if !is_item_valid(item) {
+                return None;
+            }
+            match &item.inner {
+                rd::ItemEnum::TypeAlias(ta) => Some(parser.parse_type_alias(ta)),
+                _ => None,
+            }
+        }).collect();
+
+        Ok(result)
     }
 }

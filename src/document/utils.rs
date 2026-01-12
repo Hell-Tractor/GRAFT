@@ -1,5 +1,3 @@
-use std::path::Display;
-
 use trustfall::FieldValue;
 
 use crate::{document::r#type::StructField, error::*};

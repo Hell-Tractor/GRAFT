@@ -82,12 +82,12 @@ impl ReturnValue {
     }
 }
 
-#[derive(Serialize, Deserialize)]
-pub struct APIGeneric {
-    pub name: String,
-    pub type_bound: Vec<rustdoc_types::GenericBound>,
+// #[derive(Serialize, Deserialize)]
+// pub struct APIGeneric {
+//     pub name: String,
+//     pub type_bound: Vec<rustdoc_types::GenericBound>,
     // pub allowed_types: Vec<String>,
-}
+// }
 
 // impl APIGeneric {
 //     pub fn calculate_allowed_types(&mut self, types: &Types) {

@@ -3,20 +3,22 @@ use std::path::Path;
 use serde::{Deserialize, Serialize};
 use tracing::{info, instrument};
 
-use crate::{document::r#type::constant::Constant, error::Result};
+use crate::{document::{r#type::constant::Constant, type_alias::TypeAlias}, error::Result};
 
-mod r#type;
+pub mod r#type;
 mod query;
 mod utils;
 pub mod api;
 mod parser;
 mod rust_type_names;
+pub mod type_alias;
 
 #[derive(Serialize, Deserialize)]
 pub struct APIDoc {
     pub apis: Vec<api::API>,
     pub types: Types,
     pub constants: Vec<Constant>,
+    pub type_alias: Vec<TypeAlias>,
 }
 
 pub trait APIDocParser<T, P> : Send {

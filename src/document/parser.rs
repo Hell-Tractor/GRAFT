@@ -1,6 +1,6 @@
 use tracing::info;
 
-use crate::{document::{APIDoc, APIDocParser, Types, api::API, parser::rustdoc::RustDocParser, r#type::{constant::Constant, r#enum::Enum, r#struct::Struct}}, error::Result};
+use crate::{document::{APIDoc, APIDocParser, Types, api::API, parser::rustdoc::RustDocParser, r#type::{constant::Constant, r#enum::Enum, r#struct::Struct}, type_alias::TypeAlias}, error::Result};
 
 // mod trustfall;
 mod rustdoc;
@@ -14,10 +14,12 @@ macro_rules! impl_api_doc_parser {
                 let apis = API::parse(querier)?;
                 let types = Types::parse(querier)?;
                 let constants = Constant::parse(querier)?;
+                let type_alias = TypeAlias::parse(querier)?;
                 Ok(APIDoc {
                     apis,
                     types,
                     constants,
+                    type_alias,
                 })
             }
         }
