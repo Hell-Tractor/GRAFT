@@ -33,13 +33,13 @@ pub struct ImplementedTrait {
     pub bounds: Vec<GenericParamBound>,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct TypeWithArgs {
     pub type_: rustdoc_types::Type,
     pub args: Vec<rustdoc_types::Type>, // empty for non-generic types
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct GenericParamBound {
     /// Name of the generic parameter, same as in original code.
     /// Allow use as primiary key

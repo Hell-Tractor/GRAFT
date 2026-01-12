@@ -3,7 +3,7 @@ use std::path::Path;
 use serde::{Deserialize, Serialize};
 use tracing::{info, instrument};
 
-use crate::{document::{r#type::constant::Constant, type_alias::TypeAlias}, error::Result};
+use crate::{document::r#type::constant::Constant, error::Result};
 
 pub mod r#type;
 mod query;
@@ -11,7 +11,9 @@ mod utils;
 pub mod api;
 mod parser;
 mod rust_type_names;
-pub mod type_alias;
+mod type_alias;
+
+pub use type_alias::TypeAlias;
 
 #[derive(Serialize, Deserialize)]
 pub struct APIDoc {

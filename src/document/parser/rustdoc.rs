@@ -273,12 +273,15 @@ impl RustDocParser {
         }
     }
 
-    fn parse_function(&self, item: &rd::Item, f: &rd::Function, self_type: Option<&rd::Type>) -> API {
+    fn parse_function(&self, item: &rd::Item, f: &rd::Function, self_type: Option<&rd::Type>, additional_generics: Vec<GenericParamBound>) -> API {
         let name = item.name.clone().unwrap_or("UnknownFunction".to_string());
         let signature = rust_type_names::function_signature(f, &name);
         let path = self.get_item_path(&item.id);
 
-        let generics = self.generics_to_generic_param_bounds(&f.generics);
+        let mut generics = self.generics_to_generic_param_bounds(&f.generics);
+        generics.extend(additional_generics);
+        let generics = generics;
+
         let inputs = f.sig.inputs.iter()
             .map(|(name, type_)| {
                 let type_ = if let rd::Type::Generic(g) = type_ && g == "Self" {
@@ -320,13 +323,15 @@ impl RustDocParser {
         }
     }
 
-    fn parse_method(&self, impl_: &rd::Impl) -> Vec<API> {
+    fn parse_method(&self, impl_: &rd::Impl, mut additional_generics: Vec<GenericParamBound>) -> Vec<API> {
         let self_type = Some(&impl_.for_);
+        let impl_generics = self.generics_to_generic_param_bounds(&impl_.generics);
+        additional_generics.extend(impl_generics);
         impl_.items.iter().filter_map(|assoc_item_id| {
             let assoc_item = self.krate.index.get(assoc_item_id)
                 .expect("Associated item ID not found in crate index");
             match &assoc_item.inner {
-                rd::ItemEnum::Function(f) => Some(self.parse_function(assoc_item, f, self_type)),
+                rd::ItemEnum::Function(f) => Some(self.parse_function(assoc_item, f, self_type, additional_generics.clone())),
                 _ => None,
             }
         }).collect()
@@ -433,13 +438,39 @@ impl APIDocParser<Vec<API>, RustDocParser> for API {
                 return None;
             }
             match &item.inner {
-                rd::ItemEnum::Impl(impl_) => {
-                    let apis = parser.parse_method(impl_);
-                    for api in &apis {
-                        set.insert(api.id);
+                rd::ItemEnum::Struct(s) => {
+                    let struct_generics = parser.generics_to_generic_param_bounds(&s.generics);
+                    let methods = s.impls.iter().flat_map(|impl_id| {
+                        let impl_ = get_item_inner_as!(&parser.krate, impl_id, rd::ItemEnum::Impl(impl_) => impl_);
+                        parser.parse_method(impl_, struct_generics.clone())
+                    }).collect::<Vec<_>>();
+                    for method in &methods {
+                        set.insert(method.id);
                     }
-                    Some(apis)
+                    Some(methods)
                 },
+                rd::ItemEnum::Enum(e) => {
+                    let enum_generics = parser.generics_to_generic_param_bounds(&e.generics);
+                    let methods = e.impls.iter().flat_map(|impl_id| {
+                        let impl_ = get_item_inner_as!(&parser.krate, impl_id, rd::ItemEnum::Impl(impl_) => impl_);
+                        parser.parse_method(impl_, enum_generics.clone())
+                    }).collect::<Vec<_>>();
+                    for method in &methods {
+                        set.insert(method.id);
+                    }
+                    Some(methods)
+                },
+                // rd::ItemEnum::Union(u) => {
+                //     let union_generics = parser.generics_to_generic_param_bounds(&u.generics);
+                //     let methods = u.impls.iter().flat_map(|impl_id| {
+                //         let impl_ = get_item_inner_as!(&parser.krate, impl_id, rd::ItemEnum::Impl(impl_) => impl_);
+                //         parser.parse_method(impl_, union_generics.clone())
+                //     }).collect::<Vec<_>>();
+                //     for method in &methods {
+                //         set.insert(method.id);
+                //     }
+                //     Some(methods)
+                // },
                 _ => None,
             }
         }).flatten().collect();
@@ -452,7 +483,7 @@ impl APIDocParser<Vec<API>, RustDocParser> for API {
                     if set.contains(&item.id.0) {
                         return None;   // already parsed as method
                     }
-                    Some(parser.parse_function(item, f, None))
+                    Some(parser.parse_function(item, f, None, vec![]))
                 },
                 _ => None,
             }
