@@ -12,7 +12,7 @@ pub struct Config {
     pub commands: CommandConfig,
     pub testcase: TestcaseConfig,
     pub doc: DocConfig,
-    pub querys: QueryConfig,
+    // pub querys: QueryConfig,
 }
 
 #[derive(Deserialize)]
@@ -52,16 +52,16 @@ pub struct DocConfig {
     pub parser: APIDocParsers,
 }
 
-#[derive(Deserialize)]
-pub struct QueryConfig {
-    pub function: String,
-    pub method: String,
-    #[serde(rename = "struct")]
-    pub struct_: String,
-    #[serde(rename = "enum")]
-    pub enum_: String,
-    pub constant: String,
-}
+// #[derive(Deserialize)]
+// pub struct QueryConfig {
+//     pub function: String,
+//     pub method: String,
+//     #[serde(rename = "struct")]
+//     pub struct_: String,
+//     #[serde(rename = "enum")]
+//     pub enum_: String,
+//     pub constant: String,
+// }
 
 pub fn config() -> &'static Config {
     static CONFIG: OnceLock<Config> = OnceLock::new();

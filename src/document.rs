@@ -6,12 +6,13 @@ use tracing::{info, instrument};
 use crate::{document::r#type::constant::Constant, error::Result};
 
 pub mod r#type;
-mod query;
-mod utils;
+// mod query;
+// mod utils;
 pub mod api;
 mod parser;
-mod rust_type_names;
+pub mod rust_type_names;
 mod type_alias;
+pub use parser::ProjectRustDocParser;
 
 pub use type_alias::TypeAlias;
 
@@ -21,10 +22,11 @@ pub struct APIDoc {
     pub types: Types,
     pub constants: Vec<Constant>,
     pub type_alias: Vec<TypeAlias>,
+    pub parser: ProjectRustDocParser,
 }
 
 pub trait APIDocParser<T, P> : Send {
-    fn parse(parser: &P) -> Result<T>;
+    fn parse(parser: P) -> Result<T>;
 }
 
 #[derive(Deserialize)]
@@ -37,6 +39,7 @@ pub enum APIDocParsers {
 pub struct Types {
     pub structs: Vec<r#type::r#struct::Struct>,
     pub enums: Vec<r#type::r#enum::Enum>,
+    pub primitives: Vec<r#type::primitive::Primitive>,
     // enums, traits, etc can be added later
 }
 
@@ -115,26 +118,35 @@ impl APIDoc {
     //         }
     //     }
     // }
-    pub fn from_crate_name(crate_name: &str) -> Result<APIDocBuilder> {
+    pub fn from_crate_name(crate_name: &str, is_std: bool) -> Result<APIDocBuilder> {
         let raw_doc = get_raw_api_documentation(crate_name)?;
-        let api_doc = APIDoc::from_raw_doc(&raw_doc)?;
+        let api_doc = APIDoc::from_raw_doc(&raw_doc, is_std)?;
         Ok(api_doc)
     }
 
-    pub fn from_file(path: &Path) -> Result<APIDocBuilder> {
+    pub fn from_file(path: &Path, is_std: bool) -> Result<APIDocBuilder> {
         let raw_doc = crate::utils::read_file_to_string(path)?;
-        let api_doc = APIDoc::from_raw_doc(&raw_doc)?;
+        let api_doc = APIDoc::from_raw_doc(&raw_doc, is_std)?;
         Ok(api_doc)
     }
 
-    fn from_raw_doc(raw_doc: &str) -> Result<APIDocBuilder> {
+    fn from_raw_doc(raw_doc: &str, _is_std: bool) -> Result<APIDocBuilder> {
         let parser_type = &crate::utils::config().doc.parser;
         match parser_type {
             APIDocParsers::TrustFall => {
                 panic!("Deprecated: TrustFall parser is no longer supported");
             },
             APIDocParsers::RustDoc => {
-                unimplemented!("RustDoc parser is not implemented yet");
+                // let api_doc = if is_std {
+                //     let parser = StdRustDocParser::new(raw_doc)?;
+                //     APIDoc::parse(&parser)?
+                // } else {
+                //     let parser = ProjectRustDocParser::new(raw_doc)?;
+                //     APIDoc::parse(&parser)?
+                // };
+                let parser = ProjectRustDocParser::new(raw_doc)?;
+                let api_doc = APIDoc::parse(parser)?;
+                Ok(APIDocBuilder { doc: api_doc })
             },
         }
     }

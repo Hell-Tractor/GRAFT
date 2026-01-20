@@ -60,13 +60,11 @@ impl APIGraph {
     }
 
     pub fn new(doc: document::APIDoc, std_doc: document::APIDoc) -> Self {
-        let all_types = doc.types;
-
         let mut apis = vec![];
         let mut vertices = vec![];
         info!("Extracting APIs and API parameters from APIDoc");
         for api in doc.apis {
-            let api_vertex = Arc::new(RwLock::new(API::new(api.signature, api.output.get_wrapped_type(), api.generics, api.impl_for, api.module_path, api.doc_comment)));
+            let api_vertex = Arc::new(RwLock::new(API::new(api.signature, api.output.get_wrapped_type(), api.generics, api.module_path, api.doc_comment)));
             for param in api.inputs {
                 let api_param = APIParam::new(param.name, param.type_, &api_vertex);
                 let api_param = Arc::new(RwLock::new(api_param));
@@ -120,12 +118,13 @@ impl APIGraph {
                 let to_api = to_api.read().unwrap();
                 debug!("  Checking compatibility to target API: {} (ID: {})", to_api.signature, to_api.id);
                 let checker = GenericBoundChecker::new(
+                    &doc.parser,
+                    &std_doc.parser,
                     &from_api.generics,
                     &to_api.generics,
-                    &all_types,
-                    from_api.impl_for.as_ref(),
-                    to_api.impl_for.as_ref(),
+                    &doc.types,
                     &std_doc.types,
+                    &doc.type_alias,
                 );
                 for input_type in &to_api.params {
                     let input_type = input_type.read().unwrap();
@@ -133,7 +132,7 @@ impl APIGraph {
                     if input_type.is_fuzzer_generable() {
                         continue;
                     }
-                    if checker.type_satisfies(&output_type, &input_type.type_) {
+                    if checker.check(&output_type, &input_type.type_) {
                         debug!("      Compatible! Adding edge from API {} to API {}", from_api.id, to_api.id);
                         edges[from_api.id].push(Edge::new(input_type.id, input_type.get_ref_type()));
                         rev_edges[input_type.id].push(Edge::new(from_api.id, input_type.get_ref_type()));
@@ -151,12 +150,13 @@ impl APIGraph {
                     debug!("  Checking compatibility from Constant: {} (ID: {}) to target API: {} (ID: {})", constant.name, constant.id, to_api.signature, to_api.id);
                     let empty_vec = vec![];
                     let checker = GenericBoundChecker::new(
+                        &doc.parser,
+                        &std_doc.parser,
                         &empty_vec,
                         &to_api.generics,
-                        &all_types,
-                        None,
-                        to_api.impl_for.as_ref(),
+                        &doc.types,
                         &std_doc.types,
+                        &doc.type_alias,
                     );
                     for input_type in &to_api.params {
                         let input_type = input_type.read().unwrap();
@@ -164,7 +164,7 @@ impl APIGraph {
                         if input_type.is_fuzzer_generable() {
                             continue;
                         }
-                        if checker.type_satisfies(&constant.type_, &input_type.type_) {
+                        if checker.check(&constant.type_, &input_type.type_) {
                             debug!("      Compatible! Adding edge from Constant {} to API {}", constant.id, to_api.id);
                             edges[constant.id].push(Edge::new(input_type.id, input_type.get_ref_type()));
                             rev_edges[input_type.id].push(Edge::new(constant.id, input_type.get_ref_type()));

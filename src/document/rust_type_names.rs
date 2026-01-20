@@ -3,12 +3,13 @@
 // at commit 51ce830d2be04d166840ca4ab5369da238cb3f68.
 // The original code is licensed under the MIT License; this copy may include
 // local modifications. See this crate's git history for details of changes.
+#![allow(unused)]
 use std::fmt::{Display, Formatter, Result};
 
 /// Serializes the `rustdoc_types::Type` type as a `String` containing the name
 /// of the type together with all generic parameters,
 /// as close as possible to its original code declaration.
-fn rust_type_name(ty: &rustdoc_types::Type) -> String {
+pub fn rust_type_name(ty: &rustdoc_types::Type) -> String {
     Type(ty, false).to_string()
 }
 

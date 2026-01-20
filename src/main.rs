@@ -51,7 +51,7 @@ async fn main() {
 
 fn generate_doc(crate_name: &str, output: &PathBuf) -> Result<()> {
     info!("Generating API documentation for crate `{}`", crate_name);
-    let api_doc = document::APIDoc::from_crate_name(crate_name)?
+    let api_doc = document::APIDoc::from_crate_name(crate_name, false)?
         .filter_api().filter_types()
         .build();
     info!("Generation completed. Serializing to `{}`...", output.display());
@@ -63,7 +63,7 @@ fn generate_doc(crate_name: &str, output: &PathBuf) -> Result<()> {
 
 fn generate_doc_from_file(path: &PathBuf, output: &PathBuf) -> Result<()> {
     info!("Generating API documentation from file `{}`", path.display());
-    let api_doc = document::APIDoc::from_file(path)?
+    let api_doc = document::APIDoc::from_file(path, false)?
         .filter_api().filter_types()
         .build();
     info!("Generation completed. Serializing to `{}`...", output.display());
@@ -89,7 +89,7 @@ fn generate_api_graph(input: &PathBuf, std: &PathBuf, output: &PathBuf) -> Resul
 
 fn measure_crate(crate_name: &str, std: &PathBuf) -> Result<()> {
     info!("Measuring crate `{}` for possible max API coverage", crate_name);
-    let api_doc = document::APIDoc::from_crate_name(crate_name)?
+    let api_doc = document::APIDoc::from_crate_name(crate_name, false)?
         .filter_api().filter_types()
         .build();
     let std_doc = {

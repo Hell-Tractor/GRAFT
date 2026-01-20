@@ -168,7 +168,7 @@ impl<'a> APISequeceGenerator<'a> {
                 let new_api = self.graph.rev_edges[param.id].iter()
                     .map(|edge| {
                         if let Vertex::Constant(constant) = &self.graph.vertices[edge.to] {
-                            return Arc::new(RwLock::new(API { signature: format!("const {}: {}", constant.name, trustfall_rustdoc_adapter::rust_type_name(&constant.type_)), params: vec![], return_type: Some(constant.type_.clone()), id: constant.id, generics: vec![], impl_for: None, module_path: constant.module_path.clone(), doc_comment: constant.doc_comment.clone() }));
+                            return Arc::new(RwLock::new(API { signature: format!("const {}: {}", constant.name, trustfall_rustdoc_adapter::rust_type_name(&constant.type_)), params: vec![], return_type: Some(constant.type_.clone()), id: constant.id, generics: vec![], module_path: constant.module_path.clone(), doc_comment: constant.doc_comment.clone() }));
                         }
                         let Vertex::API(api) = &self.graph.vertices[edge.to] else {
                             unreachable!("Reverse edge should point to API");

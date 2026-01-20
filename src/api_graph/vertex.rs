@@ -2,7 +2,7 @@ use std::sync::{Arc, RwLock, Weak};
 
 use rustdoc_types::Type;
 use serde::{Deserialize, Serialize};
-use crate::{document::api::APIGeneric, generic_bound::GenericBoundChecker};
+use crate::{document::r#type::GenericParamBound, generic_bound::GenericBoundChecker};
 
 use super::edge::RefType;
 
@@ -27,8 +27,7 @@ pub struct API {
     pub params: Vec<Arc<RwLock<APIParam>>>,
     pub return_type: Option<Type>,
     pub id: usize, // ID in the APIGraph
-    pub generics: Vec<APIGeneric>,
-    pub impl_for: Option<Type>,
+    pub generics: Vec<GenericParamBound>,
     pub module_path: String,
     pub doc_comment: String,
 }
@@ -74,14 +73,13 @@ impl APIParam {
 }
 
 impl API {
-    pub fn new(signature: String, return_type: Option<Type>, generics: Vec<APIGeneric>, impl_for: Option<Type>, module_path: String, doc_comment: String) -> Self {
+    pub fn new(signature: String, return_type: Option<Type>, generics: Vec<GenericParamBound>, module_path: String, doc_comment: String) -> Self {
         Self {
             signature,
             params: vec![],
             id: 0,
             return_type,
             generics,
-            impl_for,
             module_path,
             doc_comment,
         }

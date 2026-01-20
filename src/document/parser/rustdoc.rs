@@ -2,12 +2,17 @@ use core::panic;
 use std::collections::{HashMap, HashSet};
 
 use rustdoc_types as rd;
+use serde::{Deserialize, Serialize};
 use trustfall_rustdoc_adapter::rust_type_name;
 
-use crate::{document::{APIDocParser, api::{API, APIKind, Parameter, ReturnValue}, rust_type_names, r#type::{GenericParamBound, ImplementedTrait, StructField, TypeKind, TypeWithArgs, constant::Constant, r#enum::{Enum, EnumVariant}, r#struct::Struct}, type_alias::TypeAlias}, error::Result};
+use crate::{document::{APIDocParser, api::{API, APIKind, Parameter, ReturnValue}, rust_type_names, r#type::{GenericParamBound, ImplementedTrait, StructField, TypeKind, TypeWithArgs, constant::Constant, r#enum::{Enum, EnumVariant}, primitive::Primitive, r#struct::Struct}, type_alias::TypeAlias}, error::Result};
 
-pub struct RustDocParser {
+const EXPECT_TYPE_EXISTS: &str = "Expected type to exist in the documentation";
+
+#[derive(Serialize, Deserialize)]
+pub struct RustDocParser<const OFFSET: u32> {
     krate: rustdoc_types::Crate,
+    #[serde(skip)]
     parent_map: HashMap<rustdoc_types::Id, rustdoc_types::Id>,
 }
 
@@ -26,7 +31,7 @@ macro_rules! get_item_inner_as {
     };
 }
 
-impl RustDocParser {
+impl<const OFFSET: u32> RustDocParser<OFFSET> {
     pub fn new(raw_doc: &str) -> Result<Self> {
         let krate = serde_json::from_str::<rustdoc_types::Crate>(raw_doc)?;
         let parent_map = Self::build_parent_map(&krate);
@@ -73,11 +78,10 @@ impl RustDocParser {
         path.join("::")
     }
 
-    fn type_from_path_id(&self, path: &rd::Path) -> rd::Type {
+    fn type_from_path_id(&self, path: &rd::Path) -> Option<rd::Type> {
         let id = &path.id;
 
-        match &self.krate.index.get(id)
-            .expect("Item id not found in crate index")
+        match &self.krate.index.get(id)?
             .inner
         {
             rd::ItemEnum::Struct(_) |
@@ -88,7 +92,7 @@ impl RustDocParser {
             rd::ItemEnum::Primitive(_) |
             rd::ItemEnum::ExternType => {
                 // 对“名义类型”，ResolvedPath 是正确的
-                rd::Type::ResolvedPath(path.clone())
+                Some(rd::Type::ResolvedPath(path.clone()))
             }
 
             other => {
@@ -100,11 +104,11 @@ impl RustDocParser {
         }
     }
 
-    fn path_to_type_with_args(&self, path: &rd::Path) -> TypeWithArgs {
+    pub fn path_to_type_with_args(&self, path: &rd::Path) -> Option<TypeWithArgs> {
+        let type_ = self.type_from_path_id(path)?;
         let args = path.args.as_ref().map(|args| extract_type_args(&*args)).unwrap_or(vec![]);
-        let type_ = self.type_from_path_id(path);
 
-        TypeWithArgs { type_, args }
+        Some(TypeWithArgs { type_, args })
     }
 
     fn impl_id_to_implemented_trait(&self, impl_id: &rustdoc_types::Id,) -> Option<ImplementedTrait> {
@@ -112,7 +116,7 @@ impl RustDocParser {
 
         // return none if inherent trait
         let trait_path = impl_.trait_.as_ref()?;
-        let args = self.path_to_type_with_args(trait_path);
+        let args = self.path_to_type_with_args(trait_path).expect(EXPECT_TYPE_EXISTS);
 
         let bounds = impl_.generics.params.iter()
             .filter_map(|param| {
@@ -122,7 +126,7 @@ impl RustDocParser {
 
                 let trait_bounds = bounds.iter()
                     .filter_map(|b| match b {
-                        rd::GenericBound::TraitBound { trait_, .. } => Some(self.path_to_type_with_args(trait_)),
+                        rd::GenericBound::TraitBound { trait_, .. } => Some(self.path_to_type_with_args(trait_).expect(EXPECT_TYPE_EXISTS)),
                         _ => None, // 忽略 Outlives / 其它
                     })
                     .collect::<Vec<_>>();
@@ -135,7 +139,7 @@ impl RustDocParser {
             .collect();
 
         Some(ImplementedTrait {
-            id: trait_path.id.0,
+            id: Some(trait_path.id.0 + OFFSET),
             name: trait_path.path.clone(),
             trait_: args,
             bounds,
@@ -169,7 +173,7 @@ impl RustDocParser {
 
             for bound in bounds {
                 if let rd::GenericBound::TraitBound { trait_, .. } = bound {
-                    entry.bounds.push(self.path_to_type_with_args(trait_));
+                    entry.bounds.push(self.path_to_type_with_args(trait_).expect(EXPECT_TYPE_EXISTS));
                 }
             }
         }
@@ -198,7 +202,7 @@ impl RustDocParser {
 
             for bound in bounds {
                 if let rd::GenericBound::TraitBound { trait_, .. } = bound {
-                    entry.bounds.push(self.path_to_type_with_args(trait_));
+                    entry.bounds.push(self.path_to_type_with_args(trait_).expect(EXPECT_TYPE_EXISTS));
                 }
             }
         }
@@ -233,7 +237,7 @@ impl RustDocParser {
         let bounds = self.generics_to_generic_param_bounds(&e.generics);
 
         Enum {
-            id: item.id.0,
+            id: item.id.0 + OFFSET,
             name: item.name.clone().unwrap_or_default(),
             docs: item.docs.clone().unwrap_or_default(),
             type_: TypeKind::Enum,
@@ -262,7 +266,7 @@ impl RustDocParser {
         let bounds = self.generics_to_generic_param_bounds(&s.generics);
 
         Struct {
-            id: item.id.0,
+            id: item.id.0 + OFFSET,
             name: item.name.clone().unwrap_or_default(),
             docs: item.docs.clone().unwrap_or_default(),
             type_: TypeKind::Struct,
@@ -310,7 +314,7 @@ impl RustDocParser {
         };
 
         API {
-            id: item.id.0,
+            id: item.id.0 + OFFSET,
             name,
             kind,
             signature,
@@ -319,7 +323,6 @@ impl RustDocParser {
             generics,
             inputs,
             output: ReturnValue { type_: output },
-            impl_for: None,
         }
     }
 
@@ -345,14 +348,26 @@ impl RustDocParser {
         }
     }
 
+    fn parse_primitives(&self, item: &rd::Item, p: &rd::Primitive) -> Primitive {
+        let impls = p.impls.iter()
+            .filter_map(|impl_id| self.impl_id_to_implemented_trait(impl_id))
+            .collect();
+        Primitive {
+            id: item.id.0 + OFFSET,
+            name: p.name.clone(),
+            type_: TypeKind::Primitive,
+            traits: impls,
+        }
+    }
+
 }
 
 fn is_item_valid(item: &rd::Item) -> bool {
     item.visibility == rd::Visibility::Public && item.deprecation == None
 }
 
-impl APIDocParser<Vec<Constant>, RustDocParser> for Constant {
-    fn parse(parser: &RustDocParser) -> Result<Vec<Constant>> {
+impl<const OFFSET: u32> APIDocParser<Vec<Constant>, &RustDocParser<OFFSET>> for Constant {
+    fn parse(parser: &RustDocParser<OFFSET>) -> Result<Vec<Constant>> {
         let result = parser.krate.index.values().filter_map(|item| {
             if !is_item_valid(item) {
                 return None;
@@ -360,7 +375,7 @@ impl APIDocParser<Vec<Constant>, RustDocParser> for Constant {
             match &item.inner {
                 rd::ItemEnum::Constant { type_, .. } => {
                     Some(Constant {
-                        id: item.id.0,
+                        id: item.id.0 + OFFSET,
                         name: item.name.clone().unwrap_or_default(),
                         docs: item.docs.clone().unwrap_or_default(),
                         type_: type_.clone(),
@@ -369,7 +384,7 @@ impl APIDocParser<Vec<Constant>, RustDocParser> for Constant {
                 },
                 rd::ItemEnum::Static(s) => {
                     Some(Constant {
-                        id: item.id.0,
+                        id: item.id.0 + OFFSET,
                         name: item.name.clone().unwrap_or_default(),
                         docs: item.docs.clone().unwrap_or_default(),
                         type_: s.type_.clone(),
@@ -398,8 +413,8 @@ fn extract_type_args(args: &rd::GenericArgs) -> Vec<rd::Type> {
     }
 }
 
-impl APIDocParser<Vec<Enum>, RustDocParser> for Enum {
-    fn parse(parser: &RustDocParser) -> Result<Vec<Enum>> {
+impl<const OFFSET: u32> APIDocParser<Vec<Enum>, &RustDocParser<OFFSET>> for Enum {
+    fn parse(parser: &RustDocParser<OFFSET>) -> Result<Vec<Enum>> {
         let result = parser.krate.index.values().filter_map(|item| {
             if !is_item_valid(item) {
                 return None;
@@ -414,8 +429,8 @@ impl APIDocParser<Vec<Enum>, RustDocParser> for Enum {
     }
 }
 
-impl APIDocParser<Vec<Struct>, RustDocParser> for Struct {
-    fn parse(parser: &RustDocParser) -> Result<Vec<Struct>> {
+impl<const OFFSET: u32> APIDocParser<Vec<Struct>, &RustDocParser<OFFSET>> for Struct {
+    fn parse(parser: &RustDocParser<OFFSET>) -> Result<Vec<Struct>> {
         let result = parser.krate.index.values().filter_map(|item| {
             if !is_item_valid(item) {
                 return None;
@@ -430,8 +445,8 @@ impl APIDocParser<Vec<Struct>, RustDocParser> for Struct {
     }
 }
 
-impl APIDocParser<Vec<API>, RustDocParser> for API {
-    fn parse(parser: &RustDocParser) -> Result<Vec<API>> {
+impl<const OFFSET: u32> APIDocParser<Vec<API>, &RustDocParser<OFFSET>> for API {
+    fn parse(parser: &RustDocParser<OFFSET>) -> Result<Vec<API>> {
         let mut set = HashSet::new();
         let mut methods: Vec<_> = parser.krate.index.values().filter_map(|item| {
             if !is_item_valid(item) {
@@ -493,14 +508,30 @@ impl APIDocParser<Vec<API>, RustDocParser> for API {
     }
 }
 
-impl APIDocParser<Vec<TypeAlias>, RustDocParser> for TypeAlias {
-    fn parse(parser: &RustDocParser) -> Result<Vec<TypeAlias>> {
+impl<const OFFSET: u32> APIDocParser<Vec<TypeAlias>, &RustDocParser<OFFSET>> for TypeAlias {
+    fn parse(parser: &RustDocParser<OFFSET>) -> Result<Vec<TypeAlias>> {
         let result = parser.krate.index.values().filter_map(|item| {
             if !is_item_valid(item) {
                 return None;
             }
             match &item.inner {
                 rd::ItemEnum::TypeAlias(ta) => Some(parser.parse_type_alias(ta)),
+                _ => None,
+            }
+        }).collect();
+
+        Ok(result)
+    }
+}
+
+impl<const OFFSET: u32> APIDocParser<Vec<Primitive>, &RustDocParser<OFFSET>> for Primitive {
+    fn parse(parser: &RustDocParser<OFFSET>) -> Result<Vec<Primitive>> {
+        let result = parser.krate.index.values().filter_map(|item| {
+            if !is_item_valid(item) {
+                return None;
+            }
+            match &item.inner {
+                rd::ItemEnum::Primitive(p) => Some(parser.parse_primitives(item, p)),
                 _ => None,
             }
         }).collect();

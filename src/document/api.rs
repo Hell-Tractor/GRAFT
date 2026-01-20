@@ -14,7 +14,7 @@ pub struct API {
     pub generics: Vec<GenericParamBound>,
     pub inputs: Vec<Parameter>,
     pub output: ReturnValue,
-    pub impl_for: Option<rustdoc_types::Type>,
+    // pub impl_for: Option<u32>,
     // pub is_public: bool,
     // pub is_safe: bool,
     // pub has_unsafe: bool,
@@ -36,11 +36,11 @@ pub enum APIKind {
 //     Integer,
 // }
 
-#[derive(Serialize, Deserialize)]
-pub struct Location {
-    pub file: String,
-    pub line: usize,
-}
+// #[derive(Serialize, Deserialize)]
+// pub struct Location {
+//     pub file: String,
+//     pub line: usize,
+// }
 
 #[derive(Serialize, Deserialize)]
 pub struct Parameter {

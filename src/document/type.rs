@@ -3,11 +3,13 @@ use serde::{Deserialize, Serialize};
 pub mod r#struct;
 pub mod r#enum;
 pub mod constant;
+pub mod primitive;
 
 #[derive(Serialize, Deserialize)]
 pub enum TypeKind {
     Struct,
     Enum,
+    Primitive,
     // Union,
     // Constant,
 }
@@ -22,9 +24,9 @@ pub struct StructField {
     pub type_: rustdoc_types::Type,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct ImplementedTrait {
-    pub id: u32,
+    pub id: Option<u32>,
     /// Name of the trait, converted from doc file.
     /// ! Not allow use as primary key
     /// * Use `id` instead
@@ -37,6 +39,15 @@ pub struct ImplementedTrait {
 pub struct TypeWithArgs {
     pub type_: rustdoc_types::Type,
     pub args: Vec<rustdoc_types::Type>, // empty for non-generic types
+}
+
+impl TypeWithArgs {
+    // pub fn new(type_: &rustdoc_types::Type) -> Self {
+    //     Self {
+    //         type_: type_.clone(),
+    //         args: vec![],
+    //     }
+    // }
 }
 
 #[derive(Serialize, Deserialize, Clone)]
