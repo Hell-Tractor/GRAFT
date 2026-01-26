@@ -29,6 +29,7 @@ impl<'a> APISequeceGenerator<'a> {
 
     fn calculate_depth(graph: &APIGraph) -> Vec<i32> {
         // init indegrees
+        // TODO: 如果泛型T可以被基本类型替换，则也可以作为起点。并告知llm使用哪个基本类型替换哪个参数
         let mut indegrees = graph.vertices.iter().map(|vertex| {
             match vertex {
                 Vertex::API(api) => {

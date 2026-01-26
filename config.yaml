@@ -16,7 +16,7 @@ testcase:
 doc:
   temp_project_path: "./"
   temp_project_name: "temp_doc_project"
-  parser: "TrustFall" # Options: TrustFall, RustDoc
+  parser: "RustDoc" # Options: TrustFall, RustDoc
 # querys:
 #   function: "querys/function.gql"
 #   method: "querys/method.gql"

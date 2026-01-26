@@ -3,11 +3,21 @@ use std::collections::{HashMap, HashSet};
 
 use rustdoc_types as rd;
 use serde::{Deserialize, Serialize};
+use tracing::warn;
 use trustfall_rustdoc_adapter::rust_type_name;
 
-use crate::{document::{APIDocParser, api::{API, APIKind, Parameter, ReturnValue}, rust_type_names, r#type::{GenericParamBound, ImplementedTrait, StructField, TypeKind, TypeWithArgs, constant::Constant, r#enum::{Enum, EnumVariant}, primitive::Primitive, r#struct::Struct}, type_alias::TypeAlias}, error::Result};
+use crate::{document::{APIDocParser, api::{API, APIKind, Parameter, ReturnValue}, rust_type_names, r#type::{GenericParamBound, ImplementedTrait, StructField, TypeKind, TypeWithArgs, constant::Constant, r#enum::{Enum, EnumVariant}, primitive::Primitive, r#struct::Struct}, type_alias::TypeAlias}};
+use crate::error::Result as CrateResult;
 
-const EXPECT_TYPE_EXISTS: &str = "Expected type to exist in the documentation";
+// const EXPECT_TYPE_EXISTS: &str = "Expected type to exist in the documentation";
+
+#[derive(thiserror::Error, Debug, Clone)]
+pub enum Error {
+    #[error("Method found but 'Self' type could not be resolved")]
+    SelfNotFound
+}
+
+type Result<T> = std::result::Result<T, Error>;
 
 #[derive(Serialize, Deserialize)]
 pub struct RustDocParser<const OFFSET: u32> {
@@ -32,7 +42,7 @@ macro_rules! get_item_inner_as {
 }
 
 impl<const OFFSET: u32> RustDocParser<OFFSET> {
-    pub fn new(raw_doc: &str) -> Result<Self> {
+    pub fn new(raw_doc: &str) -> CrateResult<Self> {
         let krate = serde_json::from_str::<rustdoc_types::Crate>(raw_doc)?;
         let parent_map = Self::build_parent_map(&krate);
         Ok(RustDocParser { krate, parent_map })
@@ -90,16 +100,18 @@ impl<const OFFSET: u32> RustDocParser<OFFSET> {
             rd::ItemEnum::Trait(_) |
             rd::ItemEnum::TypeAlias(_) |
             rd::ItemEnum::Primitive(_) |
+            rd::ItemEnum::TraitAlias(_) |
             rd::ItemEnum::ExternType => {
                 // 对“名义类型”，ResolvedPath 是正确的
                 Some(rd::Type::ResolvedPath(path.clone()))
             }
 
             other => {
-                panic!(
+                warn!(
                     "Item {:?} (id = {}) cannot be converted into a Type",
                     other, id.0
-                )
+                );
+                None
             }
         }
     }
@@ -116,7 +128,10 @@ impl<const OFFSET: u32> RustDocParser<OFFSET> {
 
         // return none if inherent trait
         let trait_path = impl_.trait_.as_ref()?;
-        let args = self.path_to_type_with_args(trait_path).expect(EXPECT_TYPE_EXISTS);
+        let Some(args) = self.path_to_type_with_args(trait_path) else {
+            warn!("Failed to convert trait path {:?} to TypeWithArgs", trait_path);
+            return None;
+        };
 
         let bounds = impl_.generics.params.iter()
             .filter_map(|param| {
@@ -126,7 +141,7 @@ impl<const OFFSET: u32> RustDocParser<OFFSET> {
 
                 let trait_bounds = bounds.iter()
                     .filter_map(|b| match b {
-                        rd::GenericBound::TraitBound { trait_, .. } => Some(self.path_to_type_with_args(trait_).expect(EXPECT_TYPE_EXISTS)),
+                        rd::GenericBound::TraitBound { trait_, .. } => self.path_to_type_with_args(trait_),
                         _ => None, // 忽略 Outlives / 其它
                     })
                     .collect::<Vec<_>>();
@@ -173,7 +188,14 @@ impl<const OFFSET: u32> RustDocParser<OFFSET> {
 
             for bound in bounds {
                 if let rd::GenericBound::TraitBound { trait_, .. } = bound {
-                    entry.bounds.push(self.path_to_type_with_args(trait_).expect(EXPECT_TYPE_EXISTS));
+                    let ty = self.path_to_type_with_args(trait_);
+                    match ty {
+                        Some(t) => entry.bounds.push(t),
+                        None => {
+                            warn!("Failed to convert trait bound {:?} to TypeWithArgs", trait_);
+                            continue;
+                        },
+                    }
                 }
             }
         }
@@ -202,7 +224,14 @@ impl<const OFFSET: u32> RustDocParser<OFFSET> {
 
             for bound in bounds {
                 if let rd::GenericBound::TraitBound { trait_, .. } = bound {
-                    entry.bounds.push(self.path_to_type_with_args(trait_).expect(EXPECT_TYPE_EXISTS));
+                    let ty = self.path_to_type_with_args(trait_);
+                    match ty {
+                        Some(t) => entry.bounds.push(t),
+                        None => {
+                            warn!("Failed to convert trait bound {:?} to TypeWithArgs", trait_);
+                            continue;
+                        },
+                    }
                 }
             }
         }
@@ -277,7 +306,7 @@ impl<const OFFSET: u32> RustDocParser<OFFSET> {
         }
     }
 
-    fn parse_function(&self, item: &rd::Item, f: &rd::Function, self_type: Option<&rd::Type>, additional_generics: Vec<GenericParamBound>) -> API {
+    fn parse_function(&self, item: &rd::Item, f: &rd::Function, self_type: Option<&rd::Type>, additional_generics: Vec<GenericParamBound>) -> Result<API> {
         let name = item.name.clone().unwrap_or("UnknownFunction".to_string());
         let signature = rust_type_names::function_signature(f, &name);
         let path = self.get_item_path(&item.id);
@@ -288,32 +317,38 @@ impl<const OFFSET: u32> RustDocParser<OFFSET> {
 
         let inputs = f.sig.inputs.iter()
             .map(|(name, type_)| {
-                let type_ = if let rd::Type::Generic(g) = type_ && g == "Self" {
-                    let self_type = self_type.expect("Expected self type for method with Self parameter");
-                    self_type.clone()
+                let type_: Result<rd::Type> = if let rd::Type::Generic(g) = type_ && g == "Self" {
+                    let self_type = self_type.ok_or(Error::SelfNotFound);
+                    self_type.map(|t| t.clone())
                 } else {
-                    type_.clone()
+                    Ok(type_.clone())
                 };
-                Parameter {
-                    name: name.clone(),
-                    type_,
-                }
-            }).collect();
+                type_.map(|t| {
+                    Parameter {
+                        name: name.clone(),
+                        type_: t,
+                    }
+                })
+            }).collect::<Result<Vec<Parameter>>>()?;
         let output = f.sig.output.as_ref().map(|t| {
             if let rd::Type::Generic(g) = t && g == "Self" {
-                let self_type = self_type.expect("Expected self type for method with Self return type");
-                self_type.clone()
+                let self_type = self_type.ok_or(Error::SelfNotFound);
+                self_type.map(|ty| ty.clone())
             } else {
-                t.clone()
+                Ok(t.clone())
             }
         });
+        let output = match output {
+            Some(ty) => Some(ty?),
+            None => None,
+        };
         let kind = if self_type.is_some() {
             APIKind::Method
         } else {
             APIKind::Function
         };
 
-        API {
+        Ok(API {
             id: item.id.0 + OFFSET,
             name,
             kind,
@@ -323,7 +358,7 @@ impl<const OFFSET: u32> RustDocParser<OFFSET> {
             generics,
             inputs,
             output: ReturnValue { type_: output },
-        }
+        })
     }
 
     fn parse_method(&self, impl_: &rd::Impl, mut additional_generics: Vec<GenericParamBound>) -> Vec<API> {
@@ -334,7 +369,16 @@ impl<const OFFSET: u32> RustDocParser<OFFSET> {
             let assoc_item = self.krate.index.get(assoc_item_id)
                 .expect("Associated item ID not found in crate index");
             match &assoc_item.inner {
-                rd::ItemEnum::Function(f) => Some(self.parse_function(assoc_item, f, self_type, additional_generics.clone())),
+                rd::ItemEnum::Function(f) => {
+                    let func = self.parse_function(assoc_item, f, self_type, additional_generics.clone());
+                    match func {
+                        Ok(api) => Some(api),
+                        Err(e) => {
+                            warn!("Failed to parse method {}: {:?}", assoc_item.name.clone().unwrap_or("UnknownMethod".to_owned()), e);
+                            None
+                        }
+                    }
+                },
                 _ => None,
             }
         }).collect()
@@ -367,7 +411,7 @@ fn is_item_valid(item: &rd::Item) -> bool {
 }
 
 impl<const OFFSET: u32> APIDocParser<Vec<Constant>, &RustDocParser<OFFSET>> for Constant {
-    fn parse(parser: &RustDocParser<OFFSET>) -> Result<Vec<Constant>> {
+    fn parse(parser: &RustDocParser<OFFSET>) -> CrateResult<Vec<Constant>> {
         let result = parser.krate.index.values().filter_map(|item| {
             if !is_item_valid(item) {
                 return None;
@@ -414,7 +458,7 @@ fn extract_type_args(args: &rd::GenericArgs) -> Vec<rd::Type> {
 }
 
 impl<const OFFSET: u32> APIDocParser<Vec<Enum>, &RustDocParser<OFFSET>> for Enum {
-    fn parse(parser: &RustDocParser<OFFSET>) -> Result<Vec<Enum>> {
+    fn parse(parser: &RustDocParser<OFFSET>) -> CrateResult<Vec<Enum>> {
         let result = parser.krate.index.values().filter_map(|item| {
             if !is_item_valid(item) {
                 return None;
@@ -430,7 +474,7 @@ impl<const OFFSET: u32> APIDocParser<Vec<Enum>, &RustDocParser<OFFSET>> for Enum
 }
 
 impl<const OFFSET: u32> APIDocParser<Vec<Struct>, &RustDocParser<OFFSET>> for Struct {
-    fn parse(parser: &RustDocParser<OFFSET>) -> Result<Vec<Struct>> {
+    fn parse(parser: &RustDocParser<OFFSET>) -> CrateResult<Vec<Struct>> {
         let result = parser.krate.index.values().filter_map(|item| {
             if !is_item_valid(item) {
                 return None;
@@ -446,7 +490,7 @@ impl<const OFFSET: u32> APIDocParser<Vec<Struct>, &RustDocParser<OFFSET>> for St
 }
 
 impl<const OFFSET: u32> APIDocParser<Vec<API>, &RustDocParser<OFFSET>> for API {
-    fn parse(parser: &RustDocParser<OFFSET>) -> Result<Vec<API>> {
+    fn parse(parser: &RustDocParser<OFFSET>) -> CrateResult<Vec<API>> {
         let mut set = HashSet::new();
         let mut methods: Vec<_> = parser.krate.index.values().filter_map(|item| {
             if !is_item_valid(item) {
@@ -498,7 +542,14 @@ impl<const OFFSET: u32> APIDocParser<Vec<API>, &RustDocParser<OFFSET>> for API {
                     if set.contains(&item.id.0) {
                         return None;   // already parsed as method
                     }
-                    Some(parser.parse_function(item, f, None, vec![]))
+                    let func = parser.parse_function(item, f, None, vec![]);
+                    match func {
+                        Ok(api) => Some(api),
+                        Err(e) => {
+                            warn!("Failed to parse function {}: {:?}", item.name.clone().unwrap_or("UnknownFunction".to_owned()), e);
+                            None
+                        }
+                    }
                 },
                 _ => None,
             }
@@ -509,7 +560,7 @@ impl<const OFFSET: u32> APIDocParser<Vec<API>, &RustDocParser<OFFSET>> for API {
 }
 
 impl<const OFFSET: u32> APIDocParser<Vec<TypeAlias>, &RustDocParser<OFFSET>> for TypeAlias {
-    fn parse(parser: &RustDocParser<OFFSET>) -> Result<Vec<TypeAlias>> {
+    fn parse(parser: &RustDocParser<OFFSET>) -> CrateResult<Vec<TypeAlias>> {
         let result = parser.krate.index.values().filter_map(|item| {
             if !is_item_valid(item) {
                 return None;
@@ -525,7 +576,7 @@ impl<const OFFSET: u32> APIDocParser<Vec<TypeAlias>, &RustDocParser<OFFSET>> for
 }
 
 impl<const OFFSET: u32> APIDocParser<Vec<Primitive>, &RustDocParser<OFFSET>> for Primitive {
-    fn parse(parser: &RustDocParser<OFFSET>) -> Result<Vec<Primitive>> {
+    fn parse(parser: &RustDocParser<OFFSET>) -> CrateResult<Vec<Primitive>> {
         let result = parser.krate.index.values().filter_map(|item| {
             if !is_item_valid(item) {
                 return None;

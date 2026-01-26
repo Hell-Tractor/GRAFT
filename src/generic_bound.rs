@@ -8,7 +8,7 @@ use crate::document::{self, r#type::{GenericParamBound, ImplementedTrait, TypeWi
 mod constants;
 mod test;
 
-const EXPECT_TYPE_EXISTS: &str = "Expected type to exist in documentation";
+// const EXPECT_TYPE_EXISTS: &str = "Expected type to exist in documentation";
 
 pub struct GenericBoundChecker<'a> {
     parser: &'a document::ProjectRustDocParser,
@@ -151,15 +151,14 @@ impl<'a> GenericBoundChecker<'a> {
     }
 
     fn dyn_trait_to_implemented_traits(&self, dyn_trait: &rustdoc_types::DynTrait) -> Vec<ImplementedTrait> {
-        dyn_trait.traits.iter().map(|trait_| {
-            let type_with_args = self.parser.path_to_type_with_args(&trait_.trait_)
-                .expect(EXPECT_TYPE_EXISTS);
-            ImplementedTrait {
-                id: None,
-                name: trait_.trait_.path.clone(),
-                trait_: type_with_args,
-                bounds: vec![],
-            }
+        dyn_trait.traits.iter().filter_map(|trait_| {
+            self.parser.path_to_type_with_args(&trait_.trait_)
+                .map(|t| ImplementedTrait {
+                    id: None,
+                    name: trait_.trait_.path.clone(),
+                    trait_: t,
+                    bounds: vec![],
+                })
         }).collect()
     }
 
@@ -167,12 +166,10 @@ impl<'a> GenericBoundChecker<'a> {
         impl_trait.iter().filter_map(|bound| {
             match bound {
                 rd::GenericBound::TraitBound { trait_, .. } => {
-                    let type_with_args = self.parser.path_to_type_with_args(&trait_)
-                        .expect(EXPECT_TYPE_EXISTS);
-                    Some(ImplementedTrait {
+                    self.parser.path_to_type_with_args(&trait_).map(|t| ImplementedTrait {
                         id: None,
                         name: trait_.path.clone(),
-                        trait_: type_with_args,
+                        trait_: t,
                         bounds: vec![],
                     })
                 },

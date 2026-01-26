@@ -26,7 +26,7 @@ fi
 
 TOPLEVEL="$(git rev-parse --show-toplevel)"
 OUTPUT_DIR="$TOPLEVEL/output/$CRATE_NAME"
-STD_DOC="$TOPLEVEL/localdata/std_pretty.json"
+STD_DOC="$TOPLEVEL/localdata/std/std.json"
 OUTPUT_ROOT="$TOPLEVEL/output"
 if [ -d $OUTPUT_DIR ]; then
     echo "Output directory $OUTPUT_DIR already exists."
