@@ -1,8 +1,11 @@
 LLM:
   type: "DeepSeek"
-  model_name: "deepseek-reasoner"
+  # model_name: "deepseek-reasoner"
   # api_url_chat: "http://192.168.0.169:11434/api/chat"
-  api_url_chat: "https://api.deepseek.com/chat/completions"
+  # api_url_chat: "https://api.deepseek.com/chat/completions"
+  # model_name: "qwen3-coder-plus"
+  model_name: "qwen3.5-plus"
+  api_url_chat: "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions"
   fix_retries: 3
   input_gen_retries: 3
 prompts:
@@ -17,6 +20,7 @@ doc:
   temp_project_path: "./"
   temp_project_name: "temp_doc_project"
   parser: "RustDoc" # Options: TrustFall, RustDoc
+strict_mode: true
 # querys:
 #   function: "querys/function.gql"
 #   method: "querys/method.gql"

@@ -109,4 +109,7 @@ pub struct DocArgs {
     /// Output file path for the generated API documentation in JSON format
     #[arg(short, long, value_name = "FILE")]
     pub output: PathBuf,
+    /// Whether output origin rustdoc file in json format directly
+    #[arg(long, default_value_t = false)]
+    pub raw: bool,
 }

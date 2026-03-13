@@ -12,6 +12,7 @@ pub struct Config {
     pub commands: CommandConfig,
     pub testcase: TestcaseConfig,
     pub doc: DocConfig,
+    pub strict_mode: bool,
     // pub querys: QueryConfig,
 }
 

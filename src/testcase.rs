@@ -250,6 +250,8 @@ impl Testcase {
         }
         fuzz_process.arg("-o")
             .arg(relative_output_dir)
+            // .arg("target/debug/fuzz")
+            .arg("--")
             .arg(format!("target/debug/{}", project_name))
             .current_dir(&self.path);
         if let Some(_) = self.pb {

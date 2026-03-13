@@ -242,7 +242,7 @@ impl<'a> GenericBoundChecker<'a> {
                     Some(traits) => self.traits_satisfies_traits(traits, required),
                     None => {
                         warn!("Primitive type {} not found in std types", name);
-                        false
+                        !crate::utils::config().strict_mode
                     },
                 }
             },
@@ -280,7 +280,7 @@ impl<'a> GenericBoundChecker<'a> {
                         if not_found.insert(path.path.clone()) {
                             warn!("Type {} not found in documentation", path.path);
                         }
-                        false
+                        !crate::utils::config().strict_mode
                     }
                 }
             },
@@ -291,11 +291,11 @@ impl<'a> GenericBoundChecker<'a> {
             }
 
             // for QualifiedPath, unsupported yet
-            Type::QualifiedPath { .. } => false,
+            Type::QualifiedPath { .. } => !crate::utils::config().strict_mode,
 
             // for other types, return false
-            Type::FunctionPointer(_) => false,
-            Type::Infer => false,
+            Type::FunctionPointer(_) => !crate::utils::config().strict_mode,
+            Type::Infer => !crate::utils::config().strict_mode,
         }
     }
 

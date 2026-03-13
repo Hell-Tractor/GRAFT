@@ -29,7 +29,11 @@ async fn main() {
     let result = match &cli.command {
         Commands::Doc(args) => {
             if let Some(crate_name) = &args.name {
-                generate_doc(crate_name, &args.output)
+                if args.raw {
+                    generate_raw_doc(crate_name, &args.output)
+                } else {
+                    generate_doc(crate_name, &args.output)
+                }
             } else if let Some(path) = &args.path {
                 generate_doc_from_file(path, &args.output)
             } else {
@@ -47,6 +51,14 @@ async fn main() {
     if let Err(e) = result {
         error!("Error occurred: {}", e);
     }
+}
+
+fn generate_raw_doc(crate_name: &str, output: &PathBuf) -> Result<()> {
+    info!("Generating raw API documentation for crate `{}`", crate_name);
+    let api_doc = document::get_raw_api_documentation(crate_name)?;
+    std::fs::write(output, &api_doc)?;
+    info!("Done.");
+    Ok(())
 }
 
 fn generate_doc(crate_name: &str, output: &PathBuf) -> Result<()> {
@@ -256,7 +268,7 @@ async fn fuzz(crate_name: &str, dir: &PathBuf, count: usize, resume: bool, timeo
     let summary_pb = multi_pb.add(ProgressBar::new(count as u64));
     summary_pb.set_style(
         ProgressStyle::with_template(
-            " {prefix:.bold}: [{bar:40.green/white}] {pos}/{len} ({percent}%) | {msg}"
+            "{spinner:.green} [{elapsed_precise}] {prefix:.bold}: [{bar:40.green/white}] {pos}/{len} ({percent}%) | {msg}"
         )
         .unwrap()
         .progress_chars("#>-")

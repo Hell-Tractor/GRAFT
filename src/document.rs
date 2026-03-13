@@ -159,7 +159,7 @@ impl ToString for APIDoc {
 }
 
 #[instrument]
-fn get_raw_api_documentation(crate_name: &str) -> Result<String> {
+pub fn get_raw_api_documentation(crate_name: &str) -> Result<String> {
     info!("Fetching raw API documentation for crate");
     let cargo = &crate::utils::config().commands.cargo;
     let temp_project_path = &crate::utils::config().doc.temp_project_path;
