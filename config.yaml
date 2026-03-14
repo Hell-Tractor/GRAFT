@@ -16,6 +16,7 @@ commands:
   cargo: "cargo"
 testcase:
   each_api_max_usage: 3
+  api_least_coverage: 2
 doc:
   temp_project_path: "./"
   temp_project_name: "temp_doc_project"

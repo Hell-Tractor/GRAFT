@@ -208,7 +208,7 @@ impl<'a> APISequeceGenerator<'a> {
         self.graph.vertices.iter().any(|vertex| {
             if let Vertex::API(api) = vertex {
                 let api = api.read().unwrap();
-                self.depth[api.id] >= 0 && self.used_times[api.id] == 0
+                self.depth[api.id] >= 0 && self.used_times[api.id] < config().testcase.api_least_coverage as i32
             } else {
                 false
             }

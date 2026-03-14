@@ -44,6 +44,7 @@ pub struct CommandConfig {
 pub struct TestcaseConfig {
     // pub input_count: u32,
     pub each_api_max_usage: u32,
+    pub api_least_coverage: u32,
 }
 
 #[derive(Deserialize)]
