@@ -18,6 +18,7 @@ mod generic_bound;
 mod api_graph;
 mod cli;
 mod log;
+mod coverage;
 
 #[tokio::main]
 async fn main() {
@@ -46,6 +47,7 @@ async fn main() {
         Commands::Testcase { crate_name, input, output } => generate_testcases(crate_name, input, output).await,
         Commands::SeedGen { crate_name, dir, count, seed_count } => generate_seed_inputs(crate_name, dir, *count, *seed_count).await,
         Commands::Fuzz { crate_name, dir, count, resume, timeout } => fuzz(crate_name, dir, *count, *resume, *timeout).await,
+        Commands::Coverage { crate_name, coverage_path } => coverage(crate_name, coverage_path),
     };
 
     if let Err(e) = result {
@@ -312,5 +314,21 @@ async fn fuzz(crate_name: &str, dir: &PathBuf, count: usize, resume: bool, timeo
     }
     summary_pb.finish_with_message("Fuzzing completed.");
     info!("{}/{} testcases ran successfully with AFL", success_count, count);
+    Ok(())
+}
+
+fn coverage(crate_name: &str, coverage_path: &PathBuf) -> Result<()> {
+    info!("Analyzing fuzzing results and calculating API coverage for crate `{}`", crate_name);
+    let doc = document::get_raw_api_documentation(crate_name)?;
+    let krate = serde_json::from_str(&doc)?;
+    let coverage = coverage::calculate_coverage(&krate, coverage_path)?;
+    let percentage = if coverage.total > 0 {
+        coverage.covered as f64 / coverage.total as f64 * 100.0
+    } else {
+        0.0
+    };
+
+    info!("API coverage for crate `{}`: {}/{} ({:.2}%)", crate_name, coverage.covered, coverage.total, percentage);
+    println!("{crate_name},{},{},{:.2}%", coverage.covered, coverage.total, percentage);
     Ok(())
 }
