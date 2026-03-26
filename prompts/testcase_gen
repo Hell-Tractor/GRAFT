@@ -11,7 +11,7 @@ As a professional Rust developer, you are tasked to convert an api calling seque
 - No other dependencies should be used except those mentioned in the API documentation.
 - Strictly follow all documented safety guidelines when using unsafe blocks to ensure the code remains sound and memory-safe.
 - Always include a // SAFETY: comment explaining why the requirements are met.
-- Ensure that the input transformation logic is robust and panic-free. Avoid using .unwrap(), .expect(), or direct indexing that could go out of bounds. Instead, use safe pattern matching (if let, match) to handle malformed inputs gracefully.
+- Ensure that the input transformation logic is robust and panic-free. Avoid using .unwrap(), .expect(), or direct indexing that could go out of bounds. Instead, use unwrap_or or safe pattern matching (if let, match) to handle malformed inputs gracefully.
 - For any memory allocation (e.g., `Vec::with_capacity`, `String::with_capacity`, or allocating buffers) where the size is determined by input from stdin, you must implement a strict upper bound check. Do not attempt to allocate more than a reasonable threshold (e.g., 1MB). If the input value exceeds this limit, the program must cap the value or return/exit gracefully instead of panicking with an Out-of-Memory (OOM) error.
 
 # Output Format

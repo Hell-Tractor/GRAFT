@@ -26,6 +26,7 @@ pub struct LLMConfig {
     pub input_gen_retries: u32,
     #[serde(default)]
     pub api_key: Option<String>,
+    pub concurrent_tasks: usize,
 }
 
 #[derive(Deserialize)]

@@ -347,6 +347,9 @@ impl<const OFFSET: u32> RustDocParser<OFFSET> {
         } else {
             APIKind::Function
         };
+        let file = item.span.as_ref().map(|span| span.filename.clone()).unwrap_or_else(|| "UnknownFile".into());
+        let start_line = item.span.as_ref().map(|span| span.begin.0).unwrap_or(0);
+        let end_line = item.span.as_ref().map(|span| span.end.0).unwrap_or(0);
 
         Ok(API {
             id: item.id.0 + OFFSET,
@@ -358,6 +361,9 @@ impl<const OFFSET: u32> RustDocParser<OFFSET> {
             generics,
             inputs,
             output: ReturnValue { type_: output },
+            file,
+            start_line,
+            end_line,
         })
     }
 

@@ -184,8 +184,10 @@ async fn generate_testcases(crate_name: &str, input: &PathBuf, output: &PathBuf)
     let _enter = span.enter();
 
     let mut task_set = JoinSet::new();
+    let sem = Arc::new(Semaphore::new(utils::config().llm.concurrent_tasks));
     for (i, api_sequence) in api_sequences.into_iter().enumerate() {
         // info!("Converting API sequence {} / {} to testcase...", i + 1, api_sequence_count);
+        let permit = sem.clone().acquire_owned().await.expect("Failed to acquire semaphore permit");
         let name = format!("{}_test{}", crate_name, i);
         let output = output.clone();
         let crate_name = crate_name.to_string();
@@ -198,6 +200,7 @@ async fn generate_testcases(crate_name: &str, input: &PathBuf, output: &PathBuf)
                 &api_sequence,
                 llm,
             ).await;
+            drop(permit);
             (tc, i)
         });
         // info!("API sequence {} / {} converted to testcase.", i + 1, api_sequence_count);
@@ -319,9 +322,9 @@ async fn fuzz(crate_name: &str, dir: &PathBuf, count: usize, resume: bool, timeo
 
 fn coverage(crate_name: &str, coverage_path: &PathBuf) -> Result<()> {
     info!("Analyzing fuzzing results and calculating API coverage for crate `{}`", crate_name);
-    let doc = document::get_raw_api_documentation(crate_name)?;
-    let krate = serde_json::from_str(&doc)?;
-    let coverage = coverage::calculate_coverage(&krate, coverage_path)?;
+    // let doc = document::get_raw_api_documentation(crate_name)?;
+    // let krate = serde_json::from_str(&doc)?;
+    let coverage = coverage::calculate_coverage(crate_name, coverage_path)?;
     let percentage = if coverage.total > 0 {
         coverage.covered as f64 / coverage.total as f64 * 100.0
     } else {

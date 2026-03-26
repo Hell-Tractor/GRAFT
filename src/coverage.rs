@@ -2,7 +2,7 @@ use std::{io::BufRead, path::{Path, PathBuf}};
 
 use tracing::{debug, info, warn};
 
-use crate::Result;
+use crate::{Result, document};
 
 #[derive(Debug, Clone)]
 struct API {
@@ -14,8 +14,8 @@ struct API {
     signature: String,
 }
 
-fn get_public_apis(krate: &rustdoc_types::Crate) -> Vec<API> {
-    krate.index.values().filter_map(|item| {
+fn get_public_apis(krate: &str) -> Result<Vec<API>> {
+    // krate.index.values().filter_map(|item| {
         // Suppose all api in documentation are public, as private items are not included in rustdoc output.
         // if item.visibility != rustdoc_types::Visibility::Public {
         //     return None;
@@ -23,28 +23,40 @@ fn get_public_apis(krate: &rustdoc_types::Crate) -> Vec<API> {
         // if !matches!(item.visibility, rustdoc_types::Visibility::Public) {
         //     return None;
         // }
-        if let Some(_) = item.deprecation {
-            return None;
-        };
-        match &item.inner {
-            rustdoc_types::ItemEnum::Function(func) => {
-                if !func.has_body {
-                    return None;
-                }
-                let span = item.span.as_ref()?;
-                let name = item.name.clone().unwrap_or("UNKNOWN_FUNCTION_NAME".into());
-                let signature = crate::document::rust_type_names::function_signature(func, &name);
-                Some(API {
-                    file: span.filename.clone(),
-                    start_line: span.begin.0,
-                    end_line: span.end.0,
-                    is_covered: false,
-                    signature,
-                })
-            }
-            _ => None,
-        }
-    }).collect()
+    //     if let Some(_) = item.deprecation {
+    //         return None;
+    //     };
+    //     match &item.inner {
+    //         rustdoc_types::ItemEnum::Function(func) => {
+    //             if !func.has_body {
+    //                 return None;
+    //             }
+    //             let span = item.span.as_ref()?;
+    //             let name = item.name.clone().unwrap_or("UNKNOWN_FUNCTION_NAME".into());
+    //             let signature = crate::document::rust_type_names::function_signature(func, &name);
+    //             Some(API {
+    //                 file: span.filename.clone(),
+    //                 start_line: span.begin.0,
+    //                 end_line: span.end.0,
+    //                 is_covered: false,
+    //                 signature,
+    //             })
+    //         }
+    //         _ => None,
+    //     }
+    // }).collect()
+    let result = document::APIDoc::from_crate_name(krate, false)?
+        .filter_api()
+        .build()
+        .apis.into_iter()
+        .map(|api| API {
+            file: api.file,
+            start_line: api.start_line,
+            end_line: api.end_line,
+            is_covered: false,
+            signature: api.signature,
+        }).collect();
+    Ok(result)
 }
 
 pub struct Coverage {
@@ -52,8 +64,8 @@ pub struct Coverage {
     pub total: usize,
 }
 
-pub fn calculate_coverage(krate: &rustdoc_types::Crate, coverage_report_path: &Path) -> Result<Coverage> {
-    let mut apis = get_public_apis(krate);
+pub fn calculate_coverage(krate: &str, coverage_report_path: &Path) -> Result<Coverage> {
+    let mut apis = get_public_apis(krate)?;
     info!("Total public APIs found: {}", apis.len());
     debug!("Head APIs: {:#?}", apis.iter().take(10).collect::<Vec<_>>());
     let reader = std::io::BufReader::new(std::fs::File::open(coverage_report_path)?);
@@ -104,6 +116,7 @@ pub fn calculate_coverage(krate: &rustdoc_types::Crate, coverage_report_path: &P
             }
         }
     }
+    debug!("Coverage result: {:#?}", apis);
     Ok(Coverage {
         covered,
         total: apis.len(),

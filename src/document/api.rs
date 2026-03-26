@@ -1,3 +1,5 @@
+use std::path::PathBuf;
+
 use serde::{Deserialize, Serialize};
 
 use crate::document::r#type::GenericParamBound;
@@ -14,6 +16,12 @@ pub struct API {
     pub generics: Vec<GenericParamBound>,
     pub inputs: Vec<Parameter>,
     pub output: ReturnValue,
+    #[serde(skip)]
+    pub file: PathBuf,
+    #[serde(skip)]
+    pub start_line: usize,
+    #[serde(skip)]
+    pub end_line: usize,
     // pub impl_for: Option<u32>,
     // pub is_public: bool,
     // pub is_safe: bool,

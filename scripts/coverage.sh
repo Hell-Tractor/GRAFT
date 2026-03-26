@@ -67,7 +67,10 @@ done
 # 3. Data Aggregation
 echo "==============================================="
 echo "[INFO] Merging raw profile data into $PROFDATA_FILE..."
-llvm-profdata merge -sparse "$COV_RAW_DIR"/*.profraw -o "$PROFDATA_FILE"
+find "$COV_RAW_DIR" -name "*.profraw" > all_files.txt
+llvm-profdata merge -sparse -f all_files.txt -o "$PROFDATA_FILE"
+rm all_files.txt
+# llvm-profdata merge -sparse "$COV_RAW_DIR"/*.profraw -o "$PROFDATA_FILE"
 
 # 4. Report Generation
 echo -e "\n--- Coverage Report Summary ---"

@@ -66,7 +66,8 @@ impl APIDocBuilder {
             "drop", "to_owned",
             "fmt",
             "into_iter", "iter", "iter_mut",
-            "clone_to_uninit" // unstable method, skip for now
+            "clone_to_uninit", // unstable method, skip for now
+            "serialize", "deserialize", "serialize_with", "deserialize_with", // skip serde traits
         ];
 
         info!("Filtering out trivial APIs from documentation");

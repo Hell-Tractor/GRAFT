@@ -8,6 +8,7 @@ LLM:
   api_url_chat: "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions"
   fix_retries: 3
   input_gen_retries: 3
+  concurrent_tasks: 16
 prompts:
   testcase_gen: "prompts/testcase_gen"
   fix_testcase: "prompts/fix_testcase"
