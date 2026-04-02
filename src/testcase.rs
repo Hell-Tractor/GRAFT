@@ -57,26 +57,36 @@ impl Testcase {
 
     pub async fn new(path: &Path, name: &str, target_crate: &str, api_sequence: &Vec<Arc<RwLock<api_graph::API>>>, mut llm: Box<dyn LLM>) -> Result<Self> {
         let project_path = path.join(name);
+        let cargo = &utils::config().commands.cargo;
         if project_path.exists() {
-            debug!("Removing existing directory at {}", project_path.display());
+            info!("Cargo project `{}` already exists, trying to build it.", name);
+            let output = Command::new(&cargo)
+                .arg("afl").arg("build")
+                .current_dir(&project_path)
+                .output().await?;
+            if output.status.success() {
+                info!("Existing project `{}` built successfully, skipping testcase generation.", name);
+                return Ok(Testcase { path: path.join(name).into(), target_crate: target_crate.to_string(), pb: None })
+            }
+            info!("Failed to build project `{}`, Removing existing directory at {}", name, project_path.display());
             std::fs::remove_dir_all(&project_path)?;
         }
         if !path.exists() {
             std::fs::create_dir_all(&path)?;
+
+            // create project
+            info!("Creating new cargo project `{}` at {}", name, project_path.display());
+            Command::new(cargo)
+                .arg("new").arg(name).arg("--vcs").arg("none")
+                .current_dir(path)
+                .status().await?;
+            info!("Project `{}` created successfully", name);
         }
 
-        // create project
-        info!("Creating new cargo project `{}` at {}", name, project_path.display());
-        let cargo = &utils::config().commands.cargo;
-        Command::new(cargo)
-            .arg("new").arg(name).arg("--vcs").arg("none")
-            .current_dir(path)
-            .status().await?;
-        info!("Project `{}` created successfully", name);
 
         // add dependency
         info!("Adding dependency `{}` to project `{}`", target_crate, name);
-        let output = Command::new(&cargo)
+        let output = Command::new(cargo)
             .arg("add").arg(target_crate)
             .current_dir(&project_path)
             .output().await?;
