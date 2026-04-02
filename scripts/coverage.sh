@@ -20,7 +20,6 @@ else
     exit 1
 fi
 
-HARNESS_FILE="main.rs"
 TOPLEVEL="$(git rev-parse --show-toplevel)"
 TESTCASES_BASE="$TOPLEVEL/output/$CRATE_NAME/testcases"
 COV_RAW_DIR="$TOPLEVEL/output/$CRATE_NAME/coverage_raw"
@@ -28,10 +27,10 @@ PROFDATA_FILE="$TOPLEVEL/output/$CRATE_NAME/total_coverage.profdata"
 
 # 1. Initialization
 mkdir -p "$COV_RAW_DIR"
-rm -f "$COV_RAW_DIR"/*.profraw
+find "$COV_RAW_DIR" -name '*.profraw' -delete
 
 export LLVM_PROFILE_FILE="$COV_RAW_DIR/test-%p-%m.profraw"
-export RUSTFLAGS="-C instrument-coverage"
+export RUSTFLAGS="-Cinstrument-coverage"
 
 object_files=()
 
@@ -49,17 +48,21 @@ for folder in "$TESTCASES_BASE"/*/; do
     cargo build --manifest-path "${folder}Cargo.toml" --target-dir "$COVERAGE_TARGET_DIR" > /dev/null 2>&1
 
     BINARY_PATH="${COVERAGE_TARGET_DIR}/debug/${CRATE_NAME}_test${id}"
+    AFL_BINARY_PATH="${folder}target/debug/${CRATE_NAME}_test${id}"
 
     if [ ! -f "$BINARY_PATH" ]; then
         echo "[ERROR] Compilation failed or binary not found: $BINARY_PATH"
         continue
     fi
 
+    echo "[INFO] Minimizing testcases using AFL's cmin..."
+    cargo afl cmin -i "${folder}outputs/default/queue" -o "${folder}outputs/default/queue_minimized" -- "$AFL_BINARY_PATH" > /dev/null 2>&1
+
     object_files+=("-object" "$BINARY_PATH")
 
     echo "[INFO] Executing testcases for coverage collection..."
 
-    find "${folder}outputs/default/queue" "${folder}outputs/default/crashes" -maxdepth 1 -type f ! -name "*.txt" 2>/dev/null | while read -r input_file; do
+    find "${folder}outputs/default/queue_minimized" -maxdepth 1 -type f ! -name "*.txt" 2>/dev/null | while read -r input_file; do
         $BINARY_PATH < "$input_file" > /dev/null 2>&1
     done
 done
@@ -73,22 +76,30 @@ rm all_files.txt
 # llvm-profdata merge -sparse "$COV_RAW_DIR"/*.profraw -o "$PROFDATA_FILE"
 
 # 4. Report Generation
-echo -e "\n--- Coverage Report Summary ---"
-llvm-cov report \
-    "${object_files[@]}" \
-    -instr-profile="$PROFDATA_FILE" \
-    -ignore-filename-regex="rustc|testcases|$HARNESS_FILE"
-    # "$CRATE_NAME"
+# echo -e "\n--- Coverage Report Summary ---"
+# llvm-cov report \
+#     "${object_files[@]}" \
+#     -instr-profile="$PROFDATA_FILE" \
+#     -ignore-filename-regex="rustc|testcases|$HARNESS_FILE"
+#     # "$CRATE_NAME"
 
 echo -e "\n--- Generating detailed coverage report ---"
-llvm-cov show \
+# llvm-cov show \
+#     "${object_files[@]}" \
+#     -instr-profile="$PROFDATA_FILE" \
+#     -show-instantiations \
+#     -show-line-counts-or-regions \
+#     -ignore-filename-regex="rustc|testcases|$HARNESS_FILE" \
+#     --format=text > "$TOPLEVEL/output/$CRATE_NAME/coverage_detail.txt"
+llvm-cov export \
     "${object_files[@]}" \
     -instr-profile="$PROFDATA_FILE" \
-    -show-instantiations \
-    -show-line-counts-or-regions \
-    -ignore-filename-regex="rustc|testcases|$HARNESS_FILE" \
-    --format=text > "$TOPLEVEL/output/$CRATE_NAME/coverage_detail.txt"
+    --format=text \
+    --skip-expansions \
+    --skip-functions=false \
+    --ignore-filename-regex="main\.rs$" \
+    > "$TOPLEVEL/output/$CRATE_NAME/coverage_detail.json"
 
 echo "==============================================="
 echo "[SUCCESS] Detailed coverage analysis completed."
-echo "[INFO] Report location: $TOPLEVEL/output/$CRATE_NAME/coverage_detail.txt"
+echo "[INFO] Report location: $TOPLEVEL/output/$CRATE_NAME/coverage_detail.json"

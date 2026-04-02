@@ -187,11 +187,13 @@ async fn generate_testcases(crate_name: &str, input: &PathBuf, output: &PathBuf)
     let sem = Arc::new(Semaphore::new(utils::config().llm.concurrent_tasks));
     for (i, api_sequence) in api_sequences.into_iter().enumerate() {
         // info!("Converting API sequence {} / {} to testcase...", i + 1, api_sequence_count);
-        let permit = sem.clone().acquire_owned().await.expect("Failed to acquire semaphore permit");
+        // let permit = sem.clone().acquire_owned().await.expect("Failed to acquire semaphore permit");
+        let sem = sem.clone();
         let name = format!("{}_test{}", crate_name, i);
         let output = output.clone();
         let crate_name = crate_name.to_string();
         task_set.spawn(async move {
+            let permit = sem.acquire_owned().await.expect("Failed to acquire semaphore permit");
             let llm = llm::LLMFactory::create_llm(&llm_type, &llm_model, &llm_api_url);
             let tc = testcase::Testcase::new(
                 &output,
@@ -243,12 +245,17 @@ async fn generate_seed_inputs(crate_name: &str, dir: &PathBuf, count: usize, see
     span.pb_set_style(&log::pb_style());
     let _enter = span.enter();
 
+    let sem = Arc::new(Semaphore::new(utils::config().llm.concurrent_tasks));
+
     let mut task_set = JoinSet::new();
     for (i, testcase) in testcases.into_iter().enumerate() {
         // info!("Generating inputs for testcase {} / {}...", i + 1, count);
+        let sem = sem.clone();
         task_set.spawn(async move {
+            let permit = sem.acquire_owned().await.expect("Failed to acquire semaphore permit");
             let llm_client = llm::LLMFactory::create_llm(&llm_type, &llm_model, &llm_api_url);
             let res = testcase.generate_inputs(input_dir, llm_client, seed_count).await;
+            drop(permit);
             (res, i)
         });
     }
