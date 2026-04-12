@@ -63,15 +63,15 @@ impl Testcase {
             let output = Command::new(&cargo)
                 .arg("afl").arg("build")
                 .current_dir(&project_path)
-                .output().await?;
-            if output.status.success() {
+                .output().await;
+            if output.is_ok() && output.unwrap().status.success() {
                 info!("Existing project `{}` built successfully, skipping testcase generation.", name);
                 return Ok(Testcase { path: path.join(name).into(), target_crate: target_crate.to_string(), pb: None })
             }
             info!("Failed to build project `{}`, Removing existing directory at {}", name, project_path.display());
             std::fs::remove_dir_all(&project_path)?;
         }
-        if !path.exists() {
+        if !project_path.exists() {
             std::fs::create_dir_all(&path)?;
 
             // create project
@@ -167,6 +167,15 @@ impl Testcase {
     }
 
     pub async fn generate_inputs(&self, relative_dir: &Path, mut llm: Box<dyn LLM>, seed_count: usize) -> Result<()> {
+        let input_dir = self.path.join(relative_dir);
+        if input_dir.exists() {
+            let count = std::fs::read_dir(&input_dir)?.count();
+            if count >= seed_count {
+                info!("Input directory already exists with {} inputs, skipping input generation.", count);
+                return Ok(());
+            }
+            info!("Input directory already exists with {} inputs, but less than required {}, regenerating inputs.", count, seed_count);
+        }
         // read prompt template
         let prompt_path = &utils::config().prompts.input_gen;
         let prompt_template = utils::read_file_to_string(prompt_path)?;
@@ -196,7 +205,6 @@ impl Testcase {
                     // continue;
                 };
 
-                let input_dir = self.path.join(relative_dir);
                 if !input_dir.exists() {
                     std::fs::create_dir_all(&input_dir)?;
                 }
