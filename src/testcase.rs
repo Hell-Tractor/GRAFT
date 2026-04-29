@@ -61,7 +61,10 @@ impl Testcase {
         if project_path.exists() {
             info!("Cargo project `{}` already exists, trying to build it.", name);
             let output = Command::new(&cargo)
+                .arg("+nightly")
                 .arg("afl").arg("build")
+                .env("RUSTFLAGS", "-Z sanitizer=address")
+                .env("ASAN_OPTIONS", "detect_leaks=0:abort_on_error=1:symbolize=0")
                 .current_dir(&project_path)
                 .output().await;
             if output.is_ok() && output.unwrap().status.success() {
@@ -140,7 +143,10 @@ impl Testcase {
 
                 // try to build the project
                 let output = Command::new(&cargo)
+                    .arg("+nightly")
                     .arg("afl").arg("build")
+                    .env("RUSTFLAGS", "-Z sanitizer=address")
+                    .env("ASAN_OPTIONS", "detect_leaks=0:abort_on_error=1:symbolize=0")
                     .current_dir(cargo_path.parent().unwrap())
                     .output().await?;
                 if output.status.success() {
@@ -233,7 +239,10 @@ impl Testcase {
         if !resume {
             info!("Building project...");
             let output = Command::new(&cargo)
+                .arg("+nightly")
                 .arg("afl").arg("build")
+                .env("RUSTFLAGS", "-Z sanitizer=address")
+                .env("ASAN_OPTIONS", "detect_leaks=0:abort_on_error=1:symbolize=0")
                 .current_dir(&self.path)
                 .output().await?;
             if !output.status.success() {
@@ -258,7 +267,9 @@ impl Testcase {
 
         // let mut fuzz_process = Command::new(&cargo)
         let mut fuzz_process = Command::new(&cargo);
-        fuzz_process.arg("afl").arg("fuzz")
+        fuzz_process.arg("+nightly").arg("afl").arg("fuzz")
+            .env("RUSTFLAGS", "-Z sanitizer=address")
+            .env("ASAN_OPTIONS", "detect_leaks=0:abort_on_error=1:symbolize=0")
             .env("AFL_NO_UI", "1")
             .arg("-V").arg(timeout.to_string());
         if resume {

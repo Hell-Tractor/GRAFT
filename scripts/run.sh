@@ -30,13 +30,14 @@ STD_DOC="$TOPLEVEL/localdata/std/std.json"
 OUTPUT_ROOT="$TOPLEVEL/output"
 if [ -d $OUTPUT_DIR ]; then
     echo "Output directory $OUTPUT_DIR already exists."
-    echo "Enter 'y' to delete it and continue, or any other key to exit."
+    echo "Enter 'D' to delete it and continue"
+    echo "    'R' to try to recover, or any other key to exit."
     read -r response
-    if [ "$response" != "y" ]; then
+    if [ "$response" == "D" ]; then
+        rm -rf $OUTPUT_DIR
+    elif [ "$response" != "R" ]; then
         echo "Exiting."
         exit 1
-    else
-        rm -rf $OUTPUT_DIR
     fi
 fi
 mkdir -p $OUTPUT_DIR

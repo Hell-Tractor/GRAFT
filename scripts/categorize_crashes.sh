@@ -41,13 +41,13 @@ categorize_bug() {
     elif echo "$log" | grep -q "SIGSEGV"; then
         echo "segfault_unsafe"
     else
-        # 如果是其他的 panic 喵
         echo "unknown_panic"
     fi
 }
 
 total_count=0
 staged_count=0
+ALL_CRASHES_DIR="$TOPLEVEL/output/$CRATE_NAME/all_crashes"
 for folder in "$TESTCASES_BASE"/*/; do
     echo "Processing test binary in folder: $folder"
 
@@ -79,6 +79,9 @@ for folder in "$TESTCASES_BASE"/*/; do
 
             mkdir -p "$STAGING_DIR/$category"
             cp "$crash_file" "$STAGING_DIR/$category/"
+
+            mkdir -p "$ALL_CRASHES_DIR/$category"
+            cp "$crash_file" "$ALL_CRASHES_DIR/$category/"
 
             staged_count_this_testcase=$((staged_count_this_testcase + 1))
         fi
