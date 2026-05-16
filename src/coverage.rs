@@ -14,7 +14,7 @@ struct API {
     signature: String,
 }
 
-fn get_public_apis(krate: &str) -> Result<Vec<API>> {
+fn get_public_apis(krate: &str, version: Option<&str>) -> Result<Vec<API>> {
     // krate.index.values().filter_map(|item| {
         // Suppose all api in documentation are public, as private items are not included in rustdoc output.
         // if item.visibility != rustdoc_types::Visibility::Public {
@@ -45,7 +45,7 @@ fn get_public_apis(krate: &str) -> Result<Vec<API>> {
     //         _ => None,
     //     }
     // }).collect()
-    let result = document::APIDoc::from_crate_name(krate, false)?
+    let result = document::APIDoc::from_crate_name(krate, version, false)?
         .filter_api()
         .build()
         .apis.into_iter()
@@ -122,8 +122,8 @@ pub struct Coverage {
 //         total: apis.len(),
 //     })
 // }
-pub fn calculate_coverage(krate: &str, coverage_report_path: &Path) -> Result<Coverage> {
-    let mut apis = get_public_apis(krate)?;
+pub fn calculate_coverage(krate: &str, version: Option<&str>, coverage_report_path: &Path) -> Result<Coverage> {
+    let mut apis = get_public_apis(krate, version)?;
     info!("Total public APIs found: {}", apis.len());
     debug!("Head APIs: {:#?}", apis.iter().take(10).collect::<Vec<_>>());
     let coverage_data = std::fs::read_to_string(coverage_report_path)?;

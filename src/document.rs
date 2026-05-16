@@ -119,8 +119,8 @@ impl APIDoc {
     //         }
     //     }
     // }
-    pub fn from_crate_name(crate_name: &str, is_std: bool) -> Result<APIDocBuilder> {
-        let raw_doc = get_raw_api_documentation(crate_name)?;
+    pub fn from_crate_name(crate_name: &str, version: Option<&str>, is_std: bool) -> Result<APIDocBuilder> {
+        let raw_doc = get_raw_api_documentation(crate_name, version)?;
         let api_doc = APIDoc::from_raw_doc(&raw_doc, is_std)?;
         Ok(api_doc)
     }
@@ -160,7 +160,7 @@ impl ToString for APIDoc {
 }
 
 #[instrument]
-pub fn get_raw_api_documentation(crate_name: &str) -> Result<String> {
+pub fn get_raw_api_documentation(crate_name: &str, version: Option<&str>) -> Result<String> {
     info!("Fetching raw API documentation for crate");
     let cargo = &crate::utils::config().commands.cargo;
     let temp_project_path = &crate::utils::config().doc.temp_project_path;
@@ -171,8 +171,12 @@ pub fn get_raw_api_documentation(crate_name: &str) -> Result<String> {
     let _temp_project = TempProject::new(temp_project_path, &temp_project_name)?;
     // add the target crate as dependency
     let project_path = temp_project_path.join(&temp_project_name);
+    let crate_spec = match version {
+        Some(v) => format!("{}@{}", crate_name, v),
+        None => crate_name.to_string(),
+    };
     let output = std::process::Command::new(&cargo)
-        .arg("add").arg(crate_name)
+        .arg("add").arg(&crate_spec)
         .current_dir(&project_path)
         .output()?;
     if !output.status.success() {

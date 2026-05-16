@@ -47,7 +47,7 @@ async fn main() {
         Commands::Testcase { crate_name, input, output } => generate_testcases(crate_name, input, output).await,
         Commands::SeedGen { crate_name, dir, count, seed_count } => generate_seed_inputs(crate_name, dir, *count, *seed_count).await,
         Commands::Fuzz { crate_name, dir, count, resume, timeout } => fuzz(crate_name, dir, *count, *resume, *timeout).await,
-        Commands::Coverage { crate_name, coverage_path } => coverage(crate_name, coverage_path),
+        Commands::Coverage { crate_name, coverage_path, crate_version } => coverage(crate_name, coverage_path, crate_version.as_deref()),
     };
 
     if let Err(e) = result {
@@ -57,7 +57,7 @@ async fn main() {
 
 fn generate_raw_doc(crate_name: &str, output: &PathBuf) -> Result<()> {
     info!("Generating raw API documentation for crate `{}`", crate_name);
-    let api_doc = document::get_raw_api_documentation(crate_name)?;
+    let api_doc = document::get_raw_api_documentation(crate_name, None)?;
     std::fs::write(output, &api_doc)?;
     info!("Done.");
     Ok(())
@@ -65,7 +65,7 @@ fn generate_raw_doc(crate_name: &str, output: &PathBuf) -> Result<()> {
 
 fn generate_doc(crate_name: &str, output: &PathBuf) -> Result<()> {
     info!("Generating API documentation for crate `{}`", crate_name);
-    let api_doc = document::APIDoc::from_crate_name(crate_name, false)?
+    let api_doc = document::APIDoc::from_crate_name(crate_name, None, false)?
         .filter_api().filter_types()
         .build();
     info!("Generation completed. Serializing to `{}`...", output.display());
@@ -103,7 +103,7 @@ fn generate_api_graph(input: &PathBuf, std: &PathBuf, output: &PathBuf) -> Resul
 
 fn measure_crate(crate_name: &str, std: &PathBuf) -> Result<()> {
     info!("Measuring crate `{}` for possible max API coverage", crate_name);
-    let api_doc = document::APIDoc::from_crate_name(crate_name, false)?
+    let api_doc = document::APIDoc::from_crate_name(crate_name, None, false)?
         .filter_api().filter_types()
         .build();
     let std_doc = {
@@ -327,11 +327,9 @@ async fn fuzz(crate_name: &str, dir: &PathBuf, count: usize, resume: bool, timeo
     Ok(())
 }
 
-fn coverage(crate_name: &str, coverage_path: &PathBuf) -> Result<()> {
+fn coverage(crate_name: &str, coverage_path: &PathBuf, crate_version: Option<&str>) -> Result<()> {
     info!("Analyzing fuzzing results and calculating API coverage for crate `{}`", crate_name);
-    // let doc = document::get_raw_api_documentation(crate_name)?;
-    // let krate = serde_json::from_str(&doc)?;
-    let coverage = coverage::calculate_coverage(crate_name, coverage_path)?;
+    let coverage = coverage::calculate_coverage(crate_name, crate_version, coverage_path)?;
     let percentage = if coverage.total > 0 {
         coverage.covered as f64 / coverage.total as f64 * 100.0
     } else {
