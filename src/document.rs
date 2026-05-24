@@ -172,7 +172,7 @@ pub fn get_raw_api_documentation(crate_name: &str, version: Option<&str>) -> Res
     // add the target crate as dependency
     let project_path = temp_project_path.join(&temp_project_name);
     let crate_spec = match version {
-        Some(v) => format!("{}@{}", crate_name, v),
+        Some(v) => format!("{}@={}", crate_name, v),
         None => crate_name.to_string(),
     };
     let output = std::process::Command::new(&cargo)
