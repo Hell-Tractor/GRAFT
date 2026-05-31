@@ -27,6 +27,8 @@ pub struct LLMConfig {
     #[serde(default)]
     pub api_key: Option<String>,
     pub concurrent_tasks: usize,
+    #[serde(default)]
+    pub max_tokens: Option<u32>,
 }
 
 #[derive(Deserialize)]

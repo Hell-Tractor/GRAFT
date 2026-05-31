@@ -43,7 +43,7 @@ async fn main() {
         },
         Commands::ApiGraph { input, std, output } => generate_api_graph(input, std, output),
         Commands::Measure { crate_name, std } => measure_crate(crate_name, std),
-        Commands::ApiSequence { input, std, output, count } => generate_api_sequence(input, std, output, count),
+        Commands::ApiSequence { input, std, output, count, ablation } => generate_api_sequence(input, std, output, count, ablation),
         Commands::Testcase { crate_name, input, output } => generate_testcases(crate_name, input, output).await,
         Commands::SeedGen { crate_name, dir, count, seed_count } => generate_seed_inputs(crate_name, dir, *count, *seed_count).await,
         Commands::Fuzz { crate_name, dir, count, resume, timeout } => fuzz(crate_name, dir, *count, *resume, *timeout).await,
@@ -93,7 +93,7 @@ fn generate_api_graph(input: &PathBuf, std: &PathBuf, output: &PathBuf) -> Resul
     let api_doc: document::APIDoc = serde_json::from_reader(reader)?;
     let reader = std::io::BufReader::new(std::fs::File::open(std)?);
     let std_doc: document::APIDoc = serde_json::from_reader(reader)?;
-    let graph = api_graph::APIGraph::new(api_doc, std_doc);
+    let graph = api_graph::APIGraph::new(api_doc, std_doc, false);
     info!("API graph generation completed. Serializing to `{}`...", output.display());
     let mut writer = std::io::BufWriter::new(std::fs::File::create(output)?);
     graph.to_dot_file(&mut writer)?;
@@ -110,8 +110,8 @@ fn measure_crate(crate_name: &str, std: &PathBuf) -> Result<()> {
         let reader = std::io::BufReader::new(std::fs::File::open(std)?);
         serde_json::from_reader(reader)?
     };
-    let api_graph = api_graph::APIGraph::new(api_doc, std_doc);
-    let generator = api_graph::algorithm::APISequeceGenerator::new(&api_graph);
+    let api_graph = api_graph::APIGraph::new(api_doc, std_doc, false);
+    let generator = api_graph::algorithm::APISequeceGenerator::new(&api_graph, false);
     let (max_covered, total) = generator.max_api_coverage();
     info!("Max API coverage for crate `{}`: {}/{} ({:.2}%)", crate_name, max_covered, total, max_covered as f64 / total as f64 * 100.0);
     Ok(())
@@ -131,30 +131,43 @@ fn generate_api_sequence_once(id: usize, generator: &mut api_graph::algorithm::A
     seq
 }
 
-fn generate_api_sequence(input: &PathBuf, std: &PathBuf, output: &PathBuf, count: &Option<usize>) -> Result<()> {
+fn generate_api_sequence(input: &PathBuf, std: &PathBuf, output: &PathBuf, count: &Option<usize>, ablation: &Option<cli::AblationMode>) -> Result<()> {
     info!("Initializing API sequence generator...");
+    let use_syntactic = matches!(ablation, Some(cli::AblationMode::NoGeneric));
+    let random_target = matches!(ablation, Some(cli::AblationMode::NoTopo));
     let api_graph = {
         let reader = std::io::BufReader::new(std::fs::File::open(input)?);
         let api_doc: document::APIDoc = serde_json::from_reader(reader)?;
         let reader = std::io::BufReader::new(std::fs::File::open(std)?);
         let std_doc: document::APIDoc = serde_json::from_reader(reader)?;
-        api_graph::APIGraph::new(api_doc, std_doc)
+        api_graph::APIGraph::new(api_doc, std_doc, use_syntactic)
     };
-    let mut generator = api_graph::algorithm::APISequeceGenerator::new(&api_graph);
     info!("API sequence generator initialized.");
-    let (max_covered, total) = generator.max_api_coverage();
-    info!("Max API coverage: {}/{} ({:.2}%)", max_covered, total, max_covered as f64 / total as f64 * 100.0);
-    info!("Generating api sequences...");
     let mut api_sequences = vec![];
-    if let Some(count) = count {
-        for i in 0..*count {
-            let seq = generate_api_sequence_once(i, &mut generator);
+    if matches!(ablation, Some(cli::AblationMode::NoGraph)) {
+        let n = count.unwrap_or(20);
+        let seq_len = 4;
+        let mut rng = rand::rng();
+        info!("Ablation NoGraph: generating {} random sequences (seq_len={})", n, seq_len);
+        for _ in 0..n {
+            let seq = api_graph::algorithm::generate_random_sequence(&api_graph, seq_len, &mut rng);
             api_sequences.push(seq);
         }
     } else {
-        while generator.suggest_generate() {
-            let seq = generate_api_sequence_once(api_sequences.len(), &mut generator);
-            api_sequences.push(seq);
+        let mut generator = api_graph::algorithm::APISequeceGenerator::new(&api_graph, random_target);
+        let (max_covered, total) = generator.max_api_coverage();
+        info!("Max API coverage: {}/{} ({:.2}%)", max_covered, total, max_covered as f64 / total as f64 * 100.0);
+        info!("Generating api sequences...");
+        if let Some(count) = count {
+            for i in 0..*count {
+                let seq = generate_api_sequence_once(i, &mut generator);
+                api_sequences.push(seq);
+            }
+        } else {
+            while generator.suggest_generate() {
+                let seq = generate_api_sequence_once(api_sequences.len(), &mut generator);
+                api_sequences.push(seq);
+            }
         }
     }
     info!("API sequence(count = {}) generation completed. Serializing to `{}`...", api_sequences.len(), output.display());

@@ -363,4 +363,34 @@ impl<'a> GenericBoundChecker<'a> {
         true
     }
 
+    /// Ablation variant: syntactic-only type compatibility, no generic bound resolution.
+    /// Generic/DynTrait/ImplTrait parameters are treated as opaque — no trait bound lookup.
+    pub fn check_syntactic(return_ty: &rd::Type, param_ty: &rd::Type) -> bool {
+        match param_ty {
+            rd::Type::Array { type_, .. }      => Self::check_syntactic(return_ty, type_),
+            rd::Type::BorrowedRef { type_, .. } => Self::check_syntactic(return_ty, type_),
+            rd::Type::Pat { type_, .. }        => Self::check_syntactic(return_ty, type_),
+            rd::Type::RawPointer { type_, .. } => Self::check_syntactic(return_ty, type_),
+            rd::Type::Slice(type_)             => Self::check_syntactic(return_ty, type_),
+            rd::Type::Primitive(_)             => true,
+            // No bound resolution: require exact syntactic match
+            rd::Type::Generic(_) | rd::Type::DynTrait(_) | rd::Type::ImplTrait(_) => {
+                return_ty == param_ty
+            },
+            rd::Type::ResolvedPath(_) | rd::Type::FunctionPointer(_) |
+            rd::Type::QualifiedPath { .. } => return_ty == param_ty,
+            rd::Type::Tuple(t) => {
+                let non_prim: Vec<&rd::Type> = t.iter()
+                    .filter(|e| !Self::is_type_primitive(e))
+                    .collect();
+                if non_prim.len() == 1 {
+                    Self::check_syntactic(return_ty, non_prim[0])
+                } else {
+                    return_ty == param_ty
+                }
+            },
+            rd::Type::Infer => false,
+        }
+    }
+
 }

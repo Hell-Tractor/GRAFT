@@ -5,6 +5,11 @@
 /localdata
 /debug
 /output
+/output*
 /env
 /core
 /paper
+
+.claude
+/crate_list
+/test_crates

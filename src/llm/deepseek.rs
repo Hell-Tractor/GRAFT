@@ -34,12 +34,15 @@ impl LLM for LLMClient {
         }
 
         self.messages.push(LLMMessage::user(prompt));
-        let request_body = serde_json::json!({
+        let mut request_body = serde_json::json!({
                 "model": self.model_name,
                 "messages": self.messages,
                 "stream": false,
                 "temperature": 0.0,
             });
+        if let Some(max_tokens) = config().llm.max_tokens {
+            request_body["max_tokens"] = serde_json::json!(max_tokens);
+        }
         info!("Requesting LLM with model `{}`, it may take some time...", self.model_name);
         let api_key = config().llm.api_key.as_ref()
             .expect("Missing API key for LLM service");

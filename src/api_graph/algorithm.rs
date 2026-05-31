@@ -18,13 +18,14 @@ pub struct APISequeceGenerator<'a> {
     graph: &'a APIGraph,
     used_times: Vec<i32>,
     depth: Vec<i32>,
+    random_target: bool,
 }
 
 impl<'a> APISequeceGenerator<'a> {
-    pub fn new(graph: &'a APIGraph) -> Self {
+    pub fn new(graph: &'a APIGraph, random_target: bool) -> Self {
         let used_times = vec![0; graph.vertices.len()];
         let depth = APISequeceGenerator::calculate_depth(graph);
-        Self { graph, used_times, depth }
+        Self { graph, used_times, depth, random_target }
     }
 
     fn calculate_depth(graph: &APIGraph) -> Vec<i32> {
@@ -107,22 +108,31 @@ impl<'a> APISequeceGenerator<'a> {
     }
 
     pub fn generate(&mut self) -> Vec<Arc<RwLock<API>>> {
-        let target_api = self.graph.vertices.iter().filter_map(|vertex| {
-            if let Vertex::API(api) = vertex {
-                Some(api.clone())
-            } else {
-                None
-            }
-        }).min_by(|a, b| {
-            let a = a.read().unwrap();
-            let b = b.read().unwrap();
-            // first by used_times asc, then by depth desc
-            if self.used_times[a.id] != self.used_times[b.id] {
-                self.used_times[a.id].cmp(&self.used_times[b.id])
-            } else {
-                self.depth[b.id].cmp(&self.depth[a.id])
-            }
-        }).expect("Should be at least one API in graph");
+        let target_api = if self.random_target {
+            use rand::seq::IteratorRandom;
+            let mut rng = rand::rng();
+            self.graph.vertices.iter().filter_map(|vertex| {
+                if let Vertex::API(api) = vertex { Some(api.clone()) } else { None }
+            }).choose(&mut rng)
+            .expect("Should be at least one API in graph")
+        } else {
+            self.graph.vertices.iter().filter_map(|vertex| {
+                if let Vertex::API(api) = vertex {
+                    Some(api.clone())
+                } else {
+                    None
+                }
+            }).min_by(|a, b| {
+                let a = a.read().unwrap();
+                let b = b.read().unwrap();
+                // first by used_times asc, then by depth desc
+                if self.used_times[a.id] != self.used_times[b.id] {
+                    self.used_times[a.id].cmp(&self.used_times[b.id])
+                } else {
+                    self.depth[b.id].cmp(&self.depth[a.id])
+                }
+            }).expect("Should be at least one API in graph")
+        };
         {
             let api = target_api.read().unwrap();
             info!("Selected target API(used = {}): {}", self.used_times[api.id], api.signature);
@@ -233,4 +243,22 @@ impl<'a> APISequeceGenerator<'a> {
         }).count();
         (used, total)
     }
+}
+
+/// Ablation variant: generate a random sequence of APIs, ignoring the dependency graph.
+/// APIs are sampled without replacement up to `seq_len`. No type-compatibility guarantees.
+pub fn generate_random_sequence(
+    graph: &APIGraph,
+    seq_len: usize,
+    rng: &mut impl rand::Rng,
+) -> Vec<Arc<RwLock<API>>> {
+    use rand::prelude::IndexedRandom;
+    let all_apis: Vec<Arc<RwLock<API>>> = graph.vertices.iter().filter_map(|v| {
+        if let Vertex::API(api) = v { Some(api.clone()) } else { None }
+    }).collect();
+    if all_apis.is_empty() {
+        return vec![];
+    }
+    let len = seq_len.min(all_apis.len());
+    all_apis.choose_multiple(rng, len).cloned().collect()
 }

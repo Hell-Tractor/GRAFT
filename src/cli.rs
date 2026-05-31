@@ -2,6 +2,16 @@ use std::path::PathBuf;
 
 use clap::{ArgGroup, Args, Parser, Subcommand};
 
+#[derive(clap::ValueEnum, Clone, Debug, PartialEq)]
+pub enum AblationMode {
+    /// w/o generic-aware type matching: syntactic equality only
+    NoGeneric,
+    /// w/o API dependency graph: random API sampling
+    NoGraph,
+    /// w/o topological traversal strategy: random target API selection
+    NoTopo,
+}
+
 #[derive(Parser)]
 #[command(version, about, long_about = None)]
 pub struct Cli {
@@ -50,6 +60,9 @@ pub enum Commands {
         /// Default is calculated by api coverage.
         #[arg(short, long)]
         count: Option<usize>,
+        /// Ablation mode for evaluation (omit for full PLFuzz behavior)
+        #[arg(long)]
+        ablation: Option<AblationMode>,
     },
     /// Convert API sequences to executable testcases
     Testcase {

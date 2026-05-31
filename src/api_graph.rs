@@ -59,7 +59,7 @@ impl APIGraph {
         Ok(())
     }
 
-    pub fn new(doc: document::APIDoc, std_doc: document::APIDoc) -> Self {
+    pub fn new(doc: document::APIDoc, std_doc: document::APIDoc, use_syntactic: bool) -> Self {
         let mut apis = vec![];
         let mut vertices = vec![];
         info!("Extracting APIs and API parameters from APIDoc");
@@ -132,7 +132,12 @@ impl APIGraph {
                     if input_type.is_fuzzer_generable() {
                         continue;
                     }
-                    if checker.check(&output_type, &input_type.type_) {
+                    let compatible = if use_syntactic {
+                        GenericBoundChecker::check_syntactic(&output_type, &input_type.type_)
+                    } else {
+                        checker.check(&output_type, &input_type.type_)
+                    };
+                    if compatible {
                         debug!("      Compatible! Adding edge from API {} to API {}", from_api.id, to_api.id);
                         edges[from_api.id].push(Edge::new(input_type.id, input_type.get_ref_type()));
                         rev_edges[input_type.id].push(Edge::new(from_api.id, input_type.get_ref_type()));
@@ -164,7 +169,12 @@ impl APIGraph {
                         if input_type.is_fuzzer_generable() {
                             continue;
                         }
-                        if checker.check(&constant.type_, &input_type.type_) {
+                        let compatible = if use_syntactic {
+                            GenericBoundChecker::check_syntactic(&constant.type_, &input_type.type_)
+                        } else {
+                            checker.check(&constant.type_, &input_type.type_)
+                        };
+                        if compatible {
                             debug!("      Compatible! Adding edge from Constant {} to API {}", constant.id, to_api.id);
                             edges[constant.id].push(Edge::new(input_type.id, input_type.get_ref_type()));
                             rev_edges[input_type.id].push(Edge::new(constant.id, input_type.get_ref_type()));
@@ -176,6 +186,8 @@ impl APIGraph {
             }
         }
 
+        let total_edges: usize = edges.iter().map(|e| e.len()).sum();
+        info!("[AblationMetric] Total graph edges: {}", total_edges);
         info!("API graph construction completed.");
 
         APIGraph {
