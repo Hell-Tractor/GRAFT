@@ -46,7 +46,7 @@ async fn main() {
         Commands::ApiSequence { input, std, output, count, ablation } => generate_api_sequence(input, std, output, count, ablation),
         Commands::Testcase { crate_name, input, output } => generate_testcases(crate_name, input, output).await,
         Commands::SeedGen { crate_name, dir, count, seed_count } => generate_seed_inputs(crate_name, dir, *count, *seed_count).await,
-        Commands::Fuzz { crate_name, dir, count, resume, timeout } => fuzz(crate_name, dir, *count, *resume, *timeout).await,
+        Commands::Fuzz { crate_name, dir, count, offset, jobs, resume, timeout } => fuzz(crate_name, dir, *count, *offset, *jobs, *resume, *timeout).await,
         Commands::Coverage { crate_name, coverage_path, crate_version } => coverage(crate_name, coverage_path, crate_version.as_deref()),
     };
 
@@ -287,8 +287,8 @@ async fn generate_seed_inputs(crate_name: &str, dir: &PathBuf, count: usize, see
     Ok(())
 }
 
-async fn fuzz(crate_name: &str, dir: &PathBuf, count: usize, resume: bool, timeout: u64) -> Result<()> {
-    info!("Running all testcases with AFL");
+async fn fuzz(crate_name: &str, dir: &PathBuf, count: usize, offset: usize, jobs: Option<usize>, resume: bool, timeout: u64) -> Result<()> {
+    info!("Running testcases [{}, {}) with AFL", offset, offset + count);
     let multi_pb = MultiProgress::new();
     let summary_pb = multi_pb.add(ProgressBar::new(count as u64));
     summary_pb.set_style(
@@ -301,11 +301,13 @@ async fn fuzz(crate_name: &str, dir: &PathBuf, count: usize, resume: bool, timeo
     summary_pb.set_prefix("Global Progress");
     summary_pb.set_message("Starting afl fuzz...");
 
-    let max_concurrent = std::thread::available_parallelism()?.get();
+    let max_concurrent = jobs.unwrap_or_else(|| {
+        std::thread::available_parallelism().map(|n| n.get()).unwrap_or(1)
+    });
     let semaphore = Arc::new(Semaphore::new(max_concurrent));
     info!("Max concurrent fuzzing tasks set to {}", max_concurrent);
 
-    let testcases = (0..count).map(|i| {
+    let testcases = (offset..offset + count).map(|i| {
         let testcase_dir = dir.join(format!("{}_test{}", crate_name, i));
         testcase::Testcase::from_existing(&testcase_dir, crate_name)
             .with_pb(multi_pb.clone()/* , summary_pb.clone() */)

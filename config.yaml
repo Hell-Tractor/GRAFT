@@ -9,7 +9,7 @@ LLM:
   fix_retries: 3
   input_gen_retries: 3
   concurrent_tasks: 16
-  max_tokens: 4096
+  max_tokens: 8192
 prompts:
   testcase_gen: "prompts/testcase_gen"
   fix_testcase: "prompts/fix_testcase"

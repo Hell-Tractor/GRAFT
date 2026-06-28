@@ -29,6 +29,12 @@ pub struct LLMConfig {
     pub concurrent_tasks: usize,
     #[serde(default)]
     pub max_tokens: Option<u32>,
+    #[serde(default)]
+    pub enable_thinking: Option<bool>,
+    /// Maximum thinking tokens for Qwen3 models. Only used when enable_thinking is true.
+    /// Prevents thinking loops without disabling reasoning entirely.
+    #[serde(default)]
+    pub thinking_budget: Option<u32>,
 }
 
 #[derive(Deserialize)]

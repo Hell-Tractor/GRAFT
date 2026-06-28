@@ -97,6 +97,12 @@ pub enum Commands {
         /// Number of testcases to fuzz
         #[arg(short, long)]
         count: usize,
+        /// Start from testcase index (for batch rotation). Default: 0
+        #[arg(long, default_value_t = 0)]
+        offset: usize,
+        /// Max concurrent AFL instances. Default: available CPU count
+        #[arg(short, long)]
+        jobs: Option<usize>,
         /// Resume previous fuzzing session. Error if no previous session found.
         #[arg(short, long)]
         resume: bool,

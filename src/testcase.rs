@@ -236,19 +236,34 @@ impl Testcase {
     pub async fn run(&self, relative_input_dir: &Path, relative_output_dir: &Path, resume: bool, timeout: u64) -> Result<()> {
         let project_name = self.path.file_name().unwrap().to_string_lossy();
         let cargo = &utils::config().commands.cargo;
-        if !resume {
-            info!("Building project...");
-            let output = Command::new(&cargo)
-                .arg("+nightly")
-                .arg("afl").arg("build")
-                .env("RUSTFLAGS", "-Z sanitizer=address")
-                .env("ASAN_OPTIONS", "detect_leaks=0:abort_on_error=1:symbolize=0")
-                .current_dir(&self.path)
-                .output().await?;
-            if !output.status.success() {
-                return Err(Error::CommandError(format!("AFL build failed: {}", String::from_utf8_lossy(&output.stderr))));
+
+        // Auto-detect resume: if AFL queue exists, always resume regardless of the flag.
+        // This allows batch-rotation fuzzing without manually tracking per-testcase state.
+        let queue_dir = self.path.join(relative_output_dir).join("default/queue");
+        let has_queue = queue_dir.exists()
+            && std::fs::read_dir(&queue_dir).map(|mut d| d.next().is_some()).unwrap_or(false);
+        let do_resume = resume || has_queue;
+
+        if !do_resume {
+            // Skip build if the AFL-instrumented binary already exists (built during testcase generation).
+            // Running 32 concurrent cargo-afl builds causes proc-macro crate races (e.g. zerofrom_derive).
+            let binary_path = self.path.join("target/debug").join(project_name.as_ref());
+            if !binary_path.exists() {
+                info!("Building project...");
+                let output = Command::new(&cargo)
+                    .arg("+nightly")
+                    .arg("afl").arg("build")
+                    .env("RUSTFLAGS", "-Z sanitizer=address")
+                    .env("ASAN_OPTIONS", "detect_leaks=0:abort_on_error=1:symbolize=0")
+                    .current_dir(&self.path)
+                    .output().await?;
+                if !output.status.success() {
+                    return Err(Error::CommandError(format!("AFL build failed: {}", String::from_utf8_lossy(&output.stderr))));
+                }
+                info!("Build completed successfully");
+            } else {
+                info!("Binary already exists, skipping build");
             }
-            info!("Build completed successfully");
             info!("Starting AFL fuzzing for {} seconds", timeout);
         } else {
             info!("Resuming AFL fuzzing for {} seconds", timeout);
@@ -265,14 +280,13 @@ impl Testcase {
             pb
         });
 
-        // let mut fuzz_process = Command::new(&cargo)
         let mut fuzz_process = Command::new(&cargo);
         fuzz_process.arg("+nightly").arg("afl").arg("fuzz")
             .env("RUSTFLAGS", "-Z sanitizer=address")
             .env("ASAN_OPTIONS", "detect_leaks=0:abort_on_error=1:symbolize=0")
             .env("AFL_NO_UI", "1")
             .arg("-V").arg(timeout.to_string());
-        if resume {
+        if do_resume {
             fuzz_process.arg("-i").arg("-");
         } else {
             fuzz_process.arg("-i").arg(relative_input_dir);

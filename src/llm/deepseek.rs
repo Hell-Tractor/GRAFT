@@ -43,6 +43,14 @@ impl LLM for LLMClient {
         if let Some(max_tokens) = config().llm.max_tokens {
             request_body["max_tokens"] = serde_json::json!(max_tokens);
         }
+        if let Some(enable_thinking) = config().llm.enable_thinking {
+            request_body["enable_thinking"] = serde_json::json!(enable_thinking);
+            if enable_thinking {
+                if let Some(budget) = config().llm.thinking_budget {
+                    request_body["thinking_budget"] = serde_json::json!(budget);
+                }
+            }
+        }
         info!("Requesting LLM with model `{}`, it may take some time...", self.model_name);
         let api_key = config().llm.api_key.as_ref()
             .expect("Missing API key for LLM service");
