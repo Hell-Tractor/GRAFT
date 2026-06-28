@@ -50,7 +50,7 @@ fi
 # build project
 echo "Building project..."
 cargo build --release
-EXE="$TOPLEVEL/target/release/PLFuzz"
+EXE="$TOPLEVEL/target/release/graft"
 if [ ! -e $EXE ]; then
     echo "Build failed, executable not found at $EXE"
     exit 1

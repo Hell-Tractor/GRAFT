@@ -1,5 +1,5 @@
 [package]
-name = "PLFuzz"
+name = "graft"
 version = "0.1.0"
 edition = "2024"
 

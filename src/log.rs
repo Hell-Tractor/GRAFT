@@ -25,7 +25,7 @@ impl Logger {
             .with_target(true);
 
         tracing_subscriber::Registry::default()
-            .with(EnvFilter::try_from_default_env().unwrap_or_else(|_| EnvFilter::new("PLFuzz=info")))
+            .with(EnvFilter::try_from_default_env().unwrap_or_else(|_| EnvFilter::new("graft=info")))
             .with(file_layer)
             .with(terminal_layer)
             .with(indicatif_layer)

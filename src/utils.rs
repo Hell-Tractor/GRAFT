@@ -82,7 +82,7 @@ pub fn config() -> &'static Config {
             .build().unwrap()
             .try_deserialize().unwrap();
         let env_config = config::Config::builder()
-            .add_source(config::Environment::with_prefix("PLF").separator("_"))
+            .add_source(config::Environment::with_prefix("GRAFT").separator("_"))
             .build().unwrap();
         config.llm.api_key = env_config.get_string("api.key").ok();
 

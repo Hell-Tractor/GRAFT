@@ -1,13 +1,13 @@
 #!/bin/bash
 
 CRATE_NAME=$1
+OUTPUT_BASE=${2:-}
 if [ -z "$CRATE_NAME" ]; then
-    echo "Usage: $0 <CRATE_NAME>"
+    echo "Usage: $0 <CRATE_NAME> [output_base_dir]"
+    echo "  output_base_dir defaults to output/ (relative to repo root)"
     exit 1
 fi
 
-# --- Locate LLVM tools from rustup ---
-# This identifies the bin directory for the current rustc toolchain
 RUST_SYSROOT=$(rustc --print sysroot)
 RUST_HOST=$(rustc -vV | grep host | awk '{print $2}')
 LLVM_BIN_DIR="$RUST_SYSROOT/lib/rustlib/$RUST_HOST/bin"
@@ -21,11 +21,15 @@ else
 fi
 
 TOPLEVEL="$(git rev-parse --show-toplevel)"
-TESTCASES_BASE="$TOPLEVEL/output/$CRATE_NAME/testcases"
-COV_RAW_DIR="$TOPLEVEL/output/$CRATE_NAME/coverage_raw"
-PROFDATA_FILE="$TOPLEVEL/output/$CRATE_NAME/total_coverage.profdata"
+if [ -z "$OUTPUT_BASE" ]; then
+    OUTPUT_BASE="$TOPLEVEL/output"
+fi
+TESTCASES_BASE="$OUTPUT_BASE/$CRATE_NAME/testcases"
+COV_RAW_DIR="$OUTPUT_BASE/$CRATE_NAME/coverage_raw"
+PROFDATA_FILE="$OUTPUT_BASE/$CRATE_NAME/total_coverage.profdata"
+# Shared target dir: all testcases of the same crate share compiled deps (huge speedup)
+SHARED_TARGET_DIR="$OUTPUT_BASE/$CRATE_NAME/target_coverage"
 
-# 1. Initialization
 mkdir -p "$COV_RAW_DIR"
 find "$COV_RAW_DIR" -name '*.profraw' -delete
 
@@ -34,63 +38,38 @@ export RUSTFLAGS="-Cinstrument-coverage"
 
 object_files=()
 
-# 2. Iterative Compilation and Data Collection
 for folder in "$TESTCASES_BASE"/*/; do
     BINARY_NAME=$(basename "$folder")
-    id=${BINARY_NAME##*_test}  # Extract ID from folder name
+    id=${BINARY_NAME##*_test}
     echo "==============================================="
     echo "[INFO] Processing Testcase ID: $id"
     echo "[INFO] Directory: $folder"
 
-    COVERAGE_TARGET_DIR="${folder}target/coverage"
+    echo "[INFO] Compiling coverage-instrumented binary (shared target)..."
+    cargo build --manifest-path "${folder}Cargo.toml" --target-dir "$SHARED_TARGET_DIR" > /dev/null 2>&1
 
-    echo "[INFO] Compiling coverage-instrumented binary..."
-    cargo build --manifest-path "${folder}Cargo.toml" --target-dir "$COVERAGE_TARGET_DIR" > /dev/null 2>&1
-
-    BINARY_PATH="${COVERAGE_TARGET_DIR}/debug/${CRATE_NAME}_test${id}"
-    AFL_BINARY_PATH="${folder}target/debug/${CRATE_NAME}_test${id}"
+    BINARY_PATH="${SHARED_TARGET_DIR}/debug/${CRATE_NAME}_test${id}"
 
     if [ ! -f "$BINARY_PATH" ]; then
         echo "[ERROR] Compilation failed or binary not found: $BINARY_PATH"
         continue
     fi
 
-    echo "[INFO] Minimizing testcases using AFL's cmin..."
-    cargo afl cmin -i "${folder}outputs/default/queue" -o "${folder}outputs/default/queue_minimized" -- "$AFL_BINARY_PATH" > /dev/null 2>&1
-
     object_files+=("-object" "$BINARY_PATH")
 
     echo "[INFO] Executing testcases for coverage collection..."
-
-    find "${folder}outputs/default/queue_minimized" -maxdepth 1 -type f ! -name "*.txt" 2>/dev/null | while read -r input_file; do
-        $BINARY_PATH < "$input_file" > /dev/null 2>&1
+    find "${folder}outputs/default/queue" -maxdepth 1 -type f ! -name "*.txt" 2>/dev/null | while read -r input_file; do
+        "$BINARY_PATH" < "$input_file" > /dev/null 2>&1
     done
 done
 
-# 3. Data Aggregation
 echo "==============================================="
 echo "[INFO] Merging raw profile data into $PROFDATA_FILE..."
 find "$COV_RAW_DIR" -name "*.profraw" > all_files.txt
 llvm-profdata merge -sparse -f all_files.txt -o "$PROFDATA_FILE"
 rm all_files.txt
-# llvm-profdata merge -sparse "$COV_RAW_DIR"/*.profraw -o "$PROFDATA_FILE"
-
-# 4. Report Generation
-# echo -e "\n--- Coverage Report Summary ---"
-# llvm-cov report \
-#     "${object_files[@]}" \
-#     -instr-profile="$PROFDATA_FILE" \
-#     -ignore-filename-regex="rustc|testcases|$HARNESS_FILE"
-#     # "$CRATE_NAME"
 
 echo -e "\n--- Generating detailed coverage report ---"
-# llvm-cov show \
-#     "${object_files[@]}" \
-#     -instr-profile="$PROFDATA_FILE" \
-#     -show-instantiations \
-#     -show-line-counts-or-regions \
-#     -ignore-filename-regex="rustc|testcases|$HARNESS_FILE" \
-#     --format=text > "$TOPLEVEL/output/$CRATE_NAME/coverage_detail.txt"
 llvm-cov export \
     "${object_files[@]}" \
     -instr-profile="$PROFDATA_FILE" \
@@ -98,8 +77,8 @@ llvm-cov export \
     --skip-expansions \
     --skip-functions=false \
     --ignore-filename-regex="main\.rs$" \
-    > "$TOPLEVEL/output/$CRATE_NAME/coverage_detail.json"
+    > "$OUTPUT_BASE/$CRATE_NAME/coverage_detail.json"
 
 echo "==============================================="
-echo "[SUCCESS] Detailed coverage analysis completed."
-echo "[INFO] Report location: $TOPLEVEL/output/$CRATE_NAME/coverage_detail.json"
+echo "[SUCCESS] Coverage analysis completed."
+echo "[INFO] Report: $OUTPUT_BASE/$CRATE_NAME/coverage_detail.json"

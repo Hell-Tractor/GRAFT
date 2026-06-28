@@ -60,7 +60,7 @@ pub enum Commands {
         /// Default is calculated by api coverage.
         #[arg(short, long)]
         count: Option<usize>,
-        /// Ablation mode for evaluation (omit for full PLFuzz behavior)
+        /// Ablation mode for evaluation (omit for full GRAFT behavior)
         #[arg(long)]
         ablation: Option<AblationMode>,
     },
