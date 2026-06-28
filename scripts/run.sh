@@ -12,12 +12,14 @@ pause(){
 set -eo pipefail
 
 CRATE_NAME=$1
-TESTCASE_COUNT=$2 # if small than 1, generate testcases with suggested count(may be large)
-SEED_COUNT=$3
-FUZZ_TIMEOUT=$4
+CRATE_VERSION=$2
+TESTCASE_COUNT=$3 # if small than 1, generate testcases with suggested count(may be large)
+SEED_COUNT=$4
+FUZZ_TIMEOUT=$5
 if [ $# -lt 4 ]; then
-    echo "Usage: $0 <crate_name> <testcase_count> <seed_count> <fuzz_timeout>"
+    echo "Usage: $0 <crate_name> <crate_version> <testcase_count> <seed_count> <fuzz_timeout>"
     echo "  <crate_name>: Name of the Rust crate to fuzz."
+    echo "  <crate_version>: Version of the Rust crate to fuzz."
     echo "  <testcase_count>: Number of test cases to generate. If less than 1, use suggested count."
     echo "  <seed_count>: Number of seeds to generate for each test case."
     echo "  <fuzz_timeout>: Timeout for each fuzzing session in seconds."
@@ -64,7 +66,7 @@ pause
 
 # Generate Docs
 echo "Generating documentation..."
-$EXE doc -n $CRATE_NAME -o "${OUTPUT_DIR}/doc.json"
+$EXE doc -n $CRATE_NAME -o "${OUTPUT_DIR}/doc.json" --crate-version $CRATE_VERSION
 if [ ! -e "${OUTPUT_DIR}/doc.json" ]; then
     echo "Documentation generation failed."
     exit 1

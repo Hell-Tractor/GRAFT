@@ -141,4 +141,7 @@ pub struct DocArgs {
     /// Whether output origin rustdoc file in json format directly
     #[arg(long, default_value_t = false)]
     pub raw: bool,
+    /// Pin the crate version for API lookup (e.g. "0.22.1"). Defaults to latest.
+    #[arg(long)]
+    pub crate_version: Option<String>,
 }

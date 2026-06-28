@@ -31,9 +31,9 @@ async fn main() {
         Commands::Doc(args) => {
             if let Some(crate_name) = &args.name {
                 if args.raw {
-                    generate_raw_doc(crate_name, &args.output)
+                    generate_raw_doc(crate_name, args.crate_version.as_deref(), &args.output)
                 } else {
-                    generate_doc(crate_name, &args.output)
+                    generate_doc(crate_name, args.crate_version.as_deref(), &args.output)
                 }
             } else if let Some(path) = &args.path {
                 generate_doc_from_file(path, &args.output)
@@ -55,17 +55,17 @@ async fn main() {
     }
 }
 
-fn generate_raw_doc(crate_name: &str, output: &PathBuf) -> Result<()> {
+fn generate_raw_doc(crate_name: &str, version: Option<&str>, output: &PathBuf) -> Result<()> {
     info!("Generating raw API documentation for crate `{}`", crate_name);
-    let api_doc = document::get_raw_api_documentation(crate_name, None)?;
+    let api_doc = document::get_raw_api_documentation(crate_name, version)?;
     std::fs::write(output, &api_doc)?;
     info!("Done.");
     Ok(())
 }
 
-fn generate_doc(crate_name: &str, output: &PathBuf) -> Result<()> {
+fn generate_doc(crate_name: &str, version: Option<&str>, output: &PathBuf) -> Result<()> {
     info!("Generating API documentation for crate `{}`", crate_name);
-    let api_doc = document::APIDoc::from_crate_name(crate_name, None, false)?
+    let api_doc = document::APIDoc::from_crate_name(crate_name, version, false)?
         .filter_api().filter_types()
         .build();
     info!("Generation completed. Serializing to `{}`...", output.display());
