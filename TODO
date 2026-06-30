@@ -1,1 +1,0 @@
-对于库中定义的trait，需要补充其Implementations on Foreign Types信息，以便识别std中类型是否满足某trait。
