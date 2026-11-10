@@ -9,6 +9,18 @@ from model_cost_control import read_ledger,spent
 from generation_metrics import distribution
 
 
+def timing_metrics(records):
+    attempts=[a for record in records for a in record['attempts']]
+    def durations(attempt):
+        return [c.get('seconds',c.get('elapsed_seconds')) for c in attempt.get('compiler_runs',[])]
+    return {'model_call_seconds':distribution([a.get('model_seconds') for a in attempts]),
+        'compiler_process_seconds':distribution([v for a in attempts for v in durations(a)]),
+        'attempt_compiler_total_seconds':distribution([sum(v for v in durations(a) if v is not None)
+            for a in attempts if durations(a)]),
+        'attempt_validation_seconds':distribution([a.get('compile_validation_seconds') for a in attempts]),
+        'generation_job_seconds':distribution([r.get('elapsed_seconds') for r in records])}
+
+
 def review(batch):
     batch=Path(batch);summary=json.loads((batch/'calibration-summary.json').read_text())
     manifest=json.loads((batch/'calibration-manifest.json').read_text());authority=read_ledger(batch/'batch-model-cost.json')
@@ -76,10 +88,8 @@ def review(batch):
             'listed_prior_calibrations_cny':summary['prior_calibration_spent_or_reserved_cny'],
             'cumulative_listed_cny':summary['cumulative_listed_calibrations_spent_or_reserved_cny'],
             'cumulative_listed_cost_per_current_admitted_cny':summary['cumulative_listed_cost_per_current_admitted_cny']},
-        'timing':{'model_call_seconds':distribution([a.get('model_seconds') for a in attempts]),
-            'compiler_process_seconds':distribution([c.get('elapsed_seconds') for a in attempts for c in a.get('compiler_runs',[])]),
-            'attempt_validation_seconds':distribution([a.get('compile_validation_seconds') for a in attempts]),
-            'generation_job_seconds':distribution([r.get('elapsed_seconds') for r in records])},
+        'review_implementation':fingerprint(__file__),
+        'timing':timing_metrics(records),
         'influence_counts':dict(influence),'final_failure_causes':dict(Counter(r['final_diagnosis']['code'] if r['final_diagnosis'] else r['status'] for r in targets if not r['accepted'])),
         'gates':gates,'controls':controls,'targets':targets,
         'scope':'New targeted variant on a development-used cohort, not an unbiased full generation rate; no formal fuzz or automatic expansion.'}

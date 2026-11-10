@@ -133,4 +133,17 @@ class CalibrationStopTests(unittest.TestCase):
                 self.assertEqual(result['cases'],2);self.assertEqual(result['executed_cases'],1)
                 self.assertEqual(result['results'][1]['status'],'not_run_batch_stopped')
 
+class CalibrationReviewTests(unittest.TestCase):
+    def test_actual_compiler_duration_field_is_reported(self):
+        from review_repair_calibration import timing_metrics
+        result=timing_metrics([{'attempts':[{'compiler_runs':[{'seconds':.5},{'seconds':.75}]}]}])
+        self.assertEqual(result['compiler_process_seconds']['n'],2)
+        self.assertEqual(result['compiler_process_seconds']['sum_seconds'],1.25)
+        self.assertEqual(result['attempt_compiler_total_seconds']['median_seconds'],1.25)
+    def test_no_compile_is_not_reported_as_zero_second_compile(self):
+        from review_repair_calibration import timing_metrics
+        result=timing_metrics([{'attempts':[{}]}])
+        self.assertEqual(result['compiler_process_seconds']['n'],0)
+        self.assertIsNone(result['attempt_compiler_total_seconds']['median_seconds'])
+
 if __name__=='__main__':unittest.main()
