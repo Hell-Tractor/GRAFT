@@ -19,6 +19,8 @@ from admission_diagnostics import begin_evidence, capture_attempt, repair_feedba
 from preflight_admission import read_profile, run_preflight
 import parameter_repair
 import bounded_replanning
+from model_source import extract as extract_model_source
+from repair_context import classification, helper_names, documentation_card, task as repair_task
 from run_experiment_rounds import command_run, execute, publish, publication_directory, save, summarize, UPSTREAM_FAILURES
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -46,7 +48,7 @@ class ExistingProcess:
         return self.returncode
 
 def artifact(path):return {'path':str(path.resolve()),'sha256':file_hash(path)}
-def clean_env():return {k:v for k,v in os.environ.items() if not any(s in k.upper() for s in ['API_KEY','TOKEN','SECRET','AUTHORIZATION'])}
+def clean_env():return {k:v for k,v in os.environ.items() if k not in ('GRAFT_TRACE','GRAFT_PROBE_ARGS') and not any(s in k.upper() for s in ['API_KEY','TOKEN','SECRET','AUTHORIZATION'])}
 
 def compiler_template(log):
     lines=[x for x in Path(log).read_text().splitlines() if 'Running `' in x and '--crate-name graft_joint_compatibility' in x]
@@ -103,7 +105,7 @@ class Engine:
             p['admission_profile']=self.admission_profile
             p['admission_implementation']={name:artifact(ROOT/'scripts'/name) for name in
                 ('admission_diagnostics.py','preflight_admission.py','launch_controlled_round.py',
-                 'generation_metrics.py','run_experiment_rounds.py','parameter_repair.py','bounded_replanning.py')}
+                 'generation_metrics.py','run_experiment_rounds.py','parameter_repair.py','bounded_replanning.py','model_source.py','repair_context.py')}
             p['admission_binaries']={'planner':artifact(self.planner_bin),
                                     'harness':artifact(self.harness_bin)}
             batch_id=re.sub(r'[^A-Za-z0-9_.-]','_',root.name)+'-'+hashlib.sha256(str(root.resolve()).encode()).hexdigest()[:12]
@@ -417,6 +419,31 @@ class Engine:
         if load(d/'replanning/plan-lineage.json').get('status')=='infrastructure_failed':
             raise ModelBackendError('bounded replanning infrastructure failed; original target budget retained')
         return chosen
+    def parameter_prompt(self,plan,prompt):
+        """Retrieve documentation for the active plan, including bounded helpers."""
+        if self.admission_profile.get('repair_tasks'):
+            p=load(plan)['plan'];c=p['crate_name']
+            directory=self.root/'repair-context-catalog';directory.mkdir(exist_ok=True)
+            catalog=directory/(c+'.json')
+            if not catalog.exists():
+                cmd=[str(self.planner_bin),'import',str(self.runtime/'raw-rustdoc'/(c+'-'+p['crate_version']+'.json')),
+                     str(catalog),'--package',p['package_name']]
+                for feature in p['features']:cmd+=['--features',feature]
+                if not p['default_features']:cmd+=['--no-default-features']
+                result=command_run(cmd,directory,self.env,catalog.with_suffix('.log'),15)
+                if result['returncode']!=0:raise ModelBackendError('active documentation import failed')
+            cat=load(catalog)
+            if cat['rustdoc_sha256']!=p['rustdoc_sha256']:raise ModelBackendError('active documentation rustdoc changed')
+            raw=load(self.runtime/'raw-rustdoc'/(c+'-'+p['crate_version']+'.json'))
+            ids={s['api'] for s in p['steps'] if s['kind']=='call'}
+            allowed={a['rustdoc_id'] for a in self.universes[c]['apis'] if a.get('public_name_body_definition')}
+            helpers=helper_names(p)
+            docs=[documentation_card(api,raw['index'].get(api['id'],{}).get('docs',''),
+                   0 if api['id']==p['target'] else (1 if api['path'] in helpers else 2))
+                  for api in cat['apis'] if api['id'] in ids or (api['id'] in allowed and api['path'] in helpers)]
+            prefix=prompt.split('Public documentation pool:\n',1)[0]
+            prompt=prefix+'Public documentation pool:\n'+json.dumps(docs,ensure_ascii=False)+'\nRender the following pinned SequencePlan'
+        return parameter_repair.base_prompt(plan,prompt,getattr(self,'parameter_rules',None))
     def fuzz(self,task):
         m,c,i=task['method'],task['crate'],task['slot'];key=(m,c,i)
         with self.lock:self.identities[key]=dict(task,status='fuzzing');self.update()
@@ -482,8 +509,21 @@ class Engine:
         if not text:
             raise EmptyModelResponse(json.dumps(metadata,sort_keys=True))
         if self.cost_policy and finish!='stop':raise EmptyModelResponse('truncated output; no automatic paid retry: '+json.dumps(metadata,sort_keys=True))
-        if text.startswith('```'):
-            text=text.split('\n',1)[1].rsplit('```',1)[0].strip()
+        processing_start=time.monotonic()
+        raw_source=d/f'attempt-{index}.raw.txt';raw_source.write_text(text)
+        plain_verified=False
+        if self.admission_profile and self.admission_profile.get('repair_tasks'):
+            parsed=command_run([str(self.planner_bin),'source-key',str(raw_source),str(d/f'attempt-{index}.raw-key.json')],
+                               d,self.env,d/f'attempt-{index}.raw-key.log',5)
+            plain_verified=parsed['returncode']==0
+        try:text,extraction=extract_model_source(text,validated_plain=plain_verified)
+        except ValueError as error:
+            save(d/f'attempt-{index}.extraction.json',{'accepted':False,'reason':str(error)})
+            # Preserve rejected bytes for the normal Rust gate and repair feedback.
+        else:
+            save(d/f'attempt-{index}.extraction.json',dict(extraction,accepted=True))
+            metadata['source_extraction_kind']=extraction['kind']
+        metadata['source_processing_seconds']=time.monotonic()-processing_start
         path=d/f'attempt-{index}.rs';path.write_text(text);return path,metadata
     def model(self,m,c,i,prompt,plan=None,paired=False):
         d=self.directory(m,c,i);original=prompt;last=None
@@ -522,8 +562,8 @@ class Engine:
                     emitted=command_run([str(self.planner_bin),'repair-seed',str(plan),str(seed)],
                                         d,self.env,d/'repair-seed.log',15)
                     if emitted['returncode']!=0:raise RuntimeError('parameter repair seed generation failed')
-                    base_prompt=parameter_repair.base_prompt(plan,prompt,getattr(self,'parameter_rules',None))
-                    original=parameter_repair.prompt(base_prompt,seed.read_text(),preflight['diagnosis'])
+                    base_prompt=self.parameter_prompt(plan,prompt)
+                    original=parameter_repair.prompt(base_prompt,seed.read_text(),preflight['diagnosis'],plan)
                     if first_index:
                         previous=d/f'attempt-{first_index-1}.rs'
                         diagnosis=record['attempts'][-1].get('validation_evidence',{}).get('diagnosis')
@@ -532,9 +572,11 @@ class Engine:
                                                     'source/diagnosis; reconcile before another paid call')
                         prior_plan=record['attempts'][-1].get('plan')
                         original=parameter_repair.prompt(base_prompt,
-                            seed.read_text() if prior_plan and prior_plan!=artifact(plan) else previous.read_text(),diagnosis)
+                            seed.read_text() if prior_plan and prior_plan!=artifact(plan) else previous.read_text(),diagnosis,plan)
                     record.update(strategy='llm_parameter_repair',
                                   preflight_action='llm_repair' if preflight['status']=='rejected' else 'llm_generation')
+                    if self.admission_profile.get('repair_tasks'):
+                        record['input_applicability']=classification(load(plan)['plan'])
                     save(d/'parameter-repair-context.json',{'plan':artifact(plan),'seed':artifact(seed),
                         'preflight_diagnosis':preflight['diagnosis'],'target_identity':{'method':m,'crate':c,'slot':i},
                         'parameter_rules':parameter_repair.rule_context(load(plan)['plan'],getattr(self,'parameter_rules',None))})
@@ -546,6 +588,16 @@ class Engine:
                 record['attempts'].append(attempt_record)
                 model_start=time.monotonic()
                 source,response_meta=self.request(original,d,attempt);last=source
+                if self.admission_profile and self.admission_profile.get('repair_tasks'):
+                    key_started=time.monotonic()
+                    key_path=d/f'attempt-{attempt}.source-key.json'
+                    key_run=command_run([str(self.planner_bin),'source-key',str(source),str(key_path)],d,self.env,
+                                        d/f'attempt-{attempt}.source-key.log',5)
+                    if key_run['returncode']==0 and key_path.exists():
+                        attempt_record['source_token_key']=load(key_path)['sha256']
+                        attempt_record['paid_response_same_ast']=any(a.get('source_token_key')==attempt_record['source_token_key']
+                            for a in record['attempts'][:-1])
+                    attempt_record['source_key_seconds']=time.monotonic()-key_started
                 response_record=load(d/f'response-{attempt}.json')
                 attempt_record.update(response_received=True,model_seconds=response_record['latency_seconds'],
                                       model_service_wait_and_io_seconds=max(0,time.monotonic()-model_start-response_record['latency_seconds']),
@@ -591,6 +643,12 @@ class Engine:
                     evidence=capture_attempt(d,attempt,source,False,
                                              {'method':m,'crate':c,'slot':i})
                     attempt_record['validation_evidence']=evidence
+                    if repair_mode and self.admission_profile.get('repair_tasks'):
+                        instruction=repair_task(load(plan)['plan'],source.read_text(),evidence['diagnosis'])
+                        save(d/f'attempt-{attempt}.repair-task.json',instruction)
+                        attempt_record['same_failure_fingerprint']=any(
+                            a.get('validation_evidence',{}).get('diagnosis',{}).get('code')==evidence['diagnosis']['code']
+                            for a in record['attempts'][:-1])
                     pending_validation=None
                     diagnostics=repair_feedback(evidence)
                 with self.lock:self.generation[(m,c,i)]=copy.deepcopy(record);self.update()
@@ -603,13 +661,13 @@ class Engine:
                             record['plan_lineage']=artifact(d/'replanning/plan-lineage.json')
                         if selected:
                             plan=selected;record['active_plan']=artifact(plan)
-                            base_prompt=parameter_repair.base_prompt(plan,prompt,getattr(self,'parameter_rules',None))
+                            base_prompt=self.parameter_prompt(plan,prompt)
                             seed=d/f'alternate-seed-{attempt+1}.rs'
                             emitted=command_run([str(self.planner_bin),'repair-seed',str(plan),str(seed)],d,self.env,d/f'alternate-seed-{attempt+1}.log',15)
                             if emitted['returncode']!=0:raise ModelBackendError('alternate repair seed emission failed')
-                            original=parameter_repair.prompt(base_prompt,seed.read_text(),evidence['diagnosis'])
+                            original=parameter_repair.prompt(base_prompt,seed.read_text(),evidence['diagnosis'],plan)
                             save(d/'generation.json',record)
-                        else:original=parameter_repair.prompt(base_prompt,source.read_text(),evidence['diagnosis'])
+                        else:original=parameter_repair.prompt(base_prompt,source.read_text(),evidence['diagnosis'],plan)
                     else:
                         prefix=base_prompt if self.cost_policy else original
                         original=prefix+'\nCURRENT SOURCE:\n'+source.read_text()+'\nDIAGNOSTICS:\n'+diagnostics[-20000:]+'\nRemaining repairs: '+str(max_calls-attempt-1)+'. Keep the immutable planned core if supplied.'

@@ -37,6 +37,9 @@ def summarize_generation(records, crates, slots=20):
             'core_preflight_rejected_jobs': sum(p['status']=='rejected' for p in preflights),
             'core_preflight_routed_to_llm_repair_jobs': sum(r.get('preflight_action')=='llm_repair' for r in items),
             'replanning_jobs':sum(bool(r.get('plan_lineage')) for r in items),
+            'paid_duplicate_token_responses':sum(bool(a.get('paid_response_same_ast')) for a in attempts),
+            'repeated_failure_code_responses':sum(bool(a.get('same_failure_fingerprint')) for a in attempts),
+            'input_influence_applicability':dict(Counter(r.get('input_applicability',{}).get('influence_applicability','unknown') for r in items)),
             'accepted_after_replanning_jobs':sum(r.get('accepted',False) and bool(r.get('active_plan')) for r in done),
             'changed_plan_model_attempts':sum(bool(r.get('attempts')) and len({
                 a.get('plan',{}).get('sha256') for a in r['attempts'] if a.get('plan')})>1 for r in items),

@@ -16,6 +16,8 @@ def read_profile(path):
     if profile.get('assembly_mode') not in ('legacy-full-source','llm-parameter-repair'):
         raise ValueError('unsupported admission assembly mode')
     version3=profile.get('repair_contract')=='planned-call-v3'
+    if type(profile.get('repair_tasks',False)) is not bool or (profile.get('repair_tasks') and not version3):
+        raise ValueError('structured repair tasks require an explicit v3 boolean flag')
     if profile.get('assembly_mode') == 'llm-parameter-repair' and profile.get('repair_contract') not in ('planned-call-v2','planned-call-v3'):
         raise ValueError('unsupported parameter repair contract')
     if version3:

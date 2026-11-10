@@ -103,6 +103,8 @@ def diagnose(directory):
             code = 'runtime_panic'
         elif failed:
             code = 'probe_process_failed'
+        elif 'GRAFT_BRANCH:' in stderr and not report.get('reached_inputs'):
+            code = 'producer_branch_rejected'
         elif not report.get('reached_inputs'):
             code = 'target_not_reached'
         elif report.get('scalar_input_influence') == 'not_observed':

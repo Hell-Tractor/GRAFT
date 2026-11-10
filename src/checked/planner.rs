@@ -416,6 +416,7 @@ pub fn plan(catalog: &Catalog, target: &str, limits: &Limits) -> PlanResult {
                 search_nodes: search.nodes,
                 type_paths: catalog.type_paths.iter().filter(|p|identities.contains(&p.identity)).cloned().collect(),
                 infer_call_results:false,
+                target_signature:catalog.apis.iter().find(|a|a.id==target).and_then(|a|a.signature.clone()),
             },
         }},
         Err(e) => {

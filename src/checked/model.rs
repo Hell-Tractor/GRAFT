@@ -150,6 +150,15 @@ pub struct Api {
     pub output: Ty,
     pub obligations: Vec<Obligation>,
     pub unsupported: Vec<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub signature: Option<TargetSignature>,
+}
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct TargetSignature {
+    pub argument_count: usize,
+    pub receiver_argument_index: Option<usize>,
+    pub kind: String,
+    pub evidence: String,
 }
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Catalog {
@@ -279,6 +288,8 @@ pub struct SequencePlan {
     pub type_paths: Vec<TypePathEvidence>,
     #[serde(default, skip_serializing_if = "std::ops::Not::not")]
     pub infer_call_results: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub target_signature: Option<TargetSignature>,
 }
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(tag = "status", rename_all = "snake_case")]

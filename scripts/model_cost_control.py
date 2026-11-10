@@ -63,7 +63,11 @@ def select_records(records,terms,limit):
     def score(row):
         s=json.dumps(row,ensure_ascii=False)
         return -sum(8 if t in str(row[0]) else 1 for t in terms if t and t in s)
-    rows.sort(key=score)
+    # Explicit tool-supplied priorities exist only in the new repair variant.
+    def priority(row):
+        value=row[1].get('_repair_priority',2) if isinstance(row[1],dict) else 2
+        return value if type(value) is int and 0<=value<=2 else 2
+    rows.sort(key=lambda row:(priority(row),score(row)))
     selected=[]
     for key,value in rows:
         row={'id':key,'value':value}

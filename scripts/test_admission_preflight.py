@@ -256,7 +256,7 @@ class EngineIntegrationTests(unittest.TestCase):
             engine.preflight.return_value={'status':'rejected','diagnosis':{
                 'stage':'probe','code':'resource_limit','message':'allocation of 72340172838076673 failed'}}
             plan=root/'plan.json';atomic_json(plan,{'plan':{
-                'target':'original-api','crate_name':'bytes','crate_version':'1.11.1'}})
+                'target':'original-api','crate_name':'bytes','crate_version':'1.11.1','steps':[]}})
             prompts=[]
             def emit(command,*args):
                 Path(command[-1]).write_text('pub fn graft_body(data: &[u8]) -> Vec<(usize,Vec<u8>)> { Vec::new() }')
@@ -338,7 +338,7 @@ class EngineIntegrationTests(unittest.TestCase):
             ledger=directory/'model-cost.json';ledger.write_text('persistent original target budget')
             alternate=directory/'replanning/alternate.json'
             atomic_json(alternate,{'plan':{'target':'same-api','crate_name':'bytes','crate_version':'1.11.1',
-                'steps':[{'different_producer':True}]}})
+                'steps':[{'kind':'call','api':'same-api','path':'bytes::alternate','args':[]}]}})
             def replan(*args):
                 atomic_json(directory/'replanning/plan-lineage.json',{'selected':{'path':str(alternate)}})
                 return alternate

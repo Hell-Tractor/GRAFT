@@ -109,3 +109,20 @@ impl<T> Method<T> {
         1
     }
 }
+
+pub struct Bytes([u8;1]);
+static OBSERVER_CALLS:std::sync::atomic::AtomicUsize=std::sync::atomic::AtomicUsize::new(0);
+impl Bytes {
+    pub fn len(&self)->usize {OBSERVER_CALLS.fetch_add(1,std::sync::atomic::Ordering::SeqCst);1}
+}
+impl std::ops::Index<std::ops::RangeTo<usize>> for Bytes {
+    type Output=[u8];
+    fn index(&self,r:std::ops::RangeTo<usize>)->&[u8] {&self.0[r]}
+}
+pub fn make_bytes()->Bytes {Bytes([0])}
+pub fn read_bytes(_: &Bytes)->u8 {0}
+pub fn observer_count()->usize {OBSERVER_CALLS.load(std::sync::atomic::Ordering::SeqCst)}
+pub fn optional_scalar(x:Option<u8>)->u8 {x.unwrap_or(0)}
+static ARGUMENT_CALLS:std::sync::atomic::AtomicUsize=std::sync::atomic::AtomicUsize::new(0);
+pub fn counted_input()->u8 {ARGUMENT_CALLS.fetch_add(1,std::sync::atomic::Ordering::SeqCst);1}
+pub fn argument_count()->usize {ARGUMENT_CALLS.load(std::sync::atomic::Ordering::SeqCst)}

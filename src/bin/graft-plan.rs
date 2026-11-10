@@ -48,6 +48,8 @@ enum Command {
     Prompt { plan: PathBuf, output: PathBuf },
     /// Reference core without tracing; parameter repair must preserve call anchors.
     RepairSeed { plan: PathBuf, output: PathBuf },
+    /// Canonical parsed Rust tokens, preserving literal contents, for repeat diagnostics.
+    SourceKey { source:PathBuf, output:PathBuf },
     /// Bounded alternate producers for exactly the original target and catalog.
     Alternatives {
         plan:PathBuf,catalog:PathBuf,output:PathBuf,
@@ -89,6 +91,13 @@ fn get_plan(p: &PathBuf) -> Result<SequencePlan, Box<dyn std::error::Error>> {
 }
 fn run() -> Result<(), Box<dyn std::error::Error>> {
     match Cli::parse().command {
+        Command::SourceKey{source,output}=>{
+            use quote::ToTokens;
+            let file=syn::parse_file(&std::fs::read_to_string(source)?)?;
+            write(&output,&serde_json::json!({"schema":"graft-rust-token-key-v1",
+                "sha256":rustdoc::sha256(file.to_token_stream().to_string().as_bytes()),
+                "scope":"parsed tokens only, not semantic equivalence"}))?;
+        },
         Command::Alternatives{plan:original,catalog,output,max_candidates,nodes,syntactic}=>{
             let p=get_plan(&original)?;let mut c:Catalog=read(&catalog)?;
             if syntactic {for a in &mut c.apis {if !a.generics.is_empty(){a.unsupported.push("syntactic control disables generic solving/instantiation".into());}}}

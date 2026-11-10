@@ -2,7 +2,8 @@
 import json
 from pathlib import Path
 
-from admission_diagnostics import repair_feedback
+from admission_diagnostics import repair_feedback, fingerprint
+from repair_context import task
 
 
 def enabled(profile):
@@ -33,7 +34,8 @@ def rule_context(plan,rules):
     for rule in rules['rules']:
         if (rule['crate'],rule['version'])!=(plan['crate_name'],plan['crate_version']):continue
         instances=[s['instance'] for s in plan['steps'] if s['kind']=='call' and
-                   any(s['path'].endswith(suffix) for suffix in rule['suffixes'])]
+                   any(s['path'].endswith(suffix) for suffix in rule['suffixes']) and
+                   (not rule.get('owners') or any(s['path'].startswith(owner+'::') for owner in rule['owners']))]
         if not instances:continue
         row={k:rule[k] for k in ('id','roles','advice','evidence')};row['instances']=instances
         if len(json.dumps(selected+[row],ensure_ascii=False).encode())<=rules['max_context_utf8_bytes']:
@@ -82,9 +84,20 @@ def base_prompt(plan_path, original_prompt, rules=None):
         'Additional helpers must be safe calls on the pinned library or basic Vec/primitive '
         'operations. No version changes, target deletion, call replacement or new paid target IDs.\n'
         'TARGET ID: ' + plan['target'] + '\nPINNED CRATE: ' + plan['crate_name'] +
-        ' ' + plan['crate_version'] + '\n' + hints)
+        ' ' + plan['crate_version'] + '\n' + hints +
+        '\nACTIVE PLAN SHA256: '+fingerprint(plan_path)['sha256']+
+        '\nACTIVE PLANNED CALLS (preserve this current list, not an earlier constructor):\n'+
+        json.dumps([s['path'] for s in plan['steps'] if s['kind']=='call'])+
+        '\nOnly truly zero-argument targets have input influence marked not applicable; targets with receivers require real object preparation. '
+        'Empty input must work: use data.get(i).copied().unwrap_or(0), never unguarded data[i]. '
+        'Compute indices before taking mutable borrows. Call grow directly on the original binding; do not shadow it.\n')
 
 
-def prompt(base, source, diagnosis):
+def prompt(base, source, diagnosis, plan=None):
     feedback = repair_feedback({'diagnosis': diagnosis})
+    if plan is not None:
+        p=json.loads(Path(plan).read_text())['plan']
+        instruction=task(p,source,diagnosis)
+        # Append the concise required change first so the budget compactor retains it.
+        feedback='error: repair task: '+instruction['required_local_change']+'\n'+feedback
     return base + '\nREPAIR SOURCE:\n' + source + '\nDIAGNOSTICS:\n' + feedback

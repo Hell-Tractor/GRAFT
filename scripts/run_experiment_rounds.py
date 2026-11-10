@@ -112,6 +112,8 @@ def check_tasks(protocol, manifest, round_number):
         for name, val in task.get('environment', {}).items():
             if not isinstance(name, str) or not isinstance(val, str):
                 raise ValueError('environment entries must be strings')
+            if name in ('GRAFT_TRACE','GRAFT_PROBE_ARGS'):
+                raise ValueError('diagnostic flags are forbidden in formal task environments')
     if seen != expected:
         raise ValueError(f'{len(expected - seen)} missing target slots')
     return manifest['tasks']
@@ -177,8 +179,9 @@ def execute(task, protocol, number, directory, cpus, universe):
         for key, val in values.items():
             command = [arg.replace('{' + key + '}', val) for arg in command]
         return command
-    env = {k:v for k,v in os.environ.items() if not any(s in k.upper() for s in ('API_KEY','TOKEN','SECRET','AUTHORIZATION'))}
+    env = {k:v for k,v in os.environ.items() if k not in ('GRAFT_TRACE','GRAFT_PROBE_ARGS') and not any(s in k.upper() for s in ('API_KEY','TOKEN','SECRET','AUTHORIZATION'))}
     env.update(task.get('environment', {}))
+    for flag in ('GRAFT_TRACE','GRAFT_PROBE_ARGS'):env.pop(flag,None)
     env['GRAFT_RUN_DIR'] = str(directory)
     result['seed'] = int(values['seed'])
     try:

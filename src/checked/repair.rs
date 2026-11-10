@@ -78,7 +78,7 @@ impl<'ast> Visit<'ast> for Review<'_> {
         if ["std", "core", "alloc"].contains(&root.as_str()) {
             let text = path.to_token_stream().to_string().replace(' ', "");
             let allowed = ["std::hint::black_box", "std::cmp::", "core::cmp::",
-                "core::array::from_fn", "std::vec::Vec", "alloc::vec::Vec"];
+                "core::array::from_fn", "core::str::from_utf8", "std::vec::Vec", "alloc::vec::Vec"];
             if !allowed.iter().any(|prefix| text.starts_with(prefix)) {
                 self.errors.push(format!("unapproved helper path: {text}"));
             }
@@ -178,6 +178,10 @@ pub fn prepare_observed(plan: &SequencePlan, source: &str, observe_objects:bool)
     review.visit_item_fn(&repaired);
     if !review.errors.is_empty() { return Err(review.errors.join("; ")); }
     let target_has_arguments=plan.steps.iter().any(|s|matches!(s,Step::Call{api,args,..} if api==&plan.target && !args.is_empty()));
+    if let Some(signature)=&plan.target_signature {
+        let actual=plan.steps.iter().rev().find_map(|s|match s {Step::Call{api,args,..} if api==&plan.target=>Some(args.len()),_=>None});
+        if actual!=Some(signature.argument_count) {return Err("target signature argument count disagrees with planned call".into());}
+    }
     if review.data_uses == 0 && target_has_arguments { return Err("repair has no byte-input use".into()); }
 
     let mut calls = vec![];
@@ -203,6 +207,7 @@ pub fn prepare_observed(plan: &SequencePlan, source: &str, observe_objects:bool)
     let mut producer_names: BTreeMap<usize,String> = BTreeMap::new();
     for stmt in &mut repaired.block.stmts {
         let syn::Stmt::Local(local) = stmt else { continue };
+        let mut extracted_source=None;
         if observe_objects {
             if let syn::Pat::TupleStruct(pattern)=&local.pat {
                 if pattern.elems.len()==1 {
@@ -214,10 +219,23 @@ pub fn prepare_observed(plan: &SequencePlan, source: &str, observe_objects:bool)
                                     let name=binding.ident.to_string();
                                     if review.bindings.get(&name)!=Some(&1) {return Err("branch result binding is shadowed".into());}
                                     producer_names.insert(*value,name);
+                                    extracted_source=Some((*source,variant.clone()));
                                 }
                             }
                         }
                     }
+                }
+            }
+        }
+        if let Some((source,variant))=extracted_source {
+            if let Some(init)=local.init.as_mut() {
+                if let Some((_,branch))=init.diverge.as_mut() {
+                    let marker=format!("GRAFT_BRANCH:{source}:{variant}:rejected");
+                    let original=branch.clone();
+                    *branch=Box::new(syn::parse_quote!({
+                        if std::env::var_os("GRAFT_TRACE").is_some(){eprintln!(#marker);}
+                        #original
+                    }));
                 }
             }
         }
@@ -258,19 +276,21 @@ pub fn prepare_observed(plan: &SequencePlan, source: &str, observe_objects:bool)
         let object_marker=format!("GRAFT_OBJECT:{instance}:{{:?}}");
         let enter_marker=format!("GRAFT_ENTER:{instance}");
         let before=if observe_objects {quote!{
-            let __graft_objects:Vec<String>=vec![#(#expressions),*];
             if std::env::var_os("GRAFT_TRACE").is_some() {
+                let __graft_objects:Vec<String>=vec![#(#expressions),*];
                 eprintln!(#object_marker,__graft_objects);
                 eprintln!(#enter_marker);
             }
         }}else{quote!{}};
         let replacement: syn::Expr = syn::parse_quote!({
             #(let #identifiers = #actual_args;)*
-            let __graft_observed = format!("{:?}", (#(&#scalar,)*));
+            let __graft_observed = if std::env::var_os("GRAFT_TRACE").is_some() {
+                Some(format!("{:?}", (#(&#scalar,)*)))
+            }else{None};
             #before
             let __graft_result = #function(#(#identifiers),*);
             std::hint::black_box(&__graft_result);
-            if std::env::var_os("GRAFT_TRACE").is_some() {
+            if let Some(__graft_observed)=__graft_observed {
                 eprintln!(#marker, __graft_observed);
             }
             __graft_result
@@ -293,6 +313,9 @@ pub fn prepare_observed(plan: &SequencePlan, source: &str, observe_objects:bool)
         "target":plan.target,"crate":plan.crate_name,"version":plan.crate_version,
         "source_sha256":sha256(source.as_bytes()),"instrumented_sha256":sha256(core.as_bytes()),
         "calls":rows,"byte_input_ast_uses":review.data_uses,
+        "input_influence_applicability":if target_has_arguments {"required"} else {"not_applicable_no_arguments"},
+        "target_signature":plan.target_signature,
+        "signature_evidence":if plan.target_signature.is_some(){"frozen_rustdoc_signature"}else{"frozen_call_arity_receiver_unknown"},
         "scope":"preserved direct planned calls and tool-inserted post-call markers; runtime target arrival and scalar influence remain mandatory; opaque argument taint and universal preconditions are not proved"});
     Ok(Prepared { core, standalone, evidence })
 }

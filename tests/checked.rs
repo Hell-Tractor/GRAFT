@@ -801,3 +801,95 @@ async fn runtime_probe_accepts_actual_byte_wrapper() {
     assert_eq!(r.reached_inputs, 3);
     assert_eq!(r.scalar_input_influence, "observed");
 }
+
+#[test]
+fn signature_distinguishes_owner_from_receiver() {
+    let c=catalog();
+    let constructor=c.apis.iter().find(|a|a.path=="new" && matches!(a.owner.as_ref(),Some(Ty::Nominal{path,..}) if path.contains("Method"))).unwrap();
+    assert_eq!(constructor.signature.as_ref().unwrap().receiver_argument_index,None);
+    let method=c.apis.iter().find(|a|a.path=="visit").unwrap();
+    assert_eq!(method.signature.as_ref().unwrap().receiver_argument_index,Some(0));
+    let p=planned(&c,"process_nonce");
+    assert_eq!(p.target_signature.as_ref().unwrap().argument_count,0);
+}
+
+#[test]
+fn object_observer_is_not_evaluated_in_normal_execution() {
+    let p=planned(&catalog(),"read_bytes");
+    let text=serde_json::to_string(&p).unwrap().replace("checked_fixture","bytes").replace("0.1.0","1.11.1");
+    let p:SequencePlan=serde_json::from_str(&text).unwrap();
+    let source=repair::seed(&p).unwrap().replacen("let mut trace","let _used=data.len(); let mut trace",1);
+    let prepared=repair::prepare_observed(&p,&source,true).unwrap();
+    let source=format!("extern crate checked_fixture as bytes; {}\nfn main() {{graft_body(&[1]); println!(\"{{}}\",bytes::observer_count());}}",prepared.core);
+    let executable=compile(&source,"observer-counter",true);
+    let quiet=Command::new(&executable).env_remove("GRAFT_TRACE").output().unwrap();
+    assert!(quiet.status.success());assert_eq!(String::from_utf8_lossy(&quiet.stdout).trim(),"0");
+    let diagnostic=Command::new(&executable).env("GRAFT_TRACE","1").output().unwrap();
+    assert!(diagnostic.status.success());
+    assert!(String::from_utf8_lossy(&diagnostic.stdout).trim().parse::<usize>().unwrap()>0);
+}
+
+#[test]
+fn extraction_rejection_identifies_the_failed_producer_without_reexecuting_it() {
+    let mut c=catalog();c.apis.retain(|a|a.path!="checked_fixture::token");
+    let mut p=planned(&c,"use_token");
+    // Pin the Result producer and reject only at its Ok branch for byte zero.
+    c.apis.retain(|a|a.path!="checked_fixture::option");
+    if let PlanResult::Planned{plan}=plan(&c,&p.target,&Limits::default()) {p=plan;}
+    let prepared=repair::prepare_observed(&p,&repair::seed(&p).unwrap(),true).unwrap();
+    let executable=compile(&prepared.standalone,"branch-rejection-marker",true);
+    let output=Command::new(&executable).arg("0").env("GRAFT_TRACE","1").output().unwrap();
+    let stderr=String::from_utf8_lossy(&output.stderr);
+    assert!(stderr.contains("GRAFT_BRANCH:"));
+    assert!(!repair::seed(&p).unwrap().contains("GRAFT_BRANCH:"));
+}
+
+#[test]
+fn optional_scalar_argument_remains_observable_with_constant_other_state() {
+    let p=planned(&catalog(),"optional_scalar");
+    let prepared=repair::prepare_observed(&p,&repair::seed(&p).unwrap(),true).unwrap();
+    let executable=compile(&prepared.standalone,"optional-scalar-observed",true);
+    let report=tokio::runtime::Runtime::new().unwrap().block_on(validate::probe_extended(
+        &p,&executable,&executable.with_extension("probe.json"))).unwrap();
+    assert!(report.extended_probe_passed);
+    assert_eq!(report.argument_input_influence,"observed_repeatable");
+}
+
+#[test]
+fn source_token_keys_ignore_comments_but_keep_string_literal_contents() {
+    let dir=std::env::temp_dir().join(format!("graft-source-keys-{}",std::process::id()));
+    std::fs::create_dir_all(&dir).unwrap();
+    let mut keys=vec![];
+    for (i,source) in ["fn f(){let _x=\"a b\";}","//comment\nfn f () { let _x = \"a b\" ; }","fn f(){let _x=\"ab\";}"] .iter().enumerate() {
+        let path=dir.join(format!("{i}.rs"));let output=dir.join(format!("{i}.json"));std::fs::write(&path,source).unwrap();
+        assert!(Command::new(env!("CARGO_BIN_EXE_graft-plan")).args(["source-key",path.to_str().unwrap(),output.to_str().unwrap()]).status().unwrap().success());
+        let value:serde_json::Value=serde_json::from_slice(&std::fs::read(output).unwrap()).unwrap();keys.push(value["sha256"].clone());
+    }
+    assert_eq!(keys[0],keys[1]);assert_ne!(keys[0],keys[2]);
+}
+
+#[test]
+fn instrumentation_evaluates_actual_arguments_once_in_both_modes() {
+    let p=planned(&catalog(),"scalar");
+    let mut file=syn::parse_file(&repair::seed(&p).unwrap()).unwrap();
+    let f=file.items.iter_mut().find_map(|item|match item {syn::Item::Fn(f)=>Some(f),_=>None}).unwrap();
+    for stmt in &mut f.block.stmts {
+        if let syn::Stmt::Local(local)=stmt {
+            if let Some(init)=&mut local.init {
+                if let syn::Expr::Call(call)=init.expr.as_mut() {
+                    if quote::ToTokens::to_token_stream(&call.func).to_string().ends_with("scalar") {
+                        call.args[0]=syn::parse_quote!(checked_fixture::counted_input());
+                    }
+                }
+            }
+        }
+    }
+    let prepared=repair::prepare_observed(&p,&quote::ToTokens::to_token_stream(&file).to_string(),true).unwrap();
+    let executable=compile(&format!("{} fn main(){{graft_body(&[1]);println!(\"{{}}\",checked_fixture::argument_count());}}",prepared.core),"argument-eval-once",true);
+    for trace in [false,true] {
+        let mut command=Command::new(&executable);
+        if trace {command.env("GRAFT_TRACE","1");} else {command.env_remove("GRAFT_TRACE");}
+        let output=command.output().unwrap();assert!(output.status.success());
+        assert_eq!(String::from_utf8_lossy(&output.stdout).trim(),"1");
+    }
+}

@@ -11,6 +11,7 @@ from admission_diagnostics import atomic_json, fingerprint
 from launch_controlled_round import Engine, ROOT
 from model_cost_control import read_ledger, spent
 from preflight_admission import read_profile
+from repair_context import classification, helper_names
 
 
 DEFAULT_CASES = [('bytes', 0), ('chrono', 0), ('fixedbitset', 4), ('time', 0)]
@@ -27,6 +28,7 @@ def calibrate(source, output, planner, harness, execute=False, cases=None,
         [ROOT/'scripts'/name for name in ('launch_controlled_round.py','parameter_repair.py',
          'preflight_admission.py','admission_diagnostics.py','bounded_replanning.py',
          'model_cost_control.py','costed_model_request.py','calibrate_parameter_repair.py')]+
+        [ROOT/'scripts'/name for name in ('model_source.py','repair_context.py','generation_metrics.py','run_experiment_rounds.py')]+
         ([ROOT/profile['semantics_rules']] if profile.get('semantics_rules') else [])))
     implementation_hashes={str(p.relative_to(ROOT)):fingerprint(p) for p in source_files}
     binaries={name:fingerprint(path) if Path(path).is_file() else None
@@ -45,9 +47,13 @@ def calibrate(source, output, planner, harness, execute=False, cases=None,
         old = json.loads(generation.read_text())
         if not old.get('finished') or (old.get('accepted') and not include_accepted_controls):
             raise ValueError(f'{crate}:{slot} is not an allowed completed control case')
+        original_plan=json.loads(plan.read_text())
+        raw_path=source/'runtime/raw-rustdoc'/(crate+'-'+str(original_plan.get('crate_version'))+'.json')
+        applicability=(classification(original_plan,json.loads(raw_path.read_text()) if raw_path.exists() else None)
+                       if original_plan.get('steps') else None)
         snapshots.append({'crate': crate, 'slot': slot, 'original_generation': fingerprint(generation),
                           'original_plan': fingerprint(plan), 'prior_status': old['status'],
-                          'prior_accepted':bool(old.get('accepted'))})
+                          'prior_accepted':bool(old.get('accepted')),'input_applicability':applicability})
     if expected_manifest:
         expected=json.loads(Path(expected_manifest).read_text())
         if (expected['cases']!=snapshots or expected['admission_profile']!=fingerprint(profile_path)
@@ -101,10 +107,11 @@ def calibrate(source, output, planner, harness, execute=False, cases=None,
             raw = json.loads((source / 'runtime/raw-rustdoc' / (crate + '-' + raw_plan['crate_version'] + '.json')).read_text())
             ids = {step['api'] for step in raw_plan['steps'] if step['kind'] == 'call'}
             catalog = json.loads((source / 'plans/round-01' / crate / 'catalog.json').read_text())
-            helper_names={'grow','len'} if (crate,raw_plan['crate_version'])==('fixedbitset','0.5.7') else set()
+            helpers=helper_names(raw_plan)
             docs = [{**api, 'documentation': raw['index'].get(api['id'], {}).get('docs', ''),
                      'qualified_helper':(api.get('owner') or {}).get('path','')+'::'+api['path']}
-                    for api in catalog['apis'] if api['id'] in ids or api['path'] in helper_names]
+                    for api in catalog['apis'] if api['id'] in ids or api['path'] in helpers]
+            atomic_json(directory/'input-applicability.json',classification(raw_plan,raw))
             initial = ('Use only the pinned ' + crate + ' ' + raw_plan['crate_version'] +
                        ' default-feature library. Public documentation pool:\n' +
                        json.dumps(docs, ensure_ascii=False) + '\nRender the following pinned SequencePlan')

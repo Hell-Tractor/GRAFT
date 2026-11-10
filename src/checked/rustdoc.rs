@@ -453,13 +453,20 @@ pub fn import(bytes: &[u8]) -> Result<Catalog, String> {
         apis.push(Api {
             id: id.to_string(),
             path,
-            owner,
+            owner: owner.clone(),
             generics,
             function_generics,
             inputs,
             output,
             obligations,
             unsupported,
+            signature: Some(TargetSignature {
+                argument_count:fun["sig"]["inputs"].as_array().unwrap().len(),
+                receiver_argument_index:fun["sig"]["inputs"].as_array().unwrap().iter().position(|a|a[0]=="self"),
+                kind:if fun["sig"]["inputs"].as_array().unwrap().iter().any(|a|a[0]=="self") {"method"}
+                    else if owner.is_some() {"associated"}else{"free"}.into(),
+                evidence:im.provenance.clone(),
+            }),
         });
     }
     Ok(Catalog {

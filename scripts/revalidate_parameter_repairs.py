@@ -23,11 +23,19 @@ def revalidate(batches, output, planner, harness, admission_profile=None):
             seen.add(key)
             if not record.get('finished') or not record.get('attempts'):
                 raise ValueError('Only completed paid-response records may be replayed')
-            index=next((a['index'] for a in record['attempts'] if a.get('accepted')),
-                       record['attempts'][-1]['index'])
+            selected=next((a for a in record['attempts'] if a.get('accepted')),record['attempts'][-1])
+            index=selected['index']
+            bound=selected.get('plan')
+            if bound:
+                if fingerprint(bound['path'])!=bound:raise ValueError('Selected attempt plan changed')
+                actual_plan=Path(bound['path'])
+            elif index==0:actual_plan=path.parent/'plan.json'
+            elif (path.parent/'replanning/plan-lineage.json').exists():
+                raise ValueError('Repair replay needs its actual plan binding')
+            else:actual_plan=path.parent/'plan.json'
             ledger=read_ledger(path.parent/'model-cost.json')
             cases.append({'crate':key[0],'slot':key[1], 'prior_accepted':bool(record.get('accepted')),
-                          'generation':fingerprint(path),'plan':fingerprint(path.parent/'plan.json'),
+                          'generation':fingerprint(path),'plan':fingerprint(actual_plan),
                           'response':fingerprint(path.parent/f'attempt-{index}.rs'),
                           'prior_protocol':fingerprint(batch/'protocol.json'),
                           'prior_spent_or_reserved_cny':str(spent(ledger)),
