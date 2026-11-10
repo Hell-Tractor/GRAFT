@@ -9,11 +9,45 @@ def enabled(profile):
     return bool(profile and profile.get('assembly_mode') == 'llm-parameter-repair')
 
 
-def base_prompt(plan_path, original_prompt):
+def extended(profile):
+    return bool(profile and profile.get('repair_contract')=='planned-call-v3')
+
+
+def read_rules(path):
+    value=json.loads(Path(path).read_text())
+    if value.get('schema')!='graft-parameter-guidance-v1' or value.get('kind')!='llm_guidance_not_universal_precondition_proof':
+        raise ValueError('unsupported parameter guidance')
+    ids=set()
+    for rule in value['rules']:
+        if rule['id'] in ids or not rule.get('crate') or not rule.get('version') or not rule.get('evidence'):
+            raise ValueError('duplicate or unversioned parameter rule')
+        ids.add(rule['id'])
+    if not 0<value.get('max_context_utf8_bytes',0)<=2200:
+        raise ValueError('parameter guidance must remain within the existing context budget')
+    return value
+
+
+def rule_context(plan,rules):
+    if not rules:return []
+    selected=[]
+    for rule in rules['rules']:
+        if (rule['crate'],rule['version'])!=(plan['crate_name'],plan['crate_version']):continue
+        instances=[s['instance'] for s in plan['steps'] if s['kind']=='call' and
+                   any(s['path'].endswith(suffix) for suffix in rule['suffixes'])]
+        if not instances:continue
+        row={k:rule[k] for k in ('id','roles','advice','evidence')};row['instances']=instances
+        if len(json.dumps(selected+[row],ensure_ascii=False).encode())<=rules['max_context_utf8_bytes']:
+            selected.append(row)
+    return selected
+
+
+def base_prompt(plan_path, original_prompt, rules=None):
     result = json.loads(Path(plan_path).read_text())
     plan = result['plan']
     hints = ''
-    if (plan['crate_name'],plan['crate_version']) == ('fixedbitset','0.5.7'):
+    if rules:
+        hints='\nVERSIONED PARAMETER GUIDANCE (advice, not proof):\n'+json.dumps(rule_context(plan,rules),ensure_ascii=False,separators=(',',':'))+'\n'
+    elif (plan['crate_name'],plan['crate_version']) == ('fixedbitset','0.5.7'):
         hints = ('\nRECEIVER STATE HINT (fixedbitset 0.5.7 public API): '
                  'FixedBitSet::new() has length zero. Before set/toggle/insert, preserve the new() '
                  'call and add receiver.grow(bits) where bits is a bounded positive input-derived '

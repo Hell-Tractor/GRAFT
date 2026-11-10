@@ -15,6 +15,8 @@ struct Args {
     repair_plan: Option<PathBuf>,
     #[arg(long, requires="repair_plan")]
     standalone_output: Option<PathBuf>,
+    #[arg(long, requires="repair_plan")]
+    observe_objects: bool,
     #[arg(long, default_value="fuzz_target")]
     entry: String,
     #[arg(long)]
@@ -73,7 +75,7 @@ fn run()->Result<(),Box<dyn std::error::Error>>{
     if let Some(ref planpath)=a.repair_plan {
         let result:graft::checked::PlanResult=serde_json::from_slice(&std::fs::read(planpath)?)?;
         let graft::checked::PlanResult::Planned{plan}=result else{return Err("rejected repair plan".into());};
-        let prepared=graft::checked::repair::prepare(&plan,&source)?;
+        let prepared=graft::checked::repair::prepare_observed(&plan,&source,a.observe_objects)?;
         if let Some(ref output)=a.standalone_output {std::fs::write(output,&prepared.standalone)?;}
         file=syn::parse_file(&prepared.core)?;
         repair_evidence=Some(prepared.evidence);

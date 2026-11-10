@@ -1,5 +1,7 @@
 # Admission v2：核心预检与 LLM 参数修复
 
+2026-11-10 后续开发已加入公开类型路径、版本化参数提示、可重复对象实参探测和有界替代生产者重规划，入口为 `development-complete.json`。实现、无费用验证和已冻结的 24 目标校准命令见 [DEVELOPMENT-20261110.md](DEVELOPMENT-20261110.md)。下面保留上一版参数修复和历史预检协议记录；其中“未实现重规划”等限制描述的是当时版本。
+
 ## 当前实现：LLM 参数修复
 
 `parameter-repair.json` 启用 `llm-parameter-repair` 和 `planned-call-v2`。对可修复的核心预检拒绝，不再直接终止，而是将失败输入、编译诊断、panic 和公开 API 文档交给 LLM。环境故障仍停止付费生成。

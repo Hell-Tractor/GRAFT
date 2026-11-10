@@ -1,0 +1,15 @@
+{
+  "schema":"graft-admission-profile-v2",
+  "revision":"20261110-typed-paths-observations-bounded-replanning-v1",
+  "core_preflight":true,
+  "gate":"strict-three-input-v1",
+  "preflight_wall_seconds":60,
+  "assembly_mode":"llm-parameter-repair",
+  "repair_contract":"planned-call-v3",
+  "argument_probe":"repeatable-observations-v1",
+  "infer_call_results":true,
+  "semantics_rules":"experiments/admission-v2/parameter-hints-v1.json",
+  "replanning":{"max_candidates":3,"wall_seconds":60,"search_nodes":2000},
+  "paired_plan_policy":"no-repair retains the shared first response and initial plan; later GRAFT replanning is recorded separately",
+  "notes":"LLM parameter repair remains primary. Repeatable object observations use fixed diagnostic inputs, not additional fuzz seeds. Replanning may change producers but not original target/version/slot or paid ledger. Unsupported opaque observations remain unknown; no universal taint/precondition proof. New batch and isolated binaries required."
+}

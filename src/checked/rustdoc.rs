@@ -3,6 +3,7 @@ use super::model::*;
 use serde_json::Value;
 use sha2::{Digest, Sha256};
 use std::collections::{BTreeMap, BTreeSet};
+use std::cell::RefCell;
 
 pub fn sha256(bytes: &[u8]) -> String {
     format!("{:x}", Sha256::digest(bytes))
@@ -11,6 +12,7 @@ struct Import<'a> {
     krate: &'a Value,
     provenance: String,
     public_names: BTreeMap<String, String>,
+    type_paths: RefCell<BTreeMap<String,TypePathEvidence>>,
 }
 impl Import<'_> {
     fn path(&self, p: &Value, scope: &str) -> Ty {
@@ -27,15 +29,12 @@ impl Import<'_> {
                 reason: format!("unresolved canonical path id {id}"),
             };
         };
-        let path = if summary["crate_id"] == 0 {
-            match self.public_names.get(&id) {
-                Some(p) => p.clone(),
-                None => {
-                    return Ty::Unknown {
-                        reason: format!("no publicly named type path for {canonical}"),
-                    };
-                }
-            }
+        let path = if let Some(public) = self.public_names.get(&id) {
+            public.clone()
+        } else if summary["crate_id"] == 0 {
+            return Ty::Unknown {
+                reason: format!("no publicly named type path for {canonical}"),
+            };
         } else {
             canonical.clone()
         };
@@ -46,6 +45,14 @@ impl Import<'_> {
         }
         let crate_id = summary["crate_id"].as_u64().unwrap_or(u64::MAX);
         let identity = format!("{}:crate{crate_id}:item{id}:{canonical}", self.provenance);
+        let external=&self.krate["external_crates"][crate_id.to_string()];
+        self.type_paths.borrow_mut().insert(identity.clone(),TypePathEvidence {
+            identity:identity.clone(),canonical_path:canonical.clone(),emitted_path:path.clone(),
+            origin_crate_id:crate_id,
+            origin_crate_name:external["name"].as_str().unwrap_or("").to_string(),
+            origin_metadata_path:external["path"].as_str().map(String::from),
+            public_reexport:crate_id!=0 && self.public_names.contains_key(&id),
+        });
         let mut args = vec![];
         if !p["args"].is_null() {
             let Some(angle) = p["args"].get("angle_bracketed") else {
@@ -324,6 +331,7 @@ pub fn import(bytes: &[u8]) -> Result<Catalog, String> {
         krate,
         provenance: provenance.clone(),
         public_names: public_names(krate, &crate_name),
+        type_paths:RefCell::new(BTreeMap::new()),
     };
     let index = krate["index"].as_object().unwrap();
     let mut owners = BTreeMap::new();
@@ -464,5 +472,6 @@ pub fn import(bytes: &[u8]) -> Result<Catalog, String> {
         rustdoc_sha256: provenance,
         apis,
         impls,
+        type_paths:im.type_paths.into_inner().into_values().collect(),
     })
 }

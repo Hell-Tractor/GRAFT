@@ -102,6 +102,115 @@ fn parameter_repair_allows_alpha_renaming_but_preserves_producer_arguments() {
     assert_ne!(hidden,renamed);
     assert!(repair::prepare(&p,&hidden).is_err());
 }
+
+#[test]
+fn public_reexport_changes_spelling_but_preserves_external_definition_identity() {
+    let c=catalog();
+    let api=c.apis.iter().find(|a|a.path=="checked_fixture::public_duration").unwrap();
+    let Ty::Nominal{identity,path,..}=&api.output else {panic!("expected Duration")};
+    assert_eq!(path,"checked_fixture::PublicDuration");
+    assert!(identity.contains("core::time::Duration"));
+    let evidence=c.type_paths.iter().find(|p|&p.identity==identity).unwrap();
+    assert!(evidence.public_reexport);
+    assert_ne!(evidence.origin_crate_id,0);
+    assert_eq!(evidence.canonical_path,"core::time::Duration");
+    let mut wrong=api.output.clone();
+    if let Ty::Nominal{identity,..}=&mut wrong {*identity=format!("different-crate-version:{identity}");}
+    assert!(unify(&api.output,&wrong,&mut BTreeMap::new()).is_err());
+    compile(&emit::standalone(&planned(&c,"public_duration")).unwrap(),"public-reexport",true);
+}
+
+#[test]
+fn compiler_infers_call_results_without_printing_unreachable_transitive_paths() {
+    let mut p=planned(&catalog(),"public_duration");
+    if let Step::Call{ty:Ty::Nominal{path,..},..}=p.steps.last_mut().unwrap() {
+        *path="core::not_public::Duration".into();
+    } else {panic!("expected nominal call result");}
+    p.infer_call_results=true;
+    let source=emit::standalone(&p).unwrap();
+    assert!(!source.contains("not_public"));
+    compile(&source,"inferred-transitive-result",true);
+}
+
+#[test]
+fn repeated_input_probe_rejects_process_nonce_as_fake_input_influence() {
+    let p=planned(&catalog(),"scalar_u32");
+    let mut file=syn::parse_file(&repair::seed(&p).unwrap()).unwrap();
+    let f=file.items.iter_mut().find_map(|i|match i {syn::Item::Fn(f)=>Some(f),_=>None}).unwrap();
+    f.block.stmts.insert(0,syn::parse_quote!(let _used=data.len();));
+    let local=f.block.stmts.iter_mut().find_map(|s|match s {
+        syn::Stmt::Local(l) if quote::ToTokens::to_token_stream(&l.pat).to_string().contains("v0")=>Some(l),_=>None}).unwrap();
+    local.init.as_mut().unwrap().expr=Box::new(syn::parse_quote!(checked_fixture::process_nonce()));
+    let prepared=repair::prepare_observed(&p,&quote::ToTokens::to_token_stream(&file).to_string(),true).unwrap();
+    let executable=compile(&prepared.standalone,"nonce-not-input",true);
+    let report=tokio::runtime::Runtime::new().unwrap().block_on(validate::probe_extended(
+        &p,&executable,&executable.with_extension("probe.json"))).unwrap();
+    assert!(report.strict.bounded_probe_passed);
+    assert!(!report.extended_probe_passed);
+    assert_eq!(report.argument_input_influence,"nondeterministic_observations");
+}
+
+#[test]
+fn repeated_input_probe_preserves_real_scalar_variation() {
+    let p=planned(&catalog(),"scalar");
+    let prepared=repair::prepare_observed(&p,&repair::seed(&p).unwrap(),true).unwrap();
+    let executable=compile(&prepared.standalone,"repeatable-input",true);
+    let report=tokio::runtime::Runtime::new().unwrap().block_on(validate::probe_extended(
+        &p,&executable,&executable.with_extension("probe.json"))).unwrap();
+    assert!(report.extended_probe_passed);
+    assert_eq!(report.extended_samples.len(),16);
+    assert!(report.extended_samples.iter().all(|s|s.call_entered));
+    assert_eq!(report.argument_input_influence,"observed_repeatable");
+}
+
+#[test]
+fn truly_zero_argument_target_is_explicitly_not_input_sensitive() {
+    let p=planned(&catalog(),"process_nonce");
+    let prepared=repair::prepare_observed(&p,&repair::seed(&p).unwrap(),true).unwrap();
+    let executable=compile(&prepared.standalone,"zero-arguments",true);
+    let report=tokio::runtime::Runtime::new().unwrap().block_on(validate::probe_extended(
+        &p,&executable,&executable.with_extension("probe.json"))).unwrap();
+    assert!(report.extended_probe_passed);
+    assert_eq!(report.argument_input_influence,"not_applicable_no_arguments");
+}
+
+#[test]
+fn alternate_producers_keep_target_version_and_total_search_bound() {
+    let c=catalog();let p=planned(&c,"choose");
+    let report=planner::alternatives(&c,&p,&Limits::default(),2).unwrap();
+    assert_eq!(report["target"],p.target);
+    assert!(report["search_nodes"].as_u64().unwrap()<=2000);
+    let candidates=report["candidates"].as_array().unwrap();
+    assert!(!candidates.is_empty());
+    let mut planned_count=0;
+    for candidate in candidates {
+        let result:PlanResult=serde_json::from_value(candidate["result"].clone()).unwrap();
+        if let PlanResult::Planned{plan}=result {
+            planned_count+=1;
+            assert_eq!(plan.target,p.target);assert_eq!(plan.crate_version,p.crate_version);
+            let excluded=candidate["excluded_producer"].as_str().unwrap();
+            assert!(!plan.steps.iter().any(|s|matches!(s,Step::Call{api,..} if api==excluded)));
+        }
+    }
+    assert!(planned_count>0);
+    let mut wrong=p.clone();wrong.crate_version="different".into();
+    assert!(planner::alternatives(&c,&wrong,&Limits::default(),2).is_err());
+    let tiny=planner::alternatives(&c,&p,&Limits{nodes:1,..Limits::default()},2).unwrap();
+    assert!(tiny["search_nodes"].as_u64().unwrap()<=1);
+}
+
+#[test]
+fn observed_repair_tracks_ok_some_extraction_dependencies() {
+    let c=catalog();let mut p=planned(&c,"use_token");
+    // Force the existing public Result producer, preserving the original target.
+    let mut only=c.clone();only.apis.retain(|a|a.path.ends_with("::result")||a.path.ends_with("::use_token"));
+    if let PlanResult::Planned{plan}=plan(&only,&p.target,&Limits::default()) {p=plan;}else{panic!("result producer absent");}
+    let seed=repair::seed(&p).unwrap();
+    assert!(repair::prepare_observed(&p,&seed,true).is_ok());
+    let broken=seed.replace("let Ok", "let Some");
+    assert_ne!(broken,seed);
+    assert!(repair::prepare_observed(&p,&broken,true).is_err());
+}
 fn catalog() -> Catalog {
     static C: OnceLock<Catalog> = OnceLock::new();
     C.get_or_init(|| {

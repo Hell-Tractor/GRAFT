@@ -1,0 +1,15 @@
+{
+  "schema": "graft-admission-profile-v2",
+  "revision": "20261110-typed-paths-observations-bounded-replanning-v1-no-replanning",
+  "core_preflight": true,
+  "gate": "strict-three-input-v1",
+  "preflight_wall_seconds": 60,
+  "assembly_mode": "llm-parameter-repair",
+  "repair_contract": "planned-call-v3",
+  "argument_probe": "repeatable-observations-v1",
+  "infer_call_results": true,
+  "semantics_rules": "experiments/admission-v2/parameter-hints-v1.json",
+  "replanning": false,
+  "paired_plan_policy": "no-repair retains the shared first response and initial plan; later GRAFT replanning is recorded separately",
+  "notes": "Explicit no-replanning ablation of development-complete; same target slots, strict gate, observations, paid cap and compiler. Separate batch required."
+}

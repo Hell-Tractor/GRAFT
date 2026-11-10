@@ -45,10 +45,10 @@ struct Search<'a> {
 }
 impl Search<'_> {
     fn tick(&mut self, depth: usize) -> Result<(), Failure> {
-        self.nodes += 1;
-        if self.nodes > self.limits.nodes || depth > self.limits.depth {
+        if self.nodes >= self.limits.nodes || depth > self.limits.depth {
             Err(Failure::BudgetExhausted)
         } else {
+            self.nodes += 1;
             Ok(())
         }
     }
@@ -383,7 +383,7 @@ pub fn plan(catalog: &Catalog, target: &str, limits: &Limits) -> PlanResult {
                 Ok(s) => return Ok(s),
                 Err(e) => {
                     search.reasons.push(e);
-                    if search.nodes > limits.nodes {
+                    if search.nodes >= limits.nodes {
                         break;
                     }
                 }
@@ -394,7 +394,13 @@ pub fn plan(catalog: &Catalog, target: &str, limits: &Limits) -> PlanResult {
         ))
     })();
     match attempt {
-        Ok(s) => PlanResult::Planned {
+        Ok(s) => {
+            let mut identities=BTreeSet::new();
+            for step in &s.steps {
+                step.ty().nominal_identities(&mut identities);
+                if let Step::Call{type_args,..}=step {for t in type_args {t.nominal_identities(&mut identities);}}
+            }
+            PlanResult::Planned {
             plan: SequencePlan {
                 schema: if limits.independent_arguments { "graft-ablation-independent-arguments-v1" } else { "graft-plan-v1" }.into(),
                 crate_name: catalog.crate_name.clone(),
@@ -408,8 +414,10 @@ pub fn plan(catalog: &Catalog, target: &str, limits: &Limits) -> PlanResult {
                 obligations: s.obligations,
                 unresolved: vec![],
                 search_nodes: search.nodes,
+                type_paths: catalog.type_paths.iter().filter(|p|identities.contains(&p.identity)).cloned().collect(),
+                infer_call_results:false,
             },
-        },
+        }},
         Err(e) => {
             search.reasons.push(e);
             PlanResult::Rejected {
@@ -419,4 +427,38 @@ pub fn plan(catalog: &Catalog, target: &str, limits: &Limits) -> PlanResult {
             }
         }
     }
+}
+
+/// At most two alternate producer exclusions after the original plan. No target
+/// replacement, version change, coverage ranking or unbounded candidate search.
+pub fn alternatives(catalog:&Catalog,original:&SequencePlan,limits:&Limits,max_candidates:usize)
+    ->Result<serde_json::Value,Failure> {
+    if max_candidates==0 || max_candidates>2 || limits.nodes==0 || limits.nodes>2000 || catalog.crate_name!=original.crate_name
+        || catalog.crate_version!=original.crate_version || catalog.package_name!=original.package_name
+        || catalog.features!=original.features || catalog.default_features!=original.default_features
+        || catalog.rustdoc_sha256!=original.rustdoc_sha256 {
+        return Err(Failure::incompatible("alternate plans require the original pinned catalog and at most two alternatives"));
+    }
+    let mut excluded=vec![];
+    for step in original.steps.iter().rev() {
+        if let Step::Call{api,..}=step {
+            if api!=&original.target && !excluded.contains(api) {excluded.push(api.clone());}
+        }
+    }
+    let mut spent_nodes=0;let mut rows=vec![];
+    for producer in excluded.into_iter().take(max_candidates) {
+        if spent_nodes>=limits.nodes {break;}
+        let mut candidate=catalog.clone();candidate.apis.retain(|a|a.id!=producer);
+        let mut bounds=limits.clone();bounds.nodes=limits.nodes-spent_nodes;
+        bounds.independent_arguments=original.schema=="graft-ablation-independent-arguments-v1";
+        let mut result=plan(&candidate,&original.target,&bounds);
+        let nodes=match &mut result {
+            PlanResult::Planned{plan}=>{plan.infer_call_results=original.infer_call_results;plan.search_nodes},
+            PlanResult::Rejected{search_nodes,..}=>*search_nodes,
+        };
+        spent_nodes+=nodes;
+        rows.push(serde_json::json!({"excluded_producer":producer,"result":result}));
+    }
+    Ok(serde_json::json!({"schema":"graft-bounded-alternatives-v1","target":original.target,
+        "search_nodes":spent_nodes,"max_candidates":max_candidates,"candidates":rows}))
 }

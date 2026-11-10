@@ -1,0 +1,7 @@
+{
+  "schema": "graft-parameter-guidance-v1",
+  "kind": "llm_guidance_not_universal_precondition_proof",
+  "revision": "20261110-empty-guidance-ablation-v1",
+  "max_context_utf8_bytes": 2200,
+  "rules": []
+}

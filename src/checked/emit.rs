@@ -67,7 +67,8 @@ pub fn emit(plan: &SequencePlan) -> Result<String, Failure> {
             return Err(Failure::incompatible("non-topological/duplicate value id"));
         }
         let v = step.value();
-        let ty = rust_type(step.ty())?;
+        let inferred = plan.infer_call_results && !matches!(step,Step::Input{..});
+        let ty = if inferred {String::new()} else {rust_type(step.ty())?};
         match step {
             Step::Input { ty: t, .. } => {
                 if !input_supported(t) {
@@ -84,7 +85,8 @@ pub fn emit(plan: &SequencePlan) -> Result<String, Failure> {
                         "{ty}::from_le_bytes(core::array::from_fn(|i| data.get(({cursor} + i) % data.len().max(1)).copied().unwrap_or(0)))"
                     ),
                 };
-                s.push_str(&format!("let mut v{v}: {ty} = {expr};\n"));
+                let annotation=if inferred {String::new()} else {format!(": {ty}")};
+                s.push_str(&format!("let mut v{v}{annotation} = {expr};\n"));
                 cursor += 16;
             }
             Step::Construct {
@@ -105,7 +107,8 @@ pub fn emit(plan: &SequencePlan) -> Result<String, Failure> {
                     "some" if es.len() == 1 => format!("Some({})", es[0]),
                     _ => return Err(Failure::unknown("unsupported constructor")),
                 };
-                s.push_str(&format!("let mut v{v}: {ty} = {expr};\n"));
+                let annotation=if inferred {String::new()} else {format!(": {ty}")};
+                s.push_str(&format!("let mut v{v}{annotation} = {expr};\n"));
             }
             Step::Call {
                 instance,
@@ -143,7 +146,8 @@ pub fn emit(plan: &SequencePlan) -> Result<String, Failure> {
                 s.push_str(&format!(
                     "let observed_{instance} = format!(\"{{:?}}\", ({observed})).into_bytes();\n"
                 ));
-                s.push_str(&format!("let mut v{v}: {ty} = {path}{generics}({});\nstd::hint::black_box(&v{v});\nif std::env::var_os(\"GRAFT_TRACE\").is_some() {{ eprintln!(\"GRAFT_CALL:{instance}:{{}}\", String::from_utf8_lossy(&observed_{instance})); }}\ntrace.push(({instance}, observed_{instance}));\n",args.iter().map(binding).collect::<Vec<_>>().join(", ")));
+                let annotation=if inferred {String::new()} else {format!(": {ty}")};
+                s.push_str(&format!("let mut v{v}{annotation} = {path}{generics}({});\nstd::hint::black_box(&v{v});\nif std::env::var_os(\"GRAFT_TRACE\").is_some() {{ eprintln!(\"GRAFT_CALL:{instance}:{{}}\", String::from_utf8_lossy(&observed_{instance})); }}\ntrace.push(({instance}, observed_{instance}));\n",args.iter().map(binding).collect::<Vec<_>>().join(", ")));
             }
             Step::Extract {
                 source, variant, ..

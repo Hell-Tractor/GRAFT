@@ -3,6 +3,7 @@ pub mod emit;
 pub mod model;
 pub mod planner;
 pub mod repair;
+pub mod observe;
 pub mod rustdoc;
 pub mod solver;
 pub mod validate;

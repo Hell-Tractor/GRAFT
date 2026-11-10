@@ -1,0 +1,62 @@
+{
+  "schema": "graft-admission-development-verification-v1",
+  "model_requests_this_development": 0,
+  "fuzz_jobs": 0,
+  "rust_tests_passed": 46,
+  "python_tests_passed": 96,
+  "saved_candidates": {
+    "total": 5,
+    "admitted": 4,
+    "prior_success_regressions": 0,
+    "scope": "Selected saved responses, not an unbiased generation rate"
+  },
+  "legacy_compatibility": {
+    "targets": 137,
+    "passed_core_preflight": 62,
+    "rejected_core_preflight": 75,
+    "prior_admitted_core_preflight_passed": 54,
+    "prior_admitted": 54,
+    "scope": "Core preflight only, not complete admission/fuzz"
+  },
+  "negative_control": {
+    "constant_chrono_object_rejected": true,
+    "legacy_strict_gate_would_accept": true
+  },
+  "chrono_known_target_core_compiles": true,
+  "pilot": {
+    "prepared": 24,
+    "executed": false,
+    "max_budget_cny": "5.76",
+    "accepted_original_controls": 5
+  },
+  "evidence": {
+    "saved-response-replay/revalidation-summary.json": {
+      "path": "/home/cym/workspace/graft-admission-development-20261110/saved-response-replay/revalidation-summary.json",
+      "sha256": "0bdbe3d2c92cc3996157f9489682b7f889f9e2f295dfcd432da79875cfe0ef5f"
+    },
+    "legacy-compatibility/paired-admission-report.json": {
+      "path": "/home/cym/workspace/graft-admission-development-20261110/legacy-compatibility/paired-admission-report.json",
+      "sha256": "278a99ba72ddfcfb75cf388da96d533fb3145f182fb3f254a3da0d849b045e7b"
+    },
+    "constant-object-negative-control/result.json": {
+      "path": "/home/cym/workspace/graft-admission-development-20261110/constant-object-negative-control/result.json",
+      "sha256": "cf19907dc4afb9ca7f8997c4c05e977940eaaf44e88c9ea32d8c823d9592294a"
+    },
+    "chrono-type-compile/result.json": {
+      "path": "/home/cym/workspace/graft-admission-development-20261110/chrono-type-compile/result.json",
+      "sha256": "e5c76beb961c22e95f3aa7a5b97ebbcd4681eb86a2c662a1844f996122e973d5"
+    },
+    "pilot-24-ready/calibration-manifest.json": {
+      "path": "/home/cym/workspace/graft-admission-development-20261110/pilot-24-ready/calibration-manifest.json",
+      "sha256": "b7f1751994c3e4de0ef983be38193172530e3bcf12674875ff263eb861113c10"
+    },
+    "development-rust-tests.log": {
+      "path": "/home/cym/workspace/graft-admission-development-20261110/development-rust-tests.log",
+      "sha256": "0990b8495442284d7a46eb4b0179041ae63f2241d19d3886f812357d918200ca"
+    },
+    "development-python-tests.log": {
+      "path": "/home/cym/workspace/graft-admission-development-20261110/development-python-tests.log",
+      "sha256": "ea2dd14e2ec27974583693ed4e3fff68441818d1607a419e5f06323628ee52a8"
+    }
+  }
+}

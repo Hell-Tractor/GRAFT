@@ -84,12 +84,18 @@ def diagnose(directory):
                     'message': '\n'.join(errors)}
     for name in ('original-wrapper-probe.json', 'wrapper-probe.json'):
         report = read_json(directory / name)
-        if not report or report.get('bounded_probe_passed'):
+        if not report or (report.get('bounded_probe_passed') and report.get('extended_probe_passed',True)):
             continue
         samples = report.get('samples', [])
         failed = [s for s in samples if s.get('timed_out') or s.get('exit_code') != 0]
         stderr = '\n'.join(s.get('stderr', '') for s in samples)
-        if any(s.get('timed_out') for s in failed):
+        if report.get('probe_budget_exhausted'):
+            code='probe_timeout'
+        elif report.get('argument_input_influence')=='nondeterministic_observations':
+            code='nondeterministic_observations'
+        elif report.get('argument_input_influence')=='not_observed' and report.get('bounded_probe_passed'):
+            code='input_influence_unobserved'
+        elif any(s.get('timed_out') for s in failed):
             code = 'probe_timeout'
         elif 'memory allocation' in stderr or 'out of memory' in stderr:
             code = 'resource_limit'
@@ -105,7 +111,7 @@ def diagnose(directory):
             code = 'probe_rejected'
         # Args are standalone byte arguments, not fuzzer corpus paths.
         return {'stage': name.removesuffix('.json'), 'code': code,
-                'message': stderr.strip() or code,
+                'message': ('argument observations: '+report['argument_input_influence']+'\n' if report.get('argument_input_influence') else '')+(stderr.strip() or code),
                 'samples': [{k: s.get(k) for k in ('args', 'exit_code', 'timed_out',
                             'target_reached', 'scalar_arguments', 'stderr')} for s in samples]}
     outcome = read_json(directory / 'outcome.json')

@@ -36,6 +36,10 @@ def summarize_generation(records, crates, slots=20):
             'generation_jobs_finished': len(done),
             'core_preflight_rejected_jobs': sum(p['status']=='rejected' for p in preflights),
             'core_preflight_routed_to_llm_repair_jobs': sum(r.get('preflight_action')=='llm_repair' for r in items),
+            'replanning_jobs':sum(bool(r.get('plan_lineage')) for r in items),
+            'accepted_after_replanning_jobs':sum(r.get('accepted',False) and bool(r.get('active_plan')) for r in done),
+            'changed_plan_model_attempts':sum(bool(r.get('attempts')) and len({
+                a.get('plan',{}).get('sha256') for a in r['attempts'] if a.get('plan')})>1 for r in items),
             'core_preflight_infrastructure_failed_jobs': sum(p['status']=='infrastructure_failed' for p in preflights),
             'core_preflight_wall_time': distribution([p.get('elapsed_seconds') for p in preflights]),
             'max_model_calls_per_target_observed': sorted({r['max_model_calls'] for r in items if 'max_model_calls' in r}),

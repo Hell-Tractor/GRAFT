@@ -290,3 +290,91 @@ pub async fn probe(
         .map_err(|e| e.to_string())?;
     Ok(report)
 }
+
+#[derive(Debug,Clone,Serialize,Deserialize)]
+pub struct ExtendedSample {
+    #[serde(flatten)]
+    pub run:RuntimeSample,
+    pub call_entered:bool,
+    pub object_arguments:Vec<String>,
+}
+#[derive(Debug,Clone,Serialize,Deserialize)]
+pub struct ExtendedReport {
+    #[serde(flatten)]
+    pub strict:RuntimeReport,
+    pub extended_samples:Vec<ExtendedSample>,
+    pub argument_input_influence:String,
+    pub extended_probe_passed:bool,
+    pub probe_budget_exhausted:bool,
+    pub extended_scope:String,
+}
+
+/// Keep the strict gate, then require repeatable value changes where observable.
+/// Eight fixed inputs are repeated once; no coverage-guided or plan-specific seeds.
+pub async fn probe_extended(plan:&SequencePlan,executable:&Path,output:&Path)->Result<ExtendedReport,String> {
+    let started=Instant::now();
+    let strict=probe(plan,executable,output).await?;
+    let (instance,args)=plan.steps.iter().rev().find_map(|s|match s {
+        Step::Call{instance,api,args,..} if api==&plan.target=>Some((*instance,args)),_=>None,
+    }).ok_or("target absent")?;
+    let scalar=args.iter().any(|b|emit::input_supported(plan.steps[b.value].ty()));
+    let object_marker=format!("GRAFT_OBJECT:{instance}:");
+    let enter_marker=format!("GRAFT_ENTER:{instance}");
+    let post_marker=format!("GRAFT_CALL:{instance}:");
+    let convert=|run:RuntimeSample| {
+        let object_arguments=run.stderr.lines().filter_map(|s|s.strip_prefix(&object_marker))
+            .filter(|s|*s!="[]").map(String::from).collect();
+        let call_entered=run.stderr.lines().any(|s|s==enter_marker);
+        ExtendedSample{run,object_arguments,call_entered}
+    };
+    let inputs:Vec<Vec<String>>=[vec![],vec![0],vec![1],vec![255],vec![1,0,0,0],
+        vec![2,0,0,0],vec![255,0,0,0],vec![0,1,2,3,4,5,6,7]]
+        .into_iter().map(|v|v.into_iter().map(|b|b.to_string()).collect()).collect();
+    let mut samples:Vec<_>=strict.samples.iter().cloned().map(&convert).collect();
+    let mut exhausted=false;
+    for input in inputs.iter().skip(3).chain(inputs.iter()) {
+        let remaining=10.0-started.elapsed().as_secs_f64();
+        if remaining<=0.0 {exhausted=true;break;}
+        let mut command=tokio::process::Command::new(executable);
+        command.args(input).env("GRAFT_TRACE","1").kill_on_drop(true);
+        let run=match tokio::time::timeout(std::time::Duration::from_secs_f64(remaining.min(3.0)),command.output()).await {
+            Ok(Ok(out))=>{
+                let stderr=String::from_utf8_lossy(&out.stderr).into_owned();
+                let arguments:Vec<_>=stderr.lines().filter_map(|s|s.strip_prefix(&post_marker).map(String::from)).collect();
+                RuntimeSample{args:input.clone(),exit_code:out.status.code(),timed_out:false,
+                    target_reached:!arguments.is_empty(),scalar_arguments:arguments,
+                    stdout:String::from_utf8_lossy(&out.stdout).into_owned(),stderr}
+            },
+            Ok(Err(e))=>return Err(e.to_string()),
+            Err(_)=>RuntimeSample{args:input.clone(),exit_code:None,timed_out:true,target_reached:false,
+                scalar_arguments:vec![],stdout:String::new(),stderr:"extended probe timed out".into()},
+        };
+        samples.push(convert(run));
+    }
+    let object_supported=samples.iter().any(|s|!s.object_arguments.is_empty());
+    let mut grouped:std::collections::BTreeMap<Vec<String>,Vec<String>>=Default::default();
+    for sample in &samples {
+        if sample.run.exit_code==Some(0) && sample.run.target_reached && !sample.run.timed_out {
+            let observation=serde_json::to_string(&(
+                if scalar {sample.run.scalar_arguments.clone()}else{vec![]},
+                &sample.object_arguments)).map_err(|e|e.to_string())?;
+            grouped.entry(sample.run.args.clone()).or_default().push(observation);
+        }
+    }
+    let unstable=grouped.values().any(|v|v.len()==2 && v[0]!=v[1]);
+    let stable_values:std::collections::BTreeSet<_>=grouped.values()
+        .filter(|v|v.len()==2 && v[0]==v[1]).map(|v|v[0].clone()).collect();
+    let influence=if args.is_empty() {"not_applicable_no_arguments"}
+        else if !scalar && !object_supported {"unknown_opaque_arguments"}
+        else if unstable {"nondeterministic_observations"}
+        else if stable_values.len()>=2 {"observed_repeatable"}
+        else {"not_observed"};
+    exhausted=exhausted || samples.len()!=16 || started.elapsed().as_secs_f64()>10.0;
+    let passed=strict.bounded_probe_passed && !exhausted &&
+        !matches!(influence,"not_observed"|"nondeterministic_observations");
+    let report=ExtendedReport{strict,extended_samples:samples,argument_input_influence:influence.into(),
+        extended_probe_passed:passed,probe_budget_exhausted:exhausted,
+        extended_scope:"unchanged strict three-input gate plus 16 fixed repeated-input observations within 10 seconds; supported object snapshots are bounded and are not a complete taint proof; extra inputs are not formal fuzz seeds".into()};
+    std::fs::write(output,serde_json::to_vec_pretty(&report).map_err(|e|e.to_string())?).map_err(|e|e.to_string())?;
+    Ok(report)
+}

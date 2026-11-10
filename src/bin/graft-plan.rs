@@ -38,6 +38,9 @@ enum Command {
         /// Syntactic control: no generic solving or concrete generic enumeration.
         #[arg(long)]
         syntactic: bool,
+        /// Let the pinned compiler infer call result annotations, not API identity.
+        #[arg(long)]
+        infer_call_results: bool,
     },
     /// Emit a standalone validation program and an exact-version Cargo manifest.
     Emit { plan: PathBuf, output: PathBuf },
@@ -45,6 +48,13 @@ enum Command {
     Prompt { plan: PathBuf, output: PathBuf },
     /// Reference core without tracing; parameter repair must preserve call anchors.
     RepairSeed { plan: PathBuf, output: PathBuf },
+    /// Bounded alternate producers for exactly the original target and catalog.
+    Alternatives {
+        plan:PathBuf,catalog:PathBuf,output:PathBuf,
+        #[arg(long,default_value_t=2)] max_candidates:usize,
+        #[arg(long,default_value_t=2000)] nodes:usize,
+        #[arg(long)] syntactic:bool,
+    },
     /// Check immutable core AST retention; compilation and runtime are separate checks.
     Validate { plan: PathBuf, source: PathBuf },
     /// Run the actual standalone wrapper on three inputs; save separate runtime evidence.
@@ -52,6 +62,8 @@ enum Command {
         plan: PathBuf,
         executable: PathBuf,
         output: PathBuf,
+        #[arg(long)]
+        extended:bool,
     },
     /// Count supported/unknown APIs without claiming reachability or edge validity.
     Inventory {
@@ -77,6 +89,12 @@ fn get_plan(p: &PathBuf) -> Result<SequencePlan, Box<dyn std::error::Error>> {
 }
 fn run() -> Result<(), Box<dyn std::error::Error>> {
     match Cli::parse().command {
+        Command::Alternatives{plan:original,catalog,output,max_candidates,nodes,syntactic}=>{
+            let p=get_plan(&original)?;let mut c:Catalog=read(&catalog)?;
+            if syntactic {for a in &mut c.apis {if !a.generics.is_empty(){a.unsupported.push("syntactic control disables generic solving/instantiation".into());}}}
+            write(&output,&planner::alternatives(&c,&p,&Limits{nodes,..Limits::default()},max_candidates)
+                .map_err(|e|format!("{e:?}"))?)?;
+        },
         Command::RepairSeed { plan, output } => {
             std::fs::write(output, repair::seed(&get_plan(&plan)?)?)?;
         }
@@ -84,8 +102,14 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
             plan,
             executable,
             output,
+            extended,
         } => {
             let p = get_plan(&plan)?;
+            if extended {
+                let r=tokio::runtime::Runtime::new()?.block_on(validate::probe_extended(&p,&executable,&output))?;
+                if !r.extended_probe_passed {std::process::exit(3);}
+                return Ok(());
+            }
             let r = tokio::runtime::Runtime::new()?.block_on(validate::probe(
                 &p,
                 &executable,
@@ -118,6 +142,7 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
             depth,
             independent_arguments,
             syntactic,
+            infer_call_results,
         } => {
             let mut c: Catalog = read(&catalog)?;
             if syntactic {
@@ -127,7 +152,7 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
                     }
                 }
             }
-            let r = plan(
+            let mut r = plan(
                 &c,
                 &target,
                 &Limits {
@@ -137,6 +162,7 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
                     ..Limits::default()
                 },
             );
+            if let PlanResult::Planned{plan}= &mut r {plan.infer_call_results=infer_call_results;}
             write(&output, &r)?;
             if matches!(r, PlanResult::Rejected { .. }) {
                 std::process::exit(2);

@@ -18,6 +18,7 @@ from costed_model_request import send as costed_send
 from admission_diagnostics import begin_evidence, capture_attempt, repair_feedback
 from preflight_admission import read_profile, run_preflight
 import parameter_repair
+import bounded_replanning
 from run_experiment_rounds import command_run, execute, publish, publication_directory, save, summarize, UPSTREAM_FAILURES
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -68,6 +69,8 @@ class Engine:
         self.number=number;self.round_name=f'round-{number:02d}';self.root=root;self.runtime=root/'runtime';self.protocol=load(ROOT/'experiments/week5/protocol.json')
         self.deep_process=deep_process
         self.admission_profile=read_profile(admission_profile) if admission_profile else None
+        self.parameter_rules=(parameter_repair.read_rules(ROOT/self.admission_profile['semantics_rules'])
+                              if self.admission_profile and self.admission_profile.get('semantics_rules') else None)
         self.admission_only=admission_only
         if admission_only and not self.admission_profile:
             raise ValueError('admission-only calibration requires an explicit new profile')
@@ -100,12 +103,13 @@ class Engine:
             p['admission_profile']=self.admission_profile
             p['admission_implementation']={name:artifact(ROOT/'scripts'/name) for name in
                 ('admission_diagnostics.py','preflight_admission.py','launch_controlled_round.py',
-                 'generation_metrics.py','run_experiment_rounds.py','parameter_repair.py')}
+                 'generation_metrics.py','run_experiment_rounds.py','parameter_repair.py','bounded_replanning.py')}
             p['admission_binaries']={'planner':artifact(self.planner_bin),
                                     'harness':artifact(self.harness_bin)}
             batch_id=re.sub(r'[^A-Za-z0-9_.-]','_',root.name)+'-'+hashlib.sha256(str(root.resolve()).encode()).hexdigest()[:12]
             p['publication_namespace']='admission-v2/'+batch_id
             p['execution_scope']='admission_only' if admission_only else 'full_fuzz_round'
+            if self.parameter_rules:p['parameter_guidance']=artifact(ROOT/self.admission_profile['semantics_rules'])
         p['universes']={c:artifact(self.runtime/'universes/api_universes'/(c+'.json')) for c in p['versions']}
         p['definition_count']=sum(sum(a.get('public_name_body_definition',False) for a in load(v['path'])['apis']) for v in p['universes'].values())
         p['cfg_flags']=['--cfg','fuzzing','-C','opt-level=3','-C','codegen-units=1','-C','target-cpu=native']
@@ -269,6 +273,7 @@ class Engine:
         if plan:
             command += (['--repair-plan',str(plan),'--standalone-output',str(d/'standalone.rs')]
                         if parameter_repair.enabled(self.admission_profile) else ['--plan',str(plan)])
+            if parameter_repair.extended(self.admission_profile):command += ['--observe-objects']
         if baseline:command += ['--baseline']
         required=d/'required-names.json'
         if required.exists():command += ['--required-names',str(required)]
@@ -294,7 +299,8 @@ class Engine:
             if plan:
                 original=self.compile(d/'standalone.rs' if repair_mode else source,d/'original-wrapper','coverage')
                 if original['returncode']!=0:self.failure(m,c,i,'compile_failed','original planned wrapper did not compile',original);return False
-                original_probe=command_run(['prlimit','--as=1073741824','--',str(self.planner_bin),'probe',str(plan),str(d/'original-wrapper'),str(d/'original-wrapper-probe.json')],d,dict(self.env,LLVM_PROFILE_FILE='/dev/null'),d/'original-wrapper-probe.log',20)
+                extra=['--extended'] if parameter_repair.extended(self.admission_profile) else []
+                original_probe=command_run(['prlimit','--as=1073741824','--',str(self.planner_bin),'probe',str(plan),str(d/'original-wrapper'),str(d/'original-wrapper-probe.json')]+extra,d,dict(self.env,LLVM_PROFILE_FILE='/dev/null'),d/'original-wrapper-probe.log',20)
                 if original_probe['returncode']!=0:self.failure(m,c,i,'validation_rejected','original planned wrapper failed three-input probe',original_probe);return False
             if not repair_mode:
                 ok,review=self.normalize(source,d,plan,baseline)
@@ -303,7 +309,7 @@ class Engine:
             if compiled['returncode']!=0:self.failure(m,c,i,'compile_failed','common coverage compiler rejected target',compiled);return
             if plan:
                 probe_env=dict(self.env,GRAFT_PROBE_ARGS='1',LLVM_PROFILE_FILE='/dev/null')
-                probe=command_run(['prlimit','--as=1073741824','--',str(self.planner_bin),'probe',str(plan),str(d/'replay'),str(d/'wrapper-probe.json')],d,probe_env,d/'probe.log',20)
+                probe=command_run(['prlimit','--as=1073741824','--',str(self.planner_bin),'probe',str(plan),str(d/'replay'),str(d/'wrapper-probe.json')]+extra,d,probe_env,d/'probe.log',20)
                 if probe['returncode']!=0:self.failure(m,c,i,'validation_rejected','planned-call/three-input wrapper probe failed',probe);return
             wrapper_probe_passed=True
             valid=d/'initial';valid.mkdir(exist_ok=True);probes=[];profiles=[]
@@ -342,6 +348,7 @@ class Engine:
             save(d/'task.json',task)
             with self.lock:
                 self.tasks[(m,c,i)]=task
+                self.results.pop((m,c,i),None)
                 if getattr(self,'admission_only',False):
                     self.identities[(m,c,i)]=dict(task,status='admitted_not_fuzzed')
                 else:
@@ -359,7 +366,7 @@ class Engine:
                 capture_attempt(d,len(self.admissions[(m,c,i)])-1,source,
                                 admitted,{'method':m,'crate':c,'slot':i})
             with self.lock:self.update()
-    def preflight(self,plan,d):
+    def preflight(self,plan,d,wall_seconds=None):
         """Local core checks precede paid generation under the opt-in profile."""
         def emit_core(plan,directory,timeout):
             result=command_run([str(self.planner_bin),'emit',str(plan),str(directory/'emitted')],
@@ -376,7 +383,40 @@ class Engine:
                                report.with_suffix('.log'),timeout)
         return run_preflight(plan,d/'core-preflight',emit_core,compile_core,probe_core,
             {'protocol_sha256':self.protocol['_file_sha256']},
-            self.admission_profile['preflight_wall_seconds'])
+            min(self.admission_profile['preflight_wall_seconds'],wall_seconds)
+            if wall_seconds is not None else self.admission_profile['preflight_wall_seconds'])
+    def replan(self,initial_plan,d,method,crate):
+        bounds=self.admission_profile.get('replanning')
+        if not isinstance(bounds,dict):return None
+        initial=load(initial_plan)['plan']
+        catalog=self.root/'plans'/self.round_name/crate/'catalog.json'
+        def generate(report,timeout,max_alternatives):
+            began=time.monotonic()
+            selected_catalog=catalog
+            if not selected_catalog.exists():
+                selected_catalog=report.parent/'catalog.json'
+                raw=self.runtime/'raw-rustdoc'/(crate+'-'+initial['crate_version']+'.json')
+                command=[str(self.planner_bin),'import',str(raw),str(selected_catalog),'--package',initial['package_name']]
+                for feature in initial['features']:command+=['--features',feature]
+                if not initial['default_features']:command+=['--no-default-features']
+                result=command_run(command,d,self.env,report.parent/'import.log',min(timeout,15))
+                if result['returncode']!=0:raise RuntimeError('replanning catalog import failed')
+                cat=load(selected_catalog);allowed={a['rustdoc_id'] for a in self.universes[crate]['apis'] if a.get('public_name_body_definition')}
+                cat['apis']=[a for a in cat['apis'] if a['id'] in allowed];save(selected_catalog,cat)
+            remaining=timeout-(time.monotonic()-began)
+            if remaining<=0:raise TimeoutError('replanning catalog exhausted wall budget')
+            command=[str(self.planner_bin),'alternatives',str(initial_plan),str(selected_catalog),str(report),
+                     '--max-candidates',str(max_alternatives),'--nodes',str(bounds['search_nodes'])]
+            if method=='syntactic+LLM':command+=['--syntactic']
+            result=command_run(command,d,self.env,report.parent/'generate.log',remaining)
+            if result['timed_out']:raise TimeoutError('alternate planning exhausted wall budget')
+            if result['returncode']!=0:raise RuntimeError('alternate planner failed')
+            return load(report)
+        chosen=bounded_replanning.choose(initial_plan,d/'replanning',bounds,generate,
+            lambda plan,work,timeout:self.preflight(plan,work,wall_seconds=timeout))
+        if load(d/'replanning/plan-lineage.json').get('status')=='infrastructure_failed':
+            raise ModelBackendError('bounded replanning infrastructure failed; original target budget retained')
+        return chosen
     def fuzz(self,task):
         m,c,i=task['method'],task['crate'],task['slot'];key=(m,c,i)
         with self.lock:self.identities[key]=dict(task,status='fuzzing');self.update()
@@ -447,6 +487,7 @@ class Engine:
         path=d/f'attempt-{index}.rs';path.write_text(text);return path,metadata
     def model(self,m,c,i,prompt,plan=None,paired=False):
         d=self.directory(m,c,i);original=prompt;last=None
+        initial_plan=plan
         began=time.monotonic();record=copy.deepcopy(self.generation[(m,c,i)])
         if 'started_unix_seconds' not in record:
             record.update(started_unix_seconds=time.time(),
@@ -462,6 +503,11 @@ class Engine:
         if first_index:
             saved=d/f'attempt-{first_index-1}.prompt.txt'
             if saved.exists():original=saved.read_text()
+            lineage=d/'replanning/plan-lineage.json'
+            if lineage.exists() and load(lineage).get('selected'):
+                selected=load(lineage)['selected']
+                if artifact(Path(selected['path']))!=selected:raise ValueError('resumed alternate plan changed')
+                plan=Path(selected['path'])
         try:
             if self.admission_profile and plan:
                 preflight=self.preflight(plan,d);record['core_preflight']=preflight
@@ -476,7 +522,7 @@ class Engine:
                     emitted=command_run([str(self.planner_bin),'repair-seed',str(plan),str(seed)],
                                         d,self.env,d/'repair-seed.log',15)
                     if emitted['returncode']!=0:raise RuntimeError('parameter repair seed generation failed')
-                    base_prompt=parameter_repair.base_prompt(plan,prompt)
+                    base_prompt=parameter_repair.base_prompt(plan,prompt,getattr(self,'parameter_rules',None))
                     original=parameter_repair.prompt(base_prompt,seed.read_text(),preflight['diagnosis'])
                     if first_index:
                         previous=d/f'attempt-{first_index-1}.rs'
@@ -484,15 +530,19 @@ class Engine:
                         if not previous.exists() or not diagnosis:
                             raise ModelBackendError('interrupted parameter repair lacks sealed '
                                                     'source/diagnosis; reconcile before another paid call')
-                        original=parameter_repair.prompt(base_prompt,previous.read_text(),diagnosis)
+                        prior_plan=record['attempts'][-1].get('plan')
+                        original=parameter_repair.prompt(base_prompt,
+                            seed.read_text() if prior_plan and prior_plan!=artifact(plan) else previous.read_text(),diagnosis)
                     record.update(strategy='llm_parameter_repair',
                                   preflight_action='llm_repair' if preflight['status']=='rejected' else 'llm_generation')
                     save(d/'parameter-repair-context.json',{'plan':artifact(plan),'seed':artifact(seed),
-                        'preflight_diagnosis':preflight['diagnosis'],'target_identity':{'method':m,'crate':c,'slot':i}})
+                        'preflight_diagnosis':preflight['diagnosis'],'target_identity':{'method':m,'crate':c,'slot':i},
+                        'parameter_rules':parameter_repair.rule_context(load(plan)['plan'],getattr(self,'parameter_rules',None))})
             for attempt in range(first_index,max_calls):
                 compile_before=len(getattr(self.worker_local,'compile_runs',[]))
                 attempt_record={'index':attempt,'kind':'initial' if attempt==0 else 'repair',
                     'response_received':False,'accepted':False}
+                if plan:attempt_record['plan']=artifact(plan)
                 record['attempts'].append(attempt_record)
                 model_start=time.monotonic()
                 source,response_meta=self.request(original,d,attempt);last=source
@@ -546,7 +596,20 @@ class Engine:
                 with self.lock:self.generation[(m,c,i)]=copy.deepcopy(record);self.update()
                 if attempt<max_calls-1:
                     if repair_mode:
-                        original=parameter_repair.prompt(base_prompt,source.read_text(),evidence['diagnosis'])
+                        selected=None
+                        if isinstance(self.admission_profile.get('replanning'),dict) and evidence['diagnosis']['code'] in (
+                            'core_compile_error','dependency_identity_mismatch','target_not_reached','input_influence_unobserved'):
+                            selected=self.replan(initial_plan,d,m,c)
+                            record['plan_lineage']=artifact(d/'replanning/plan-lineage.json')
+                        if selected:
+                            plan=selected;record['active_plan']=artifact(plan)
+                            base_prompt=parameter_repair.base_prompt(plan,prompt,getattr(self,'parameter_rules',None))
+                            seed=d/f'alternate-seed-{attempt+1}.rs'
+                            emitted=command_run([str(self.planner_bin),'repair-seed',str(plan),str(seed)],d,self.env,d/f'alternate-seed-{attempt+1}.log',15)
+                            if emitted['returncode']!=0:raise ModelBackendError('alternate repair seed emission failed')
+                            original=parameter_repair.prompt(base_prompt,seed.read_text(),evidence['diagnosis'])
+                            save(d/'generation.json',record)
+                        else:original=parameter_repair.prompt(base_prompt,source.read_text(),evidence['diagnosis'])
                     else:
                         prefix=base_prompt if self.cost_policy else original
                         original=prefix+'\nCURRENT SOURCE:\n'+source.read_text()+'\nDIAGNOSTICS:\n'+diagnostics[-20000:]+'\nRemaining repairs: '+str(max_calls-attempt-1)+'. Keep the immutable planned core if supplied.'
@@ -610,7 +673,8 @@ class Engine:
         plans=[]
         for api in cat['apis']:
             path=directory/(api['id']+'.json')
-            r=subprocess.run([str(self.planner_bin),'plan',str(catalog),api['id'],str(path)],capture_output=True,timeout=30)
+            infer=['--infer-call-results'] if self.admission_profile and self.admission_profile.get('infer_call_results') else []
+            r=subprocess.run([str(self.planner_bin),'plan',str(catalog),api['id'],str(path)]+infer,capture_output=True,timeout=30)
             if path.exists() and load(path)['status']=='planned':plans.append((api,path))
         save(directory/'support.json',{'public_catalog_apis':len(cat['apis']),'complete_candidates':len(plans),'public_definition_denominator':sum(a.get('public_name_body_definition',False) for a in self.universes[c]['apis'])})
         def select(random_order=False):
@@ -655,12 +719,17 @@ class Engine:
                 api,plan=selected[i];d=self.directory(m,c,i)
                 if m in ['syntactic+LLM','no-cross-argument-unification']:
                     altered=d/'plan.json';flag='--syntactic' if m=='syntactic+LLM' else '--independent-arguments'
-                    r=subprocess.run([str(self.planner_bin),'plan',str(catalog),api['id'],str(altered),flag],capture_output=True,timeout=30)
+                    infer=['--infer-call-results'] if self.admission_profile and self.admission_profile.get('infer_call_results') else []
+                    r=subprocess.run([str(self.planner_bin),'plan',str(catalog),api['id'],str(altered),flag]+infer,capture_output=True,timeout=30)
                     if r.returncode!=0:self.failure(m,c,i,'planning_unknown','counterfactual planner could not construct target',load(altered));continue
                     plan=altered
                 try:
                     source=self.source_from_plan(plan,d)
-                    if m=='deterministic-emitter':self.admit(m,c,i,source,plan);continue
+                    if m=='deterministic-emitter':
+                        if parameter_repair.enabled(self.admission_profile):
+                            source=d/'deterministic-seed.rs'
+                            subprocess.run([str(self.planner_bin),'repair-seed',str(plan),str(source)],check=True,capture_output=True)
+                        self.admit(m,c,i,source,plan);continue
                     promptfile=d/'core-prompt.txt';subprocess.run([str(self.planner_bin),'prompt',str(plan),str(promptfile)],check=True)
                     self.submit_model(genpool,m,c,i,prefix+promptfile.read_text(),plan,m=='GRAFT')
                 except Exception as e:

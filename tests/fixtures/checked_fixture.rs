@@ -73,6 +73,10 @@ pub fn scalar_mut(x: &mut u8) -> u8 {
     *x = x.wrapping_add(1);
     *x
 }
+pub use core::time::Duration as PublicDuration;
+pub fn public_duration(x:u64)->PublicDuration { PublicDuration::from_secs(x) }
+pub fn scalar_u32(x:u32)->u32 {x.wrapping_add(1)}
+pub fn process_nonce()->u32 {std::process::id()}
 pub struct Buffer<T>(T);
 pub fn buffer_i32(x: i32) -> Buffer<i32> {
     Buffer(x)
@@ -90,6 +94,7 @@ pub fn bad_choice(_: Cycle) -> Choice {
 pub fn good_choice(_: u8) -> Choice {
     Choice
 }
+pub fn other_choice(_:u8)->Choice {Choice}
 pub fn choose(_: Choice) {}
 pub struct Holder<'a>(&'a u8);
 pub fn held_ref(x: &u8) -> Holder<'_> {

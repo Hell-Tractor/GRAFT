@@ -151,6 +151,10 @@ pub struct Prepared {
 }
 
 pub fn prepare(plan: &SequencePlan, source: &str) -> Result<Prepared, String> {
+    prepare_observed(plan,source,false)
+}
+
+pub fn prepare_observed(plan: &SequencePlan, source: &str, observe_objects:bool) -> Result<Prepared, String> {
     let expected = syn::parse_file(&emit::emit(plan).map_err(|e| format!("{e:?}"))?)
         .map_err(|e| e.to_string())?;
     let reference = function(&expected)?;
@@ -173,7 +177,8 @@ pub fn prepare(plan: &SequencePlan, source: &str) -> Result<Prepared, String> {
         bindings: BTreeMap::new(), data_uses: 0 };
     review.visit_item_fn(&repaired);
     if !review.errors.is_empty() { return Err(review.errors.join("; ")); }
-    if review.data_uses == 0 { return Err("repair has no byte-input use".into()); }
+    let target_has_arguments=plan.steps.iter().any(|s|matches!(s,Step::Call{api,args,..} if api==&plan.target && !args.is_empty()));
+    if review.data_uses == 0 && target_has_arguments { return Err("repair has no byte-input use".into()); }
 
     let mut calls = vec![];
     for step in &plan.steps {
@@ -198,6 +203,24 @@ pub fn prepare(plan: &SequencePlan, source: &str) -> Result<Prepared, String> {
     let mut producer_names: BTreeMap<usize,String> = BTreeMap::new();
     for stmt in &mut repaired.block.stmts {
         let syn::Stmt::Local(local) = stmt else { continue };
+        if observe_objects {
+            if let syn::Pat::TupleStruct(pattern)=&local.pat {
+                if pattern.elems.len()==1 {
+                    if let (Some(init),Some(syn::Pat::Ident(binding)))=(&local.init,pattern.elems.first()) {
+                        for step in &plan.steps {
+                            if let Step::Extract{value,source,variant,..}=step {
+                                if pattern.path.is_ident(variant) && producer_names.get(source)
+                                    .is_some_and(|name|direct_producer(&init.expr,name)) {
+                                    let name=binding.ident.to_string();
+                                    if review.bindings.get(&name)!=Some(&1) {return Err("branch result binding is shadowed".into());}
+                                    producer_names.insert(*value,name);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
         let Some(name) = local_name(local) else { continue };
         let Some(init) = local.init.as_mut() else { continue };
         let syn::Expr::Call(call) = init.expr.as_ref() else { continue };
@@ -217,6 +240,8 @@ pub fn prepare(plan: &SequencePlan, source: &str) -> Result<Prepared, String> {
                     if !direct_producer(actual,producer) {
                         return Err(format!("planned producer dependency {producer} was bypassed"));
                     }
+                } else if observe_objects && matches!(plan.steps[binding.value],Step::Extract{..}) {
+                    return Err("planned Ok/Some producer extraction was bypassed".into());
                 }
             }
         }
@@ -227,9 +252,22 @@ pub fn prepare(plan: &SequencePlan, source: &str) -> Result<Prepared, String> {
             emit::input_supported(plan.steps[binding.value].ty()).then(|| identifiers[i].clone())
         }).collect();
         let marker = format!("GRAFT_CALL:{instance}:{{}}");
+        let objects:Vec<_>=if observe_objects {args.iter().enumerate().filter_map(|(i,b)|
+            super::observe::argument(plan,plan.steps[b.value].ty(),&identifiers[i]).map(|(rule,expr)|(i,rule,expr))).collect()}else{vec![]};
+        let expressions:Vec<_>=objects.iter().map(|(_,_,e)|e).collect();
+        let object_marker=format!("GRAFT_OBJECT:{instance}:{{:?}}");
+        let enter_marker=format!("GRAFT_ENTER:{instance}");
+        let before=if observe_objects {quote!{
+            let __graft_objects:Vec<String>=vec![#(#expressions),*];
+            if std::env::var_os("GRAFT_TRACE").is_some() {
+                eprintln!(#object_marker,__graft_objects);
+                eprintln!(#enter_marker);
+            }
+        }}else{quote!{}};
         let replacement: syn::Expr = syn::parse_quote!({
             #(let #identifiers = #actual_args;)*
             let __graft_observed = format!("{:?}", (#(&#scalar,)*));
+            #before
             let __graft_result = #function(#(#identifiers),*);
             std::hint::black_box(&__graft_result);
             if std::env::var_os("GRAFT_TRACE").is_some() {
@@ -244,13 +282,14 @@ pub fn prepare(plan: &SequencePlan, source: &str) -> Result<Prepared, String> {
         rows.push(serde_json::json!({"instance": instance, "api": api, "binding": name,
             "original_binding":expected_name,
             "callee_tokens": func, "observed_scalar_positions": args.iter().enumerate()
-                .filter_map(|(i,b)| emit::input_supported(plan.steps[b.value].ty()).then_some(i)).collect::<Vec<_>>()}));
+                .filter_map(|(i,b)| emit::input_supported(plan.steps[b.value].ty()).then_some(i)).collect::<Vec<_>>(),
+            "object_observations":objects.iter().map(|(position,rule,_)|serde_json::json!({"position":position,"rule":rule})).collect::<Vec<_>>()}));
         position += 1;
     }
     if position != calls.len() { return Err("planned calls must remain top-level local initializers".into()); }
     let core = quote!(extern crate alloc; #repaired).to_string();
     let standalone = format!("{core}\nfn main() {{ let data: Vec<u8> = std::env::args().skip(1).map(|v| v.parse::<u8>().unwrap()).collect(); std::hint::black_box(graft_body(&data)); }}");
-    let evidence = serde_json::json!({"schema":"graft-parameter-repair-contract-v2",
+    let evidence = serde_json::json!({"schema":if observe_objects {"graft-parameter-repair-contract-v3"}else{"graft-parameter-repair-contract-v2"},
         "target":plan.target,"crate":plan.crate_name,"version":plan.crate_version,
         "source_sha256":sha256(source.as_bytes()),"instrumented_sha256":sha256(core.as_bytes()),
         "calls":rows,"byte_input_ast_uses":review.data_uses,

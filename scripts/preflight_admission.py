@@ -15,10 +15,19 @@ def read_profile(path):
         raise ValueError('stage A/B requires the unchanged strict three-input gate')
     if profile.get('assembly_mode') not in ('legacy-full-source','llm-parameter-repair'):
         raise ValueError('unsupported admission assembly mode')
-    if profile.get('assembly_mode') == 'llm-parameter-repair' and profile.get('repair_contract') != 'planned-call-v2':
-        raise ValueError('parameter repair requires the planned-call-v2 contract')
-    if profile.get('replanning') is not False or profile.get('semantics_rules') is not None:
-        raise ValueError('semantic rules and replanning are not implemented in stage A/B')
+    version3=profile.get('repair_contract')=='planned-call-v3'
+    if profile.get('assembly_mode') == 'llm-parameter-repair' and profile.get('repair_contract') not in ('planned-call-v2','planned-call-v3'):
+        raise ValueError('unsupported parameter repair contract')
+    if version3:
+        if profile.get('argument_probe')!='repeatable-observations-v1':raise ValueError('v3 requires repeatable observations')
+        rules=profile.get('semantics_rules')
+        if not isinstance(rules,str) or Path(rules).is_absolute() or '..' in Path(rules).parts:
+            raise ValueError('v3 requires a versioned repository-relative guidance file')
+        bounds=profile.get('replanning')
+        if bounds is not False and (not isinstance(bounds,dict) or isinstance(bounds.get('max_candidates'),bool) or not isinstance(bounds.get('max_candidates'),int) or not 1<=bounds.get('max_candidates',0)<=3 or isinstance(bounds.get('wall_seconds'),bool) or not isinstance(bounds.get('wall_seconds'),(int,float)) or not 0<bounds.get('wall_seconds',0)<=60 or isinstance(bounds.get('search_nodes'),bool) or not isinstance(bounds.get('search_nodes'),int) or not 0<bounds.get('search_nodes',0)<=2000):
+            raise ValueError('replanning exceeds candidate, wall or search-node limits')
+    elif profile.get('replanning') is not False or profile.get('semantics_rules') is not None:
+        raise ValueError('legacy profiles cannot enable new semantic rules or replanning')
     seconds = profile.get('preflight_wall_seconds')
     if isinstance(seconds, bool) or not isinstance(seconds, (int, float)) or not 0 < seconds <= 60:
         raise ValueError('preflight wall budget must be in (0, 60] seconds')

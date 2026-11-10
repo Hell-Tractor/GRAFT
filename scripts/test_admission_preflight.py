@@ -16,6 +16,25 @@ from calibrate_parameter_repair import calibrate
 
 
 class DiagnosticsTests(unittest.TestCase):
+    def test_prepared_calibration_locks_success_controls_and_profile(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);batch=root/'source'
+            directory=batch/'preparation/round-01/GRAFT/csv/0';directory.mkdir(parents=True)
+            (batch/'runtime').mkdir()
+            atomic_json(directory/'generation.json',{'finished':True,'accepted':True,'status':'accepted'})
+            atomic_json(directory/'emitted/plan.json',{'target':'original'})
+            profile=Path(__file__).resolve().parents[1]/'experiments/admission-v2/development-complete.json'
+            result=calibrate(batch,root/'prepare',root/'planner',root/'harness',False,[('csv',0)],profile,True)
+            self.assertEqual(result['model_requests'],0)
+            manifest=root/'prepare/calibration-manifest.json'
+            frozen=json.loads(manifest.read_text())
+            self.assertTrue(frozen['cases'][0]['prior_accepted'])
+            frozen['cases'][0]['slot']=99;atomic_json(manifest,frozen)
+            with patch('calibrate_parameter_repair.Engine') as engine:
+                with self.assertRaisesRegex(ValueError,'Prepared target selection'):
+                    calibrate(batch,root/'run',root/'planner',root/'harness',True,[('csv',0)],profile,True,manifest)
+                engine.assert_not_called()
+
     def test_calibration_prepare_never_initializes_paid_engine(self):
         with tempfile.TemporaryDirectory() as tmp:
             root=Path(tmp);batch=root/'source'
@@ -286,6 +305,7 @@ class EngineIntegrationTests(unittest.TestCase):
     def test_each_repair_uses_its_own_evidence_and_actual_call_limit(self):
         with tempfile.TemporaryDirectory() as tmp:
             engine = self.make_engine(Path(tmp), 'passed')
+            atomic_json(Path(tmp)/'plan.json',{'status':'planned','plan':{}})
             prompts = []
             def request(prompt, directory, index):
                 prompts.append(prompt)
@@ -303,6 +323,53 @@ class EngineIntegrationTests(unittest.TestCase):
             self.assertTrue((directory / 'validation-attempts/0/evidence.json').exists())
             self.assertTrue((directory / 'validation-attempts/1/evidence.json').exists())
             self.assertIn('2 model calls', json.loads((directory / 'outcome.json').read_text())['reason'])
+
+    def test_alternate_plan_uses_second_call_in_same_original_target_directory(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);engine=self.make_engine(root,'passed')
+            engine.admission_profile={'assembly_mode':'llm-parameter-repair','replanning':{
+                'max_candidates':3,'wall_seconds':60,'search_nodes':2000}}
+            engine.planner_bin=Path('/isolated/planner');engine.env={}
+            engine.preflight.return_value={'status':'passed','diagnosis':{
+                'stage':'preflight','code':'passed','message':'core ready'}}
+            plan=root/'initial.json';atomic_json(plan,{'plan':{
+                'target':'same-api','crate_name':'bytes','crate_version':'1.11.1','steps':[]}})
+            directory=engine.directory('GRAFT','bytes',0)
+            ledger=directory/'model-cost.json';ledger.write_text('persistent original target budget')
+            alternate=directory/'replanning/alternate.json'
+            atomic_json(alternate,{'plan':{'target':'same-api','crate_name':'bytes','crate_version':'1.11.1',
+                'steps':[{'different_producer':True}]}})
+            def replan(*args):
+                atomic_json(directory/'replanning/plan-lineage.json',{'selected':{'path':str(alternate)}})
+                return alternate
+            engine.replan=Mock(side_effect=replan)
+            def emit(command,*args):Path(command[-1]).write_text('// seed');return {'returncode':0}
+            directories=[]
+            def request(prompt,d,index):
+                directories.append(d);source=d/f'attempt-{index}.rs';source.write_text(f'// {index}')
+                atomic_json(d/f'response-{index}.json',{'latency_seconds':0});return source,{}
+            engine.request=Mock(side_effect=request)
+            def normalize(source,d,*args):
+                (d/'normalized.rs').write_text(source.read_text());(d/'normalize.log').write_text('')
+                return True,{'accepted':True}
+            engine.normalize=normalize
+            def compile(source,binary,mode):binary.with_suffix('.compile.log').write_text('');return {'returncode':0}
+            engine.compile=compile
+            def admit(method,crate,slot,source,active_plan):
+                if source.name=='attempt-0.rs':
+                    atomic_json(directory/'original-wrapper-probe.json',{'bounded_probe_passed':False,
+                        'reached_inputs':0,'samples':[{'exit_code':0,'target_reached':False,'stderr':''}]})
+                    engine.failure(method,crate,slot,'validation_rejected','target not reached')
+                    return False
+                self.assertEqual(active_plan,alternate);return True
+            engine.admit=admit
+            with patch('launch_controlled_round.command_run',side_effect=emit):
+                engine.model('GRAFT','bytes',0,'public docs',plan=plan)
+            record=engine.generation[('GRAFT','bytes',0)]
+            self.assertTrue(record['accepted']);self.assertEqual(engine.request.call_count,2)
+            self.assertEqual(directories,[directory,directory])
+            self.assertNotEqual(record['attempts'][0]['plan'],record['attempts'][1]['plan'])
+            self.assertEqual(ledger.read_text(),'persistent original target budget')
 
 
 if __name__ == '__main__':

@@ -11,7 +11,7 @@ from launch_controlled_round import Engine, ROOT
 from model_cost_control import read_ledger, spent
 
 
-def revalidate(batches, output, planner, harness):
+def revalidate(batches, output, planner, harness, admission_profile=None):
     batches=[Path(b).resolve() for b in batches];output=Path(output).resolve()
     if any(output.is_relative_to(b) for b in batches):
         raise ValueError('Revalidation must not overwrite a paid calibration')
@@ -40,7 +40,7 @@ def revalidate(batches, output, planner, harness):
     atomic_json(output/'input-manifest.json',{'cases':cases,'selection':
         'Original first admitted response, otherwise the final budgeted response; no new generation or extra candidate search'})
     engine=Engine(output,cost_policy=ROOT/'experiments/cost-control/policy.json',
-                  admission_profile=ROOT/'experiments/admission-v2/parameter-repair.json',
+                  admission_profile=admission_profile or ROOT/'experiments/admission-v2/parameter-repair.json',
                   planner_bin=tools/'graft-plan',harness_bin=tools/'graft-harness',admission_only=True)
     def no_requests(*args,**kwargs):raise AssertionError('Saved-response replay must never call a model')
     engine.request=no_requests
@@ -77,6 +77,8 @@ if __name__=='__main__':
     parser.add_argument('--output',required=True,type=Path)
     parser.add_argument('--planner',required=True,type=Path)
     parser.add_argument('--harness',required=True,type=Path)
+    parser.add_argument('--admission-profile',type=Path,
+                        default=ROOT/'experiments/admission-v2/parameter-repair.json')
     args=parser.parse_args()
-    summary=revalidate(args.input_batches,args.output,args.planner,args.harness)
+    summary=revalidate(args.input_batches,args.output,args.planner,args.harness,args.admission_profile)
     print(json.dumps({k:v for k,v in summary.items() if k!='results'},ensure_ascii=False))

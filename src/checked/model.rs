@@ -41,6 +41,14 @@ pub enum Ty {
     },
 }
 impl Ty {
+    pub fn nominal_identities(&self, out:&mut std::collections::BTreeSet<String>) {
+        match self {
+            Self::Nominal{identity,args,..}=>{out.insert(identity.clone());for t in args {t.nominal_identities(out);}},
+            Self::Ref{inner,..}|Self::Slice{inner}|Self::Array{inner,..}=>inner.nominal_identities(out),
+            Self::Tuple{items}=>for t in items {t.nominal_identities(out);},
+            _=>{},
+        }
+    }
     pub fn primitive(name: &str) -> Self {
         Self::Primitive { name: name.into() }
     }
@@ -154,6 +162,21 @@ pub struct Catalog {
     pub rustdoc_sha256: String,
     pub apis: Vec<Api>,
     pub impls: Vec<TraitImpl>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub type_paths: Vec<TypePathEvidence>,
+}
+
+/// Printable names do not define nominal identity. A re-export keeps the exact
+/// rustdoc definition/crate instance, even when another version has the same name.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct TypePathEvidence {
+    pub identity: String,
+    pub canonical_path: String,
+    pub emitted_path: String,
+    pub origin_crate_id: u64,
+    pub origin_crate_name: String,
+    pub origin_metadata_path: Option<String>,
+    pub public_reexport: bool,
 }
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(tag = "status", rename_all = "snake_case")]
@@ -252,6 +275,10 @@ pub struct SequencePlan {
     pub obligations: Vec<Obligation>,
     pub unresolved: Vec<Failure>,
     pub search_nodes: usize,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub type_paths: Vec<TypePathEvidence>,
+    #[serde(default, skip_serializing_if = "std::ops::Not::not")]
+    pub infer_call_results: bool,
 }
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(tag = "status", rename_all = "snake_case")]
