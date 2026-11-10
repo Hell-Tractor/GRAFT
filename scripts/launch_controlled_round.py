@@ -15,7 +15,9 @@ from experiment_batch import read_key
 from generation_metrics import summarize_generation, summarize_admissions
 from model_cost_control import BudgetRejected, compact_controlled, read_policy, read_ledger
 from costed_model_request import send as costed_send
-from run_experiment_rounds import command_run, execute, publish, save, summarize, UPSTREAM_FAILURES
+from admission_diagnostics import begin_evidence, capture_attempt, repair_feedback
+from preflight_admission import read_profile, run_preflight
+from run_experiment_rounds import command_run, execute, publish, publication_directory, save, summarize, UPSTREAM_FAILURES
 
 ROOT=Path(__file__).resolve().parents[1]
 PORT=ROOT.parent.parent/'graft-baseline-port-20261109'
@@ -60,9 +62,15 @@ def has_required_compiler_flags(tokens, flags):
     return all(item in present for item in required)
 
 class Engine:
-    def __init__(self,root,number=1,deep_process=None,resume=False,cost_policy=None):
+    def __init__(self,root,number=1,deep_process=None,resume=False,cost_policy=None,
+                 admission_profile=None,planner_bin=None,harness_bin=None):
         self.number=number;self.round_name=f'round-{number:02d}';self.root=root;self.runtime=root/'runtime';self.protocol=load(ROOT/'experiments/week5/protocol.json')
         self.deep_process=deep_process
+        self.admission_profile=read_profile(admission_profile) if admission_profile else None
+        self.planner_bin=Path(planner_bin) if planner_bin else PLANNER
+        self.harness_bin=Path(harness_bin) if harness_bin else HARNESS
+        if not self.admission_profile and (planner_bin or harness_bin):
+            raise ValueError('binary overrides require a separately frozen admission profile')
         p=self.protocol;p['status']='controlled_short_budget_execution';p['operator_start_policy']='User requested round one, then automatic round two after complete statistics and successful paper update unless new steering arrives; stop after round two.'
         p['generation_adapter_status']='implemented adapters; per-target admission outcomes recorded'
         p['instrumentation_cfg_status']='fuzzing cfg and opt-level=3 matched; same nightly compiler; no sanitizer in coverage track'
@@ -84,6 +92,15 @@ class Engine:
                 'empty_response_policy':'no retry; retained spend counts against target budget'}
         p['admission_policy']='Default safe calls; permit reviewed u8 alignment and discarded bumpalo raw iterator only. Other direct unsafe without proof is validation_rejected, not a proven invalid harness or library bug.'
         p['failure_policy']='planning_unknown and validation_rejected are actual pipeline admission outcomes with no executed harness. Infrastructure failure remains incomplete.'
+        if self.admission_profile:
+            p['admission_profile']=self.admission_profile
+            p['admission_implementation']={name:artifact(ROOT/'scripts'/name) for name in
+                ('admission_diagnostics.py','preflight_admission.py','launch_controlled_round.py',
+                 'generation_metrics.py','run_experiment_rounds.py')}
+            p['admission_binaries']={'planner':artifact(self.planner_bin),
+                                    'harness':artifact(self.harness_bin)}
+            batch_id=re.sub(r'[^A-Za-z0-9_.-]','_',root.name)+'-'+hashlib.sha256(str(root.resolve()).encode()).hexdigest()[:12]
+            p['publication_namespace']='admission-v2/'+batch_id
         p['universes']={c:artifact(self.runtime/'universes/api_universes'/(c+'.json')) for c in p['versions']}
         p['definition_count']=sum(sum(a.get('public_name_body_definition',False) for a in load(v['path'])['apis']) for v in p['universes'].values())
         p['cfg_flags']=['--cfg','fuzzing','-C','opt-level=3','-C','codegen-units=1','-C','target-cpu=native']
@@ -214,7 +231,7 @@ class Engine:
         with self.lock:
             self.tasks[(m,c,i)]=task;self.identities[(m,c,i)]=task
             self.results[(m,c,i)]=record;self.update()
-    def compile(self,source,output,mode):
+    def compile(self,source,output,mode,timeout=90,include_queue_wait=False):
         command=[];template=self.templates[mode];i=0
         while i<len(template):
             t=template[i]
@@ -230,15 +247,20 @@ class Engine:
             if not support.exists():raise RuntimeError('reviewed native global-data support missing')
             command+=['--extern','global_data='+str(support)]
         wait_start=time.monotonic()
-        with self.compile_slots:
+        acquired=self.compile_slots.acquire(timeout=timeout if include_queue_wait else None)
+        if not acquired:raise TimeoutError('preflight compile queue budget exhausted')
+        try:
             waited=time.monotonic()-wait_start
-            result=command_run(command,self.runtime/'project',self.env,output.with_suffix('.compile.log'),90,sorted(os.sched_getaffinity(0))[48:56])
+            remaining=timeout-waited if include_queue_wait else timeout
+            if remaining<=0:raise TimeoutError('preflight compile queue budget exhausted')
+            result=command_run(command,self.runtime/'project',self.env,output.with_suffix('.compile.log'),remaining,sorted(os.sched_getaffinity(0))[48:56])
+        finally:self.compile_slots.release()
         result['waiting_compile_seconds']=waited
         if not hasattr(self.worker_local,'compile_runs'):self.worker_local.compile_runs=[]
         self.worker_local.compile_runs.append(dict(mode=mode,output=str(output),**result))
         return result
     def normalize(self,source,d,plan=None,baseline=False):
-        command=[str(HARNESS),str(source),str(d/'normalized.rs'),str(d/'validity.json')]
+        command=[str(self.harness_bin),str(source),str(d/'normalized.rs'),str(d/'validity.json')]
         if plan:command += ['--plan',str(plan)]
         if baseline:command += ['--baseline']
         required=d/'required-names.json'
@@ -252,6 +274,7 @@ class Engine:
             return load(d/'task.json')['status'] not in ('generation_failed','generation_timeout',
                 'planning_unknown','infrastructure_failed','validation_rejected','compile_failed','no_target')
         start=time.monotonic();admitted=False
+        if self.admission_profile and (m,c,i) not in self.generation:begin_evidence(d)
         compile_before=len(getattr(self.worker_local,'compile_runs',[]))
         admission={'source':artifact(source),'started_unix_seconds':time.time(),'accepted':False}
         with self.lock:self.admissions.setdefault((m,c,i),[]).append(admission)
@@ -260,7 +283,7 @@ class Engine:
             if plan:
                 original=self.compile(source,d/'original-wrapper','coverage')
                 if original['returncode']!=0:self.failure(m,c,i,'compile_failed','original planned wrapper did not compile',original);return False
-                original_probe=command_run(['prlimit','--as=1073741824','--',str(PLANNER),'probe',str(plan),str(d/'original-wrapper'),str(d/'original-wrapper-probe.json')],d,dict(self.env,LLVM_PROFILE_FILE='/dev/null'),d/'original-wrapper-probe.log',20)
+                original_probe=command_run(['prlimit','--as=1073741824','--',str(self.planner_bin),'probe',str(plan),str(d/'original-wrapper'),str(d/'original-wrapper-probe.json')],d,dict(self.env,LLVM_PROFILE_FILE='/dev/null'),d/'original-wrapper-probe.log',20)
                 if original_probe['returncode']!=0:self.failure(m,c,i,'validation_rejected','original planned wrapper failed three-input probe',original_probe);return False
             ok,review=self.normalize(source,d,plan,baseline)
             if not ok:self.failure(m,c,i,'validation_rejected','normalization/contract admission failed',review);return
@@ -268,7 +291,7 @@ class Engine:
             if compiled['returncode']!=0:self.failure(m,c,i,'compile_failed','common coverage compiler rejected target',compiled);return
             if plan:
                 probe_env=dict(self.env,GRAFT_PROBE_ARGS='1',LLVM_PROFILE_FILE='/dev/null')
-                probe=command_run(['prlimit','--as=1073741824','--',str(PLANNER),'probe',str(plan),str(d/'replay'),str(d/'wrapper-probe.json')],d,probe_env,d/'probe.log',20)
+                probe=command_run(['prlimit','--as=1073741824','--',str(self.planner_bin),'probe',str(plan),str(d/'replay'),str(d/'wrapper-probe.json')],d,probe_env,d/'probe.log',20)
                 if probe['returncode']!=0:self.failure(m,c,i,'validation_rejected','planned-call/three-input wrapper probe failed',probe);return
             wrapper_probe_passed=True
             valid=d/'initial';valid.mkdir(exist_ok=True);probes=[];profiles=[]
@@ -315,7 +338,28 @@ class Engine:
             admission.update(accepted=admitted,elapsed_seconds=time.monotonic()-start,
                              compiler_runs=getattr(self.worker_local,'compile_runs',[])[compile_before:])
             save(d/('admission-'+str(len(self.admissions[(m,c,i)])-1)+'.json'),admission)
+            if self.admission_profile and (m,c,i) not in self.generation:
+                capture_attempt(d,len(self.admissions[(m,c,i)])-1,source,
+                                admitted,{'method':m,'crate':c,'slot':i})
             with self.lock:self.update()
+    def preflight(self,plan,d):
+        """Local core checks precede paid generation under the opt-in profile."""
+        def emit_core(plan,directory,timeout):
+            result=command_run([str(self.planner_bin),'emit',str(plan),str(directory/'emitted')],
+                               directory,self.env,directory/'emit.log',timeout)
+            if result['returncode']!=0:raise RuntimeError('deterministic core emission failed')
+            return directory/'emitted/src/main.rs'
+        def compile_core(source,binary,timeout):
+            self.runtime_checks(source)
+            return self.compile(source,binary,'coverage',timeout=timeout,include_queue_wait=True)
+        def probe_core(plan,binary,report,timeout):
+            return command_run(['prlimit','--as=1073741824','--',str(self.planner_bin),
+                                'probe',str(plan),str(binary),str(report)],report.parent,
+                               dict(self.env,LLVM_PROFILE_FILE='/dev/null'),
+                               report.with_suffix('.log'),timeout)
+        return run_preflight(plan,d/'core-preflight',emit_core,compile_core,probe_core,
+            {'protocol_sha256':self.protocol['_file_sha256']},
+            self.admission_profile['preflight_wall_seconds'])
     def fuzz(self,task):
         m,c,i=task['method'],task['crate'],task['slot'];key=(m,c,i)
         with self.lock:self.identities[key]=dict(task,status='fuzzing');self.update()
@@ -391,10 +435,20 @@ class Engine:
         if first_index>=max_calls:
             self.failure(m,c,i,'generation_failed','maximum generation attempts reached without admission',record);return
         base_prompt=prompt
+        record['max_model_calls']=max_calls
+        pending_validation=None
         if first_index:
             saved=d/f'attempt-{first_index-1}.prompt.txt'
             if saved.exists():original=saved.read_text()
         try:
+            if self.admission_profile and plan:
+                preflight=self.preflight(plan,d);record['core_preflight']=preflight
+                if preflight['status']!='passed':
+                    status='planning_unknown' if preflight['status']=='rejected' else 'infrastructure_failed'
+                    record['status']=status
+                    self.failure(m,c,i,status,'core preflight blocked paid generation',preflight)
+                    if paired:self.failure('no-repair',c,i,status,'shared core preflight blocked generation',preflight)
+                    return
             for attempt in range(first_index,max_calls):
                 compile_before=len(getattr(self.worker_local,'compile_runs',[]))
                 attempt_record={'index':attempt,'kind':'initial' if attempt==0 else 'repair',
@@ -419,6 +473,8 @@ class Engine:
                     self.admit('no-repair',c,i,source,plan)
                     record['paired_no_repair_validation_seconds']=time.monotonic()-paired_start
                 validation_start=time.monotonic()
+                if self.admission_profile:begin_evidence(d)
+                pending_validation=(attempt,source)
                 ok,review=self.normalize(source,d,plan,False)
                 diagnostics=json.dumps(review,ensure_ascii=False)
                 if ok:
@@ -430,6 +486,10 @@ class Engine:
                             attempt_record.update(accepted=True,compile_validation_seconds=time.monotonic()-validation_start)
                             attempt_record['compiler_runs']=getattr(self.worker_local,'compile_runs',[])[compile_before:]
                             record['accepted']=True;record['status']='accepted'
+                            if self.admission_profile:
+                                attempt_record['validation_evidence']=capture_attempt(d,attempt,source,
+                                    True,{'method':m,'crate':c,'slot':i})
+                                pending_validation=None
                             return
                         diagnostics=json.dumps(load(d/'outcome.json'),ensure_ascii=False)
                         for logname in ['original-wrapper.compile.log','original-wrapper-probe.log','probe.log']:
@@ -437,12 +497,18 @@ class Engine:
                             if log.exists():diagnostics+='\n'+log.read_text(errors='replace')[-10000:]
                 attempt_record['compile_validation_seconds']=time.monotonic()-validation_start
                 attempt_record['compiler_runs']=getattr(self.worker_local,'compile_runs',[])[compile_before:]
+                if self.admission_profile:
+                    evidence=capture_attempt(d,attempt,source,False,
+                                             {'method':m,'crate':c,'slot':i})
+                    attempt_record['validation_evidence']=evidence
+                    pending_validation=None
+                    diagnostics=repair_feedback(evidence)
                 with self.lock:self.generation[(m,c,i)]=copy.deepcopy(record);self.update()
                 if attempt<max_calls-1:
                     prefix=base_prompt if self.cost_policy else original
                     original=prefix+'\nCURRENT SOURCE:\n'+source.read_text()+'\nDIAGNOSTICS:\n'+diagnostics[-20000:]+'\nRemaining repairs: '+str(max_calls-attempt-1)+'. Keep the immutable planned core if supplied.'
             record['status']='generation_failed'
-            self.failure(m,c,i,'generation_failed','no accepted compiled source within initial plus 3 repairs',str(last))
+            self.failure(m,c,i,'generation_failed',f'no accepted source within {max_calls} model calls',str(last))
         except BudgetRejected as error:
             record.update(status='infrastructure_failed',budget_rejection=str(error))
             self.failure(m,c,i,'infrastructure_failed',str(error),{'policy_revision':self.cost_policy['revision']})
@@ -474,6 +540,10 @@ class Engine:
             self.failure(m,c,i,'infrastructure_failed','model/backend error: '+type(error).__name__)
             if paired and ('no-repair',c,i) not in self.tasks:self.failure('no-repair',c,i,'infrastructure_failed','shared first response unavailable')
         finally:
+            if self.admission_profile and pending_validation:
+                index,source=pending_validation
+                record['attempts'][-1]['validation_evidence']=capture_attempt(d,index,source,
+                    False,{'method':m,'crate':c,'slot':i})
             record.update(finished=True,elapsed_seconds=time.monotonic()-began,compile_validation_seconds=sum(a.get('compile_validation_seconds',0) for a in record['attempts']))
             save(d/'generation.json',record)
             with self.lock:self.generation[(m,c,i)]=copy.deepcopy(record);self.update()
@@ -489,7 +559,7 @@ class Engine:
     def plans(self,c):
         v=self.protocol['versions'][c];directory=self.root/'plans'/self.round_name/c;directory.mkdir(parents=True,exist_ok=True)
         raw=self.runtime/'raw-rustdoc'/(c+'-'+v+'.json');catalog=directory/'catalog.json'
-        subprocess.run([str(PLANNER),'import',str(raw),str(catalog),'--package',c],check=True,capture_output=True)
+        subprocess.run([str(self.planner_bin),'import',str(raw),str(catalog),'--package',c],check=True,capture_output=True)
         cat=load(catalog);allowed={a['rustdoc_id'] for a in self.universes[c]['apis'] if a.get('public_name_body_definition')}
         # Dependencies must also be publicly named; private rustdoc items are not
         # imported as hidden constructors in the controlled generation catalog.
@@ -497,7 +567,7 @@ class Engine:
         plans=[]
         for api in cat['apis']:
             path=directory/(api['id']+'.json')
-            r=subprocess.run([str(PLANNER),'plan',str(catalog),api['id'],str(path)],capture_output=True,timeout=30)
+            r=subprocess.run([str(self.planner_bin),'plan',str(catalog),api['id'],str(path)],capture_output=True,timeout=30)
             if path.exists() and load(path)['status']=='planned':plans.append((api,path))
         save(directory/'support.json',{'public_catalog_apis':len(cat['apis']),'complete_candidates':len(plans),'public_definition_denominator':sum(a.get('public_name_body_definition',False) for a in self.universes[c]['apis'])})
         def select(random_order=False):
@@ -517,7 +587,7 @@ class Engine:
         return catalog,cat,select(),select(True),context
     def source_from_plan(self,plan,d):
         out=d/'emitted';out.mkdir(exist_ok=True)
-        subprocess.run([str(PLANNER),'emit',str(plan),str(out)],check=True,capture_output=True)
+        subprocess.run([str(self.planner_bin),'emit',str(plan),str(out)],check=True,capture_output=True)
         return out/'src/main.rs'
     def crate(self,c,genpool):
         try:catalog,cat,full,rand,context=self.plans(c)
@@ -542,13 +612,13 @@ class Engine:
                 api,plan=selected[i];d=self.directory(m,c,i)
                 if m in ['syntactic+LLM','no-cross-argument-unification']:
                     altered=d/'plan.json';flag='--syntactic' if m=='syntactic+LLM' else '--independent-arguments'
-                    r=subprocess.run([str(PLANNER),'plan',str(catalog),api['id'],str(altered),flag],capture_output=True,timeout=30)
+                    r=subprocess.run([str(self.planner_bin),'plan',str(catalog),api['id'],str(altered),flag],capture_output=True,timeout=30)
                     if r.returncode!=0:self.failure(m,c,i,'planning_unknown','counterfactual planner could not construct target',load(altered));continue
                     plan=altered
                 try:
                     source=self.source_from_plan(plan,d)
                     if m=='deterministic-emitter':self.admit(m,c,i,source,plan);continue
-                    promptfile=d/'core-prompt.txt';subprocess.run([str(PLANNER),'prompt',str(plan),str(promptfile)],check=True)
+                    promptfile=d/'core-prompt.txt';subprocess.run([str(self.planner_bin),'prompt',str(plan),str(promptfile)],check=True)
                     self.submit_model(genpool,m,c,i,prefix+promptfile.read_text(),plan,m=='GRAFT')
                 except Exception as e:
                     self.failure(m,c,i,'infrastructure_failed',str(e))
@@ -630,13 +700,17 @@ def main():
     p=argparse.ArgumentParser();p.add_argument('--root',type=Path,required=True);p.add_argument('--auto-second',action='store_true');p.add_argument('--resume',action='store_true')
     p.add_argument('--cost-policy',type=Path,default=ROOT/'experiments/cost-control/policy.json')
     p.add_argument('--legacy-model-budget',action='store_true',help='Explicit historical reproduction only; high-thinking costs apply')
+    p.add_argument('--admission-profile',type=Path,help='Opt-in v2 profile; requires a new batch')
+    p.add_argument('--planner-bin',type=Path,help='Isolated checked planner binary for the v2 profile')
+    p.add_argument('--harness-bin',type=Path,help='Isolated normalization binary for the v2 profile')
     a=p.parse_args();a.root=a.root.resolve()
     cost_policy=None if a.legacy_model_budget else a.cost_policy.resolve()
     control=a.root/'control.json'
     if not control.exists():save(control,{'auto_second':a.auto_second,'stop_after_round':2,'reason':'explicit user instruction: automatically start round two after round one unless superseded'})
     for number in [1,2] if a.auto_second else [1]:
         round_name=f'round-{number:02d}';summary_path=a.root/round_name/'summary.json'
-        publication=ROOT.parent/'GRAFTPaper/revisions/short-budget'/round_name/'publication.json'
+        publication_protocol=load(a.root/'protocol.json') if (a.root/'protocol.json').exists() else {}
+        publication=publication_directory(publication_protocol,ROOT.parent/'GRAFTPaper',number)/'publication.json'
         if summary_path.exists() and load(summary_path).get('status')=='complete' and publication.exists():
             print(f'{round_name} already complete and published; not regenerated',flush=True)
             continue
@@ -655,7 +729,8 @@ def main():
         deep_command=[sys.executable,str(ROOT/'scripts/prepare_deepsurf_round.py'),'--root',str(a.root),'--round',str(number)]
         deep_command+=['--cost-policy',str(cost_policy)] if cost_policy else ['--legacy-model-budget']
         # Freeze/check the protocol before starting any paid native subprocess.
-        engine=Engine(a.root,number,resume=a.resume,cost_policy=cost_policy)
+        engine=Engine(a.root,number,resume=a.resume,cost_policy=cost_policy,
+                      admission_profile=a.admission_profile,planner_bin=a.planner_bin,harness_bin=a.harness_bin)
         process_path=deep_dir/'process.json'
         if a.resume and process_path.exists():
             deep=ExistingProcess(int(load(process_path)['pid']))

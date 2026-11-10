@@ -263,8 +263,26 @@ def latex_escape(text):
                     '{': r'\{', '}': r'\}', '\\': r'\textbackslash{}'}.get(c, c) for c in text)
 
 
+def publication_directory(protocol, paper, number):
+    namespace = Path(protocol.get('publication_namespace', 'short-budget'))
+    if namespace.is_absolute() or any(part in ('.', '..') for part in namespace.parts) or not namespace.parts:
+        raise ValueError('publication namespace must be a nonempty relative path without traversal')
+    return Path(paper) / 'revisions' / namespace / f'round-{number:02d}'
+
+
 def publish(protocol, batch, paper, number, summary, generation=None):
-    destination = paper / 'revisions' / 'short-budget' / f'round-{number:02d}'
+    # All batches compile through one canonical include in main.tex.
+    publication_directory(protocol, paper, number)
+    lock_path = Path(paper) / 'revisions' / '.publication.lock'
+    lock_path.parent.mkdir(parents=True, exist_ok=True)
+    with lock_path.open('a') as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        return _publish_locked(protocol, batch, paper, number, summary, generation)
+
+
+def _publish_locked(protocol, batch, paper, number, summary, generation=None):
+    destination = publication_directory(protocol, paper, number)
+    namespace = Path(protocol.get('publication_namespace', 'short-budget'))
     destination.mkdir(parents=True, exist_ok=True)
     reports = [load(batch / f'round-{i:02d}' / 'summary.json') for i in range(1, number + 1)]
     stats = cumulative(protocol, reports)
@@ -341,10 +359,12 @@ def publish(protocol, batch, paper, number, summary, generation=None):
             'The appended generation metrics contain the full status, repair, token, and timing distributions.']
     text = '\n'.join(tex)
     atomic(destination / 'results.tex', text)
+    if namespace != Path('short-budget'):
+        atomic(paper / 'chapters' / 'generated' / namespace / 'results.tex', text)
     include = paper / 'chapters' / 'generated' / 'short-budget.tex'
     old = include.read_text() if include.exists() else None
     atomic(include, text)
-    out = paper / 'out' / 'short-budget' / f'round-{number:02d}'
+    out = paper / 'out' / namespace / f'round-{number:02d}'
     out.mkdir(parents=True, exist_ok=True)
     command = [protocol['tectonic'], '--only-cached', '--keep-logs', '--keep-intermediates',
                '--outdir', str(out), 'main.tex']
@@ -359,10 +379,14 @@ def publish(protocol, batch, paper, number, summary, generation=None):
         else:
             atomic(include, old)
         raise
+    if namespace != Path('short-budget'):
+        # Publish the variant PDF, then put the manuscript's previous selection back.
+        if old is None:include.unlink(missing_ok=True)
+        else:atomic(include, old)
     save(destination / 'publication.json', {'round': number, 'pdf': str(out / 'main.pdf'),
         'pdf_sha256': file_hash(out / 'main.pdf'), 'build': built,
         'protocol_sha256': protocol['_file_sha256']})
-    save(paper / 'revisions' / 'short-budget' / 'latest.json', {'round': number,
+    save(paper / 'revisions' / namespace / 'latest.json', {'round': number,
         'statistics': str(destination / 'statistics.json'), 'pdf': str(out / 'main.pdf')})
 
 

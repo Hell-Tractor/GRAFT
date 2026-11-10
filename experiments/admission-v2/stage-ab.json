@@ -1,0 +1,11 @@
+{
+  "schema": "graft-admission-profile-v2",
+  "revision": "20261110-stage-ab-preflight-and-diagnostics",
+  "core_preflight": true,
+  "gate": "strict-three-input-v1",
+  "preflight_wall_seconds": 60,
+  "assembly_mode": "legacy-full-source",
+  "replanning": false,
+  "semantics_rules": null,
+  "notes": "Stage A/B only. No semantic input normalization, replanning, gate relaxation, or model-wrapper assembly is enabled. Use a new batch; never resume an old frozen protocol with this profile."
+}

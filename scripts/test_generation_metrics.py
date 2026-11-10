@@ -9,6 +9,20 @@ class GenerationMetricsTests(unittest.TestCase):
         self.assertIsNone(overall['eventual_admission_rate_of_finished_jobs'])
         self.assertEqual(overall['fixed_target_slots'],20)
 
+    def test_preflight_rejection_keeps_denominator_without_inventing_a_model_dispatch(self):
+        record={'crate':'a','finished':True,'accepted':False,'status':'planning_unknown',
+                'core_preflight':{'status':'rejected','elapsed_seconds':1},
+                'max_model_calls':2,'attempts':[]}
+        overall=summarize_generation([record],['a'])['overall']
+        self.assertEqual(overall['fixed_target_slots'],20)
+        self.assertEqual(overall['generation_jobs_scheduled'],1)
+        self.assertEqual(overall['generation_jobs_finished'],1)
+        self.assertEqual(overall['llm_jobs_dispatched'],0)
+        self.assertEqual(overall['total_model_calls'],0)
+        self.assertEqual(overall['core_preflight_rejected_jobs'],1)
+        self.assertEqual(overall['eventual_admission_rate_of_finished_jobs'],0)
+        self.assertEqual(overall['max_model_calls_per_target_observed'],[2])
+
     def test_repair_success_keeps_initial_failure(self):
         record={'crate':'a','finished':True,'accepted':True,'elapsed_seconds':5,
                 'attempts':[{'response_received':True,'accepted':False,'model_seconds':1},

@@ -25,11 +25,19 @@ def summarize_generation(records, crates, slots=20):
         first_compiled = sum(bool(r['attempts'][0].get('normalized_coverage_compile_success'))
                              for r in responses)
         attempts = [a for r in items for a in r.get('attempts', [])]
+        preflights = [r['core_preflight'] for r in items if r.get('core_preflight')]
         costs=[Decimal(a['peak_estimate_cny']) for a in attempts if 'peak_estimate_cny' in a]
         usage = [a.get('usage', {}) for r in items for a in r.get('attempts', [])
                  if a.get('usage')]
         return {
-            'fixed_target_slots': expected, 'llm_jobs_dispatched': len(items), 'llm_jobs_finished': len(done),
+            'fixed_target_slots': expected, 'generation_jobs_scheduled': len(items),
+            'llm_jobs_dispatched': sum(bool(r.get('attempts')) for r in items),
+            'llm_jobs_finished': sum(bool(r.get('attempts')) for r in done),
+            'generation_jobs_finished': len(done),
+            'core_preflight_rejected_jobs': sum(p['status']=='rejected' for p in preflights),
+            'core_preflight_infrastructure_failed_jobs': sum(p['status']=='infrastructure_failed' for p in preflights),
+            'core_preflight_wall_time': distribution([p.get('elapsed_seconds') for p in preflights]),
+            'max_model_calls_per_target_observed': sorted({r['max_model_calls'] for r in items if 'max_model_calls' in r}),
             'first_responses_received': len(responses), 'first_response_admitted': first,
             'first_response_admission_rate': first / len(responses) if responses else None,
             'first_response_compile_success': first_compiled,
@@ -69,7 +77,8 @@ def summarize_generation(records, crates, slots=20):
         'definitions': {
             'admitted': 'Original planned wrapper compiles and passes the three-input planned-call probe; normalized wrapper passes policy, compiler, input/profiling checks and AFL compilation. Fuzzing completion is separate.',
             'first_response_admission_rate': 'Admitted first responses / received first responses; backend failures are reported separately.',
-            'eventual_admission_rate_of_finished_jobs': 'Admitted after at most three repairs / finished dispatched jobs, including backend errors.',
+            'eventual_admission_rate_of_finished_jobs': 'Admitted / finished scheduled generation jobs, including preflight rejection and backend errors. Per-target max_model_calls records the actual repair limit.',
+            'dispatch': 'Scheduled jobs are distinct from jobs with a model attempt. Local preflight rejection has no model attempt. Local money-policy rejection may still have an attempted request; actual HTTP dispatch is counted by the batch model_requests counter.',
             'admitted_fraction_of_fixed_slots_so_far': 'Accepted so far / fixed target slots. Pending and planning-unknown slots are not represented as failed LLM calls.',
             'timing': 'Wall seconds; call and job durations overlap across workers. Sum of durations is not experiment elapsed time. Compile/validation includes waiting for compile slots.',
             'no_repair_cost': 'The no-repair configuration shares the first GRAFT response and incurs no extra initial model call.'},
