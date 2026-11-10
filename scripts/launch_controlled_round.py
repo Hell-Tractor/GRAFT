@@ -67,7 +67,7 @@ def has_required_compiler_flags(tokens, flags):
 
 class Engine:
     def __init__(self,root,number=1,deep_process=None,resume=False,cost_policy=None,
-                 admission_profile=None,planner_bin=None,harness_bin=None,admission_only=False):
+                 admission_profile=None,planner_bin=None,harness_bin=None,admission_only=False,batch_budget_cny=None):
         self.number=number;self.round_name=f'round-{number:02d}';self.root=root;self.runtime=root/'runtime';self.protocol=load(ROOT/'experiments/week5/protocol.json')
         self.deep_process=deep_process
         self.admission_profile=read_profile(admission_profile) if admission_profile else None
@@ -90,6 +90,15 @@ class Engine:
                             'reasoning_effort':'high','max_tokens':MODEL_MAX_TOKENS,
                             'empty_response_policy':'fail target once; no batch retry'}
         self.cost_policy=read_policy(cost_policy) if cost_policy else None
+        self.batch_budget_cny=batch_budget_cny
+        self.batch_ledger=root/'batch-model-cost.json' if batch_budget_cny is not None else None
+        if batch_budget_cny is not None:
+            if not (admission_only and self.cost_policy):raise ValueError('batch budget is currently restricted to admission-only calibration')
+            from batch_model_budget import initialize,limit_value
+            self.batch_budget_cny=str(limit_value(batch_budget_cny))
+            initialize(self.batch_ledger,self.cost_policy,self.batch_budget_cny)
+            p['batch_model_budget']={'limit_cny':self.batch_budget_cny,'ledger':str(self.batch_ledger.resolve()),
+                                     'implementation':artifact(ROOT/'scripts/batch_model_budget.py')}
         if self.cost_policy:
             if p['model']!=self.cost_policy['model'] or p['model_endpoint']!=self.cost_policy['endpoint']:
                 raise ValueError('cost policy model/service differs from the experimental protocol')
@@ -478,7 +487,9 @@ class Engine:
                 if self.cost_policy:
                     raw=costed_send(body['messages'],self.cost_policy,d/'model-cost.json',
                         self.root/'model-cost-ledgers'/self.round_name/d.parts[-3]/(d.parts[-2]+'.json'),
-                        d/f'request-{index}.json',d/f'raw-response-{index}.json',credential=key,on_send=count_actual_request)
+                        d/f'request-{index}.json',d/f'raw-response-{index}.json',credential=key,on_send=count_actual_request,
+                        batch_ledger=getattr(self,'batch_ledger',None),batch_budget_cny=getattr(self,'batch_budget_cny',None),
+                        target_identity='/'.join(d.parts[-3:]))
                 else:
                     count_actual_request()
                     with urllib.request.urlopen(req,timeout=MODEL_TIMEOUT_SECONDS) as response:raw=json.load(response)

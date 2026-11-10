@@ -12,8 +12,8 @@ from model_cost_control import (BudgetRejected, compact_native, read_policy,
 
 
 def send(messages,policy,target_ledger,crate_ledger,request_path,response_path,
-         timeout=180,credential=None,on_send=None):
-    body,ticket=reserve(messages,policy,target_ledger,crate_ledger)
+         timeout=180,credential=None,on_send=None,batch_ledger=None,batch_budget_cny=None,target_identity=None):
+    body,ticket=reserve(messages,policy,target_ledger,crate_ledger,batch_ledger,batch_budget_cny,target_identity)
     Path(request_path).write_text(json.dumps(body,ensure_ascii=False,indent=2)+'\n')
     raw=None
     try:
@@ -26,9 +26,9 @@ def send(messages,policy,target_ledger,crate_ledger,request_path,response_path,
     except BaseException as error:
         # A timeout may already have been billed. Its full reservation remains
         # spent until provider billing can be reconciled, including on resume.
-        settle(ticket,None,policy,target_ledger,crate_ledger,type(error).__name__)
+        settle(ticket,None,policy,target_ledger,crate_ledger,type(error).__name__,batch_ledger,batch_budget_cny)
         raise
-    settle(ticket,raw.get('usage'),policy,target_ledger,crate_ledger)
+    settle(ticket,raw.get('usage'),policy,target_ledger,crate_ledger,batch_path=batch_ledger,batch_budget_cny=batch_budget_cny)
     if not raw.get('usage'):raise BudgetRejected('GRAFT_BUDGET_USAGE_UNKNOWN: no automatic retry without usage')
     return raw
 

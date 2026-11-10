@@ -189,10 +189,16 @@ def store(path,value):
     temporary.write_text(json.dumps(value,indent=2)+'\n');temporary.replace(path)
 
 
-def reserve(messages,policy,target_path,crate_path):
+def reserve(messages,policy,target_path,crate_path,batch_path=None,batch_budget_cny=None,target_identity=None):
+    if batch_path is not None or batch_budget_cny is not None:
+        if batch_path is None or batch_budget_cny is None:raise ValueError('batch path and budget are required together')
+        from batch_model_budget import reserve as reserve_batch
+        return reserve_batch(messages,policy,target_path,crate_path,batch_path,batch_budget_cny,target_identity)
     target_path,crate_path=map(Path,[target_path,crate_path])
     with locked_ledgers([target_path,crate_path]):
         target,crate=read_ledger(target_path),read_ledger(crate_path)
+        if any(e.get('batch') for d in [target,crate] for e in d['entries']):
+            raise BudgetRejected('GRAFT_BATCH_POLICY: batch-bound ledgers require the batch budget')
         revision=policy['revision']
         fingerprint=hashlib.sha256(json.dumps(policy,sort_keys=True).encode()).hexdigest()
         if any(d.get('policy_revision',revision)!=revision for d in [target,crate]):raise BudgetRejected('GRAFT_BUDGET_POLICY: ledger revision differs')
@@ -218,12 +224,17 @@ def reserve(messages,policy,target_path,crate_path):
     return body,ticket
 
 
-def settle(ticket,usage,policy,target_path,crate_path,error=None):
+def settle(ticket,usage,policy,target_path,crate_path,error=None,batch_path=None,batch_budget_cny=None):
+    if batch_path is not None or batch_budget_cny is not None:
+        if batch_path is None or batch_budget_cny is None:raise ValueError('batch path and budget are required together')
+        from batch_model_budget import settle as settle_batch
+        return settle_batch(ticket,usage,policy,target_path,crate_path,batch_path,batch_budget_cny,error)
     cost=usage_cost(usage,policy) if usage else None
     violation=False
     with locked_ledgers([target_path,crate_path]):
         for path in [target_path,crate_path]:
             ledger=read_ledger(path);entry=next(e for e in ledger['entries'] if e['id']==ticket)
+            if entry.get('batch'):raise BudgetRejected('GRAFT_BATCH_POLICY: batch-bound settlement requires batch budget')
             if cost is not None:
                 violation=violation or cost>Decimal(entry['reserved_cny'])
                 entry.update(charged_cny=str(cost),usage=usage,status='usage_reported',reservation_exceeded=cost>Decimal(entry['reserved_cny']))
