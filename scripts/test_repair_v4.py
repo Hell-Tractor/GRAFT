@@ -58,6 +58,15 @@ class RepairTaskTests(unittest.TestCase):
     def test_no_inputs_does_not_exempt_receiver(self):
         self.assertEqual(classification(self.plan())['influence_applicability'],'required')
         self.assertEqual(classification(self.plan(0))['influence_applicability'],'not_applicable_no_arguments')
+    def test_rustdoc_identity_uses_canonical_json_not_file_whitespace(self):
+        import hashlib
+        raw={'index':{'x':{'inner':{'function':{'sig':{'inputs':[]}}}}},'format_version':57}
+        plan=self.plan(0)
+        plan['rustdoc_sha256']=hashlib.sha256(json.dumps(raw,sort_keys=True,ensure_ascii=False,separators=(',',':')).encode()).hexdigest()
+        self.assertEqual(classification(plan,raw)['influence_applicability'],'not_applicable_no_arguments')
+        raw['format_version']=58
+        with self.assertRaisesRegex(ValueError,'canonical rustdoc'):classification(plan,raw)
+
     def test_borrow_and_empty_input_are_concrete(self):
         self.assertIn('BEFORE',task(self.plan(),'x',{'code':'core_compile_error','message':'E0502'})['required_local_change'])
         self.assertIn('data.get',task(self.plan(),'data[0]',{'code':'runtime_panic'})['required_local_change'])

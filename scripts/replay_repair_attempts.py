@@ -73,7 +73,6 @@ def replay(batch,output,planner,harness,profile):
                 shutil.copyfile(item['plan']['path'],work/'plan.json')
                 p=json.loads((work/'plan.json').read_text())['plan']
                 raw_path=engine.runtime/'raw-rustdoc'/(p['crate_name']+'-'+p['crate_version']+'.json')
-                if fingerprint(raw_path)['sha256']!=p['rustdoc_sha256']:raise ValueError('Changed raw signature source')
                 atomic_json(work/'input-applicability.json',classification(p,json.loads(raw_path.read_text())))
                 (work/'raw.txt').write_text(item['content'])
                 parsed=subprocess.run([str(tools/'graft-plan'),'source-key',str(work/'raw.txt'),str(work/'raw-key.json')],

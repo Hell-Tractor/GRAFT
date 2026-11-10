@@ -1,5 +1,6 @@
 """Bounded, evidence-driven repair tasks. No edits to model code or paid calls."""
 import json
+import hashlib
 import re
 from pathlib import Path
 from model_cost_control import byte_limit
@@ -33,6 +34,10 @@ def classification(plan,raw=None):
     call=next(s for s in reversed(plan['steps']) if s['kind']=='call' and s['api']==plan['target'])
     signature=plan.get('target_signature')
     if raw is not None:
+        # rustdoc.rs hashes serde_json's canonical map serialization, not file bytes.
+        canonical=json.dumps(raw,sort_keys=True,ensure_ascii=False,separators=(',',':')).encode()
+        if hashlib.sha256(canonical).hexdigest()!=plan['rustdoc_sha256']:
+            raise ValueError('Changed canonical rustdoc signature source')
         item=raw['index'][plan['target']]['inner']['function']
         inputs=item['sig']['inputs']
         signature={'argument_count':len(inputs),'receiver_argument_index':next((i for i,v in enumerate(inputs) if v[0]=='self'),None),
