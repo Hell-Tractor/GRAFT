@@ -1,0 +1,76 @@
+{
+  "schema": "graft-fixed-generation-runner-verification-v1",
+  "implementation_commits": [
+    "868e56d",
+    "1e81ca8"
+  ],
+  "admission_algorithm_commit": "0fde979",
+  "admission_algorithm_changed": false,
+  "python_tests_passed": 106,
+  "prepared_only": {
+    "status": "checked_preparation_only",
+    "new_model_calls": 0,
+    "fuzz_jobs": 0,
+    "through_round": 6
+  },
+  "prepared_full_slots": 2860,
+  "prepared_methods": 11,
+  "prepared_crates": 13,
+  "seconds_per_target": 300,
+  "fuzz_workers": 48,
+  "generation_repetitions": 1,
+  "fuzz_repetitions": 6,
+  "formal_generation_jobs_started": 0,
+  "formal_fuzz_jobs_started": 0,
+  "development_smoke": {
+    "result": {
+      "status": "complete",
+      "published_round": 6
+    },
+    "elapsed_seconds": 27.735961437225342,
+    "new_model_requests": 0,
+    "new_admission_calls": 0,
+    "formal_fuzz_jobs": 0,
+    "development_fuzz_runs": 6,
+    "seconds_per_development_run": 1,
+    "implementation": {
+      "path": "/home/cym/workspace/GRAFT-2.0/GRAFTTool/scripts/run_fixed_generation.py",
+      "sha256": "96b15fab7a0c0f236338079b9bd9357853672a6331444a1e500244ada6b4f943"
+    },
+    "scope": "Not formal 300-second experimental data"
+  },
+  "development_execution_count": 21216,
+  "development_task_hashes_identical": true,
+  "development_six_distinct_seeds": true,
+  "development_six_publication_barriers_verified": true,
+  "development_resume_completed_without_rerun": true,
+  "native_inventory_artifacts_frozen": 576,
+  "old_batch_status": "paused_for_admission_optimization",
+  "max_scale_pure_fuzz_hours_per_round": 5,
+  "max_scale_pure_fuzz_hours_six_rounds": 30,
+  "cost_policy_total_reservation_upper_bound_cny": "436.80",
+  "cost_scope": "7 paid arms * 13 crates * 20 slots * .24; generation charged once, excludes historical calibration",
+  "evidence": {
+    "/home/cym/workspace/graft-admission-full-fixedgen-20261110/protocol.json": {
+      "path": "/home/cym/workspace/graft-admission-full-fixedgen-20261110/protocol.json",
+      "sha256": "4578c14175a96dbd130906b108e1ced47b2e00978bf4f6ae3a500c30ab3ef23c"
+    },
+    "/home/cym/workspace/graft-admission-full-fixedgen-20261110/fixed-generation-inputs.json": {
+      "path": "/home/cym/workspace/graft-admission-full-fixedgen-20261110/fixed-generation-inputs.json",
+      "sha256": "e880a30890f5a463cc58586af9e680dcb5511ff66a413d39b902010437015bb4"
+    },
+    "/home/cym/workspace/graft-fixed-generation-final-verification-20261110/smoke-verification.json": {
+      "path": "/home/cym/workspace/graft-fixed-generation-final-verification-20261110/smoke-verification.json",
+      "sha256": "0f421ae51ff01836df26258c4063aec391d4146a0870b83d5d4cb3370176b7b4"
+    },
+    "/home/cym/workspace/graft-fixed-generation-final-verification-20261110/python-tests.log": {
+      "path": "/home/cym/workspace/graft-fixed-generation-final-verification-20261110/python-tests.log",
+      "sha256": "1fae064567c67e1356f2577a55f02d13c128abb275da80aabcc036b2684d86f3"
+    },
+    "/home/cym/workspace/graft-fixed-generation-task-metadata-20261110/metadata-verification.json": {
+      "path": "/home/cym/workspace/graft-fixed-generation-task-metadata-20261110/metadata-verification.json",
+      "sha256": "9affa038efd067b4a597047f9c88bc2a93b8b9273a718a0eb7804476200b9e48"
+    }
+  },
+  "scope": "Zero new model calls. Six one-second development runs on one existing admitted target, not formal experiment results. Formal batch prepared only."
+}
