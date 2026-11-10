@@ -56,7 +56,17 @@ def task(plan,source,diagnosis):
     code=diagnosis.get('code','unknown');message=diagnosis.get('message','')
     calls=[s for s in plan['steps'] if s['kind']=='call']
     change='Fix the reported failure while keeping the active planned calls and their producer bindings.'
-    if 'E0502' in message:
+    scalar_samples=[s.get('scalar_arguments') for s in diagnosis.get('samples',[])
+                    if s.get('target_reached') and s.get('exit_code')==0]
+    scalar_constant=(bool(scalar_samples) and all(v==scalar_samples[0] for v in scalar_samples)
+                     and bool(scalar_samples[0]) and any(v!='()' for v in scalar_samples[0]))
+    if (plan['crate_name'],plan.get('crate_version'))==('bumpalo','3.14.0') and any(s['api']==plan['target'] and s['path'].endswith(('::allocated_bytes','::allocated_bytes_including_metadata')) for s in calls) and code=='contract_rejected' and ('explicit loops' in message or 'macros/trace' in message):
+        change='Remove explicit loops, vec! macros and trace writes. On the SAME original Bump use if !data.is_empty() { arena.alloc_slice_copy(&data[..data.len().min(64)]); } before the original target. Do not copy into a temporary Vec or replace the constructor.'
+    elif code=='input_influence_unobserved' and scalar_constant:
+        change='Direct scalar target arguments stayed constant on strict short inputs, even if the receiver varied. Use safe byte b=data.first().copied().unwrap_or(0); for missing later bytes use data.get(i).copied().unwrap_or(b), then map to the actual valid argument range. Preserve all producers and calls.'
+    elif code=='runtime_panic' and (plan['crate_name'],plan.get('crate_version'))==('csv','1.3.1') and any(s['api']==plan['target'] and s['path'].endswith('::into_byte_record') for s in calls) and re.search(r'data\s*\[',source):
+        change='Empty input fails in a slice: data[1..1] is invalid when len=0. Prefer let bytes=&data[..data.len().min(64)]; use core::str::from_utf8(bytes).unwrap_or("") then push_field on the SAME record. If skipping a prefix use data.get(start..end).unwrap_or(&[]). No loops, vec! or early target bypass.'
+    elif 'E0502' in message:
         change='Compute receiver.len() and the final index in separate locals BEFORE taking &mut receiver in the target call.'
     elif 'shadow' in message:
         change='Do not rebind the planned producer. Call grow(&mut original, size) directly, then compute a separate index local.'

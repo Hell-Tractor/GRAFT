@@ -1,0 +1,209 @@
+{
+  "schema": "graft-parameter-guidance-v1",
+  "kind": "llm_guidance_not_universal_precondition_proof",
+  "revision": "20261110-bounded-preparation-v3",
+  "max_context_utf8_bytes": 2200,
+  "rules": [
+    {
+      "id": "time-short-scalar-v3",
+      "crate": "time",
+      "version": "0.3.9",
+      "suffixes": [
+        "::replace_minute",
+        "::replace_second",
+        "::replace_hour"
+      ],
+      "owners": [
+        "<time::Time>",
+        "<time::PrimitiveDateTime>",
+        "<time::OffsetDateTime>"
+      ],
+      "roles": {
+        "clock_scalar": "input-derived valid component"
+      },
+      "helpers": [],
+      "advice": "Use a valid input-derived clock scalar even on short inputs. Let b=data.first().copied().unwrap_or(0); read later positions with data.get(i).copied().unwrap_or(b). For hour use byte%24, minute/second byte%60. Receiver variation alone does not satisfy the direct scalar gate. Do not replace all fields by constants.",
+      "evidence": "Pinned time-0.3.9 replace clock component signatures; unchanged strict short-input admission observations"
+    },
+    {
+      "id": "bytes-capacity-v1",
+      "crate": "bytes",
+      "version": "1.11.1",
+      "suffixes": [
+        "::with_capacity"
+      ],
+      "roles": {
+        "0": "allocation_capacity"
+      },
+      "helpers": [
+        "extend_from_slice",
+        "len"
+      ],
+      "advice": "Bound capacity to 65536 or less. Capacity is not length: fill an input-derived bounded slice before freeze/split/index consumers.",
+      "evidence": "bytes-1.11.1 public BytesMut::with_capacity documentation and pinned source"
+    },
+    {
+      "id": "bytes-index-v1",
+      "crate": "bytes",
+      "version": "1.11.1",
+      "suffixes": [
+        "::truncate",
+        "::split_to",
+        "::advance"
+      ],
+      "roles": {
+        "0": "receiver",
+        "1": "index_or_length_at_most_receiver_len"
+      },
+      "helpers": [
+        "len",
+        "extend_from_slice"
+      ],
+      "advice": "Compute the index/length from actual receiver.len(), not capacity. Preserve variation on valid inputs; prepare nonempty input-derived content where needed.",
+      "evidence": "bytes-1.11.1 public Bytes/BytesMut length-consuming API documentation"
+    },
+    {
+      "id": "fixedbitset-state-v1",
+      "crate": "fixedbitset",
+      "version": "0.5.7",
+      "suffixes": [
+        "::new",
+        "::set",
+        "::toggle",
+        "::insert"
+      ],
+      "roles": {
+        "receiver": "initialized_bitset_length",
+        "index": "strictly_less_than_len"
+      },
+      "helpers": [
+        "grow",
+        "len"
+      ],
+      "advice": "Keep original constructor. Safe byte b=data.get(0).copied().unwrap_or(0). grow(1+usize::from(b)) directly on the original binding; never shadow it. Cache len and index BEFORE taking &mut receiver. Fill meaningful state before binary set operations, including empty input.",
+      "evidence": "fixedbitset-0.5.7 src/lib.rs FixedBitSet::new/grow/len/set/toggle"
+    },
+    {
+      "id": "chrono-date-v1",
+      "crate": "chrono",
+      "version": "0.4.19",
+      "suffixes": [
+        "::from_ymd",
+        "::from_ymd_opt"
+      ],
+      "roles": {
+        "0": "year",
+        "1": "month_1_to_12",
+        "2": "valid_day_for_year_month"
+      },
+      "helpers": [],
+      "advice": "Map bytes to a valid supported year/month/day; use month length and leap-year rules or explicitly document a restricted day range. Preserve meaningful input variation including multi-byte inputs.",
+      "evidence": "chrono-0.4.19 public NaiveDate constructors and date.rs validation"
+    },
+    {
+      "id": "chrono-clock-v1",
+      "crate": "chrono",
+      "version": "0.4.19",
+      "suffixes": [
+        "::and_hms",
+        "::from_hms"
+      ],
+      "roles": {
+        "clock_fields": "valid_hour_minute_second"
+      },
+      "helpers": [],
+      "advice": "Respect receiver versus static argument positions. Keep hour/minute/second in supported ranges. chrono APIs use chrono::Duration; do not substitute the unrelated direct time dependency type.",
+      "evidence": "chrono-0.4.19 public NaiveDate/NaiveTime documentation and Duration re-export"
+    },
+    {
+      "id": "time-date-v1",
+      "crate": "time",
+      "version": "0.3.9",
+      "suffixes": [
+        "::from_ordinal_date",
+        "::from_calendar_date"
+      ],
+      "roles": {
+        "year": "supported_year",
+        "ordinal": "valid_nonzero_day"
+      },
+      "helpers": [],
+      "advice": "Date producer must return Ok. Safe byte b; year=2000+i32::from(b%100), ordinal=1+u16::from(b) is a valid restricted mapping for from_ordinal_date. Never pass raw decoded ordinal zero or repeated-byte huge years. Keep every original constructor/extraction.",
+      "evidence": "time-0.3.9 public Date constructors",
+      "owners": [
+        "<time::Date>"
+      ]
+    },
+    {
+      "id": "time-clock-offset-v3",
+      "crate": "time",
+      "version": "0.3.9",
+      "suffixes": [
+        "::from_hms",
+        "::from_hms_milli",
+        "::from_hms_micro",
+        "::from_hms_nano"
+      ],
+      "roles": {
+        "fields": "clock_or_offset_components_by_owner"
+      },
+      "helpers": [],
+      "advice": "Time: hour<24, minute/second<60, fractions within unit. UtcOffset: signed components with consistent sign, hour -23..23, minute/second -59..59. i8::from(u8) DOES NOT compile: bound first, e.g. (b%24) as i8. Use safe reads; preceding Result constructors must return Ok.",
+      "evidence": "time-0.3.9 public Time and UtcOffset constructors"
+    },
+    {
+      "id": "bumpalo-capacity-v1",
+      "crate": "bumpalo",
+      "version": "3.14.0",
+      "suffixes": [
+        "::with_capacity",
+        "::with_capacity_in"
+      ],
+      "roles": {
+        "capacity": "bounded_resource_size"
+      },
+      "helpers": [],
+      "advice": "Bound input-derived allocation sizes and total prepared content; do not decode a single byte repeatedly into an enormous allocation. Keep original allocator/target calls and use safe APIs.",
+      "evidence": "bumpalo-3.14.0 public capacity constructor documentation"
+    },
+    {
+      "id": "csv-record-state-v3",
+      "crate": "csv",
+      "version": "1.3.1",
+      "suffixes": [
+        "::new",
+        "::into_byte_record",
+        "::set_position"
+      ],
+      "roles": {
+        "receiver": "input-derived record",
+        "position": "input-derived Position"
+      },
+      "helpers": [
+        "push_field",
+        "set_byte",
+        "set_line",
+        "set_record"
+      ],
+      "advice": "Keep original constructors/conversions. Before into_byte_record, prepare SAME StringRecord: let bytes=&data[..data.len().min(64)]; let field=core::str::from_utf8(bytes).unwrap_or(\"\"); record.push_field(field). No loops, vec! or trace output. For any skipped prefix use data.get(start..end).unwrap_or(&[]); even data[1..1] panics on empty data. For set_position, mutate original Position fields from input before Some.",
+      "evidence": "Pinned csv-1.3.1 string_record.rs push_field and byte_record.rs Position setter signatures"
+    },
+    {
+      "id": "bumpalo-receiver-state-v3",
+      "crate": "bumpalo",
+      "version": "3.14.0",
+      "suffixes": [
+        "::allocated_bytes",
+        "::allocated_bytes_including_metadata"
+      ],
+      "roles": {
+        "receiver": "same allocator with input-dependent allocation state"
+      },
+      "helpers": [
+        "alloc_slice_copy"
+      ],
+      "advice": "Keep Bump::new and original target. Before target: if !data.is_empty() { arena.alloc_slice_copy(&data[..data.len().min(64)]); } using the SAME original arena. No temporary Vec, vec! macro, explicit loop, or trace output. Empty data leaves arena empty; allocation on nonempty input changes actual allocator state. This is a resource-state channel, not byte-content taint.",
+      "evidence": "Pinned bumpalo-3.14.0 src/lib.rs alloc_slice_copy and allocated_bytes(_including_metadata)"
+    }
+  ]
+}
