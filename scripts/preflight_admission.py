@@ -13,8 +13,10 @@ def read_profile(path):
         raise ValueError('unsupported admission profile')
     if profile.get('core_preflight') is not True or profile.get('gate') != 'strict-three-input-v1':
         raise ValueError('stage A/B requires the unchanged strict three-input gate')
-    if profile.get('assembly_mode') != 'legacy-full-source':
-        raise ValueError('only the tested full-source interface is enabled in stage A/B')
+    if profile.get('assembly_mode') not in ('legacy-full-source','llm-parameter-repair'):
+        raise ValueError('unsupported admission assembly mode')
+    if profile.get('assembly_mode') == 'llm-parameter-repair' and profile.get('repair_contract') != 'planned-call-v2':
+        raise ValueError('parameter repair requires the planned-call-v2 contract')
     if profile.get('replanning') is not False or profile.get('semantics_rules') is not None:
         raise ValueError('semantic rules and replanning are not implemented in stage A/B')
     seconds = profile.get('preflight_wall_seconds')

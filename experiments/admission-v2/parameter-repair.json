@@ -1,0 +1,13 @@
+{
+  "schema": "graft-admission-profile-v2",
+  "revision": "20261110-llm-parameter-repair-call-contract-v2",
+  "core_preflight": true,
+  "gate": "strict-three-input-v1",
+  "preflight_wall_seconds": 60,
+  "assembly_mode": "llm-parameter-repair",
+  "repair_contract": "planned-call-v2",
+  "parameter_hint_revision": "fixedbitset-0.5.7-grow-len-v1",
+  "replanning": false,
+  "semantics_rules": null,
+  "notes": "Preflight rejection is feedback for budgeted LLM parameter repair, not a terminal rejection. Preserve original callees/order/producer dependencies, allowing local alpha-renaming. Tool inserts post-call markers. Dynamic probes and full admission remain required. Opaque input dependence and universal preconditions are not proved. Use isolated binaries and a new batch."
+}

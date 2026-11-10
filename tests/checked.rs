@@ -12,6 +12,96 @@ fn nominal(path: &str, args: Vec<Ty>) -> Ty {
         args,
     }
 }
+
+#[test]
+fn parameter_repair_allows_decoding_changes_and_inserts_real_call_markers() {
+    let p = planned(&catalog(), "scalar");
+    let seed = repair::seed(&p).unwrap();
+    assert!(!seed.contains("GRAFT_TRACE"));
+    let source = seed.replace("unwrap_or (0)", "unwrap_or (0).wrapping_add(1)");
+    assert_ne!(source, seed);
+    let prepared = repair::prepare(&p, &source).unwrap();
+    assert!(validate::retain_plan(&p, &source).is_err());
+    let executable = compile(&prepared.standalone, "parameter-repair-real-call", true);
+    let report = executable.with_extension("probe.json");
+    let result = tokio::runtime::Runtime::new().unwrap()
+        .block_on(validate::probe(&p, &executable, &report)).unwrap();
+    assert!(result.bounded_probe_passed);
+    assert_eq!(result.scalar_input_influence, "observed");
+    assert_eq!(prepared.evidence["calls"].as_array().unwrap().len(), 1);
+}
+
+#[test]
+fn parameter_repair_rejects_deleted_calls_fake_markers_and_shadowing() {
+    let p = planned(&catalog(), "scalar");
+    let seed = repair::seed(&p).unwrap();
+    assert!(repair::prepare(&p, &seed.replace("checked_fixture :: scalar", "checked_fixture :: token")).is_err());
+    let fake = seed.replacen("let mut trace", "eprintln!(\"GRAFT_CALL:0:(1,)\"); let mut trace", 1);
+    assert!(repair::prepare(&p, &fake).is_err());
+    let nested = seed.replacen("let mut trace", "fn hidden() {} let mut trace", 1);
+    assert!(repair::prepare(&p, &nested).is_err());
+    let io = seed.replacen("let mut trace", "let _f = <std::fs::File>::open(\"/tmp/x\"); let mut trace", 1);
+    assert!(repair::prepare(&p, &io).is_err());
+}
+
+#[test]
+fn parameter_repair_guard_only_does_not_pass_runtime_admission() {
+    let p = planned(&catalog(), "scalar");
+    let seed = repair::seed(&p).unwrap();
+    let source = seed.replacen("let mut trace", "if data.len() < 9 { return Vec::new(); } let mut trace", 1);
+    let prepared = repair::prepare(&p, &source).unwrap();
+    let executable = compile(&prepared.standalone, "parameter-repair-guard-only", true);
+    let report = executable.with_extension("probe.json");
+    let result = tokio::runtime::Runtime::new().unwrap()
+        .block_on(validate::probe(&p, &executable, &report)).unwrap();
+    assert!(!result.bounded_probe_passed);
+    assert_eq!(result.reached_inputs, 0);
+}
+
+#[test]
+fn parameter_repair_constant_scalar_does_not_pass_runtime_admission() {
+    let p = planned(&catalog(), "scalar");
+    let mut file = syn::parse_file(&repair::seed(&p).unwrap()).unwrap();
+    let f = file.items.iter_mut().find_map(|i| match i {syn::Item::Fn(f)=>Some(f),_=>None}).unwrap();
+    f.block.stmts.insert(0, syn::parse_quote!(let _n = data.len();));
+    let local = f.block.stmts.iter_mut().find_map(|s| match s {
+        syn::Stmt::Local(l) if quote::ToTokens::to_token_stream(&l.pat).to_string().contains("v0") => Some(l), _=>None}).unwrap();
+    local.init.as_mut().unwrap().expr = Box::new(syn::parse_quote!(0u8));
+    let prepared = repair::prepare(&p, &quote::ToTokens::to_token_stream(&file).to_string()).unwrap();
+    let executable = compile(&prepared.standalone, "parameter-repair-constant", true);
+    let result = tokio::runtime::Runtime::new().unwrap()
+        .block_on(validate::probe(&p, &executable, &executable.with_extension("probe.json"))).unwrap();
+    assert_eq!(result.reached_inputs, 3);
+    assert!(!result.bounded_probe_passed);
+    assert_eq!(result.scalar_input_influence, "not_observed");
+}
+
+#[test]
+fn parameter_repair_preserves_move_and_borrow_producer_chains() {
+    for name in ["shared", "mutable", "moved", "scalar_mut"] {
+        let p = planned(&catalog(), name);
+        let prepared = repair::prepare(&p, &repair::seed(&p).unwrap()).unwrap();
+        let executable = compile(&prepared.standalone, &format!("parameter-chain-{name}"), true);
+        let result = tokio::runtime::Runtime::new().unwrap()
+            .block_on(validate::probe(&p, &executable, &executable.with_extension("probe.json"))).unwrap();
+        assert!(result.bounded_probe_passed, "{name}: {result:?}");
+    }
+}
+
+#[test]
+fn parameter_repair_allows_alpha_renaming_but_preserves_producer_arguments() {
+    let p=planned(&catalog(),"shared");
+    let seed=repair::seed(&p).unwrap();
+    let renamed=seed.replace("v1","prepared_object");
+    let prepared=repair::prepare(&p,&renamed).unwrap();
+    let executable=compile(&prepared.standalone,"parameter-renamed-producer",true);
+    let report=tokio::runtime::Runtime::new().unwrap()
+        .block_on(validate::probe(&p,&executable,&executable.with_extension("probe.json"))).unwrap();
+    assert!(report.bounded_probe_passed);
+    let hidden=renamed.replace("& prepared_object","{ let unused = &prepared_object; &prepared_object }");
+    assert_ne!(hidden,renamed);
+    assert!(repair::prepare(&p,&hidden).is_err());
+}
 fn catalog() -> Catalog {
     static C: OnceLock<Catalog> = OnceLock::new();
     C.get_or_init(|| {

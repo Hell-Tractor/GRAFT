@@ -43,6 +43,8 @@ enum Command {
     Emit { plan: PathBuf, output: PathBuf },
     /// Save the exact initial model prompt for inspection without a model call.
     Prompt { plan: PathBuf, output: PathBuf },
+    /// Reference core without tracing; parameter repair must preserve call anchors.
+    RepairSeed { plan: PathBuf, output: PathBuf },
     /// Check immutable core AST retention; compilation and runtime are separate checks.
     Validate { plan: PathBuf, source: PathBuf },
     /// Run the actual standalone wrapper on three inputs; save separate runtime evidence.
@@ -75,6 +77,9 @@ fn get_plan(p: &PathBuf) -> Result<SequencePlan, Box<dyn std::error::Error>> {
 }
 fn run() -> Result<(), Box<dyn std::error::Error>> {
     match Cli::parse().command {
+        Command::RepairSeed { plan, output } => {
+            std::fs::write(output, repair::seed(&get_plan(&plan)?)?)?;
+        }
         Command::Probe {
             plan,
             executable,

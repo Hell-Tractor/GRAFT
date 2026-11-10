@@ -14,6 +14,7 @@ EVIDENCE_NAMES = (
     'original-wrapper-probe.json', 'replay.compile.log', 'probe.log',
     'wrapper-probe.json', 'input-probes.json', 'build-evidence.json',
     'fuzz.compile.log', 'outcome.json',
+    'standalone.rs', 'normalized.rs',
 )
 
 
@@ -63,6 +64,8 @@ def diagnose(directory):
     text = normalization.read_text(errors='replace') if normalization.exists() else ''
     if 'planned core AST changed' in text:
         return {'stage': 'normalization', 'code': 'core_changed', 'message': text.strip()}
+    if text.strip():
+        return {'stage': 'normalization', 'code': 'contract_rejected', 'message': text.strip()}
     validity = read_json(directory / 'validity.json')
     if validity and not validity.get('accepted'):
         return {'stage': 'normalization', 'code': 'contract_rejected',

@@ -12,9 +12,23 @@ from admission_diagnostics import (atomic_json, audit_batch, begin_evidence, cap
 from model_cost_control import compact_diagnostics
 from preflight_admission import read_profile, run_preflight
 from launch_controlled_round import Engine
+from calibrate_parameter_repair import calibrate
 
 
 class DiagnosticsTests(unittest.TestCase):
+    def test_calibration_prepare_never_initializes_paid_engine(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);batch=root/'source'
+            directory=batch/'preparation/round-01/GRAFT/bytes/0';directory.mkdir(parents=True)
+            (batch/'runtime').mkdir()
+            atomic_json(directory/'generation.json',{'finished':True,'accepted':False,'status':'generation_failed'})
+            atomic_json(directory/'emitted/plan.json',{'target':'original'})
+            with patch('calibrate_parameter_repair.Engine') as engine:
+                result=calibrate(batch,root/'new',root/'planner',root/'harness',False,[('bytes',0)])
+                engine.assert_not_called()
+            self.assertEqual(result['model_requests'],0)
+            self.assertEqual(result['fuzz_jobs'],0)
+
     def test_probe_failure_reaches_budgeted_repair_prompt(self):
         with tempfile.TemporaryDirectory() as tmp:
             directory = Path(tmp)
@@ -163,6 +177,8 @@ class PreflightTests(unittest.TestCase):
         value = json.loads(policy.read_text()); value['gate'] = 'any-input-passes'
         output = self.root / 'bad-policy.json'; atomic_json(output, value)
         with self.assertRaises(ValueError): read_profile(output)
+        repair=policy.with_name('parameter-repair.json')
+        self.assertEqual(read_profile(repair)['assembly_mode'],'llm-parameter-repair')
 
 
 class EngineIntegrationTests(unittest.TestCase):
@@ -212,6 +228,60 @@ class EngineIntegrationTests(unittest.TestCase):
                     engine.compile(source,Path(tmp)/'target','coverage',
                                    timeout=.001,include_queue_wait=True)
                 run.assert_not_called()
+
+    def test_semantic_profile_routes_rejected_core_to_bounded_llm_repair(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);engine=self.make_engine(root,'rejected')
+            engine.admission_profile={'assembly_mode':'llm-parameter-repair'}
+            engine.planner_bin=Path('/isolated/planner');engine.env={}
+            engine.preflight.return_value={'status':'rejected','diagnosis':{
+                'stage':'probe','code':'resource_limit','message':'allocation of 72340172838076673 failed'}}
+            plan=root/'plan.json';atomic_json(plan,{'plan':{
+                'target':'original-api','crate_name':'bytes','crate_version':'1.11.1'}})
+            prompts=[]
+            def emit(command,*args):
+                Path(command[-1]).write_text('pub fn graft_body(data: &[u8]) -> Vec<(usize,Vec<u8>)> { Vec::new() }')
+                return {'returncode':0,'timed_out':False}
+            def request(prompt,directory,index):
+                prompts.append(prompt)
+                source=directory/f'attempt-{index}.rs';source.write_text('// mocked source')
+                atomic_json(directory/f'response-{index}.json',{'latency_seconds':0})
+                return source,{}
+            def normalize(source,directory,plan,baseline):
+                (directory/'normalize.log').write_text('planned API calls were deleted')
+                return False,{'returncode':1}
+            engine.request=Mock(side_effect=request);engine.normalize=normalize
+            with patch('launch_controlled_round.command_run',side_effect=emit):
+                engine.model('GRAFT','bytes',0,'public docs',plan=plan)
+            self.assertEqual(engine.request.call_count,2)
+            self.assertIn('72340172838076673',prompts[0])
+            self.assertIn('MAY change input decoding',prompts[0])
+            self.assertIn('planned API calls were deleted',prompts[1])
+            self.assertNotIn('Keep the immutable planned core',prompts[1])
+            self.assertEqual(engine.generation[('GRAFT','bytes',0)]['preflight_action'],'llm_repair')
+
+    def test_semantic_normalization_uses_call_contract_and_canonical_standalone(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);engine=self.make_engine(root,'passed')
+            engine.admission_profile={'assembly_mode':'llm-parameter-repair'}
+            engine.harness_bin=Path('/isolated/harness');engine.env={}
+            atomic_json(root/'validity.json',{'accepted':True})
+            with patch('launch_controlled_round.command_run',return_value={'returncode':0}) as run:
+                self.assertTrue(engine.normalize(root/'response.rs',root,root/'plan.json')[0])
+            command=run.call_args.args[0]
+            self.assertIn('--repair-plan',command)
+            self.assertIn('--standalone-output',command)
+            self.assertNotIn('--plan',command)
+
+    def test_interrupted_request_is_not_overwritten_or_resent(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            engine=Engine.__new__(Engine);engine.admission_profile={'assembly_mode':'llm-parameter-repair'}
+            directory=Path(tmp);saved=directory/'raw-response-0.json';saved.write_text('previous paid response')
+            with patch('launch_controlled_round.read_key') as credentials:
+                with self.assertRaisesRegex(RuntimeError,'reconcile'):
+                    engine.request('new prompt',directory,0)
+                credentials.assert_not_called()
+            self.assertEqual(saved.read_text(),'previous paid response')
 
     def test_each_repair_uses_its_own_evidence_and_actual_call_limit(self):
         with tempfile.TemporaryDirectory() as tmp:

@@ -17,6 +17,7 @@ from model_cost_control import BudgetRejected, compact_controlled, read_policy, 
 from costed_model_request import send as costed_send
 from admission_diagnostics import begin_evidence, capture_attempt, repair_feedback
 from preflight_admission import read_profile, run_preflight
+import parameter_repair
 from run_experiment_rounds import command_run, execute, publish, publication_directory, save, summarize, UPSTREAM_FAILURES
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -63,10 +64,13 @@ def has_required_compiler_flags(tokens, flags):
 
 class Engine:
     def __init__(self,root,number=1,deep_process=None,resume=False,cost_policy=None,
-                 admission_profile=None,planner_bin=None,harness_bin=None):
+                 admission_profile=None,planner_bin=None,harness_bin=None,admission_only=False):
         self.number=number;self.round_name=f'round-{number:02d}';self.root=root;self.runtime=root/'runtime';self.protocol=load(ROOT/'experiments/week5/protocol.json')
         self.deep_process=deep_process
         self.admission_profile=read_profile(admission_profile) if admission_profile else None
+        self.admission_only=admission_only
+        if admission_only and not self.admission_profile:
+            raise ValueError('admission-only calibration requires an explicit new profile')
         self.planner_bin=Path(planner_bin) if planner_bin else PLANNER
         self.harness_bin=Path(harness_bin) if harness_bin else HARNESS
         if not self.admission_profile and (planner_bin or harness_bin):
@@ -96,11 +100,12 @@ class Engine:
             p['admission_profile']=self.admission_profile
             p['admission_implementation']={name:artifact(ROOT/'scripts'/name) for name in
                 ('admission_diagnostics.py','preflight_admission.py','launch_controlled_round.py',
-                 'generation_metrics.py','run_experiment_rounds.py')}
+                 'generation_metrics.py','run_experiment_rounds.py','parameter_repair.py')}
             p['admission_binaries']={'planner':artifact(self.planner_bin),
                                     'harness':artifact(self.harness_bin)}
             batch_id=re.sub(r'[^A-Za-z0-9_.-]','_',root.name)+'-'+hashlib.sha256(str(root.resolve()).encode()).hexdigest()[:12]
             p['publication_namespace']='admission-v2/'+batch_id
+            p['execution_scope']='admission_only' if admission_only else 'full_fuzz_round'
         p['universes']={c:artifact(self.runtime/'universes/api_universes'/(c+'.json')) for c in p['versions']}
         p['definition_count']=sum(sum(a.get('public_name_body_definition',False) for a in load(v['path'])['apis']) for v in p['universes'].values())
         p['cfg_flags']=['--cfg','fuzzing','-C','opt-level=3','-C','codegen-units=1','-C','target-cpu=native']
@@ -261,7 +266,9 @@ class Engine:
         return result
     def normalize(self,source,d,plan=None,baseline=False):
         command=[str(self.harness_bin),str(source),str(d/'normalized.rs'),str(d/'validity.json')]
-        if plan:command += ['--plan',str(plan)]
+        if plan:
+            command += (['--repair-plan',str(plan),'--standalone-output',str(d/'standalone.rs')]
+                        if parameter_repair.enabled(self.admission_profile) else ['--plan',str(plan)])
         if baseline:command += ['--baseline']
         required=d/'required-names.json'
         if required.exists():command += ['--required-names',str(required)]
@@ -280,13 +287,18 @@ class Engine:
         with self.lock:self.admissions.setdefault((m,c,i),[]).append(admission)
         try:
             runtime_checks=self.runtime_checks(source)
+            repair_mode=bool(plan and parameter_repair.enabled(self.admission_profile))
+            if repair_mode:
+                ok,review=self.normalize(source,d,plan,baseline)
+                if not ok:self.failure(m,c,i,'validation_rejected','parameter repair contract rejected',review);return False
             if plan:
-                original=self.compile(source,d/'original-wrapper','coverage')
+                original=self.compile(d/'standalone.rs' if repair_mode else source,d/'original-wrapper','coverage')
                 if original['returncode']!=0:self.failure(m,c,i,'compile_failed','original planned wrapper did not compile',original);return False
                 original_probe=command_run(['prlimit','--as=1073741824','--',str(self.planner_bin),'probe',str(plan),str(d/'original-wrapper'),str(d/'original-wrapper-probe.json')],d,dict(self.env,LLVM_PROFILE_FILE='/dev/null'),d/'original-wrapper-probe.log',20)
                 if original_probe['returncode']!=0:self.failure(m,c,i,'validation_rejected','original planned wrapper failed three-input probe',original_probe);return False
-            ok,review=self.normalize(source,d,plan,baseline)
-            if not ok:self.failure(m,c,i,'validation_rejected','normalization/contract admission failed',review);return
+            if not repair_mode:
+                ok,review=self.normalize(source,d,plan,baseline)
+                if not ok:self.failure(m,c,i,'validation_rejected','normalization/contract admission failed',review);return
             compiled=self.compile(d/'normalized.rs',d/'replay','coverage')
             if compiled['returncode']!=0:self.failure(m,c,i,'compile_failed','common coverage compiler rejected target',compiled);return
             if plan:
@@ -329,8 +341,13 @@ class Engine:
                 'environment':{'AFL_NO_UI':'1','AFL_NO_AFFINITY':'1','AFL_SKIP_CPUFREQ':'1','AFL_I_DONT_CARE_ABOUT_MISSING_CRASHES':'1','LLVM_PROFILE_FILE':'/dev/null'}}
             save(d/'task.json',task)
             with self.lock:
-                self.tasks[(m,c,i)]=task;self.identities[(m,c,i)]=dict(task,status='queued')
-                future=self.fuzz_pool.submit(self.fuzz,task);self.fuzz_futures.append(future);self.update()
+                self.tasks[(m,c,i)]=task
+                if getattr(self,'admission_only',False):
+                    self.identities[(m,c,i)]=dict(task,status='admitted_not_fuzzed')
+                else:
+                    self.identities[(m,c,i)]=dict(task,status='queued')
+                    future=self.fuzz_pool.submit(self.fuzz,task);self.fuzz_futures.append(future)
+                self.update()
             admitted=True
             return True
         except Exception as error:self.failure(m,c,i,'infrastructure_failed',str(error))
@@ -369,6 +386,10 @@ class Engine:
         with self.lock:self.results[key]=result;self.identities[key]=dict(task,status=result['status']);self.update()
         return result
     def request(self,prompt,d,index):
+        if self.admission_profile and any((d/name).exists() for name in
+            (f'request-{index}.json',f'raw-response-{index}.json',f'response-{index}.json')):
+            raise ModelBackendError('request artifacts already exist; reconcile the interrupted '
+                                    'attempt instead of overwriting or paying for a resend')
         key=read_key(Path.home()/'.config/go-exit/deepseek.env')
         request_config=self.protocol['model_request']
         body={'model':self.protocol['model'],'messages':[{'role':'user','content':prompt}],
@@ -435,6 +456,7 @@ class Engine:
         if first_index>=max_calls:
             self.failure(m,c,i,'generation_failed','maximum generation attempts reached without admission',record);return
         base_prompt=prompt
+        repair_mode=bool(plan and parameter_repair.enabled(self.admission_profile))
         record['max_model_calls']=max_calls
         pending_validation=None
         if first_index:
@@ -443,12 +465,30 @@ class Engine:
         try:
             if self.admission_profile and plan:
                 preflight=self.preflight(plan,d);record['core_preflight']=preflight
-                if preflight['status']!='passed':
+                if preflight['status']!='passed' and not (repair_mode and preflight['status']=='rejected'):
                     status='planning_unknown' if preflight['status']=='rejected' else 'infrastructure_failed'
                     record['status']=status
                     self.failure(m,c,i,status,'core preflight blocked paid generation',preflight)
                     if paired:self.failure('no-repair',c,i,status,'shared core preflight blocked generation',preflight)
                     return
+                if repair_mode:
+                    seed=d/'parameter-repair-seed.rs'
+                    emitted=command_run([str(self.planner_bin),'repair-seed',str(plan),str(seed)],
+                                        d,self.env,d/'repair-seed.log',15)
+                    if emitted['returncode']!=0:raise RuntimeError('parameter repair seed generation failed')
+                    base_prompt=parameter_repair.base_prompt(plan,prompt)
+                    original=parameter_repair.prompt(base_prompt,seed.read_text(),preflight['diagnosis'])
+                    if first_index:
+                        previous=d/f'attempt-{first_index-1}.rs'
+                        diagnosis=record['attempts'][-1].get('validation_evidence',{}).get('diagnosis')
+                        if not previous.exists() or not diagnosis:
+                            raise ModelBackendError('interrupted parameter repair lacks sealed '
+                                                    'source/diagnosis; reconcile before another paid call')
+                        original=parameter_repair.prompt(base_prompt,previous.read_text(),diagnosis)
+                    record.update(strategy='llm_parameter_repair',
+                                  preflight_action='llm_repair' if preflight['status']=='rejected' else 'llm_generation')
+                    save(d/'parameter-repair-context.json',{'plan':artifact(plan),'seed':artifact(seed),
+                        'preflight_diagnosis':preflight['diagnosis'],'target_identity':{'method':m,'crate':c,'slot':i}})
             for attempt in range(first_index,max_calls):
                 compile_before=len(getattr(self.worker_local,'compile_runs',[]))
                 attempt_record={'index':attempt,'kind':'initial' if attempt==0 else 'repair',
@@ -505,8 +545,11 @@ class Engine:
                     diagnostics=repair_feedback(evidence)
                 with self.lock:self.generation[(m,c,i)]=copy.deepcopy(record);self.update()
                 if attempt<max_calls-1:
-                    prefix=base_prompt if self.cost_policy else original
-                    original=prefix+'\nCURRENT SOURCE:\n'+source.read_text()+'\nDIAGNOSTICS:\n'+diagnostics[-20000:]+'\nRemaining repairs: '+str(max_calls-attempt-1)+'. Keep the immutable planned core if supplied.'
+                    if repair_mode:
+                        original=parameter_repair.prompt(base_prompt,source.read_text(),evidence['diagnosis'])
+                    else:
+                        prefix=base_prompt if self.cost_policy else original
+                        original=prefix+'\nCURRENT SOURCE:\n'+source.read_text()+'\nDIAGNOSTICS:\n'+diagnostics[-20000:]+'\nRemaining repairs: '+str(max_calls-attempt-1)+'. Keep the immutable planned core if supplied.'
             record['status']='generation_failed'
             self.failure(m,c,i,'generation_failed',f'no accepted source within {max_calls} model calls',str(last))
         except BudgetRejected as error:

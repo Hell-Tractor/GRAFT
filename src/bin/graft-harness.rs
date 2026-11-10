@@ -11,6 +11,10 @@ struct Args {
     report: PathBuf,
     #[arg(long)]
     plan: Option<PathBuf>,
+    #[arg(long, conflicts_with_all=["plan", "baseline"])]
+    repair_plan: Option<PathBuf>,
+    #[arg(long, requires="repair_plan")]
+    standalone_output: Option<PathBuf>,
     #[arg(long, default_value="fuzz_target")]
     entry: String,
     #[arg(long)]
@@ -65,7 +69,16 @@ fn run()->Result<(),Box<dyn std::error::Error>>{
     if review.pointer_casts>0 {reasons.push("raw pointer cast: storage/alignment/preconditions not established".to_string());}
     if !review.forbidden.is_empty(){reasons.push("unapproved process/network operation".into());}
     let entry: syn::Ident;
-    if let Some(ref planpath)=a.plan {
+    let mut repair_evidence=None;
+    if let Some(ref planpath)=a.repair_plan {
+        let result:graft::checked::PlanResult=serde_json::from_slice(&std::fs::read(planpath)?)?;
+        let graft::checked::PlanResult::Planned{plan}=result else{return Err("rejected repair plan".into());};
+        let prepared=graft::checked::repair::prepare(&plan,&source)?;
+        if let Some(ref output)=a.standalone_output {std::fs::write(output,&prepared.standalone)?;}
+        file=syn::parse_file(&prepared.core)?;
+        repair_evidence=Some(prepared.evidence);
+        entry=quote::format_ident!("graft_body");
+    } else if let Some(ref planpath)=a.plan {
         let result:graft::checked::PlanResult=serde_json::from_slice(&std::fs::read(planpath)?)?;
         let graft::checked::PlanResult::Planned{plan}=result else{return Err("rejected plan".into());};
         graft::checked::validate::retain_plan(&plan,&source)?;
@@ -122,10 +135,10 @@ fn run()->Result<(),Box<dyn std::error::Error>>{
     }
     let safe_env_use=if a.plan.is_none(){!source.contains("std::env::") && !source.contains("std::fs::") && !source.contains("include!")}else{true};
     if !a.baseline && !safe_env_use {reasons.push("unapproved environment/filesystem access in model source".into());}
-    let report=serde_json::json!({"accepted":reasons.is_empty(),"reasons":reasons,"unsafe_blocks":review.unsafe_blocks,"raw_pointer_casts":review.pointer_casts,"data_uses":review.data_uses,"called_names":review.calls,"policy":"same canonical wrapper; no unreviewed direct unsafe admission; byte-input AST use and requested-name order are not complete taint or API-resolution proofs"});
+    let report=serde_json::json!({"accepted":reasons.is_empty(),"reasons":reasons,"unsafe_blocks":review.unsafe_blocks,"raw_pointer_casts":review.pointer_casts,"data_uses":review.data_uses,"called_names":review.calls,"repair_contract":repair_evidence,"policy":"same canonical wrapper; no unreviewed direct unsafe admission; byte-input AST use and requested-name order are not complete taint or API-resolution proofs"});
     std::fs::write(a.report,serde_json::to_vec_pretty(&report)?)?;
     if !report["accepted"].as_bool().unwrap(){std::process::exit(3);}
-    if a.plan.is_none(){syn::visit_mut::VisitMut::visit_file_mut(&mut KeepCalls,&mut file);}
+    if a.plan.is_none() && a.repair_plan.is_none(){syn::visit_mut::VisitMut::visit_file_mut(&mut KeepCalls,&mut file);}
     let items=file.items;
     let output=quote!{#(#items)* fn main(){
         use std::io::Read;

@@ -69,6 +69,10 @@ pub fn borrowed(x: &u8) -> &u8 {
 pub fn scalar(x: u8) -> u8 {
     x.wrapping_add(1)
 }
+pub fn scalar_mut(x: &mut u8) -> u8 {
+    *x = x.wrapping_add(1);
+    *x
+}
 pub struct Buffer<T>(T);
 pub fn buffer_i32(x: i32) -> Buffer<i32> {
     Buffer(x)

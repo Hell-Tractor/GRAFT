@@ -1,6 +1,48 @@
-# Admission v2：第一阶段实现
+# Admission v2：核心预检与 LLM 参数修复
 
-本阶段完成失败证据归档、修复反馈、付费前核心预检，以及新协议/论文结果隔离。尚未实现容量/索引/日期语义规则、依赖类型路径修正、本地重规划和模型包装片段接口；不要将此阶段称为完整的通过率优化。
+## 当前实现：LLM 参数修复
+
+`parameter-repair.json` 启用 `llm-parameter-repair` 和 `planned-call-v2`。对可修复的核心预检拒绝，不再直接终止，而是将失败输入、编译诊断、panic 和公开 API 文档交给 LLM。环境故障仍停止付费生成。
+
+LLM 可以调整解码器、范围、借用、局部类型和安全的对象准备。Rust 验证器保留原有 fully-qualified 计划调用及顺序，允许局部变量一致改名，检查直接调用生产者的接收者依赖；禁止删调用、改目标、unsafe、额外项/导入、模型宏和假追踪。计划调用必须保持顶层直接初始化，避免把它们藏进死分支。
+
+调用标记由工具在真实调用返回后插入，记录实际传入的直接标量参数。归一化后的独立包装和覆盖包装都需通过原三输入探测，最后还要通过初始语料运行、覆盖映射与 AFL 编译。只提前返回或将标量改成常量的样例在回归测试中不能通过。对不透明对象的完整输入依赖、全部输入上的前置条件尚未证明，当前结果只是有界运行证据。
+
+fixedbitset 0.5.7 的 grow/len 状态提示按精确版本启用，来自本地冻结源码/公开文档，是显式提示辅助，不应描述为模型独立推断。没有实现通用的自动重规划或完整跨依赖类型解析修正；chrono 校准中的 Duration 注解由 LLM 修正。
+
+同一原始目标最多两次付费调用、合计 ¥0.24。中断后发现同序号请求/响应文件时拒绝覆盖和重发；恢复语义修复必须有前次封存源码和诊断。
+
+### 实际验证
+
+- 初版四目标校准：bytes/0、chrono/0、time/0 通过，fixedbitset/4 失败；6 次调用，usage 峰价估算 ¥0.170694。
+- 增加接收者状态提示后的独立 fixedbitset/14 校准：模型生成正确扩容思路，但被初版“变量名必须不变”检查拒绝；2 次调用，¥0.044145。没有重置 fixedbitset/4 的账本重试。
+- 修正为允许变量一致改名、保留调用和直接生产者关系后，复用上述 5 个已有候选重新执行完整 admission：4 个通过，fixedbitset/4 仍失败。原 3 个成功候选无退化，追加模型调用与 fuzz 均为 0。
+- 历史生成总费用含失败共 ¥0.214839，分摊给新契约下 4 个通过候选约 ¥0.05370975。全部 usage 已知，没有未知费用预留。来自不同提示/契约版本的诊断样本，不是无偏新生成成功率，不能合并进正式论文覆盖结果。
+- 验证：89 项 Python 测试、39 项 Rust 集成测试通过。
+
+证据目录：
+
+```text
+/home/cym/workspace/graft-parameter-repair-20261110
+/home/cym/workspace/graft-parameter-repair-hints-20261110
+/home/cym/workspace/graft-parameter-repair-contract-v2-replay-20261110
+```
+
+`calibrate_parameter_repair.py` 默认只准备独立清单，`--execute` 才会调用模型；会复制独立二进制和实现快照。`revalidate_parameter_repairs.py` 只复验已有响应，禁止模型请求。两者使用 admission-only 引擎，均不启动 AFL。
+
+新全量批次可用以下配置接入，不能直接恢复到旧批次：
+
+```text
+--admission-profile experiments/admission-v2/parameter-repair.json
+--planner-bin <单独构建且冻结的 graft-plan>
+--harness-bin <单独构建且冻结的 graft-harness>
+```
+
+本次没有恢复旧批次或启动新全量批次。
+
+## 历史第一阶段：仅诊断和预检
+
+以下描述的是 `stage-ab.json` 的历史行为。该模式只做诊断和提前拒绝；它与上面的 LLM 参数修复模式分别冻结，不能混用。
 
 ## 已实现
 
