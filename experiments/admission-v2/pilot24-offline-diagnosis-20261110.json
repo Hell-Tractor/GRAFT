@@ -1,0 +1,149 @@
+{
+  "schema": "graft-pilot24-offline-followup-v1",
+  "source_batch": "/home/cym/workspace/graft-admission-pilot-24-execution-20261110",
+  "frozen_gate_result": "failed; not changed by this audit",
+  "accepted": 14,
+  "cases": 24,
+  "new_model_requests": 0,
+  "new_fuzz_jobs": 0,
+  "repair_jobs": 10,
+  "responses_equal_ignoring_whitespace": 7,
+  "failures": [
+    {
+      "crate": "bytes",
+      "slot": 10,
+      "first_cause": "input_influence_unobserved",
+      "final_cause": "contract_rejected",
+      "responses_equal_after_whitespace_removal": false,
+      "comparison_scope": "Text comparison only; not a semantic-equivalence proof",
+      "response_sha256": {
+        "0": "80e58353c56ed2d1f8472eab04e6582c48001059d250fcd68bea29d113a47a78",
+        "1": "d7060295ffc069c74300d910f2b54902be1d9683ddc580dede9e35a9480f4776"
+      },
+      "replanning_status": "selected"
+    },
+    {
+      "crate": "time",
+      "slot": 0,
+      "first_cause": "target_not_reached",
+      "final_cause": "target_not_reached",
+      "responses_equal_after_whitespace_removal": true,
+      "comparison_scope": "Text comparison only; not a semantic-equivalence proof",
+      "response_sha256": {
+        "0": "bc18a0371b39cbd13c3d62f5dcd230ebbd686c6a4d5e01b366c61381bd7c112e",
+        "1": "bc18a0371b39cbd13c3d62f5dcd230ebbd686c6a4d5e01b366c61381bd7c112e"
+      },
+      "replanning_status": "no_admissible_alternative"
+    },
+    {
+      "crate": "time",
+      "slot": 1,
+      "first_cause": "target_not_reached",
+      "final_cause": "target_not_reached",
+      "responses_equal_after_whitespace_removal": true,
+      "comparison_scope": "Text comparison only; not a semantic-equivalence proof",
+      "response_sha256": {
+        "0": "e2ee83d4444ab5c3d2854858245cdb119f1896d15b0026cd24c0e0bc805535fe",
+        "1": "e2ee83d4444ab5c3d2854858245cdb119f1896d15b0026cd24c0e0bc805535fe"
+      },
+      "replanning_status": "no_admissible_alternative"
+    },
+    {
+      "crate": "time",
+      "slot": 12,
+      "first_cause": "target_not_reached",
+      "final_cause": "target_not_reached",
+      "responses_equal_after_whitespace_removal": true,
+      "comparison_scope": "Text comparison only; not a semantic-equivalence proof",
+      "response_sha256": {
+        "0": "4f740aea48d7dc1dfa6f20b3a39ccffa3aa943c6111808ba2920b00285399bda",
+        "1": "4f740aea48d7dc1dfa6f20b3a39ccffa3aa943c6111808ba2920b00285399bda"
+      },
+      "replanning_status": "no_admissible_alternative"
+    },
+    {
+      "crate": "fixedbitset",
+      "slot": 0,
+      "first_cause": "runtime_panic",
+      "final_cause": "runtime_panic",
+      "responses_equal_after_whitespace_removal": true,
+      "comparison_scope": "Text comparison only; not a semantic-equivalence proof",
+      "response_sha256": {
+        "0": "35749fecc79f39b90adc30ba7e98f1f61ea99e0cfeab6957304284fcf8303e14",
+        "1": "a1780e637162cb78adf7ddb5c2cb26902822f4103ddb122c6925b615683aabe6"
+      }
+    },
+    {
+      "crate": "fixedbitset",
+      "slot": 4,
+      "first_cause": "core_compile_error",
+      "final_cause": "core_compile_error",
+      "responses_equal_after_whitespace_removal": true,
+      "comparison_scope": "Text comparison only; not a semantic-equivalence proof",
+      "response_sha256": {
+        "0": "ebcc66216473d64bee3fbf0c5b4653433f663d151bc068185640905b5de40775",
+        "1": "ebcc66216473d64bee3fbf0c5b4653433f663d151bc068185640905b5de40775"
+      },
+      "replanning_status": "no_admissible_alternative"
+    },
+    {
+      "crate": "fixedbitset",
+      "slot": 14,
+      "first_cause": "contract_rejected",
+      "final_cause": "contract_rejected",
+      "responses_equal_after_whitespace_removal": true,
+      "comparison_scope": "Text comparison only; not a semantic-equivalence proof",
+      "response_sha256": {
+        "0": "769424fdbe3bb3881cc14e8d93190cd0db84ddce4de54c194b9d888edd739d16",
+        "1": "769424fdbe3bb3881cc14e8d93190cd0db84ddce4de54c194b9d888edd739d16"
+      }
+    },
+    {
+      "crate": "csv",
+      "slot": 0,
+      "first_cause": "contract_rejected",
+      "final_cause": "contract_rejected",
+      "responses_equal_after_whitespace_removal": true,
+      "comparison_scope": "Text comparison only; not a semantic-equivalence proof",
+      "response_sha256": {
+        "0": "99ffdae1cff4f97749aaacbae37644a9a5dbba9598a6101e77acd6ce0291c09c",
+        "1": "99ffdae1cff4f97749aaacbae37644a9a5dbba9598a6101e77acd6ce0291c09c"
+      }
+    },
+    {
+      "crate": "csv",
+      "slot": 11,
+      "first_cause": "contract_rejected",
+      "final_cause": "contract_rejected",
+      "responses_equal_after_whitespace_removal": false,
+      "comparison_scope": "Text comparison only; not a semantic-equivalence proof",
+      "response_sha256": {
+        "0": "9d44163de3ca5397186b0b4889d478c1a78f86350c8aa050b9597e9d578143de",
+        "1": "e7f8fbe247d703ba4277a1dbc9ebb87f5c636f6061fa6838d051f15ecc12abf1"
+      }
+    },
+    {
+      "crate": "bumpalo",
+      "slot": 0,
+      "first_cause": "contract_rejected",
+      "final_cause": "contract_rejected",
+      "responses_equal_after_whitespace_removal": false,
+      "comparison_scope": "Text comparison only; not a semantic-equivalence proof",
+      "response_sha256": {
+        "0": "eccfb3ea852f17d7755c7c4d7f4905720c73ff85cb6f3b5b1ae496cf259aaf55",
+        "1": "13066f66e2b6427ba45088141963671f8e1d67dbf249bd7e933debcb9af9464b"
+      }
+    }
+  ],
+  "no_argument_review_correction": {
+    "crate": "bumpalo",
+    "slot": 6,
+    "original_target": "<bumpalo::Bump>::new",
+    "original_target_argument_count": 0,
+    "interpretation": "Original target is unchanged and takes no arguments. not_applicable_no_arguments is the previously implemented classification, not evidence of constant argument substitution. Does not establish an input-sensitive harness or waive other failed gates."
+  },
+  "source_evidence_sha256": {
+    "calibration-summary.json": "fc6dbadc6ae489774093f8ddcaf7629d1ad6d2b84d80d63e1c1626c55dc9b815",
+    "calibration-gate-review.json": "cf95a7143f044596bd69ba56a02a89bd24cfc414b0dae60852312203d46ac7dd"
+  }
+}
