@@ -125,6 +125,7 @@ class Engine:
             if self.parameter_rules:p['parameter_guidance']=artifact(ROOT/self.admission_profile['semantics_rules'])
         if fixed_generation:
             p.update(generation_mode='fixed-generation-six-fuzz-v1', generation_repetitions=1,
+                     max_repairs_after_initial=self.cost_policy['max_calls_per_target']-1 if self.cost_policy else p['max_repairs_after_initial'],
                      fuzz_repetitions=6,afl_seeds_per_generation=6,
                      repetition_policy='Generate once; reuse identical sealed tasks and initial corpus for six paired independent AFL seeds.',
                      operator_start_policy='Continue through the configured round after successful publication unless paused; never use legacy auto_second.')

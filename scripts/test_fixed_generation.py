@@ -133,6 +133,16 @@ class FixedGenerationTests(unittest.TestCase):
     def test_cost_summary_cannot_drift_from_frozen_ledgers(self):
         path=self.batch/'generation-seal.json';data=load(path);data['cost_summary']['spent_or_reserved_cny']='0';save(path,data)
         with self.assertRaisesRegex(ValueError,'cost accounting'):self.run_fixed()
+    def test_incomplete_first_generation_still_publishes_unavailable_measurements(self):
+        (self.batch/'generation-seal.json').unlink()
+        rows=copy.deepcopy(self.first);rows[0]['status']='infrastructure_failed'
+        summary=summarize(self.p,rows,{'fixture':self.u},1);save(self.batch/'round-01/summary.json',summary)
+        with patch('run_experiment_rounds.command_run',side_effect=self.build):
+            result=fixed.run(self.batch,self.paper,generate=lambda *a:summary)
+        self.assertEqual(result['status'],'round_incomplete');self.assertFalse((self.batch/'round-02').exists())
+        stats=load(self.paper/'revisions/fixed-unit-fixture/round-01/statistics.json')
+        self.assertEqual(stats['independent_afl_seeds_per_generation'],0)
+        self.assertFalse((self.batch/'round-01/publication-barrier.json').exists())
     def test_first_round_restore_preserves_ready_task_for_reuse(self):
         from launch_controlled_round import Engine
         task=self.tasks[0];path=self.batch/'preparation/round-01/GRAFT/fixture/0/task.json';save(path,task)

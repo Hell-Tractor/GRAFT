@@ -217,7 +217,9 @@ def run(batch,paper,through=6,resume=False,check_only=False,generate=first_gener
             if number>1:barrier(batch,p,paper,number-1)
             if number==1 and not (batch/'generation-seal.json').exists():
                 result=generate(batch,resume)
-                if result['status']!='complete':return {'status':'round_incomplete','round':1}
+                if result['status']!='complete':
+                    publish(p,batch,paper,1,result,generation=load(batch/'round-01/all-method-generation.json'))
+                    return {'status':'round_incomplete','round':1}
             seal=verify_seal(batch,p)
             rd=batch/f'round-{number:02d}'
             if not (rd/'publication-barrier.json').exists():
