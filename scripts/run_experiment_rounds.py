@@ -300,9 +300,16 @@ def _publish_locked(protocol, batch, paper, number, summary, generation=None):
     for report_number in range(1,number+1):
         path=batch/f'round-{report_number:02d}'/'all-method-generation.json'
         if path.exists():generation_by_round[str(report_number)]=load(path)
+    fixed=protocol.get('generation_mode')=='fixed-generation-six-fuzz-v1'
+    if fixed:
+        generation=load(batch/'round-01/all-method-generation.json')
+        generation_by_round={'1':generation}
     save(destination / 'statistics.json', {'through_round': number, 'methods': stats,
         'target_status_counts': dict(sum((Counter(r['slot_status_counts']) for report in reports for r in report['rows']), Counter())),
-        'independent_generation_rounds': number, 'independent_afl_seeds_per_generation': 1,
+        'independent_generation_rounds': 1 if fixed else number, 'independent_afl_seeds_per_generation': sum(r['status']=='complete' for r in reports) if fixed else 1,
+        'attempted_afl_repetitions': number,
+        'generation_costs': load(batch/'generation-seal.json').get('cost_summary') if fixed and (batch/'generation-seal.json').exists() else None,
+        'generation_cost_accounting':'once from sealed round one; no repeated charges' if fixed else 'per independent generation round',
         'planned_rounds': protocol['rounds'], 'per_target_seconds': protocol['seconds_per_target'],
         'generation': generation, 'generation_by_round': generation_by_round})
     save(destination / 'summary.json', summary)
@@ -325,8 +332,10 @@ def _publish_locked(protocol, batch, paper, number, summary, generation=None):
     tex = [r'\paragraph{Short-budget rerun progress.}',
         f'After round {number} of {protocol["rounds"]}, each eligible target receives '
         f'{protocol["seconds_per_target"]} seconds per round. The table reports mean macro API entry coverage and sample standard deviation '
-        'over fully measured rounds. Each round uses an independent generation batch and AFL seed; '
-        'the no-repair arm shares the initial Full response. Missing measurements remain unavailable. '
+        + ('over fully measured rounds. A single generation batch is reused across independent AFL seeds; '
+           'source, executables and initial corpus remain fixed. ' if fixed else
+           'over fully measured rounds. Each round uses an independent generation batch and AFL seed; ')
+        + 'the no-repair arm shares the initial Full response. Missing measurements remain unavailable. '
         'These short runs do not replace longer-budget evidence.',
         r'\begin{center}\small\begin{tabular}{lrrr}', r'Configuration & Complete rounds & Mean (\%) & SD \\ \hline']
     for row in stats:

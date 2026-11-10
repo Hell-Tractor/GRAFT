@@ -67,7 +67,9 @@ def has_required_compiler_flags(tokens, flags):
 
 class Engine:
     def __init__(self,root,number=1,deep_process=None,resume=False,cost_policy=None,
-                 admission_profile=None,planner_bin=None,harness_bin=None,admission_only=False,batch_budget_cny=None):
+                 admission_profile=None,planner_bin=None,harness_bin=None,admission_only=False,batch_budget_cny=None,fixed_generation=False):
+        self.fixed_generation=fixed_generation
+        if fixed_generation and (number!=1 or admission_only):raise ValueError('fixed generation prepares only the first formal round')
         self.number=number;self.round_name=f'round-{number:02d}';self.root=root;self.runtime=root/'runtime';self.protocol=load(ROOT/'experiments/week5/protocol.json')
         self.deep_process=deep_process
         self.admission_profile=read_profile(admission_profile) if admission_profile else None
@@ -121,6 +123,12 @@ class Engine:
             p['publication_namespace']='admission-v2/'+batch_id
             p['execution_scope']='admission_only' if admission_only else 'full_fuzz_round'
             if self.parameter_rules:p['parameter_guidance']=artifact(ROOT/self.admission_profile['semantics_rules'])
+        if fixed_generation:
+            p.update(generation_mode='fixed-generation-six-fuzz-v1', generation_repetitions=1,
+                     fuzz_repetitions=6,afl_seeds_per_generation=6,
+                     repetition_policy='Generate once; reuse identical sealed tasks and initial corpus for six paired independent AFL seeds.',
+                     operator_start_policy='Continue through the configured round after successful publication unless paused; never use legacy auto_second.')
+            p['fixed_generation_implementation']=artifact(ROOT/'scripts/run_fixed_generation.py')
         p['universes']={c:artifact(self.runtime/'universes/api_universes'/(c+'.json')) for c in p['versions']}
         p['definition_count']=sum(sum(a.get('public_name_body_definition',False) for a in load(v['path'])['apis']) for v in p['universes'].values())
         p['cfg_flags']=['--cfg','fuzzing','-C','opt-level=3','-C','codegen-units=1','-C','target-cpu=native']
@@ -184,7 +192,8 @@ class Engine:
                 result=load(result_path);self.results[key]=result;task=dict(task,status=result['status'])
             elif task['status']=='ready':
                 restored.append(task)
-            self.tasks[key]=task;self.identities[key]=task
+            if self.fixed_generation and (task_path.parent/'task.json').exists():task=load(task_path)
+            self.tasks[key]=task;self.identities[key]=dict(task,status=self.results[key]['status']) if key in self.results else task
         for result_path in sorted((self.root/self.round_name).glob('*/*/*/result.json')):
             result=load(result_path);key=(result['method'],result['crate'],result['slot'])
             self.results[key]=result
@@ -202,7 +211,7 @@ class Engine:
             for k,t in self.identities.items():
                 s=t['status'];counts[s]=counts.get(s,0)+1
                 row=crates.setdefault(k[1],{});row[s]=row.get(s,0)+1
-            save(self.root/'progress.json',{'status':'running','round':self.number,'elapsed_seconds':time.time()-self.started,'target_states':counts,'by_crate':crates,'model_requests':self.requests,'fuzz_jobs_submitted':len(self.fuzz_futures),'formal_round_complete':False,'second_round_auto_start':True})
+            save(self.root/'progress.json',{'status':'running','round':self.number,'elapsed_seconds':time.time()-self.started,'target_states':counts,'by_crate':crates,'model_requests':self.requests,'fuzz_jobs_submitted':len(self.fuzz_futures),'formal_round_complete':False,'second_round_auto_start':not self.fixed_generation})
             if time.monotonic()-self.last_metrics_write<2:return
             self.last_metrics_write=time.monotonic()
             metrics=summarize_generation([copy.deepcopy(v) for k,v in self.generation.items() if k[0]=='GRAFT'],list(self.protocol['versions']))
@@ -356,6 +365,9 @@ class Engine:
                 'fuzz_command':[str(AFL),'-V','{seconds}','-s','{seed}','-i',str(valid),'-o','{run_dir}/afl','-m','1024','-t','1000','--',str(d/'fuzz')],
                 'replay_command':[sys.executable,str(ROOT/'scripts/replay_round_coverage.py'),'--initial',str(valid),'--afl-output','{run_dir}/afl','--binary',str(d/'replay'),'--llvm-bin',str(LLVM),'--output','{coverage_export}','--work','{run_dir}/replayed'],
                 'environment':{'AFL_NO_UI':'1','AFL_NO_AFFINITY':'1','AFL_SKIP_CPUFREQ':'1','AFL_I_DONT_CARE_ABOUT_MISSING_CRASHES':'1','LLVM_PROFILE_FILE':'/dev/null'}}
+            if self.fixed_generation:
+                task['replay_binary']=artifact(d/'replay')
+                task['replay_adapter']=artifact(ROOT/'scripts/replay_round_coverage.py')
             save(d/'task.json',task)
             with self.lock:
                 self.tasks[(m,c,i)]=task
@@ -808,6 +820,8 @@ class Engine:
         tool=m.lower();summary=PORT/(f'generator-preflight-formal-round{self.number}/'+tool+'/summary.json')
         if not summary.exists():raise RuntimeError('native generator summary missing '+m)
         reports={r['crate']:r for r in load(summary)}
+        if self.fixed_generation:
+            reports={c:dict(r,generation_measurement='reused_prepared_inventory',original_report=artifact(summary)) for c,r in reports.items()}
         with self.lock:self.generator_runs[m]=reports
         for c in self.protocol['versions']:
             directory=PORT/(f'generator-preflight-formal-round{self.number}/rpg/'+c) if m=='RPG' else PORT/(f'rulf-work-formal-round{self.number}/'+c.replace('-','_')+'-work')
@@ -859,8 +873,12 @@ class Engine:
         save(self.root/self.round_name/'tasks.json',{'round':self.number,'protocol_sha256':self.protocol['_file_sha256'],'tasks':tasks})
         results=list(self.results.values());summary=summarize(self.protocol,results,self.universes,self.number);save(self.root/self.round_name/'summary.json',summary)
         self.last_metrics_write=0;self.update()
-        publish(self.protocol,self.root,ROOT.parent/'GRAFTPaper',self.number,summary,
-                generation=load(self.root/self.round_name/'all-method-generation.json'))
+        if self.fixed_generation and summary['status']=='complete':
+            from run_fixed_generation import seal_first
+            seal_first(self.root,self.protocol)
+        if not self.fixed_generation:
+            publish(self.protocol,self.root,ROOT.parent/'GRAFTPaper',self.number,summary,
+                    generation=load(self.root/self.round_name/'all-method-generation.json'))
         progress=load(self.root/'progress.json');progress.update(status='round_attempt_finished',round_status=summary['status'],formal_round_complete=summary['status']=='complete');save(self.root/'progress.json',progress);save(self.root/self.round_name/'progress.json',progress)
         return summary
 
