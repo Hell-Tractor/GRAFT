@@ -1,0 +1,77 @@
+{
+  "schema": "graft-repair-v4-development-verification-v1",
+  "implementation_commits": [
+    "2291db8",
+    "fdc5d78"
+  ],
+  "new_model_requests": 0,
+  "fuzz_jobs": 0,
+  "python_tests_passed": 109,
+  "rust_tests_passed": 52,
+  "saved_response_replay": {
+    "attempts": 34,
+    "fixed_targets": 24,
+    "admitted_targets": 14,
+    "prior_accepted_retained": 14,
+    "new_generation_success_rate_measured": false
+  },
+  "manual_witnesses": {
+    "positives": 10,
+    "positives_passed": 10,
+    "negatives": 4,
+    "negative_false_accepts": 0,
+    "counts_as_llm_repair_success": false
+  },
+  "prompt_audit": {
+    "cases": 10,
+    "all_tasks_retained": true,
+    "all_within_budget": true,
+    "maximum_prompt_utf8_bytes": 8330,
+    "configured_context_limit_utf8_bytes": 14000
+  },
+  "legacy_core_compatibility": {
+    "targets": 137,
+    "prior_accepted": 54,
+    "prior_accepted_core_passed": 54
+  },
+  "original_artifact_bindings_verified_unchanged": 204,
+  "frozen_v3_gate_result": "failed; unchanged",
+  "new_paid_calibration_started": false,
+  "six_fuzz_repetition_runner_implemented": false,
+  "pending": [
+    "Real new-model repair efficacy",
+    "Batch-wide CNY 2.40 atomic reservation before any such proposed paid pilot",
+    "Frozen new calibration and quality gate",
+    "Fixed-generation fuzz repetition runner after calibration passes"
+  ],
+  "evidence": {
+    "verified-replay/summary.json": {
+      "path": "/home/cym/workspace/graft-admission-repair-v4-offline-20261110/verified-replay/summary.json",
+      "sha256": "202ec2e5b0fa4be6bf2da92a6e2293f7491a4dbb6616961a022355627b4ee523"
+    },
+    "verified-replay/input-manifest.json": {
+      "path": "/home/cym/workspace/graft-admission-repair-v4-offline-20261110/verified-replay/input-manifest.json",
+      "sha256": "1fa935411e2f94ff6888e2f85579f66e44484145b77feb2504d66b4828207936"
+    },
+    "verified-witnesses/summary.json": {
+      "path": "/home/cym/workspace/graft-admission-repair-v4-offline-20261110/verified-witnesses/summary.json",
+      "sha256": "99145edcb103bdcb889592e96515e4e23567c6bde2dbee18be78032ffa4dae0b"
+    },
+    "verified-prompts/summary.json": {
+      "path": "/home/cym/workspace/graft-admission-repair-v4-offline-20261110/verified-prompts/summary.json",
+      "sha256": "a64533deb8e3f721642260b453ba0e6f9d0e7fea19fd7e59d1abb0ab8e2a681c"
+    },
+    "legacy-compatibility/paired-admission-report.json": {
+      "path": "/home/cym/workspace/graft-admission-repair-v4-offline-20261110/legacy-compatibility/paired-admission-report.json",
+      "sha256": "16c936c68a1fc5e4904115ad13f02a3c25271c5c155bee756f78a57026576cf3"
+    },
+    "python-final.log": {
+      "path": "/home/cym/workspace/graft-admission-repair-v4-offline-20261110/python-final.log",
+      "sha256": "213a49141f0d7c78f73612fbcc3e7eb02c93b425f6d89ffed8402fb21faa2025"
+    },
+    "rust-final.log": {
+      "path": "/home/cym/workspace/graft-admission-repair-v4-offline-20261110/rust-final.log",
+      "sha256": "2ab842baa1894db5a9766c8bff4ce1fa18f9ef9bfff1e3420debf3896acada65"
+    }
+  }
+}
