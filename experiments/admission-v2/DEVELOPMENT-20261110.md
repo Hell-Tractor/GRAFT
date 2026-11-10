@@ -1,5 +1,7 @@
 # Admission 后续开发与验证（2026-11-10）
 
+实验交接更新：实际 Engine 为 48 个 fuzz worker、所有配置各一个 worker/目标；本文末尾 56 worker/双 worker 的数值仅为场景估算。新版默认按实际配置估算一轮纯 fuzz 上界约 5 小时、六轮约 30 小时。旧 --auto-second 会重新生成，固定一次生成的六次 fuzz 调度与论文统计需由执行 agent 补齐；不能直接沿用。正式交接计划为 GRAFTPaper/revisions/admission-experiment-plan-v3-20261110.md；可立即执行的校准入口为 `bash scripts/run_admission_pilot_24_20261110.sh --execute`，默认不带参数仅检查。
+
 ## 已实现的流程
 
 入口配置为 `development-complete.json`。旧 `stage-ab.json`、`parameter-repair.json` 保留原协议；当前暂停批次不恢复。类型修正、提示规则和探测发生变化，必须创建独立新批次并冻结二进制。

@@ -1,0 +1,60 @@
+{
+  "schema": "graft-admission-experiment-handoff-v3",
+  "date": "2026-11-10",
+  "plan": "/home/cym/workspace/GRAFT-2.0/GRAFTPaper/revisions/admission-experiment-plan-v3-20261110.md",
+  "tool_base_commit": "e50743e",
+  "pilot": {
+    "check_command": [
+      "bash",
+      "scripts/run_admission_pilot_24_20261110.sh",
+      "--check-only"
+    ],
+    "execute_command": [
+      "bash",
+      "scripts/run_admission_pilot_24_20261110.sh",
+      "--execute"
+    ],
+    "cases": 24,
+    "minimum_admitted": 17,
+    "original_success_controls_required": 5,
+    "max_budget_cny": "5.76",
+    "required_cost_per_admitted_cny_less_than": "0.25",
+    "execute_requested_in_handoff_preparation": false
+  },
+  "full": {
+    "root": "/home/cym/workspace/graft-admission-full-fixedgen-20261110",
+    "configs": 11,
+    "crates": 13,
+    "slots_per_crate_per_method": 20,
+    "generation_repetitions": 1,
+    "fuzz_repetitions": 6,
+    "seconds_per_target_per_fuzz_repetition": 300,
+    "max_generation_budget_cny": "436.80",
+    "max_total_budget_including_pilot_cny": "442.56",
+    "default_fuzz_workers": 48,
+    "compile_workers": 8,
+    "actual_fuzz_workers_per_target": 1,
+    "fuzz_only_slot_upper_bound_hours_per_round": 5,
+    "fuzz_only_slot_upper_bound_hours_six_rounds": 30,
+    "not_included_in_time": [
+      "generation",
+      "compilation",
+      "replay",
+      "publication",
+      "contention"
+    ],
+    "must_complete_before_paid_full_generation": [
+      "pilot gates",
+      "fixed-generation continuation and tests",
+      "correct paper generation/fuzz repetition accounting",
+      "frozen protocol and implementation"
+    ],
+    "forbidden_legacy_flags": [
+      "--auto-second",
+      "--legacy-model-budget"
+    ],
+    "next_round_barrier": "complete measurement and successful statistics/paper publication; no new user stop instruction"
+  },
+  "old_batch": "/home/cym/workspace/graft-cost-controlled-20261110",
+  "old_batch_must_remain_paused": true
+}
