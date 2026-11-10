@@ -1,0 +1,600 @@
+{
+  "schema": "graft-v4-calibration-gate-review-v1",
+  "overall_pass": false,
+  "status": "gate_failed",
+  "auto_expand": false,
+  "counts": {
+    "cases": 24,
+    "accepted": 21,
+    "admission_rate": 0.875,
+    "first_response_compile_success": 19,
+    "accepted_first_attempt": 19,
+    "repair_success": 2,
+    "replanning_targets": 2,
+    "duplicate_paid_token_responses": 0,
+    "original_success_controls_retained": 3,
+    "controls": 5,
+    "paid_or_reserved_calls": 29,
+    "recorded_attempts": 29
+  },
+  "cost": {
+    "current_cny": "0.681858",
+    "current_cost_per_admitted_cny": "0.03246942857142857142857142857",
+    "batch_cap_cny": "2.40",
+    "unknown_reserved_calls": 0,
+    "listed_prior_calibrations_cny": "0.8349072",
+    "cumulative_listed_cny": "1.5167652",
+    "cumulative_listed_cost_per_current_admitted_cny": "0.07222691428571428571428571429"
+  },
+  "review_implementation": {
+    "path": "/home/cym/workspace/GRAFT-2.0/GRAFTTool/scripts/review_repair_calibration.py",
+    "sha256": "1e2b8670ebda11e930886d0940f5bead3baff9a871c05cb4f74541568447ca70"
+  },
+  "timing": {
+    "model_call_seconds": {
+      "n": 29,
+      "sum_seconds": 100.24211915046908,
+      "mean_seconds": 3.456624798292037,
+      "median_seconds": 3.2176081109791994,
+      "p95_seconds": 5.167040670057759
+    },
+    "compiler_process_seconds": {
+      "n": 90,
+      "sum_seconds": 38.3295756992884,
+      "mean_seconds": 0.42588417443653775,
+      "median_seconds": 0.4175048975739628,
+      "p95_seconds": 0.517973966198042
+    },
+    "attempt_compiler_total_seconds": {
+      "n": 25,
+      "sum_seconds": 38.3295756992884,
+      "mean_seconds": 1.533183027971536,
+      "median_seconds": 1.718081473140046,
+      "p95_seconds": 2.0184073271229863
+    },
+    "attempt_validation_seconds": {
+      "n": 29,
+      "sum_seconds": 46.54536834452301,
+      "mean_seconds": 1.6050127015352762,
+      "median_seconds": 2.0207885429263115,
+      "p95_seconds": 2.382971059065312
+    },
+    "generation_job_seconds": {
+      "n": 24,
+      "sum_seconds": 163.09630450652912,
+      "mean_seconds": 6.795679354438714,
+      "median_seconds": 6.358632149524055,
+      "p95_seconds": 12.24790745601058
+    }
+  },
+  "influence_counts": {
+    "observed_repeatable": 20,
+    "not_applicable_no_arguments": 1
+  },
+  "final_failure_causes": {
+    "input_influence_unobserved": 1,
+    "runtime_panic": 1,
+    "contract_rejected": 1
+  },
+  "gates": [
+    {
+      "id": 1,
+      "name": "all 24 targets completed without infrastructure gaps",
+      "passed": true
+    },
+    {
+      "id": 2,
+      "name": "at least 17/24 and all five original-success controls retained",
+      "passed": false
+    },
+    {
+      "id": 3,
+      "name": "actual target execution and applicable repeatable argument influence",
+      "passed": true
+    },
+    {
+      "id": 4,
+      "name": "batch/target/call limits and cost per admitted target",
+      "passed": true
+    },
+    {
+      "id": 5,
+      "name": "no target deletion, argument substitution, unsafe bypass or version drift",
+      "passed": true
+    }
+  ],
+  "scope": "New targeted variant on a development-used cohort, not an unbiased full generation rate; no formal fuzz or automatic expansion.",
+  "verification": {
+    "schema": "graft-v4-paid-calibration-verification-v1",
+    "generation_implementation_commit": "cf97f13",
+    "post_run_review_fix_commit": "433847a",
+    "review_note": "Initial review used the wrong compiler duration key. Initial JSON/MD retained; correction reads recorded seconds only, makes no generation, plan, admission, model or ledger changes.",
+    "old_paid_artifact_bindings_verified_unchanged": 204,
+    "checked_reference_bindings": 340,
+    "references_unchanged": true,
+    "post_run_live_source_drift": [
+      "scripts/review_repair_calibration.py"
+    ],
+    "generation_pipeline_frozen_unchanged": true,
+    "paired_v3_new_acceptances": [
+      "bytes/10",
+      "time/0",
+      "time/1",
+      "fixedbitset/0",
+      "fixedbitset/4",
+      "fixedbitset/14",
+      "csv/0"
+    ],
+    "paired_v3_regressions": [],
+    "old_batch_status": "paused_for_admission_optimization",
+    "formal_fuzz_jobs": 0,
+    "generation_wall_seconds": 165.10346603393555,
+    "max_current_target_cny": "0.070641",
+    "max_current_calls_per_target": 2
+  },
+  "targets": [
+    {
+      "crate": "bytes",
+      "slot": 0,
+      "v3_accepted": true,
+      "v4_accepted": true,
+      "calls_current": 1,
+      "cost_current_cny": "0.023391",
+      "cost_listed_prior_cny": "0.041310",
+      "cost_cumulative_listed_cny": "0.064701",
+      "calls_cumulative_listed": 3,
+      "final_diagnosis": "accepted",
+      "generation_record": {
+        "path": "/home/cym/workspace/graft-admission-v4-calibration-20261110/preparation/round-01/GRAFT/bytes/0/generation.json",
+        "sha256": "25b315d827bdcd3581bfb971b5b8744a582fe4b335e794bdb273bb8fde18d89d"
+      }
+    },
+    {
+      "crate": "bytes",
+      "slot": 1,
+      "v3_accepted": true,
+      "v4_accepted": true,
+      "calls_current": 1,
+      "cost_current_cny": "0.020574",
+      "cost_listed_prior_cny": "0.0167292",
+      "cost_cumulative_listed_cny": "0.0373032",
+      "calls_cumulative_listed": 2,
+      "final_diagnosis": "accepted",
+      "generation_record": {
+        "path": "/home/cym/workspace/graft-admission-v4-calibration-20261110/preparation/round-01/GRAFT/bytes/1/generation.json",
+        "sha256": "35876c38b945ab311e35430a78cd899d5769d47c6c4a2a0fc38459a02765e5de"
+      }
+    },
+    {
+      "crate": "bytes",
+      "slot": 10,
+      "v3_accepted": false,
+      "v4_accepted": true,
+      "calls_current": 1,
+      "cost_current_cny": "0.018729",
+      "cost_listed_prior_cny": "0.0256914",
+      "cost_cumulative_listed_cny": "0.0444204",
+      "calls_cumulative_listed": 3,
+      "final_diagnosis": "accepted",
+      "generation_record": {
+        "path": "/home/cym/workspace/graft-admission-v4-calibration-20261110/preparation/round-01/GRAFT/bytes/10/generation.json",
+        "sha256": "82ac112334f7c19de45c57feca79683b4e7c11dd659fd5b075a1a1c1dd6d270e"
+      }
+    },
+    {
+      "crate": "bytes",
+      "slot": 19,
+      "v3_accepted": true,
+      "v4_accepted": true,
+      "calls_current": 1,
+      "cost_current_cny": "0.020232",
+      "cost_listed_prior_cny": "0.0120672",
+      "cost_cumulative_listed_cny": "0.0322992",
+      "calls_cumulative_listed": 2,
+      "final_diagnosis": "accepted",
+      "generation_record": {
+        "path": "/home/cym/workspace/graft-admission-v4-calibration-20261110/preparation/round-01/GRAFT/bytes/19/generation.json",
+        "sha256": "6d40462d4dbfdd02cef6e6ed6f1d8b0ffc8b0bccbaa840e34916e2922cbabe5c"
+      }
+    },
+    {
+      "crate": "chrono",
+      "slot": 0,
+      "v3_accepted": true,
+      "v4_accepted": true,
+      "calls_current": 1,
+      "cost_current_cny": "0.031158",
+      "cost_listed_prior_cny": "0.058743",
+      "cost_cumulative_listed_cny": "0.089901",
+      "calls_cumulative_listed": 3,
+      "final_diagnosis": "accepted",
+      "generation_record": {
+        "path": "/home/cym/workspace/graft-admission-v4-calibration-20261110/preparation/round-01/GRAFT/chrono/0/generation.json",
+        "sha256": "d6601f02e5bd003fb80175f1a550ad19bd98371be3841c58a64001aff8df996c"
+      }
+    },
+    {
+      "crate": "chrono",
+      "slot": 1,
+      "v3_accepted": true,
+      "v4_accepted": true,
+      "calls_current": 1,
+      "cost_current_cny": "0.030744",
+      "cost_listed_prior_cny": "0.0285012",
+      "cost_cumulative_listed_cny": "0.0592452",
+      "calls_cumulative_listed": 2,
+      "final_diagnosis": "accepted",
+      "generation_record": {
+        "path": "/home/cym/workspace/graft-admission-v4-calibration-20261110/preparation/round-01/GRAFT/chrono/1/generation.json",
+        "sha256": "72589bec8d02d4e4c42fea3f3dd54b1dc6b114a9aecb6475752510d76a0499f4"
+      }
+    },
+    {
+      "crate": "chrono",
+      "slot": 10,
+      "v3_accepted": true,
+      "v4_accepted": true,
+      "calls_current": 1,
+      "cost_current_cny": "0.027306",
+      "cost_listed_prior_cny": "0.0261162",
+      "cost_cumulative_listed_cny": "0.0534222",
+      "calls_cumulative_listed": 2,
+      "final_diagnosis": "accepted",
+      "generation_record": {
+        "path": "/home/cym/workspace/graft-admission-v4-calibration-20261110/preparation/round-01/GRAFT/chrono/10/generation.json",
+        "sha256": "472085326b77283d6c2d2c2de5e14e18a4d26a225d08f7339e01122236bdf183"
+      }
+    },
+    {
+      "crate": "chrono",
+      "slot": 19,
+      "v3_accepted": true,
+      "v4_accepted": true,
+      "calls_current": 1,
+      "cost_current_cny": "0.020799",
+      "cost_listed_prior_cny": "0.0253962",
+      "cost_cumulative_listed_cny": "0.0461952",
+      "calls_cumulative_listed": 2,
+      "final_diagnosis": "accepted",
+      "generation_record": {
+        "path": "/home/cym/workspace/graft-admission-v4-calibration-20261110/preparation/round-01/GRAFT/chrono/19/generation.json",
+        "sha256": "9324157fd77b47ac4d53c25c8c442c77396982aed4b4669f98b07e5bc862cb32"
+      }
+    },
+    {
+      "crate": "time",
+      "slot": 0,
+      "v3_accepted": false,
+      "v4_accepted": true,
+      "calls_current": 2,
+      "cost_current_cny": "0.070641",
+      "cost_listed_prior_cny": "0.1516932",
+      "cost_cumulative_listed_cny": "0.2223342",
+      "calls_cumulative_listed": 6,
+      "final_diagnosis": "accepted",
+      "generation_record": {
+        "path": "/home/cym/workspace/graft-admission-v4-calibration-20261110/preparation/round-01/GRAFT/time/0/generation.json",
+        "sha256": "699a04991108c8a54c41096e011f4d3352edeeaabfad6bdf2a6d63f32248e27f"
+      }
+    },
+    {
+      "crate": "time",
+      "slot": 1,
+      "v3_accepted": false,
+      "v4_accepted": true,
+      "calls_current": 1,
+      "cost_current_cny": "0.033669",
+      "cost_listed_prior_cny": "0.0612882",
+      "cost_cumulative_listed_cny": "0.0949572",
+      "calls_cumulative_listed": 3,
+      "final_diagnosis": "accepted",
+      "generation_record": {
+        "path": "/home/cym/workspace/graft-admission-v4-calibration-20261110/preparation/round-01/GRAFT/time/1/generation.json",
+        "sha256": "174b791a559ba742686c2371e1d84ff58f233680834d309efa041ffd3591f670"
+      }
+    },
+    {
+      "crate": "time",
+      "slot": 12,
+      "v3_accepted": false,
+      "v4_accepted": false,
+      "calls_current": 2,
+      "cost_current_cny": "0.064998",
+      "cost_listed_prior_cny": "0.0471642",
+      "cost_cumulative_listed_cny": "0.1121622",
+      "calls_cumulative_listed": 4,
+      "final_diagnosis": "input_influence_unobserved",
+      "generation_record": {
+        "path": "/home/cym/workspace/graft-admission-v4-calibration-20261110/preparation/round-01/GRAFT/time/12/generation.json",
+        "sha256": "e2cbad9e6feac1bee85eed60d76172369beabe97e199950da6fc0e609d24cfdb"
+      }
+    },
+    {
+      "crate": "time",
+      "slot": 19,
+      "v3_accepted": true,
+      "v4_accepted": true,
+      "calls_current": 1,
+      "cost_current_cny": "0.028629",
+      "cost_listed_prior_cny": "0.020013",
+      "cost_cumulative_listed_cny": "0.048642",
+      "calls_cumulative_listed": 2,
+      "final_diagnosis": "accepted",
+      "generation_record": {
+        "path": "/home/cym/workspace/graft-admission-v4-calibration-20261110/preparation/round-01/GRAFT/time/19/generation.json",
+        "sha256": "fde033608d0f6bcc68c52604b8e9f109c483dada15a05abfc79e42c322ddcffe"
+      }
+    },
+    {
+      "crate": "fixedbitset",
+      "slot": 0,
+      "v3_accepted": false,
+      "v4_accepted": true,
+      "calls_current": 1,
+      "cost_current_cny": "0.018495",
+      "cost_listed_prior_cny": "0.0313638",
+      "cost_cumulative_listed_cny": "0.0498588",
+      "calls_cumulative_listed": 3,
+      "final_diagnosis": "accepted",
+      "generation_record": {
+        "path": "/home/cym/workspace/graft-admission-v4-calibration-20261110/preparation/round-01/GRAFT/fixedbitset/0/generation.json",
+        "sha256": "94ddfca3cb47b4df68b00dd7b4728bbd8eb00f1af0445fcfeec12778bac53591"
+      }
+    },
+    {
+      "crate": "fixedbitset",
+      "slot": 4,
+      "v3_accepted": false,
+      "v4_accepted": true,
+      "calls_current": 1,
+      "cost_current_cny": "0.02187",
+      "cost_listed_prior_cny": "0.0628674",
+      "cost_cumulative_listed_cny": "0.0847374",
+      "calls_cumulative_listed": 5,
+      "final_diagnosis": "accepted",
+      "generation_record": {
+        "path": "/home/cym/workspace/graft-admission-v4-calibration-20261110/preparation/round-01/GRAFT/fixedbitset/4/generation.json",
+        "sha256": "f8e2b137c9d211b234aed1c6d06b2d98fd9b6a48889854ccd7c20eecf9d9662b"
+      }
+    },
+    {
+      "crate": "fixedbitset",
+      "slot": 14,
+      "v3_accepted": false,
+      "v4_accepted": true,
+      "calls_current": 1,
+      "cost_current_cny": "0.020457",
+      "cost_listed_prior_cny": "0.0685602",
+      "cost_cumulative_listed_cny": "0.0890172",
+      "calls_cumulative_listed": 5,
+      "final_diagnosis": "accepted",
+      "generation_record": {
+        "path": "/home/cym/workspace/graft-admission-v4-calibration-20261110/preparation/round-01/GRAFT/fixedbitset/14/generation.json",
+        "sha256": "b80c365cba57dd47e66238f158a2e439ff398f8636ebf4fe3e3731711e44a0d8"
+      }
+    },
+    {
+      "crate": "fixedbitset",
+      "slot": 19,
+      "v3_accepted": true,
+      "v4_accepted": true,
+      "calls_current": 1,
+      "cost_current_cny": "0.020565",
+      "cost_listed_prior_cny": "0.0133506",
+      "cost_cumulative_listed_cny": "0.0339156",
+      "calls_cumulative_listed": 2,
+      "final_diagnosis": "accepted",
+      "generation_record": {
+        "path": "/home/cym/workspace/graft-admission-v4-calibration-20261110/preparation/round-01/GRAFT/fixedbitset/19/generation.json",
+        "sha256": "e1fe497ea15a5b70a48cb76ecf352ca0eedcf5839716dbf63f09327b0f14570c"
+      }
+    },
+    {
+      "crate": "csv",
+      "slot": 0,
+      "v3_accepted": false,
+      "v4_accepted": true,
+      "calls_current": 1,
+      "cost_current_cny": "0.022797",
+      "cost_listed_prior_cny": "0.032706",
+      "cost_cumulative_listed_cny": "0.055503",
+      "calls_cumulative_listed": 3,
+      "final_diagnosis": "accepted",
+      "generation_record": {
+        "path": "/home/cym/workspace/graft-admission-v4-calibration-20261110/preparation/round-01/GRAFT/csv/0/generation.json",
+        "sha256": "6d1b255a06844a675548c79dd6291cf32a87f5eb7310a8e187c3adb5146e3227"
+      }
+    },
+    {
+      "crate": "csv",
+      "slot": 2,
+      "v3_accepted": true,
+      "v4_accepted": true,
+      "calls_current": 1,
+      "cost_current_cny": "0.018657",
+      "cost_listed_prior_cny": "0.017289",
+      "cost_cumulative_listed_cny": "0.035946",
+      "calls_cumulative_listed": 2,
+      "final_diagnosis": "accepted",
+      "generation_record": {
+        "path": "/home/cym/workspace/graft-admission-v4-calibration-20261110/preparation/round-01/GRAFT/csv/2/generation.json",
+        "sha256": "96fcd438a9acdac663e57d399d1d86a7a062a6e42ac4cb24a0e7d9e979891ea2"
+      }
+    },
+    {
+      "crate": "csv",
+      "slot": 11,
+      "v3_accepted": false,
+      "v4_accepted": false,
+      "calls_current": 2,
+      "cost_current_cny": "0.039753",
+      "cost_listed_prior_cny": "0.0177282",
+      "cost_cumulative_listed_cny": "0.0574812",
+      "calls_cumulative_listed": 4,
+      "final_diagnosis": "runtime_panic",
+      "generation_record": {
+        "path": "/home/cym/workspace/graft-admission-v4-calibration-20261110/preparation/round-01/GRAFT/csv/11/generation.json",
+        "sha256": "e9af6d396361d202182cce8e1bb40f2a4f8f4e709e48274c857f47fee6d0de57"
+      }
+    },
+    {
+      "crate": "csv",
+      "slot": 16,
+      "v3_accepted": true,
+      "v4_accepted": true,
+      "calls_current": 2,
+      "cost_current_cny": "0.039528",
+      "cost_listed_prior_cny": "0.012006",
+      "cost_cumulative_listed_cny": "0.051534",
+      "calls_cumulative_listed": 3,
+      "final_diagnosis": "accepted",
+      "generation_record": {
+        "path": "/home/cym/workspace/graft-admission-v4-calibration-20261110/preparation/round-01/GRAFT/csv/16/generation.json",
+        "sha256": "8a56f9bfeec8f042f6c8c2e5fe7f871f6f0d562f49fde9c53ecf39ccfc61c623"
+      }
+    },
+    {
+      "crate": "bumpalo",
+      "slot": 0,
+      "v3_accepted": false,
+      "v4_accepted": false,
+      "calls_current": 2,
+      "cost_current_cny": "0.035433",
+      "cost_listed_prior_cny": "0.027135",
+      "cost_cumulative_listed_cny": "0.062568",
+      "calls_cumulative_listed": 4,
+      "final_diagnosis": "contract_rejected",
+      "generation_record": {
+        "path": "/home/cym/workspace/graft-admission-v4-calibration-20261110/preparation/round-01/GRAFT/bumpalo/0/generation.json",
+        "sha256": "35a9c162ea89d9c8a34e81bebbf2976b0ba20b220e2b609306228f41ab1e3002"
+      }
+    },
+    {
+      "crate": "bumpalo",
+      "slot": 2,
+      "v3_accepted": true,
+      "v4_accepted": true,
+      "calls_current": 1,
+      "cost_current_cny": "0.016596",
+      "cost_listed_prior_cny": "0.015381",
+      "cost_cumulative_listed_cny": "0.031977",
+      "calls_cumulative_listed": 2,
+      "final_diagnosis": "accepted",
+      "generation_record": {
+        "path": "/home/cym/workspace/graft-admission-v4-calibration-20261110/preparation/round-01/GRAFT/bumpalo/2/generation.json",
+        "sha256": "4c18cb8f780b76c63437dc55f620021d7c51bc8d0b5671c0f8e7a250b681302c"
+      }
+    },
+    {
+      "crate": "bumpalo",
+      "slot": 6,
+      "v3_accepted": true,
+      "v4_accepted": true,
+      "calls_current": 1,
+      "cost_current_cny": "0.020169",
+      "cost_listed_prior_cny": "0.008613",
+      "cost_cumulative_listed_cny": "0.028782",
+      "calls_cumulative_listed": 2,
+      "final_diagnosis": "accepted",
+      "generation_record": {
+        "path": "/home/cym/workspace/graft-admission-v4-calibration-20261110/preparation/round-01/GRAFT/bumpalo/6/generation.json",
+        "sha256": "face1d657baa49c00c14ec73f63f129356a1055465bed12ada40362e5b645b6d"
+      }
+    },
+    {
+      "crate": "bumpalo",
+      "slot": 9,
+      "v3_accepted": true,
+      "v4_accepted": true,
+      "calls_current": 1,
+      "cost_current_cny": "0.016668",
+      "cost_listed_prior_cny": "0.013194",
+      "cost_cumulative_listed_cny": "0.029862",
+      "calls_cumulative_listed": 2,
+      "final_diagnosis": "accepted",
+      "generation_record": {
+        "path": "/home/cym/workspace/graft-admission-v4-calibration-20261110/preparation/round-01/GRAFT/bumpalo/9/generation.json",
+        "sha256": "02856db2c8efe3169872f9dd40cae996cda88d521ffc86468b2186e4071b0737"
+      }
+    }
+  ],
+  "controls": [
+    {
+      "crate": "fixedbitset",
+      "slot": 0,
+      "prior_accepted": true,
+      "accepted": true,
+      "status": "accepted",
+      "attempts": 1,
+      "paid_or_reserved_calls": 1,
+      "spent_or_reserved_cny": "0.018495"
+    },
+    {
+      "crate": "csv",
+      "slot": 0,
+      "prior_accepted": true,
+      "accepted": true,
+      "status": "accepted",
+      "attempts": 1,
+      "paid_or_reserved_calls": 1,
+      "spent_or_reserved_cny": "0.022797"
+    },
+    {
+      "crate": "csv",
+      "slot": 11,
+      "prior_accepted": true,
+      "accepted": false,
+      "status": "generation_failed",
+      "attempts": 2,
+      "paid_or_reserved_calls": 2,
+      "spent_or_reserved_cny": "0.039753"
+    },
+    {
+      "crate": "bumpalo",
+      "slot": 0,
+      "prior_accepted": true,
+      "accepted": false,
+      "status": "generation_failed",
+      "attempts": 2,
+      "paid_or_reserved_calls": 2,
+      "spent_or_reserved_cny": "0.035433"
+    },
+    {
+      "crate": "bumpalo",
+      "slot": 6,
+      "prior_accepted": true,
+      "accepted": true,
+      "status": "accepted",
+      "attempts": 1,
+      "paid_or_reserved_calls": 1,
+      "spent_or_reserved_cny": "0.020169"
+    }
+  ],
+  "evidence": {
+    "calibration-manifest.json": {
+      "path": "/home/cym/workspace/graft-admission-v4-calibration-20261110/calibration-manifest.json",
+      "sha256": "2234b2f0f752aa4057c60a8f57373651e7f36c20143bffca574a3e23abadc59d"
+    },
+    "calibration-summary.json": {
+      "path": "/home/cym/workspace/graft-admission-v4-calibration-20261110/calibration-summary.json",
+      "sha256": "c40ca0e5cdc84d69088f63868ea39992a38a2a8a3ee05099f131c9622411f00d"
+    },
+    "calibration-gate-review.json": {
+      "path": "/home/cym/workspace/graft-admission-v4-calibration-20261110/calibration-gate-review.json",
+      "sha256": "a1d2012210d371a16b62a77571bbf19baef884a2f30b1d79553147c35712c69c"
+    },
+    "batch-model-cost.json": {
+      "path": "/home/cym/workspace/graft-admission-v4-calibration-20261110/batch-model-cost.json",
+      "sha256": "c88542111d027bed52ce33eb33f82ac16e0a7152aaebd1ae67c4b73a0a28f7a4"
+    },
+    "implementation/manifest.json": {
+      "path": "/home/cym/workspace/graft-admission-v4-calibration-20261110/implementation/manifest.json",
+      "sha256": "17ed3623fc6e9c9854fb365099dbf3a04fd4a1f9d7ddf948fc23831cfa065745"
+    },
+    "calibration-verification.json": {
+      "path": "/home/cym/workspace/graft-admission-v4-calibration-20261110/calibration-verification.json",
+      "sha256": "58b86948d428639016b4f2529e4b94d5f0551449daa831417aa5f42fd02b147c"
+    }
+  },
+  "interpretation": "Targeted development-used cohort; no unbiased full-generation or fuzz conclusion. Gate failed: original-success controls 3/5. No expansion."
+}
