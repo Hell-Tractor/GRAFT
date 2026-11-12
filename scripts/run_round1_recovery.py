@@ -225,8 +225,11 @@ def run_native_missing(batch,destination,missing):
                  '--analysis-timeout',str(LIMITS['native_timeout_seconds']),'--generation-timeout',str(LIMITS['native_timeout_seconds']),
                  '--container-label','graft-recovery','--skip-existing']
         result=subprocess.run(command,capture_output=True,text=True,timeout=LIMITS['native_timeout_seconds']+120)
-        reports.append({'crate':crate,'returncode':result.returncode,'stdout':result.stdout[-4000:],'stderr':result.stderr[-4000:]})
-        if result.returncode:raise RuntimeError('safe native recovery failed for '+crate)
+        report={'crate':crate,'command':command,'returncode':result.returncode,
+                'stdout':result.stdout[-4000:],'stderr':result.stderr[-4000:]}
+        reports.append(report)
+        save(destination/('native-'+crate+'-attempt.json'),report)
+        if result.returncode:raise RuntimeError('safe native recovery failed for '+crate+': '+result.stderr[-1000:])
     save(destination/'phase-c-native.json',{'runs':reports})
 
 
