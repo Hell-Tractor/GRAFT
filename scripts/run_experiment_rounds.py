@@ -279,21 +279,22 @@ def publication_directory(protocol, paper, number):
     return Path(paper) / 'revisions' / namespace / f'round-{number:02d}'
 
 
-def publish(protocol, batch, paper, number, summary, generation=None):
+def publish(protocol, batch, paper, number, summary, generation=None, reports=None):
     # All batches compile through one canonical include in main.tex.
     publication_directory(protocol, paper, number)
     lock_path = Path(paper) / 'revisions' / '.publication.lock'
     lock_path.parent.mkdir(parents=True, exist_ok=True)
     with lock_path.open('a') as lock:
         fcntl.flock(lock, fcntl.LOCK_EX)
-        return _publish_locked(protocol, batch, paper, number, summary, generation)
+        return _publish_locked(protocol, batch, paper, number, summary, generation, reports)
 
 
-def _publish_locked(protocol, batch, paper, number, summary, generation=None):
+def _publish_locked(protocol, batch, paper, number, summary, generation=None, reports=None):
     destination = publication_directory(protocol, paper, number)
     namespace = Path(protocol.get('publication_namespace', 'short-budget'))
     destination.mkdir(parents=True, exist_ok=True)
-    reports = [load(batch / f'round-{i:02d}' / 'summary.json') for i in range(1, number + 1)]
+    if reports is None:
+        reports = [load(batch / f'round-{i:02d}' / 'summary.json') for i in range(1, number + 1)]
     stats = cumulative(protocol, reports)
     if generation is None:
         generation_path = batch/f'round-{number:02d}'/'all-method-generation.json'
