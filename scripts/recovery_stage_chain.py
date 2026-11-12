@@ -8,6 +8,7 @@ from pathlib import Path
 
 
 def active(unit):
+    if '.' not in unit:unit+='.scope'
     return subprocess.run(['systemctl','--user','is-active','--quiet',unit]).returncode==0
 
 
@@ -18,6 +19,7 @@ def main():
     p.add_argument('--stage-b-scope',default='graft-r1-main-20261112')
     p.add_argument('--timeout',type=int,default=21600)
     a=p.parse_args();started=time.monotonic();report=a.recovery/'stage-chain.json'
+    report.write_text(json.dumps({'status':'waiting','stage_b_scope':a.stage_b_scope},indent=2)+'\n')
     while True:
         progress_path=a.recovery/'progress.json'
         progress=json.loads(progress_path.read_text()) if progress_path.exists() else {}

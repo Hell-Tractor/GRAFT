@@ -92,6 +92,7 @@ def main():
             'available_emergency_bytes':int(a.available_emergency_gib*1024**3),
             'interval_seconds':a.interval}
         print(json.dumps(value,indent=2));return
+    if a.scope_unit and '.' not in a.scope_unit:a.scope_unit+='.scope'
     started=time.time();initial_swap=sample(None,a.label)['swap_free_bytes']
     low_count=0;full_count=0;load_count=0
     while True:
