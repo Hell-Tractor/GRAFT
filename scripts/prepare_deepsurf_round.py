@@ -12,7 +12,7 @@ DEEPSURF_IMAGE='deepsurf:graft-ready'
 
 def main():
     p=argparse.ArgumentParser();p.add_argument('--root',type=Path,required=True);p.add_argument('--round',type=int,required=True);p.add_argument('--only');p.add_argument('--only-list',help='comma-separated repair subset; does not seal the round finished marker');p.add_argument('--analysis-only',action='store_true')
-    p.add_argument('--cost-policy',type=Path,default=ROOT/'experiments/cost-control/policy.json');p.add_argument('--legacy-model-budget',action='store_true');a=p.parse_args()
+    p.add_argument('--cost-policy',type=Path,default=ROOT/'experiments/cost-control/policy.json');p.add_argument('--legacy-model-budget',action='store_true')
     p.add_argument('--native-workers',type=int,default=2);p.add_argument('--container-memory-gib',type=int,default=12);p.add_argument('--container-pids',type=int,default=256);p.add_argument('--container-cpus',type=int,default=4);p.add_argument('--analysis-timeout',type=int,default=900);p.add_argument('--generation-timeout',type=int,default=900);p.add_argument('--container-label',default='graft-recovery');p.add_argument('--skip-existing',action='store_true');a=p.parse_args()
     if a.native_workers<1 or a.container_memory_gib<1 or a.container_cpus<1:raise ValueError('invalid native recovery limits')
     cost_policy=None if a.legacy_model_budget else read_policy(a.cost_policy)
