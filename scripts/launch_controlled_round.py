@@ -68,7 +68,7 @@ def has_required_compiler_flags(tokens, flags):
 class Engine:
     def __init__(self,root,number=1,deep_process=None,resume=False,cost_policy=None,
                  admission_profile=None,planner_bin=None,harness_bin=None,admission_only=False,batch_budget_cny=None,fixed_generation=False,
-                 defer_fuzz=False,recovery_skip=None,compile_workers=None,model_workers=None,fuzz_workers=None):
+                 defer_fuzz=False,recovery_skip=None,compile_workers=None,model_workers=None,fuzz_workers=None,preserve_frozen_protocol=False):
         self.fixed_generation=fixed_generation
         self.defer_fuzz=defer_fuzz
         self.recovery_skip=set(tuple(x) for x in (recovery_skip or []))
@@ -161,7 +161,9 @@ class Engine:
             raise ValueError('runtime Cargo.toml differs from frozen shared manifest')
         if (root/'protocol.json').exists():
             frozen=load(root/'protocol.json');frozen.pop('_file_sha256',None)
-            if frozen!=p:raise ValueError('frozen protocol changed; use a new batch')
+            if preserve_frozen_protocol:
+                p=frozen;self.protocol=p
+            elif frozen!=p:raise ValueError('frozen protocol changed; use a new batch')
         else:save(root/'protocol.json',p)
         p['_file_sha256']=file_hash(root/'protocol.json')
         self.env=clean_env()

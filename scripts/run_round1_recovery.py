@@ -239,7 +239,8 @@ def prepare_missing(batch,destination):
     engine=Engine(batch,resume=True,cost_policy=inputs['cost_policy']['path'],
         admission_profile=inputs['profile']['path'],planner_bin=batch/'tools/graft-plan',harness_bin=batch/'tools/graft-harness',
         fixed_generation=True,defer_fuzz=True,recovery_skip=UNRESOLVED,compile_workers=LIMITS['compile_workers'],
-        model_workers=LIMITS['model_workers'],fuzz_workers=LIMITS['max_fuzz_workers'])
+        model_workers=LIMITS['model_workers'],fuzz_workers=LIMITS['max_fuzz_workers'],
+        preserve_frozen_protocol=True)
     with cf.ThreadPoolExecutor(max_workers=LIMITS['model_workers']) as genpool:
         with cf.ThreadPoolExecutor(max_workers=LIMITS['compile_workers']) as prep:
             futures=[prep.submit(engine.baseline,m) for m in ('RPG','RULF')]
