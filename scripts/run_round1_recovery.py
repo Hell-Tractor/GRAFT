@@ -254,7 +254,7 @@ def prepare_missing(batch,destination):
                 try:future.result()
                 except Exception as error:errors.append(type(error).__name__+': '+str(error))
     engine.fuzz_pool.shutdown(wait=True)
-    save(destination/'phase-c-preparation.json',{'errors':errors,'new_tasks':sum((batch/'preparation/round-01').glob('*/*/*/task.json')),
+    save(destination/'phase-c-preparation.json',{'errors':errors,'new_tasks':sum(1 for _ in (batch/'preparation/round-01').glob('*/*/*/task.json')),
         'unresolved_isolated':[list(x) for x in sorted(UNRESOLVED)]})
     if errors:raise RuntimeError('preparation completed with stage errors: '+json.dumps(errors))
 
