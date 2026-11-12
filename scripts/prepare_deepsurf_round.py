@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Fresh native deepSURF analysis/generation with auditable common-version port."""
-import argparse, concurrent.futures as cf, json, os, re, shutil, subprocess, sys, time, uuid
+import argparse, concurrent.futures as cf, json, os, re, shlex, shutil, subprocess, sys, time, uuid
 from pathlib import Path
 from experiment_batch import read_key
 from run_experiment_rounds import command_run, save
@@ -47,10 +47,13 @@ def main():
         if not lib.exists():shutil.copytree(PORT/'vendor-v2'/(c+'-'+v),lib)
         lib.chmod(0o777)
         report_dir=lib/'deepSURF/report'
-        if report_dir.exists():
-            report_dir.chmod(0o777)
-            for report in report_dir.glob(c.replace('-','_')+'_*.urapi.json'):report.unlink()
         generation={'crate':c,'version':v,'round':a.round,'native_generator':'deepSURF','port':'original generation and called-URAPI feedback; compile-only AFL shim uses exact pinned rlibs; common real AFL execution follows','started_unix_seconds':time.time()}
+        if report_dir.exists():
+            cleanup,name=docker('none',work,'cleanup')
+            script='chmod 777 '+shlex.quote(str(report_dir))+' && find '+shlex.quote(str(report_dir))+' -maxdepth 1 -type f -name '+shlex.quote(c.replace('-','_')+'_*.urapi.json')+' -delete'
+            cleanup+=['--entrypoint','/bin/sh',DEEPSURF_IMAGE,'-c',script]
+            cleaned=run_container(cleanup,work/'cleanup.log',60,generation)
+            if cleaned['returncode']!=0:raise RuntimeError('native report cleanup failed; see cleanup.log')
         try:
             analysis,name=docker('none',work,'analysis')
             analysis += ['--entrypoint','python3',DEEPSURF_IMAGE,'/opt/graft-scripts/deep_analysis_container.py',c,v,str(work),str(PORT),str(build)]
