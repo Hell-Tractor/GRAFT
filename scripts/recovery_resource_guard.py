@@ -97,7 +97,8 @@ def main():
     low_count=0;full_count=0;load_count=0
     while True:
         pid=None
-        if a.runner_pid_file and a.runner_pid_file.exists():
+        if (a.runner_pid_file and a.runner_pid_file.exists()
+                and a.runner_pid_file.stat().st_mtime>=started-1):
             try:pid=int(a.runner_pid_file.read_text().strip())
             except ValueError:pid=None
         value=sample(pid,a.label);value['status']='running'
