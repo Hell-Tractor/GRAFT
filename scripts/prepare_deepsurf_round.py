@@ -48,6 +48,7 @@ def main():
         lib.chmod(0o777)
         report_dir=lib/'deepSURF/report'
         if report_dir.exists():
+            report_dir.chmod(0o777)
             for report in report_dir.glob(c.replace('-','_')+'_*.urapi.json'):report.unlink()
         generation={'crate':c,'version':v,'round':a.round,'native_generator':'deepSURF','port':'original generation and called-URAPI feedback; compile-only AFL shim uses exact pinned rlibs; common real AFL execution follows','started_unix_seconds':time.time()}
         try:
