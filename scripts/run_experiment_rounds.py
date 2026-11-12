@@ -8,6 +8,7 @@ is published to the paper before any task of the next round may start.
 import argparse
 import concurrent.futures
 from collections import Counter
+import contextlib
 import csv
 import fcntl
 import hashlib
@@ -150,7 +151,7 @@ def command_run(command, cwd, env, logfile, timeout, cpus=None):
             'seconds': time.monotonic() - start, 'log': str(logfile)}
 
 
-def execute(task, protocol, number, directory, cpus, universe):
+def execute(task, protocol, number, directory, cpus, universe, replay_slots=None, recovery_limits=False):
     directory.mkdir(parents=True, exist_ok=True)
     result_path = directory / 'result.json'
     task_hash = hashlib.sha256(json.dumps(task, sort_keys=True).encode()).hexdigest()
@@ -184,8 +185,11 @@ def execute(task, protocol, number, directory, cpus, universe):
     for flag in ('GRAFT_TRACE','GRAFT_PROBE_ARGS'):env.pop(flag,None)
     env['GRAFT_RUN_DIR'] = str(directory)
     result['seed'] = int(values['seed'])
+    task_address_limit = 2 * 1024**3
+    def guarded(command):
+        return ['prlimit', '--as='+str(task_address_limit), '--'] + command if recovery_limits else command
     try:
-        result['fuzz'] = command_run(expand(task['fuzz_command']), directory, env,
+        result['fuzz'] = command_run(guarded(expand(task['fuzz_command'])), directory, env,
             directory / 'fuzz.log', protocol['seconds_per_target'] + 60, cpus)
         fuzz = result['fuzz']
         # AFL -V must stop itself. A successful exit before the budget is not a
@@ -196,8 +200,10 @@ def execute(task, protocol, number, directory, cpus, universe):
             result['afl_statistics'] = afl_statistics(directory, task['workers'])
             if any(s['run_time'] < protocol['seconds_per_target']-2 for s in result['afl_statistics']):
                 raise ValueError('AFL statistics do not confirm the full per-target budget')
-            result['replay'] = command_run(expand(task['replay_command']), directory, env,
-                directory / 'replay.log', protocol['replay_timeout_seconds'], cpus)
+            replay_command = guarded(expand(task['replay_command']))
+            with replay_slots if replay_slots is not None else contextlib.nullcontext():
+                result['replay'] = command_run(replay_command, directory, env,
+                    directory / 'replay.log', protocol['replay_timeout_seconds'], cpus)
             replay = result['replay']
             if replay['returncode'] != 0 or replay['timed_out']:
                 result['status'] = 'replay_failed'

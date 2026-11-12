@@ -67,8 +67,11 @@ def has_required_compiler_flags(tokens, flags):
 
 class Engine:
     def __init__(self,root,number=1,deep_process=None,resume=False,cost_policy=None,
-                 admission_profile=None,planner_bin=None,harness_bin=None,admission_only=False,batch_budget_cny=None,fixed_generation=False):
+                 admission_profile=None,planner_bin=None,harness_bin=None,admission_only=False,batch_budget_cny=None,fixed_generation=False,
+                 defer_fuzz=False,recovery_skip=None,compile_workers=None,model_workers=None,fuzz_workers=None):
         self.fixed_generation=fixed_generation
+        self.defer_fuzz=defer_fuzz
+        self.recovery_skip=set(tuple(x) for x in (recovery_skip or []))
         if fixed_generation and (number!=1 or admission_only):raise ValueError('fixed generation prepares only the first formal round')
         self.number=number;self.round_name=f'round-{number:02d}';self.root=root;self.runtime=root/'runtime';self.protocol=load(ROOT/'experiments/week5/protocol.json')
         self.deep_process=deep_process
@@ -161,11 +164,17 @@ class Engine:
             if frozen!=p:raise ValueError('frozen protocol changed; use a new batch')
         else:save(root/'protocol.json',p)
         p['_file_sha256']=file_hash(root/'protocol.json')
-        self.env=clean_env();self.compile_slots=threading.Semaphore(8);self.model_slots=threading.Semaphore(14)
+        self.env=clean_env()
+        self.compile_workers=compile_workers or p['compile_workers']
+        self.model_workers=model_workers or p['model_request_concurrency_allocation']['controlled_arms']
+        self.fuzz_workers=fuzz_workers or p['fuzz_workers']
+        self.compile_slots=threading.Semaphore(self.compile_workers)
+        self.model_slots=threading.Semaphore(self.model_workers)
+        self.compile_address_space_bytes=4*1024**3
         self.lock=threading.RLock();self.worker_local=threading.local();self.available_cpus=sorted(os.sched_getaffinity(0))[:48]
         def assign_cpu():
             with self.lock:self.worker_local.cpu=self.available_cpus.pop()
-        self.fuzz_pool=cf.ThreadPoolExecutor(max_workers=48,initializer=assign_cpu)
+        self.fuzz_pool=cf.ThreadPoolExecutor(max_workers=1 if defer_fuzz else min(48,self.fuzz_workers),initializer=assign_cpu)
         self.fuzz_futures=[];self.results={};self.tasks={};self.generation={};self.admissions={};self.generator_runs={};self.source_index={};self.universes={c:load(v['path']) for c,v in p['universes'].items()}
         self.started=time.time();self.requests=0;self.last_metrics_write=0
         self.initial=root/'initial';self.initial.mkdir(exist_ok=True)
@@ -200,6 +209,7 @@ class Engine:
             self.results[key]=result
             if key in self.tasks:self.identities[key]=dict(self.tasks[key],status=result['status'])
         for task in restored:
+            if self.defer_fuzz:continue
             if (self.root/self.round_name/task['method']/task['crate']/str(task['slot'])/'result.json').exists():
                 continue
             self.fuzz_futures.append(self.fuzz_pool.submit(self.fuzz,task))
@@ -283,7 +293,8 @@ class Engine:
             waited=time.monotonic()-wait_start
             remaining=timeout-waited if include_queue_wait else timeout
             if remaining<=0:raise TimeoutError('preflight compile queue budget exhausted')
-            result=command_run(command,self.runtime/'project',self.env,output.with_suffix('.compile.log'),remaining,sorted(os.sched_getaffinity(0))[48:56])
+            guarded=['prlimit','--as='+str(self.compile_address_space_bytes),'--']+command
+            result=command_run(guarded,self.runtime/'project',self.env,output.with_suffix('.compile.log'),remaining,sorted(os.sched_getaffinity(0))[48:56])
         finally:self.compile_slots.release()
         result['waiting_compile_seconds']=waited
         if not hasattr(self.worker_local,'compile_runs'):self.worker_local.compile_runs=[]
@@ -373,7 +384,7 @@ class Engine:
             with self.lock:
                 self.tasks[(m,c,i)]=task
                 self.results.pop((m,c,i),None)
-                if getattr(self,'admission_only',False):
+                if getattr(self,'admission_only',False) or self.defer_fuzz:
                     self.identities[(m,c,i)]=dict(task,status='admitted_not_fuzzed')
                 else:
                     self.identities[(m,c,i)]=dict(task,status='queued')
@@ -737,6 +748,7 @@ class Engine:
             with self.lock:self.generation[(m,c,i)]=copy.deepcopy(record);self.update()
     def submit_model(self,pool,m,c,i,prompt,plan=None,paired=False):
         key=(m,c,i)
+        if key in self.recovery_skip:return None
         if key in self.tasks:return None
         if key in self.generation and self.generation[key].get('finished'):return None
         with self.lock:
@@ -795,6 +807,7 @@ class Engine:
             save(self.directory('random-API+LLM',c,i)/'required-names.json',[a['path'].split('::')[-1] for a in apis])
             self.submit_model(genpool,'random-API+LLM',c,i,free_prompt+'\nAttempt these randomly sampled API names in this order, constructing valid arguments; do not omit impossible calls to obtain compilation:\n'+json.dumps([a['path'] for a in apis]))
             for m,selected in [('GRAFT',full),('deterministic-emitter',full),('no-repair',full),('syntactic+LLM',full),('no-cross-argument-unification',full),('random-target',rand)]:
+                if (m,c,i) in self.recovery_skip:continue
                 if (m,c,i) in self.tasks:continue
                 if i>=len(selected):self.failure(m,c,i,'planning_unknown','fewer than 20 complete public target candidates in finite planner; denominator retained');continue
                 if m=='no-repair':continue
@@ -829,6 +842,7 @@ class Engine:
             sources=sorted(directory.rglob('test*.rs')) if directory.exists() else []
             row=reports.get(c,{})
             for i in range(20):
+                if (m,c,i) in self.recovery_skip:continue
                 if (m,c,i) in self.tasks:continue
                 if i<len(sources):self.admit(m,c,i,sources[i],baseline=True)
                 else:
@@ -845,6 +859,7 @@ class Engine:
                 data=load(report)
                 with self.lock:self.generator_runs.setdefault('deepSURF',{})[c]=data['generation']
                 for row in data['targets']:
+                    if ('deepSURF',c,row['slot']) in self.recovery_skip:continue
                     if ('deepSURF',c,row['slot']) in self.tasks:continue
                     if row.get('source'):self.admit('deepSURF',c,row['slot'],Path(row['source']),baseline=True)
                     else:self.failure('deepSURF',c,row['slot'],row['status'],row.get('reason',''),row)
