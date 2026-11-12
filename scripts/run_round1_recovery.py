@@ -297,8 +297,12 @@ def main():
         'protocol_sha256':protocol['_file_sha256'],'allowed_scheduler_changes':changes,
         'admission_algorithm_changed':False,'scientific_inputs_changed':False}
     if amendment.exists() and load(amendment)!=amendment_value:
-        raise RuntimeError('recovery amendment changed after freeze')
-    if not amendment.exists():save(amendment,amendment_value)
+        history=a.recovery/'recovery-amendment-history.json'
+        values=load(history) if history.exists() else []
+        values.append({'superseded_unix_seconds':time.time(),'amendment':load(amendment)})
+        save(history,values)
+        save(amendment,amendment_value)
+    elif not amendment.exists():save(amendment,amendment_value)
     states,counts=reconcile(batch,protocol)
     protected=protected_inventory(batch)
     if a.check_only:
@@ -333,7 +337,8 @@ def main():
         states,counts=reconcile(batch,protocol)
         summary=recovery_summary(batch,protocol)
         generation=batch/'round-01/all-method-generation.json'
-        if generation.exists():publish(protocol,batch,a.paper.resolve(),1,summary,generation=load(generation))
+        if generation.exists():publish(protocol,batch,a.paper.resolve(),1,summary,
+                                       generation=load(generation),reports=[summary])
         save_progress('stopped',{'state_counts':counts,'round_status':summary['status'],'second_round_started':False})
         print(json.dumps({'status':summary['status'],'state_counts':counts,'published_partial':generation.exists(),
             'next_round_started':False},indent=2))
