@@ -106,8 +106,10 @@ def main():
             if len(reports)!=1:raise RuntimeError('native analysis report missing or ambiguous')
             # The same frozen public documentation pool used by controlled LLM
             # arms, transported without invoking a second rustdoc implementation.
-            raw=json.loads((root/'runtime/raw-rustdoc'/(c+'-'+v+'.json')).read_text())
-            universe=json.loads((root/'runtime/universes/api_universes'/(c+'.json')).read_text())
+            runtime_root=root/'runtime'
+            if not runtime_root.exists():runtime_root=source_batch/'runtime'
+            raw=json.loads((runtime_root/'raw-rustdoc'/(c+'-'+v+'.json')).read_text())
+            universe=json.loads((runtime_root/'universes/api_universes'/(c+'.json')).read_text())
             docs=[{'path':x['path'] if 'path' in x else x.get('qualified_name',x.get('name')),'documentation':raw['index'].get(x['rustdoc_id'],{}).get('docs','')} for x in universe['apis'] if x.get('public_name_body_definition')]
             docs_path=work/'frozen-public-docs.json';docs_path.write_text(json.dumps(docs,ensure_ascii=False) if cost_policy else json.dumps(docs,ensure_ascii=False)[:32000])
             wrapper=work/'bin';wrapper.mkdir(exist_ok=True)
