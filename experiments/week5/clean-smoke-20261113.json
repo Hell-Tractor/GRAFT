@@ -1,0 +1,20 @@
+{
+  "schema": "graft-clean-smoke-v1",
+  "date": "2026-11-13",
+  "plan": "experiments/week23/base64-plan.json",
+  "temporary_root": "/tmp/graft-clean-smoke.OMbDHd",
+  "operations": [
+    "graft-plan emit",
+    "cargo +nightly generate-lockfile --offline",
+    "cargo +nightly build --locked --offline",
+    "graft-plan probe"
+  ],
+  "locked_package": "base64 0.22.1",
+  "bounded_probe_passed": true,
+  "reached_inputs": 3,
+  "expected_inputs": 3,
+  "scalar_input_influence": "observed",
+  "scope": "three standalone-wrapper inputs only; marker observations are not complete taint or proof for all inputs; opaque target arguments remain unknown",
+  "model_requests": 0,
+  "new_fuzz_runs": 0
+}
