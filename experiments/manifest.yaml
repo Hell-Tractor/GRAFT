@@ -1,0 +1,157 @@
+schema: graft-run-manifest-v1
+run_id: graft-admission-full-fixedgen-20261110-round-01
+status: partial
+protocol:
+  path: /home/cym/workspace/graft-admission-full-fixedgen-20261110/protocol.json
+  sha256: 4578c14175a96dbd130906b108e1ced47b2e00978bf4f6ae3a500c30ab3ef23c
+tool:
+  repository: /home/cym/workspace/GRAFT-2.0/GRAFTTool
+  commit: 067de5480ba2ae8d2b1b0f322705aee372cb1c39
+  tree: 6b2913b5d76ccd6ff5b8dfb1e6c00e8cc6b00e5f
+  fixed_generation_entry:
+    path: scripts/run_fixed_generation.py
+    sha256: 96b15fab7a0c0f236338079b9bd9357853672a6331444a1e500244ada6b4f943
+  checked_validation_sources:
+    - path: src/checked/validate.rs
+      sha256: f14705e32bfddfdd81a56c14a44bb25bb0eb100c7c67d912c30b2d442c317652
+    - path: src/checked/repair.rs
+      sha256: 5cc71d83625fb3e4b57492aff9f870c0633c8aa8750fa7f7f60a1beb5f124dfd
+    - path: scripts/parameter_repair.py
+      sha256: 4725431270a96241b1f1d3e45e1d353f869690ab7745cd70c4a1914e027d6b7b
+shared_project:
+  manifest:
+    path: /home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/Cargo.toml
+    sha256: 42d605e7e1af6458274a37fd2306e29ed27b5baf7add191e60272d79098fc294
+  lock:
+    path: /home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/Cargo.lock
+    sha256: 0f9c3c695a2fc41ba38af211412a70675a3d0ce0b0098a1ffa959b3823b5b6f1
+crates:
+  autocfg:
+    version: 1.5.0
+    source_sha256: c08606f8c3cbf4ce6ec8e28fb0014a2c086708fe954eaa885384a6165172e7e8
+    api_universe_sha256: b15e7cd6cfff64ed14401b1b30bcdcdbedf4ba45902a5e89aff65849139faaa8
+  base64:
+    version: 0.22.1
+    source_sha256: 72b3254f16251a8381aa12e40e3c4d2f0199f8c6508fbecb9d91f575e0fbb8c6
+    api_universe_sha256: a9c6edd023faa591a4ad987852a6ebf751815db4401cbe3dad5dfe3873e4e5a4
+  bumpalo:
+    version: 3.14.0
+    source_sha256: 7f30e7476521f6f8af1a1c4c0b8cc94f0bee37d91763d0ca2665f299b6cd8aec
+    api_universe_sha256: 70b9cdd31d86ddeebfb2d0e6b0a0f6179ec049ce945b7baf631babf9b07deeb1
+  byteorder:
+    version: 1.5.0
+    source_sha256: 1fd0f2584146f6f2ef48085050886acf353beff7305ebd1ae69500e27c67f64b
+    api_universe_sha256: 492a809ae29c256e9f99a62effc5636f31469f5e7b8edbd3c894e0d41b15594c
+  bytes:
+    version: 1.11.1
+    source_sha256: 1e748733b7cbc798e1434b6ac524f0c1ff2ab456fe201501e6497c8417a4fc33
+    api_universe_sha256: 4fbfc79aec77445a25dcd39297e1f8e84152b56b56c0c55bd7eb21d24940b4bd
+  chrono:
+    version: 0.4.19
+    source_sha256: 670ad68c9088c2a963aaa298cb369688cf3f9465ce5e2d4ca10e6e0098a1ce73
+    api_universe_sha256: d7f9bcd8b9e7a985248542a86d553b88a99565daf78128e1736c907e93e4f7cb
+  csv:
+    version: 1.3.1
+    source_sha256: acdc4883a9c96732e4733212c01447ebd805833b7275a73ca3ee080fd77afdaf
+    api_universe_sha256: 6ce5c150ced8365e68ed82286942e501163d16713182b7035077973b064d1bc5
+  fixedbitset:
+    version: 0.5.7
+    source_sha256: 1d674e81391d1e1ab681a28d99df07927c6d4aa5b027d7da16ba32d1d21ecd99
+    api_universe_sha256: ead43c62da0774f014839e1426cde9c17be42713a80efa6c896a38f4598a8e9b
+  idna:
+    version: 0.5.0
+    source_sha256: 634d9b1461af396cad843f47fdba5597a4f9e6ddd4bfb6ff5d85028c25cb12f6
+    api_universe_sha256: 51942ff2186cad9a9846b13767a2e2e82e85d0cd8fae96791dfcd05386a4bff1
+  regex:
+    version: 1.6.0
+    source_sha256: 4c4eb3267174b8c6c2f654116623910a0fef09c4753f8dd83db29c48a0df988b
+    api_universe_sha256: 9a3c72d35624adf52dd013a0ad74cdd5302d1619e879022f68a39e43ac8b3ad3
+  ryu:
+    version: 1.0.20
+    source_sha256: 28d3b2b1366ec20994f1fd18c3c594f05c5dd4bc44d8bb0c1c632c8d6829481f
+    api_universe_sha256: 5ec8431907edce45159e9ab0b953fa26396f89cefa832780c9441cd3c15b83ab
+  time:
+    version: 0.3.9
+    source_sha256: c2702e08a7a860f005826c6815dcac101b19b5eb330c27fe4a5928fec1d20ddd
+    api_universe_sha256: cbdf4945dc69a40dcb0a614a84272d676b04fb90b54e5496eaea4a70adc8582f
+  unicode-segmentation:
+    version: 1.10.1
+    source_sha256: 1dd624098567895118886609431a7c3b8f516e41d30e0643f03d94592a147e36
+    api_universe_sha256: f6de6393871c7a769308bbc325fa3fc93032df8e6eafd5537014f5148386a1e3
+features: [default]
+methods:
+  - GRAFT
+  - RULF
+  - RPG
+  - deepSURF
+  - LLM-only
+  - random-API+LLM
+  - syntactic+LLM
+  - no-cross-argument-unification
+  - random-target
+  - no-repair
+  - deterministic-emitter
+generation:
+  repetitions: 1
+  target_slots_per_crate: 20
+  seconds_per_admitted_target: 300
+  max_model_calls_per_target: 2
+  max_repairs_after_initial: 1
+  request_limit: 16
+  model:
+    identifier: deepseek-v4-pro
+    revision: not exposed by current backend; alias and raw responses retained
+    endpoint: https://api.deepseek.com/chat/completions
+    temperature: 0.0
+    thinking: disabled
+    max_output_tokens: 3072
+    peak_budget_cny_per_target: 0.24
+execution:
+  fuzz_repetitions: 6
+  afl_seeds_per_generation: 6
+  planned_rounds: 6
+  completed_rounds: [1]
+  root_seed: 20261109
+  afl_version: AFL++ 4.40c
+  afl_arguments: [-V, 300, -m, 1024, -t, 1000]
+  sanitizer: none
+  initial_seeds:
+    - sha256: 6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d
+    - sha256: af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc
+    - sha256: 66687aadf862bd776c8fc18b8e9f8e20089714856ee233b3902a591d0d5f2925
+    - sha256: f5a5fd42d16a20302798ef6ed309979b43003d2320d9f0e8ea9831a92759fb4b
+    - sha256: 38723a2e5e8a17aa7950dc008209944e898f69a7bd10a23c839d341e935fd5ca
+    - sha256: 5341e6b2646979a70e57653007a1f310169421ec9bdd9f1a5648f75ade005af1
+    - sha256: 5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef
+    - sha256: 7c8975e1e60a5c8337f28edf8c33c3b180360b7279644a9bc1af3c51e6220bf5
+    - sha256: 7543b37fa53fde2c84f07fd39f368555966aa1c0eb2f2fd26b294d79966e290e
+toolchains:
+  build: nightly-2026-04-13
+  coverage: nightly-2026-02-07
+  execution_compiler_sha256: 8ab8bc36914b56dba7f5e37901910ef74ad08d3d2939776e2c5797745f1fcd73
+resources:
+  max_workers: 56
+  compile_workers: 8
+  fuzz_workers: 48
+  worker_limit_per_target: 1
+  core_affinity_observed: 0-63
+  budget_worker_seconds_per_crate_method: 6000
+phase_status:
+  round_1: partial
+  formal_round_complete: false
+  generation_seal_created: false
+  auto_second_started: false
+artifact_hashes:
+  fixed_generation_inputs:
+    path: /home/cym/workspace/graft-admission-full-fixedgen-20261110/fixed-generation-inputs.json
+    sha256: e880a30890f5a463cc58586af9e680dcb5511ff66a413d39b902010437015bb4
+  recovery_summary:
+    path: /home/cym/workspace/graft-round1-recovery-20261112/round1-recovery-summary.json
+    sha256: d73ffcdb141d43c976c3f832ca84d9638bd50234b1a00e647d8344dd20f89bb7
+  per_crate_outcomes:
+    path: /home/cym/workspace/GRAFT-2.0/GRAFTPaper/revisions/round1-outcomes-20261113.csv
+    sha256: 28a230767613bb160e7788354f87d2ca2d1cfbb82361c4703cd71d9b7ea66206
+open_conditions:
+  - four paid model requests remain unresolved and must not be resent
+  - replay, infrastructure, planning, and generation gaps remain
+  - round 2 is not authorized
