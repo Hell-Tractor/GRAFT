@@ -1,5 +1,21 @@
 # GRAFT
 
+> Revision experiments: use the frozen API snapshots and offline audit workflow
+> in [experiments/README.md](experiments/README.md). The historical live-lookup
+> `coverage` command is not the scoring path for new controlled comparisons.
+>
+> Checked planning: see [experiments/checked-planning.md](experiments/checked-planning.md)
+> for the new `graft-plan` importer, scoped unifier, explicit value plans,
+> deterministic compiler witnesses, and plan-bound LLM rendering. The legacy
+> `api-sequence` / `testcase` commands still reproduce unbound heuristic lists.
+>
+> The current paper batch uses the 13 frozen versions listed below, one
+> generation, 20 slots per crate, and 300 seconds per admitted target. Its
+> execution/recovery entry is
+> [scripts/run_fixed_generation.py](scripts/run_fixed_generation.py); the
+> historical Qwen/live-lookup workflow later in this README is retained only
+> for legacy provenance.
+
 **GRAFT** (Graph-guided Rust API Fuzzing Tool) is an LLM-assisted fuzzing framework for Rust libraries. It automatically generates AFL fuzzing harnesses by constructing a type-aware API dependency graph from rustdoc, sampling API call sequences via topological traversal, and using an LLM to synthesize compilable Rust fuzz targets.
 
 ## Table of Contents
@@ -60,12 +76,12 @@ LLM:
   type: "DeepSeek"           # adapter name (works for any OpenAI-compatible API)
   model_name: "qwen3.5-plus"
   api_url_chat: "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions"
-  fix_retries: 3             # LLM fix attempts on compile failure
+  fix_retries: 3             # legacy total attempts: initial + at most 2 repairs
   concurrent_tasks: 16       # parallel LLM requests
   max_tokens: 8192
 
 testcase:
-  each_api_max_usage: 3      # max appearances of one API across all sequences
+  each_api_max_usage: 3      # max appearances of one API per sequence
   api_least_coverage: 2      # minimum sequences each API must appear in
 
 doc:
@@ -76,7 +92,8 @@ doc:
 
 ## Basic Workflow
 
-GRAFT exposes a single binary (`target/release/graft`) with subcommands. The full pipeline for a target crate is:
+The historical workflow below uses `target/release/graft`. For new checked
+plans, use the separate `target/release/graft-plan` workflow linked above.
 
 ### Step 0 — Compile GRAFT
 
@@ -114,7 +131,7 @@ You can use `$GRAFT <subcommand> --help` to see usage for each subcommand.
 ### Step 1 — Generate std library documentation (once)
 
 ```bash
-sh scripts/generate_std_doc.json
+bash scripts/generate_std_doc.sh
 $GRAFT doc -p localdata/std/std.json -o output/std_doc.json
 ```
 
@@ -161,8 +178,8 @@ $GRAFT seed-gen <crate_name> output/<crate>/testcases/ \
 ```bash
 $GRAFT fuzz <crate_name> output/<crate>/testcases/ \
     -c <num_testcases> \
-    -t 3600   \   # seconds per testcase
-    -j 32         # max parallel AFL instances
+    -t 3600 \
+    -j 32
 ```
 
 GRAFT builds each harness with AFL instrumentation + AddressSanitizer and automatically resumes previous sessions when an AFL queue already exists.
@@ -183,11 +200,18 @@ $GRAFT coverage <crate_name> \
 
 ---
 
-## Reproducing Paper Experiments
+## Historical Evaluation Workflow
+
+> **Historical only.** The versions, model, retry semantics, and 3/6/12-hour
+> commands in this section describe the pre-revision measurements. They are not
+> the current paper batch. Current results use the frozen versions in
+> `experiments/protocol-v1.json`, DeepSeek `deepseek-v4-pro` with one initial
+> request and at most one repair, a fixed 20-slot budget, and the checked-plan
+> entry points above.
 
 ### Coverage Evaluation (Main Experiment)
 
-The paper evaluates GRAFT on 13 crates. Crate versions (as resolved by Cargo at experiment time):
+The historical evaluation used 13 crates. Crate versions:
 
 | Crate | Version | Crate | Version |
 |-------|---------|-------|---------|
@@ -207,8 +231,8 @@ The paper evaluates GRAFT on 13 crates. Crate versions (as resolved by Cargo at 
 export GRAFT_API_KEY=<your-api-key>
 
 
-bash scrips/run.sh regex 1.12.3 0 8 10800
-bash scripts/coverage.sh regex output/regex
+bash scripts/run.sh regex 1.12.3 0 8 10800
+bash scripts/coverage.sh regex output
 $GRAFT coverage regex \
     output/regex/coverage_detail.json --crate-version 1.12.3
 ```

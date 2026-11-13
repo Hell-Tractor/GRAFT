@@ -21,6 +21,17 @@ pub struct Cli {
 
 #[derive(Subcommand)]
 pub enum Commands {
+    /// Render a checked plan with the configured LLM; pinned offline build and AST gate.
+    CheckedTestcase {
+        input: PathBuf,
+        output: PathBuf,
+        /// Repair calls after the initial generation (new semantics).
+        #[arg(long, default_value_t = 3)]
+        max_repairs: usize,
+        /// Reuse the common comparison manifest, lock, and vendor configuration.
+        #[arg(long)]
+        shared_project: Option<PathBuf>,
+    },
     /// Generate API documentation for a crate
     Doc(DocArgs),
     /// Generate API graph from API documentation
@@ -44,7 +55,7 @@ pub enum Commands {
         #[arg(long, value_name = "FILE")]
         std: PathBuf,
     },
-    /// Generate API sequences from API graph
+    /// Legacy heuristic API lists (use graft-plan for checked value-bound plans)
     ApiSequence {
         /// Input API documentation file in JSON format
         #[arg(short, long, value_name = "FILE")]
@@ -64,7 +75,7 @@ pub enum Commands {
         #[arg(long)]
         ablation: Option<AblationMode>,
     },
-    /// Convert API sequences to executable testcases
+    /// Legacy LLM synthesis (compilation only; use checked-testcase for plan retention)
     Testcase {
         /// Crate name to analyze, should be available on crates.io
         crate_name: String,

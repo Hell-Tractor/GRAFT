@@ -13,3 +13,5 @@
 .claude
 /crate_list
 /test_crates
+__pycache__/
+*.pyc

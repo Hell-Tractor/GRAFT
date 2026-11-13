@@ -28,6 +28,7 @@ async fn main() {
 
     use cli::Commands;
     let result = match &cli.command {
+        Commands::CheckedTestcase { input, output, max_repairs, shared_project } => testcase::generate_checked(input, output, *max_repairs, shared_project.as_deref()).await,
         Commands::Doc(args) => {
             if let Some(crate_name) = &args.name {
                 if args.raw {
@@ -52,6 +53,7 @@ async fn main() {
 
     if let Err(e) = result {
         error!("Error occurred: {}", e);
+        std::process::exit(1);
     }
 }
 

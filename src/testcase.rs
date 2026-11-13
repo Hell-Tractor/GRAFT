@@ -11,6 +11,68 @@ use crate::error::{Error, Result};
 use crate::llm::LLM;
 use crate::utils;
 
+/// New plan-bound path. Legacy Testcase::new accepts historical unbound API lists.
+/// This produces a validation executable; AFL wrapping is a subsequent, separate step.
+pub async fn generate_checked(input: &Path, output: &Path, max_repairs: usize, shared_project: Option<&Path>) -> Result<()> {
+    use graft::checked::{emit, validate, PlanResult};
+    let result: PlanResult = serde_json::from_slice(&std::fs::read(input)?)?;
+    let PlanResult::Planned { plan } = result else {
+        return Err(Error::CommandError("checked testcase requires a complete plan".into()));
+    };
+    if output.exists() {
+        return Err(Error::CommandError("checked testcase output must be a new directory to preserve transcripts".into()));
+    }
+    std::fs::create_dir_all(output.join("src"))?;
+    let canonical_output = std::fs::canonicalize(output)?;
+    let output = canonical_output.as_path();
+    let manifest = if let Some(shared) = shared_project {
+        let manifest = emit::shared_manifest(&plan, &std::fs::read_to_string(shared.join("Cargo.toml"))?)
+            .map_err(|e| Error::CommandError(format!("{e:?}")))?;
+        std::fs::copy(shared.join("Cargo.lock"), output.join("Cargo.lock"))?;
+        std::fs::create_dir_all(output.join(".cargo"))?;
+        std::fs::copy(shared.join(".cargo/config.toml"), output.join(".cargo/config.toml"))?;
+        manifest
+    } else {
+        emit::manifest(&plan).map_err(|e| Error::CommandError(format!("{e:?}")))?
+    };
+    std::fs::write(output.join("Cargo.toml"), &manifest)?;
+    std::fs::write(output.join("plan.json"), serde_json::to_vec_pretty(&plan)?)?;
+    std::fs::write(output.join("src/main.rs"), emit::standalone(&plan).map_err(|e| Error::CommandError(format!("{e:?}")))?)?;
+    let cargo = utils::config().commands.cargo.clone();
+    if shared_project.is_none() {
+        let lock = std::process::Command::new(&cargo).args(["generate-lockfile", "--offline"]).current_dir(output).output()?;
+        if !lock.status.success() {
+            return Err(Error::CommandError(format!("pinned offline dependency resolution failed: {}", String::from_utf8_lossy(&lock.stderr))));
+        }
+    }
+    let lock_bytes = std::fs::read(output.join("Cargo.lock"))?;
+    struct PlanLLM { inner: Box<dyn LLM>, model: String }
+    #[async_trait::async_trait]
+    impl validate::Backend for PlanLLM {
+        async fn respond(&mut self, prompt: &str) -> std::result::Result<validate::Response, String> {
+            let response = self.inner.generate_response(prompt).await.map_err(|e| e.to_string())?;
+            Ok(validate::Response { content: response.content, model: self.model.clone(), immutable_revision: None, input_tokens: None, output_tokens: None, cost: None })
+        }
+    }
+    let cfg = &utils::config().llm;
+    let mut backend = PlanLLM { inner: crate::llm::LLMFactory::create_llm(&cfg.type_, &cfg.model_name, &cfg.api_url_chat), model: cfg.model_name.clone() };
+    let report = validate::generate(&plan, &mut backend, &output.join("transcript"), max_repairs, |code| {
+        if std::fs::read_to_string(output.join("Cargo.toml")).map_err(|e| e.to_string())? != manifest || std::fs::read(output.join("Cargo.lock")).map_err(|e| e.to_string())? != lock_bytes {
+            return Err("pinned manifest/lock changed".into());
+        }
+        std::fs::write(output.join("src/main.rs"), code).map_err(|e| e.to_string())?;
+        let build = std::process::Command::new(&cargo).args(["build", "--offline", "--locked", "--bin", "graft_checked_target", "--target-dir"]).arg(output.join("build")).current_dir(output).output().map_err(|e| e.to_string())?;
+        if build.status.success() { Ok(()) } else { Err(String::from_utf8_lossy(&build.stderr).into_owned()) }
+    }).await.map_err(Error::CommandError)?;
+    if !report.accepted { return Err(Error::CommandError("no compiled, plan-retaining target within repair budget; see transcript/generation.json".into())); }
+    let runtime = validate::probe(&plan, &output.join("build/debug/graft_checked_target"), &output.join("runtime.json")).await.map_err(Error::CommandError)?;
+    if !runtime.bounded_probe_passed {
+        return Err(Error::CommandError("compiled core retained, but wrapper runtime probe failed; see runtime.json".into()));
+    }
+    info!("Checked core compiled and retained; bounded wrapper probe passed (not a proof for all inputs).");
+    Ok(())
+}
+
 #[derive(serde::Deserialize, serde::Serialize)]
 pub struct Testcase {
     path: PathBuf,
