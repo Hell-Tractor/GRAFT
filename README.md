@@ -1,283 +1,348 @@
 # GRAFT
 
-> Revision experiments: use the frozen API snapshots and offline audit workflow
-> in [experiments/README.md](experiments/README.md). The historical live-lookup
-> `coverage` command is not the scoring path for new controlled comparisons.
->
-> Checked planning: see [experiments/checked-planning.md](experiments/checked-planning.md)
-> for the new `graft-plan` importer, scoped unifier, explicit value plans,
-> deterministic compiler witnesses, and plan-bound LLM rendering. The legacy
-> `api-sequence` / `testcase` commands still reproduce unbound heuristic lists.
->
-> The current paper batch uses the 13 frozen versions listed below, one
-> generation, 20 slots per crate, and 300 seconds per admitted target. Its
-> execution/recovery entry is
-> [scripts/run_fixed_generation.py](scripts/run_fixed_generation.py); the
-> historical Qwen/live-lookup workflow later in this README is retained only
-> for legacy provenance.
+**GRAFT** is a generics-aware fuzz-target generator for Rust libraries. It
+imports compiler-produced rustdoc JSON, performs bounded type matching,
+constructs explicit value-bound call plans, emits deterministic Rust programs,
+and supports plan-preserving LLM parameter preparation.
 
-**GRAFT** (Graph-guided Rust API Fuzzing Tool) is an LLM-assisted fuzzing framework for Rust libraries. It automatically generates AFL fuzzing harnesses by constructing a type-aware API dependency graph from rustdoc, sampling API call sequences via topological traversal, and using an LLM to synthesize compilable Rust fuzz targets.
+The repository contains two paths:
 
-## Table of Contents
+- **Checked path:** `graft-plan`, `graft checked-testcase`, and
+  `graft-harness`. This is the evaluated path and the recommended entry point.
+- **Legacy heuristic path:** `api-graph`, `api-sequence`, `testcase`, and the
+  original Qwen/live-lookup workflow. It remains available to reproduce
+  historical experiments and ablations.
 
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Configuration](#configuration)
-- [Basic Workflow](#basic-workflow)
-- [Reproducing Paper Experiments](#reproducing-paper-experiments)
-  - [Coverage Evaluation](#coverage-evaluation-main-experiment)
-  - [Ablation Study](#ablation-study)
-- [Docker Deployment](#docker-deployment)
+> The legacy path is not described here as the current implementation. In
+> particular, the checked planner does not materialize and traverse a global
+> heterogeneous API graph. It searches producer candidates on demand from a
+> structured catalog.
 
----
+## Current Pipeline
 
-## Prerequisites
+```text
+format-57 rustdoc JSON
+        |
+        v
+Catalog: APIs, generic identities, outputs, obligations, impls, type paths
+        |
+        v
+Bounded target planning: substitutions, constructors, producer search,
+borrow/move tracking, explicit failure and cycle handling
+        |
+        v
+SequencePlan: value IDs, call order, adapters, type arguments, branches
+        |
+        +----> deterministic Rust emitter and compiler witness
+        |
+        +----> plan-preserving LLM rendering and bounded parameter repair
+        |
+        v
+AST retention -> compilation -> runtime probes -> admission -> AFL execution
+        |
+        v
+LLVM coverage replay and conservative API-entry mapping
+```
 
-- **Rust nightly** toolchain (tested on `rustc 1.97.0-nightly (17584a181 2026-04-13)`)
-- **cargo-afl** (`cargo install afl`)
-- **LLVM tools** for coverage analysis (`rustup component add llvm-tools-preview`)
-- An LLM API key (tested with Qwen3.5-Plus via DashScope; any OpenAI-compatible endpoint works)
+## Repository Layout
+
+| Path | Purpose |
+|---|---|
+| `src/checked/` | Rustdoc importer, bounded planner, unifier, emitter, retention checks, and probes |
+| `src/bin/graft-plan.rs` | Checked catalog, planning, validation, emission, and probe CLI |
+| `src/bin/graft-harness.rs` | Canonical byte/file wrapper and admission review |
+| `src/main.rs`, `src/api_graph.rs` | Legacy `graft` CLI and historical graph traversal |
+| `tests/checked.rs` | End-to-end checked-path regressions |
+| `experiments/` | Frozen protocols, manifests, audits, and controlled-run evidence |
+| `scripts/` | Cost control, admission, coverage, baseline, and publication tooling |
+| `config.yaml` | Legacy/default local LLM configuration |
+
+## Requirements
+
+- Rustup and Cargo. `rust-toolchain.toml` pins
+  `nightly-2026-04-13` with `rust-src` and `llvm-tools-preview`.
+- Python 3.9 or newer for experiment and audit scripts.
+- AFL++/`cargo-afl` and its runtime dependencies for fuzzing.
+- LLVM tools from the matching Rust toolchain for coverage replay.
+- An LLM API key only for commands that explicitly call a model.
+
+The project currently depends on a companion fork of
+`trustfall-rustdoc-adapter` version `56.2.0`. Cargo resolves it through a
+relative sibling path:
+
+<https://github.com/Hell-Tractor/trustfall-rustdoc-adapter>
+
+## Build
+
+The checked planner expects this workspace layout:
+
+```text
+workspace/
+  GRAFT-2.0/
+    GRAFTTool/
+  trustfall-rustdoc-adapter/
+```
+
+Before the repository is renamed, clone it from its current URL:
 
 ```bash
-rustup toolchain install nightly
-cargo install afl
-rustup component add llvm-tools-preview
+mkdir -p GRAFT-workspace/GRAFT-2.0
+git clone https://github.com/Hell-Tractor/PLFuzz.git \
+  GRAFT-workspace/GRAFT-2.0/GRAFTTool
+git clone https://github.com/Hell-Tractor/trustfall-rustdoc-adapter.git \
+  GRAFT-workspace/trustfall-rustdoc-adapter
+
+cd GRAFT-workspace/GRAFT-2.0/GRAFTTool
+cargo build --locked \
+  --bin graft \
+  --bin graft-plan \
+  --bin graft-harness
 ```
 
----
+For a fully offline build, provide an appropriate Cargo cache and run with
+`--offline`.
 
-## Installation
+## Checked Planning Quick Start
+
+### 1. Import a frozen rustdoc snapshot
 
 ```bash
-git clone <this-repo> GRAFT
-cd GRAFT
-cargo build --release
+target/debug/graft-plan import \
+  /path/to/rustdoc.json \
+  catalog.json \
+  --package base64 \
+  --features std
 ```
 
-Set your LLM API key:
+`import` accepts raw format-57 rustdoc JSON or an APIDoc containing
+`parser/krate`. Feature declarations describe how the documentation was built;
+rustdoc JSON alone does not prove the active feature set. The catalog stores
+the crate version, package identity, default-feature state, and rustdoc hash.
+
+### 2. Inspect support boundaries
 
 ```bash
-# One-time export:
-export GRAFT_API_KEY=<your-api-key>
-
-# Or persist to the env file and source it before each session:
-echo 'export GRAFT_API_KEY=<your-api-key>' > env
-source env
+target/debug/graft-plan inventory catalog.json support.json --edges
 ```
 
----
+`--edges` reports candidate parameter pairs for diagnostics. These are not
+compiler-validated dependencies and are not the graph used by the planner.
 
-## Configuration
+### 3. Plan one selected API target
 
-Edit `config.yaml` before running. Key fields:
-
-```yaml
-LLM:
-  type: "DeepSeek"           # adapter name (works for any OpenAI-compatible API)
-  model_name: "qwen3.5-plus"
-  api_url_chat: "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions"
-  fix_retries: 3             # legacy total attempts: initial + at most 2 repairs
-  concurrent_tasks: 16       # parallel LLM requests
-  max_tokens: 8192
-
-testcase:
-  each_api_max_usage: 3      # max appearances of one API per sequence
-  api_least_coverage: 2      # minimum sequences each API must appear in
-
-doc:
-  parser: "RustDoc"          # RustDoc (recommended) or TrustFall
-```
-
----
-
-## Basic Workflow
-
-The historical workflow below uses `target/release/graft`. For new checked
-plans, use the separate `target/release/graft-plan` workflow linked above.
-
-### Step 0 — Compile GRAFT
+Select an API ID from `catalog.json`, then run:
 
 ```bash
-cargo build --release
-export GRAFT=$(pwd)/target/release/graft
-$GRAFT --help
+target/debug/graft-plan plan \
+  catalog.json \
+  <API_ID> \
+  plan.json \
+  --nodes 2000 \
+  --depth 12 \
+  --infer-call-results
 ```
 
-You should see the following usage message:
+Exit status `0` means a complete plan was written. Status `2` means the target
+was rejected and structured reasons were saved. Default limits are:
 
+- 2,000 search nodes;
+- recursion depth 12;
+- 128 monomorphization combinations per API;
+- generic type pool `{u8, i32}`.
 
-```
-Usage: graft <COMMAND>
+The CLI type pool is intentionally finite. The library API can provide a
+different pool through `planner::Limits`.
 
-Commands:
-  doc           Generate API documentation for a crate
-  api-graph     Generate API graph from API documentation
-  measure       Process a quick measure of target crate. Calculating possible max API coverage
-  api-sequence  Generate API sequences from API graph
-  testcase      Convert API sequences to executable testcases
-  seed-gen      Generate seed inputs for all testcases
-  fuzz          Fuzz all testcases with AFL
-  coverage      Analyze fuzzing results and calculate API coverage
-  help          Print this message or the help of the given subcommand(s)
-
-Options:
-  -h, --help     Print help
-  -V, --version  Print version
-```
-
-You can use `$GRAFT <subcommand> --help` to see usage for each subcommand.
-
-
-### Step 1 — Generate std library documentation (once)
+### 4. Emit and compile the deterministic witness
 
 ```bash
-bash scripts/generate_std_doc.sh
-$GRAFT doc -p localdata/std/std.json -o output/std_doc.json
+target/debug/graft-plan emit plan.json checked-target
+cd checked-target
+cargo build --locked --offline
+cd ..
 ```
 
-### Step 2 — Generate API documentation for the target crate
+The output contains `src/main.rs`, a pinned `Cargo.toml`, and `plan.json`.
+Emission does not start fuzzing.
+
+### 5. Optionally render with an LLM
 
 ```bash
-# Fetch from crates.io:
-$GRAFT doc -n <crate_name> -o output/<crate>/doc.json
-
-# Or from a local rustdoc JSON file:
-$GRAFT doc -p /path/to/rustdoc.json -o output/<crate>/doc.json
+export GRAFT_API_KEY=<your-key>
+target/debug/graft checked-testcase \
+  plan.json \
+  generated-target \
+  --max-repairs 1
 ```
 
-### Step 3 — Generate API sequences
+`--max-repairs 1` means one initial request plus at most one optional repair.
+The default CLI value is 3, but controlled paper batches freeze their own
+allowance. A model response must preserve all planned calls, callee paths,
+type arguments, producer dependencies, call order, required branches, and
+input-derived bindings. Formatting, comments, safe local preparation, and one
+main wrapper may differ.
+
+The model is not used to replace a rejected plan with another target. Use
+bounded alternate-producer planning instead:
 
 ```bash
-$GRAFT api-sequence \
-    -i output/<crate>/doc.json \
-    --std output/std_doc.json \
-    -o output/<crate>/seqs.json
+target/debug/graft-plan alternatives \
+  plan.json \
+  catalog.json \
+  alternatives.json \
+  --max-candidates 2 \
+  --nodes 2000
 ```
 
-The number of sequences is determined automatically from API coverage targets; override with `-c <N>`.
+## Admission and Runtime Checks
 
-### Step 4 — Generate fuzz harnesses (LLM)
+`graft-harness` converts generated source into the controlled byte/file-entry
+wrapper and records static review evidence:
 
 ```bash
-$GRAFT testcase <crate_name> \
-    -i output/<crate>/seqs.json \
-    -o output/<crate>/testcases/
+target/debug/graft-harness \
+  generated.rs \
+  normalized.rs \
+  validity.json \
+  --plan plan.json
 ```
 
-Each harness is a self-contained Cargo project under `output/<crate>/testcases/<crate>_testN/`. Harnesses that fail to compile after `fix_retries` attempts are skipped.
+For LLM parameter preparation, pass `--repair-plan`, and optionally
+`--standalone-output` and `--observe-objects`.
 
-### Step 5 — Generate seed inputs (LLM)
+`graft-plan validate` compares the surviving AST with the immutable plan core:
 
 ```bash
-$GRAFT seed-gen <crate_name> output/<crate>/testcases/ \
-    -c <num_testcases> -s <num_seeds_per_testcase>
+target/debug/graft-plan validate plan.json generated.rs
 ```
 
-### Step 6 — Fuzz
+Runtime arrival is checked separately with empty, zero-byte, and one-byte
+probes:
 
 ```bash
-$GRAFT fuzz <crate_name> output/<crate>/testcases/ \
-    -c <num_testcases> \
-    -t 3600 \
-    -j 32
+target/debug/graft-plan probe \
+  plan.json \
+  /absolute/path/to/executable \
+  runtime.json
 ```
 
-GRAFT builds each harness with AFL instrumentation + AddressSanitizer and automatically resumes previous sessions when an AFL queue already exists.
+Add `--extended` for repeatability checks. Compilation, AST retention, runtime
+arrival, and executed coverage are separate outcomes.
 
-### Step 7 — Calculate API coverage
+## Formal Experiment Entry
 
-First collect coverage data, then query GRAFT for the API-level result:
+The current controlled protocol is implemented by
+[`scripts/run_fixed_generation.py`](scripts/run_fixed_generation.py):
+
+- one generation pass;
+- fixed target slots per crate;
+- one generation reused across six AFL seeds;
+- 300 seconds per admitted target;
+- sealed generation and cost ledgers;
+- a publication barrier between rounds.
+
+Always validate an existing prepared batch first:
 
 ```bash
-# Build coverage-instrumented binaries and merge profdata:
-bash scripts/coverage.sh <crate_name> \
-
-# Compute API coverage:
-$GRAFT coverage <crate_name> \
-    output/<crate>/coverage_detail.json \
-    --crate-version <version>
+python3 scripts/run_fixed_generation.py \
+  --batch /absolute/path/to/frozen-batch \
+  --check-only
 ```
 
----
-
-## Historical Evaluation Workflow
-
-> **Historical only.** The versions, model, retry semantics, and 3/6/12-hour
-> commands in this section describe the pre-revision measurements. They are not
-> the current paper batch. Current results use the frozen versions in
-> `experiments/protocol-v1.json`, DeepSeek `deepseek-v4-pro` with one initial
-> request and at most one repair, a fixed 20-slot budget, and the checked-plan
-> entry points above.
-
-### Coverage Evaluation (Main Experiment)
-
-The historical evaluation used 13 crates. Crate versions:
-
-| Crate | Version | Crate | Version |
-|-------|---------|-------|---------|
-| base64 | 0.22.1 | chrono | 0.4.44 |
-| bumpalo | 3.20.2 | bytes | 1.11.1 |
-| byteorder | 1.5.0 | csv | 1.4.0 |
-| autocfg | 1.5.0 | idna | 1.1.0 |
-| fixedbitset | 0.5.7 | regex | 1.12.3 |
-| ryu | 1.0.23 | time | 0.3.47 |
-| unicode-segmentation | 1.13.2 | | |
-
-**LLM configuration used in the paper:** model `qwen3.5-plus` (DashScope), `temperature=0.0`, `max_tokens=8192`, `enable_thinking` disabled.
-
-**To reproduce for a single crate** (example: `regex`):
+Execution must use an already prepared and frozen batch:
 
 ```bash
-export GRAFT_API_KEY=<your-api-key>
-
-
-bash scripts/run.sh regex 1.12.3 0 8 10800
-bash scripts/coverage.sh regex output
-$GRAFT coverage regex \
-    output/regex/coverage_detail.json --crate-version 1.12.3
+python3 scripts/run_fixed_generation.py \
+  --batch /absolute/path/to/frozen-batch \
+  --execute \
+  --through-round 1
 ```
 
-### Ablation Study
+Do not use `--resume` after an interrupted fuzz job as a fresh 300-second run.
+Do not reconstruct or reset paid ledgers. The scripts reject changed protocol,
+target, corpus, binary, replay-adapter, and publication hashes.
 
-The ablation study evaluates three degraded variants on 5 crates (`base64`, `byteorder`, `fixedbitset`, `time`, `regex`) with 20 sequences each and 1-hour fuzzing per harness.
+See:
 
-| Variant | Degradation |
-|---------|-------------|
-| `no-generic` | Replaces generic-aware type matching with syntactic equality only |
-| `no-graph` | Disables the API dependency graph; sequences are sampled randomly |
-| `no-topo` | Keeps the dependency graph but selects target APIs randomly instead of by topological order |
+- [`experiments/checked-planning.md`](experiments/checked-planning.md)
+- [`experiments/README.md`](experiments/README.md)
+- [`experiments/manifest.yaml`](experiments/manifest.yaml)
+- [`experiments/protocol-v1.json`](experiments/protocol-v1.json)
+
+## Validation
+
+Current regression commands:
 
 ```bash
-source env
-
-# Run all phases for all 5 crates × 3 variants:
-bash scripts/run_ablation.sh
-
-# Specify a subset of crates:
-bash scripts/run_ablation.sh base64 regex time
+cargo test --all-targets --locked --offline
+python3 -m unittest discover -s scripts -p 'test_*.py'
 ```
 
-Results are written to `output_ablation/` and printed as a summary table at the end. The log file is at `output_ablation/ablation.log`.
+Verified locally:
 
----
+- 52 Rust integration tests passed;
+- 150 Python tests passed.
 
-## Docker Deployment
+These tests cover scoped generic substitutions, occurs checks, conditional
+impls, constructor and producer backtracking, move/borrow conflicts, explicit
+`Option`/`Result` branches, bounded alternatives, AST retention, parameter
+repair, runtime probes, admission rejection, and coverage/cost bookkeeping.
 
-See [Dockerfile](Dockerfile) in the repository root.
+## Supported Subset and Boundaries
 
-```bash
-# Build the image:
-docker build -t graft .
+The checked path explicitly returns `Unknown` or a structured failure for
+unsupported cases. Current boundaries include:
 
-# Run interactively (mount output directory for persistence):
-docker run -it \
-    -e GRAFT_API_KEY=<your-api-key> \
-    -v $(pwd)/output:/app/output \
-    graft bash
+- projections and associated-type bindings;
+- higher-ranked trait bounds;
+- symbolic constants and complex const expressions;
+- unsupported lifetime relations and borrowed outputs;
+- trait-method dispatch and specialization;
+- arbitrary type-alias expansion;
+- raw-pointer operations and unsafe calls without an explicit contract;
+- missing external or blanket impl evidence.
 
-# Inside the container the binary is available as GRAFT:
-GRAFT doc -n regex -o output/regex/doc.json
-GRAFT api-sequence -i output/regex/doc.json --std output/std_doc.json \
-    -o output/regex/seqs.json
-# ... (continue with remaining steps)
+The planner's finite search is not a proof that an API is untestable. A
+successful compiler witness does not prove all runtime preconditions. Three
+bounded probes are not complete taint analysis, and compiler acceptance does
+not establish sanitizer or whole-language soundness.
+
+## Legacy CLI
+
+The original `graft` path remains available for historical reproduction:
+
+```text
+doc
+api-graph
+measure
+api-sequence
+testcase
+seed-gen
+fuzz
+coverage
 ```
+
+Its historical Qwen configuration and topological graph traversal are retained
+for provenance and ablations. They are not the checked planner, and their
+outputs must not be mixed with `SequencePlan` or admission results.
+
+The `config.yaml` file continues to hold the legacy local LLM defaults.
+Controlled experiments load frozen model, cost, admission, and repair settings
+from their batch manifests instead of assuming the defaults in `config.yaml`.
+
+## Artifact and Reproducibility Notes
+
+- `experiments/week6-first-round/` is a single-target 300-second execution
+  probe, not the complete paper matrix.
+- `experiments/admission-v2/` documents preflight and parameter-repair
+  protocols, including failed and incomplete evidence.
+- `scripts/audit_*.py`, `coverage_snapshot.py`, and
+  `replay_round_coverage.py` implement offline denominator, coverage, cost, and
+  baseline audits.
+- Large experiment data remain organized by protocol week and include hashes,
+  raw outcomes, and unresolved cases where available.
+
+The paper protocol uses 13 frozen crates, 20 fixed slots per crate,
+DeepSeek `deepseek-v4-pro`, one generation, and six paired AFL executions per
+admitted target. Check the frozen batch manifest rather than inferring exact
+model or cost settings from the legacy `config.yaml`.
