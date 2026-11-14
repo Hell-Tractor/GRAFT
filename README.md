@@ -79,20 +79,18 @@ The checked planner expects this workspace layout:
 ```text
 workspace/
   GRAFT-2.0/
-    GRAFTTool/
+    GRAFT/
   trustfall-rustdoc-adapter/
 ```
 
-Before the repository is renamed, clone it from its current URL:
-
 ```bash
 mkdir -p GRAFT-workspace/GRAFT-2.0
-git clone https://github.com/Hell-Tractor/PLFuzz.git \
-  GRAFT-workspace/GRAFT-2.0/GRAFTTool
+git clone https://github.com/Hell-Tractor/GRAFT.git \
+  GRAFT-workspace/GRAFT-2.0/GRAFT
 git clone https://github.com/Hell-Tractor/trustfall-rustdoc-adapter.git \
   GRAFT-workspace/trustfall-rustdoc-adapter
 
-cd GRAFT-workspace/GRAFT-2.0/GRAFTTool
+cd GRAFT-workspace/GRAFT-2.0/GRAFT
 cargo build --locked \
   --bin graft \
   --bin graft-plan \
