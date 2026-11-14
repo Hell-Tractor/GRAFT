@@ -1,0 +1,9 @@
+ Documenting time v0.3.23
+Fuzz Target Generator for Rust Libraries: v1.65.0
+Total function number: 633
+Before Reachable API Analysis API Number: 221
+Before Reachable API Analysis Dependencies Number: 4151
+>>>>> Reachable API Analysis <<<<<
+After Reachable API Analysis API Number: 218
+After Reachable API Analysis Dependencies Number: 4151
+API Pool Set

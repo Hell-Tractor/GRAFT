@@ -1,0 +1,816 @@
+[
+  {
+    "all_local_function_items_by_visibility": {
+      "method_on_publicly_named_receiver": 24,
+      "publicly_named_function": 5,
+      "trait_method_on_publicly_named_receiver": 6
+    },
+    "analysis_status": "completed_visibility_only_impl_obligations_unverified",
+    "crate": "autocfg",
+    "historical_selected_rows_by_visibility": {
+      "external_definition": 0,
+      "method_on_publicly_named_receiver": 24,
+      "publicly_named_function": 5,
+      "trait_method_on_publicly_named_receiver": 2
+    },
+    "measurement_groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 74.19354838709677,
+        "covered": 23,
+        "observed_zero": 8,
+        "total": 31,
+        "unresolved": 0
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 74.19354838709677,
+        "covered": 23,
+        "observed_zero": 8,
+        "total": 31,
+        "unresolved": 0
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 74.19354838709677,
+        "covered": 23,
+        "observed_zero": 8,
+        "total": 31,
+        "unresolved": 0
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 65.71428571428571,
+        "covered": 23,
+        "observed_zero": 9,
+        "total": 35,
+        "unresolved": 3
+      },
+      "public_name_body_definitions": {
+        "confirmed_coverage_percent": 65.71428571428571,
+        "covered": 23,
+        "observed_zero": 9,
+        "total": 35,
+        "unresolved": 3
+      },
+      "public_surface_review_items": {
+        "confirmed_coverage_percent": null,
+        "covered": 0,
+        "observed_zero": 0,
+        "total": 0,
+        "unresolved": 0
+      }
+    },
+    "public_declarations_without_body": 0,
+    "public_name_body_definitions": 35,
+    "public_universe_sha256": "dd194a7d998008cf80d501ddc67549f6aa699ec8db46d93c15f09f072ab80107",
+    "report": "autocfg.json",
+    "surface_review_items": 0,
+    "version": "1.5.0"
+  },
+  {
+    "all_local_function_items_by_visibility": {
+      "method_on_publicly_named_receiver": 16,
+      "public_trait_declaration": 11,
+      "publicly_named_function": 10,
+      "trait_impl_requires_applicability_or_opaque_receiver_review": 1,
+      "trait_method_on_publicly_named_receiver": 43
+    },
+    "analysis_status": "completed_visibility_only_impl_obligations_unverified",
+    "crate": "base64",
+    "historical_selected_rows_by_visibility": {
+      "external_definition": 0,
+      "method_on_publicly_named_receiver": 16,
+      "public_trait_declaration": 0,
+      "publicly_named_function": 2,
+      "trait_impl_requires_applicability_or_opaque_receiver_review": 0,
+      "trait_method_on_publicly_named_receiver": 8
+    },
+    "measurement_groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 92.3076923076923,
+        "covered": 24,
+        "observed_zero": 2,
+        "total": 26,
+        "unresolved": 0
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 92.3076923076923,
+        "covered": 24,
+        "observed_zero": 2,
+        "total": 26,
+        "unresolved": 0
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 72.22222222222223,
+        "covered": 26,
+        "observed_zero": 10,
+        "total": 36,
+        "unresolved": 0
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 40.0,
+        "covered": 28,
+        "observed_zero": 19,
+        "total": 70,
+        "unresolved": 23
+      },
+      "public_name_body_definitions": {
+        "confirmed_coverage_percent": 40.78947368421053,
+        "covered": 31,
+        "observed_zero": 22,
+        "total": 76,
+        "unresolved": 23
+      },
+      "public_surface_review_items": {
+        "confirmed_coverage_percent": 0.0,
+        "covered": 0,
+        "observed_zero": 1,
+        "total": 1,
+        "unresolved": 0
+      }
+    },
+    "public_declarations_without_body": 4,
+    "public_name_body_definitions": 76,
+    "public_universe_sha256": "ea4f81151972b0165e23b133a306bf7ff5951ea3e4ae0aac79a19ea31eb65d71",
+    "report": "base64.json",
+    "surface_review_items": 1,
+    "version": "0.22.1"
+  },
+  {
+    "all_local_function_items_by_visibility": {
+      "method_on_publicly_named_receiver": 42,
+      "trait_method_on_publicly_named_receiver": 16
+    },
+    "analysis_status": "completed_visibility_only_impl_obligations_unverified",
+    "crate": "bumpalo",
+    "historical_selected_rows_by_visibility": {
+      "external_definition": 0,
+      "method_on_publicly_named_receiver": 42,
+      "trait_method_on_publicly_named_receiver": 2
+    },
+    "measurement_groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 100.0,
+        "covered": 44,
+        "observed_zero": 0,
+        "total": 44,
+        "unresolved": 0
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 100.0,
+        "covered": 44,
+        "observed_zero": 0,
+        "total": 44,
+        "unresolved": 0
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 100.0,
+        "covered": 44,
+        "observed_zero": 0,
+        "total": 44,
+        "unresolved": 0
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 77.58620689655173,
+        "covered": 45,
+        "observed_zero": 4,
+        "total": 58,
+        "unresolved": 9
+      },
+      "public_name_body_definitions": {
+        "confirmed_coverage_percent": 77.58620689655173,
+        "covered": 45,
+        "observed_zero": 4,
+        "total": 58,
+        "unresolved": 9
+      },
+      "public_surface_review_items": {
+        "confirmed_coverage_percent": null,
+        "covered": 0,
+        "observed_zero": 0,
+        "total": 0,
+        "unresolved": 0
+      }
+    },
+    "public_declarations_without_body": 0,
+    "public_name_body_definitions": 58,
+    "public_universe_sha256": "3f2cf1c7695a0dd2ceec8c7dde1a5e17cfbf6f5bd4d56f5b2d319be66c251cf6",
+    "report": "bumpalo.json",
+    "surface_review_items": 0,
+    "version": "3.20.2"
+  },
+  {
+    "all_local_function_items_by_visibility": {
+      "public_trait_declaration": 122,
+      "trait_method_on_publicly_named_receiver": 66
+    },
+    "analysis_status": "completed_visibility_only_impl_obligations_unverified",
+    "crate": "byteorder",
+    "historical_selected_rows_by_visibility": {
+      "external_definition": 0,
+      "public_trait_declaration": 0,
+      "trait_method_on_publicly_named_receiver": 58
+    },
+    "measurement_groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 24.137931034482758,
+        "covered": 14,
+        "observed_zero": 2,
+        "total": 58,
+        "unresolved": 42
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 24.137931034482758,
+        "covered": 14,
+        "observed_zero": 2,
+        "total": 58,
+        "unresolved": 42
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 24.137931034482758,
+        "covered": 14,
+        "observed_zero": 2,
+        "total": 58,
+        "unresolved": 42
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 21.21212121212121,
+        "covered": 14,
+        "observed_zero": 2,
+        "total": 66,
+        "unresolved": 50
+      },
+      "public_name_body_definitions": {
+        "confirmed_coverage_percent": 8.641975308641975,
+        "covered": 14,
+        "observed_zero": 2,
+        "total": 162,
+        "unresolved": 146
+      },
+      "public_surface_review_items": {
+        "confirmed_coverage_percent": null,
+        "covered": 0,
+        "observed_zero": 0,
+        "total": 0,
+        "unresolved": 0
+      }
+    },
+    "public_declarations_without_body": 26,
+    "public_name_body_definitions": 162,
+    "public_universe_sha256": "8d5db087e968d777c706d9ec94107db68438363133e7bbd2f559733e774d29d6",
+    "report": "byteorder.json",
+    "surface_review_items": 0,
+    "version": "1.5.0"
+  },
+  {
+    "all_local_function_items_by_visibility": {
+      "method_on_publicly_named_receiver": 66,
+      "public_trait_declaration": 135,
+      "trait_impl_requires_applicability_or_opaque_receiver_review": 108,
+      "trait_method_on_publicly_named_receiver": 296
+    },
+    "analysis_status": "completed_with_logged_doctest_analysis_view",
+    "crate": "bytes",
+    "historical_selected_rows_by_visibility": {
+      "external_definition": 0,
+      "method_on_publicly_named_receiver": 66,
+      "public_trait_declaration": 0,
+      "trait_impl_requires_applicability_or_opaque_receiver_review": 0,
+      "trait_method_on_publicly_named_receiver": 86
+    },
+    "measurement_groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 70.86092715231788,
+        "covered": 107,
+        "observed_zero": 32,
+        "total": 151,
+        "unresolved": 12
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 71.05263157894737,
+        "covered": 108,
+        "observed_zero": 32,
+        "total": 152,
+        "unresolved": 12
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 28.17258883248731,
+        "covered": 111,
+        "observed_zero": 55,
+        "total": 394,
+        "unresolved": 228
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 27.659574468085108,
+        "covered": 130,
+        "observed_zero": 98,
+        "total": 470,
+        "unresolved": 242
+      },
+      "public_name_body_definitions": {
+        "confirmed_coverage_percent": 28.716904276985744,
+        "covered": 141,
+        "observed_zero": 216,
+        "total": 491,
+        "unresolved": 134
+      },
+      "public_surface_review_items": {
+        "confirmed_coverage_percent": 0.0,
+        "covered": 0,
+        "observed_zero": 0,
+        "total": 108,
+        "unresolved": 108
+      }
+    },
+    "public_declarations_without_body": 6,
+    "public_name_body_definitions": 491,
+    "public_universe_sha256": "57fbd6526aad6f9741b45f1676f22a9b39ba5216ecd285692314639f0777bf1a",
+    "report": "bytes.json",
+    "surface_review_items": 108,
+    "version": "1.11.1"
+  },
+  {
+    "all_local_function_items_by_visibility": {
+      "method_on_publicly_named_receiver": 317,
+      "public_trait_declaration": 59,
+      "publicly_named_function": 4,
+      "trait_method_on_publicly_named_receiver": 414
+    },
+    "analysis_status": "completed_with_logged_doctest_analysis_view",
+    "crate": "chrono",
+    "historical_selected_rows_by_visibility": {
+      "external_definition": 0,
+      "method_on_publicly_named_receiver": 305,
+      "public_trait_declaration": 0,
+      "publicly_named_function": 2,
+      "trait_method_on_publicly_named_receiver": 211
+    },
+    "measurement_groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 77.82178217821782,
+        "covered": 393,
+        "observed_zero": 61,
+        "total": 505,
+        "unresolved": 51
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 77.99227799227799,
+        "covered": 404,
+        "observed_zero": 63,
+        "total": 518,
+        "unresolved": 51
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 73.88059701492537,
+        "covered": 396,
+        "observed_zero": 89,
+        "total": 536,
+        "unresolved": 51
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 58.50340136054422,
+        "covered": 430,
+        "observed_zero": 154,
+        "total": 735,
+        "unresolved": 151
+      },
+      "public_name_body_definitions": {
+        "confirmed_coverage_percent": 57.83926218708827,
+        "covered": 439,
+        "observed_zero": 169,
+        "total": 759,
+        "unresolved": 151
+      },
+      "public_surface_review_items": {
+        "confirmed_coverage_percent": null,
+        "covered": 0,
+        "observed_zero": 0,
+        "total": 0,
+        "unresolved": 0
+      }
+    },
+    "public_declarations_without_body": 35,
+    "public_name_body_definitions": 759,
+    "public_universe_sha256": "376ea7b78899cf7c464804695d1cea660e17a60812a4040f1395ecad8acdcd2b",
+    "report": "chrono.json",
+    "surface_review_items": 0,
+    "version": "0.4.44"
+  },
+  {
+    "all_local_function_items_by_visibility": {
+      "method_on_publicly_named_receiver": 129,
+      "publicly_named_function": 1,
+      "trait_method_on_publicly_named_receiver": 92
+    },
+    "analysis_status": "completed_visibility_only_impl_obligations_unverified",
+    "crate": "csv",
+    "historical_selected_rows_by_visibility": {
+      "external_definition": 0,
+      "method_on_publicly_named_receiver": 127,
+      "publicly_named_function": 1,
+      "trait_method_on_publicly_named_receiver": 24
+    },
+    "measurement_groups": null,
+    "public_declarations_without_body": 0,
+    "public_name_body_definitions": 222,
+    "public_universe_sha256": "5f922fca773cb047e89256b22f56bc61306c741a33ad7dafed29a123960bc1a5",
+    "report": "csv.json",
+    "surface_review_items": 0,
+    "version": "1.4.0"
+  },
+  {
+    "all_local_function_items_by_visibility": {
+      "method_on_publicly_named_receiver": 56,
+      "public_trait_declaration": 2,
+      "trait_method_on_publicly_named_receiver": 47
+    },
+    "analysis_status": "completed_visibility_only_impl_obligations_unverified",
+    "crate": "fixedbitset",
+    "historical_selected_rows_by_visibility": {
+      "external_definition": 0,
+      "method_on_publicly_named_receiver": 56,
+      "public_trait_declaration": 0,
+      "trait_method_on_publicly_named_receiver": 35
+    },
+    "measurement_groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 56.043956043956044,
+        "covered": 51,
+        "observed_zero": 40,
+        "total": 91,
+        "unresolved": 0
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 56.043956043956044,
+        "covered": 51,
+        "observed_zero": 40,
+        "total": 91,
+        "unresolved": 0
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 53.68421052631579,
+        "covered": 51,
+        "observed_zero": 44,
+        "total": 95,
+        "unresolved": 0
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 51.45631067961165,
+        "covered": 53,
+        "observed_zero": 49,
+        "total": 103,
+        "unresolved": 1
+      },
+      "public_name_body_definitions": {
+        "confirmed_coverage_percent": 52.38095238095238,
+        "covered": 55,
+        "observed_zero": 49,
+        "total": 105,
+        "unresolved": 1
+      },
+      "public_surface_review_items": {
+        "confirmed_coverage_percent": null,
+        "covered": 0,
+        "observed_zero": 0,
+        "total": 0,
+        "unresolved": 0
+      }
+    },
+    "public_declarations_without_body": 0,
+    "public_name_body_definitions": 105,
+    "public_universe_sha256": "412789d00fbf195944a0fcb4b334dfdda4183448c9392f7f3ec9c76bcfc0e5e2",
+    "report": "fixedbitset.json",
+    "surface_review_items": 0,
+    "version": "0.5.7"
+  },
+  {
+    "all_local_function_items_by_visibility": {
+      "method_on_publicly_named_receiver": 16,
+      "publicly_named_function": 10,
+      "trait_method_on_publicly_named_receiver": 23
+    },
+    "analysis_status": "completed_visibility_only_impl_obligations_unverified",
+    "crate": "idna",
+    "historical_selected_rows_by_visibility": {
+      "external_definition": 0,
+      "method_on_publicly_named_receiver": 8,
+      "publicly_named_function": 10,
+      "trait_method_on_publicly_named_receiver": 0
+    },
+    "measurement_groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 83.33333333333333,
+        "covered": 15,
+        "observed_zero": 3,
+        "total": 18,
+        "unresolved": 0
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 83.33333333333333,
+        "covered": 15,
+        "observed_zero": 3,
+        "total": 18,
+        "unresolved": 0
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 57.69230769230769,
+        "covered": 15,
+        "observed_zero": 11,
+        "total": 26,
+        "unresolved": 0
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 30.612244897959183,
+        "covered": 15,
+        "observed_zero": 16,
+        "total": 49,
+        "unresolved": 18
+      },
+      "public_name_body_definitions": {
+        "confirmed_coverage_percent": 30.612244897959183,
+        "covered": 15,
+        "observed_zero": 16,
+        "total": 49,
+        "unresolved": 18
+      },
+      "public_surface_review_items": {
+        "confirmed_coverage_percent": null,
+        "covered": 0,
+        "observed_zero": 0,
+        "total": 0,
+        "unresolved": 0
+      }
+    },
+    "public_declarations_without_body": 0,
+    "public_name_body_definitions": 49,
+    "public_universe_sha256": "6df5596148260e5253ce60313f1c9831b2bbfbfa05e87a968a0c39e917663bcc",
+    "report": "idna.json",
+    "surface_review_items": 0,
+    "version": "1.1.0"
+  },
+  {
+    "all_local_function_items_by_visibility": {
+      "method_on_publicly_named_receiver": 160,
+      "public_trait_declaration": 6,
+      "publicly_named_function": 1,
+      "trait_impl_requires_applicability_or_opaque_receiver_review": 2,
+      "trait_method_on_publicly_named_receiver": 157
+    },
+    "analysis_status": "completed_visibility_only_impl_obligations_unverified",
+    "crate": "regex",
+    "historical_selected_rows_by_visibility": {
+      "external_definition": 0,
+      "method_on_publicly_named_receiver": 156,
+      "public_trait_declaration": 0,
+      "publicly_named_function": 1,
+      "trait_impl_requires_applicability_or_opaque_receiver_review": 0,
+      "trait_method_on_publicly_named_receiver": 53
+    },
+    "measurement_groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 52.38095238095238,
+        "covered": 110,
+        "observed_zero": 100,
+        "total": 210,
+        "unresolved": 0
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 52.38095238095238,
+        "covered": 110,
+        "observed_zero": 100,
+        "total": 210,
+        "unresolved": 0
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 46.610169491525426,
+        "covered": 110,
+        "observed_zero": 126,
+        "total": 236,
+        "unresolved": 0
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 35.0,
+        "covered": 112,
+        "observed_zero": 154,
+        "total": 320,
+        "unresolved": 54
+      },
+      "public_name_body_definitions": {
+        "confirmed_coverage_percent": 34.78260869565217,
+        "covered": 112,
+        "observed_zero": 156,
+        "total": 322,
+        "unresolved": 54
+      },
+      "public_surface_review_items": {
+        "confirmed_coverage_percent": 0.0,
+        "covered": 0,
+        "observed_zero": 2,
+        "total": 2,
+        "unresolved": 0
+      }
+    },
+    "public_declarations_without_body": 2,
+    "public_name_body_definitions": 322,
+    "public_universe_sha256": "c5508fad06ab3e5bd7c8379d5894d3f8bb4f9cd920eebd3581cd4d929c1e9314",
+    "report": "regex.json",
+    "surface_review_items": 2,
+    "version": "1.12.3"
+  },
+  {
+    "all_local_function_items_by_visibility": {
+      "method_on_publicly_named_receiver": 3,
+      "owner_visibility_or_applicability_unresolved": 3,
+      "publicly_named_function": 2,
+      "trait_method_on_publicly_named_receiver": 2
+    },
+    "analysis_status": "completed_visibility_only_impl_obligations_unverified",
+    "crate": "ryu",
+    "historical_selected_rows_by_visibility": {
+      "external_definition": 0,
+      "method_on_publicly_named_receiver": 3,
+      "owner_visibility_or_applicability_unresolved": 0,
+      "publicly_named_function": 2,
+      "trait_method_on_publicly_named_receiver": 0
+    },
+    "measurement_groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 100.0,
+        "covered": 5,
+        "observed_zero": 0,
+        "total": 5,
+        "unresolved": 0
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 100.0,
+        "covered": 5,
+        "observed_zero": 0,
+        "total": 5,
+        "unresolved": 0
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 100.0,
+        "covered": 5,
+        "observed_zero": 0,
+        "total": 5,
+        "unresolved": 0
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 71.42857142857143,
+        "covered": 5,
+        "observed_zero": 2,
+        "total": 7,
+        "unresolved": 0
+      },
+      "public_name_body_definitions": {
+        "confirmed_coverage_percent": 71.42857142857143,
+        "covered": 5,
+        "observed_zero": 2,
+        "total": 7,
+        "unresolved": 0
+      },
+      "public_surface_review_items": {
+        "confirmed_coverage_percent": 0.0,
+        "covered": 0,
+        "observed_zero": 0,
+        "total": 3,
+        "unresolved": 3
+      }
+    },
+    "public_declarations_without_body": 0,
+    "public_name_body_definitions": 7,
+    "public_universe_sha256": "658ede759a3b84e5ebf65c982dd5b574e184f73f141134186bf6cff2cf6fa397",
+    "report": "ryu.json",
+    "surface_review_items": 3,
+    "version": "1.0.23"
+  },
+  {
+    "all_local_function_items_by_visibility": {
+      "method_on_publicly_named_receiver": 297,
+      "public_trait_declaration": 24,
+      "publicly_named_function": 2,
+      "trait_method_on_publicly_named_receiver": 290
+    },
+    "analysis_status": "completed_with_logged_doctest_analysis_view",
+    "crate": "time",
+    "historical_selected_rows_by_visibility": {
+      "external_definition": 0,
+      "method_on_publicly_named_receiver": 297,
+      "public_trait_declaration": 0,
+      "publicly_named_function": 1,
+      "trait_method_on_publicly_named_receiver": 111
+    },
+    "measurement_groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 51.13350125944584,
+        "covered": 203,
+        "observed_zero": 168,
+        "total": 397,
+        "unresolved": 26
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 49.877750611246945,
+        "covered": 204,
+        "observed_zero": 179,
+        "total": 409,
+        "unresolved": 26
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 46.559633027522935,
+        "covered": 203,
+        "observed_zero": 207,
+        "total": 436,
+        "unresolved": 26
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 37.18166383701188,
+        "covered": 219,
+        "observed_zero": 297,
+        "total": 589,
+        "unresolved": 73
+      },
+      "public_name_body_definitions": {
+        "confirmed_coverage_percent": 37.055837563451774,
+        "covered": 219,
+        "observed_zero": 299,
+        "total": 591,
+        "unresolved": 73
+      },
+      "public_surface_review_items": {
+        "confirmed_coverage_percent": null,
+        "covered": 0,
+        "observed_zero": 0,
+        "total": 0,
+        "unresolved": 0
+      }
+    },
+    "public_declarations_without_body": 22,
+    "public_name_body_definitions": 591,
+    "public_universe_sha256": "0a1ceceb8d02db4ff23a9e0dc2fec5fb604d29976d510213840896c062aed8ca",
+    "report": "time.json",
+    "surface_review_items": 0,
+    "version": "0.3.47"
+  },
+  {
+    "all_local_function_items_by_visibility": {
+      "method_on_publicly_named_receiver": 11,
+      "public_trait_declaration": 9,
+      "trait_method_on_publicly_named_receiver": 53
+    },
+    "analysis_status": "completed_visibility_only_impl_obligations_unverified",
+    "crate": "unicode-segmentation",
+    "historical_selected_rows_by_visibility": {
+      "external_definition": 0,
+      "method_on_publicly_named_receiver": 11,
+      "public_trait_declaration": 0,
+      "trait_method_on_publicly_named_receiver": 24
+    },
+    "measurement_groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 65.71428571428571,
+        "covered": 23,
+        "observed_zero": 12,
+        "total": 35,
+        "unresolved": 0
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 65.71428571428571,
+        "covered": 23,
+        "observed_zero": 12,
+        "total": 35,
+        "unresolved": 0
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 61.36363636363637,
+        "covered": 27,
+        "observed_zero": 17,
+        "total": 44,
+        "unresolved": 0
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 42.1875,
+        "covered": 27,
+        "observed_zero": 17,
+        "total": 64,
+        "unresolved": 20
+      },
+      "public_name_body_definitions": {
+        "confirmed_coverage_percent": 42.1875,
+        "covered": 27,
+        "observed_zero": 17,
+        "total": 64,
+        "unresolved": 20
+      },
+      "public_surface_review_items": {
+        "confirmed_coverage_percent": null,
+        "covered": 0,
+        "observed_zero": 0,
+        "total": 0,
+        "unresolved": 0
+      }
+    },
+    "public_declarations_without_body": 9,
+    "public_name_body_definitions": 64,
+    "public_universe_sha256": "029515743e51dd9aa8549a2e3a630e956edd9a56f47bd53c768388cddf03ec0e",
+    "report": "unicode-segmentation.json",
+    "surface_review_items": 0,
+    "version": "1.13.2"
+  }
+]

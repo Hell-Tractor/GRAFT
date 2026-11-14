@@ -1,0 +1,364 @@
+ Documenting autocfg v1.5.0
+Fuzz Target Generator for Rust Libraries: v1.65.0
+Total function number: 78
+Before Reachable API Analysis API Number: 29
+Before Reachable API Analysis Dependencies Number: 66
+>>>>> Reachable API Analysis <<<<<
+After Reachable API Analysis API Number: 28
+After Reachable API Analysis Dependencies Number: 44
+API Pool Set
+API FUNCTION 0: autocfg::AutoCfg::new () -> std::result::Result<AutoCfg, error::Error> { }, GENERIC:false
+API FUNCTION 1: autocfg::AutoCfg::no_std (&AutoCfg) -> bool { }, GENERIC:false
+API FUNCTION 2: autocfg::AutoCfg::set_no_std (&mut AutoCfg, bool) -> () { MUTATE }, GENERIC:false
+API FUNCTION 3: autocfg::AutoCfg::edition (&AutoCfg) -> std::option::Option<&str> { }, GENERIC:false
+API FUNCTION 4: autocfg::AutoCfg::set_edition (&mut AutoCfg, std::option::Option<std::string::String>) -> () { DROP MUTATE }, GENERIC:true
+API FUNCTION 5: autocfg::AutoCfg::probe_rustc_version (&AutoCfg, usize, usize) -> bool { }, GENERIC:false
+API FUNCTION 6: autocfg::AutoCfg::emit_rustc_version (&AutoCfg, usize, usize) -> () { DROP }, GENERIC:false
+API FUNCTION 7: autocfg::AutoCfg::probe_raw (&AutoCfg, &str) -> std::result::Result<(), error::Error> { }, GENERIC:false
+API FUNCTION 8: autocfg::AutoCfg::probe_sysroot_crate (&AutoCfg, &str) -> bool { }, GENERIC:false
+API FUNCTION 9: autocfg::AutoCfg::emit_sysroot_crate (&AutoCfg, &str) -> () { DROP }, GENERIC:false
+API FUNCTION 10: autocfg::AutoCfg::probe_path (&AutoCfg, &str) -> bool { }, GENERIC:false
+API FUNCTION 11: autocfg::AutoCfg::emit_has_path (&AutoCfg, &str) -> () { DROP }, GENERIC:false
+API FUNCTION 12: autocfg::AutoCfg::emit_path_cfg (&AutoCfg, &str, &str) -> () { }, GENERIC:false
+API FUNCTION 13: autocfg::AutoCfg::probe_trait (&AutoCfg, &str) -> bool { }, GENERIC:false
+API FUNCTION 14: autocfg::AutoCfg::emit_has_trait (&AutoCfg, &str) -> () { DROP }, GENERIC:false
+API FUNCTION 15: autocfg::AutoCfg::emit_trait_cfg (&AutoCfg, &str, &str) -> () { }, GENERIC:false
+API FUNCTION 16: autocfg::AutoCfg::probe_type (&AutoCfg, &str) -> bool { }, GENERIC:false
+API FUNCTION 17: autocfg::AutoCfg::emit_has_type (&AutoCfg, &str) -> () { DROP }, GENERIC:false
+API FUNCTION 18: autocfg::AutoCfg::emit_type_cfg (&AutoCfg, &str, &str) -> () { }, GENERIC:false
+API FUNCTION 19: autocfg::AutoCfg::probe_expression (&AutoCfg, &str) -> bool { }, GENERIC:false
+API FUNCTION 20: autocfg::AutoCfg::emit_expression_cfg (&AutoCfg, &str, &str) -> () { }, GENERIC:false
+API FUNCTION 21: autocfg::AutoCfg::probe_constant (&AutoCfg, &str) -> bool { }, GENERIC:false
+API FUNCTION 22: autocfg::AutoCfg::emit_constant_cfg (&AutoCfg, &str, &str) -> () { }, GENERIC:false
+API FUNCTION 23: autocfg::new () { }, GENERIC:false
+API FUNCTION 24: autocfg::emit_possibility () { }, GENERIC:false
+API FUNCTION 25: autocfg::rerun_env () { }, GENERIC:false
+API FUNCTION 26: autocfg::rerun_path () { }, GENERIC:false
+API FUNCTION 27: autocfg::emit () { }, GENERIC:false
+All Generated Sequences:
+Sequence.0: "", ""
+Sequence.1: "0", "[ ]"
+Sequence.2: "23", "[ ]"
+Sequence.3: "24", "[ ]"
+Sequence.4: "25", "[ ]"
+Sequence.5: "26", "[ ]"
+Sequence.6: "27", "[ ]"
+Sequence.7: "0->0", "[ ]->[ ]"
+Sequence.8: "0->1", "[ ]->[ ]"
+Sequence.9: "0->2", "[ ]->[ Mutate ]"
+Sequence.10: "0->3", "[ ]->[ ]"
+Sequence.11: "0->4", "[ ]->[ Drop Mutate ]"
+Sequence.12: "0->5", "[ ]->[ ]"
+Sequence.13: "0->6", "[ ]->[ Drop ]"
+Sequence.14: "0->7", "[ ]->[ ]"
+Sequence.15: "0->8", "[ ]->[ ]"
+Sequence.16: "0->9", "[ ]->[ Drop ]"
+Sequence.17: "0->10", "[ ]->[ ]"
+Sequence.18: "0->11", "[ ]->[ Drop ]"
+Sequence.19: "0->12", "[ ]->[ ]"
+Sequence.20: "0->13", "[ ]->[ ]"
+Sequence.21: "0->14", "[ ]->[ Drop ]"
+Sequence.22: "0->15", "[ ]->[ ]"
+Sequence.23: "0->16", "[ ]->[ ]"
+Sequence.24: "0->17", "[ ]->[ Drop ]"
+Sequence.25: "0->18", "[ ]->[ ]"
+Sequence.26: "0->19", "[ ]->[ ]"
+Sequence.27: "0->20", "[ ]->[ ]"
+Sequence.28: "0->21", "[ ]->[ ]"
+Sequence.29: "0->22", "[ ]->[ ]"
+Sequence.30: "0->23", "[ ]->[ ]"
+Sequence.31: "0->24", "[ ]->[ ]"
+Sequence.32: "0->25", "[ ]->[ ]"
+Sequence.33: "0->26", "[ ]->[ ]"
+Sequence.34: "0->27", "[ ]->[ ]"
+Sequence.35: "23->0", "[ ]->[ ]"
+Sequence.36: "23->1", "[ ]->[ ]"
+Sequence.37: "23->2", "[ ]->[ Mutate ]"
+Sequence.38: "23->3", "[ ]->[ ]"
+Sequence.39: "23->4", "[ ]->[ Drop Mutate ]"
+Sequence.40: "23->5", "[ ]->[ ]"
+Sequence.41: "23->6", "[ ]->[ Drop ]"
+Sequence.42: "23->7", "[ ]->[ ]"
+Sequence.43: "23->8", "[ ]->[ ]"
+Sequence.44: "23->9", "[ ]->[ Drop ]"
+Sequence.45: "23->10", "[ ]->[ ]"
+Sequence.46: "23->11", "[ ]->[ Drop ]"
+Sequence.47: "23->12", "[ ]->[ ]"
+Sequence.48: "23->13", "[ ]->[ ]"
+Sequence.49: "23->14", "[ ]->[ Drop ]"
+Sequence.50: "23->15", "[ ]->[ ]"
+Sequence.51: "23->16", "[ ]->[ ]"
+Sequence.52: "23->17", "[ ]->[ Drop ]"
+Sequence.53: "23->18", "[ ]->[ ]"
+Sequence.54: "23->19", "[ ]->[ ]"
+Sequence.55: "23->20", "[ ]->[ ]"
+Sequence.56: "23->21", "[ ]->[ ]"
+Sequence.57: "23->22", "[ ]->[ ]"
+Sequence.58: "23->23", "[ ]->[ ]"
+Sequence.59: "23->24", "[ ]->[ ]"
+Sequence.60: "23->25", "[ ]->[ ]"
+Sequence.61: "23->26", "[ ]->[ ]"
+Sequence.62: "23->27", "[ ]->[ ]"
+Sequence.63: "0->0->0", "[ ]->[ ]->[ ]"
+Sequence.64: "0->0->1", "[ ]->[ ]->[ ]"
+Sequence.65: "0->0->2", "[ ]->[ ]->[ Mutate ]"
+Sequence.66: "0->0->3", "[ ]->[ ]->[ ]"
+Sequence.67: "0->0->4", "[ ]->[ ]->[ Drop Mutate ]"
+Sequence.68: "0->0->5", "[ ]->[ ]->[ ]"
+Sequence.69: "0->0->6", "[ ]->[ ]->[ Drop ]"
+Sequence.70: "0->0->7", "[ ]->[ ]->[ ]"
+Sequence.71: "0->0->8", "[ ]->[ ]->[ ]"
+Sequence.72: "0->0->9", "[ ]->[ ]->[ Drop ]"
+Sequence.73: "0->0->10", "[ ]->[ ]->[ ]"
+Sequence.74: "0->0->11", "[ ]->[ ]->[ Drop ]"
+Sequence.75: "0->0->12", "[ ]->[ ]->[ ]"
+Sequence.76: "0->0->13", "[ ]->[ ]->[ ]"
+Sequence.77: "0->0->14", "[ ]->[ ]->[ Drop ]"
+Sequence.78: "0->0->15", "[ ]->[ ]->[ ]"
+Sequence.79: "0->0->16", "[ ]->[ ]->[ ]"
+Sequence.80: "0->0->17", "[ ]->[ ]->[ Drop ]"
+Sequence.81: "0->0->18", "[ ]->[ ]->[ ]"
+Sequence.82: "0->0->19", "[ ]->[ ]->[ ]"
+Sequence.83: "0->0->20", "[ ]->[ ]->[ ]"
+Sequence.84: "0->0->21", "[ ]->[ ]->[ ]"
+Sequence.85: "0->0->22", "[ ]->[ ]->[ ]"
+Sequence.86: "0->0->23", "[ ]->[ ]->[ ]"
+Sequence.87: "0->0->24", "[ ]->[ ]->[ ]"
+Sequence.88: "0->0->25", "[ ]->[ ]->[ ]"
+Sequence.89: "0->0->26", "[ ]->[ ]->[ ]"
+Sequence.90: "0->0->27", "[ ]->[ ]->[ ]"
+Sequence.91: "0->2->0", "[ ]->[ Mutate ]->[ ]"
+Sequence.92: "0->2->1", "[ ]->[ Mutate ]->[ ]"
+Sequence.93: "0->2->2", "[ ]->[ Mutate ]->[ Mutate ]"
+Sequence.94: "0->2->3", "[ ]->[ Mutate ]->[ ]"
+Sequence.95: "0->2->4", "[ ]->[ Mutate ]->[ Drop Mutate ]"
+Sequence.96: "0->2->5", "[ ]->[ Mutate ]->[ ]"
+Sequence.97: "0->2->6", "[ ]->[ Mutate ]->[ Drop ]"
+Sequence.98: "0->2->7", "[ ]->[ Mutate ]->[ ]"
+Sequence.99: "0->2->8", "[ ]->[ Mutate ]->[ ]"
+Sequence.100: "0->2->9", "[ ]->[ Mutate ]->[ Drop ]"
+Sequence.101: "0->2->10", "[ ]->[ Mutate ]->[ ]"
+Sequence.102: "0->2->11", "[ ]->[ Mutate ]->[ Drop ]"
+Sequence.103: "0->2->12", "[ ]->[ Mutate ]->[ ]"
+Sequence.104: "0->2->13", "[ ]->[ Mutate ]->[ ]"
+Sequence.105: "0->2->14", "[ ]->[ Mutate ]->[ Drop ]"
+Sequence.106: "0->2->15", "[ ]->[ Mutate ]->[ ]"
+Sequence.107: "0->2->16", "[ ]->[ Mutate ]->[ ]"
+Sequence.108: "0->2->17", "[ ]->[ Mutate ]->[ Drop ]"
+Sequence.109: "0->2->18", "[ ]->[ Mutate ]->[ ]"
+Sequence.110: "0->2->19", "[ ]->[ Mutate ]->[ ]"
+Sequence.111: "0->2->20", "[ ]->[ Mutate ]->[ ]"
+Sequence.112: "0->2->21", "[ ]->[ Mutate ]->[ ]"
+Sequence.113: "0->2->22", "[ ]->[ Mutate ]->[ ]"
+Sequence.114: "0->2->23", "[ ]->[ Mutate ]->[ ]"
+Sequence.115: "0->2->24", "[ ]->[ Mutate ]->[ ]"
+Sequence.116: "0->2->25", "[ ]->[ Mutate ]->[ ]"
+Sequence.117: "0->2->26", "[ ]->[ Mutate ]->[ ]"
+Sequence.118: "0->2->27", "[ ]->[ Mutate ]->[ ]"
+Sequence.119: "0->4->0", "[ ]->[ Drop Mutate ]->[ ]"
+Sequence.120: "0->4->1", "[ ]->[ Drop Mutate ]->[ ]"
+Sequence.121: "0->4->2", "[ ]->[ Drop Mutate ]->[ Mutate ]"
+Sequence.122: "0->4->3", "[ ]->[ Drop Mutate ]->[ ]"
+Sequence.123: "0->4->4", "[ ]->[ Drop Mutate ]->[ Drop Mutate ]"
+Sequence.124: "0->4->5", "[ ]->[ Drop Mutate ]->[ ]"
+Sequence.125: "0->4->6", "[ ]->[ Drop Mutate ]->[ Drop ]"
+Sequence.126: "0->4->7", "[ ]->[ Drop Mutate ]->[ ]"
+Sequence.127: "0->4->8", "[ ]->[ Drop Mutate ]->[ ]"
+Sequence.128: "0->4->9", "[ ]->[ Drop Mutate ]->[ Drop ]"
+Sequence.129: "0->4->10", "[ ]->[ Drop Mutate ]->[ ]"
+Sequence.130: "0->4->11", "[ ]->[ Drop Mutate ]->[ Drop ]"
+Sequence.131: "0->4->12", "[ ]->[ Drop Mutate ]->[ ]"
+Sequence.132: "0->4->13", "[ ]->[ Drop Mutate ]->[ ]"
+Sequence.133: "0->4->14", "[ ]->[ Drop Mutate ]->[ Drop ]"
+Sequence.134: "0->4->15", "[ ]->[ Drop Mutate ]->[ ]"
+Sequence.135: "0->4->16", "[ ]->[ Drop Mutate ]->[ ]"
+Sequence.136: "0->4->17", "[ ]->[ Drop Mutate ]->[ Drop ]"
+Sequence.137: "0->4->18", "[ ]->[ Drop Mutate ]->[ ]"
+Sequence.138: "0->4->19", "[ ]->[ Drop Mutate ]->[ ]"
+Sequence.139: "0->4->20", "[ ]->[ Drop Mutate ]->[ ]"
+Sequence.140: "0->4->21", "[ ]->[ Drop Mutate ]->[ ]"
+Sequence.141: "0->4->22", "[ ]->[ Drop Mutate ]->[ ]"
+Sequence.142: "0->4->23", "[ ]->[ Drop Mutate ]->[ ]"
+Sequence.143: "0->4->24", "[ ]->[ Drop Mutate ]->[ ]"
+Sequence.144: "0->4->25", "[ ]->[ Drop Mutate ]->[ ]"
+Sequence.145: "0->4->26", "[ ]->[ Drop Mutate ]->[ ]"
+Sequence.146: "0->4->27", "[ ]->[ Drop Mutate ]->[ ]"
+Sequence.147: "0->23->0", "[ ]->[ ]->[ ]"
+Sequence.148: "0->23->1", "[ ]->[ ]->[ ]"
+Sequence.149: "0->23->2", "[ ]->[ ]->[ Mutate ]"
+Sequence.150: "0->23->3", "[ ]->[ ]->[ ]"
+Sequence.151: "0->23->4", "[ ]->[ ]->[ Drop Mutate ]"
+Sequence.152: "0->23->5", "[ ]->[ ]->[ ]"
+Sequence.153: "0->23->6", "[ ]->[ ]->[ Drop ]"
+Sequence.154: "0->23->7", "[ ]->[ ]->[ ]"
+Sequence.155: "0->23->8", "[ ]->[ ]->[ ]"
+Sequence.156: "0->23->9", "[ ]->[ ]->[ Drop ]"
+Sequence.157: "0->23->10", "[ ]->[ ]->[ ]"
+Sequence.158: "0->23->11", "[ ]->[ ]->[ Drop ]"
+Sequence.159: "0->23->12", "[ ]->[ ]->[ ]"
+Sequence.160: "0->23->13", "[ ]->[ ]->[ ]"
+Sequence.161: "0->23->14", "[ ]->[ ]->[ Drop ]"
+Sequence.162: "0->23->15", "[ ]->[ ]->[ ]"
+Sequence.163: "0->23->16", "[ ]->[ ]->[ ]"
+Sequence.164: "0->23->17", "[ ]->[ ]->[ Drop ]"
+Sequence.165: "0->23->18", "[ ]->[ ]->[ ]"
+Sequence.166: "0->23->19", "[ ]->[ ]->[ ]"
+Sequence.167: "0->23->20", "[ ]->[ ]->[ ]"
+Sequence.168: "0->23->21", "[ ]->[ ]->[ ]"
+Sequence.169: "0->23->22", "[ ]->[ ]->[ ]"
+Sequence.170: "0->23->23", "[ ]->[ ]->[ ]"
+Sequence.171: "0->23->24", "[ ]->[ ]->[ ]"
+Sequence.172: "0->23->25", "[ ]->[ ]->[ ]"
+Sequence.173: "0->23->26", "[ ]->[ ]->[ ]"
+Sequence.174: "0->23->27", "[ ]->[ ]->[ ]"
+Sequence.175: "23->0->0", "[ ]->[ ]->[ ]"
+Sequence.176: "23->0->1", "[ ]->[ ]->[ ]"
+Sequence.177: "23->0->2", "[ ]->[ ]->[ Mutate ]"
+Sequence.178: "23->0->3", "[ ]->[ ]->[ ]"
+Sequence.179: "23->0->4", "[ ]->[ ]->[ Drop Mutate ]"
+Sequence.180: "23->0->5", "[ ]->[ ]->[ ]"
+Sequence.181: "23->0->6", "[ ]->[ ]->[ Drop ]"
+Sequence.182: "23->0->7", "[ ]->[ ]->[ ]"
+Sequence.183: "23->0->8", "[ ]->[ ]->[ ]"
+Sequence.184: "23->0->9", "[ ]->[ ]->[ Drop ]"
+Sequence.185: "23->0->10", "[ ]->[ ]->[ ]"
+Sequence.186: "23->0->11", "[ ]->[ ]->[ Drop ]"
+Sequence.187: "23->0->12", "[ ]->[ ]->[ ]"
+Sequence.188: "23->0->13", "[ ]->[ ]->[ ]"
+Sequence.189: "23->0->14", "[ ]->[ ]->[ Drop ]"
+Sequence.190: "23->0->15", "[ ]->[ ]->[ ]"
+Sequence.191: "23->0->16", "[ ]->[ ]->[ ]"
+Sequence.192: "23->0->17", "[ ]->[ ]->[ Drop ]"
+Sequence.193: "23->0->18", "[ ]->[ ]->[ ]"
+Sequence.194: "23->0->19", "[ ]->[ ]->[ ]"
+Sequence.195: "23->0->20", "[ ]->[ ]->[ ]"
+Sequence.196: "23->0->21", "[ ]->[ ]->[ ]"
+Sequence.197: "23->0->22", "[ ]->[ ]->[ ]"
+Sequence.198: "23->0->23", "[ ]->[ ]->[ ]"
+Sequence.199: "23->0->24", "[ ]->[ ]->[ ]"
+Sequence.200: "23->0->25", "[ ]->[ ]->[ ]"
+Sequence.201: "23->0->26", "[ ]->[ ]->[ ]"
+Sequence.202: "23->0->27", "[ ]->[ ]->[ ]"
+Sequence.203: "23->2->0", "[ ]->[ Mutate ]->[ ]"
+Sequence.204: "23->2->1", "[ ]->[ Mutate ]->[ ]"
+Sequence.205: "23->2->2", "[ ]->[ Mutate ]->[ Mutate ]"
+Sequence.206: "23->2->3", "[ ]->[ Mutate ]->[ ]"
+Sequence.207: "23->2->4", "[ ]->[ Mutate ]->[ Drop Mutate ]"
+Sequence.208: "23->2->5", "[ ]->[ Mutate ]->[ ]"
+Sequence.209: "23->2->6", "[ ]->[ Mutate ]->[ Drop ]"
+Sequence.210: "23->2->7", "[ ]->[ Mutate ]->[ ]"
+Sequence.211: "23->2->8", "[ ]->[ Mutate ]->[ ]"
+Sequence.212: "23->2->9", "[ ]->[ Mutate ]->[ Drop ]"
+Sequence.213: "23->2->10", "[ ]->[ Mutate ]->[ ]"
+Sequence.214: "23->2->11", "[ ]->[ Mutate ]->[ Drop ]"
+Sequence.215: "23->2->12", "[ ]->[ Mutate ]->[ ]"
+Sequence.216: "23->2->13", "[ ]->[ Mutate ]->[ ]"
+Sequence.217: "23->2->14", "[ ]->[ Mutate ]->[ Drop ]"
+Sequence.218: "23->2->15", "[ ]->[ Mutate ]->[ ]"
+Sequence.219: "23->2->16", "[ ]->[ Mutate ]->[ ]"
+Sequence.220: "23->2->17", "[ ]->[ Mutate ]->[ Drop ]"
+Sequence.221: "23->2->18", "[ ]->[ Mutate ]->[ ]"
+Sequence.222: "23->2->19", "[ ]->[ Mutate ]->[ ]"
+Sequence.223: "23->2->20", "[ ]->[ Mutate ]->[ ]"
+Sequence.224: "23->2->21", "[ ]->[ Mutate ]->[ ]"
+Sequence.225: "23->2->22", "[ ]->[ Mutate ]->[ ]"
+Sequence.226: "23->2->23", "[ ]->[ Mutate ]->[ ]"
+Sequence.227: "23->2->24", "[ ]->[ Mutate ]->[ ]"
+Sequence.228: "23->2->25", "[ ]->[ Mutate ]->[ ]"
+Sequence.229: "23->2->26", "[ ]->[ Mutate ]->[ ]"
+Sequence.230: "23->2->27", "[ ]->[ Mutate ]->[ ]"
+Sequence.231: "23->4->0", "[ ]->[ Drop Mutate ]->[ ]"
+Sequence.232: "23->4->1", "[ ]->[ Drop Mutate ]->[ ]"
+Sequence.233: "23->4->2", "[ ]->[ Drop Mutate ]->[ Mutate ]"
+Sequence.234: "23->4->3", "[ ]->[ Drop Mutate ]->[ ]"
+Sequence.235: "23->4->4", "[ ]->[ Drop Mutate ]->[ Drop Mutate ]"
+Sequence.236: "23->4->5", "[ ]->[ Drop Mutate ]->[ ]"
+Sequence.237: "23->4->6", "[ ]->[ Drop Mutate ]->[ Drop ]"
+Sequence.238: "23->4->7", "[ ]->[ Drop Mutate ]->[ ]"
+Sequence.239: "23->4->8", "[ ]->[ Drop Mutate ]->[ ]"
+Sequence.240: "23->4->9", "[ ]->[ Drop Mutate ]->[ Drop ]"
+Sequence.241: "23->4->10", "[ ]->[ Drop Mutate ]->[ ]"
+Sequence.242: "23->4->11", "[ ]->[ Drop Mutate ]->[ Drop ]"
+Sequence.243: "23->4->12", "[ ]->[ Drop Mutate ]->[ ]"
+Sequence.244: "23->4->13", "[ ]->[ Drop Mutate ]->[ ]"
+Sequence.245: "23->4->14", "[ ]->[ Drop Mutate ]->[ Drop ]"
+Sequence.246: "23->4->15", "[ ]->[ Drop Mutate ]->[ ]"
+Sequence.247: "23->4->16", "[ ]->[ Drop Mutate ]->[ ]"
+Sequence.248: "23->4->17", "[ ]->[ Drop Mutate ]->[ Drop ]"
+Sequence.249: "23->4->18", "[ ]->[ Drop Mutate ]->[ ]"
+Sequence.250: "23->4->19", "[ ]->[ Drop Mutate ]->[ ]"
+Sequence.251: "23->4->20", "[ ]->[ Drop Mutate ]->[ ]"
+Sequence.252: "23->4->21", "[ ]->[ Drop Mutate ]->[ ]"
+Sequence.253: "23->4->22", "[ ]->[ Drop Mutate ]->[ ]"
+Sequence.254: "23->4->23", "[ ]->[ Drop Mutate ]->[ ]"
+Sequence.255: "23->4->24", "[ ]->[ Drop Mutate ]->[ ]"
+Sequence.256: "23->4->25", "[ ]->[ Drop Mutate ]->[ ]"
+Sequence.257: "23->4->26", "[ ]->[ Drop Mutate ]->[ ]"
+Sequence.258: "23->4->27", "[ ]->[ Drop Mutate ]->[ ]"
+Sequence.259: "23->23->0", "[ ]->[ ]->[ ]"
+Sequence.260: "23->23->1", "[ ]->[ ]->[ ]"
+Sequence.261: "23->23->2", "[ ]->[ ]->[ Mutate ]"
+Sequence.262: "23->23->3", "[ ]->[ ]->[ ]"
+Sequence.263: "23->23->4", "[ ]->[ ]->[ Drop Mutate ]"
+Sequence.264: "23->23->5", "[ ]->[ ]->[ ]"
+Sequence.265: "23->23->6", "[ ]->[ ]->[ Drop ]"
+Sequence.266: "23->23->7", "[ ]->[ ]->[ ]"
+Sequence.267: "23->23->8", "[ ]->[ ]->[ ]"
+Sequence.268: "23->23->9", "[ ]->[ ]->[ Drop ]"
+Sequence.269: "23->23->10", "[ ]->[ ]->[ ]"
+Sequence.270: "23->23->11", "[ ]->[ ]->[ Drop ]"
+Sequence.271: "23->23->12", "[ ]->[ ]->[ ]"
+Sequence.272: "23->23->13", "[ ]->[ ]->[ ]"
+Sequence.273: "23->23->14", "[ ]->[ ]->[ Drop ]"
+Sequence.274: "23->23->15", "[ ]->[ ]->[ ]"
+Sequence.275: "23->23->16", "[ ]->[ ]->[ ]"
+Sequence.276: "23->23->17", "[ ]->[ ]->[ Drop ]"
+Sequence.277: "23->23->18", "[ ]->[ ]->[ ]"
+Sequence.278: "23->23->19", "[ ]->[ ]->[ ]"
+Sequence.279: "23->23->20", "[ ]->[ ]->[ ]"
+Sequence.280: "23->23->21", "[ ]->[ ]->[ ]"
+Sequence.281: "23->23->22", "[ ]->[ ]->[ ]"
+Sequence.282: "23->23->23", "[ ]->[ ]->[ ]"
+Sequence.283: "23->23->24", "[ ]->[ ]->[ ]"
+Sequence.284: "23->23->25", "[ ]->[ ]->[ ]"
+Sequence.285: "23->23->26", "[ ]->[ ]->[ ]"
+Sequence.286: "23->23->27", "[ ]->[ ]->[ ]"
+------------------------------------------------------------------------------------------------------------------------------------------------
+|	TOTAL	|	UNSAFE	|	RAWPTR	|	DROP	|	MUTATE	|	GENERIC	|
+|	28	|	0	|	0	|	6	|	2	|	1	|
+------------------------------------------------------------------------------------------------------------------------------------------------
+FUNCTION INDEX LIST <<<<<
+
+
+>>>>> WRITING FILE START
+CRATE TEST DIR: /results/autocfg/fuzz_target/autocfg_bfs_generic_fuzz
+targets covered by reverse search: 0
+average time to fuzz each api = 1.8571428571428572
+LIBFUZZER_FUZZ_TARGET_DIR: /results/autocfg/libfuzzer_target/autocfg_bfs_fuzz
+CRATE API: /results/autocfg/fuzz_target/autocfg_bfs_api_generic.txt
+CRATE DEPENDENCY: /results/autocfg/fuzz_target/autocfg_bfs_dependency_generic.txt
+-----------------STATISTICS-----------------
+------------------------------------------------
+|	TN	|	IN	|	CN	|
+|	28	|	28	|	1.00	|
+------------------------------------------------
+|	UTN	|	UIN	|	UCN	|
+|	0	|	0	|	NaN	|
+------------------------------------------------
+|	TE	|	IE	|	CE	|
+|	44	|	24	|	0.55	|
+------------------------------------------------
+|	UTE	|	UIE	|	UCE	|
+|	0	|	0	|	NaN	|
+------------------------------------------------
+CRATE API: /results/autocfg/fuzz_target/autocfg_bfs_info_generic.xls
+CRATE SEQUENCE: /results/autocfg/fuzz_target/autocfg_bfs_sequence_generic.txt
+CRATE API GRAPH: /results/autocfg/fuzz_target/autocfg_bfs_api_graph_generic.txt
+WRITING FILE FINISHED <<<<<
+
+Generic functions Num: 1
+total functions in crate : 28
+total test sequences : 287
+Total Time Used: 125
+Fuzz Target Generator exits successfully. Total time cost: 539 ms
+    Finished dev [unoptimized + debuginfo] target(s) in 0.61s

@@ -1,0 +1,25 @@
+ Documenting ryu v1.0.20
+Fuzz Target Generator for Rust Libraries: v0.1.0
+Fuzz Target Renderer Init
+crate: ryu
+using bfs end point
+after backward search
+targets = 36
+total length = 96
+average time to visit = 32
+edge covered by reverse search = 0
+-----------STATISTICS-----------
+total nodes: 3
+total edges: 0
+covered nodes: 2
+covered edges: 0
+node coverage: 0.6666666666666666
+edge coverage: NaN
+targets covered by reverse search: 0
+total targets: 2
+max length = 0
+total length = 2
+average time to fuzz each api = 1
+--------------------------------
+Fuzz Target Generator exits successfully. Total time cost: 278 ms
+    Finished dev [unoptimized + debuginfo] target(s) in 0.31s

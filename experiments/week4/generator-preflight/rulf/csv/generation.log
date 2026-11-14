@@ -1,0 +1,32 @@
+    Checking serde_core v1.0.228
+    Checking memchr v2.8.3
+    Checking itoa v1.0.15
+    Checking ryu v1.0.20
+    Checking csv-core v0.1.13
+    Checking serde v1.0.228
+ Documenting csv v1.3.1
+Fuzz Target Generator for Rust Libraries: v0.1.0
+Fuzz Target Renderer Init
+crate: csv
+using bfs end point
+reverse search can not cover more nodes
+after backward search
+targets = 1924
+total length = 5690
+average time to visit = 96.44067796610169
+edge covered by reverse search = 126
+-----------STATISTICS-----------
+total nodes: 116
+total edges: 607
+covered nodes: 59
+covered edges: 59
+node coverage: 0.5086206896551724
+edge coverage: 0.09719934102141681
+targets covered by reverse search: 0
+total targets: 38
+max length = 0
+total length = 114
+average time to fuzz each api = 1.9322033898305084
+--------------------------------
+Fuzz Target Generator exits successfully. Total time cost: 1055 ms
+    Finished dev [unoptimized + debuginfo] target(s) in 3.90s

@@ -1,0 +1,9 @@
+    Checking num-traits v0.2.19
+    Checking libc v0.2.191
+    Checking num-integer v0.1.47
+    Checking time v0.1.45
+ Documenting chrono v0.4.19
+Fuzz Target Generator for Rust Libraries: v0.1.0
+Fuzz Target Renderer Init
+crate: chrono
+using bfs end point

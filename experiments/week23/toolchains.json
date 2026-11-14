@@ -1,0 +1,27 @@
+{
+  "rustc": {
+    "command": [
+      "rustc",
+      "-vV"
+    ],
+    "returncode": 0,
+    "output": "rustc 1.94.1 (e408947bf 2026-03-25)\nbinary: rustc\ncommit-hash: e408947bfd200af42db322daf0fadfe7e26d3bd1\ncommit-date: 2026-03-25\nhost: x86_64-unknown-linux-gnu\nrelease: 1.94.1\nLLVM version: 21.1.8\n"
+  },
+  "rustdoc": {
+    "command": [
+      "rustdoc",
+      "+nightly",
+      "-vV"
+    ],
+    "returncode": 0,
+    "output": "rustdoc 1.97.0-nightly (17584a181 2026-04-13)\nbinary: rustdoc\ncommit-hash: 17584a181979f04f2aaad867332c22db1caa511a\ncommit-date: 2026-04-13\nhost: x86_64-unknown-linux-gnu\nrelease: 1.97.0-nightly\nLLVM version: 22.1.2\n"
+  },
+  "cargo": {
+    "command": [
+      "cargo",
+      "-V"
+    ],
+    "returncode": 0,
+    "output": "cargo 1.94.1 (29ea6fb6a 2026-03-24)\n"
+  }
+}

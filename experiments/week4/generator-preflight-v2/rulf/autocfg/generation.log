@@ -1,0 +1,26 @@
+ Documenting autocfg v1.5.0
+Fuzz Target Generator for Rust Libraries: v0.1.0
+Fuzz Target Renderer Init
+crate: autocfg
+using bfs end point
+reverse search can not cover more nodes
+after backward search
+targets = 175
+total length = 471
+average time to visit = 17.444444444444443
+edge covered by reverse search = 40
+-----------STATISTICS-----------
+total nodes: 28
+total edges: 44
+covered nodes: 27
+covered edges: 21
+node coverage: 0.9642857142857143
+edge coverage: 0.4772727272727273
+targets covered by reverse search: 0
+total targets: 24
+max length = 0
+total length = 47
+average time to fuzz each api = 1.7407407407407407
+--------------------------------
+Fuzz Target Generator exits successfully. Total time cost: 415 ms
+    Finished dev [unoptimized + debuginfo] target(s) in 0.46s

@@ -1,0 +1,26 @@
+ Documenting bumpalo v3.14.0
+Fuzz Target Generator for Rust Libraries: v0.1.0
+Fuzz Target Renderer Init
+crate: bumpalo
+using bfs end point
+reverse search can not cover more nodes
+after backward search
+targets = 277
+total length = 793
+average time to visit = 61
+edge covered by reverse search = 36
+-----------STATISTICS-----------
+total nodes: 15
+total edges: 44
+covered nodes: 13
+covered edges: 14
+node coverage: 0.8666666666666667
+edge coverage: 0.3181818181818182
+targets covered by reverse search: 0
+total targets: 10
+max length = 0
+total length = 24
+average time to fuzz each api = 1.8461538461538463
+--------------------------------
+Fuzz Target Generator exits successfully. Total time cost: 343 ms
+    Finished dev [unoptimized + debuginfo] target(s) in 0.38s

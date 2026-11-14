@@ -1,0 +1,44 @@
+{
+  "schema": "graft-generation-v1",
+  "started_unix_ms": 1794231675144,
+  "max_repairs": 1,
+  "accepted": true,
+  "attempts": [
+    {
+      "index": 0,
+      "is_repair": false,
+      "response": {
+        "content": "extern crate alloc;\n#[allow(unused_mut, unused_variables)]\npub fn graft_body(data: &[u8]) -> Vec<(usize, Vec<u8>)> {\nlet mut trace = Vec::new();\nlet mut v0: u8 = u8::from_le_bytes(core::array::from_fn(|i| data.get((0 + i) % data.len().max(1)).copied().unwrap_or(0)));\nlet observed_0 = format!(\"{:?}\", (v0,)).into_bytes();\nlet mut v1: u8 = 0u8;\nif std::env::var_os(\"GRAFT_TRACE\").is_some() { eprintln!(\"GRAFT_CALL:0:{}\", String::from_utf8_lossy(&observed_0)); }\ntrace.push((0, observed_0));\ntrace\n}\n\nfn main() { let data: Vec<u8> = std::env::args().skip(1).map(|s| s.parse::<u8>().expect(\"byte argument\")).collect(); println!(\"{:?}\", graft_body(&data)); }\n",
+        "model": "offline-mock",
+        "immutable_revision": "fixture-v1",
+        "input_tokens": null,
+        "output_tokens": null,
+        "cost": 0.0
+      },
+      "latency_ms": 0,
+      "source_sha256": "85e5b9cf3d0998cd6703004b5041fc155ba164d8ff1b0c807500e4aae365933e",
+      "plan_retained": false,
+      "compiled": true,
+      "diagnostics": "planned core AST changed: call/order/type/binding/branch/input decoder must be retained; request replanning instead"
+    },
+    {
+      "index": 1,
+      "is_repair": true,
+      "response": {
+        "content": "extern crate alloc;\n#[allow(unused_mut, unused_variables)]\npub fn graft_body(data: &[u8]) -> Vec<(usize, Vec<u8>)> {\nlet mut trace = Vec::new();\nlet mut v0: u8 = u8::from_le_bytes(core::array::from_fn(|i| data.get((0 + i) % data.len().max(1)).copied().unwrap_or(0)));\nlet observed_0 = format!(\"{:?}\", (v0,)).into_bytes();\nlet mut v1: u8 = checked_fixture::scalar(v0);\nif std::env::var_os(\"GRAFT_TRACE\").is_some() { eprintln!(\"GRAFT_CALL:0:{}\", String::from_utf8_lossy(&observed_0)); }\ntrace.push((0, observed_0));\ntrace\n}\n\nfn main() { let data: Vec<u8> = std::env::args().skip(1).map(|s| s.parse::<u8>().expect(\"byte argument\")).collect(); println!(\"{:?}\", graft_body(&data)); }\n",
+        "model": "offline-mock",
+        "immutable_revision": "fixture-v1",
+        "input_tokens": null,
+        "output_tokens": null,
+        "cost": 0.0
+      },
+      "latency_ms": 0,
+      "source_sha256": "3461b3c9b6f28a08b54f39784c898493eed6270360a8f045418d51a17fdd7de7",
+      "plan_retained": true,
+      "compiled": true,
+      "diagnostics": ""
+    }
+  ],
+  "backend_error": null,
+  "runtime_status": "separate_probe_required"
+}

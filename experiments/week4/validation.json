@@ -1,0 +1,75 @@
+{
+  "schema": "graft-week4-validation-v1",
+  "python_tests": {
+    "passed": 31,
+    "failed": 0,
+    "log": "python-tests.log"
+  },
+  "common_versions_round": 2,
+  "common_libraries": 13,
+  "compiler_witnesses": {
+    "modern": 0,
+    "rpg": 0,
+    "rulf": 0,
+    "deepsurf": 0
+  },
+  "api_universes_verified": 13,
+  "public_body_definitions": 2434,
+  "owner_review_items": 785,
+  "registry_source_checksums_verified": 37,
+  "rulf_patch_root_and_nested_smoke": "passed",
+  "rulf_port_optimization": "O1 diagnostic only; formal release configuration not yet calibrated",
+  "RPG": {
+    "generated_raw_targets": 230,
+    "first_two_per_available_crate_compiled": 20,
+    "sample_attempts": 22,
+    "invalid_ryu_pointer_harnesses_not_executed": 2
+  },
+  "RULF": {
+    "generated_raw_targets": 344,
+    "sample_compiled": 21,
+    "sample_attempts": 24
+  },
+  "remaining_generation_limits": {
+    "chrono_0_4_19": "both tools exceed 60-second preflight",
+    "time_0_3_9": "RPG exceeds 60-second preflight"
+  },
+  "regex_1_6_0": "both tools completed; uniform downgrade solved earlier RPG timeout",
+  "observed_hardware": {
+    "physical_cores": 32,
+    "logical_threads": 64
+  },
+  "formal_fuzzing_runs": 0,
+  "live_model_calls": 0,
+  "global_wall_budget_seconds": 86400,
+  "formal_duration_frozen": false,
+  "sha256": {
+    "experiments/week4/common-versions.json": "30d8b20ac41a2e46754b53546ad1fddad9993de5f2359fbaa1b77b1cbef61466",
+    "experiments/week4/shared-project/Cargo.toml": "42d605e7e1af6458274a37fd2306e29ed27b5baf7add191e60272d79098fc294",
+    "experiments/week4/shared-project/Cargo.lock": "0f9c3c695a2fc41ba38af211412a70675a3d0ce0b0098a1ffa959b3823b5b6f1",
+    "experiments/protocol-v2-draft.json": "cc9a37b2aa749c1cd056623c96c620922dfbd0f4a5ccd828d167028ac7311e93",
+    "experiments/week4/experiment-time-budget.json": "76c6ebec8a477bdfe0b8b30a7da053ccfbfa5e63827deddac4dea086e00a5f54",
+    "experiments/week4/harness-validity-screen.json": "dfee7de2da08e259c247d184e878a1c59cbe3dd8121431a161f0098a46e163ab",
+    "scripts/prepare_common_sources.py": "a8e88008ec5180f089f5a24f5740ca5e754d56064272d353fa7eabf60b602ac5",
+    "scripts/freeze_common_universes.py": "fdfe1d65f7c3339908e44df7045413d1c275e48c8006ad2ec61ddfffaa84bdc6",
+    "scripts/check_common_generators.py": "12fa5ef804aa8d668baff5dc5b75e255381fbdf40e9ab48e91c9a8d35cc4168b",
+    "scripts/run_shared_compatibility.py": "d8fbaa89b232c89dee42813eede333e02182a69a67e72500977071ead08ac032",
+    "scripts/run_generator_preflight.py": "59cdd5c2faaff5aa0bc8abfcdaa4d2468f1e22d0a17161622c3a2ddd659afee0",
+    "scripts/rebuild_rulf_port.py": "f1df1a201a71791daec7861fe333df42ffe2958bb75dd92eb16494573c7ed29b",
+    "scripts/estimate_experiment_time.py": "4f770458d269dfe571eef5a8fbe67fce889db9066772d09684a8110362696c95",
+    "scripts/check_baseline_containers.py": "e9a98d6da15709a63de8299ee67ab8d96061537c7a7ae8fbd30543b52ad9d7a7",
+    "experiments/week4/common-universes-v2/api_universes/autocfg.json": "592b64c20da450748286478d917164e5997c8b0a82fa842170a57c38a4ee19be",
+    "experiments/week4/common-universes-v2/api_universes/base64.json": "96a9d751880877211ef4e43912b4e6ba275d9ef728f6d89a227d904e5b6d2552",
+    "experiments/week4/common-universes-v2/api_universes/bumpalo.json": "caff29da8b0d8086a6995e47687f9f171496190fd45d6a6a7790fa92d7a33734",
+    "experiments/week4/common-universes-v2/api_universes/byteorder.json": "d10d49359dd7eea05efa3719f27f25e7b2c0a82512b3d9b8a13cc95030b478a5",
+    "experiments/week4/common-universes-v2/api_universes/bytes.json": "ea0c16086712d4f39d4a65c54bad49e7080f185548a33d902f0501714e999137",
+    "experiments/week4/common-universes-v2/api_universes/chrono.json": "ecdf9e59bb0143a4e9911dd0de2b502ee638be3da81f209012e903ad89798fee",
+    "experiments/week4/common-universes-v2/api_universes/csv.json": "df3281c9421b8b5ebfc80f2c729006c5eeba9c4686eaed320484adc50fe772b0",
+    "experiments/week4/common-universes-v2/api_universes/fixedbitset.json": "27bb16be82969a96d59488b966bacf17bb75aa914426fa2549fae2ae84c7a71f",
+    "experiments/week4/common-universes-v2/api_universes/idna.json": "e2238b3d5e995c7eb5cb8649edab7cca4d426f13b1dba8054ff9ed992d2fbd46",
+    "experiments/week4/common-universes-v2/api_universes/regex.json": "11d0f7fdd47502c159f9b40bf28db18646cfc6cfe6bb0fb337779d846abff59d",
+    "experiments/week4/common-universes-v2/api_universes/ryu.json": "fb3e37bf3e1520fcd832e93f579c43bbb2dacd429c45480f8ef132929f37b755",
+    "experiments/week4/common-universes-v2/api_universes/time.json": "9b5dbd51f73cf51a79d76a73bfa4d414501bfae501b8859ce667005cc4947905",
+    "experiments/week4/common-universes-v2/api_universes/unicode-segmentation.json": "4d4cc21a6cb5977d389ab3620e651588e0bd641c4c70baac579945abaf903e85"
+  }
+}

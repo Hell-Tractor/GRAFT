@@ -1,0 +1,3 @@
+graft_baseline_smoke::consume () { }
+graft_baseline_smoke::make () { }
+graft_baseline_smoke::scalar () { }

@@ -1,0 +1,5 @@
+    Checking aho-corasick v1.1.5
+    Checking regex-syntax v0.8.11
+    Checking regex-automata v0.4.18
+ Documenting regex v1.12.3
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.56s

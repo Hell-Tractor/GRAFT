@@ -1,0 +1,60 @@
+rustc 1.65.0-dev
+Fuzz Target Generator for Rust Libraries: v1.65.0
+Total function number: 4
+Before Reachable API Analysis API Number: 3
+Before Reachable API Analysis Dependencies Number: 1
+>>>>> Reachable API Analysis <<<<<
+After Reachable API Analysis API Number: 3
+After Reachable API Analysis Dependencies Number: 1
+API Pool Set
+API FUNCTION 0: graft_baseline_smoke::consume () { }, GENERIC:true
+API FUNCTION 1: graft_baseline_smoke::make () { }, GENERIC:false
+API FUNCTION 2: graft_baseline_smoke::scalar () { }, GENERIC:false
+All Generated Sequences:
+Sequence.0: "", ""
+Sequence.1: "1", "[ ]"
+Sequence.2: "2", "[ ]"
+Sequence.3: "1->0", "[ ]->[ ]"
+Sequence.4: "1->1", "[ ]->[ ]"
+Sequence.5: "1->2", "[ ]->[ ]"
+Sequence.6: "1->1->0", "[ ]->[ ]->[ ]"
+Sequence.7: "1->1->1", "[ ]->[ ]->[ ]"
+Sequence.8: "1->1->2", "[ ]->[ ]->[ ]"
+------------------------------------------------------------------------------------------------------------------------------------------------
+|	TOTAL	|	UNSAFE	|	RAWPTR	|	DROP	|	MUTATE	|	GENERIC	|
+|	3	|	0	|	0	|	0	|	0	|	1	|
+------------------------------------------------------------------------------------------------------------------------------------------------
+FUNCTION INDEX LIST <<<<<
+
+
+>>>>> WRITING FILE START
+CRATE TEST DIR: /work/fuzz_target/graft_baseline_smoke_bfs_generic_fuzz
+targets covered by reverse search: 0
+average time to fuzz each api = 1
+LIBFUZZER_FUZZ_TARGET_DIR: /work/libfuzzer_target/graft_baseline_smoke_bfs_fuzz
+CRATE API: /work/fuzz_target/graft_baseline_smoke_bfs_api_generic.txt
+CRATE DEPENDENCY: /work/fuzz_target/graft_baseline_smoke_bfs_dependency_generic.txt
+-----------------STATISTICS-----------------
+------------------------------------------------
+|	TN	|	IN	|	CN	|
+|	3	|	2	|	0.67	|
+------------------------------------------------
+|	UTN	|	UIN	|	UCN	|
+|	0	|	0	|	NaN	|
+------------------------------------------------
+|	TE	|	IE	|	CE	|
+|	1	|	1	|	1.00	|
+------------------------------------------------
+|	UTE	|	UIE	|	UCE	|
+|	0	|	0	|	NaN	|
+------------------------------------------------
+CRATE API: /work/fuzz_target/graft_baseline_smoke_bfs_info_generic.xls
+CRATE SEQUENCE: /work/fuzz_target/graft_baseline_smoke_bfs_sequence_generic.txt
+CRATE API GRAPH: /work/fuzz_target/graft_baseline_smoke_bfs_api_graph_generic.txt
+WRITING FILE FINISHED <<<<<
+
+Generic functions Num: 1
+total functions in crate : 3
+total test sequences : 9
+Total Time Used: 9
+Fuzz Target Generator exits successfully. Total time cost: 363 ms

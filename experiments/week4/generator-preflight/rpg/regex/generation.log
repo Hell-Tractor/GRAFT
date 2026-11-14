@@ -1,0 +1,9 @@
+ Documenting regex v1.12.3
+Fuzz Target Generator for Rust Libraries: v1.65.0
+Total function number: 428
+Before Reachable API Analysis API Number: 165
+Before Reachable API Analysis Dependencies Number: 950
+>>>>> Reachable API Analysis <<<<<
+After Reachable API Analysis API Number: 150
+After Reachable API Analysis Dependencies Number: 892
+API Pool Set

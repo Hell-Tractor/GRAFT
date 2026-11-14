@@ -1,0 +1,22 @@
+error[E0277]: the trait bound `i32: checked_fixture::Tag` is not satisfied
+  --> /tmp/graft-checked-tests-1281/bad-bound/main.rs:1:38
+   |
+ 1 | fn main(){checked_fixture::needs_tag(1i32);}
+   |           -------------------------- ^^^^ the trait `checked_fixture::Tag` is not implemented for `i32`
+   |           |
+   |           required by a bound introduced by this call
+   |
+help: the trait `checked_fixture::Tag` is implemented for `u8`
+  --> /home/cym/workspace/GRAFT-2.0/GRAFTTool/tests/fixtures/checked_fixture.rs:41:1
+   |
+41 | impl Tag for u8 {}
+   | ^^^^^^^^^^^^^^^
+note: required by a bound in `needs_tag`
+  --> /home/cym/workspace/GRAFT-2.0/GRAFTTool/tests/fixtures/checked_fixture.rs:48:21
+   |
+48 | pub fn needs_tag<T: Tag>(_: T) {}
+   |                     ^^^ required by this bound in `needs_tag`
+
+error: aborting due to 1 previous error
+
+For more information about this error, try `rustc --explain E0277`.

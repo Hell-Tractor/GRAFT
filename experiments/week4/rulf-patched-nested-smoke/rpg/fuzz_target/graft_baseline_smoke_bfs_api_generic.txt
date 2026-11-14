@@ -1,0 +1,2 @@
+graft_baseline_smoke::nested::consume () { }
+graft_baseline_smoke::nested::make () { }

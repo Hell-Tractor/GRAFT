@@ -1,0 +1,8 @@
+   Compiling serde_core v1.0.228
+   Compiling serde v1.0.228
+    Checking memchr v2.8.3
+    Checking itoa v1.0.15
+    Checking ryu v1.0.20
+    Checking csv-core v0.1.13
+ Documenting csv v1.3.1
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.30s

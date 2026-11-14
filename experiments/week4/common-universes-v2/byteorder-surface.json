@@ -1,0 +1,6896 @@
+{
+  "crate": "byteorder",
+  "functions": [
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ReadBytesExt\", \"read_u8\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_u8",
+      "owners": [
+        {
+          "id": 35,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "0",
+      "span": {
+        "begin": [
+          55,
+          5
+        ],
+        "end": [
+          59,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ReadBytesExt\", \"read_u48\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_u48",
+      "owners": [
+        {
+          "id": 35,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "10",
+      "span": {
+        "begin": [
+          269,
+          5
+        ],
+        "end": [
+          273,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"read_i128\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_i128",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "100",
+      "span": {
+        "begin": [
+          656,
+          5
+        ],
+        "end": [
+          658,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"read_int\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_int",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "101",
+      "span": {
+        "begin": [
+          679,
+          5
+        ],
+        "end": [
+          681,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"read_int128\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_int128",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "102",
+      "span": {
+        "begin": [
+          702,
+          5
+        ],
+        "end": [
+          704,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"read_f32\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_f32",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "103",
+      "span": {
+        "begin": [
+          725,
+          5
+        ],
+        "end": [
+          727,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"read_f64\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_f64",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "104",
+      "span": {
+        "begin": [
+          748,
+          5
+        ],
+        "end": [
+          750,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"write_i16\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_i16",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "105",
+      "span": {
+        "begin": [
+          770,
+          5
+        ],
+        "end": [
+          772,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"write_i24\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_i24",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "106",
+      "span": {
+        "begin": [
+          792,
+          5
+        ],
+        "end": [
+          794,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"write_i32\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_i32",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "107",
+      "span": {
+        "begin": [
+          814,
+          5
+        ],
+        "end": [
+          816,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"write_i48\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_i48",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "108",
+      "span": {
+        "begin": [
+          836,
+          5
+        ],
+        "end": [
+          838,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"write_i64\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_i64",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "109",
+      "span": {
+        "begin": [
+          858,
+          5
+        ],
+        "end": [
+          860,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ReadBytesExt\", \"read_i48\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_i48",
+      "owners": [
+        {
+          "id": 35,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "11",
+      "span": {
+        "begin": [
+          295,
+          5
+        ],
+        "end": [
+          299,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"write_i128\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_i128",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "110",
+      "span": {
+        "begin": [
+          880,
+          5
+        ],
+        "end": [
+          882,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"write_int\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_int",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "111",
+      "span": {
+        "begin": [
+          903,
+          5
+        ],
+        "end": [
+          905,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"write_int128\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_int128",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "112",
+      "span": {
+        "begin": [
+          926,
+          5
+        ],
+        "end": [
+          928,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"write_f32\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_f32",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "113",
+      "span": {
+        "begin": [
+          949,
+          5
+        ],
+        "end": [
+          951,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"write_f64\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_f64",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "114",
+      "span": {
+        "begin": [
+          972,
+          5
+        ],
+        "end": [
+          974,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": false,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"read_u16_into\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_u16_into",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "115",
+      "span": {
+        "begin": [
+          997,
+          5
+        ],
+        "end": [
+          997,
+          51
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": false,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"read_u32_into\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_u32_into",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "116",
+      "span": {
+        "begin": [
+          1020,
+          5
+        ],
+        "end": [
+          1020,
+          51
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": false,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"read_u64_into\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_u64_into",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "117",
+      "span": {
+        "begin": [
+          1043,
+          5
+        ],
+        "end": [
+          1043,
+          51
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": false,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"read_u128_into\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_u128_into",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "118",
+      "span": {
+        "begin": [
+          1066,
+          5
+        ],
+        "end": [
+          1066,
+          53
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"read_i16_into\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_i16_into",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "119",
+      "span": {
+        "begin": [
+          1090,
+          5
+        ],
+        "end": [
+          1095,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ReadBytesExt\", \"read_u64\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_u64",
+      "owners": [
+        {
+          "id": 35,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "12",
+      "span": {
+        "begin": [
+          321,
+          5
+        ],
+        "end": [
+          325,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"read_i32_into\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_i32_into",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "120",
+      "span": {
+        "begin": [
+          1119,
+          5
+        ],
+        "end": [
+          1124,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"read_i64_into\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_i64_into",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "121",
+      "span": {
+        "begin": [
+          1148,
+          5
+        ],
+        "end": [
+          1153,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"read_i128_into\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_i128_into",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "122",
+      "span": {
+        "begin": [
+          1177,
+          5
+        ],
+        "end": [
+          1182,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"read_f32_into\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_f32_into",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "123",
+      "span": {
+        "begin": [
+          1207,
+          5
+        ],
+        "end": [
+          1213,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"read_f32_into_unchecked\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: true } }]",
+      "name": "read_f32_into_unchecked",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "124",
+      "span": {
+        "begin": [
+          1242,
+          5
+        ],
+        "end": [
+          1244,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"read_f64_into\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_f64_into",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "125",
+      "span": {
+        "begin": [
+          1269,
+          5
+        ],
+        "end": [
+          1275,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"read_f64_into_unchecked\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: true } }]",
+      "name": "read_f64_into_unchecked",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "126",
+      "span": {
+        "begin": [
+          1305,
+          5
+        ],
+        "end": [
+          1307,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": false,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"write_u16_into\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_u16_into",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "127",
+      "span": {
+        "begin": [
+          1330,
+          5
+        ],
+        "end": [
+          1330,
+          52
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": false,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"write_u32_into\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_u32_into",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "128",
+      "span": {
+        "begin": [
+          1353,
+          5
+        ],
+        "end": [
+          1353,
+          52
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": false,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"write_u64_into\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_u64_into",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "129",
+      "span": {
+        "begin": [
+          1376,
+          5
+        ],
+        "end": [
+          1376,
+          52
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ReadBytesExt\", \"read_i64\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_i64",
+      "owners": [
+        {
+          "id": 35,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "13",
+      "span": {
+        "begin": [
+          347,
+          5
+        ],
+        "end": [
+          351,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": false,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"write_u128_into\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_u128_into",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "130",
+      "span": {
+        "begin": [
+          1399,
+          5
+        ],
+        "end": [
+          1399,
+          54
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"write_i8_into\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_i8_into",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "131",
+      "span": {
+        "begin": [
+          1428,
+          5
+        ],
+        "end": [
+          1433,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"write_i16_into\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_i16_into",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "132",
+      "span": {
+        "begin": [
+          1456,
+          5
+        ],
+        "end": [
+          1461,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"write_i32_into\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_i32_into",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "133",
+      "span": {
+        "begin": [
+          1484,
+          5
+        ],
+        "end": [
+          1489,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"write_i64_into\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_i64_into",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "134",
+      "span": {
+        "begin": [
+          1512,
+          5
+        ],
+        "end": [
+          1517,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"write_i128_into\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_i128_into",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "135",
+      "span": {
+        "begin": [
+          1540,
+          5
+        ],
+        "end": [
+          1545,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"write_f32_into\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_f32_into",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "136",
+      "span": {
+        "begin": [
+          1569,
+          5
+        ],
+        "end": [
+          1574,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"write_f64_into\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_f64_into",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "137",
+      "span": {
+        "begin": [
+          1598,
+          5
+        ],
+        "end": [
+          1603,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": false,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"from_slice_u16\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "from_slice_u16",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "138",
+      "span": {
+        "begin": [
+          1622,
+          5
+        ],
+        "end": [
+          1622,
+          44
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": false,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"from_slice_u32\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "from_slice_u32",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "139",
+      "span": {
+        "begin": [
+          1641,
+          5
+        ],
+        "end": [
+          1641,
+          44
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ReadBytesExt\", \"read_u128\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_u128",
+      "owners": [
+        {
+          "id": 35,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "14",
+      "span": {
+        "begin": [
+          376,
+          5
+        ],
+        "end": [
+          380,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": false,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"from_slice_u64\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "from_slice_u64",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "140",
+      "span": {
+        "begin": [
+          1660,
+          5
+        ],
+        "end": [
+          1660,
+          44
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": false,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"from_slice_u128\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "from_slice_u128",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "141",
+      "span": {
+        "begin": [
+          1679,
+          5
+        ],
+        "end": [
+          1679,
+          46
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"from_slice_i16\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "from_slice_i16",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "142",
+      "span": {
+        "begin": [
+          1699,
+          5
+        ],
+        "end": [
+          1704,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"from_slice_i32\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "from_slice_i32",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "143",
+      "span": {
+        "begin": [
+          1724,
+          5
+        ],
+        "end": [
+          1729,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"from_slice_i64\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "from_slice_i64",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "144",
+      "span": {
+        "begin": [
+          1749,
+          5
+        ],
+        "end": [
+          1754,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"from_slice_i128\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "from_slice_i128",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "145",
+      "span": {
+        "begin": [
+          1774,
+          5
+        ],
+        "end": [
+          1779,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": false,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"from_slice_f32\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "from_slice_f32",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "146",
+      "span": {
+        "begin": [
+          1786,
+          5
+        ],
+        "end": [
+          1786,
+          44
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": false,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"from_slice_f64\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "from_slice_f64",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "147",
+      "span": {
+        "begin": [
+          1793,
+          5
+        ],
+        "end": [
+          1793,
+          44
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ReadBytesExt\", \"read_i128\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_i128",
+      "owners": [
+        {
+          "id": 35,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "15",
+      "span": {
+        "begin": [
+          402,
+          5
+        ],
+        "end": [
+          406,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "read_u16",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 182,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "BigEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "156",
+      "span": {
+        "begin": [
+          1940,
+          5
+        ],
+        "end": [
+          1942,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "read_u32",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 182,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "BigEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "157",
+      "span": {
+        "begin": [
+          1945,
+          5
+        ],
+        "end": [
+          1947,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "read_u64",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 182,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "BigEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "158",
+      "span": {
+        "begin": [
+          1950,
+          5
+        ],
+        "end": [
+          1952,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "read_u128",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 182,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "BigEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "159",
+      "span": {
+        "begin": [
+          1955,
+          5
+        ],
+        "end": [
+          1957,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ReadBytesExt\", \"read_uint\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_uint",
+      "owners": [
+        {
+          "id": 35,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "16",
+      "span": {
+        "begin": [
+          427,
+          5
+        ],
+        "end": [
+          431,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "read_uint",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 182,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "BigEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "160",
+      "span": {
+        "begin": [
+          1960,
+          5
+        ],
+        "end": [
+          1966,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "read_uint128",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 182,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "BigEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "161",
+      "span": {
+        "begin": [
+          1969,
+          5
+        ],
+        "end": [
+          1975,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "write_u16",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 182,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "BigEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "162",
+      "span": {
+        "begin": [
+          1978,
+          5
+        ],
+        "end": [
+          1980,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "write_u32",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 182,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "BigEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "163",
+      "span": {
+        "begin": [
+          1983,
+          5
+        ],
+        "end": [
+          1985,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "write_u64",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 182,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "BigEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "164",
+      "span": {
+        "begin": [
+          1988,
+          5
+        ],
+        "end": [
+          1990,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "write_u128",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 182,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "BigEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "165",
+      "span": {
+        "begin": [
+          1993,
+          5
+        ],
+        "end": [
+          1995,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "write_uint",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 182,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "BigEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "166",
+      "span": {
+        "begin": [
+          1998,
+          5
+        ],
+        "end": [
+          2009,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "write_uint128",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 182,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "BigEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "167",
+      "span": {
+        "begin": [
+          2012,
+          5
+        ],
+        "end": [
+          2023,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "read_u16_into",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 182,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "BigEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "168",
+      "span": {
+        "begin": [
+          2026,
+          5
+        ],
+        "end": [
+          2028,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "read_u32_into",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 182,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "BigEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "169",
+      "span": {
+        "begin": [
+          2031,
+          5
+        ],
+        "end": [
+          2033,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ReadBytesExt\", \"read_int\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_int",
+      "owners": [
+        {
+          "id": 35,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "17",
+      "span": {
+        "begin": [
+          452,
+          5
+        ],
+        "end": [
+          456,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "read_u64_into",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 182,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "BigEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "170",
+      "span": {
+        "begin": [
+          2036,
+          5
+        ],
+        "end": [
+          2038,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "read_u128_into",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 182,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "BigEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "171",
+      "span": {
+        "begin": [
+          2041,
+          5
+        ],
+        "end": [
+          2043,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "write_u16_into",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 182,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "BigEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "172",
+      "span": {
+        "begin": [
+          2046,
+          5
+        ],
+        "end": [
+          2048,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "write_u32_into",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 182,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "BigEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "173",
+      "span": {
+        "begin": [
+          2051,
+          5
+        ],
+        "end": [
+          2053,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "write_u64_into",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 182,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "BigEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "174",
+      "span": {
+        "begin": [
+          2056,
+          5
+        ],
+        "end": [
+          2058,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "write_u128_into",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 182,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "BigEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "175",
+      "span": {
+        "begin": [
+          2061,
+          5
+        ],
+        "end": [
+          2063,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "from_slice_u16",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 182,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "BigEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "176",
+      "span": {
+        "begin": [
+          2066,
+          5
+        ],
+        "end": [
+          2072,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "from_slice_u32",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 182,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "BigEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "177",
+      "span": {
+        "begin": [
+          2075,
+          5
+        ],
+        "end": [
+          2081,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "from_slice_u64",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 182,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "BigEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "178",
+      "span": {
+        "begin": [
+          2084,
+          5
+        ],
+        "end": [
+          2090,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "from_slice_u128",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 182,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "BigEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "179",
+      "span": {
+        "begin": [
+          2093,
+          5
+        ],
+        "end": [
+          2099,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ReadBytesExt\", \"read_uint128\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_uint128",
+      "owners": [
+        {
+          "id": 35,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "18",
+      "span": {
+        "begin": [
+          460,
+          5
+        ],
+        "end": [
+          464,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "from_slice_f32",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 182,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "BigEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "180",
+      "span": {
+        "begin": [
+          2102,
+          5
+        ],
+        "end": [
+          2111,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "from_slice_f64",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 182,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "BigEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "181",
+      "span": {
+        "begin": [
+          2114,
+          5
+        ],
+        "end": [
+          2123,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "read_u16",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 209,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "LittleEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "183",
+      "span": {
+        "begin": [
+          2128,
+          5
+        ],
+        "end": [
+          2130,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "read_u32",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 209,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "LittleEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "184",
+      "span": {
+        "begin": [
+          2133,
+          5
+        ],
+        "end": [
+          2135,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "read_u64",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 209,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "LittleEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "185",
+      "span": {
+        "begin": [
+          2138,
+          5
+        ],
+        "end": [
+          2140,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "read_u128",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 209,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "LittleEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "186",
+      "span": {
+        "begin": [
+          2143,
+          5
+        ],
+        "end": [
+          2145,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "read_uint",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 209,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "LittleEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "187",
+      "span": {
+        "begin": [
+          2148,
+          5
+        ],
+        "end": [
+          2153,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "read_uint128",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 209,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "LittleEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "188",
+      "span": {
+        "begin": [
+          2156,
+          5
+        ],
+        "end": [
+          2161,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "write_u16",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 209,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "LittleEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "189",
+      "span": {
+        "begin": [
+          2164,
+          5
+        ],
+        "end": [
+          2166,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ReadBytesExt\", \"read_int128\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_int128",
+      "owners": [
+        {
+          "id": 35,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "19",
+      "span": {
+        "begin": [
+          468,
+          5
+        ],
+        "end": [
+          472,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "write_u32",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 209,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "LittleEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "190",
+      "span": {
+        "begin": [
+          2169,
+          5
+        ],
+        "end": [
+          2171,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "write_u64",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 209,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "LittleEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "191",
+      "span": {
+        "begin": [
+          2174,
+          5
+        ],
+        "end": [
+          2176,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "write_u128",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 209,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "LittleEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "192",
+      "span": {
+        "begin": [
+          2179,
+          5
+        ],
+        "end": [
+          2181,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "write_uint",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 209,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "LittleEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "193",
+      "span": {
+        "begin": [
+          2184,
+          5
+        ],
+        "end": [
+          2191,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "write_uint128",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 209,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "LittleEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "194",
+      "span": {
+        "begin": [
+          2194,
+          5
+        ],
+        "end": [
+          2201,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "read_u16_into",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 209,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "LittleEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "195",
+      "span": {
+        "begin": [
+          2204,
+          5
+        ],
+        "end": [
+          2206,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "read_u32_into",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 209,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "LittleEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "196",
+      "span": {
+        "begin": [
+          2209,
+          5
+        ],
+        "end": [
+          2211,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "read_u64_into",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 209,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "LittleEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "197",
+      "span": {
+        "begin": [
+          2214,
+          5
+        ],
+        "end": [
+          2216,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "read_u128_into",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 209,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "LittleEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "198",
+      "span": {
+        "begin": [
+          2219,
+          5
+        ],
+        "end": [
+          2221,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "write_u16_into",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 209,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "LittleEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "199",
+      "span": {
+        "begin": [
+          2224,
+          5
+        ],
+        "end": [
+          2226,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ReadBytesExt\", \"read_i8\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_i8",
+      "owners": [
+        {
+          "id": 35,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "2",
+      "span": {
+        "begin": [
+          85,
+          5
+        ],
+        "end": [
+          89,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ReadBytesExt\", \"read_f32\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_f32",
+      "owners": [
+        {
+          "id": 35,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "20",
+      "span": {
+        "begin": [
+          499,
+          5
+        ],
+        "end": [
+          503,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "write_u32_into",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 209,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "LittleEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "200",
+      "span": {
+        "begin": [
+          2229,
+          5
+        ],
+        "end": [
+          2231,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "write_u64_into",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 209,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "LittleEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "201",
+      "span": {
+        "begin": [
+          2234,
+          5
+        ],
+        "end": [
+          2236,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "write_u128_into",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 209,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "LittleEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "202",
+      "span": {
+        "begin": [
+          2239,
+          5
+        ],
+        "end": [
+          2241,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "from_slice_u16",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 209,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "LittleEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "203",
+      "span": {
+        "begin": [
+          2244,
+          5
+        ],
+        "end": [
+          2250,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "from_slice_u32",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 209,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "LittleEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "204",
+      "span": {
+        "begin": [
+          2253,
+          5
+        ],
+        "end": [
+          2259,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "from_slice_u64",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 209,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "LittleEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "205",
+      "span": {
+        "begin": [
+          2262,
+          5
+        ],
+        "end": [
+          2268,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "from_slice_u128",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 209,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "LittleEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "206",
+      "span": {
+        "begin": [
+          2271,
+          5
+        ],
+        "end": [
+          2277,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "from_slice_f32",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 209,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "LittleEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "207",
+      "span": {
+        "begin": [
+          2280,
+          5
+        ],
+        "end": [
+          2289,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "from_slice_f64",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 209,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "LittleEndian",
+          "receiver_publicly_named": true,
+          "trait": "ByteOrder",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "208",
+      "span": {
+        "begin": [
+          2292,
+          5
+        ],
+        "end": [
+          2301,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ReadBytesExt\", \"read_f64\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_f64",
+      "owners": [
+        {
+          "id": 35,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "21",
+      "span": {
+        "begin": [
+          530,
+          5
+        ],
+        "end": [
+          534,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ReadBytesExt\", \"read_u16_into\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_u16_into",
+      "owners": [
+        {
+          "id": 35,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "22",
+      "span": {
+        "begin": [
+          562,
+          5
+        ],
+        "end": [
+          569,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "borrow",
+      "owners": [
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "id": 38,
+                          "path": "Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 225,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "BigEndian",
+          "receiver_publicly_named": true,
+          "trait": "Borrow",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "id": 38,
+                          "path": "Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 289,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "LittleEndian",
+          "receiver_publicly_named": true,
+          "trait": "Borrow",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "224",
+      "span": null,
+      "status": "external_definition"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "borrow_mut",
+      "owners": [
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "id": 38,
+                          "path": "Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 228,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "BigEndian",
+          "receiver_publicly_named": true,
+          "trait": "BorrowMut",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "id": 38,
+                          "path": "Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 290,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "LittleEndian",
+          "receiver_publicly_named": true,
+          "trait": "BorrowMut",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "227",
+      "span": null,
+      "status": "external_definition"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ReadBytesExt\", \"read_u32_into\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_u32_into",
+      "owners": [
+        {
+          "id": 35,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "23",
+      "span": {
+        "begin": [
+          597,
+          5
+        ],
+        "end": [
+          604,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "clone_to_uninit",
+      "owners": [
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "id": 148,
+                          "path": "Clone"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 231,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "BigEndian",
+          "receiver_publicly_named": true,
+          "trait": "CloneToUninit",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "id": 148,
+                          "path": "Clone"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 291,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "LittleEndian",
+          "receiver_publicly_named": true,
+          "trait": "CloneToUninit",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "230",
+      "span": null,
+      "status": "external_definition"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "into",
+      "owners": [
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              },
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "U"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          },
+                          "id": 233,
+                          "path": "From"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "U"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 235,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "BigEndian",
+          "receiver_publicly_named": true,
+          "trait": "Into",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              },
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "U"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          },
+                          "id": 233,
+                          "path": "From"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "U"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 292,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "LittleEndian",
+          "receiver_publicly_named": true,
+          "trait": "Into",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "234",
+      "span": null,
+      "status": "external_definition"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "from",
+      "owners": [
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 238,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "BigEndian",
+          "receiver_publicly_named": true,
+          "trait": "From",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 293,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "LittleEndian",
+          "receiver_publicly_named": true,
+          "trait": "From",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "237",
+      "span": null,
+      "status": "external_definition"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ReadBytesExt\", \"read_u64_into\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_u64_into",
+      "owners": [
+        {
+          "id": 35,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "24",
+      "span": {
+        "begin": [
+          635,
+          5
+        ],
+        "end": [
+          642,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "try_into",
+      "owners": [
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              },
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "U"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          },
+                          "id": 240,
+                          "path": "TryFrom"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "U"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 243,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "BigEndian",
+          "receiver_publicly_named": true,
+          "trait": "TryInto",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              },
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "U"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          },
+                          "id": 240,
+                          "path": "TryFrom"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "U"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 294,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "LittleEndian",
+          "receiver_publicly_named": true,
+          "trait": "TryInto",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "241",
+      "span": null,
+      "status": "external_definition"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "try_from",
+      "owners": [
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              },
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "U"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          },
+                          "id": 236,
+                          "path": "Into"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "U"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 248,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "BigEndian",
+          "receiver_publicly_named": true,
+          "trait": "TryFrom",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              },
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "U"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          },
+                          "id": 236,
+                          "path": "Into"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "U"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 295,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "LittleEndian",
+          "receiver_publicly_named": true,
+          "trait": "TryFrom",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "247",
+      "span": null,
+      "status": "external_definition"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "type_id",
+      "owners": [
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "outlives": "'static"
+                    },
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "id": 38,
+                          "path": "Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 251,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "BigEndian",
+          "receiver_publicly_named": true,
+          "trait": "Any",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "outlives": "'static"
+                    },
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "id": 38,
+                          "path": "Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 296,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "LittleEndian",
+          "receiver_publicly_named": true,
+          "trait": "Any",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "249",
+      "span": null,
+      "status": "external_definition"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ReadBytesExt\", \"read_u128_into\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_u128_into",
+      "owners": [
+        {
+          "id": 35,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "25",
+      "span": {
+        "begin": [
+          673,
+          5
+        ],
+        "end": [
+          683,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "to_owned",
+      "owners": [
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "id": 148,
+                          "path": "Clone"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 256,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "BigEndian",
+          "receiver_publicly_named": true,
+          "trait": "ToOwned",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "id": 148,
+                          "path": "Clone"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 297,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "LittleEndian",
+          "receiver_publicly_named": true,
+          "trait": "ToOwned",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "254",
+      "span": null,
+      "status": "external_definition"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "clone_into",
+      "owners": [
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "id": 148,
+                          "path": "Clone"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 256,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "BigEndian",
+          "receiver_publicly_named": true,
+          "trait": "ToOwned",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "id": 148,
+                          "path": "Clone"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 297,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "LittleEndian",
+          "receiver_publicly_named": true,
+          "trait": "ToOwned",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "255",
+      "span": null,
+      "status": "external_definition"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "clone",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 259,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "BigEndian",
+          "receiver_publicly_named": true,
+          "trait": "Clone",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "258",
+      "span": {
+        "begin": [
+          1812,
+          10
+        ],
+        "end": [
+          1812,
+          15
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ReadBytesExt\", \"read_i8_into\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_i8_into",
+      "owners": [
+        {
+          "id": 35,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "26",
+      "span": {
+        "begin": [
+          716,
+          5
+        ],
+        "end": [
+          719,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "fmt",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 264,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "BigEndian",
+          "receiver_publicly_named": true,
+          "trait": "Debug",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "261",
+      "span": {
+        "begin": [
+          1812,
+          23
+        ],
+        "end": [
+          1812,
+          28
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "hash",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 268,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "BigEndian",
+          "receiver_publicly_named": true,
+          "trait": "Hash",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "266",
+      "span": {
+        "begin": [
+          1812,
+          34
+        ],
+        "end": [
+          1812,
+          38
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "cmp",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 271,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "BigEndian",
+          "receiver_publicly_named": true,
+          "trait": "Ord",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "269",
+      "span": {
+        "begin": [
+          1812,
+          40
+        ],
+        "end": [
+          1812,
+          43
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ReadBytesExt\", \"read_i16_into\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_i16_into",
+      "owners": [
+        {
+          "id": 35,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "27",
+      "span": {
+        "begin": [
+          747,
+          5
+        ],
+        "end": [
+          754,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "eq",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 275,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "BigEndian",
+          "receiver_publicly_named": true,
+          "trait": "PartialEq",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "274",
+      "span": {
+        "begin": [
+          1812,
+          45
+        ],
+        "end": [
+          1812,
+          54
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "partial_cmp",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 278,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "BigEndian",
+          "receiver_publicly_named": true,
+          "trait": "PartialOrd",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "276",
+      "span": {
+        "begin": [
+          1812,
+          56
+        ],
+        "end": [
+          1812,
+          66
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "default",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 280,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "BigEndian",
+          "receiver_publicly_named": true,
+          "trait": "Default",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "279",
+      "span": {
+        "begin": [
+          1816,
+          5
+        ],
+        "end": [
+          1818,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ReadBytesExt\", \"read_i32_into\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_i32_into",
+      "owners": [
+        {
+          "id": 35,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "28",
+      "span": {
+        "begin": [
+          782,
+          5
+        ],
+        "end": [
+          789,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ReadBytesExt\", \"read_i64_into\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_i64_into",
+      "owners": [
+        {
+          "id": 35,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "29",
+      "span": {
+        "begin": [
+          820,
+          5
+        ],
+        "end": [
+          827,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "clone",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 299,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "LittleEndian",
+          "receiver_publicly_named": true,
+          "trait": "Clone",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "298",
+      "span": {
+        "begin": [
+          1842,
+          10
+        ],
+        "end": [
+          1842,
+          15
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ReadBytesExt\", \"read_u16\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_u16",
+      "owners": [
+        {
+          "id": 35,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "3",
+      "span": {
+        "begin": [
+          112,
+          5
+        ],
+        "end": [
+          116,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ReadBytesExt\", \"read_i128_into\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_i128_into",
+      "owners": [
+        {
+          "id": 35,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "30",
+      "span": {
+        "begin": [
+          858,
+          5
+        ],
+        "end": [
+          868,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "fmt",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 302,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "LittleEndian",
+          "receiver_publicly_named": true,
+          "trait": "Debug",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "301",
+      "span": {
+        "begin": [
+          1842,
+          23
+        ],
+        "end": [
+          1842,
+          28
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "hash",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 305,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "LittleEndian",
+          "receiver_publicly_named": true,
+          "trait": "Hash",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "304",
+      "span": {
+        "begin": [
+          1842,
+          34
+        ],
+        "end": [
+          1842,
+          38
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "cmp",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 307,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "LittleEndian",
+          "receiver_publicly_named": true,
+          "trait": "Ord",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "306",
+      "span": {
+        "begin": [
+          1842,
+          40
+        ],
+        "end": [
+          1842,
+          43
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "eq",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 310,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "LittleEndian",
+          "receiver_publicly_named": true,
+          "trait": "PartialEq",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "309",
+      "span": {
+        "begin": [
+          1842,
+          45
+        ],
+        "end": [
+          1842,
+          54
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ReadBytesExt\", \"read_f32_into\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_f32_into",
+      "owners": [
+        {
+          "id": 35,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "31",
+      "span": {
+        "begin": [
+          902,
+          5
+        ],
+        "end": [
+          909,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "partial_cmp",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 312,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "LittleEndian",
+          "receiver_publicly_named": true,
+          "trait": "PartialOrd",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "311",
+      "span": {
+        "begin": [
+          1842,
+          56
+        ],
+        "end": [
+          1842,
+          66
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "default",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 314,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "LittleEndian",
+          "receiver_publicly_named": true,
+          "trait": "Default",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "313",
+      "span": {
+        "begin": [
+          1846,
+          5
+        ],
+        "end": [
+          1848,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ReadBytesExt\", \"read_f32_into_unchecked\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: true } }]",
+      "name": "read_f32_into_unchecked",
+      "owners": [
+        {
+          "id": 35,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "32",
+      "span": {
+        "begin": [
+          948,
+          5
+        ],
+        "end": [
+          953,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ReadBytesExt\", \"read_f64_into\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_f64_into",
+      "owners": [
+        {
+          "id": 35,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "33",
+      "span": {
+        "begin": [
+          987,
+          5
+        ],
+        "end": [
+          994,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ReadBytesExt\", \"read_f64_into_unchecked\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: true } }]",
+      "name": "read_f64_into_unchecked",
+      "owners": [
+        {
+          "id": 35,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "34",
+      "span": {
+        "begin": [
+          1039,
+          5
+        ],
+        "end": [
+          1044,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"WriteBytesExt\", \"write_u8\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_u8",
+      "owners": [
+        {
+          "id": 59,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "39",
+      "span": {
+        "begin": [
+          1098,
+          5
+        ],
+        "end": [
+          1100,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"WriteBytesExt\", \"write_i8\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_i8",
+      "owners": [
+        {
+          "id": 59,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "40",
+      "span": {
+        "begin": [
+          1126,
+          5
+        ],
+        "end": [
+          1128,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"WriteBytesExt\", \"write_u16\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_u16",
+      "owners": [
+        {
+          "id": 59,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "41",
+      "span": {
+        "begin": [
+          1151,
+          5
+        ],
+        "end": [
+          1155,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"WriteBytesExt\", \"write_i16\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_i16",
+      "owners": [
+        {
+          "id": 59,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "42",
+      "span": {
+        "begin": [
+          1178,
+          5
+        ],
+        "end": [
+          1182,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"WriteBytesExt\", \"write_u24\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_u24",
+      "owners": [
+        {
+          "id": 59,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "43",
+      "span": {
+        "begin": [
+          1205,
+          5
+        ],
+        "end": [
+          1209,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"WriteBytesExt\", \"write_i24\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_i24",
+      "owners": [
+        {
+          "id": 59,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "44",
+      "span": {
+        "begin": [
+          1232,
+          5
+        ],
+        "end": [
+          1236,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"WriteBytesExt\", \"write_u32\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_u32",
+      "owners": [
+        {
+          "id": 59,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "45",
+      "span": {
+        "begin": [
+          1259,
+          5
+        ],
+        "end": [
+          1263,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"WriteBytesExt\", \"write_i32\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_i32",
+      "owners": [
+        {
+          "id": 59,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "46",
+      "span": {
+        "begin": [
+          1286,
+          5
+        ],
+        "end": [
+          1290,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"WriteBytesExt\", \"write_u48\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_u48",
+      "owners": [
+        {
+          "id": 59,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "47",
+      "span": {
+        "begin": [
+          1313,
+          5
+        ],
+        "end": [
+          1317,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"WriteBytesExt\", \"write_i48\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_i48",
+      "owners": [
+        {
+          "id": 59,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "48",
+      "span": {
+        "begin": [
+          1340,
+          5
+        ],
+        "end": [
+          1344,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"WriteBytesExt\", \"write_u64\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_u64",
+      "owners": [
+        {
+          "id": 59,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "49",
+      "span": {
+        "begin": [
+          1367,
+          5
+        ],
+        "end": [
+          1371,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ReadBytesExt\", \"read_i16\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_i16",
+      "owners": [
+        {
+          "id": 35,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "5",
+      "span": {
+        "begin": [
+          139,
+          5
+        ],
+        "end": [
+          143,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"WriteBytesExt\", \"write_i64\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_i64",
+      "owners": [
+        {
+          "id": 59,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "50",
+      "span": {
+        "begin": [
+          1394,
+          5
+        ],
+        "end": [
+          1398,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"WriteBytesExt\", \"write_u128\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_u128",
+      "owners": [
+        {
+          "id": 59,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "51",
+      "span": {
+        "begin": [
+          1402,
+          5
+        ],
+        "end": [
+          1406,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"WriteBytesExt\", \"write_i128\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_i128",
+      "owners": [
+        {
+          "id": 59,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "52",
+      "span": {
+        "begin": [
+          1410,
+          5
+        ],
+        "end": [
+          1414,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"WriteBytesExt\", \"write_uint\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_uint",
+      "owners": [
+        {
+          "id": 59,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "53",
+      "span": {
+        "begin": [
+          1442,
+          5
+        ],
+        "end": [
+          1450,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"WriteBytesExt\", \"write_int\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_int",
+      "owners": [
+        {
+          "id": 59,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "54",
+      "span": {
+        "begin": [
+          1478,
+          5
+        ],
+        "end": [
+          1486,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"WriteBytesExt\", \"write_uint128\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_uint128",
+      "owners": [
+        {
+          "id": 59,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "55",
+      "span": {
+        "begin": [
+          1493,
+          5
+        ],
+        "end": [
+          1501,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"WriteBytesExt\", \"write_int128\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_int128",
+      "owners": [
+        {
+          "id": 59,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "56",
+      "span": {
+        "begin": [
+          1508,
+          5
+        ],
+        "end": [
+          1516,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"WriteBytesExt\", \"write_f32\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_f32",
+      "owners": [
+        {
+          "id": 59,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "57",
+      "span": {
+        "begin": [
+          1541,
+          5
+        ],
+        "end": [
+          1545,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"WriteBytesExt\", \"write_f64\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_f64",
+      "owners": [
+        {
+          "id": 59,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "58",
+      "span": {
+        "begin": [
+          1570,
+          5
+        ],
+        "end": [
+          1574,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ReadBytesExt\", \"read_u24\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_u24",
+      "owners": [
+        {
+          "id": 35,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "6",
+      "span": {
+        "begin": [
+          165,
+          5
+        ],
+        "end": [
+          169,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "slice_to_u8_mut",
+      "owners": [],
+      "rustdoc_id": "62",
+      "span": {
+        "begin": [
+          1587,
+          1
+        ],
+        "end": [
+          1592,
+          2
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "not_publicly_named_function"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ReadBytesExt\", \"read_i24\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_i24",
+      "owners": [
+        {
+          "id": 35,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "7",
+      "span": {
+        "begin": [
+          191,
+          5
+        ],
+        "end": [
+          195,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "extend_sign",
+      "owners": [],
+      "rustdoc_id": "73",
+      "span": {
+        "begin": [
+          88,
+          1
+        ],
+        "end": [
+          91,
+          2
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "not_publicly_named_function"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "extend_sign128",
+      "owners": [],
+      "rustdoc_id": "74",
+      "span": {
+        "begin": [
+          94,
+          1
+        ],
+        "end": [
+          97,
+          2
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "not_publicly_named_function"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "unextend_sign",
+      "owners": [],
+      "rustdoc_id": "75",
+      "span": {
+        "begin": [
+          100,
+          1
+        ],
+        "end": [
+          103,
+          2
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "not_publicly_named_function"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "unextend_sign128",
+      "owners": [],
+      "rustdoc_id": "76",
+      "span": {
+        "begin": [
+          106,
+          1
+        ],
+        "end": [
+          109,
+          2
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "not_publicly_named_function"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "pack_size",
+      "owners": [],
+      "rustdoc_id": "77",
+      "span": {
+        "begin": [
+          112,
+          1
+        ],
+        "end": [
+          130,
+          2
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "not_publicly_named_function"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "pack_size128",
+      "owners": [],
+      "rustdoc_id": "78",
+      "span": {
+        "begin": [
+          133,
+          1
+        ],
+        "end": [
+          167,
+          2
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "not_publicly_named_function"
+    },
+    {
+      "has_body": false,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"read_u16\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_u16",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "79",
+      "span": {
+        "begin": [
+          229,
+          5
+        ],
+        "end": [
+          229,
+          36
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ReadBytesExt\", \"read_u32\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_u32",
+      "owners": [
+        {
+          "id": 35,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "8",
+      "span": {
+        "begin": [
+          217,
+          5
+        ],
+        "end": [
+          221,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"read_u24\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_u24",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "80",
+      "span": {
+        "begin": [
+          248,
+          5
+        ],
+        "end": [
+          250,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": false,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"read_u32\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_u32",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "81",
+      "span": {
+        "begin": [
+          269,
+          5
+        ],
+        "end": [
+          269,
+          36
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"read_u48\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_u48",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "82",
+      "span": {
+        "begin": [
+          288,
+          5
+        ],
+        "end": [
+          290,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": false,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"read_u64\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_u64",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "83",
+      "span": {
+        "begin": [
+          309,
+          5
+        ],
+        "end": [
+          309,
+          36
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": false,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"read_u128\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_u128",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "84",
+      "span": {
+        "begin": [
+          328,
+          5
+        ],
+        "end": [
+          328,
+          38
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": false,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"read_uint\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_uint",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "85",
+      "span": {
+        "begin": [
+          348,
+          5
+        ],
+        "end": [
+          348,
+          52
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": false,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"read_uint128\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_uint128",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "86",
+      "span": {
+        "begin": [
+          368,
+          5
+        ],
+        "end": [
+          368,
+          56
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": false,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"write_u16\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_u16",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "87",
+      "span": {
+        "begin": [
+          387,
+          5
+        ],
+        "end": [
+          387,
+          42
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"write_u24\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_u24",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "88",
+      "span": {
+        "begin": [
+          406,
+          5
+        ],
+        "end": [
+          408,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": false,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"write_u32\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_u32",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "89",
+      "span": {
+        "begin": [
+          427,
+          5
+        ],
+        "end": [
+          427,
+          42
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ReadBytesExt\", \"read_i32\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_i32",
+      "owners": [
+        {
+          "id": 35,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "9",
+      "span": {
+        "begin": [
+          243,
+          5
+        ],
+        "end": [
+          247,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/io.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"write_u48\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_u48",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "90",
+      "span": {
+        "begin": [
+          446,
+          5
+        ],
+        "end": [
+          448,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": false,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"write_u64\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_u64",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "91",
+      "span": {
+        "begin": [
+          467,
+          5
+        ],
+        "end": [
+          467,
+          42
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": false,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"write_u128\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_u128",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "92",
+      "span": {
+        "begin": [
+          486,
+          5
+        ],
+        "end": [
+          486,
+          44
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": false,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"write_uint\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_uint",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "93",
+      "span": {
+        "begin": [
+          506,
+          5
+        ],
+        "end": [
+          506,
+          58
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": false,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"write_uint128\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "write_uint128",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "94",
+      "span": {
+        "begin": [
+          526,
+          5
+        ],
+        "end": [
+          526,
+          62
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"read_i16\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_i16",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "95",
+      "span": {
+        "begin": [
+          546,
+          5
+        ],
+        "end": [
+          548,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"read_i24\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_i24",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "96",
+      "span": {
+        "begin": [
+          568,
+          5
+        ],
+        "end": [
+          570,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"read_i32\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_i32",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "97",
+      "span": {
+        "begin": [
+          590,
+          5
+        ],
+        "end": [
+          592,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"read_i48\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_i48",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "98",
+      "span": {
+        "begin": [
+          612,
+          5
+        ],
+        "end": [
+          614,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"byteorder\", \"ByteOrder\", \"read_i64\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "read_i64",
+      "owners": [
+        {
+          "id": 4,
+          "kind": "trait_declaration",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "99",
+      "span": {
+        "begin": [
+          634,
+          5
+        ],
+        "end": [
+          636,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/byteorder-1.5.0/src/lib.rs"
+      },
+      "status": "public_trait_declaration"
+    }
+  ],
+  "input_path": "/home/cym/workspace/graft-baseline-port-20261109/frozen-rustdoc-v2/byteorder-1.5.0.json",
+  "policy": "publicly importable paths from existing rustdoc adapter; trait impl obligations remain unresolved",
+  "rustdoc_format": 57,
+  "schema": "graft-public-surface-crosscheck-v1",
+  "version": "1.5.0"
+}

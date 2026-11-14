@@ -1,0 +1,82 @@
+{
+  "audit_sources": [
+    {
+      "bytes": 20208,
+      "path": "/home/cym/workspace/GRAFT-2.0/GRAFTTool/scripts/audit_experiments.py",
+      "sha256": "25d481d663a97a1c5cf47fcc2b9569b3da19ca37d48ff1edcf0ed79be6679acd"
+    },
+    {
+      "bytes": 16961,
+      "path": "/home/cym/workspace/GRAFT-2.0/GRAFTTool/scripts/coverage_snapshot.py",
+      "sha256": "4c86dd0ae689ceddf66e8eaa351b959385fe7ed55f93b0b19648a32527652b9a"
+    }
+  ],
+  "commands": [
+    {
+      "command": [
+        "rustc",
+        "-vV"
+      ],
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "rustc 1.94.1 (e408947bf 2026-03-25)\nbinary: rustc\ncommit-hash: e408947bfd200af42db322daf0fadfe7e26d3bd1\ncommit-date: 2026-03-25\nhost: x86_64-unknown-linux-gnu\nrelease: 1.94.1\nLLVM version: 21.1.8"
+    },
+    {
+      "command": [
+        "rustup",
+        "toolchain",
+        "list"
+      ],
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "stable-x86_64-unknown-linux-gnu (active, default)\nnightly-x86_64-unknown-linux-gnu\nnightly-2022-09-15-x86_64-unknown-linux-gnu\nnightly-2026-02-07-x86_64-unknown-linux-gnu\nmyrust"
+    },
+    {
+      "command": [
+        "git",
+        "-C",
+        "/home/cym/workspace/GRAFT-2.0/GRAFTTool",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "ffc0f9dd6c9990055b682031cee816dc674c8e6e"
+    },
+    {
+      "command": [
+        "git",
+        "-C",
+        "/home/cym/workspace/GRAFT-2.0/GRAFTPaper",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "d8cfdcd2fa46a292d91c8e2d8a1226f207062d11"
+    }
+  ],
+  "paper_sources": [
+    {
+      "bytes": 636,
+      "path": "/home/cym/workspace/GRAFT-2.0/GRAFTPaper/OUR_RESULTS.md",
+      "sha256": "b106a0456d82e927f23597e954134f374c62c19b20214cff7e99e23fb3fc8356"
+    },
+    {
+      "bytes": 5216,
+      "path": "/home/cym/workspace/GRAFT-2.0/GRAFTPaper/BASELINE_RESULTS.md",
+      "sha256": "1f35814fec4d16773af6ebe61788640cdb3559a6fb6a71a13c464195caf35e50"
+    },
+    {
+      "bytes": 3665,
+      "path": "/home/cym/workspace/GRAFT-2.0/GRAFTPaper/DEEPSURF_RESULTS.md",
+      "sha256": "2a73167cef74f3a840f569c90b81cdb7ff7928f908e0e014dea3a26a553a1d8f"
+    },
+    {
+      "bytes": 13974,
+      "path": "/home/cym/workspace/GRAFT-2.0/GRAFTPaper/ABLATION_RESULT.md",
+      "sha256": "cd7836df251e947e8d4cd0602bd1181d0a075e51f54016567ffbc33f87379c7f"
+    }
+  ],
+  "scope": "current host, not historical run environment"
+}

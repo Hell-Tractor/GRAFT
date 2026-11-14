@@ -1,0 +1,916 @@
+{
+  "schema": "graft-round-preparation-v1",
+  "status": "preparation_only_not_formal_round",
+  "protocol_sha256": "732dd2aaf268255ec6f3b242560675d7cee23e521ce5420088e05a60bf9e8674",
+  "selected_saved_replays": 296,
+  "compile_counts": {
+    "rpg:compiled": 134,
+    "rpg:compile_failed": 4,
+    "rulf:compiled": 145,
+    "rulf:compile_failed": 13
+  },
+  "static_review_flagged": 115,
+  "formal_ready": 0,
+  "fuzz_runs": 0,
+  "catalogs": [
+    {
+      "crate": "autocfg",
+      "version": "1.5.0",
+      "import": {
+        "command": [
+          "/tmp/graft-week1-target/debug/graft-plan",
+          "import",
+          "/home/cym/workspace/graft-baseline-port-20261109/frozen-rustdoc-v2/autocfg-1.5.0.json",
+          "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/autocfg/catalog.json",
+          "--package",
+          "autocfg"
+        ],
+        "returncode": 0,
+        "seconds": 0.06479223701171577,
+        "log": "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/autocfg/import.log"
+      },
+      "inventory": {
+        "command": [
+          "/tmp/graft-week1-target/debug/graft-plan",
+          "inventory",
+          "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/autocfg/catalog.json",
+          "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/autocfg/inventory.json"
+        ],
+        "returncode": 0,
+        "seconds": 0.008387591922655702,
+        "log": "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/autocfg/inventory.log"
+      }
+    },
+    {
+      "crate": "base64",
+      "version": "0.22.1",
+      "import": {
+        "command": [
+          "/tmp/graft-week1-target/debug/graft-plan",
+          "import",
+          "/home/cym/workspace/graft-baseline-port-20261109/frozen-rustdoc-v2/base64-0.22.1.json",
+          "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/base64/catalog.json",
+          "--package",
+          "base64"
+        ],
+        "returncode": 0,
+        "seconds": 0.16452672006562352,
+        "log": "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/base64/import.log"
+      },
+      "inventory": {
+        "command": [
+          "/tmp/graft-week1-target/debug/graft-plan",
+          "inventory",
+          "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/base64/catalog.json",
+          "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/base64/inventory.json"
+        ],
+        "returncode": 0,
+        "seconds": 0.01658680196851492,
+        "log": "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/base64/inventory.log"
+      }
+    },
+    {
+      "crate": "bumpalo",
+      "version": "3.14.0",
+      "import": {
+        "command": [
+          "/tmp/graft-week1-target/debug/graft-plan",
+          "import",
+          "/home/cym/workspace/graft-baseline-port-20261109/frozen-rustdoc-v2/bumpalo-3.14.0.json",
+          "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/bumpalo/catalog.json",
+          "--package",
+          "bumpalo"
+        ],
+        "returncode": 0,
+        "seconds": 0.11447445000521839,
+        "log": "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/bumpalo/import.log"
+      },
+      "inventory": {
+        "command": [
+          "/tmp/graft-week1-target/debug/graft-plan",
+          "inventory",
+          "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/bumpalo/catalog.json",
+          "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/bumpalo/inventory.json"
+        ],
+        "returncode": 0,
+        "seconds": 0.008311411133036017,
+        "log": "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/bumpalo/inventory.log"
+      }
+    },
+    {
+      "crate": "byteorder",
+      "version": "1.5.0",
+      "import": {
+        "command": [
+          "/tmp/graft-week1-target/debug/graft-plan",
+          "import",
+          "/home/cym/workspace/graft-baseline-port-20261109/frozen-rustdoc-v2/byteorder-1.5.0.json",
+          "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/byteorder/catalog.json",
+          "--package",
+          "byteorder"
+        ],
+        "returncode": 0,
+        "seconds": 0.11438829288817942,
+        "log": "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/byteorder/import.log"
+      },
+      "inventory": {
+        "command": [
+          "/tmp/graft-week1-target/debug/graft-plan",
+          "inventory",
+          "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/byteorder/catalog.json",
+          "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/byteorder/inventory.json"
+        ],
+        "returncode": 0,
+        "seconds": 0.004254430998116732,
+        "log": "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/byteorder/inventory.log"
+      }
+    },
+    {
+      "crate": "bytes",
+      "version": "1.11.1",
+      "import": {
+        "command": [
+          "/tmp/graft-week1-target/debug/graft-plan",
+          "import",
+          "/home/cym/workspace/graft-baseline-port-20261109/frozen-rustdoc-v2/bytes-1.11.1.json",
+          "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/bytes/catalog.json",
+          "--package",
+          "bytes"
+        ],
+        "returncode": 0,
+        "seconds": 0.21450887084938586,
+        "log": "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/bytes/import.log"
+      },
+      "inventory": {
+        "command": [
+          "/tmp/graft-week1-target/debug/graft-plan",
+          "inventory",
+          "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/bytes/catalog.json",
+          "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/bytes/inventory.json"
+        ],
+        "returncode": 0,
+        "seconds": 0.01653632801026106,
+        "log": "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/bytes/inventory.log"
+      }
+    },
+    {
+      "crate": "chrono",
+      "version": "0.4.19",
+      "import": {
+        "command": [
+          "/tmp/graft-week1-target/debug/graft-plan",
+          "import",
+          "/home/cym/workspace/graft-baseline-port-20261109/frozen-rustdoc-v2/chrono-0.4.19.json",
+          "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/chrono/catalog.json",
+          "--package",
+          "chrono"
+        ],
+        "returncode": 0,
+        "seconds": 0.36483215307816863,
+        "log": "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/chrono/import.log"
+      },
+      "inventory": {
+        "command": [
+          "/tmp/graft-week1-target/debug/graft-plan",
+          "inventory",
+          "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/chrono/catalog.json",
+          "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/chrono/inventory.json"
+        ],
+        "returncode": 0,
+        "seconds": 0.0326313569676131,
+        "log": "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/chrono/inventory.log"
+      }
+    },
+    {
+      "crate": "csv",
+      "version": "1.3.1",
+      "import": {
+        "command": [
+          "/tmp/graft-week1-target/debug/graft-plan",
+          "import",
+          "/home/cym/workspace/graft-baseline-port-20261109/frozen-rustdoc-v2/csv-1.3.1.json",
+          "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/csv/catalog.json",
+          "--package",
+          "csv"
+        ],
+        "returncode": 0,
+        "seconds": 0.31480679009109735,
+        "log": "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/csv/import.log"
+      },
+      "inventory": {
+        "command": [
+          "/tmp/graft-week1-target/debug/graft-plan",
+          "inventory",
+          "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/csv/catalog.json",
+          "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/csv/inventory.json"
+        ],
+        "returncode": 0,
+        "seconds": 0.032608143985271454,
+        "log": "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/csv/inventory.log"
+      }
+    },
+    {
+      "crate": "fixedbitset",
+      "version": "0.5.7",
+      "import": {
+        "command": [
+          "/tmp/graft-week1-target/debug/graft-plan",
+          "import",
+          "/home/cym/workspace/graft-baseline-port-20261109/frozen-rustdoc-v2/fixedbitset-0.5.7.json",
+          "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/fixedbitset/catalog.json",
+          "--package",
+          "fixedbitset"
+        ],
+        "returncode": 0,
+        "seconds": 0.11447707400657237,
+        "log": "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/fixedbitset/import.log"
+      },
+      "inventory": {
+        "command": [
+          "/tmp/graft-week1-target/debug/graft-plan",
+          "inventory",
+          "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/fixedbitset/catalog.json",
+          "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/fixedbitset/inventory.json"
+        ],
+        "returncode": 0,
+        "seconds": 0.016482649138197303,
+        "log": "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/fixedbitset/inventory.log"
+      }
+    },
+    {
+      "crate": "idna",
+      "version": "0.5.0",
+      "import": {
+        "command": [
+          "/tmp/graft-week1-target/debug/graft-plan",
+          "import",
+          "/home/cym/workspace/graft-baseline-port-20261109/frozen-rustdoc-v2/idna-0.5.0.json",
+          "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/idna/catalog.json",
+          "--package",
+          "idna"
+        ],
+        "returncode": 0,
+        "seconds": 0.11467435606755316,
+        "log": "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/idna/import.log"
+      },
+      "inventory": {
+        "command": [
+          "/tmp/graft-week1-target/debug/graft-plan",
+          "inventory",
+          "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/idna/catalog.json",
+          "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/idna/inventory.json"
+        ],
+        "returncode": 0,
+        "seconds": 0.008337459061294794,
+        "log": "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/idna/inventory.log"
+      }
+    },
+    {
+      "crate": "regex",
+      "version": "1.6.0",
+      "import": {
+        "command": [
+          "/tmp/graft-week1-target/debug/graft-plan",
+          "import",
+          "/home/cym/workspace/graft-baseline-port-20261109/frozen-rustdoc-v2/regex-1.6.0.json",
+          "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/regex/catalog.json",
+          "--package",
+          "regex"
+        ],
+        "returncode": 0,
+        "seconds": 0.5648679488804191,
+        "log": "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/regex/import.log"
+      },
+      "inventory": {
+        "command": [
+          "/tmp/graft-week1-target/debug/graft-plan",
+          "inventory",
+          "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/regex/catalog.json",
+          "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/regex/inventory.json"
+        ],
+        "returncode": 0,
+        "seconds": 0.0647004849743098,
+        "log": "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/regex/inventory.log"
+      }
+    },
+    {
+      "crate": "ryu",
+      "version": "1.0.20",
+      "import": {
+        "command": [
+          "/tmp/graft-week1-target/debug/graft-plan",
+          "import",
+          "/home/cym/workspace/graft-baseline-port-20261109/frozen-rustdoc-v2/ryu-1.0.20.json",
+          "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/ryu/catalog.json",
+          "--package",
+          "ryu"
+        ],
+        "returncode": 0,
+        "seconds": 0.03238936606794596,
+        "log": "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/ryu/import.log"
+      },
+      "inventory": {
+        "command": [
+          "/tmp/graft-week1-target/debug/graft-plan",
+          "inventory",
+          "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/ryu/catalog.json",
+          "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/ryu/inventory.json"
+        ],
+        "returncode": 0,
+        "seconds": 0.008508619852364063,
+        "log": "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/ryu/inventory.log"
+      }
+    },
+    {
+      "crate": "time",
+      "version": "0.3.9",
+      "import": {
+        "command": [
+          "/tmp/graft-week1-target/debug/graft-plan",
+          "import",
+          "/home/cym/workspace/graft-baseline-port-20261109/frozen-rustdoc-v2/time-0.3.9.json",
+          "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/time/catalog.json",
+          "--package",
+          "time"
+        ],
+        "returncode": 0,
+        "seconds": 0.2147117368876934,
+        "log": "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/time/import.log"
+      },
+      "inventory": {
+        "command": [
+          "/tmp/graft-week1-target/debug/graft-plan",
+          "inventory",
+          "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/time/catalog.json",
+          "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/time/inventory.json"
+        ],
+        "returncode": 0,
+        "seconds": 0.03287630085833371,
+        "log": "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/time/inventory.log"
+      }
+    },
+    {
+      "crate": "unicode-segmentation",
+      "version": "1.10.1",
+      "import": {
+        "command": [
+          "/tmp/graft-week1-target/debug/graft-plan",
+          "import",
+          "/home/cym/workspace/graft-baseline-port-20261109/frozen-rustdoc-v2/unicode-segmentation-1.10.1.json",
+          "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/unicode-segmentation/catalog.json",
+          "--package",
+          "unicode-segmentation"
+        ],
+        "returncode": 0,
+        "seconds": 0.11462403903715312,
+        "log": "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/unicode-segmentation/import.log"
+      },
+      "inventory": {
+        "command": [
+          "/tmp/graft-week1-target/debug/graft-plan",
+          "inventory",
+          "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/unicode-segmentation/catalog.json",
+          "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/unicode-segmentation/inventory.json"
+        ],
+        "returncode": 0,
+        "seconds": 0.01639990508556366,
+        "log": "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/catalogs/unicode-segmentation/inventory.log"
+      }
+    }
+  ],
+  "generator_preflight": {
+    "rpg": [
+      {
+        "crate": "autocfg",
+        "version": "1.5.0",
+        "generation": {
+          "command": [
+            "/Rust-Lib-Testing/rust1.65/bin/cargo",
+            "--config",
+            "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/.cargo/config.toml",
+            "doc",
+            "--manifest-path",
+            "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/Cargo.toml",
+            "--frozen",
+            "--offline",
+            "--jobs",
+            "8",
+            "--no-deps",
+            "--package",
+            "autocfg@1.5.0"
+          ],
+          "returncode": 0,
+          "timed_out": false,
+          "seconds": 0.619456266053021,
+          "log": "/results/autocfg/generation.log"
+        },
+        "raw_targets": 25
+      },
+      {
+        "crate": "base64",
+        "version": "0.22.1",
+        "generation": {
+          "command": [
+            "/Rust-Lib-Testing/rust1.65/bin/cargo",
+            "--config",
+            "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/.cargo/config.toml",
+            "doc",
+            "--manifest-path",
+            "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/Cargo.toml",
+            "--frozen",
+            "--offline",
+            "--jobs",
+            "8",
+            "--no-deps",
+            "--package",
+            "base64@0.22.1"
+          ],
+          "returncode": 0,
+          "timed_out": false,
+          "seconds": 0.5332098128274083,
+          "log": "/results/base64/generation.log"
+        },
+        "raw_targets": 4
+      },
+      {
+        "crate": "bumpalo",
+        "version": "3.14.0",
+        "generation": {
+          "command": [
+            "/Rust-Lib-Testing/rust1.65/bin/cargo",
+            "--config",
+            "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/.cargo/config.toml",
+            "doc",
+            "--manifest-path",
+            "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/Cargo.toml",
+            "--frozen",
+            "--offline",
+            "--jobs",
+            "8",
+            "--no-deps",
+            "--package",
+            "bumpalo@3.14.0"
+          ],
+          "returncode": 0,
+          "timed_out": false,
+          "seconds": 1.2127452048007399,
+          "log": "/results/bumpalo/generation.log"
+        },
+        "raw_targets": 10
+      },
+      {
+        "crate": "byteorder",
+        "version": "1.5.0",
+        "generation": {
+          "command": [
+            "/Rust-Lib-Testing/rust1.65/bin/cargo",
+            "--config",
+            "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/.cargo/config.toml",
+            "doc",
+            "--manifest-path",
+            "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/Cargo.toml",
+            "--frozen",
+            "--offline",
+            "--jobs",
+            "8",
+            "--no-deps",
+            "--package",
+            "byteorder@1.5.0"
+          ],
+          "returncode": 0,
+          "timed_out": false,
+          "seconds": 0.4910465411376208,
+          "log": "/results/byteorder/generation.log"
+        },
+        "raw_targets": 12
+      },
+      {
+        "crate": "bytes",
+        "version": "1.11.1",
+        "generation": {
+          "command": [
+            "/Rust-Lib-Testing/rust1.65/bin/cargo",
+            "--config",
+            "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/.cargo/config.toml",
+            "doc",
+            "--manifest-path",
+            "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/Cargo.toml",
+            "--frozen",
+            "--offline",
+            "--jobs",
+            "8",
+            "--no-deps",
+            "--package",
+            "bytes@1.11.1"
+          ],
+          "returncode": 0,
+          "timed_out": false,
+          "seconds": 23.027949953917414,
+          "log": "/results/bytes/generation.log"
+        },
+        "raw_targets": 33
+      },
+      {
+        "crate": "csv",
+        "version": "1.3.1",
+        "generation": {
+          "command": [
+            "/Rust-Lib-Testing/rust1.65/bin/cargo",
+            "--config",
+            "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/.cargo/config.toml",
+            "doc",
+            "--manifest-path",
+            "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/Cargo.toml",
+            "--frozen",
+            "--offline",
+            "--jobs",
+            "8",
+            "--no-deps",
+            "--package",
+            "csv@1.3.1"
+          ],
+          "returncode": 0,
+          "timed_out": false,
+          "seconds": 31.062178750056773,
+          "log": "/results/csv/generation.log"
+        },
+        "raw_targets": 38
+      },
+      {
+        "crate": "fixedbitset",
+        "version": "0.5.7",
+        "generation": {
+          "command": [
+            "/Rust-Lib-Testing/rust1.65/bin/cargo",
+            "--config",
+            "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/.cargo/config.toml",
+            "doc",
+            "--manifest-path",
+            "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/Cargo.toml",
+            "--frozen",
+            "--offline",
+            "--jobs",
+            "8",
+            "--no-deps",
+            "--package",
+            "fixedbitset@0.5.7"
+          ],
+          "returncode": 0,
+          "timed_out": false,
+          "seconds": 5.831320641096681,
+          "log": "/results/fixedbitset/generation.log"
+        },
+        "raw_targets": 28
+      },
+      {
+        "crate": "idna",
+        "version": "0.5.0",
+        "generation": {
+          "command": [
+            "/Rust-Lib-Testing/rust1.65/bin/cargo",
+            "--config",
+            "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/.cargo/config.toml",
+            "doc",
+            "--manifest-path",
+            "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/Cargo.toml",
+            "--frozen",
+            "--offline",
+            "--jobs",
+            "8",
+            "--no-deps",
+            "--package",
+            "idna@0.5.0"
+          ],
+          "returncode": 0,
+          "timed_out": false,
+          "seconds": 1.9597370568662882,
+          "log": "/results/idna/generation.log"
+        },
+        "raw_targets": 7
+      },
+      {
+        "crate": "ryu",
+        "version": "1.0.20",
+        "generation": {
+          "command": [
+            "/Rust-Lib-Testing/rust1.65/bin/cargo",
+            "--config",
+            "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/.cargo/config.toml",
+            "doc",
+            "--manifest-path",
+            "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/Cargo.toml",
+            "--frozen",
+            "--offline",
+            "--jobs",
+            "8",
+            "--no-deps",
+            "--package",
+            "ryu@1.0.20"
+          ],
+          "returncode": 0,
+          "timed_out": false,
+          "seconds": 0.35256064496934414,
+          "log": "/results/ryu/generation.log"
+        },
+        "raw_targets": 2
+      },
+      {
+        "crate": "unicode-segmentation",
+        "version": "1.10.1",
+        "generation": {
+          "command": [
+            "/Rust-Lib-Testing/rust1.65/bin/cargo",
+            "--config",
+            "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/.cargo/config.toml",
+            "doc",
+            "--manifest-path",
+            "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/Cargo.toml",
+            "--frozen",
+            "--offline",
+            "--jobs",
+            "8",
+            "--no-deps",
+            "--package",
+            "unicode-segmentation@1.10.1"
+          ],
+          "returncode": 0,
+          "timed_out": false,
+          "seconds": 0.4852632808033377,
+          "log": "/results/unicode-segmentation/generation.log"
+        },
+        "raw_targets": 3
+      }
+    ],
+    "rulf": [
+      {
+        "crate": "autocfg",
+        "version": "1.5.0",
+        "generation": {
+          "command": [
+            "/home/cym/workspace/RULF/build/x86_64-unknown-linux-gnu/stage2-tools-bin/cargo",
+            "--config",
+            "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/.cargo/config.toml",
+            "doc",
+            "--manifest-path",
+            "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/Cargo.toml",
+            "--frozen",
+            "--offline",
+            "--jobs",
+            "8",
+            "--no-deps",
+            "--package",
+            "autocfg@1.5.0"
+          ],
+          "returncode": 0,
+          "timed_out": false,
+          "seconds": 0.4680654800031334,
+          "log": "/results/autocfg/generation.log"
+        },
+        "raw_targets": 24
+      },
+      {
+        "crate": "base64",
+        "version": "0.22.1",
+        "generation": {
+          "command": [
+            "/home/cym/workspace/RULF/build/x86_64-unknown-linux-gnu/stage2-tools-bin/cargo",
+            "--config",
+            "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/.cargo/config.toml",
+            "doc",
+            "--manifest-path",
+            "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/Cargo.toml",
+            "--frozen",
+            "--offline",
+            "--jobs",
+            "8",
+            "--no-deps",
+            "--package",
+            "base64@0.22.1"
+          ],
+          "returncode": 0,
+          "timed_out": false,
+          "seconds": 0.48655795003287494,
+          "log": "/results/base64/generation.log"
+        },
+        "raw_targets": 4
+      },
+      {
+        "crate": "bumpalo",
+        "version": "3.14.0",
+        "generation": {
+          "command": [
+            "/home/cym/workspace/RULF/build/x86_64-unknown-linux-gnu/stage2-tools-bin/cargo",
+            "--config",
+            "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/.cargo/config.toml",
+            "doc",
+            "--manifest-path",
+            "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/Cargo.toml",
+            "--frozen",
+            "--offline",
+            "--jobs",
+            "8",
+            "--no-deps",
+            "--package",
+            "bumpalo@3.14.0"
+          ],
+          "returncode": 0,
+          "timed_out": false,
+          "seconds": 0.39262239914387465,
+          "log": "/results/bumpalo/generation.log"
+        },
+        "raw_targets": 10
+      },
+      {
+        "crate": "byteorder",
+        "version": "1.5.0",
+        "generation": {
+          "command": [
+            "/home/cym/workspace/RULF/build/x86_64-unknown-linux-gnu/stage2-tools-bin/cargo",
+            "--config",
+            "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/.cargo/config.toml",
+            "doc",
+            "--manifest-path",
+            "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/Cargo.toml",
+            "--frozen",
+            "--offline",
+            "--jobs",
+            "8",
+            "--no-deps",
+            "--package",
+            "byteorder@1.5.0"
+          ],
+          "returncode": 0,
+          "timed_out": false,
+          "seconds": 0.4723871070891619,
+          "log": "/results/byteorder/generation.log"
+        },
+        "raw_targets": 12
+      },
+      {
+        "crate": "bytes",
+        "version": "1.11.1",
+        "generation": {
+          "command": [
+            "/home/cym/workspace/RULF/build/x86_64-unknown-linux-gnu/stage2-tools-bin/cargo",
+            "--config",
+            "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/.cargo/config.toml",
+            "doc",
+            "--manifest-path",
+            "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/Cargo.toml",
+            "--frozen",
+            "--offline",
+            "--jobs",
+            "8",
+            "--no-deps",
+            "--package",
+            "bytes@1.11.1"
+          ],
+          "returncode": 0,
+          "timed_out": false,
+          "seconds": 1.2602629358880222,
+          "log": "/results/bytes/generation.log"
+        },
+        "raw_targets": 33
+      },
+      {
+        "crate": "csv",
+        "version": "1.3.1",
+        "generation": {
+          "command": [
+            "/home/cym/workspace/RULF/build/x86_64-unknown-linux-gnu/stage2-tools-bin/cargo",
+            "--config",
+            "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/.cargo/config.toml",
+            "doc",
+            "--manifest-path",
+            "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/Cargo.toml",
+            "--frozen",
+            "--offline",
+            "--jobs",
+            "8",
+            "--no-deps",
+            "--package",
+            "csv@1.3.1"
+          ],
+          "returncode": 0,
+          "timed_out": false,
+          "seconds": 3.8936576650012285,
+          "log": "/results/csv/generation.log"
+        },
+        "raw_targets": 38
+      },
+      {
+        "crate": "fixedbitset",
+        "version": "0.5.7",
+        "generation": {
+          "command": [
+            "/home/cym/workspace/RULF/build/x86_64-unknown-linux-gnu/stage2-tools-bin/cargo",
+            "--config",
+            "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/.cargo/config.toml",
+            "doc",
+            "--manifest-path",
+            "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/Cargo.toml",
+            "--frozen",
+            "--offline",
+            "--jobs",
+            "8",
+            "--no-deps",
+            "--package",
+            "fixedbitset@0.5.7"
+          ],
+          "returncode": 0,
+          "timed_out": false,
+          "seconds": 0.40579727105796337,
+          "log": "/results/fixedbitset/generation.log"
+        },
+        "raw_targets": 24
+      },
+      {
+        "crate": "idna",
+        "version": "0.5.0",
+        "generation": {
+          "command": [
+            "/home/cym/workspace/RULF/build/x86_64-unknown-linux-gnu/stage2-tools-bin/cargo",
+            "--config",
+            "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/.cargo/config.toml",
+            "doc",
+            "--manifest-path",
+            "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/Cargo.toml",
+            "--frozen",
+            "--offline",
+            "--jobs",
+            "8",
+            "--no-deps",
+            "--package",
+            "idna@0.5.0"
+          ],
+          "returncode": 0,
+          "timed_out": false,
+          "seconds": 1.4187117528636009,
+          "log": "/results/idna/generation.log"
+        },
+        "raw_targets": 7
+      },
+      {
+        "crate": "ryu",
+        "version": "1.0.20",
+        "generation": {
+          "command": [
+            "/home/cym/workspace/RULF/build/x86_64-unknown-linux-gnu/stage2-tools-bin/cargo",
+            "--config",
+            "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/.cargo/config.toml",
+            "doc",
+            "--manifest-path",
+            "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/Cargo.toml",
+            "--frozen",
+            "--offline",
+            "--jobs",
+            "8",
+            "--no-deps",
+            "--package",
+            "ryu@1.0.20"
+          ],
+          "returncode": 0,
+          "timed_out": false,
+          "seconds": 0.32669048686511815,
+          "log": "/results/ryu/generation.log"
+        },
+        "raw_targets": 2
+      },
+      {
+        "crate": "unicode-segmentation",
+        "version": "1.10.1",
+        "generation": {
+          "command": [
+            "/home/cym/workspace/RULF/build/x86_64-unknown-linux-gnu/stage2-tools-bin/cargo",
+            "--config",
+            "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/.cargo/config.toml",
+            "doc",
+            "--manifest-path",
+            "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/Cargo.toml",
+            "--frozen",
+            "--offline",
+            "--jobs",
+            "8",
+            "--no-deps",
+            "--package",
+            "unicode-segmentation@1.10.1"
+          ],
+          "returncode": 0,
+          "timed_out": false,
+          "seconds": 0.41959164501167834,
+          "log": "/results/unicode-segmentation/generation.log"
+        },
+        "raw_targets": 3
+      }
+    ]
+  },
+  "limitations": [
+    "Saved baseline generation was a 60-second compatibility preflight, not six independent generation rounds.",
+    "Modern compiler replay compilation is a broader validity diagnostic; it is not original-compiler or instrumented-harness evidence.",
+    "Keyword flags are conservative review queues, not a sound unsafe analyzer.",
+    "Missing generation/AFL adapters cannot be replaced with empty or synthetic formal rounds."
+  ],
+  "review_screen_note": "Known replay file-reading wrapper is not a filesystem mutation; unsafe screen remains conservative and is not a validity proof.",
+  "targets_detail_path": "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/preparation/preparation.json",
+  "targets_detail_sha256": "8c057cc19d6dd935bf36e9d52dc4f0ad4f925f7de91e86dd0891905d5a5596ad"
+}

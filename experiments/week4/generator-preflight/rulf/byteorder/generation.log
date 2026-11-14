@@ -1,0 +1,25 @@
+ Documenting byteorder v1.5.0
+Fuzz Target Generator for Rust Libraries: v0.1.0
+Fuzz Target Renderer Init
+crate: byteorder
+using bfs end point
+after backward search
+targets = 12
+total length = 12
+average time to visit = 1
+edge covered by reverse search = 0
+-----------STATISTICS-----------
+total nodes: 12
+total edges: 0
+covered nodes: 12
+covered edges: 0
+node coverage: 1
+edge coverage: NaN
+targets covered by reverse search: 0
+total targets: 12
+max length = 0
+total length = 12
+average time to fuzz each api = 1
+--------------------------------
+Fuzz Target Generator exits successfully. Total time cost: 430 ms
+    Finished dev [unoptimized + debuginfo] target(s) in 0.48s

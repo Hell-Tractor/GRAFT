@@ -1,0 +1,10 @@
+{
+  "command": [
+    "/tmp/graft-week1-target/debug/audit_public_surface",
+    "/home/cym/workspace/PLFuzz/output/chrono/doc.json",
+    "experiments/week1/public_surface/chrono.json"
+  ],
+  "exit_code": 101,
+  "stderr": "\nthread 'main' (170) panicked at /home/cym/workspace/trustfall-rustdoc-adapter/src/attributes.rs:410:13:\nString `#[doc(test(attr(deny(warnings))))` cannot be parsed as an attribute because it is not closed with a square bracket.\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n",
+  "stdout": ""
+}

@@ -1,0 +1,180 @@
+{
+  "schema": "graft-cost-calibration-summary-v1",
+  "date": "2026-11-10",
+  "currency": "CNY",
+  "scope": "Diagnostic selection, not a full-matrix estimate. No formal experiments or AFL runs. Native bytes used its same persistent ledger for its second/last repair call.",
+  "pricing_basis": "2026-11-10 official peak rates; conservative estimate, not a provider invoice. Failed costs included.",
+  "cases": [
+    {
+      "case": "GRAFT-base64-0",
+      "method": "GRAFT",
+      "crate": "base64",
+      "compiled": true,
+      "validated": true,
+      "attempts": [
+        {
+          "usage": {
+            "prompt_tokens": 1200,
+            "completion_tokens": 414,
+            "total_tokens": 1614,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 1200
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "elapsed_seconds": 5.786671346053481,
+      "peak_estimate_or_reserved_cny": "0.021978",
+      "result_path": "/home/cym/workspace/graft-cost-calibration-20261110/cases/GRAFT-base64-0/result.json"
+    },
+    {
+      "case": "GRAFT-base64-1",
+      "method": "GRAFT",
+      "crate": "base64",
+      "compiled": true,
+      "validated": true,
+      "attempts": [
+        {
+          "usage": {
+            "prompt_tokens": 1205,
+            "completion_tokens": 399,
+            "total_tokens": 1604,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 1205
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "elapsed_seconds": 5.548305162927136,
+      "peak_estimate_or_reserved_cny": "0.021618",
+      "result_path": "/home/cym/workspace/graft-cost-calibration-20261110/cases/GRAFT-base64-1/result.json"
+    },
+    {
+      "case": "GRAFT-bumpalo-0",
+      "method": "GRAFT",
+      "crate": "bumpalo",
+      "compiled": true,
+      "validated": true,
+      "attempts": [
+        {
+          "usage": {
+            "prompt_tokens": 1323,
+            "completion_tokens": 355,
+            "total_tokens": 1678,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 1323
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "elapsed_seconds": 4.956284318817779,
+      "peak_estimate_or_reserved_cny": "0.021492",
+      "result_path": "/home/cym/workspace/graft-cost-calibration-20261110/cases/GRAFT-bumpalo-0/result.json"
+    },
+    {
+      "case": "LLM-only-ryu",
+      "method": "LLM-only",
+      "crate": "ryu",
+      "compiled": true,
+      "validated": true,
+      "attempts": [
+        {
+          "usage": {
+            "prompt_tokens": 85,
+            "completion_tokens": 498,
+            "total_tokens": 583,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 85
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "elapsed_seconds": 6.529352409997955,
+      "peak_estimate_or_reserved_cny": "0.014211",
+      "result_path": "/home/cym/workspace/graft-cost-calibration-20261110/cases/LLM-only-ryu/result.json"
+    },
+    {
+      "case": "deepSURF-byteorder",
+      "method": "deepSURF",
+      "crate": "byteorder",
+      "compiled": true,
+      "validated": true,
+      "attempts": [
+        {
+          "usage": {
+            "prompt_tokens": 4482,
+            "completion_tokens": 785,
+            "total_tokens": 5267,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 4482
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "elapsed_seconds": 9.365391316823661,
+      "peak_estimate_or_reserved_cny": "0.061533",
+      "result_path": "/home/cym/workspace/graft-cost-calibration-native-20261110/cases/deepSURF-byteorder/result.json"
+    },
+    {
+      "case": "deepSURF-bytes",
+      "method": "deepSURF",
+      "crate": "bytes",
+      "compiled": false,
+      "validated": false,
+      "attempts": [
+        {
+          "usage": {
+            "prompt_tokens": 4203,
+            "completion_tokens": 1205,
+            "total_tokens": 5408,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 4203
+          },
+          "finish_reason": "stop"
+        },
+        {
+          "usage": {
+            "prompt_tokens": 3487,
+            "completion_tokens": 1466,
+            "total_tokens": 4953,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 3487
+          },
+          "finish_reason": "length"
+        }
+      ],
+      "elapsed_seconds": 15.078304006019607,
+      "peak_estimate_or_reserved_cny": "0.141327",
+      "result_path": "/home/cym/workspace/graft-cost-calibration-native-20261110/cases/deepSURF-bytes/result.json"
+    }
+  ],
+  "unique_cases": 6,
+  "model_calls": 7,
+  "compiled_and_bounded_probe_passed": 5,
+  "failed_cases": 1,
+  "total_peak_estimate_cny": "0.282159",
+  "mean_cny_per_attempted_case": "0.0470265",
+  "total_cny_per_validated_case": "0.0564318",
+  "all_target_costs_below_cny_025": true
+}

@@ -1,0 +1,74 @@
+Render the following pinned SequencePlan as Rust. The deterministic graft_body function below is immutable: preserve its AST, including actual calls, order, type arguments, value bindings, branches, and input decoding. You may format/comment it and add one main wrapper. The standalone main must parse each command-line argument as a u8, pass those bytes (or empty bytes if no arguments) to graft_body, and print the returned trace. It will be probed on empty, 0, and 1 inputs with a three-second timeout. No other top-level items or crate attributes. Unsupported operations require replanning, never target deletion, constant substitution, version changes, or unsafe workarounds. Return Rust source only. Compilation, plan retention, and runtime reachability are separate outcomes.
+PLAN:
+{
+  "schema": "graft-plan-v1",
+  "crate_name": "checked_fixture",
+  "crate_version": "0.1.0",
+  "package_name": "checked_fixture",
+  "features": [],
+  "default_features": true,
+  "rustdoc_sha256": "05baf80ca9d7a837e449a37a1d68f3651dc253acccf5fdcd2090f50318fd489b",
+  "target": "146",
+  "steps": [
+    {
+      "kind": "input",
+      "value": 0,
+      "ty": {
+        "kind": "primitive",
+        "name": "u8"
+      }
+    },
+    {
+      "kind": "call",
+      "instance": 0,
+      "api": "146",
+      "path": "checked_fixture::scalar",
+      "type_args": [],
+      "substitution": {},
+      "args": [
+        {
+          "value": 0,
+          "adapter": "move"
+        }
+      ],
+      "value": 1,
+      "ty": {
+        "kind": "primitive",
+        "name": "u8"
+      }
+    }
+  ],
+  "obligations": [],
+  "unresolved": [],
+  "search_nodes": 2
+}
+IMMUTABLE CORE:
+extern crate alloc;
+#[allow(unused_mut, unused_variables)]
+pub fn graft_body(data: &[u8]) -> Vec<(usize, Vec<u8>)> {
+let mut trace = Vec::new();
+let mut v0: u8 = u8::from_le_bytes(core::array::from_fn(|i| data.get((0 + i) % data.len().max(1)).copied().unwrap_or(0)));
+let observed_0 = format!("{:?}", (v0,)).into_bytes();
+let mut v1: u8 = checked_fixture::scalar(v0);
+if std::env::var_os("GRAFT_TRACE").is_some() { eprintln!("GRAFT_CALL:0:{}", String::from_utf8_lossy(&observed_0)); }
+trace.push((0, observed_0));
+trace
+}
+
+CURRENT SOURCE:
+extern crate alloc;
+#[allow(unused_mut, unused_variables)]
+pub fn graft_body(data: &[u8]) -> Vec<(usize, Vec<u8>)> {
+let mut trace = Vec::new();
+let mut v0: u8 = u8::from_le_bytes(core::array::from_fn(|i| data.get((0 + i) % data.len().max(1)).copied().unwrap_or(0)));
+let observed_0 = format!("{:?}", (v0,)).into_bytes();
+let mut v1: u8 = 0u8;
+if std::env::var_os("GRAFT_TRACE").is_some() { eprintln!("GRAFT_CALL:0:{}", String::from_utf8_lossy(&observed_0)); }
+trace.push((0, observed_0));
+trace
+}
+
+fn main() { let data: Vec<u8> = std::env::args().skip(1).map(|s| s.parse::<u8>().expect("byte argument")).collect(); println!("{:?}", graft_body(&data)); }
+COMPILER / PLAN DIAGNOSTICS:
+planned core AST changed: call/order/type/binding/branch/input decoder must be retained; request replanning instead
+Remaining repair calls: 0. Return corrected Rust source only. Preserve the pinned dependency and immutable planned core.

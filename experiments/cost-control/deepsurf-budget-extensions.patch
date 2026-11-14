@@ -1,0 +1,140 @@
+--- deepsurf-port/generator/src/main.rs (budget bridge)
++++ deepsurf-port/generator/src/main.rs
+@@ -559,6 +559,7 @@
+         // println!("----> {}", dynamic_prompt);
+ 
+ 
++        let attempt_limit=if env::var("GRAFT_MODEL_COST_POLICY").is_ok(){2}else{MAX_PROMPT_ATTEMPTS};
+         let mut attempt: usize = 1;
+         println!("[{llm_urapi}]: attempting llm-improvement...");
+         loop{ // improvement attempts
+@@ -592,9 +593,9 @@
+ 
+             if !has_main_function(&improved_harness){
+                 println!("[{llm_urapi}]: Could not locate main function. Repeating the last prompt...");
+-                println!("[{llm_urapi}]: checking target {attempt}/{MAX_PROMPT_ATTEMPTS} --> Err!");
+-                if attempt >= MAX_PROMPT_ATTEMPTS{
+-                    println!("[{llm_urapi}]: Harness improvement failed after {MAX_PROMPT_ATTEMPTS} attempts.");
++                println!("[{llm_urapi}]: checking target {attempt}/{attempt_limit} --> Err!");
++                if attempt >= attempt_limit{
++                    println!("[{llm_urapi}]: Harness improvement failed after {attempt_limit} attempts.");
+                     break;
+                 }
+                 attempt+=1;
+@@ -619,13 +620,13 @@
+                     // Do some validity checks here
+                     if !contains_fuzz_macros(&improved_harness){
+                         println!("[{llm_urapi}]: could not find fuzz_nohook! macro.");
+-                        println!("[{llm_urapi}]: checking target {attempt}/{MAX_PROMPT_ATTEMPTS} --> Err!");
++                        println!("[{llm_urapi}]: checking target {attempt}/{attempt_limit} --> Err!");
+                         surf_remove_target_dir(&improved_target_dir);
+                         surf_move_dir_into(&improved_target_dir, &fuzz_llm_only_non_comp_dir)?;
+                         break;
+                     }
+ 
+-                    println!("[{llm_urapi}]: checking target {attempt}/{MAX_PROMPT_ATTEMPTS} --> Ok!");
++                    println!("[{llm_urapi}]: checking target {attempt}/{attempt_limit} --> Ok!");
+ 
+                     for called_api_stable_def_id in called_apis{
+                         // Check if is a URAPI
+@@ -672,7 +673,7 @@
+                     break
+                 },
+                 Err(output) => {
+-                    println!("[{llm_urapi}]: checking target {attempt}/{MAX_PROMPT_ATTEMPTS} --> Err!");
++                    println!("[{llm_urapi}]: checking target {attempt}/{attempt_limit} --> Err!");
+                     
+                     // Move the llm_improved fuzz target to non_compilable
+                     surf_remove_target_dir(&improved_target_dir);
+@@ -690,8 +691,8 @@
+                     );
+                 },
+             }
+-            if attempt >= MAX_PROMPT_ATTEMPTS{
+-                println!("[{llm_urapi}]: Harness improvement failed after {MAX_PROMPT_ATTEMPTS} attempts.");
++            if attempt >= attempt_limit{
++                println!("[{llm_urapi}]: Harness improvement failed after {attempt_limit} attempts.");
+                 break;
+             }
+             attempt+=1;
+@@ -706,6 +707,16 @@
+ }
+ 
+ fn main(){
++    // Offline preflight uses exactly the native response assembly, without a
++    // model request or crate generation. It does not change the fuzz algorithm.
++    if let Ok(path)=env::var("GRAFT_POSTPROCESS_RESPONSE") {
++        let content=fs::read_to_string(path).expect("preflight response source");
++        println!("#![forbid(unsafe_code)]\n{}\n{}",
++            replace_fuzz_macro(&surf_clean_leftover_converters(&surf_remove_forbid_unsafe(
++                &surf_extract_rust_code(&surf_remove_harness_markers(&content))))),
++            surf_get_type_converters());
++        return;
++    }
+     if let Ok(_) = env::var("SURF_ENABLE_LLM_ONLY"){
+         
+         let rt = tokio::runtime::Runtime::new().unwrap();
+@@ -1252,6 +1263,7 @@
+         // println!("----> {}", dynamic_prompt);
+         //std::process::exit(0);
+ 
++        let attempt_limit=if env::var("GRAFT_MODEL_COST_POLICY").is_ok(){2}else{MAX_PROMPT_ATTEMPTS};
+         let mut attempt: usize = 1;
+         println!("[{urapi_def_id}]: attempting llm-improvement...");
+         loop{ // improvement attempts
+@@ -1285,9 +1297,9 @@
+ 
+             if !has_main_function(&improved_harness){
+                 println!("[{urapi_def_id}]: Could not locate main function. Repeating the last prompt...");
+-                println!("[{urapi_def_id}]: checking target {attempt}/{MAX_PROMPT_ATTEMPTS} --> Err!");
+-                if attempt >= MAX_PROMPT_ATTEMPTS{
+-                    println!("[{urapi_def_id}]: Harness improvement failed after {MAX_PROMPT_ATTEMPTS} attempts.");
++                println!("[{urapi_def_id}]: checking target {attempt}/{attempt_limit} --> Err!");
++                if attempt >= attempt_limit{
++                    println!("[{urapi_def_id}]: Harness improvement failed after {attempt_limit} attempts.");
+                     break;
+                 }
+                 attempt+=1;
+@@ -1312,13 +1324,13 @@
+                     // Do some validity checks here
+                     if !contains_fuzz_macros(&improved_harness){
+                         println!("[{urapi_def_id}]: could not find fuzz_nohook! macro.");
+-                        println!("[{urapi_def_id}]: checking target {attempt}/{MAX_PROMPT_ATTEMPTS} --> Err!");
++                        println!("[{urapi_def_id}]: checking target {attempt}/{attempt_limit} --> Err!");
+                         surf_remove_target_dir(&improved_target_dir);
+                         surf_move_dir_into(&improved_target_dir, &fuzz_llm_non_comp_dir)?;
+                         break;
+                     }
+ 
+-                    println!("[{urapi_def_id}]: checking target {attempt}/{MAX_PROMPT_ATTEMPTS} --> Ok!");
++                    println!("[{urapi_def_id}]: checking target {attempt}/{attempt_limit} --> Ok!");
+ 
+                     // Actually check here what new you really covered.
+                     if !called_apis.contains(stable_urapi_def_id){
+@@ -1412,13 +1424,13 @@
+                     break
+                 },
+                 Err(output) => {
+-                    println!("[{urapi_def_id}]: checking target {attempt}/{MAX_PROMPT_ATTEMPTS} --> Err!");
++                    println!("[{urapi_def_id}]: checking target {attempt}/{attempt_limit} --> Err!");
+                     
+                     // Move the llm_improved fuzz target to non_compilable
+                     surf_remove_target_dir(&improved_target_dir);
+                     surf_move_dir_into(&improved_target_dir, &fuzz_llm_non_comp_dir)?;
+ 
+-                    if attempt == MAX_PROMPT_ATTEMPTS {
++                    if attempt == attempt_limit {
+                         // Check if the failed harness improvement corresponds to a Macro-Expanded URAPI
+                         if SURF_MACRO_URAPIS.contains_key(stable_urapi_def_id){
+                             let macro_variants_count = SURF_MACRO_URAPIS.get(stable_urapi_def_id).unwrap().len();
+@@ -1444,8 +1456,8 @@
+                     );
+                 },
+             }
+-            if attempt >= MAX_PROMPT_ATTEMPTS{
+-                println!("[{urapi_def_id}]: Harness improvement failed after {MAX_PROMPT_ATTEMPTS} attempts.");
++            if attempt >= attempt_limit{
++                println!("[{urapi_def_id}]: Harness improvement failed after {attempt_limit} attempts.");
+                 break;
+             }
+             attempt+=1;

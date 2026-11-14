@@ -1,0 +1,1 @@
+fn main(){checked_fixture::combine(vec![1u8],checked_fixture::buffer_i32(2));}

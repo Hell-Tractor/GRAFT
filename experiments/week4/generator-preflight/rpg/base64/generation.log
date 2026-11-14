@@ -1,0 +1,94 @@
+ Documenting base64 v0.22.1
+Fuzz Target Generator for Rust Libraries: v1.65.0
+Total function number: 140
+Before Reachable API Analysis API Number: 13
+Before Reachable API Analysis Dependencies Number: 23
+>>>>> Reachable API Analysis <<<<<
+After Reachable API Analysis API Number: 8
+After Reachable API Analysis Dependencies Number: 15
+API Pool Set
+API FUNCTION 0: base64::engine::general_purpose::GeneralPurpose::new (&alphabet::Alphabet, engine::general_purpose::GeneralPurposeConfig) -> engine::general_purpose::GeneralPurpose { }, GENERIC:true
+API FUNCTION 1: base64::engine::Engine::config (&engine::general_purpose::GeneralPurpose) -> &engine::general_purpose::GeneralPurposeConfig { }, GENERIC:false
+API FUNCTION 2: base64::engine::general_purpose::GeneralPurposeConfig::new () -> engine::general_purpose::GeneralPurposeConfig { }, GENERIC:false
+API FUNCTION 3: base64::engine::general_purpose::GeneralPurposeConfig::with_encode_padding (engine::general_purpose::GeneralPurposeConfig, bool) -> engine::general_purpose::GeneralPurposeConfig { }, GENERIC:true
+API FUNCTION 4: base64::engine::general_purpose::GeneralPurposeConfig::with_decode_allow_trailing_bits (engine::general_purpose::GeneralPurposeConfig, bool) -> engine::general_purpose::GeneralPurposeConfig { }, GENERIC:true
+API FUNCTION 5: base64::engine::Config::encode_padding (&engine::general_purpose::GeneralPurposeConfig) -> bool { }, GENERIC:false
+API FUNCTION 6: base64::alphabet::Alphabet::new (&str) -> std::result::Result<alphabet::Alphabet, alphabet::ParseAlphabetError> { }, GENERIC:false
+API FUNCTION 7: base64::alphabet::Alphabet::as_str (&alphabet::Alphabet) -> &str { }, GENERIC:false
+All Generated Sequences:
+Sequence.0: "", ""
+Sequence.1: "2", "[ ]"
+Sequence.2: "6", "[ ]"
+Sequence.3: "2->2", "[ ]->[ ]"
+Sequence.4: "2->3", "[ ]->[ ]"
+Sequence.5: "2->4", "[ ]->[ ]"
+Sequence.6: "2->5", "[ ]->[ ]"
+Sequence.7: "2->6", "[ ]->[ ]"
+Sequence.8: "6->2", "[ ]->[ ]"
+Sequence.9: "6->6", "[ ]->[ ]"
+Sequence.10: "6->7", "[ ]->[ ]"
+Sequence.11: "2->2->2", "[ ]->[ ]->[ ]"
+Sequence.12: "2->2->3", "[ ]->[ ]->[ ]"
+Sequence.13: "2->2->4", "[ ]->[ ]->[ ]"
+Sequence.14: "2->2->5", "[ ]->[ ]->[ ]"
+Sequence.15: "2->2->6", "[ ]->[ ]->[ ]"
+Sequence.16: "2->3->2", "[ ]->[ ]->[ ]"
+Sequence.17: "2->3->6", "[ ]->[ ]->[ ]"
+Sequence.18: "2->4->2", "[ ]->[ ]->[ ]"
+Sequence.19: "2->4->6", "[ ]->[ ]->[ ]"
+Sequence.20: "2->6->0", "[ ]->[ ]->[ ]"
+Sequence.21: "2->6->2", "[ ]->[ ]->[ ]"
+Sequence.22: "2->6->3", "[ ]->[ ]->[ ]"
+Sequence.23: "2->6->4", "[ ]->[ ]->[ ]"
+Sequence.24: "2->6->5", "[ ]->[ ]->[ ]"
+Sequence.25: "2->6->6", "[ ]->[ ]->[ ]"
+Sequence.26: "2->6->7", "[ ]->[ ]->[ ]"
+Sequence.27: "6->2->0", "[ ]->[ ]->[ ]"
+Sequence.28: "6->2->2", "[ ]->[ ]->[ ]"
+Sequence.29: "6->2->3", "[ ]->[ ]->[ ]"
+Sequence.30: "6->2->4", "[ ]->[ ]->[ ]"
+Sequence.31: "6->2->5", "[ ]->[ ]->[ ]"
+Sequence.32: "6->2->6", "[ ]->[ ]->[ ]"
+Sequence.33: "6->2->7", "[ ]->[ ]->[ ]"
+Sequence.34: "6->6->2", "[ ]->[ ]->[ ]"
+Sequence.35: "6->6->6", "[ ]->[ ]->[ ]"
+Sequence.36: "6->6->7", "[ ]->[ ]->[ ]"
+------------------------------------------------------------------------------------------------------------------------------------------------
+|	TOTAL	|	UNSAFE	|	RAWPTR	|	DROP	|	MUTATE	|	GENERIC	|
+|	8	|	0	|	0	|	0	|	0	|	3	|
+------------------------------------------------------------------------------------------------------------------------------------------------
+FUNCTION INDEX LIST <<<<<
+
+
+>>>>> WRITING FILE START
+CRATE TEST DIR: /results/base64/fuzz_target/base64_bfs_generic_fuzz
+targets covered by reverse search: 0
+average time to fuzz each api = 1.5
+LIBFUZZER_FUZZ_TARGET_DIR: /results/base64/libfuzzer_target/base64_bfs_fuzz
+CRATE API: /results/base64/fuzz_target/base64_bfs_api_generic.txt
+CRATE DEPENDENCY: /results/base64/fuzz_target/base64_bfs_dependency_generic.txt
+-----------------STATISTICS-----------------
+------------------------------------------------
+|	TN	|	IN	|	CN	|
+|	8	|	6	|	0.75	|
+------------------------------------------------
+|	UTN	|	UIN	|	UCN	|
+|	0	|	0	|	NaN	|
+------------------------------------------------
+|	TE	|	IE	|	CE	|
+|	15	|	5	|	0.33	|
+------------------------------------------------
+|	UTE	|	UIE	|	UCE	|
+|	0	|	0	|	NaN	|
+------------------------------------------------
+CRATE API: /results/base64/fuzz_target/base64_bfs_info_generic.xls
+CRATE SEQUENCE: /results/base64/fuzz_target/base64_bfs_sequence_generic.txt
+CRATE API GRAPH: /results/base64/fuzz_target/base64_bfs_api_graph_generic.txt
+WRITING FILE FINISHED <<<<<
+
+Generic functions Num: 3
+total functions in crate : 8
+total test sequences : 37
+Total Time Used: 52
+Fuzz Target Generator exits successfully. Total time cost: 478 ms
+    Finished dev [unoptimized + debuginfo] target(s) in 0.53s

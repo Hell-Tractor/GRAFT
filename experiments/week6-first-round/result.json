@@ -1,0 +1,111 @@
+{
+  "scope": "single-target first-round execution probe; not the full comparison",
+  "full_matrix_complete": false,
+  "formal_rounds_completed": 0,
+  "method": "deterministic-emitter",
+  "crate": "base64",
+  "version": "0.22.1",
+  "api": "base64::encoded_len",
+  "seconds_per_target": 300,
+  "worker_count": 1,
+  "seed": 2215903673,
+  "started_utc": "2026-11-09T16:05:41.789477+00:00",
+  "launcher_pid": 2,
+  "status": "completed_execution_probe",
+  "initial_inputs": [
+    {
+      "path": "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/first-round-execution-probe-20261110/initial/one",
+      "sha256": "72cd6e8422c407fb6d098690f1130b7ded7ec2f7f5e1d30bd9d521f015363793",
+      "bytes": 32
+    },
+    {
+      "path": "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/first-round-execution-probe-20261110/initial/zero",
+      "sha256": "66687aadf862bd776c8fc18b8e9f8e20089714856ee233b3902a591d0d5f2925",
+      "bytes": 32
+    }
+  ],
+  "artifact_sha256": {
+    "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/executor-smoke/afl-build/debug/fuzz": "c7948705b0f173f9fed243bea2565ea60c100d9351bdb0de412668e0d525b336",
+    "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/executor-smoke/coverage-build/debug/replay": "125dd9f2927771a4bda87aba82bd41aad16944af00785e7f2032074a5bc0d2c7",
+    "/home/cym/.local/share/afl.rs/rustc-1.97.0-nightly-17584a1/afl.rs-0.18.2/afl/bin/afl-fuzz": "d1e60c1cf3bda4eb490ce49ad7654bb66eb11b6811a47882eb4a4bd6fdeb1c8e",
+    "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/executor-smoke/project/src/bin/fuzz.rs": "788108687a619cb4ae3146148d5997d5a8c7d215b61c1dcd8fb55246d74ceea3",
+    "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/executor-smoke/project/src/bin/replay.rs": "ab0153a9e0a782d63758415de3b9db8f560a796d904b302a0e139219000e1bfa",
+    "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/executor-smoke/project/Cargo.lock": "0f9c3c695a2fc41ba38af211412a70675a3d0ce0b0098a1ffa959b3823b5b6f1",
+    "/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week4/common-universes-v2/api_universes/base64.json": "96a9d751880877211ef4e43912b4e6ba275d9ef728f6d89a227d904e5b6d2552"
+  },
+  "limitations": [
+    "11-configuration generation adapters remain incomplete; no method ranking is inferred.",
+    "Diagnostic uses saved dev builds: AFL compiler nightly 1.97, replay compiler nightly 1.95; this is not the final matched instrumentation configuration.",
+    "No ASan build or valid library bug claim from this probe."
+  ],
+  "fuzz": {
+    "command": [
+      "taskset",
+      "--cpu-list",
+      "0",
+      "/home/cym/.local/share/afl.rs/rustc-1.97.0-nightly-17584a1/afl.rs-0.18.2/afl/bin/afl-fuzz",
+      "-V",
+      "300",
+      "-s",
+      "2215903673",
+      "-i",
+      "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/first-round-execution-probe-20261110/initial",
+      "-o",
+      "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/first-round-execution-probe-20261110/afl",
+      "-m",
+      "none",
+      "-t",
+      "1000",
+      "--",
+      "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/executor-smoke/afl-build/debug/fuzz"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "seconds": 300.08940818393603,
+    "log": "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/first-round-execution-probe-20261110/fuzz.log"
+  },
+  "afl_statistics": [
+    {
+      "run_time": 300,
+      "execs_done": 956031,
+      "saved_crashes": 0,
+      "saved_hangs": 0,
+      "path": "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/first-round-execution-probe-20261110/afl/default/fuzzer_stats"
+    }
+  ],
+  "replay": {
+    "command": [
+      "taskset",
+      "--cpu-list",
+      "0",
+      "/usr/bin/python3",
+      "/home/cym/workspace/GRAFT-2.0/GRAFTTool/scripts/replay_round_coverage.py",
+      "--initial",
+      "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/first-round-execution-probe-20261110/initial",
+      "--afl-output",
+      "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/first-round-execution-probe-20261110/afl",
+      "--binary",
+      "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/executor-smoke/coverage-build/debug/replay",
+      "--llvm-bin",
+      "/home/cym/.rustup/toolchains/nightly-2026-02-07-x86_64-unknown-linux-gnu/lib/rustlib/x86_64-unknown-linux-gnu/bin",
+      "--output",
+      "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/first-round-execution-probe-20261110/coverage-export.json",
+      "--work",
+      "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/first-round-execution-probe-20261110/replayed"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "seconds": 0.11480046389624476,
+    "log": "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/first-round-execution-probe-20261110/replay.log"
+  },
+  "coverage": {
+    "total": 76,
+    "covered": 1,
+    "observed_zero": 52,
+    "unresolved": 23,
+    "confirmed_coverage_percent": 1.3157894736842106
+  },
+  "unique_replayed_inputs": 3,
+  "elapsed_seconds": 300.22786123794504,
+  "finished_utc": "2026-11-09T16:10:42.033854+00:00"
+}

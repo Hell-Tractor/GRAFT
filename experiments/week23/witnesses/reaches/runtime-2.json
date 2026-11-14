@@ -1,0 +1,6 @@
+{
+  "exit_code": 0,
+  "input_byte": "2",
+  "stderr": "",
+  "stdout": "[(0, [40, 50, 44, 41])]\n"
+}

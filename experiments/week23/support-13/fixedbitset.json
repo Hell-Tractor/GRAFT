@@ -1,0 +1,25 @@
+{
+  "api_count": 91,
+  "apis_with_obligations": 12,
+  "candidate_parameter_pairs": {
+    "incompatible": 1503,
+    "unified_candidate_not_compiler_verified": 78,
+    "unified_pending_trait_obligations": 40,
+    "unknown_api_feature": 737,
+    "unknown_type_form": 3453
+  },
+  "crate": "fixedbitset",
+  "no_import_blocker": 39,
+  "rustdoc_sha256": "3c89195104c8075a2f585b5a68495f3485143c509f8328b86d0dadf2984a48ea",
+  "scope": "import support only, not proven constructibility; trait obligations may still be unknown",
+  "unsupported_api_reasons": {
+    "associated type binding/constraint": 3,
+    "borrowed output requires lifetime analysis": 3,
+    "direct unsafe call: preconditions require explicit contract": 7,
+    "nominal lifetime argument requires storage analysis": 23,
+    "trait method dispatch/impl specialization": 35,
+    "type alias expansion: fixedbitset::Block": 3,
+    "unsupported rustdoc type: qualified_path": 13
+  },
+  "version": "0.5.7"
+}

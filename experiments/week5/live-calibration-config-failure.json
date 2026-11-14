@@ -1,0 +1,18 @@
+{
+  "scope": "single live generation/build/probe calibration; not a formal round",
+  "command": [
+    "/tmp/graft-week1-target/debug/graft",
+    "checked-testcase",
+    "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/executor-smoke/plan.json",
+    "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/live-calibration/base64-target",
+    "--shared-project",
+    "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2",
+    "--max-repairs",
+    "3"
+  ],
+  "returncode": 101,
+  "seconds": 0.01606772211380303,
+  "credential": "user-specified env file, never stored",
+  "model": "deepseek-v4-pro",
+  "authorization": "User explicitly authorized outbound public crate API documentation, GRAFT plans and target source for six-round generation and repair calls."
+}

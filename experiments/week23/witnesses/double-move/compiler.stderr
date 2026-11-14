@@ -1,0 +1,12 @@
+error[E0382]: use of moved value: `t`
+ --> /tmp/graft-checked-tests-1281/double-move/main.rs:1:68
+  |
+1 | fn main(){let t=checked_fixture::token(1);checked_fixture::moved(t,t);}
+  |               -                                                  - ^ value used here after move
+  |               |                                                  |
+  |               |                                                  value moved here
+  |               move occurs because `t` has type `Token`, which does not implement the `Copy` trait
+
+error: aborting due to 1 previous error
+
+For more information about this error, try `rustc --explain E0382`.

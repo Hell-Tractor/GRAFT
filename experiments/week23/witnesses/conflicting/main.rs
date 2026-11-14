@@ -1,0 +1,1 @@
+fn main(){checked_fixture::same(checked_fixture::left_u8(1),checked_fixture::right_i32(2));}

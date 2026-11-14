@@ -1,0 +1,26 @@
+{
+  "api_count": 44,
+  "apis_with_obligations": 20,
+  "candidate_parameter_pairs": {
+    "incompatible": 620,
+    "unknown_api_feature": 368,
+    "unknown_type_form": 1787
+  },
+  "crate": "bumpalo",
+  "no_import_blocker": 0,
+  "rustdoc_sha256": "1ea046f471ab51f3411f5ab65f210949736964c3449f49011c95eade12850874",
+  "scope": "import support only, not proven constructibility; trait obligations may still be unknown",
+  "unsupported_api_reasons": {
+    "associated type binding/constraint": 3,
+    "borrowed output requires lifetime analysis": 24,
+    "const generic parameter": 40,
+    "const/inferred generic argument": 42,
+    "direct unsafe call: preconditions require explicit contract": 1,
+    "nominal lifetime argument requires storage analysis": 4,
+    "parenthesized/function trait arguments": 7,
+    "trait method dispatch/impl specialization": 2,
+    "unsupported rustdoc type: qualified_path": 4,
+    "unsupported rustdoc type: raw_pointer": 1
+  },
+  "version": "3.20.2"
+}

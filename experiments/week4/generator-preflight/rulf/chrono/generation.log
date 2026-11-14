@@ -1,0 +1,7 @@
+    Checking num-traits v0.2.19
+    Checking iana-time-zone v0.1.65
+ Documenting chrono v0.4.44
+Fuzz Target Generator for Rust Libraries: v0.1.0
+Fuzz Target Renderer Init
+crate: chrono
+using bfs end point

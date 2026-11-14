@@ -1,0 +1,269 @@
+{
+  "schema": "graft-common-versions-v2",
+  "status": "shared older-version pins; 13 libraries compile on all four toolchains; generator timeouts/invalid targets remain explicit",
+  "platform": "x86_64-unknown-linux-gnu",
+  "versions": {
+    "autocfg": "1.5.0",
+    "base64": "0.22.1",
+    "bumpalo": "3.14.0",
+    "byteorder": "1.5.0",
+    "bytes": "1.11.1",
+    "chrono": "0.4.19",
+    "csv": "1.3.1",
+    "fixedbitset": "0.5.7",
+    "idna": "0.5.0",
+    "regex": "1.6.0",
+    "ryu": "1.0.20",
+    "time": "0.3.9",
+    "unicode-segmentation": "1.10.1"
+  },
+  "rows": [
+    {
+      "crate": "autocfg",
+      "version": "1.5.0",
+      "previous_frozen_version": "1.5.0",
+      "default_features": true,
+      "explicit_features": [],
+      "resolved_features": [],
+      "declared_msrv": "1.0",
+      "edition": "2015",
+      "package_checksum": "c08606f8c3cbf4ce6ec8e28fb0014a2c086708fe954eaa885384a6165172e7e8",
+      "api_universe_sha256": "e6f7311ae95ae9b6ce8552a2214681fd526d50b18d09a6b738e4a187134954da",
+      "public_name_body_definitions": 35,
+      "surface_review_items": 13
+    },
+    {
+      "crate": "base64",
+      "version": "0.22.1",
+      "previous_frozen_version": "0.22.1",
+      "default_features": true,
+      "explicit_features": [],
+      "resolved_features": [
+        "alloc",
+        "default",
+        "std"
+      ],
+      "declared_msrv": "1.48.0",
+      "edition": "2018",
+      "package_checksum": "72b3254f16251a8381aa12e40e3c4d2f0199f8c6508fbecb9d91f575e0fbb8c6",
+      "api_universe_sha256": "9f44e315debe5d76a5433e59d06e44171ae382f40c0d684fe8945b7505bc63bd",
+      "public_name_body_definitions": 76,
+      "surface_review_items": 8
+    },
+    {
+      "crate": "bumpalo",
+      "version": "3.14.0",
+      "previous_frozen_version": "3.20.2",
+      "default_features": true,
+      "explicit_features": [],
+      "resolved_features": [
+        "default"
+      ],
+      "declared_msrv": "1.60.0",
+      "edition": "2021",
+      "package_checksum": "7f30e7476521f6f8af1a1c4c0b8cc94f0bee37d91763d0ca2665f299b6cd8aec",
+      "api_universe_sha256": "0165a7d4d9280bfecee2b9bbc9f6119b258676d1c50618d738f3517d0ea1fc95",
+      "public_name_body_definitions": 44,
+      "surface_review_items": 32
+    },
+    {
+      "crate": "byteorder",
+      "version": "1.5.0",
+      "previous_frozen_version": "1.5.0",
+      "default_features": true,
+      "explicit_features": [],
+      "resolved_features": [
+        "default",
+        "std"
+      ],
+      "declared_msrv": "1.60",
+      "edition": "2021",
+      "package_checksum": "1fd0f2584146f6f2ef48085050886acf353beff7305ebd1ae69500e27c67f64b",
+      "api_universe_sha256": "722b84f367cb1a6eb7f0171fb43d4f057600623151cd3f8620d9fc4bdb0510ba",
+      "public_name_body_definitions": 162,
+      "surface_review_items": 0
+    },
+    {
+      "crate": "bytes",
+      "version": "1.11.1",
+      "previous_frozen_version": "1.11.1",
+      "default_features": true,
+      "explicit_features": [],
+      "resolved_features": [
+        "default",
+        "std"
+      ],
+      "declared_msrv": "1.57",
+      "edition": "2021",
+      "package_checksum": "1e748733b7cbc798e1434b6ac524f0c1ff2ab456fe201501e6497c8417a4fc33",
+      "api_universe_sha256": "918fdf9d3f39196e2be051f3bfca6817949ef2b2913cc05dafedaf80bcccf39a",
+      "public_name_body_definitions": 491,
+      "surface_review_items": 115
+    },
+    {
+      "crate": "chrono",
+      "version": "0.4.19",
+      "previous_frozen_version": "0.4.44",
+      "default_features": true,
+      "explicit_features": [],
+      "resolved_features": [
+        "clock",
+        "default",
+        "libc",
+        "oldtime",
+        "std",
+        "time",
+        "winapi"
+      ],
+      "declared_msrv": null,
+      "edition": "2015",
+      "package_checksum": "670ad68c9088c2a963aaa298cb369688cf3f9465ce5e2d4ca10e6e0098a1ce73",
+      "api_universe_sha256": "a916cdafec6628f7267577e4a0a8e7a1c935e966022966e9d50c339550b95522",
+      "public_name_body_definitions": 473,
+      "surface_review_items": 66
+    },
+    {
+      "crate": "csv",
+      "version": "1.3.1",
+      "previous_frozen_version": "1.4.0",
+      "default_features": true,
+      "explicit_features": [],
+      "resolved_features": [],
+      "declared_msrv": "1.65",
+      "edition": "2021",
+      "package_checksum": "acdc4883a9c96732e4733212c01447ebd805833b7275a73ca3ee080fd77afdaf",
+      "api_universe_sha256": "3d306abd1bf20fc15bb850695b748d0dcb3484fadf43960f2978f255cade923f",
+      "public_name_body_definitions": 222,
+      "surface_review_items": 177
+    },
+    {
+      "crate": "fixedbitset",
+      "version": "0.5.7",
+      "previous_frozen_version": "0.5.7",
+      "default_features": true,
+      "explicit_features": [],
+      "resolved_features": [
+        "default",
+        "std"
+      ],
+      "declared_msrv": "1.56",
+      "edition": "2021",
+      "package_checksum": "1d674e81391d1e1ab681a28d99df07927c6d4aa5b027d7da16ba32d1d21ecd99",
+      "api_universe_sha256": "5eee61679665a8b42070e54bc8f498f0bd710769a153b57fdbb66fda0c4c701d",
+      "public_name_body_definitions": 105,
+      "surface_review_items": 20
+    },
+    {
+      "crate": "idna",
+      "version": "0.5.0",
+      "previous_frozen_version": "1.1.0",
+      "default_features": true,
+      "explicit_features": [],
+      "resolved_features": [
+        "alloc",
+        "default",
+        "std"
+      ],
+      "declared_msrv": "1.51",
+      "edition": "2018",
+      "package_checksum": "634d9b1461af396cad843f47fdba5597a4f9e6ddd4bfb6ff5d85028c25cb12f6",
+      "api_universe_sha256": "6dfde129c258c5eb83fe349b6ac45f16be17887f1595d85c9d3b5d4a9e271676",
+      "public_name_body_definitions": 25,
+      "surface_review_items": 7
+    },
+    {
+      "crate": "regex",
+      "version": "1.6.0",
+      "previous_frozen_version": "1.12.3",
+      "default_features": true,
+      "explicit_features": [],
+      "resolved_features": [
+        "aho-corasick",
+        "default",
+        "memchr",
+        "perf",
+        "perf-cache",
+        "perf-dfa",
+        "perf-inline",
+        "perf-literal",
+        "std",
+        "unicode",
+        "unicode-age",
+        "unicode-bool",
+        "unicode-case",
+        "unicode-gencat",
+        "unicode-perl",
+        "unicode-script",
+        "unicode-segment"
+      ],
+      "declared_msrv": null,
+      "edition": "2018",
+      "package_checksum": "4c4eb3267174b8c6c2f654116623910a0fef09c4753f8dd83db29c48a0df988b",
+      "api_universe_sha256": "aaaece7cdfd7ef33e839a34f554574da4320a603fa5f0fdf0a21cdf2d56da956",
+      "public_name_body_definitions": 277,
+      "surface_review_items": 294
+    },
+    {
+      "crate": "ryu",
+      "version": "1.0.20",
+      "previous_frozen_version": "1.0.23",
+      "default_features": true,
+      "explicit_features": [],
+      "resolved_features": [],
+      "declared_msrv": "1.36",
+      "edition": "2018",
+      "package_checksum": "28d3b2b1366ec20994f1fd18c3c594f05c5dd4bc44d8bb0c1c632c8d6829481f",
+      "api_universe_sha256": "47100fb8ac8a0e93cb84346d36c553264db040b8c408b8b7af661eb3ba79aceb",
+      "public_name_body_definitions": 7,
+      "surface_review_items": 9
+    },
+    {
+      "crate": "time",
+      "version": "0.3.9",
+      "previous_frozen_version": "0.3.47",
+      "default_features": true,
+      "explicit_features": [],
+      "resolved_features": [
+        "alloc",
+        "default",
+        "std"
+      ],
+      "declared_msrv": null,
+      "edition": "2018",
+      "package_checksum": "c2702e08a7a860f005826c6815dcac101b19b5eb330c27fe4a5928fec1d20ddd",
+      "api_universe_sha256": "7832023857040226ceb1bc3070dd154362daf4719eb770fe1230cbe859f0baf2",
+      "public_name_body_definitions": 464,
+      "surface_review_items": 12
+    },
+    {
+      "crate": "unicode-segmentation",
+      "version": "1.10.1",
+      "previous_frozen_version": "1.13.2",
+      "default_features": true,
+      "explicit_features": [],
+      "resolved_features": [],
+      "declared_msrv": null,
+      "edition": "2018",
+      "package_checksum": "1dd624098567895118886609431a7c3b8f516e41d30e0643f03d94592a147e36",
+      "api_universe_sha256": "99f9150bfc656943107ffe3269a4331684039e6bb032af4df74468017581637d",
+      "public_name_body_definitions": 53,
+      "surface_review_items": 32
+    }
+  ],
+  "shared_cargo_lock_sha256": "0f9c3c695a2fc41ba38af211412a70675a3d0ce0b0098a1ffa959b3823b5b6f1",
+  "shared_manifest_sha256": "42d605e7e1af6458274a37fd2306e29ed27b5baf7add191e60272d79098fc294",
+  "shared_transitive_pin": {
+    "serde": "1.0.228",
+    "ryu": "1.0.20"
+  },
+  "compiler_witnesses": "older-version-trial/complete-dependencies/compiler-witnesses.json",
+  "authoritative_api_universes": "common-universes-v2/api_universes",
+  "preflight_cfg": "default features, Cargo dev profile; validate cfg/profile equality before formal instrumented builds",
+  "generator_notes": "RPG regex 1.6 succeeds; chrono/time generation limits remain, not compiler incompatibility",
+  "not_proven": [
+    "all targets valid",
+    "unsafe contracts satisfied",
+    "formal release-profile performance",
+    "executed coverage"
+  ]
+}

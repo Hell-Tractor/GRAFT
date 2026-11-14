@@ -1,0 +1,3 @@
+(function() {var implementors = {
+"graft_baseline_smoke":[["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/core/marker/trait.Unpin.html\" title=\"trait core::marker::Unpin\">Unpin</a> for <a class=\"struct\" href=\"graft_baseline_smoke/nested/struct.Value.html\" title=\"struct graft_baseline_smoke::nested::Value\">Value</a>",1,["graft_baseline_smoke::nested::Value"]]]
+};if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

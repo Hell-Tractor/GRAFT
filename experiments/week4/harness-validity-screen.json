@@ -1,0 +1,22 @@
+{
+  "schema": "graft-harness-validity-v1",
+  "status": "compilation not sufficient; actual defect found",
+  "tool": "RPG",
+  "crate": "ryu",
+  "version": "1.0.20",
+  "finding": "Generated format64/format32 use fuzz-derived u8 as a raw output pointer; no allocated writable output buffer is constructed. These are invalid harnesses, not ryu bugs.",
+  "source_contract": "format64 writes up to 24 bytes; format32 up to 16 bytes; caller must provide suitable writable storage",
+  "evidence": [
+    {
+      "path": "experiments/week4/generator-preflight-v2/rpg/ryu/fuzz_target/ryu_bfs_generic_fuzz/replay_files/replay_ryu0.rs",
+      "sha256": "f2273330047ed16f9d3cb0d2b5736d686e2a8add3048c2006b43eff1e042734b"
+    },
+    {
+      "path": "experiments/week4/generator-preflight-v2/rpg/ryu/fuzz_target/ryu_bfs_generic_fuzz/replay_files/replay_ryu1.rs",
+      "sha256": "ac3df46d2a84f4d1e091cc0748ea8d0966d51aef23b304c188c6b518e98738d5"
+    }
+  ],
+  "library_contract_source": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/ryu-1.0.20/src/pretty/mod.rs",
+  "library_contract_source_sha256": "49b0701a2f7b896e3ff23221761a48b4445a048d9ae63207d8934ff1969de795",
+  "execution": "not_run; known invalid raw-pointer construction"
+}

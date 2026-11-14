@@ -1,0 +1,44 @@
+{
+  "schema": "graft-generation-v1",
+  "started_unix_ms": 1794238539019,
+  "max_repairs": 3,
+  "accepted": true,
+  "attempts": [
+    {
+      "index": 0,
+      "is_repair": false,
+      "response": {
+        "content": "",
+        "model": "deepseek-v4-pro",
+        "immutable_revision": null,
+        "input_tokens": null,
+        "output_tokens": null,
+        "cost": null
+      },
+      "latency_ms": 54522,
+      "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "plan_retained": false,
+      "compiled": false,
+      "diagnostics": "expected one immutable graft_body and at most one wrapper main\n   Compiling libc v0.2.191\n   Compiling autocfg v1.5.0\n   Compiling memchr v2.8.3\n   Compiling serde_core v1.0.228\n   Compiling serde v1.0.228\n   Compiling tinyvec v1.13.3\n   Compiling num_threads v0.1.7\n   Compiling regex-syntax v0.6.27\n   Compiling itoa v1.0.15\n   Compiling ryu v1.0.20\n   Compiling unicode-bidi v0.3.18\n   Compiling byteorder v1.5.0\n   Compiling bumpalo v3.14.0\n   Compiling fixedbitset v0.5.7\n   Compiling bytes v1.11.1\n   Compiling unicode-segmentation v1.10.1\n   Compiling base64 v0.22.1\n   Compiling unicode-normalization v0.1.25\n   Compiling num-traits v0.2.19\n   Compiling csv-core v0.1.13\n   Compiling aho-corasick v0.7.18\n   Compiling idna v0.5.0\n   Compiling num-integer v0.1.47\n   Compiling time v0.1.45\n   Compiling time v0.3.9\n   Compiling chrono v0.4.19\n   Compiling regex v1.6.0\n   Compiling csv v1.3.1\n   Compiling graft_joint_compatibility v0.0.0 (/home/cym/workspace/graft-experiments-5min-6rounds-20261109/live-calibration/base64-target-v2)\nerror[E0601]: `main` function not found in crate `graft_checked_target`\n  |\n  = note: consider adding a `main` function to `src/main.rs`\n\nFor more information about this error, try `rustc --explain E0601`.\nerror: could not compile `graft_joint_compatibility` (bin \"graft_checked_target\") due to 1 previous error\n"
+    },
+    {
+      "index": 1,
+      "is_repair": true,
+      "response": {
+        "content": "extern crate alloc;\n#[allow(unused_mut, unused_variables)]\npub fn graft_body(data: &[u8]) -> Vec<(usize, Vec<u8>)> {\n    let mut trace = Vec::new();\n    let mut v0: usize = usize::from_le_bytes(core::array::from_fn(|i| data.get((0 + i) % data.len().max(1)).copied().unwrap_or(0)));\n    let mut v1: bool = data.get(16 % data.len().max(1)).copied().unwrap_or(0) & 1 != 0;\n    let observed_0 = format!(\"{:?}\", (v0, v1,)).into_bytes();\n    let mut v2: core::option::Option<usize> = base64::encoded_len(v0, v1);\n    if std::env::var_os(\"GRAFT_TRACE\").is_some() { eprintln!(\"GRAFT_CALL:0:{}\", String::from_utf8_lossy(&observed_0)); }\n    trace.push((0, observed_0));\n    trace\n}\n\nfn main() {\n    let bytes: Vec<u8> = std::env::args()\n        .skip(1)\n        .map(|arg| arg.parse::<u8>().expect(\"expected command-line arguments to be u8 values\"))\n        .collect();\n    let trace = graft_body(&bytes);\n    println!(\"{:?}\", trace);\n}",
+        "model": "deepseek-v4-pro",
+        "immutable_revision": null,
+        "input_tokens": null,
+        "output_tokens": null,
+        "cost": null
+      },
+      "latency_ms": 44179,
+      "source_sha256": "cee02949a001c6dcf6fe8c9e242ba636001e604ab91cb6e60b768e355bf3bbf7",
+      "plan_retained": true,
+      "compiled": true,
+      "diagnostics": ""
+    }
+  ],
+  "backend_error": null,
+  "runtime_status": "separate_probe_required"
+}

@@ -1,0 +1,19 @@
+{
+  "api_count": 5,
+  "apis_with_obligations": 2,
+  "candidate_parameter_pairs": {
+    "incompatible": 10,
+    "unknown_api_feature": 8,
+    "unknown_type_form": 6
+  },
+  "crate": "ryu",
+  "no_import_blocker": 1,
+  "rustdoc_sha256": "4badf0e37bd68885ac95181c4cf6f19c1061b6575906fd107e8731872b08a21d",
+  "scope": "import support only, not proven constructibility; trait obligations may still be unknown",
+  "unsupported_api_reasons": {
+    "borrowed output requires lifetime analysis": 2,
+    "direct unsafe call: preconditions require explicit contract": 2,
+    "unsupported rustdoc type: raw_pointer": 2
+  },
+  "version": "1.0.23"
+}

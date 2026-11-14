@@ -1,0 +1,9 @@
+{
+  "schema": "graft-generation-v1",
+  "started_unix_ms": 1794231675145,
+  "max_repairs": 1,
+  "accepted": false,
+  "attempts": [],
+  "backend_error": "no mock response",
+  "runtime_status": "separate_probe_required"
+}

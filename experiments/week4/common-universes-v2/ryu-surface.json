@@ -1,0 +1,2384 @@
+{
+  "crate": "ryu",
+  "functions": [
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "d2d",
+      "owners": [],
+      "rustdoc_id": "115",
+      "span": {
+        "begin": [
+          91,
+          1
+        ],
+        "end": [
+          302,
+          2
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/ryu-1.0.20/src/d2s.rs"
+      },
+      "status": "not_publicly_named_function"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "div5",
+      "owners": [],
+      "rustdoc_id": "120",
+      "span": {
+        "begin": [
+          24,
+          1
+        ],
+        "end": [
+          26,
+          2
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/ryu-1.0.20/src/d2s_intrinsics.rs"
+      },
+      "status": "not_publicly_named_function"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "div10",
+      "owners": [],
+      "rustdoc_id": "121",
+      "span": {
+        "begin": [
+          29,
+          1
+        ],
+        "end": [
+          31,
+          2
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/ryu-1.0.20/src/d2s_intrinsics.rs"
+      },
+      "status": "not_publicly_named_function"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "div100",
+      "owners": [],
+      "rustdoc_id": "122",
+      "span": {
+        "begin": [
+          34,
+          1
+        ],
+        "end": [
+          36,
+          2
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/ryu-1.0.20/src/d2s_intrinsics.rs"
+      },
+      "status": "not_publicly_named_function"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "pow5_factor",
+      "owners": [],
+      "rustdoc_id": "123",
+      "span": {
+        "begin": [
+          39,
+          1
+        ],
+        "end": [
+          52,
+          2
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/ryu-1.0.20/src/d2s_intrinsics.rs"
+      },
+      "status": "not_publicly_named_function"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "multiple_of_power_of_5",
+      "owners": [],
+      "rustdoc_id": "124",
+      "span": {
+        "begin": [
+          56,
+          1
+        ],
+        "end": [
+          59,
+          2
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/ryu-1.0.20/src/d2s_intrinsics.rs"
+      },
+      "status": "not_publicly_named_function"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "multiple_of_power_of_2",
+      "owners": [],
+      "rustdoc_id": "125",
+      "span": {
+        "begin": [
+          63,
+          1
+        ],
+        "end": [
+          68,
+          2
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/ryu-1.0.20/src/d2s_intrinsics.rs"
+      },
+      "status": "not_publicly_named_function"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "mul_shift_64",
+      "owners": [],
+      "rustdoc_id": "126",
+      "span": {
+        "begin": [
+          71,
+          1
+        ],
+        "end": [
+          75,
+          2
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/ryu-1.0.20/src/d2s_intrinsics.rs"
+      },
+      "status": "not_publicly_named_function"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "mul_shift_all_64",
+      "owners": [],
+      "rustdoc_id": "127",
+      "span": {
+        "begin": [
+          78,
+          1
+        ],
+        "end": [
+          89,
+          2
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/ryu-1.0.20/src/d2s_intrinsics.rs"
+      },
+      "status": "not_publicly_named_function"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "format_finite",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 14,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Buffer",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "13",
+      "span": {
+        "begin": [
+          72,
+          5
+        ],
+        "end": [
+          79,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/ryu-1.0.20/src/buffer/mod.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "f2d",
+      "owners": [],
+      "rustdoc_id": "156",
+      "span": {
+        "begin": [
+          40,
+          1
+        ],
+        "end": [
+          178,
+          2
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/ryu-1.0.20/src/f2s.rs"
+      },
+      "status": "not_publicly_named_function"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "pow5factor_32",
+      "owners": [],
+      "rustdoc_id": "157",
+      "span": {
+        "begin": [
+          27,
+          1
+        ],
+        "end": [
+          40,
+          2
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/ryu-1.0.20/src/f2s_intrinsics.rs"
+      },
+      "status": "not_publicly_named_function"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "multiple_of_power_of_5_32",
+      "owners": [],
+      "rustdoc_id": "159",
+      "span": {
+        "begin": [
+          44,
+          1
+        ],
+        "end": [
+          46,
+          2
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/ryu-1.0.20/src/f2s_intrinsics.rs"
+      },
+      "status": "not_publicly_named_function"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "multiple_of_power_of_2_32",
+      "owners": [],
+      "rustdoc_id": "160",
+      "span": {
+        "begin": [
+          50,
+          1
+        ],
+        "end": [
+          53,
+          2
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/ryu-1.0.20/src/f2s_intrinsics.rs"
+      },
+      "status": "not_publicly_named_function"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "mul_shift_32",
+      "owners": [],
+      "rustdoc_id": "161",
+      "span": {
+        "begin": [
+          58,
+          1
+        ],
+        "end": [
+          72,
+          2
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/ryu-1.0.20/src/f2s_intrinsics.rs"
+      },
+      "status": "not_publicly_named_function"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "mul_pow5_inv_div_pow2",
+      "owners": [],
+      "rustdoc_id": "162",
+      "span": {
+        "begin": [
+          75,
+          1
+        ],
+        "end": [
+          98,
+          2
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/ryu-1.0.20/src/f2s_intrinsics.rs"
+      },
+      "status": "not_publicly_named_function"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "mul_pow5_div_pow2",
+      "owners": [],
+      "rustdoc_id": "163",
+      "span": {
+        "begin": [
+          101,
+          1
+        ],
+        "end": [
+          113,
+          2
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/ryu-1.0.20/src/f2s_intrinsics.rs"
+      },
+      "status": "not_publicly_named_function"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "write_exponent3",
+      "owners": [],
+      "rustdoc_id": "164",
+      "span": {
+        "begin": [
+          5,
+          1
+        ],
+        "end": [
+          28,
+          2
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/ryu-1.0.20/src/pretty/exponent.rs"
+      },
+      "status": "not_publicly_named_function"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "write_exponent2",
+      "owners": [],
+      "rustdoc_id": "165",
+      "span": {
+        "begin": [
+          31,
+          1
+        ],
+        "end": [
+          48,
+          2
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/ryu-1.0.20/src/pretty/exponent.rs"
+      },
+      "status": "not_publicly_named_function"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "write_mantissa_long",
+      "owners": [],
+      "rustdoc_id": "168",
+      "span": {
+        "begin": [
+          5,
+          1
+        ],
+        "end": [
+          41,
+          2
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/ryu-1.0.20/src/pretty/mantissa.rs"
+      },
+      "status": "not_publicly_named_function"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "write_mantissa",
+      "owners": [],
+      "rustdoc_id": "169",
+      "span": {
+        "begin": [
+          44,
+          1
+        ],
+        "end": [
+          82,
+          2
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/ryu-1.0.20/src/pretty/mantissa.rs"
+      },
+      "status": "not_publicly_named_function"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"ryu\", \"raw\", \"format64\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "format64",
+      "owners": [],
+      "rustdoc_id": "171",
+      "span": {
+        "begin": [
+          52,
+          1
+        ],
+        "end": [
+          118,
+          2
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/ryu-1.0.20/src/pretty/mod.rs"
+      },
+      "status": "publicly_named_function"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"ryu\", \"raw\", \"format32\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "format32",
+      "owners": [],
+      "rustdoc_id": "175",
+      "span": {
+        "begin": [
+          159,
+          1
+        ],
+        "end": [
+          224,
+          2
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/ryu-1.0.20/src/pretty/mod.rs"
+      },
+      "status": "publicly_named_function"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "borrow",
+      "owners": [
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "id": 31,
+                          "path": "Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 30,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Buffer",
+          "receiver_publicly_named": true,
+          "trait": "Borrow",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "id": 31,
+                          "path": "Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 108,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "FloatingDecimal64",
+          "receiver_publicly_named": false,
+          "trait": "Borrow",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "id": 31,
+                          "path": "Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 149,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "FloatingDecimal32",
+          "receiver_publicly_named": false,
+          "trait": "Borrow",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "29",
+      "span": null,
+      "status": "external_definition"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "borrow_mut",
+      "owners": [
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "id": 31,
+                          "path": "Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 34,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Buffer",
+          "receiver_publicly_named": true,
+          "trait": "BorrowMut",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "id": 31,
+                          "path": "Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 109,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "FloatingDecimal64",
+          "receiver_publicly_named": false,
+          "trait": "BorrowMut",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "id": 31,
+                          "path": "Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 150,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "FloatingDecimal32",
+          "receiver_publicly_named": false,
+          "trait": "BorrowMut",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "33",
+      "span": null,
+      "status": "external_definition"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "clone_to_uninit",
+      "owners": [
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "id": 38,
+                          "path": "Clone"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 37,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Buffer",
+          "receiver_publicly_named": true,
+          "trait": "CloneToUninit",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "36",
+      "span": null,
+      "status": "external_definition"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "into",
+      "owners": [
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              },
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "U"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          },
+                          "id": 40,
+                          "path": "From"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "U"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 42,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Buffer",
+          "receiver_publicly_named": true,
+          "trait": "Into",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              },
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "U"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          },
+                          "id": 40,
+                          "path": "From"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "U"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 110,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "FloatingDecimal64",
+          "receiver_publicly_named": false,
+          "trait": "Into",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              },
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "U"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          },
+                          "id": 40,
+                          "path": "From"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "U"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 151,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "FloatingDecimal32",
+          "receiver_publicly_named": false,
+          "trait": "Into",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "41",
+      "span": null,
+      "status": "external_definition"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "from",
+      "owners": [
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 45,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Buffer",
+          "receiver_publicly_named": true,
+          "trait": "From",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 111,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "FloatingDecimal64",
+          "receiver_publicly_named": false,
+          "trait": "From",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 152,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "FloatingDecimal32",
+          "receiver_publicly_named": false,
+          "trait": "From",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "44",
+      "span": null,
+      "status": "external_definition"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "try_into",
+      "owners": [
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              },
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "U"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          },
+                          "id": 47,
+                          "path": "TryFrom"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "U"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 50,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Buffer",
+          "receiver_publicly_named": true,
+          "trait": "TryInto",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              },
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "U"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          },
+                          "id": 47,
+                          "path": "TryFrom"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "U"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 112,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "FloatingDecimal64",
+          "receiver_publicly_named": false,
+          "trait": "TryInto",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              },
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "U"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          },
+                          "id": 47,
+                          "path": "TryFrom"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "U"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 153,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "FloatingDecimal32",
+          "receiver_publicly_named": false,
+          "trait": "TryInto",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "48",
+      "span": null,
+      "status": "external_definition"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "try_from",
+      "owners": [
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              },
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "U"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          },
+                          "id": 43,
+                          "path": "Into"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "U"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 55,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Buffer",
+          "receiver_publicly_named": true,
+          "trait": "TryFrom",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              },
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "U"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          },
+                          "id": 43,
+                          "path": "Into"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "U"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 113,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "FloatingDecimal64",
+          "receiver_publicly_named": false,
+          "trait": "TryFrom",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              },
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "U"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          },
+                          "id": 43,
+                          "path": "Into"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "U"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 154,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "FloatingDecimal32",
+          "receiver_publicly_named": false,
+          "trait": "TryFrom",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "54",
+      "span": null,
+      "status": "external_definition"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "type_id",
+      "owners": [
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "outlives": "'static"
+                    },
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "id": 31,
+                          "path": "Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 58,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Buffer",
+          "receiver_publicly_named": true,
+          "trait": "Any",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "outlives": "'static"
+                    },
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "id": 31,
+                          "path": "Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 114,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "FloatingDecimal64",
+          "receiver_publicly_named": false,
+          "trait": "Any",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "outlives": "'static"
+                    },
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "id": 31,
+                          "path": "Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 155,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "FloatingDecimal32",
+          "receiver_publicly_named": false,
+          "trait": "Any",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "56",
+      "span": null,
+      "status": "external_definition"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "clone",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 63,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Buffer",
+          "receiver_publicly_named": true,
+          "trait": "Clone",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "62",
+      "span": {
+        "begin": [
+          87,
+          5
+        ],
+        "end": [
+          89,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/ryu-1.0.20/src/buffer/mod.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "default",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 65,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Buffer",
+          "receiver_publicly_named": true,
+          "trait": "Default",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "64",
+      "span": {
+        "begin": [
+          95,
+          5
+        ],
+        "end": [
+          97,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/ryu-1.0.20/src/buffer/mod.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "new",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 14,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Buffer",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "7",
+      "span": {
+        "begin": [
+          29,
+          5
+        ],
+        "end": [
+          32,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/ryu-1.0.20/src/buffer/mod.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": false,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "is_nonfinite",
+      "owners": [
+        {
+          "id": 67,
+          "kind": "trait_declaration",
+          "trait_publicly_named": false
+        }
+      ],
+      "rustdoc_id": "70",
+      "span": {
+        "begin": [
+          110,
+          5
+        ],
+        "end": [
+          110,
+          35
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/ryu-1.0.20/src/buffer/mod.rs"
+      },
+      "status": "owner_visibility_or_applicability_unresolved"
+    },
+    {
+      "has_body": false,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "format_nonfinite",
+      "owners": [
+        {
+          "id": 67,
+          "kind": "trait_declaration",
+          "trait_publicly_named": false
+        }
+      ],
+      "rustdoc_id": "71",
+      "span": {
+        "begin": [
+          111,
+          5
+        ],
+        "end": [
+          111,
+          47
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/ryu-1.0.20/src/buffer/mod.rs"
+      },
+      "status": "owner_visibility_or_applicability_unresolved"
+    },
+    {
+      "has_body": false,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "write_to_ryu_buffer",
+      "owners": [
+        {
+          "id": 67,
+          "kind": "trait_declaration",
+          "trait_publicly_named": false
+        }
+      ],
+      "rustdoc_id": "72",
+      "span": {
+        "begin": [
+          112,
+          5
+        ],
+        "end": [
+          112,
+          67
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/ryu-1.0.20/src/buffer/mod.rs"
+      },
+      "status": "owner_visibility_or_applicability_unresolved"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "is_nonfinite",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 76,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "f32",
+          "receiver_publicly_named": true,
+          "trait": "Sealed",
+          "trait_publicly_named": false
+        }
+      ],
+      "rustdoc_id": "73",
+      "span": {
+        "begin": [
+          117,
+          5
+        ],
+        "end": [
+          121,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/ryu-1.0.20/src/buffer/mod.rs"
+      },
+      "status": "owner_visibility_or_applicability_unresolved"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "format_nonfinite",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 76,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "f32",
+          "receiver_publicly_named": true,
+          "trait": "Sealed",
+          "trait_publicly_named": false
+        }
+      ],
+      "rustdoc_id": "74",
+      "span": {
+        "begin": [
+          125,
+          5
+        ],
+        "end": [
+          136,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/ryu-1.0.20/src/buffer/mod.rs"
+      },
+      "status": "owner_visibility_or_applicability_unresolved"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "write_to_ryu_buffer",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 76,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "f32",
+          "receiver_publicly_named": true,
+          "trait": "Sealed",
+          "trait_publicly_named": false
+        }
+      ],
+      "rustdoc_id": "75",
+      "span": {
+        "begin": [
+          139,
+          5
+        ],
+        "end": [
+          141,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/ryu-1.0.20/src/buffer/mod.rs"
+      },
+      "status": "owner_visibility_or_applicability_unresolved"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "is_nonfinite",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 80,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "f64",
+          "receiver_publicly_named": true,
+          "trait": "Sealed",
+          "trait_publicly_named": false
+        }
+      ],
+      "rustdoc_id": "77",
+      "span": {
+        "begin": [
+          146,
+          5
+        ],
+        "end": [
+          150,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/ryu-1.0.20/src/buffer/mod.rs"
+      },
+      "status": "owner_visibility_or_applicability_unresolved"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "format_nonfinite",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 80,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "f64",
+          "receiver_publicly_named": true,
+          "trait": "Sealed",
+          "trait_publicly_named": false
+        }
+      ],
+      "rustdoc_id": "78",
+      "span": {
+        "begin": [
+          154,
+          5
+        ],
+        "end": [
+          165,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/ryu-1.0.20/src/buffer/mod.rs"
+      },
+      "status": "owner_visibility_or_applicability_unresolved"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "write_to_ryu_buffer",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 80,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "f64",
+          "receiver_publicly_named": true,
+          "trait": "Sealed",
+          "trait_publicly_named": false
+        }
+      ],
+      "rustdoc_id": "79",
+      "span": {
+        "begin": [
+          168,
+          5
+        ],
+        "end": [
+          170,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/ryu-1.0.20/src/buffer/mod.rs"
+      },
+      "status": "owner_visibility_or_applicability_unresolved"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "format",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 14,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Buffer",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "8",
+      "span": {
+        "begin": [
+          47,
+          5
+        ],
+        "end": [
+          53,
+          6
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/ryu-1.0.20/src/buffer/mod.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "decimal_length9",
+      "owners": [],
+      "rustdoc_id": "81",
+      "span": {
+        "begin": [
+          24,
+          1
+        ],
+        "end": [
+          48,
+          2
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/ryu-1.0.20/src/common.rs"
+      },
+      "status": "not_publicly_named_function"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "log2_pow5",
+      "owners": [],
+      "rustdoc_id": "82",
+      "span": {
+        "begin": [
+          53,
+          1
+        ],
+        "end": [
+          60,
+          2
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/ryu-1.0.20/src/common.rs"
+      },
+      "status": "not_publicly_named_function"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "pow5bits",
+      "owners": [],
+      "rustdoc_id": "83",
+      "span": {
+        "begin": [
+          64,
+          1
+        ],
+        "end": [
+          71,
+          2
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/ryu-1.0.20/src/common.rs"
+      },
+      "status": "not_publicly_named_function"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "ceil_log2_pow5",
+      "owners": [],
+      "rustdoc_id": "84",
+      "span": {
+        "begin": [
+          75,
+          1
+        ],
+        "end": [
+          77,
+          2
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/ryu-1.0.20/src/common.rs"
+      },
+      "status": "not_publicly_named_function"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "log10_pow2",
+      "owners": [],
+      "rustdoc_id": "85",
+      "span": {
+        "begin": [
+          81,
+          1
+        ],
+        "end": [
+          86,
+          2
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/ryu-1.0.20/src/common.rs"
+      },
+      "status": "not_publicly_named_function"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "log10_pow5",
+      "owners": [],
+      "rustdoc_id": "86",
+      "span": {
+        "begin": [
+          90,
+          1
+        ],
+        "end": [
+          95,
+          2
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/ryu-1.0.20/src/common.rs"
+      },
+      "status": "not_publicly_named_function"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "decimal_length17",
+      "owners": [],
+      "rustdoc_id": "97",
+      "span": {
+        "begin": [
+          38,
+          1
+        ],
+        "end": [
+          80,
+          2
+        ],
+        "filename": "/home/cym/workspace/graft-baseline-port-20261109/vendor-v2/ryu-1.0.20/src/d2s.rs"
+      },
+      "status": "not_publicly_named_function"
+    }
+  ],
+  "input_path": "/home/cym/workspace/graft-baseline-port-20261109/frozen-rustdoc-v2/ryu-1.0.20.json",
+  "policy": "publicly importable paths from existing rustdoc adapter; trait impl obligations remain unresolved",
+  "rustdoc_format": 57,
+  "schema": "graft-public-surface-crosscheck-v1",
+  "version": "1.0.20"
+}

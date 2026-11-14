@@ -1,0 +1,1600 @@
+{
+  "apis": [
+    {
+      "api_id": "1953a248d75902e9e63cd8d2d8dbb8c185aa864ded8e1a93a87eb7a7b2b31d9f",
+      "begin": [
+        34,
+        1
+      ],
+      "deprecated": false,
+      "end": [
+        34,
+        36
+      ],
+      "exclusion_reasons": [],
+      "file": "src/lib.rs",
+      "historical_name_filter": false,
+      "historical_row_multiplicity": 0,
+      "local_callable_candidate": true,
+      "mapping_limitations": [],
+      "name": "same_line_left",
+      "original_file": "/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week1/fixtures/coverage-fixture-0.1.0/src/lib.rs",
+      "owners": [],
+      "rustdoc_id": "51",
+      "selected_by_historical_doc": false,
+      "signature": {
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [],
+          "is_c_variadic": false,
+          "output": {
+            "primitive": "u8"
+          }
+        }
+      },
+      "source_sha256": "29b006f65f3990de9b011ab63ac9be2c3445c4a5757bdfa1635d711cf744d1ae"
+    },
+    {
+      "api_id": "217dbc71f7e0966702996ff83c07ed8de3f2ad9c1d659d34c9b5c96eaec1196d",
+      "begin": [
+        22,
+        5
+      ],
+      "deprecated": false,
+      "end": [
+        24,
+        6
+      ],
+      "exclusion_reasons": [],
+      "file": "src/lib.rs",
+      "historical_name_filter": false,
+      "historical_row_multiplicity": 0,
+      "local_callable_candidate": true,
+      "mapping_limitations": [],
+      "name": "read",
+      "original_file": "/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week1/fixtures/coverage-fixture-0.1.0/src/lib.rs",
+      "owners": [
+        {
+          "for": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "generic": "T"
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "id": 7,
+              "path": "Container"
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [
+                      {
+                        "trait_bound": {
+                          "generic_params": [],
+                          "modifier": "none",
+                          "trait": {
+                            "args": null,
+                            "id": 5,
+                            "path": "Copy"
+                          }
+                        }
+                      }
+                    ],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": []
+          },
+          "is_synthetic": false,
+          "trait": null
+        }
+      ],
+      "rustdoc_id": "9",
+      "selected_by_historical_doc": false,
+      "signature": {
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "generic": "T"
+          }
+        }
+      },
+      "source_sha256": "29b006f65f3990de9b011ab63ac9be2c3445c4a5757bdfa1635d711cf744d1ae"
+    },
+    {
+      "api_id": "223a15947e238d95ec1e765fd5fe0d1978c55b28605bf758161ccd64c21246e9",
+      "begin": [
+        3,
+        1
+      ],
+      "deprecated": false,
+      "end": [
+        5,
+        2
+      ],
+      "exclusion_reasons": [],
+      "file": "src/lib.rs",
+      "historical_name_filter": false,
+      "historical_row_multiplicity": 0,
+      "local_callable_candidate": true,
+      "mapping_limitations": [],
+      "name": "entered",
+      "original_file": "/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week1/fixtures/coverage-fixture-0.1.0/src/lib.rs",
+      "owners": [],
+      "rustdoc_id": "2",
+      "selected_by_historical_doc": false,
+      "signature": {
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "x",
+              {
+                "primitive": "u8"
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "primitive": "u8"
+          }
+        }
+      },
+      "source_sha256": "29b006f65f3990de9b011ab63ac9be2c3445c4a5757bdfa1635d711cf744d1ae"
+    },
+    {
+      "api_id": "365323057dbf97413a2aa7b4af4afe5196f182200bd378ae0d66885af4d7b531",
+      "begin": [
+        7,
+        1
+      ],
+      "deprecated": false,
+      "end": [
+        9,
+        2
+      ],
+      "exclusion_reasons": [],
+      "file": "src/lib.rs",
+      "historical_name_filter": false,
+      "historical_row_multiplicity": 0,
+      "local_callable_candidate": true,
+      "mapping_limitations": [],
+      "name": "uncalled",
+      "original_file": "/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week1/fixtures/coverage-fixture-0.1.0/src/lib.rs",
+      "owners": [],
+      "rustdoc_id": "3",
+      "selected_by_historical_doc": false,
+      "signature": {
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [],
+          "is_c_variadic": false,
+          "output": {
+            "primitive": "u8"
+          }
+        }
+      },
+      "source_sha256": "29b006f65f3990de9b011ab63ac9be2c3445c4a5757bdfa1635d711cf744d1ae"
+    },
+    {
+      "api_id": "3bf856c67cf8b38e9b48a243c4d593a1a7978ef4b53c218cfede91a72f14cfa9",
+      "begin": [
+        11,
+        1
+      ],
+      "deprecated": false,
+      "end": [
+        13,
+        2
+      ],
+      "exclusion_reasons": [],
+      "file": "src/lib.rs",
+      "historical_name_filter": false,
+      "historical_row_multiplicity": 0,
+      "local_callable_candidate": true,
+      "mapping_limitations": [],
+      "name": "generic",
+      "original_file": "/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week1/fixtures/coverage-fixture-0.1.0/src/lib.rs",
+      "owners": [],
+      "rustdoc_id": "4",
+      "selected_by_historical_doc": false,
+      "signature": {
+        "generics": {
+          "params": [
+            {
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "id": 5,
+                          "path": "Copy"
+                        }
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              },
+              "name": "T"
+            }
+          ],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "x",
+              {
+                "generic": "T"
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "generic": "T"
+          }
+        }
+      },
+      "source_sha256": "29b006f65f3990de9b011ab63ac9be2c3445c4a5757bdfa1635d711cf744d1ae"
+    },
+    {
+      "api_id": "6299d63b12240647c6d3a4127aeaa129bc45c651c84b644c4f3fd9547f87fdf3",
+      "begin": null,
+      "deprecated": false,
+      "end": null,
+      "exclusion_reasons": [
+        "external_definition"
+      ],
+      "file": null,
+      "historical_name_filter": false,
+      "historical_row_multiplicity": 0,
+      "local_callable_candidate": false,
+      "mapping_limitations": [
+        "unresolved_source_path",
+        "no_source_span"
+      ],
+      "name": "type_id",
+      "original_file": null,
+      "owners": [
+        {
+          "for": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "generic": "T"
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "id": 7,
+              "path": "Container"
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "outlives": "'static"
+                    },
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "id": 25,
+                          "path": "Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "is_synthetic": false,
+          "trait": {
+            "args": null,
+            "id": 49,
+            "path": "Any"
+          }
+        }
+      ],
+      "rustdoc_id": "46",
+      "selected_by_historical_doc": false,
+      "signature": {
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": null,
+              "id": 47,
+              "path": "TypeId"
+            }
+          }
+        }
+      },
+      "source_sha256": null
+    },
+    {
+      "api_id": "64e2dcf1ae15898bad96572f4d0379a39d52a5ed0b265be99860b4cfb733e78d",
+      "begin": null,
+      "deprecated": false,
+      "end": null,
+      "exclusion_reasons": [
+        "external_definition"
+      ],
+      "file": null,
+      "historical_name_filter": false,
+      "historical_row_multiplicity": 0,
+      "local_callable_candidate": false,
+      "mapping_limitations": [
+        "unresolved_source_path",
+        "no_source_span"
+      ],
+      "name": "try_into",
+      "original_file": null,
+      "owners": [
+        {
+          "for": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "generic": "T"
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "id": 7,
+              "path": "Container"
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              },
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "U"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          },
+                          "id": 37,
+                          "path": "TryFrom"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "U"
+                  }
+                }
+              }
+            ]
+          },
+          "is_synthetic": false,
+          "trait": {
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "U"
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            },
+            "id": 41,
+            "path": "TryInto"
+          }
+        }
+      ],
+      "rustdoc_id": "38",
+      "selected_by_historical_doc": false,
+      "signature": {
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "generic": "Self"
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "generic": "U"
+                      }
+                    },
+                    {
+                      "type": {
+                        "qualified_path": {
+                          "args": null,
+                          "name": "Error",
+                          "self_type": {
+                            "generic": "U"
+                          },
+                          "trait": {
+                            "args": {
+                              "angle_bracketed": {
+                                "args": [
+                                  {
+                                    "type": {
+                                      "generic": "T"
+                                    }
+                                  }
+                                ],
+                                "constraints": []
+                              }
+                            },
+                            "id": 37,
+                            "path": "TryFrom"
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "id": 39,
+              "path": "Result"
+            }
+          }
+        }
+      },
+      "source_sha256": null
+    },
+    {
+      "api_id": "6bf2b837cfdc99eb5a9903a65beca0756132a7af6ecf81a224a845ee168c92b8",
+      "begin": [
+        34,
+        37
+      ],
+      "deprecated": false,
+      "end": [
+        34,
+        73
+      ],
+      "exclusion_reasons": [],
+      "file": "src/lib.rs",
+      "historical_name_filter": false,
+      "historical_row_multiplicity": 0,
+      "local_callable_candidate": true,
+      "mapping_limitations": [],
+      "name": "same_line_right",
+      "original_file": "/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week1/fixtures/coverage-fixture-0.1.0/src/lib.rs",
+      "owners": [],
+      "rustdoc_id": "52",
+      "selected_by_historical_doc": false,
+      "signature": {
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [],
+          "is_c_variadic": false,
+          "output": {
+            "primitive": "u8"
+          }
+        }
+      },
+      "source_sha256": "29b006f65f3990de9b011ab63ac9be2c3445c4a5757bdfa1635d711cf744d1ae"
+    },
+    {
+      "api_id": "963e8ef85dea64c28c878eaafbae3fcf5046fcda019500956a049ee80de1ffe7",
+      "begin": null,
+      "deprecated": false,
+      "end": null,
+      "exclusion_reasons": [
+        "external_definition"
+      ],
+      "file": null,
+      "historical_name_filter": false,
+      "historical_row_multiplicity": 0,
+      "local_callable_candidate": false,
+      "mapping_limitations": [
+        "unresolved_source_path",
+        "no_source_span"
+      ],
+      "name": "from",
+      "original_file": null,
+      "owners": [
+        {
+          "for": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "generic": "T"
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "id": 7,
+              "path": "Container"
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": []
+          },
+          "is_synthetic": false,
+          "trait": {
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "T"
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            },
+            "id": 30,
+            "path": "From"
+          }
+        }
+      ],
+      "rustdoc_id": "34",
+      "selected_by_historical_doc": false,
+      "signature": {
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "t",
+              {
+                "generic": "T"
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "generic": "T"
+          }
+        }
+      },
+      "source_sha256": null
+    },
+    {
+      "api_id": "a3688d87b0b684b56876cd9d0408df0f9324633bcfa37f5cf2b917ef2d5cfdb2",
+      "begin": [
+        28,
+        5
+      ],
+      "deprecated": false,
+      "end": [
+        30,
+        6
+      ],
+      "exclusion_reasons": [],
+      "file": "src/lib.rs",
+      "historical_name_filter": false,
+      "historical_row_multiplicity": 0,
+      "local_callable_candidate": true,
+      "mapping_limitations": [],
+      "name": "reexported",
+      "original_file": "/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week1/fixtures/coverage-fixture-0.1.0/src/lib.rs",
+      "owners": [],
+      "rustdoc_id": "0",
+      "selected_by_historical_doc": false,
+      "signature": {
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [],
+          "is_c_variadic": false,
+          "output": {
+            "primitive": "u8"
+          }
+        }
+      },
+      "source_sha256": "29b006f65f3990de9b011ab63ac9be2c3445c4a5757bdfa1635d711cf744d1ae"
+    },
+    {
+      "api_id": "b80cb47c12c7a524eeee82cb6ca4d1540327bb531bddff4acab4c0b80eddf981",
+      "begin": null,
+      "deprecated": false,
+      "end": null,
+      "exclusion_reasons": [
+        "external_definition"
+      ],
+      "file": null,
+      "historical_name_filter": false,
+      "historical_row_multiplicity": 0,
+      "local_callable_candidate": false,
+      "mapping_limitations": [
+        "unresolved_source_path",
+        "no_source_span"
+      ],
+      "name": "borrow_mut",
+      "original_file": null,
+      "owners": [
+        {
+          "for": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "generic": "T"
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "id": 7,
+              "path": "Container"
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "id": 25,
+                          "path": "Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "is_synthetic": false,
+          "trait": {
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "T"
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            },
+            "id": 29,
+            "path": "BorrowMut"
+          }
+        }
+      ],
+      "rustdoc_id": "27",
+      "selected_by_historical_doc": false,
+      "signature": {
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": true,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "borrowed_ref": {
+              "is_mutable": true,
+              "lifetime": null,
+              "type": {
+                "generic": "T"
+              }
+            }
+          }
+        }
+      },
+      "source_sha256": null
+    },
+    {
+      "api_id": "c629841b84d34b2c057b4181bf842093aeb12bd2e7345abd9af69c7cb6b2dacb",
+      "begin": [
+        39,
+        1
+      ],
+      "deprecated": false,
+      "end": [
+        39,
+        23
+      ],
+      "exclusion_reasons": [],
+      "file": "src/lib.rs",
+      "historical_name_filter": false,
+      "historical_row_multiplicity": 0,
+      "local_callable_candidate": true,
+      "mapping_limitations": [],
+      "name": "macro_api",
+      "original_file": "/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week1/fixtures/coverage-fixture-0.1.0/src/lib.rs",
+      "owners": [],
+      "rustdoc_id": "53",
+      "selected_by_historical_doc": false,
+      "signature": {
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [],
+          "is_c_variadic": false,
+          "output": {
+            "primitive": "u8"
+          }
+        }
+      },
+      "source_sha256": "29b006f65f3990de9b011ab63ac9be2c3445c4a5757bdfa1635d711cf744d1ae"
+    },
+    {
+      "api_id": "ca503598500c4f4586a569cf52024cd0823bb0c01e05e604d5babe957975ac77",
+      "begin": [
+        18,
+        5
+      ],
+      "deprecated": false,
+      "end": [
+        20,
+        6
+      ],
+      "exclusion_reasons": [],
+      "file": "src/lib.rs",
+      "historical_name_filter": false,
+      "historical_row_multiplicity": 0,
+      "local_callable_candidate": true,
+      "mapping_limitations": [],
+      "name": "new",
+      "original_file": "/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week1/fixtures/coverage-fixture-0.1.0/src/lib.rs",
+      "owners": [
+        {
+          "for": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "generic": "T"
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "id": 7,
+              "path": "Container"
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [
+                      {
+                        "trait_bound": {
+                          "generic_params": [],
+                          "modifier": "none",
+                          "trait": {
+                            "args": null,
+                            "id": 5,
+                            "path": "Copy"
+                          }
+                        }
+                      }
+                    ],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": []
+          },
+          "is_synthetic": false,
+          "trait": null
+        }
+      ],
+      "rustdoc_id": "8",
+      "selected_by_historical_doc": false,
+      "signature": {
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "value",
+              {
+                "generic": "T"
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "generic": "Self"
+          }
+        }
+      },
+      "source_sha256": "29b006f65f3990de9b011ab63ac9be2c3445c4a5757bdfa1635d711cf744d1ae"
+    },
+    {
+      "api_id": "cbe6cfaf821b52d37e96e89829db6b3bf83ed33d294c517ac3397f9363105d01",
+      "begin": null,
+      "deprecated": false,
+      "end": null,
+      "exclusion_reasons": [
+        "external_definition"
+      ],
+      "file": null,
+      "historical_name_filter": false,
+      "historical_row_multiplicity": 0,
+      "local_callable_candidate": false,
+      "mapping_limitations": [
+        "unresolved_source_path",
+        "no_source_span"
+      ],
+      "name": "borrow",
+      "original_file": null,
+      "owners": [
+        {
+          "for": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "generic": "T"
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "id": 7,
+              "path": "Container"
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "id": 25,
+                          "path": "Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "is_synthetic": false,
+          "trait": {
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "T"
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            },
+            "id": 26,
+            "path": "Borrow"
+          }
+        }
+      ],
+      "rustdoc_id": "23",
+      "selected_by_historical_doc": false,
+      "signature": {
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "borrowed_ref": {
+              "is_mutable": false,
+              "lifetime": null,
+              "type": {
+                "generic": "T"
+              }
+            }
+          }
+        }
+      },
+      "source_sha256": null
+    },
+    {
+      "api_id": "de36affffac9e5aa58fd6ba1b4a6476d2736146973767904a70591f442b70812",
+      "begin": null,
+      "deprecated": false,
+      "end": null,
+      "exclusion_reasons": [
+        "external_definition"
+      ],
+      "file": null,
+      "historical_name_filter": false,
+      "historical_row_multiplicity": 0,
+      "local_callable_candidate": false,
+      "mapping_limitations": [
+        "unresolved_source_path",
+        "no_source_span"
+      ],
+      "name": "into",
+      "original_file": null,
+      "owners": [
+        {
+          "for": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "generic": "T"
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "id": 7,
+              "path": "Container"
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              },
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "U"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          },
+                          "id": 30,
+                          "path": "From"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "U"
+                  }
+                }
+              }
+            ]
+          },
+          "is_synthetic": false,
+          "trait": {
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "U"
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            },
+            "id": 33,
+            "path": "Into"
+          }
+        }
+      ],
+      "rustdoc_id": "31",
+      "selected_by_historical_doc": false,
+      "signature": {
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "generic": "Self"
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "generic": "U"
+          }
+        }
+      },
+      "source_sha256": null
+    },
+    {
+      "api_id": "e9f3c06f510c81945475fb3ab41a7b2a4f2bf8ace54601dd083254fbf75728c5",
+      "begin": null,
+      "deprecated": false,
+      "end": null,
+      "exclusion_reasons": [
+        "external_definition"
+      ],
+      "file": null,
+      "historical_name_filter": false,
+      "historical_row_multiplicity": 0,
+      "local_callable_candidate": false,
+      "mapping_limitations": [
+        "unresolved_source_path",
+        "no_source_span"
+      ],
+      "name": "try_from",
+      "original_file": null,
+      "owners": [
+        {
+          "for": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "generic": "T"
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "id": 7,
+              "path": "Container"
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              },
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "U"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          },
+                          "id": 33,
+                          "path": "Into"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "U"
+                  }
+                }
+              }
+            ]
+          },
+          "is_synthetic": false,
+          "trait": {
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "U"
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            },
+            "id": 37,
+            "path": "TryFrom"
+          }
+        }
+      ],
+      "rustdoc_id": "44",
+      "selected_by_historical_doc": false,
+      "signature": {
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "value",
+              {
+                "generic": "U"
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "generic": "T"
+                      }
+                    },
+                    {
+                      "type": {
+                        "qualified_path": {
+                          "args": null,
+                          "name": "Error",
+                          "self_type": {
+                            "generic": "T"
+                          },
+                          "trait": {
+                            "args": {
+                              "angle_bracketed": {
+                                "args": [
+                                  {
+                                    "type": {
+                                      "generic": "U"
+                                    }
+                                  }
+                                ],
+                                "constraints": []
+                              }
+                            },
+                            "id": 37,
+                            "path": "TryFrom"
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "id": 39,
+              "path": "Result"
+            }
+          }
+        }
+      },
+      "source_sha256": null
+    }
+  ],
+  "crate": "coverage-fixture",
+  "filter_names": [],
+  "historical_apidoc_rows": 0,
+  "historical_duplicate_rows": 0,
+  "includes_private": false,
+  "input_doc_sha256": "58ec491643f51b0d544e63f5c6ad82373fe9a26d6b179e6489c1b5cee2e48bfe",
+  "rustdoc_format": 57,
+  "schema": "graft-api-snapshot-v1",
+  "source_root": "/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week1/fixtures/coverage-fixture-0.1.0",
+  "status": "frozen_historical_audit_not_validated_public_surface",
+  "surface_limitations": [
+    "module/reexport visibility and impl usability require review",
+    "generic instantiations are not separate API items",
+    "external trait bodies remain explicit historical entries"
+  ],
+  "universe_sha256": "bb5f60601fad20c228dcc736f7113a6f7a49ae3386eb6fbbec4f4f735966e72d",
+  "version": "0.1.0"
+}

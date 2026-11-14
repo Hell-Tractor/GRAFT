@@ -1,0 +1,13 @@
+    Checking num-traits v0.2.19
+    Checking libc v0.2.191
+    Checking num-integer v0.1.47
+    Checking time v0.1.45
+ Documenting chrono v0.4.19
+Fuzz Target Generator for Rust Libraries: v1.65.0
+Total function number: 757
+Before Reachable API Analysis API Number: 240
+Before Reachable API Analysis Dependencies Number: 3518
+>>>>> Reachable API Analysis <<<<<
+After Reachable API Analysis API Number: 228
+After Reachable API Analysis Dependencies Number: 3242
+API Pool Set

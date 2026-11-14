@@ -1,0 +1,55 @@
+[
+  {
+    "command": [
+      "/home/cym/workspace/RULF/build/x86_64-unknown-linux-gnu/stage2/bin/fuzz-target-generator",
+      "--version"
+    ],
+    "exit_code": 0,
+    "stdout": "Fuzz Target Generator for Rust Libraries: v0.1.0\nrustdoc 1.66.0-dev\nFuzz Target Generator exits successfully. Total time cost: 68 ms\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "rustc",
+      "+myrust",
+      "-vV"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "error: toolchain 'myrust' is not installed\n"
+  },
+  {
+    "command": [
+      "docker",
+      "ps",
+      "--format",
+      "{{.Names}} {{.Status}}"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "permission denied while trying to connect to the docker API at unix:///var/run/docker.sock\n"
+  },
+  {
+    "directory": "/home/cym/workspace/RULF",
+    "git_head": "37509433dd08552fd288061ce6bf2dbae88c5347",
+    "git_error": ""
+  },
+  {
+    "directory": "/home/cym/workspace/deepSURF",
+    "git_head": "69e93a5b3f454194106b868856d0f3f5361b406d",
+    "git_error": ""
+  },
+  {
+    "directory": "/home/cym/workspace/Rust-Lib-Testing-main",
+    "git_head": null,
+    "git_error": "致命错误：不是 git 仓库（或者直至挂载点 / 的任何父目录）\n停止在文件系统边界（未设置 GIT_DISCOVERY_ACROSS_FILESYSTEM）。"
+  },
+  {
+    "not_found_in_bounded_workspace_search": [
+      "RuMono",
+      "SyRust",
+      "FRIES"
+    ],
+    "scope": "workspace directory names through depth 3; not a claim of universal absence"
+  }
+]

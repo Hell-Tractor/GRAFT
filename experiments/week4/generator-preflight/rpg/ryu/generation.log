@@ -1,0 +1,92 @@
+ Documenting ryu v1.0.20
+Fuzz Target Generator for Rust Libraries: v1.65.0
+Total function number: 40
+Before Reachable API Analysis API Number: 5
+Before Reachable API Analysis Dependencies Number: 2
+>>>>> Reachable API Analysis <<<<<
+After Reachable API Analysis API Number: 3
+After Reachable API Analysis Dependencies Number: 0
+API Pool Set
+API FUNCTION 0: ryu::Buffer::new () -> buffer::Buffer { }, GENERIC:false
+API FUNCTION 1: ryu::raw::format64 () { }, GENERIC:false
+API FUNCTION 2: ryu::raw::format32 () { }, GENERIC:false
+All Generated Sequences:
+Sequence.0: "", ""
+Sequence.1: "0", "[ ]"
+Sequence.2: "1", "[ ]"
+Sequence.3: "2", "[ ]"
+Sequence.4: "0->0", "[ ]->[ ]"
+Sequence.5: "0->1", "[ ]->[ ]"
+Sequence.6: "0->2", "[ ]->[ ]"
+Sequence.7: "1->0", "[ ]->[ ]"
+Sequence.8: "1->1", "[ ]->[ ]"
+Sequence.9: "1->2", "[ ]->[ ]"
+Sequence.10: "2->0", "[ ]->[ ]"
+Sequence.11: "2->1", "[ ]->[ ]"
+Sequence.12: "2->2", "[ ]->[ ]"
+Sequence.13: "0->0->0", "[ ]->[ ]->[ ]"
+Sequence.14: "0->0->1", "[ ]->[ ]->[ ]"
+Sequence.15: "0->0->2", "[ ]->[ ]->[ ]"
+Sequence.16: "0->1->0", "[ ]->[ ]->[ ]"
+Sequence.17: "0->1->1", "[ ]->[ ]->[ ]"
+Sequence.18: "0->1->2", "[ ]->[ ]->[ ]"
+Sequence.19: "0->2->0", "[ ]->[ ]->[ ]"
+Sequence.20: "0->2->1", "[ ]->[ ]->[ ]"
+Sequence.21: "0->2->2", "[ ]->[ ]->[ ]"
+Sequence.22: "1->0->0", "[ ]->[ ]->[ ]"
+Sequence.23: "1->0->1", "[ ]->[ ]->[ ]"
+Sequence.24: "1->0->2", "[ ]->[ ]->[ ]"
+Sequence.25: "1->1->0", "[ ]->[ ]->[ ]"
+Sequence.26: "1->1->1", "[ ]->[ ]->[ ]"
+Sequence.27: "1->1->2", "[ ]->[ ]->[ ]"
+Sequence.28: "1->2->0", "[ ]->[ ]->[ ]"
+Sequence.29: "1->2->1", "[ ]->[ ]->[ ]"
+Sequence.30: "1->2->2", "[ ]->[ ]->[ ]"
+Sequence.31: "2->0->0", "[ ]->[ ]->[ ]"
+Sequence.32: "2->0->1", "[ ]->[ ]->[ ]"
+Sequence.33: "2->0->2", "[ ]->[ ]->[ ]"
+Sequence.34: "2->1->0", "[ ]->[ ]->[ ]"
+Sequence.35: "2->1->1", "[ ]->[ ]->[ ]"
+Sequence.36: "2->1->2", "[ ]->[ ]->[ ]"
+Sequence.37: "2->2->0", "[ ]->[ ]->[ ]"
+Sequence.38: "2->2->1", "[ ]->[ ]->[ ]"
+Sequence.39: "2->2->2", "[ ]->[ ]->[ ]"
+------------------------------------------------------------------------------------------------------------------------------------------------
+|	TOTAL	|	UNSAFE	|	RAWPTR	|	DROP	|	MUTATE	|	GENERIC	|
+|	3	|	2	|	0	|	0	|	0	|	0	|
+------------------------------------------------------------------------------------------------------------------------------------------------
+FUNCTION INDEX LIST <<<<<
+
+
+>>>>> WRITING FILE START
+CRATE TEST DIR: /results/ryu/fuzz_target/ryu_bfs_generic_fuzz
+targets covered by reverse search: 0
+average time to fuzz each api = 1
+LIBFUZZER_FUZZ_TARGET_DIR: /results/ryu/libfuzzer_target/ryu_bfs_fuzz
+CRATE API: /results/ryu/fuzz_target/ryu_bfs_api_generic.txt
+CRATE DEPENDENCY: /results/ryu/fuzz_target/ryu_bfs_dependency_generic.txt
+-----------------STATISTICS-----------------
+------------------------------------------------
+|	TN	|	IN	|	CN	|
+|	3	|	2	|	0.67	|
+------------------------------------------------
+|	UTN	|	UIN	|	UCN	|
+|	2	|	2	|	1.00	|
+------------------------------------------------
+|	TE	|	IE	|	CE	|
+|	0	|	0	|	NaN	|
+------------------------------------------------
+|	UTE	|	UIE	|	UCE	|
+|	0	|	0	|	NaN	|
+------------------------------------------------
+CRATE API: /results/ryu/fuzz_target/ryu_bfs_info_generic.xls
+CRATE SEQUENCE: /results/ryu/fuzz_target/ryu_bfs_sequence_generic.txt
+CRATE API GRAPH: /results/ryu/fuzz_target/ryu_bfs_api_graph_generic.txt
+WRITING FILE FINISHED <<<<<
+
+Generic functions Num: 0
+total functions in crate : 3
+total test sequences : 40
+Total Time Used: 26
+Fuzz Target Generator exits successfully. Total time cost: 299 ms
+    Finished dev [unoptimized + debuginfo] target(s) in 0.35s

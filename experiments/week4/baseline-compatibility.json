@@ -1,0 +1,429 @@
+{
+  "schema": "graft-baseline-compatibility-v1",
+  "scope": "Declared package MSRV/edition only. Toolchain dev prerelease handling, target-specific and transitive dependencies, language features and actual compiler/plugin execution remain unvalidated. Never silently substitute versions. deepSURF version is from local README, not a verified container binary.",
+  "rows": [
+    {
+      "crate": "ryu",
+      "version": "1.0.23",
+      "track": "historical_candidate",
+      "archive": "/home/cym/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/ryu-1.0.23.crate",
+      "archive_sha256": "9774ba4a74de5f7b1c1451ed6cd5285a32eddb5cccb8cc655a4e50009e06477f",
+      "manifest_sha256": "410de3eae58a75b9d2558d0a4e3ed43c2c8317781ffbd30a7cbe4aebaa833e1a",
+      "edition": "2021",
+      "declared_rust_version": "1.71",
+      "default_features": [],
+      "rulf_1_66": "blocked_declared_msrv",
+      "rpg_1_65": "blocked_declared_msrv",
+      "deepsurf_1_81_documented_only": "metadata_eligible_not_built",
+      "graft_execution_1_94": "metadata_eligible_not_built",
+      "normal_dependencies": [
+        "no-panic"
+      ]
+    },
+    {
+      "crate": "ryu",
+      "version": "1.0.23",
+      "track": "newer_frozen",
+      "archive": "/home/cym/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/ryu-1.0.23.crate",
+      "archive_sha256": "9774ba4a74de5f7b1c1451ed6cd5285a32eddb5cccb8cc655a4e50009e06477f",
+      "manifest_sha256": "410de3eae58a75b9d2558d0a4e3ed43c2c8317781ffbd30a7cbe4aebaa833e1a",
+      "edition": "2021",
+      "declared_rust_version": "1.71",
+      "default_features": [],
+      "rulf_1_66": "blocked_declared_msrv",
+      "rpg_1_65": "blocked_declared_msrv",
+      "deepsurf_1_81_documented_only": "metadata_eligible_not_built",
+      "graft_execution_1_94": "metadata_eligible_not_built",
+      "normal_dependencies": [
+        "no-panic"
+      ]
+    },
+    {
+      "crate": "bumpalo",
+      "version": "3.14.0",
+      "track": "historical_candidate",
+      "error": "exact pinned source not in local archive cache",
+      "rulf_1_66": "unknown_missing_pinned_source",
+      "rpg_1_65": "unknown_missing_pinned_source"
+    },
+    {
+      "crate": "bumpalo",
+      "version": "3.20.2",
+      "track": "newer_frozen",
+      "error": "exact pinned source not in local archive cache",
+      "rulf_1_66": "unknown_missing_pinned_source",
+      "rpg_1_65": "unknown_missing_pinned_source"
+    },
+    {
+      "crate": "base64",
+      "version": "0.22.1",
+      "track": "historical_candidate",
+      "archive": "/home/cym/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/base64-0.22.1.crate",
+      "archive_sha256": "72b3254f16251a8381aa12e40e3c4d2f0199f8c6508fbecb9d91f575e0fbb8c6",
+      "manifest_sha256": "52bee6a418e14918d37058fd15fccfd0f417a06fe4f9668b6f97866bf7f991e3",
+      "edition": "2018",
+      "declared_rust_version": "1.48.0",
+      "default_features": [
+        "std"
+      ],
+      "rulf_1_66": "metadata_eligible_not_built",
+      "rpg_1_65": "metadata_eligible_not_built",
+      "deepsurf_1_81_documented_only": "metadata_eligible_not_built",
+      "graft_execution_1_94": "metadata_eligible_not_built",
+      "normal_dependencies": []
+    },
+    {
+      "crate": "base64",
+      "version": "0.22.1",
+      "track": "newer_frozen",
+      "archive": "/home/cym/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/base64-0.22.1.crate",
+      "archive_sha256": "72b3254f16251a8381aa12e40e3c4d2f0199f8c6508fbecb9d91f575e0fbb8c6",
+      "manifest_sha256": "52bee6a418e14918d37058fd15fccfd0f417a06fe4f9668b6f97866bf7f991e3",
+      "edition": "2018",
+      "declared_rust_version": "1.48.0",
+      "default_features": [
+        "std"
+      ],
+      "rulf_1_66": "metadata_eligible_not_built",
+      "rpg_1_65": "metadata_eligible_not_built",
+      "deepsurf_1_81_documented_only": "metadata_eligible_not_built",
+      "graft_execution_1_94": "metadata_eligible_not_built",
+      "normal_dependencies": []
+    },
+    {
+      "crate": "regex",
+      "version": "1.12.3",
+      "track": "historical_candidate",
+      "archive": "/home/cym/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/regex-1.12.3.crate",
+      "archive_sha256": "e10754a14b9137dd7b1e3e5b0493cc9171fdd105e0ab477f51b72e7f3ac0e276",
+      "manifest_sha256": "a41c45254782e4ae11fe4d213a0cb4d17ee0f6bc094eea90dd331ad6cbaff837",
+      "edition": "2021",
+      "declared_rust_version": "1.65",
+      "default_features": [
+        "std",
+        "perf",
+        "unicode",
+        "regex-syntax/default"
+      ],
+      "rulf_1_66": "metadata_eligible_not_built",
+      "rpg_1_65": "metadata_eligible_not_built",
+      "deepsurf_1_81_documented_only": "metadata_eligible_not_built",
+      "graft_execution_1_94": "metadata_eligible_not_built",
+      "normal_dependencies": [
+        "aho-corasick",
+        "memchr",
+        "regex-automata",
+        "regex-syntax"
+      ]
+    },
+    {
+      "crate": "regex",
+      "version": "1.12.3",
+      "track": "newer_frozen",
+      "archive": "/home/cym/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/regex-1.12.3.crate",
+      "archive_sha256": "e10754a14b9137dd7b1e3e5b0493cc9171fdd105e0ab477f51b72e7f3ac0e276",
+      "manifest_sha256": "a41c45254782e4ae11fe4d213a0cb4d17ee0f6bc094eea90dd331ad6cbaff837",
+      "edition": "2021",
+      "declared_rust_version": "1.65",
+      "default_features": [
+        "std",
+        "perf",
+        "unicode",
+        "regex-syntax/default"
+      ],
+      "rulf_1_66": "metadata_eligible_not_built",
+      "rpg_1_65": "metadata_eligible_not_built",
+      "deepsurf_1_81_documented_only": "metadata_eligible_not_built",
+      "graft_execution_1_94": "metadata_eligible_not_built",
+      "normal_dependencies": [
+        "aho-corasick",
+        "memchr",
+        "regex-automata",
+        "regex-syntax"
+      ]
+    },
+    {
+      "crate": "idna",
+      "version": "0.5.0",
+      "track": "historical_candidate",
+      "error": "exact pinned source not in local archive cache",
+      "rulf_1_66": "unknown_missing_pinned_source",
+      "rpg_1_65": "unknown_missing_pinned_source"
+    },
+    {
+      "crate": "idna",
+      "version": "1.1.0",
+      "track": "newer_frozen",
+      "archive": "/home/cym/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/idna-1.1.0.crate",
+      "archive_sha256": "3b0875f23caa03898994f6ddc501886a45c7d3d62d04d2d90788d47be1b1e4de",
+      "manifest_sha256": "f24a386a071c661e10acc366022adc8278d4f2ca8899d3b50b83e965d3933d00",
+      "edition": "2018",
+      "declared_rust_version": "1.57",
+      "default_features": [
+        "std",
+        "compiled_data"
+      ],
+      "rulf_1_66": "metadata_eligible_not_built",
+      "rpg_1_65": "metadata_eligible_not_built",
+      "deepsurf_1_81_documented_only": "metadata_eligible_not_built",
+      "graft_execution_1_94": "metadata_eligible_not_built",
+      "normal_dependencies": [
+        "idna_adapter",
+        "smallvec",
+        "utf8_iter"
+      ]
+    },
+    {
+      "crate": "fixedbitset",
+      "version": "0.5.7",
+      "track": "historical_candidate",
+      "archive": "/home/cym/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/fixedbitset-0.5.7.crate",
+      "archive_sha256": "1d674e81391d1e1ab681a28d99df07927c6d4aa5b027d7da16ba32d1d21ecd99",
+      "manifest_sha256": "8d265c4f6d6f71a27e1671cc712dbe77274dae1431f455b99b347b8650c1ece0",
+      "edition": "2021",
+      "declared_rust_version": "1.56",
+      "default_features": [
+        "std"
+      ],
+      "rulf_1_66": "metadata_eligible_not_built",
+      "rpg_1_65": "metadata_eligible_not_built",
+      "deepsurf_1_81_documented_only": "metadata_eligible_not_built",
+      "graft_execution_1_94": "metadata_eligible_not_built",
+      "normal_dependencies": [
+        "serde"
+      ]
+    },
+    {
+      "crate": "fixedbitset",
+      "version": "0.5.7",
+      "track": "newer_frozen",
+      "archive": "/home/cym/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/fixedbitset-0.5.7.crate",
+      "archive_sha256": "1d674e81391d1e1ab681a28d99df07927c6d4aa5b027d7da16ba32d1d21ecd99",
+      "manifest_sha256": "8d265c4f6d6f71a27e1671cc712dbe77274dae1431f455b99b347b8650c1ece0",
+      "edition": "2021",
+      "declared_rust_version": "1.56",
+      "default_features": [
+        "std"
+      ],
+      "rulf_1_66": "metadata_eligible_not_built",
+      "rpg_1_65": "metadata_eligible_not_built",
+      "deepsurf_1_81_documented_only": "metadata_eligible_not_built",
+      "graft_execution_1_94": "metadata_eligible_not_built",
+      "normal_dependencies": [
+        "serde"
+      ]
+    },
+    {
+      "crate": "chrono",
+      "version": "0.4.44",
+      "track": "historical_candidate",
+      "error": "exact pinned source not in local archive cache",
+      "rulf_1_66": "unknown_missing_pinned_source",
+      "rpg_1_65": "unknown_missing_pinned_source"
+    },
+    {
+      "crate": "chrono",
+      "version": "0.4.44",
+      "track": "newer_frozen",
+      "error": "exact pinned source not in local archive cache",
+      "rulf_1_66": "unknown_missing_pinned_source",
+      "rpg_1_65": "unknown_missing_pinned_source"
+    },
+    {
+      "crate": "time",
+      "version": "0.3.23",
+      "track": "historical_candidate",
+      "archive": "/home/cym/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/time-0.3.23.crate",
+      "archive_sha256": "59e399c068f43a5d116fedaf73b203fa4f9c519f17e2b34f63221d3792f81446",
+      "manifest_sha256": "a011e69d5ae4484afdc3df407f6fcfdc91461b412730302a3d4fb4f4f731fe3f",
+      "edition": "2021",
+      "declared_rust_version": "1.65.0",
+      "default_features": [
+        "std"
+      ],
+      "rulf_1_66": "metadata_eligible_not_built",
+      "rpg_1_65": "metadata_eligible_not_built",
+      "deepsurf_1_81_documented_only": "metadata_eligible_not_built",
+      "graft_execution_1_94": "metadata_eligible_not_built",
+      "normal_dependencies": [
+        "itoa",
+        "quickcheck",
+        "rand",
+        "serde",
+        "time-core",
+        "time-macros"
+      ]
+    },
+    {
+      "crate": "time",
+      "version": "0.3.47",
+      "track": "newer_frozen",
+      "archive": "/home/cym/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/time-0.3.47.crate",
+      "archive_sha256": "743bd48c283afc0388f9b8827b976905fb217ad9e647fae3a379a9283c4def2c",
+      "manifest_sha256": "414b315922eeaa474993676bfdf4434de91e47cd7d055feff5fc413cb3f06912",
+      "edition": "2024",
+      "declared_rust_version": "1.88.0",
+      "default_features": [
+        "std"
+      ],
+      "rulf_1_66": "blocked_edition",
+      "rpg_1_65": "blocked_edition",
+      "deepsurf_1_81_documented_only": "blocked_edition",
+      "graft_execution_1_94": "metadata_eligible_not_built",
+      "normal_dependencies": [
+        "deranged",
+        "itoa",
+        "num-conv",
+        "powerfmt",
+        "quickcheck",
+        "rand08",
+        "rand09",
+        "serde_core",
+        "time-core",
+        "time-macros"
+      ]
+    },
+    {
+      "crate": "csv",
+      "version": "1.3.1",
+      "track": "historical_candidate",
+      "error": "exact pinned source not in local archive cache",
+      "rulf_1_66": "unknown_missing_pinned_source",
+      "rpg_1_65": "unknown_missing_pinned_source"
+    },
+    {
+      "crate": "csv",
+      "version": "1.4.0",
+      "track": "newer_frozen",
+      "error": "exact pinned source not in local archive cache",
+      "rulf_1_66": "unknown_missing_pinned_source",
+      "rpg_1_65": "unknown_missing_pinned_source"
+    },
+    {
+      "crate": "autocfg",
+      "version": "1.5.0",
+      "track": "historical_candidate",
+      "archive": "/home/cym/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/autocfg-1.5.0.crate",
+      "archive_sha256": "c08606f8c3cbf4ce6ec8e28fb0014a2c086708fe954eaa885384a6165172e7e8",
+      "manifest_sha256": "919934158a57ad16895ec2e937c5c14e3cef405b168c191d64dc81b69b9abe4a",
+      "edition": "2015",
+      "declared_rust_version": "1.0",
+      "default_features": [],
+      "rulf_1_66": "metadata_eligible_not_built",
+      "rpg_1_65": "metadata_eligible_not_built",
+      "deepsurf_1_81_documented_only": "metadata_eligible_not_built",
+      "graft_execution_1_94": "metadata_eligible_not_built",
+      "normal_dependencies": []
+    },
+    {
+      "crate": "autocfg",
+      "version": "1.5.0",
+      "track": "newer_frozen",
+      "archive": "/home/cym/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/autocfg-1.5.0.crate",
+      "archive_sha256": "c08606f8c3cbf4ce6ec8e28fb0014a2c086708fe954eaa885384a6165172e7e8",
+      "manifest_sha256": "919934158a57ad16895ec2e937c5c14e3cef405b168c191d64dc81b69b9abe4a",
+      "edition": "2015",
+      "declared_rust_version": "1.0",
+      "default_features": [],
+      "rulf_1_66": "metadata_eligible_not_built",
+      "rpg_1_65": "metadata_eligible_not_built",
+      "deepsurf_1_81_documented_only": "metadata_eligible_not_built",
+      "graft_execution_1_94": "metadata_eligible_not_built",
+      "normal_dependencies": []
+    },
+    {
+      "crate": "bytes",
+      "version": "1.11.1",
+      "track": "historical_candidate",
+      "archive": "/home/cym/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/bytes-1.11.1.crate",
+      "archive_sha256": "1e748733b7cbc798e1434b6ac524f0c1ff2ab456fe201501e6497c8417a4fc33",
+      "manifest_sha256": "ebdcb7f4b82227b25a075ca774a6021037502d6305d77fee8e01b157c84ffdaa",
+      "edition": "2021",
+      "declared_rust_version": "1.57",
+      "default_features": [
+        "std"
+      ],
+      "rulf_1_66": "metadata_eligible_not_built",
+      "rpg_1_65": "metadata_eligible_not_built",
+      "deepsurf_1_81_documented_only": "metadata_eligible_not_built",
+      "graft_execution_1_94": "metadata_eligible_not_built",
+      "normal_dependencies": [
+        "extra-platforms",
+        "serde"
+      ]
+    },
+    {
+      "crate": "bytes",
+      "version": "1.11.1",
+      "track": "newer_frozen",
+      "archive": "/home/cym/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/bytes-1.11.1.crate",
+      "archive_sha256": "1e748733b7cbc798e1434b6ac524f0c1ff2ab456fe201501e6497c8417a4fc33",
+      "manifest_sha256": "ebdcb7f4b82227b25a075ca774a6021037502d6305d77fee8e01b157c84ffdaa",
+      "edition": "2021",
+      "declared_rust_version": "1.57",
+      "default_features": [
+        "std"
+      ],
+      "rulf_1_66": "metadata_eligible_not_built",
+      "rpg_1_65": "metadata_eligible_not_built",
+      "deepsurf_1_81_documented_only": "metadata_eligible_not_built",
+      "graft_execution_1_94": "metadata_eligible_not_built",
+      "normal_dependencies": [
+        "extra-platforms",
+        "serde"
+      ]
+    },
+    {
+      "crate": "unicode-segmentation",
+      "version": "1.10.1",
+      "track": "historical_candidate",
+      "error": "exact pinned source not in local archive cache",
+      "rulf_1_66": "unknown_missing_pinned_source",
+      "rpg_1_65": "unknown_missing_pinned_source"
+    },
+    {
+      "crate": "unicode-segmentation",
+      "version": "1.13.2",
+      "track": "newer_frozen",
+      "error": "exact pinned source not in local archive cache",
+      "rulf_1_66": "unknown_missing_pinned_source",
+      "rpg_1_65": "unknown_missing_pinned_source"
+    },
+    {
+      "crate": "byteorder",
+      "version": "1.5.0",
+      "track": "historical_candidate",
+      "archive": "/home/cym/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/byteorder-1.5.0.crate",
+      "archive_sha256": "1fd0f2584146f6f2ef48085050886acf353beff7305ebd1ae69500e27c67f64b",
+      "manifest_sha256": "94ba374cb26f3c68fb83da2e5e7dce85920fc4fb827620b06b39d71a9d0e1e18",
+      "edition": "2021",
+      "declared_rust_version": "1.60",
+      "default_features": [
+        "std"
+      ],
+      "rulf_1_66": "metadata_eligible_not_built",
+      "rpg_1_65": "metadata_eligible_not_built",
+      "deepsurf_1_81_documented_only": "metadata_eligible_not_built",
+      "graft_execution_1_94": "metadata_eligible_not_built",
+      "normal_dependencies": []
+    },
+    {
+      "crate": "byteorder",
+      "version": "1.5.0",
+      "track": "newer_frozen",
+      "archive": "/home/cym/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/byteorder-1.5.0.crate",
+      "archive_sha256": "1fd0f2584146f6f2ef48085050886acf353beff7305ebd1ae69500e27c67f64b",
+      "manifest_sha256": "94ba374cb26f3c68fb83da2e5e7dce85920fc4fb827620b06b39d71a9d0e1e18",
+      "edition": "2021",
+      "declared_rust_version": "1.60",
+      "default_features": [
+        "std"
+      ],
+      "rulf_1_66": "metadata_eligible_not_built",
+      "rpg_1_65": "metadata_eligible_not_built",
+      "deepsurf_1_81_documented_only": "metadata_eligible_not_built",
+      "graft_execution_1_94": "metadata_eligible_not_built",
+      "normal_dependencies": []
+    }
+  ]
+}

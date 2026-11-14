@@ -1,0 +1,43 @@
+{
+  "schema": "graft-experiment-protocol-v2-draft",
+  "status": "superseded by week5/protocol.json; execution preparation in progress",
+  "supersedes": "protocol-v1 candidate versions/core limit only; retains matching universe and independent-run requirements",
+  "user_wall_deadline_seconds": null,
+  "preferred_initial_seconds_per_harness": [
+    300,
+    300
+  ],
+  "observed_hardware": {
+    "physical_cores": 32,
+    "logical_threads": 64,
+    "memory_gib_approx": 128
+  },
+  "candidate_max_logical_worker_slots": 56,
+  "worker_smt_throughput_calibration": "pending",
+  "common_versions_sha256": "30d8b20ac41a2e46754b53546ad1fddad9993de5f2359fbaa1b77b1cbef61466",
+  "cargo_lock_sha256": "0f9c3c695a2fc41ba38af211412a70675a3d0ce0b0098a1ffa959b3823b5b6f1",
+  "budget_report": "week4/budget-first-report.md",
+  "requested_scale_assumption": {
+    "crates": 13,
+    "target_slots": 20,
+    "joint_repetitions": 6,
+    "main_methods": 4,
+    "all_methods_including_variants": 11
+  },
+  "selected_formal_seconds_per_harness": 300,
+  "short_screening_is_not_30_to_60_minute_equivalent": true,
+  "worker_fairness": "must equalize total worker budget or validate same roles; natural deepSURF pair vs single workers is a cost scenario only",
+  "before_launch": [
+    "review actual harness validity including unsafe contracts",
+    "record generation and replay cost, model rate limits and immutable response artifacts",
+    "freeze uniform duration and hierarchical generation/AFL seed design",
+    "all tools use identical common version/features/lock/API universe per crate",
+    "record all failures and stop as incomplete at deadline rather than silently dropping cases"
+  ],
+  "live_model_requests_so_far": 0,
+  "formal_fuzzing_runs_so_far": 0,
+  "authoritative_version_round": 2,
+  "previous_user_wall_deadline_seconds": 86400,
+  "user_authorized_exceed_24_hours": true,
+  "superseded_by": "week5/protocol.json"
+}

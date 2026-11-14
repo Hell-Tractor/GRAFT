@@ -1,0 +1,26 @@
+ Documenting unicode-segmentation v1.10.1
+Fuzz Target Generator for Rust Libraries: v0.1.0
+Fuzz Target Renderer Init
+crate: unicode_segmentation
+using bfs end point
+reverse search can not cover more nodes
+after backward search
+targets = 50
+total length = 141
+average time to visit = 20.142857142857142
+edge covered by reverse search = 6
+-----------STATISTICS-----------
+total nodes: 11
+total edges: 16
+covered nodes: 7
+covered edges: 6
+node coverage: 0.6363636363636364
+edge coverage: 0.375
+targets covered by reverse search: 0
+total targets: 3
+max length = 0
+total length = 9
+average time to fuzz each api = 1.2857142857142858
+--------------------------------
+Fuzz Target Generator exits successfully. Total time cost: 368 ms
+    Finished dev [unoptimized + debuginfo] target(s) in 0.41s

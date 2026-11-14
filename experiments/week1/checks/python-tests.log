@@ -1,0 +1,28 @@
+test_empty_coverage_is_invalid_evidence_not_zero (test_audit_experiments.ArtifactAuditTests) ... ok
+test_missing_artifact_directory_stays_explicitly_missing (test_audit_experiments.ArtifactAuditTests) ... ok
+test_no_stats_does_not_mean_zero_worker_budget (test_audit_experiments.ArtifactAuditTests) ... ok
+test_target_presence_and_surviving_worker_duration_are_distinct (test_audit_experiments.ArtifactAuditTests) ... ok
+test_version_and_archive_checksum_come_from_target_lock (test_audit_experiments.ArtifactAuditTests) ... ok
+test_all_llvm_data_records_are_read (test_coverage_snapshot.CoverageSnapshotTests) ... ok
+test_duplicate_apidoc_rows_are_reported (test_coverage_snapshot.CoverageSnapshotTests) ... ok
+test_freeze_rejects_mismatched_document_identity (test_coverage_snapshot.CoverageSnapshotTests) ... ok
+test_function_only_version_mismatch_is_rejected (test_coverage_snapshot.CoverageSnapshotTests) ... ok
+test_generic_instantiations_count_as_one_api (test_coverage_snapshot.CoverageSnapshotTests) ... ok
+test_legacy_line_control_exposes_same_line_overcount (test_coverage_snapshot.CoverageSnapshotTests) ... ok
+test_mismatched_version_is_rejected (test_coverage_snapshot.CoverageSnapshotTests) ... ok
+test_named_filter_is_separate_from_frozen_selected_pool (test_coverage_snapshot.CoverageSnapshotTests) ... ok
+test_no_basename_fallback (test_coverage_snapshot.CoverageSnapshotTests) ... ok
+test_public_surface_groups_keep_unmapped_definitions_in_denominator (test_coverage_snapshot.CoverageSnapshotTests) ... ok
+test_relative_path_traversal_is_not_normalized (test_coverage_snapshot.CoverageSnapshotTests) ... ok
+test_same_line_functions_do_not_share_coverage (test_coverage_snapshot.CoverageSnapshotTests) ... ok
+test_segments_cannot_substitute_for_entry_counts (test_coverage_snapshot.CoverageSnapshotTests) ... ok
+test_shared_entry_span_is_ambiguous (test_coverage_snapshot.CoverageSnapshotTests) ... ok
+test_tampered_snapshot_is_rejected (test_coverage_snapshot.CoverageSnapshotTests) ... ok
+test_zero_count_is_distinct_from_missing_record (test_coverage_snapshot.CoverageSnapshotTests) ... ok
+test_correct_or_unrecognized_attributes_stay_unchanged (test_public_surface.DoctestAnalysisViewTests) ... ok
+test_only_known_doctest_attribute_is_closed_in_a_copy (test_public_surface.DoctestAnalysisViewTests) ... ok
+
+----------------------------------------------------------------------
+Ran 23 tests in 0.019s
+
+OK

@@ -1,0 +1,18 @@
+{
+  "status": {
+    "returncode": 0,
+    "stdout": "配置：11 个；每目标 300 秒；6 轮；计划 17160 次目标运行。\n准备状态：{\"pending\": 17160}\n第 1 轮：unprepared task: ('GRAFT', 'autocfg', 0)\n第 2 轮：unprepared task: ('GRAFT', 'autocfg', 0)\n第 3 轮：unprepared task: ('GRAFT', 'autocfg', 0)\n第 4 轮：unprepared task: ('GRAFT', 'autocfg', 0)\n第 5 轮：unprepared task: ('GRAFT', 'autocfg', 0)\n第 6 轮：unprepared task: ('GRAFT', 'autocfg', 0)\n可启动完整批次：否\n",
+    "stderr": ""
+  },
+  "check": {
+    "returncode": 3,
+    "stdout": "配置：11 个；每目标 300 秒；6 轮；计划 17160 次目标运行。\n准备状态：{\"pending\": 17160}\n第 1 轮：unprepared task: ('GRAFT', 'autocfg', 0)\n第 2 轮：unprepared task: ('GRAFT', 'autocfg', 0)\n第 3 轮：unprepared task: ('GRAFT', 'autocfg', 0)\n第 4 轮：unprepared task: ('GRAFT', 'autocfg', 0)\n第 5 轮：unprepared task: ('GRAFT', 'autocfg', 0)\n第 6 轮：unprepared task: ('GRAFT', 'autocfg', 0)\n可启动完整批次：否\n",
+    "stderr": ""
+  },
+  "run": {
+    "returncode": 3,
+    "stdout": "",
+    "stderr": "完整批次尚未就绪，未启动 AFL。请先运行 status 查看缺项。\n"
+  },
+  "formal_jobs_started": 0
+}

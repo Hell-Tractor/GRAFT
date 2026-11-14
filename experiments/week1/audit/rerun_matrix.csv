@@ -1,0 +1,99 @@
+tool,crate,rustdoc_version,coverage_versions,lock_versions,targets_present,worker_stats_present,surviving_stats_run_time_seconds_sum,decision,reasons
+GRAFT,ryu,1.0.23,1.0.23,"{""1.0.23"": 6}",6,6,64800,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence
+GRAFT,bumpalo,3.20.2,3.20.2,"{""3.20.2"": 24}",24,24,86400,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence
+GRAFT,base64,0.22.1,0.22.1,"{""0.22.1"": 23}",23,23,82801,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence
+GRAFT,regex,1.12.3,1.12.3,"{""1.12.3"": 150}",150,150,5234759,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence
+GRAFT,idna,1.1.0,1.1.0,"{""1.1.0"": 10}",10,10,36000,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence
+GRAFT,fixedbitset,0.5.7,0.5.7,"{""0.5.7"": 60}",60,57,205200,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence
+GRAFT,chrono,0.4.44,0.4.44,"{""0.4.44"": 531}",533,524,3769419,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;duplicate_api_rows_require_counting_policy;unresolved_function_mapping;present_target_count_differs_from_paper;paper_denominator_differs_from_graft_snapshot
+GRAFT,time,0.3.47,0.3.47,"{""0.3.47"": 371}",381,374,1346654,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;duplicate_api_rows_require_counting_policy;unresolved_function_mapping;paper_denominator_differs_from_graft_snapshot
+GRAFT,csv,1.4.0,,"{""1.4.0"": 43}",43,35,126000,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;paper_denominator_differs_from_graft_snapshot
+GRAFT,autocfg,1.5.0,1.5.0,"{""1.5.0"": 51}",51,44,475200,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence
+GRAFT,bytes,1.11.1,1.11.1,"{""1.11.1"": 109}",109,105,1134022,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;duplicate_api_rows_require_counting_policy;unresolved_function_mapping;paper_denominator_differs_from_graft_snapshot
+GRAFT,unicode-segmentation,1.13.2,1.13.2,"{""1.13.2"": 24}",24,24,518404,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence
+GRAFT,byteorder,1.5.0,1.5.0,"{""1.5.0"": 110}",110,92,1324827,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;unresolved_function_mapping;present_target_count_differs_from_paper
+RULF,ryu,,,{},0,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed
+RULF,bumpalo,,3.14.0,"{""3.14.0"": 10}",10,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed;coverage_version_differs_from_graft_snapshot;paper_denominator_differs_from_graft_snapshot
+RULF,base64,,0.22.1,"{""0.22.1"": 6}",6,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed
+RULF,regex,,1.12.3,"{""1.12.3"": 10}",10,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed
+RULF,idna,,,{},7,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed
+RULF,fixedbitset,,0.5.7,"{""0.5.7"": 10}",10,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed
+RULF,chrono,,0.4.44,"{""0.4.44"": 10}",10,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed;duplicate_api_rows_require_counting_policy;unresolved_function_mapping;paper_denominator_differs_from_graft_snapshot
+RULF,time,,0.3.23,"{""0.3.23"": 6}",6,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed;duplicate_api_rows_require_counting_policy;coverage_version_differs_from_graft_snapshot;paper_denominator_differs_from_graft_snapshot
+RULF,csv,,1.3.1,"{""1.3.1"": 10}",10,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed;coverage_version_differs_from_graft_snapshot;paper_denominator_differs_from_graft_snapshot
+RULF,autocfg,,1.5.0,"{""1.5.0"": 15}",15,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed
+RULF,bytes,,1.11.1,"{""1.11.1"": 22}",22,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed;duplicate_api_rows_require_counting_policy;unresolved_function_mapping;paper_denominator_differs_from_graft_snapshot
+RULF,unicode-segmentation,,1.10.1,"{""1.10.1"": 3}",3,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed;coverage_version_differs_from_graft_snapshot;paper_denominator_differs_from_graft_snapshot
+RULF,byteorder,,1.5.0,"{""1.5.0"": 10}",10,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed;unresolved_function_mapping
+RPG-merged,ryu,,1.0.23,"{""1.0.23"": 3}",3,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed;historical_claim_version_differs_from_present_artifacts
+RPG-merged,bumpalo,,3.20.2,"{""3.20.2"": 38}",38,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed;historical_claim_version_differs_from_present_artifacts
+RPG-merged,base64,,0.22.1,"{""0.22.1"": 7}",7,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed
+RPG-merged,regex,,1.12.3,"{""1.12.3"": 69}",69,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed
+RPG-merged,idna,,0.5.0,"{""0.5.0"": 10}",10,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed;coverage_version_differs_from_graft_snapshot
+RPG-merged,fixedbitset,,0.5.7,"{""0.5.7"": 89}",89,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed
+RPG-merged,chrono,,,{},0,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;artifact_directory_missing;worker_budget_not_observed;duplicate_api_rows_require_counting_policy
+RPG-merged,time,,0.3.47,"{""0.3.47"": 300}",300,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed;duplicate_api_rows_require_counting_policy;unresolved_function_mapping;historical_claim_version_differs_from_present_artifacts;paper_denominator_differs_from_graft_snapshot
+RPG-merged,csv,,,{},0,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;artifact_directory_missing;worker_budget_not_observed
+RPG-merged,autocfg,,1.5.0,"{""1.5.0"": 66}",66,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed
+RPG-merged,bytes,,,{},0,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;artifact_directory_missing;worker_budget_not_observed;duplicate_api_rows_require_counting_policy
+RPG-merged,unicode-segmentation,,1.13.2,"{""1.13.2"": 7}",7,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed;historical_claim_version_differs_from_present_artifacts
+RPG-merged,byteorder,,1.5.0,"{""1.5.0"": 20}",20,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed;unresolved_function_mapping
+RPG-bfs,ryu,,1.0.23,"{""1.0.23"": 2}",2,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed;historical_claim_version_differs_from_present_artifacts
+RPG-bfs,bumpalo,,3.20.2,"{""3.20.2"": 8}",8,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed;historical_claim_version_differs_from_present_artifacts
+RPG-bfs,base64,,0.22.1,"{""0.22.1"": 4}",4,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed
+RPG-bfs,regex,,1.12.3,"{""1.12.3"": 33}",33,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed
+RPG-bfs,idna,,0.5.0,"{""0.5.0"": 7}",7,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed;coverage_version_differs_from_graft_snapshot
+RPG-bfs,fixedbitset,,0.5.7,"{""0.5.7"": 28}",28,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed
+RPG-bfs,chrono,,,{},0,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;artifact_directory_missing;worker_budget_not_observed;duplicate_api_rows_require_counting_policy
+RPG-bfs,time,,,{},0,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;artifact_directory_missing;worker_budget_not_observed;duplicate_api_rows_require_counting_policy;paper_denominator_differs_from_graft_snapshot
+RPG-bfs,csv,,,{},0,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;artifact_directory_missing;worker_budget_not_observed
+RPG-bfs,autocfg,,1.5.0,"{""1.5.0"": 25}",25,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed
+RPG-bfs,bytes,,,{},0,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;artifact_directory_missing;worker_budget_not_observed;duplicate_api_rows_require_counting_policy
+RPG-bfs,unicode-segmentation,,,"{""1.13.2"": 3}",3,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;invalid_coverage_json;worker_budget_not_observed
+RPG-bfs,byteorder,,1.5.0,"{""1.5.0"": 12}",12,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed;unresolved_function_mapping
+RPG-wubfs,ryu,,,{},1,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed
+RPG-wubfs,bumpalo,,,{},30,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed
+RPG-wubfs,base64,,,{},3,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed
+RPG-wubfs,regex,,,{},36,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed
+RPG-wubfs,idna,,,{},3,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed
+RPG-wubfs,fixedbitset,,,{},61,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed
+RPG-wubfs,chrono,,,{},0,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;artifact_directory_missing;worker_budget_not_observed;duplicate_api_rows_require_counting_policy
+RPG-wubfs,time,,,{},300,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed;duplicate_api_rows_require_counting_policy;paper_denominator_differs_from_graft_snapshot
+RPG-wubfs,csv,,,{},0,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;artifact_directory_missing;worker_budget_not_observed
+RPG-wubfs,autocfg,,,{},41,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed
+RPG-wubfs,bytes,,,{},0,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;artifact_directory_missing;worker_budget_not_observed;duplicate_api_rows_require_counting_policy
+RPG-wubfs,unicode-segmentation,,,{},4,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed
+RPG-wubfs,byteorder,,,{},8,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed
+deepSURF,ryu,,1.0.20,"{""1.0.20"": 2}",2,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_stats_permission_denied;worker_budget_not_observed;coverage_version_differs_from_graft_snapshot
+deepSURF,bumpalo,,3.14.0,"{""3.14.0"": 47}",47,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_stats_permission_denied;worker_budget_not_observed;coverage_version_differs_from_graft_snapshot;paper_denominator_differs_from_graft_snapshot
+deepSURF,base64,,,{},0,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed
+deepSURF,regex,,,{},0,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed
+deepSURF,idna,,,{},0,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed
+deepSURF,fixedbitset,,0.5.7,"{""0.5.7"": 30}",30,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_stats_permission_denied;worker_budget_not_observed
+deepSURF,chrono,,0.4.44,"{""0.4.44"": 60}",60,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_stats_permission_denied;worker_budget_not_observed;duplicate_api_rows_require_counting_policy;unresolved_function_mapping;paper_denominator_differs_from_graft_snapshot
+deepSURF,time,,0.3.23,"{""0.3.23"": 22}",22,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_stats_permission_denied;worker_budget_not_observed;duplicate_api_rows_require_counting_policy;coverage_version_differs_from_graft_snapshot;paper_denominator_differs_from_graft_snapshot
+deepSURF,csv,,1.3.1,"{""1.3.1"": 34}",34,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_stats_permission_denied;worker_budget_not_observed;coverage_version_differs_from_graft_snapshot;paper_denominator_differs_from_graft_snapshot
+deepSURF,autocfg,,,{},0,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed
+deepSURF,bytes,,1.11.1,"{""1.11.1"": 71}",71,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_stats_permission_denied;worker_budget_not_observed;duplicate_api_rows_require_counting_policy;unresolved_function_mapping;paper_denominator_differs_from_graft_snapshot
+deepSURF,unicode-segmentation,,,{},0,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_budget_not_observed
+deepSURF,byteorder,,1.5.0,"{""1.5.0"": 2}",2,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;worker_stats_permission_denied;worker_budget_not_observed;unresolved_function_mapping
+ablation-full,base64,,,{},0,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;artifact_directory_missing;worker_budget_not_observed
+ablation-full,byteorder,,,{},0,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;artifact_directory_missing;worker_budget_not_observed
+ablation-full,fixedbitset,,,{},0,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;artifact_directory_missing;worker_budget_not_observed
+ablation-full,time,,,{},0,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;artifact_directory_missing;worker_budget_not_observed;duplicate_api_rows_require_counting_policy
+ablation-full,regex,,,{},0,0,,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;artifact_directory_missing;worker_budget_not_observed
+ablation-no-generic,base64,,0.22.1,"{""0.22.1"": 20}",20,9,32400,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence
+ablation-no-generic,byteorder,,1.5.0,"{""1.5.0"": 20}",20,7,25200,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;unresolved_function_mapping
+ablation-no-generic,fixedbitset,,0.5.7,"{""0.5.7"": 20}",20,14,50400,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence
+ablation-no-generic,time,,0.3.47,"{""0.3.47"": 20}",20,2,7200,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;duplicate_api_rows_require_counting_policy;unresolved_function_mapping
+ablation-no-generic,regex,,1.12.3,"{""1.12.3"": 20}",20,17,61200,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence
+ablation-no-graph,base64,,0.22.1,"{""0.22.1"": 20}",20,6,21600,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence
+ablation-no-graph,byteorder,,1.5.0,"{""1.5.0"": 20}",20,4,14400,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;unresolved_function_mapping
+ablation-no-graph,fixedbitset,,0.5.7,"{""0.5.7"": 20}",20,9,32400,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence
+ablation-no-graph,time,,0.3.47,"{""0.3.47"": 20}",20,5,18000,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;duplicate_api_rows_require_counting_policy;unresolved_function_mapping
+ablation-no-graph,regex,,1.12.3,"{""1.12.3"": 20}",20,12,43200,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence
+ablation-no-topo,base64,,0.22.1,"{""0.22.1"": 20}",20,11,39600,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence
+ablation-no-topo,byteorder,,1.5.0,"{""1.5.0"": 20}",20,6,21600,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;unresolved_function_mapping
+ablation-no-topo,fixedbitset,,0.5.7,"{""0.5.7"": 20}",20,8,28800,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence
+ablation-no-topo,time,,0.3.47,"{""0.3.47"": 20}",20,8,28800,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence;duplicate_api_rows_require_counting_policy;unresolved_function_mapping
+ablation-no-topo,regex,,1.12.3,"{""1.12.3"": 20}",20,13,46800,recount_diagnostic_only_rerun_required,missing_run_manifest;no_independent_repetition_evidence

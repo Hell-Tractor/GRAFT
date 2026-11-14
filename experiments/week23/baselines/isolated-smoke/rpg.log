@@ -1,0 +1,10 @@
+rustc 1.65.0-dev
+Fuzz Target Generator for Rust Libraries: v1.65.0
+Total function number: 4
+error: couldn't generate documentation: Permission denied (os error 13)
+  |
+  = note: failed to create or modify "/work/doc"
+
+error: aborting due to previous error
+
+Fuzz Target Generator exits successfully. Total time cost: 1359 ms

@@ -1,0 +1,21 @@
+{
+  "api_count": 31,
+  "apis_with_obligations": 1,
+  "candidate_parameter_pairs": {
+    "incompatible": 159,
+    "unified_candidate_not_compiler_verified": 42,
+    "unified_pending_trait_obligations": 24,
+    "unknown_api_feature": 55,
+    "unknown_type_form": 56
+  },
+  "crate": "autocfg",
+  "no_import_blocker": 28,
+  "rustdoc_sha256": "d347fef13a5e0b8cf69a52b86e9bf8ea6c9a9c4504116124c86b8c34e8ccb4f3",
+  "scope": "import support only, not proven constructibility; trait obligations may still be unknown",
+  "unsupported_api_reasons": {
+    "borrowed output requires lifetime analysis": 3,
+    "trait method dispatch/impl specialization": 2,
+    "unsupported rustdoc type: dyn_trait": 1
+  },
+  "version": "1.5.0"
+}

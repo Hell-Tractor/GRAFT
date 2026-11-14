@@ -1,0 +1,26 @@
+ Documenting base64 v0.22.1
+Fuzz Target Generator for Rust Libraries: v0.1.0
+Fuzz Target Renderer Init
+crate: base64
+using bfs end point
+reverse search can not cover more nodes
+after backward search
+targets = 38
+total length = 107
+average time to visit = 13.375
+edge covered by reverse search = 13
+-----------STATISTICS-----------
+total nodes: 19
+total edges: 30
+covered nodes: 8
+covered edges: 8
+node coverage: 0.42105263157894735
+edge coverage: 0.26666666666666666
+targets covered by reverse search: 1
+total targets: 4
+max length = 4
+total length = 12
+average time to fuzz each api = 1.5
+--------------------------------
+Fuzz Target Generator exits successfully. Total time cost: 445 ms
+    Finished dev [unoptimized + debuginfo] target(s) in 0.49s

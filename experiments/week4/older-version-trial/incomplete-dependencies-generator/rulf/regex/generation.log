@@ -1,0 +1,4 @@
+error: no matching package named `autocfg` found
+location searched: registry `crates-io`
+required by package `graft_joint_compatibility v0.0.0 (/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2)`
+As a reminder, you're using offline mode (--offline) which can sometimes cause surprising resolution failures, if this error is too confusing you may wish to retry without the offline flag.

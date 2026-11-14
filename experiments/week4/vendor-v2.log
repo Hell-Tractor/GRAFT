@@ -1,0 +1,10 @@
+error: failed to sync
+
+Caused by:
+  failed to download packages for /home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2
+
+Caused by:
+  failed to download `winapi-i686-pc-windows-gnu v0.4.0`
+
+Caused by:
+  attempting to make an HTTP request, but --frozen was specified

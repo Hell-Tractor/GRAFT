@@ -1,0 +1,24 @@
+rustc 1.66.0-dev
+Fuzz Target Generator for Rust Libraries: v0.1.0
+Fuzz Target Renderer Init
+crate: graft_baseline_smoke
+using bfs end point
+after backward search
+targets = 8
+total length = 17
+average time to visit = 5.666666666666667
+edge covered by reverse search = 1
+-----------STATISTICS-----------
+total nodes: 3
+total edges: 1
+covered nodes: 2
+covered edges: 1
+node coverage: 0.6666666666666666
+edge coverage: 1
+targets covered by reverse search: 0
+total targets: 1
+max length = 0
+total length = 2
+average time to fuzz each api = 1
+--------------------------------
+Fuzz Target Generator exits successfully. Total time cost: 347 ms

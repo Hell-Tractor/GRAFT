@@ -1,0 +1,16 @@
+{
+  "api_count": 58,
+  "apis_with_obligations": 2,
+  "candidate_parameter_pairs": {
+    "incompatible": 392,
+    "unknown_api_feature": 8
+  },
+  "crate": "byteorder",
+  "no_import_blocker": 0,
+  "rustdoc_sha256": "1cc70b827ea16f991499090d8f78ac9e5499c084d0abfeb9877f02d9f0dbaf10",
+  "scope": "import support only, not proven constructibility; trait obligations may still be unknown",
+  "unsupported_api_reasons": {
+    "trait method dispatch/impl specialization": 58
+  },
+  "version": "1.5.0"
+}

@@ -1,0 +1,74 @@
+ Documenting byteorder v1.5.0
+Fuzz Target Generator for Rust Libraries: v1.65.0
+Total function number: 171
+Before Reachable API Analysis API Number: 12
+Before Reachable API Analysis Dependencies Number: 0
+>>>>> Reachable API Analysis <<<<<
+After Reachable API Analysis API Number: 12
+After Reachable API Analysis Dependencies Number: 0
+API Pool Set
+API FUNCTION 0: byteorder::BigEndian::read_u16 (&[u8]) -> u16 { }, GENERIC:false
+API FUNCTION 1: byteorder::BigEndian::read_u32 (&[u8]) -> u32 { }, GENERIC:false
+API FUNCTION 2: byteorder::BigEndian::read_u64 (&[u8]) -> u64 { }, GENERIC:false
+API FUNCTION 3: byteorder::BigEndian::read_u128 (&[u8]) -> u128 { }, GENERIC:false
+API FUNCTION 4: byteorder::BigEndian::read_uint (&[u8], usize) -> u64 { }, GENERIC:false
+API FUNCTION 5: byteorder::BigEndian::read_uint128 (&[u8], usize) -> u128 { }, GENERIC:false
+API FUNCTION 6: byteorder::LittleEndian::read_u16 (&[u8]) -> u16 { }, GENERIC:false
+API FUNCTION 7: byteorder::LittleEndian::read_u32 (&[u8]) -> u32 { }, GENERIC:false
+API FUNCTION 8: byteorder::LittleEndian::read_u64 (&[u8]) -> u64 { }, GENERIC:false
+API FUNCTION 9: byteorder::LittleEndian::read_u128 (&[u8]) -> u128 { }, GENERIC:false
+API FUNCTION 10: byteorder::LittleEndian::read_uint (&[u8], usize) -> u64 { }, GENERIC:false
+API FUNCTION 11: byteorder::LittleEndian::read_uint128 (&[u8], usize) -> u128 { }, GENERIC:false
+All Generated Sequences:
+Sequence.0: "", ""
+Sequence.1: "0", "[ ]"
+Sequence.2: "1", "[ ]"
+Sequence.3: "2", "[ ]"
+Sequence.4: "3", "[ ]"
+Sequence.5: "4", "[ ]"
+Sequence.6: "5", "[ ]"
+Sequence.7: "6", "[ ]"
+Sequence.8: "7", "[ ]"
+Sequence.9: "8", "[ ]"
+Sequence.10: "9", "[ ]"
+Sequence.11: "10", "[ ]"
+Sequence.12: "11", "[ ]"
+------------------------------------------------------------------------------------------------------------------------------------------------
+|	TOTAL	|	UNSAFE	|	RAWPTR	|	DROP	|	MUTATE	|	GENERIC	|
+|	12	|	0	|	0	|	0	|	0	|	0	|
+------------------------------------------------------------------------------------------------------------------------------------------------
+FUNCTION INDEX LIST <<<<<
+
+
+>>>>> WRITING FILE START
+CRATE TEST DIR: /results/byteorder/fuzz_target/byteorder_bfs_generic_fuzz
+targets covered by reverse search: 0
+average time to fuzz each api = 1
+LIBFUZZER_FUZZ_TARGET_DIR: /results/byteorder/libfuzzer_target/byteorder_bfs_fuzz
+CRATE API: /results/byteorder/fuzz_target/byteorder_bfs_api_generic.txt
+CRATE DEPENDENCY: /results/byteorder/fuzz_target/byteorder_bfs_dependency_generic.txt
+-----------------STATISTICS-----------------
+------------------------------------------------
+|	TN	|	IN	|	CN	|
+|	12	|	12	|	1.00	|
+------------------------------------------------
+|	UTN	|	UIN	|	UCN	|
+|	0	|	0	|	NaN	|
+------------------------------------------------
+|	TE	|	IE	|	CE	|
+|	0	|	0	|	NaN	|
+------------------------------------------------
+|	UTE	|	UIE	|	UCE	|
+|	0	|	0	|	NaN	|
+------------------------------------------------
+CRATE API: /results/byteorder/fuzz_target/byteorder_bfs_info_generic.xls
+CRATE SEQUENCE: /results/byteorder/fuzz_target/byteorder_bfs_sequence_generic.txt
+CRATE API GRAPH: /results/byteorder/fuzz_target/byteorder_bfs_api_graph_generic.txt
+WRITING FILE FINISHED <<<<<
+
+Generic functions Num: 0
+total functions in crate : 12
+total test sequences : 13
+Total Time Used: 43
+Fuzz Target Generator exits successfully. Total time cost: 439 ms
+    Finished dev [unoptimized + debuginfo] target(s) in 0.49s

@@ -1,0 +1,93 @@
+[
+  {
+    "crate": "ryu",
+    "historical_compatibility_candidate": "1.0.23",
+    "newer_track_historical_universe_sha256": "af7ef0c5755dadd36a805143a7c8f7631c5216b15caad89028f66c86dbe2267d",
+    "newer_track_version": "1.0.23",
+    "status": "exact_versions_frozen; common_tool_feasibility_and_public_surface_pending"
+  },
+  {
+    "crate": "bumpalo",
+    "historical_compatibility_candidate": "3.14.0",
+    "newer_track_historical_universe_sha256": "9be3c646417132be5a5b7869b8457826f383cf31c79ed62de83487b870fa3532",
+    "newer_track_version": "3.20.2",
+    "status": "exact_versions_frozen; common_tool_feasibility_and_public_surface_pending"
+  },
+  {
+    "crate": "base64",
+    "historical_compatibility_candidate": "0.22.1",
+    "newer_track_historical_universe_sha256": "0777405bed96aeeef76809d0c3d367019fa184bbca23a0814ce9503d49131de5",
+    "newer_track_version": "0.22.1",
+    "status": "exact_versions_frozen; common_tool_feasibility_and_public_surface_pending"
+  },
+  {
+    "crate": "regex",
+    "historical_compatibility_candidate": "1.12.3",
+    "newer_track_historical_universe_sha256": "bcbf695159259a226f717faa8a780b7f44574b3b100477da3cedc0fcf653d528",
+    "newer_track_version": "1.12.3",
+    "status": "exact_versions_frozen; common_tool_feasibility_and_public_surface_pending"
+  },
+  {
+    "crate": "idna",
+    "historical_compatibility_candidate": "0.5.0",
+    "newer_track_historical_universe_sha256": "7220576f03b587701219b3779546e45f07ac78734785c2fcc0345301055b5ebb",
+    "newer_track_version": "1.1.0",
+    "status": "exact_versions_frozen; common_tool_feasibility_and_public_surface_pending"
+  },
+  {
+    "crate": "fixedbitset",
+    "historical_compatibility_candidate": "0.5.7",
+    "newer_track_historical_universe_sha256": "72b27f54314b7e1e1316d81c8b09729396d7f0b7fe1f1daa75bfdcd1249a3364",
+    "newer_track_version": "0.5.7",
+    "status": "exact_versions_frozen; common_tool_feasibility_and_public_surface_pending"
+  },
+  {
+    "crate": "chrono",
+    "historical_compatibility_candidate": "0.4.44",
+    "newer_track_historical_universe_sha256": "21b8d5d9d558288563881183e195cdd4702151471802599ebab28e8da6684607",
+    "newer_track_version": "0.4.44",
+    "status": "exact_versions_frozen; common_tool_feasibility_and_public_surface_pending"
+  },
+  {
+    "crate": "time",
+    "historical_compatibility_candidate": "0.3.23",
+    "newer_track_historical_universe_sha256": "613686e4cb337941838a41c6127ef0ae89b707837584c2c4cc066995f6cffdcd",
+    "newer_track_version": "0.3.47",
+    "status": "exact_versions_frozen; common_tool_feasibility_and_public_surface_pending"
+  },
+  {
+    "crate": "csv",
+    "historical_compatibility_candidate": "1.3.1",
+    "newer_track_historical_universe_sha256": "4f03bb9d87fd0e120c23c9777bf2923a7d15737d3a6656ef4cbbcce5dcbf0568",
+    "newer_track_version": "1.4.0",
+    "status": "exact_versions_frozen; common_tool_feasibility_and_public_surface_pending"
+  },
+  {
+    "crate": "autocfg",
+    "historical_compatibility_candidate": "1.5.0",
+    "newer_track_historical_universe_sha256": "0b3e9fc552c2a13393efb243b0bb30583d013c1326175b464d12c0c6825b0663",
+    "newer_track_version": "1.5.0",
+    "status": "exact_versions_frozen; common_tool_feasibility_and_public_surface_pending"
+  },
+  {
+    "crate": "bytes",
+    "historical_compatibility_candidate": "1.11.1",
+    "newer_track_historical_universe_sha256": "8f9db51abd5652d999f8a801c432dac6cc049324838a96c86a8560ba78467f1a",
+    "newer_track_version": "1.11.1",
+    "status": "exact_versions_frozen; common_tool_feasibility_and_public_surface_pending"
+  },
+  {
+    "crate": "unicode-segmentation",
+    "historical_compatibility_candidate": "1.10.1",
+    "newer_track_historical_universe_sha256": "efcffea7413fab3f92d2f63c1bd9b2cb2d34f96db275c6404825a1d62de07bba",
+    "newer_track_version": "1.13.2",
+    "status": "exact_versions_frozen; common_tool_feasibility_and_public_surface_pending"
+  },
+  {
+    "crate": "byteorder",
+    "historical_compatibility_candidate": "1.5.0",
+    "newer_track_historical_universe_sha256": "cd90e2dd6bf9a5174a6b79d23fd92a41f109ce14905cce18cd3e384a4dcd7bbe",
+    "newer_track_version": "1.5.0",
+    "status": "exact_versions_frozen; common_tool_feasibility_and_public_surface_pending"
+  }
+]

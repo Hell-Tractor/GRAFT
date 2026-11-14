@@ -1,0 +1,1 @@
+fn main(){let mut t=checked_fixture::token(1);checked_fixture::mutable(&mut t,&mut t);}

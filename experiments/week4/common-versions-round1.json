@@ -1,0 +1,278 @@
+{
+  "schema": "graft-common-versions-v1",
+  "status": "all_13_default_feature_libraries_compile_on_4_toolchains; generator_failures_retained_separately",
+  "platform": "x86_64-unknown-linux-gnu only",
+  "user_policy": "downgrade unsupported versions uniformly for every tool and rebuild API universe; never compare different versions",
+  "versions": {
+    "autocfg": "1.5.0",
+    "base64": "0.22.1",
+    "bumpalo": "3.14.0",
+    "byteorder": "1.5.0",
+    "bytes": "1.11.1",
+    "chrono": "0.4.44",
+    "csv": "1.3.1",
+    "fixedbitset": "0.5.7",
+    "idna": "0.5.0",
+    "regex": "1.12.3",
+    "ryu": "1.0.20",
+    "time": "0.3.23",
+    "unicode-segmentation": "1.10.1"
+  },
+  "rows": [
+    {
+      "crate": "autocfg",
+      "version": "1.5.0",
+      "previous_frozen_version": "1.5.0",
+      "default_features": true,
+      "explicit_features": [],
+      "resolved_features": [],
+      "declared_msrv": "1.0",
+      "edition": "2015",
+      "package_checksum": "c08606f8c3cbf4ce6ec8e28fb0014a2c086708fe954eaa885384a6165172e7e8",
+      "api_universe_sha256": "127a31d368edbd6dedb4898e30dbb86cb59493a73d7bc230aee8d86fe55ad61b",
+      "public_name_body_definitions": 35,
+      "surface_review_items": 13
+    },
+    {
+      "crate": "base64",
+      "version": "0.22.1",
+      "previous_frozen_version": "0.22.1",
+      "default_features": true,
+      "explicit_features": [],
+      "resolved_features": [
+        "alloc",
+        "default",
+        "std"
+      ],
+      "declared_msrv": "1.48.0",
+      "edition": "2018",
+      "package_checksum": "72b3254f16251a8381aa12e40e3c4d2f0199f8c6508fbecb9d91f575e0fbb8c6",
+      "api_universe_sha256": "31ac19064908191a156419a24aea237b426073d77d523f228864771cab2a61be",
+      "public_name_body_definitions": 76,
+      "surface_review_items": 8
+    },
+    {
+      "crate": "bumpalo",
+      "version": "3.14.0",
+      "previous_frozen_version": "3.20.2",
+      "default_features": true,
+      "explicit_features": [],
+      "resolved_features": [
+        "default"
+      ],
+      "declared_msrv": "1.60.0",
+      "edition": "2021",
+      "package_checksum": "7f30e7476521f6f8af1a1c4c0b8cc94f0bee37d91763d0ca2665f299b6cd8aec",
+      "api_universe_sha256": "64a63cdcc27403be8a0e061e2b82058dc1165e70e38b8bd979efcb74e9805695",
+      "public_name_body_definitions": 44,
+      "surface_review_items": 32
+    },
+    {
+      "crate": "byteorder",
+      "version": "1.5.0",
+      "previous_frozen_version": "1.5.0",
+      "default_features": true,
+      "explicit_features": [],
+      "resolved_features": [
+        "default",
+        "std"
+      ],
+      "declared_msrv": "1.60",
+      "edition": "2021",
+      "package_checksum": "1fd0f2584146f6f2ef48085050886acf353beff7305ebd1ae69500e27c67f64b",
+      "api_universe_sha256": "e891570136ef1d81530e9cb7b77634c815835daa9a7fea946afcf2d53bd1f258",
+      "public_name_body_definitions": 162,
+      "surface_review_items": 0
+    },
+    {
+      "crate": "bytes",
+      "version": "1.11.1",
+      "previous_frozen_version": "1.11.1",
+      "default_features": true,
+      "explicit_features": [],
+      "resolved_features": [
+        "default",
+        "std"
+      ],
+      "declared_msrv": "1.57",
+      "edition": "2021",
+      "package_checksum": "1e748733b7cbc798e1434b6ac524f0c1ff2ab456fe201501e6497c8417a4fc33",
+      "api_universe_sha256": "2ab444b03843fd309e2730a35e3a916fa26f0a45af3254c339534a4ba98651c7",
+      "public_name_body_definitions": 491,
+      "surface_review_items": 115
+    },
+    {
+      "crate": "chrono",
+      "version": "0.4.44",
+      "previous_frozen_version": "0.4.44",
+      "default_features": true,
+      "explicit_features": [],
+      "resolved_features": [
+        "alloc",
+        "clock",
+        "default",
+        "iana-time-zone",
+        "js-sys",
+        "now",
+        "oldtime",
+        "std",
+        "wasm-bindgen",
+        "wasmbind",
+        "winapi",
+        "windows-link"
+      ],
+      "declared_msrv": "1.62.0",
+      "edition": "2021",
+      "package_checksum": "c673075a2e0e5f4a1dde27ce9dee1ea4558c7ffe648f576438a20ca1d2acc4b0",
+      "api_universe_sha256": "08f4eb4ad212a7f9f1f55ca2cd9367987f50f2a380c91357ed1b41a96691eabb",
+      "public_name_body_definitions": 759,
+      "surface_review_items": 70
+    },
+    {
+      "crate": "csv",
+      "version": "1.3.1",
+      "previous_frozen_version": "1.4.0",
+      "default_features": true,
+      "explicit_features": [],
+      "resolved_features": [],
+      "declared_msrv": "1.65",
+      "edition": "2021",
+      "package_checksum": "acdc4883a9c96732e4733212c01447ebd805833b7275a73ca3ee080fd77afdaf",
+      "api_universe_sha256": "1cc3439c9937c1149a527a06b6998c9264f4d030eae950442ca97eb0499ae7eb",
+      "public_name_body_definitions": 222,
+      "surface_review_items": 177
+    },
+    {
+      "crate": "fixedbitset",
+      "version": "0.5.7",
+      "previous_frozen_version": "0.5.7",
+      "default_features": true,
+      "explicit_features": [],
+      "resolved_features": [
+        "default",
+        "std"
+      ],
+      "declared_msrv": "1.56",
+      "edition": "2021",
+      "package_checksum": "1d674e81391d1e1ab681a28d99df07927c6d4aa5b027d7da16ba32d1d21ecd99",
+      "api_universe_sha256": "9a4870dd1171aee903e5db7dfc3245cd699f458ca691655678b52e2a52c804a2",
+      "public_name_body_definitions": 105,
+      "surface_review_items": 20
+    },
+    {
+      "crate": "idna",
+      "version": "0.5.0",
+      "previous_frozen_version": "1.1.0",
+      "default_features": true,
+      "explicit_features": [],
+      "resolved_features": [
+        "alloc",
+        "default",
+        "std"
+      ],
+      "declared_msrv": "1.51",
+      "edition": "2018",
+      "package_checksum": "634d9b1461af396cad843f47fdba5597a4f9e6ddd4bfb6ff5d85028c25cb12f6",
+      "api_universe_sha256": "a8c9e9911d358f4af570086ec65d6fcd58a9482882b61c8cca1fe1b0007f5b8f",
+      "public_name_body_definitions": 25,
+      "surface_review_items": 7
+    },
+    {
+      "crate": "regex",
+      "version": "1.12.3",
+      "previous_frozen_version": "1.12.3",
+      "default_features": true,
+      "explicit_features": [],
+      "resolved_features": [
+        "default",
+        "perf",
+        "perf-backtrack",
+        "perf-cache",
+        "perf-dfa",
+        "perf-inline",
+        "perf-literal",
+        "perf-onepass",
+        "std",
+        "unicode",
+        "unicode-age",
+        "unicode-bool",
+        "unicode-case",
+        "unicode-gencat",
+        "unicode-perl",
+        "unicode-script",
+        "unicode-segment"
+      ],
+      "declared_msrv": "1.65",
+      "edition": "2021",
+      "package_checksum": "e10754a14b9137dd7b1e3e5b0493cc9171fdd105e0ab477f51b72e7f3ac0e276",
+      "api_universe_sha256": "503d7515d8cfdf32f28ad1a5b9e65b73ba5c6bb4d94d9f736180f99080e3b4e6",
+      "public_name_body_definitions": 322,
+      "surface_review_items": 5
+    },
+    {
+      "crate": "ryu",
+      "version": "1.0.20",
+      "previous_frozen_version": "1.0.23",
+      "default_features": true,
+      "explicit_features": [],
+      "resolved_features": [],
+      "declared_msrv": "1.36",
+      "edition": "2018",
+      "package_checksum": "28d3b2b1366ec20994f1fd18c3c594f05c5dd4bc44d8bb0c1c632c8d6829481f",
+      "api_universe_sha256": "6fbccc0778145a0180ce8c1f1174801997165b59e4f635476f72a94ecc56e310",
+      "public_name_body_definitions": 7,
+      "surface_review_items": 9
+    },
+    {
+      "crate": "time",
+      "version": "0.3.23",
+      "previous_frozen_version": "0.3.47",
+      "default_features": true,
+      "explicit_features": [],
+      "resolved_features": [
+        "alloc",
+        "default",
+        "std"
+      ],
+      "declared_msrv": "1.65.0",
+      "edition": "2021",
+      "package_checksum": "59e399c068f43a5d116fedaf73b203fa4f9c519f17e2b34f63221d3792f81446",
+      "api_universe_sha256": "d0bcc01b525a76a932eaffffadc215e9b52c6298bbd9f8256974c81e6449e8ad",
+      "public_name_body_definitions": 481,
+      "surface_review_items": 84
+    },
+    {
+      "crate": "unicode-segmentation",
+      "version": "1.10.1",
+      "previous_frozen_version": "1.13.2",
+      "default_features": true,
+      "explicit_features": [],
+      "resolved_features": [],
+      "declared_msrv": null,
+      "edition": "2018",
+      "package_checksum": "1dd624098567895118886609431a7c3b8f516e41d30e0643f03d94592a147e36",
+      "api_universe_sha256": "96e9a2403a563bb3c5852619ea60a9913720cd2abca123b1b303d0869f374183",
+      "public_name_body_definitions": 53,
+      "surface_review_items": 32
+    }
+  ],
+  "shared_cargo_lock_sha256": "290b534b8957b4469626ed803ab2b1fb29c6da57ad208c4d4f400804c3c1a8ea",
+  "shared_manifest_sha256": "65a8e3317ef9ccf5c0b6013991790ccfd7b2b729ea0aac86ff488e82e3ad462b",
+  "shared_transitive_pin": {
+    "serde": "1.0.228",
+    "ryu": "1.0.20"
+  },
+  "compiler_witness_logs": {
+    "GRAFT_Rust_1_94": "joint-modern-build.log",
+    "RPG_Rust_1_65": "joint-rpg-build.log",
+    "RULF_Rust_1_66": "joint-rulf-build.log",
+    "deepSURF_Rust_1_81": "joint-deepsurf-build-root.log"
+  },
+  "not_proven": [
+    "all generators complete or emit valid targets",
+    "unsafe harness preconditions",
+    "runtime API coverage",
+    "non-Linux targets",
+    "formal resource-matched comparisons"
+  ]
+}

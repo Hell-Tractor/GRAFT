@@ -1,0 +1,1 @@
+fn main(){let t=checked_fixture::token(1);checked_fixture::moved(t,t);}

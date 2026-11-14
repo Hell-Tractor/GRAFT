@@ -1,0 +1,57 @@
+{
+  "schema": "graft-short-budget-handoff-validation-v1",
+  "operator_will_start": true,
+  "formal_rounds_completed": 0,
+  "formal_fuzz_runs": 0,
+  "ready_formal_target_slots": 0,
+  "pending_formal_target_runs": 17160,
+  "python_tests_passed": 50,
+  "rust_tests_passed": 32,
+  "baseline_selected_replay_compiles": {
+    "passed": 279,
+    "attempts": 296
+  },
+  "catalog_imports": 13,
+  "live_calibration": {
+    "model": "deepseek-v4-pro",
+    "requests": 2,
+    "accepted": true,
+    "bounded_wrapper_probe_passed": true,
+    "shared_lock_identical": true
+  },
+  "diagnostic_afl": {
+    "run_time": 5,
+    "execs_done": 12792,
+    "saved_crashes": 0,
+    "saved_hangs": 0
+  },
+  "paper_publisher_test": {
+    "scope": "synthetic publisher integration test only; actual paper/data unchanged",
+    "passed": true,
+    "configurations_tested": 11,
+    "csv_rows": 143,
+    "pdf_build_returncode": 0,
+    "actual_include_sha256": "1bb179701a8e426cfe31b71f5db04b7bc8a7f4602ecd46bbaf254c17fc2f0b20",
+    "test_pdf_discarded": true
+  },
+  "entry_checks": "entry-check.json",
+  "script_sha256": {
+    "experiment_batch.py": "14b0503763886fc9089a3dfccc0aaff8db27ed2e58785a24a492ab4319c03af6",
+    "run_experiment_rounds.py": "ef9a975e75e4b8e72ebe428cbf63c661c7df53a4649fa05096bb12c57a58cf26",
+    "run_5min_6rounds.sh": "b7b5b7b8ff430b900055dc31d1753807532b73c44408670fdb22836a3a5d279a",
+    "replay_round_coverage.py": "567bdc74fccd0ef9baf38b6ecaf8e4b2f9310bd0a73566a14223ab0c4f22b3d4",
+    "prepare_round_preflight.py": "e66b623457fbb76ba2a6c5d038519d5d0d10e5c37713e5a1f234f5b2b9847f03"
+  },
+  "protocol_sha256": "ec8b11fdfcbcf77ed832a3eb634d710df06f48cd975dbaa21f9f62bd6a82fed6",
+  "paper_handoff": {
+    "scope": "operator handoff draft, zero formal rounds",
+    "pdf": "/home/cym/workspace/GRAFT-2.0/GRAFTPaper/out/short-budget/handoff/main.pdf",
+    "pdf_sha256": "16782435e976ef7c8cb849ab9dfe9ad20cc740524f6b19024fe5e9bca4c9cb86",
+    "build_returncode": 0,
+    "undefined_reference_summary": false,
+    "missing_characters": false,
+    "layout_overfull_warnings": 8
+  },
+  "diff_check": "passed with CRLF recognized as line endings",
+  "no_formal_tasks_started": true
+}

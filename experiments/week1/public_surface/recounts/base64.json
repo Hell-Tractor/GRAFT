@@ -1,0 +1,2522 @@
+{
+  "apis": [
+    {
+      "api_id": "0326b810170e39ce160c844e16882e0280c3c3e89c883e470f5ecbf1f35a522d",
+      "candidate": true,
+      "file": "src/read/decoder.rs",
+      "function_records": 3,
+      "historical_row_multiplicity": 1,
+      "max_execution_count": 36,
+      "name": "into_inner",
+      "name_filtered": false,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": true,
+      "status": "covered"
+    },
+    {
+      "api_id": "06610b891b2d18c475e76b89bb3bad8b35c9dd5017853fa50db1863db93e8417",
+      "candidate": true,
+      "file": "src/alphabet.rs",
+      "function_records": 1,
+      "historical_row_multiplicity": 1,
+      "max_execution_count": 66,
+      "name": "new",
+      "name_filtered": false,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": true,
+      "status": "covered"
+    },
+    {
+      "api_id": "10ca5e9555989333484a049c9e902d26f986a7065f8e107db389173e738fdd06",
+      "candidate": true,
+      "file": "src/engine/mod.rs",
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "eq",
+      "name_filtered": true,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    },
+    {
+      "api_id": "1353109ee6fd8cebeecb4b06152226eea76540d4a19bc04834b88e3230788d04",
+      "candidate": true,
+      "file": "src/encode.rs",
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "clone",
+      "name_filtered": true,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    },
+    {
+      "api_id": "14688fcdf64a9e53d8565596c8dce498d8939314a780ed648ab56a3d5ec106a0",
+      "candidate": true,
+      "file": "src/encode.rs",
+      "function_records": 1,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": 0,
+      "name": "encode_engine_string",
+      "name_filtered": false,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "observed_zero"
+    },
+    {
+      "api_id": "16bef9f1eeaee00ab73c9ef959471896bc893ebb5963c89f9cf7247508c402ed",
+      "candidate": true,
+      "file": "src/decode.rs",
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "eq",
+      "name_filtered": true,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    },
+    {
+      "api_id": "19be0a728c44c50f61824b124749ccddc903a5ec6881d54cd59c09b65001bfd2",
+      "candidate": false,
+      "file": "src/engine/mod.rs",
+      "function_records": 6,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": 34,
+      "name": "encode_slice",
+      "name_filtered": false,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "covered"
+    },
+    {
+      "api_id": "19d205b1c7a6ced48450a7f58829a3c63290cf1aa6047e8990a833f8bc86aec9",
+      "candidate": true,
+      "file": "src/engine/mod.rs",
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "eq",
+      "name_filtered": true,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    },
+    {
+      "api_id": "1b49c1f89afb6e6f59f9fefc813b24074f5976f176da2164eff780a5f16f8e35",
+      "candidate": true,
+      "file": "src/decode.rs",
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "eq",
+      "name_filtered": true,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    },
+    {
+      "api_id": "246a6f8811b834aae35f192a9ed74746445edb4523423aaecb64cbe7da65601c",
+      "candidate": true,
+      "file": "src/read/decoder.rs",
+      "function_records": 1,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": 0,
+      "name": "fmt",
+      "name_filtered": true,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "observed_zero"
+    },
+    {
+      "api_id": "24ec7d4ea2ed482353847b0b36a826b388c5156e0d0d48a6a9499525c929aeeb",
+      "candidate": true,
+      "file": "src/decode.rs",
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "clone",
+      "name_filtered": true,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    },
+    {
+      "api_id": "2508baddca58c70a4fd522633260f1c87110399a8b50ea3f80a8bbaeb1092e3d",
+      "candidate": true,
+      "file": "src/decode.rs",
+      "function_records": 1,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": 0,
+      "name": "fmt",
+      "name_filtered": true,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "observed_zero"
+    },
+    {
+      "api_id": "293ac7cb2682610bcea4eacf2d45c5d57bd34622afe87ad9b12cb99225839ccf",
+      "candidate": false,
+      "file": null,
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "to_string",
+      "name_filtered": true,
+      "public_name_body_definition": false,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    },
+    {
+      "api_id": "2a810c5f9c185b9da50ea0c70ab3b34e9fedd8984f646dbe2fa3ff0bf2a6300d",
+      "candidate": true,
+      "file": "src/encode.rs",
+      "function_records": 1,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": 0,
+      "name": "encode",
+      "name_filtered": false,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "observed_zero"
+    },
+    {
+      "api_id": "2c3f18ebb9ecef687d7bb02273c590f9e0194f33268f3c54398c586aad4d9c04",
+      "candidate": false,
+      "file": null,
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "try_from",
+      "name_filtered": true,
+      "public_name_body_definition": false,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    },
+    {
+      "api_id": "3715a2cfcc5582f48038cdcf7fe0abac141e147a52f1e6c9abc91bf214b05010",
+      "candidate": false,
+      "file": "src/engine/mod.rs",
+      "function_records": 6,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": 195,
+      "name": "encode",
+      "name_filtered": false,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "covered"
+    },
+    {
+      "api_id": "379c38e11719163c36ab72c5b14b81ad768c811335f2a77b5253b83815665fc9",
+      "candidate": true,
+      "file": "src/decode.rs",
+      "function_records": 1,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": 0,
+      "name": "fmt",
+      "name_filtered": true,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "observed_zero"
+    },
+    {
+      "api_id": "406c15ec5bf754441b128d3659a77aaf3bd361568b6943350113131e8aade33b",
+      "candidate": true,
+      "file": "src/write/encoder_string_writer.rs",
+      "function_records": 3,
+      "historical_row_multiplicity": 1,
+      "max_execution_count": 66,
+      "name": "flush",
+      "name_filtered": false,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": true,
+      "status": "covered"
+    },
+    {
+      "api_id": "41e6b371c68d05d246232fddf664956d920dc9bac985a22ae53daefc2f2676f0",
+      "candidate": false,
+      "file": null,
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "clone_into",
+      "name_filtered": true,
+      "public_name_body_definition": false,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    },
+    {
+      "api_id": "4239018b673640e7fa0d0bb0b4c8f340d8e9a3a5ee7aba74e203af5423e81d52",
+      "candidate": true,
+      "file": "src/decode.rs",
+      "function_records": 1,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": 0,
+      "name": "decode_engine_slice",
+      "name_filtered": false,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "observed_zero"
+    },
+    {
+      "api_id": "458fe57fe2d20b9ea8d131003f4a7c989e887e6f3b4a5079f42cc3c66a1905bb",
+      "candidate": false,
+      "file": null,
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "try_into",
+      "name_filtered": true,
+      "public_name_body_definition": false,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    },
+    {
+      "api_id": "47231f15ec5265ffe263fa684533536f2f5f338b432cedc382ae09c28db604f1",
+      "candidate": true,
+      "file": "src/write/encoder_string_writer.rs",
+      "function_records": 3,
+      "historical_row_multiplicity": 1,
+      "max_execution_count": 66,
+      "name": "write",
+      "name_filtered": false,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": true,
+      "status": "covered"
+    },
+    {
+      "api_id": "4c495b596140e4ba5b97f85ef0a01c458e28e30a07d95a130c944ca65913e5cc",
+      "candidate": true,
+      "file": "src/engine/general_purpose/mod.rs",
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "clone",
+      "name_filtered": true,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    },
+    {
+      "api_id": "4d3ccc6bb93cf05617e28aa4516e029c4c42049b0854b2427237c1708de77830",
+      "candidate": true,
+      "file": "src/alphabet.rs",
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "fmt",
+      "name_filtered": true,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    },
+    {
+      "api_id": "4ef2cfae12da984e7729223770ca7a4c3dc6f93d5d64b1cbe3c4f26c03a4962d",
+      "candidate": true,
+      "file": "src/decode.rs",
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "fmt",
+      "name_filtered": true,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    },
+    {
+      "api_id": "58f7a4ead50b3f33e5827fa2c30977ec07bb50bdab16d24f182ce2e904f7c5f5",
+      "candidate": true,
+      "file": "src/encode.rs",
+      "function_records": 2,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": 70,
+      "name": "encode_engine",
+      "name_filtered": false,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "covered"
+    },
+    {
+      "api_id": "5a1c64451b24f509545cd4458069346b0188e0b87e543c584dab28159a97d7ec",
+      "candidate": true,
+      "file": "src/engine/general_purpose/mod.rs",
+      "function_records": 1,
+      "historical_row_multiplicity": 1,
+      "max_execution_count": 190,
+      "name": "with_decode_padding_mode",
+      "name_filtered": false,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": true,
+      "status": "covered"
+    },
+    {
+      "api_id": "5ceed0d41f58e3be5bbe7c9508d48774ed30ee45c2fb8c7af15e70299d093aca",
+      "candidate": true,
+      "file": "src/encode.rs",
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "fmt",
+      "name_filtered": true,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    },
+    {
+      "api_id": "5d30331a28c76f3094b89916a05d8680e7c1a032f5e12807b22aae4426e845e7",
+      "candidate": true,
+      "file": "src/encode.rs",
+      "function_records": 1,
+      "historical_row_multiplicity": 1,
+      "max_execution_count": 479,
+      "name": "encoded_len",
+      "name_filtered": false,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": true,
+      "status": "covered"
+    },
+    {
+      "api_id": "5e5939a57154dae784eff2a6f183ad47cff850e54b58266d981196d48c420c8d",
+      "candidate": true,
+      "file": "src/write/encoder_string_writer.rs",
+      "function_records": 3,
+      "historical_row_multiplicity": 1,
+      "max_execution_count": 77,
+      "name": "new",
+      "name_filtered": false,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": true,
+      "status": "covered"
+    },
+    {
+      "api_id": "5e785ca805f196279eed5c61f6aacf5bd4661253793a717937bb5b6ddff451ea",
+      "candidate": true,
+      "file": "src/decode.rs",
+      "function_records": 1,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": 0,
+      "name": "decode_engine_vec",
+      "name_filtered": false,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "observed_zero"
+    },
+    {
+      "api_id": "5f8d765d43c1529dd101f63d538f17d515c69b3ad1ab99d03005e20788998d09",
+      "candidate": true,
+      "file": "src/engine/mod.rs",
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "fmt",
+      "name_filtered": true,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    },
+    {
+      "api_id": "60faf4f586333454cd626aa82fc1dd5b78a7b7bd5404fc876e67aecae69b5691",
+      "candidate": false,
+      "file": "src/engine/mod.rs",
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "decoded_len_estimate",
+      "name_filtered": false,
+      "public_name_body_definition": false,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    },
+    {
+      "api_id": "611ae5713f6efaedf72104f6284e9be9455c3985a97419086dbc264cf757325e",
+      "candidate": true,
+      "file": "src/encode.rs",
+      "function_records": 1,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": 0,
+      "name": "encode_engine_slice",
+      "name_filtered": false,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "observed_zero"
+    },
+    {
+      "api_id": "64c1d1d4066af3131892138aa79f4ffed65cf6d9806e37a7073c5fe3e4af5b8d",
+      "candidate": false,
+      "file": null,
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "type_id",
+      "name_filtered": true,
+      "public_name_body_definition": false,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    },
+    {
+      "api_id": "6506b6ef1451d7f19590ba5ef351449f09048b6636fcfa252d542081f3058dd3",
+      "candidate": true,
+      "file": "src/read/decoder.rs",
+      "function_records": 3,
+      "historical_row_multiplicity": 1,
+      "max_execution_count": 104,
+      "name": "read",
+      "name_filtered": false,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": true,
+      "status": "covered"
+    },
+    {
+      "api_id": "6957b7699d4a21c8852dbaf06f99e0a9d293c62cfc1d9e094bc56cbf16785c2c",
+      "candidate": true,
+      "file": "src/alphabet.rs",
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "eq",
+      "name_filtered": true,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    },
+    {
+      "api_id": "6bd851fd44fe7a3ed9591224e0f9277448470deab025ab4cfc225e7a29051a36",
+      "candidate": false,
+      "file": null,
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "to_owned",
+      "name_filtered": true,
+      "public_name_body_definition": false,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    },
+    {
+      "api_id": "6c9ef6c8cd875f8c0ffbae4d50b1765535a09266f882f7372d16ae5fecc78cc7",
+      "candidate": true,
+      "file": "src/decode.rs",
+      "function_records": 1,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": 0,
+      "name": "decode",
+      "name_filtered": false,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "observed_zero"
+    },
+    {
+      "api_id": "6da8246bccc8d362be6d816f0b43422b164fa4f9c30c745aa938dfccb0ad2035",
+      "candidate": false,
+      "file": null,
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "clone_to_uninit",
+      "name_filtered": true,
+      "public_name_body_definition": false,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    },
+    {
+      "api_id": "6e563a7af9c2cd7597ac18d398423c8d1cbafd686f5f47ad43020bf3777f4440",
+      "candidate": false,
+      "file": "src/engine/mod.rs",
+      "function_records": 1,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": 0,
+      "name": "encode_string",
+      "name_filtered": false,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "observed_zero"
+    },
+    {
+      "api_id": "6e8e1327c6d51893cf61cdb3fc71c9ab5ae681651e97cd0efc6529477f761f44",
+      "candidate": true,
+      "file": "src/write/encoder.rs",
+      "function_records": 1,
+      "historical_row_multiplicity": 1,
+      "max_execution_count": 0,
+      "name": "into_inner",
+      "name_filtered": false,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": true,
+      "status": "observed_zero"
+    },
+    {
+      "api_id": "72980e748f9907b3e176dce0c5d7dda8ace03f1f2a9fc4ead20c1873b0df44cf",
+      "candidate": true,
+      "file": "src/engine/general_purpose/mod.rs",
+      "function_records": 1,
+      "historical_row_multiplicity": 1,
+      "max_execution_count": 54,
+      "name": "new",
+      "name_filtered": false,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": true,
+      "status": "covered"
+    },
+    {
+      "api_id": "72fdd87925b0e0ad94b0239d11a08bc838234d947c3cf5af20d9ab08e61d3791",
+      "candidate": true,
+      "file": "src/engine/general_purpose/mod.rs",
+      "function_records": 1,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": 0,
+      "name": "default",
+      "name_filtered": true,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "observed_zero"
+    },
+    {
+      "api_id": "793aaae7544a0861c3b68aca087a90474a10dea02cad089515942d3058727e3e",
+      "candidate": true,
+      "file": "src/decode.rs",
+      "function_records": 1,
+      "historical_row_multiplicity": 1,
+      "max_execution_count": 0,
+      "name": "source",
+      "name_filtered": false,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": true,
+      "status": "observed_zero"
+    },
+    {
+      "api_id": "7af1a8d849577eff9bd7defa81725ab5b77a067405f48f1cc5bfd2040bb50b85",
+      "candidate": true,
+      "file": "src/decode.rs",
+      "function_records": 1,
+      "historical_row_multiplicity": 1,
+      "max_execution_count": 80,
+      "name": "decoded_len_estimate",
+      "name_filtered": false,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": true,
+      "status": "covered"
+    },
+    {
+      "api_id": "7bb8794b9809fba872e65974587d953d84d57d06981707824a2bd66ab07fb86b",
+      "candidate": false,
+      "file": null,
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "into",
+      "name_filtered": true,
+      "public_name_body_definition": false,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    },
+    {
+      "api_id": "7d73716d749997414faef51e28cf69bcd3b66cb551883bc754f3d633255f7353",
+      "candidate": true,
+      "file": "src/write/encoder.rs",
+      "function_records": 6,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": 81,
+      "name": "drop",
+      "name_filtered": true,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "covered"
+    },
+    {
+      "api_id": "8d12f6777e4e825316e8e68c411969db1a5a177f0110adc22da890b1889fcb04",
+      "candidate": true,
+      "file": "src/engine/general_purpose/mod.rs",
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "fmt",
+      "name_filtered": true,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    },
+    {
+      "api_id": "8defe7b843697871e77ac24d32bb5f72e11bd93eae2fecfd30609778cc341afe",
+      "candidate": false,
+      "file": "src/engine/mod.rs",
+      "function_records": 1,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": 0,
+      "name": "decode_vec",
+      "name_filtered": false,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "observed_zero"
+    },
+    {
+      "api_id": "8e7a97d8ee45c18893c4b7ccc682c4fd71e2cfe5ae7fa29c96a299505181caa1",
+      "candidate": true,
+      "file": "src/write/encoder_string_writer.rs",
+      "function_records": 3,
+      "historical_row_multiplicity": 1,
+      "max_execution_count": 66,
+      "name": "into_inner",
+      "name_filtered": false,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": true,
+      "status": "covered"
+    },
+    {
+      "api_id": "8ebcccce710796215be0b992d1bf0a20f221cc381120527b06a26aca1202ad5f",
+      "candidate": true,
+      "file": "src/alphabet.rs",
+      "function_records": 1,
+      "historical_row_multiplicity": 1,
+      "max_execution_count": 61,
+      "name": "as_str",
+      "name_filtered": false,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": true,
+      "status": "covered"
+    },
+    {
+      "api_id": "903f9bc4b1cd04d5440bbf4a53940d6dfa26fe366128b8879f8746c32f7e7b44",
+      "candidate": true,
+      "file": "src/alphabet.rs",
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "eq",
+      "name_filtered": true,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    },
+    {
+      "api_id": "917bad4ac111369bf0356e416af0afb45eb25f6535e969956feef44f1cfb4678",
+      "candidate": false,
+      "file": "src/write/encoder_string_writer.rs",
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "consume",
+      "name_filtered": false,
+      "public_name_body_definition": false,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    },
+    {
+      "api_id": "91f5735cd5dc39f98534ce0db4b30815ee517e0eca1c8b1cc8d3e2ff32bc84ad",
+      "candidate": true,
+      "file": "src/engine/general_purpose/mod.rs",
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "fmt",
+      "name_filtered": true,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    },
+    {
+      "api_id": "993396022c4c52d8b86dd09deb80b815f33efe3eddd782afe3d814fc849db58c",
+      "candidate": true,
+      "file": "src/display.rs",
+      "function_records": 1,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": 0,
+      "name": "fmt",
+      "name_filtered": true,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "observed_zero"
+    },
+    {
+      "api_id": "9df8b1a1a8d5af3486fc71a170fa5bf755d56b9201717b2a007e7f52259a3a3e",
+      "candidate": false,
+      "file": "src/engine/mod.rs",
+      "function_records": 1,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": 0,
+      "name": "decode_slice",
+      "name_filtered": false,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "observed_zero"
+    },
+    {
+      "api_id": "9f15327562445f3a55fdce5f55daa39b94e82699d368ffba006b3e33341486cf",
+      "candidate": true,
+      "file": "src/write/encoder_string_writer.rs",
+      "function_records": 1,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": 107,
+      "name": "consume",
+      "name_filtered": false,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "covered"
+    },
+    {
+      "api_id": "a23e60f0071ff7499fd999860f60b6f87b22aa8ae9a376a735efa2632308b31c",
+      "candidate": true,
+      "file": "src/engine/general_purpose/mod.rs",
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "clone",
+      "name_filtered": true,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    },
+    {
+      "api_id": "a68b40ea311e3e5477bcaa0115343fcedc27ffa0b877616c9624352723683a40",
+      "candidate": true,
+      "file": "src/engine/general_purpose/mod.rs",
+      "function_records": 1,
+      "historical_row_multiplicity": 1,
+      "max_execution_count": 938,
+      "name": "config",
+      "name_filtered": false,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": true,
+      "status": "covered"
+    },
+    {
+      "api_id": "a929a5b9678e6758f3ba33eb10252757d877f5d3321b7333a078032542c8d26d",
+      "candidate": true,
+      "file": "src/write/encoder_string_writer.rs",
+      "function_records": 4,
+      "historical_row_multiplicity": 1,
+      "max_execution_count": 77,
+      "name": "from_consumer",
+      "name_filtered": false,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": true,
+      "status": "covered"
+    },
+    {
+      "api_id": "a9b9d5919d72769131ce378e5c715b5aaab34f50c17f0a89fe5bff9d533115c3",
+      "candidate": false,
+      "file": null,
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "from",
+      "name_filtered": true,
+      "public_name_body_definition": false,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    },
+    {
+      "api_id": "ac7d05610a317c816b99bf3aed1f2de40b33d9c17a463cab8439f2515905cd18",
+      "candidate": true,
+      "file": "src/write/encoder.rs",
+      "function_records": 5,
+      "historical_row_multiplicity": 1,
+      "max_execution_count": 81,
+      "name": "finish",
+      "name_filtered": false,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": true,
+      "status": "covered"
+    },
+    {
+      "api_id": "b1c2c1eb1326cbd266591aa0e762a892a7f43b97a560f8af11993fd203b21ef2",
+      "candidate": true,
+      "file": "src/engine/general_purpose/mod.rs",
+      "function_records": 1,
+      "historical_row_multiplicity": 1,
+      "max_execution_count": 713,
+      "name": "new",
+      "name_filtered": false,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": true,
+      "status": "covered"
+    },
+    {
+      "api_id": "b26c4200387335ef801d6bc9cc1241bd47e6ce6abfa270fa5725a6ed729dad35",
+      "candidate": true,
+      "file": "src/engine/general_purpose/mod.rs",
+      "function_records": 1,
+      "historical_row_multiplicity": 1,
+      "max_execution_count": 148,
+      "name": "with_encode_padding",
+      "name_filtered": false,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": true,
+      "status": "covered"
+    },
+    {
+      "api_id": "b35305569be41df332bc63de8721408950aacd459e1c496fded60b52e198b78f",
+      "candidate": true,
+      "file": "src/alphabet.rs",
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "fmt",
+      "name_filtered": true,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    },
+    {
+      "api_id": "b3a4beb8fcf3b7a007480da5b9893c2e20984f7b17a73b39aa8ca02f54570a87",
+      "candidate": true,
+      "file": "src/engine/general_purpose/mod.rs",
+      "function_records": 1,
+      "historical_row_multiplicity": 1,
+      "max_execution_count": 938,
+      "name": "encode_padding",
+      "name_filtered": false,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": true,
+      "status": "covered"
+    },
+    {
+      "api_id": "b418f6c2e195555541bc69dc315aaa6ff6b5fdba10614700ec50ad491e6f9ca9",
+      "candidate": true,
+      "file": "src/write/encoder_string_writer.rs",
+      "function_records": 1,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": 0,
+      "name": "consume",
+      "name_filtered": false,
+      "public_name_body_definition": false,
+      "public_surface_review_item": true,
+      "selected": false,
+      "status": "observed_zero"
+    },
+    {
+      "api_id": "b5669a091911feb037ed1eb8af7e6ceaf0efcfa6779719cd43c04dea92f977b2",
+      "candidate": true,
+      "file": "src/encode.rs",
+      "function_records": 1,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": 0,
+      "name": "fmt",
+      "name_filtered": true,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "observed_zero"
+    },
+    {
+      "api_id": "bf3a44c9a8cffc72f52ef7b77a716a0f69f1d05256b06042d6b20dcc27323967",
+      "candidate": true,
+      "file": "src/write/encoder.rs",
+      "function_records": 6,
+      "historical_row_multiplicity": 1,
+      "max_execution_count": 81,
+      "name": "new",
+      "name_filtered": false,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": true,
+      "status": "covered"
+    },
+    {
+      "api_id": "bf49928910362e16267124806fb649388abae512a9bbecdbc97f052012a7492e",
+      "candidate": true,
+      "file": "src/alphabet.rs",
+      "function_records": 1,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": 0,
+      "name": "fmt",
+      "name_filtered": true,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "observed_zero"
+    },
+    {
+      "api_id": "bf4f536c707fdcc85a3520e03c15a9f754c897eaa480d172bc969e33decd21e1",
+      "candidate": true,
+      "file": "src/engine/mod.rs",
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "fmt",
+      "name_filtered": true,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    },
+    {
+      "api_id": "c19d47c53f8c17bb033da73cfcb9eff57a3c2a9382609f08729773908d6a30d7",
+      "candidate": true,
+      "file": "src/alphabet.rs",
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "clone",
+      "name_filtered": true,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    },
+    {
+      "api_id": "c4354c1ed3998d3f6df501be0f05f67255cf5eb754b639c82d61468709fab3b7",
+      "candidate": true,
+      "file": "src/decode.rs",
+      "function_records": 1,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": 286,
+      "name": "from",
+      "name_filtered": true,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "covered"
+    },
+    {
+      "api_id": "c455926e4ad22bfb006b5a31697373dccf585c460c106fed93ea6aa8413c8273",
+      "candidate": true,
+      "file": "src/decode.rs",
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "clone",
+      "name_filtered": true,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    },
+    {
+      "api_id": "c467eccb20df70ef7f6f59eb549c0992de85df4c61be2b1629d5a0ab42cc6c16",
+      "candidate": true,
+      "file": "src/write/encoder.rs",
+      "function_records": 1,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": 0,
+      "name": "fmt",
+      "name_filtered": true,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "observed_zero"
+    },
+    {
+      "api_id": "c779236031919e25eeb3f23e4fc92a54b991b1a498bae5efd53a98d34bdc3b15",
+      "candidate": false,
+      "file": "src/engine/mod.rs",
+      "function_records": 3,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": 195,
+      "name": "decode",
+      "name_filtered": false,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "covered"
+    },
+    {
+      "api_id": "c8878fc28e12a94b4cf7532ad69c2eaa3ed14ec15793e3a28cd23e16581740ab",
+      "candidate": false,
+      "file": null,
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "borrow",
+      "name_filtered": true,
+      "public_name_body_definition": false,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    },
+    {
+      "api_id": "cd2443f3060ec7f96caf43efe7303f2bc0645c989cc2b4407a9e271af6cbd3a9",
+      "candidate": false,
+      "file": "src/engine/mod.rs",
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "config",
+      "name_filtered": false,
+      "public_name_body_definition": false,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    },
+    {
+      "api_id": "d0d5070a526d7669e5fc29b60a8221f80b6d8e8fe9fee55d4771833d78087fc5",
+      "candidate": false,
+      "file": "src/engine/mod.rs",
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "encode_padding",
+      "name_filtered": false,
+      "public_name_body_definition": false,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    },
+    {
+      "api_id": "d0fb9e7187e81a0888f73c932cf6299bb8444c8dd8df72a39e1f1307aacefe9a",
+      "candidate": true,
+      "file": "src/alphabet.rs",
+      "function_records": 1,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": 0,
+      "name": "try_from",
+      "name_filtered": true,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "observed_zero"
+    },
+    {
+      "api_id": "d77f2820f96da200116ca76ffe071274fcdc57655719a39a9ce5cc6136cf502b",
+      "candidate": true,
+      "file": "src/write/encoder.rs",
+      "function_records": 5,
+      "historical_row_multiplicity": 1,
+      "max_execution_count": 579,
+      "name": "write",
+      "name_filtered": false,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": true,
+      "status": "covered"
+    },
+    {
+      "api_id": "d8210344c63a1d6c3ff48456b4a45324b48c8ba9d76134825b481b49bec121a3",
+      "candidate": true,
+      "file": "src/display.rs",
+      "function_records": 3,
+      "historical_row_multiplicity": 1,
+      "max_execution_count": 7,
+      "name": "new",
+      "name_filtered": false,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": true,
+      "status": "covered"
+    },
+    {
+      "api_id": "df3015ac3632f636f087edcad68419ea40eb98117129714bacddff3f4331020e",
+      "candidate": false,
+      "file": null,
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "borrow_mut",
+      "name_filtered": true,
+      "public_name_body_definition": false,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    },
+    {
+      "api_id": "dfb97fb239b5ceec46be3d4839f370b1bf1e94849241af54f28446a15692607f",
+      "candidate": true,
+      "file": "src/decode.rs",
+      "function_records": 1,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": 0,
+      "name": "decode_engine",
+      "name_filtered": false,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "observed_zero"
+    },
+    {
+      "api_id": "e631c9f99ba8f2ac5ed43230caba9cf9230020f122c7320025e930473e49b22a",
+      "candidate": true,
+      "file": "src/encode.rs",
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "eq",
+      "name_filtered": true,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    },
+    {
+      "api_id": "eeb81c3c96efb14594d5805c9e308e4eee47862c7083d5785ec707cfbcb9fb52",
+      "candidate": true,
+      "file": "src/engine/mod.rs",
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "clone",
+      "name_filtered": true,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    },
+    {
+      "api_id": "efce3fc3cb05c9292db0f0b0f097b80b293e666d27c81da53557bfb998830a30",
+      "candidate": true,
+      "file": "src/decode.rs",
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "fmt",
+      "name_filtered": true,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    },
+    {
+      "api_id": "f76cd37aa0883adfb568696149293817ab6df2eb94dacb2402d8ad183e6af74d",
+      "candidate": true,
+      "file": "src/write/encoder.rs",
+      "function_records": 3,
+      "historical_row_multiplicity": 1,
+      "max_execution_count": 66,
+      "name": "flush",
+      "name_filtered": false,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": true,
+      "status": "covered"
+    },
+    {
+      "api_id": "f79beefe5c60cc13252ecc3d5a5579b7cb11fa154b953e5737719f0e2e3f2c0b",
+      "candidate": true,
+      "file": "src/read/decoder.rs",
+      "function_records": 4,
+      "historical_row_multiplicity": 1,
+      "max_execution_count": 104,
+      "name": "new",
+      "name_filtered": false,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": true,
+      "status": "covered"
+    },
+    {
+      "api_id": "f8ce1868cb3fc5375e1aad9eae23c2ca18dd67e6348e563583be798cc4ae464c",
+      "candidate": true,
+      "file": "src/engine/general_purpose/mod.rs",
+      "function_records": 1,
+      "historical_row_multiplicity": 1,
+      "max_execution_count": 166,
+      "name": "with_decode_allow_trailing_bits",
+      "name_filtered": false,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": true,
+      "status": "covered"
+    },
+    {
+      "api_id": "fd179fd71d6472c8925b3e50328c2d2156bbd8d74f7a515cc1f29a0764849911",
+      "candidate": false,
+      "file": "src/engine/mod.rs",
+      "function_records": 1,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": 0,
+      "name": "decode_slice_unchecked",
+      "name_filtered": false,
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "observed_zero"
+    }
+  ],
+  "coverage_sha256": "ac35b397dbc2ed56cbbab8b6c4b2e64c30cd640bb413b5ab387ff5b731f08c62",
+  "crate": "base64",
+  "groups": {
+    "historical_selected": {
+      "confirmed_coverage_percent": 92.3076923076923,
+      "covered": 24,
+      "observed_zero": 2,
+      "total": 26,
+      "unresolved": 0
+    },
+    "historical_selected_rows_with_duplicates": {
+      "confirmed_coverage_percent": 92.3076923076923,
+      "covered": 24,
+      "observed_zero": 2,
+      "total": 26,
+      "unresolved": 0
+    },
+    "local_callable_candidates_name_filtered": {
+      "confirmed_coverage_percent": 72.22222222222223,
+      "covered": 26,
+      "observed_zero": 10,
+      "total": 36,
+      "unresolved": 0
+    },
+    "local_callable_candidates_unfiltered": {
+      "confirmed_coverage_percent": 40.0,
+      "covered": 28,
+      "observed_zero": 19,
+      "total": 70,
+      "unresolved": 23
+    },
+    "public_name_body_definitions": {
+      "confirmed_coverage_percent": 40.78947368421053,
+      "covered": 31,
+      "observed_zero": 22,
+      "total": 76,
+      "unresolved": 23
+    },
+    "public_surface_review_items": {
+      "confirmed_coverage_percent": 0.0,
+      "covered": 0,
+      "observed_zero": 1,
+      "total": 1,
+      "unresolved": 0
+    }
+  },
+  "has_function_records": true,
+  "legacy_segment_diagnostic": {
+    "covered_rows": 24,
+    "percent": 92.3076923076923,
+    "total_rows": 26,
+    "validity": "historical line-region rule, not validated API-entry coverage"
+  },
+  "mapping_policy": "unique_exact_function_entry_position_v1",
+  "schema": "graft-coverage-audit-v1",
+  "status": "conservative_existing_export_audit_not_new_fuzzing_result",
+  "universe_sha256": "ea4f81151972b0165e23b133a306bf7ff5951ea3e4ae0aac79a19ea31eb65d71",
+  "unmatched_functions": [
+    {
+      "begin": [
+        472,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/engine/mod.rs",
+      "name": "_RNvMNtCsafjR9jDfmIp_6base646engineNtB2_14DecodeMetadata3new",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        62,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/alphabet.rs",
+      "name": "_RNvMNtCsafjR9jDfmIp_6base648alphabetNtB2_8Alphabet18from_str_unchecked",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        14,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/engine/general_purpose/decode.rs",
+      "name": "_RNvMNtNtNtCsafjR9jDfmIp_6base646engine15general_purpose6decodeNtB2_22GeneralPurposeEstimate3new",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        57,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/chunked_encoder.rs",
+      "name": "_RNvMs_NtCsafjR9jDfmIp_6base6415chunked_encoderNtB4_10StringSink3new",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        132,
+        1
+      ],
+      "candidate_api_ids": [],
+      "file": "src/encode.rs",
+      "name": "_RNvNtCsafjR9jDfmIp_6base646encode11add_padding",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        211,
+        1
+      ],
+      "candidate_api_ids": [],
+      "file": "src/engine/general_purpose/mod.rs",
+      "name": "_RNvNtNtCsafjR9jDfmIp_6base646engine15general_purpose12decode_table",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        193,
+        1
+      ],
+      "candidate_api_ids": [],
+      "file": "src/engine/general_purpose/mod.rs",
+      "name": "_RNvNtNtCsafjR9jDfmIp_6base646engine15general_purpose12encode_table",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        228,
+        1
+      ],
+      "candidate_api_ids": [],
+      "file": "src/engine/general_purpose/mod.rs",
+      "name": "_RNvNtNtCsafjR9jDfmIp_6base646engine15general_purpose8read_u64B5_",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        11,
+        1
+      ],
+      "candidate_api_ids": [],
+      "file": "src/engine/general_purpose/decode_suffix.rs",
+      "name": "_RNvNtNtNtCsafjR9jDfmIp_6base646engine15general_purpose13decode_suffix13decode_suffix",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        35,
+        1
+      ],
+      "candidate_api_ids": [],
+      "file": "src/engine/general_purpose/decode.rs",
+      "name": "_RNvNtNtNtCsafjR9jDfmIp_6base646engine15general_purpose6decode13decode_helperB7_",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        256,
+        1
+      ],
+      "candidate_api_ids": [],
+      "file": "src/engine/general_purpose/decode.rs",
+      "name": "_RNvNtNtNtCsafjR9jDfmIp_6base646engine15general_purpose6decode14decode_chunk_4",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        174,
+        1
+      ],
+      "candidate_api_ids": [],
+      "file": "src/engine/general_purpose/decode.rs",
+      "name": "_RNvNtNtNtCsafjR9jDfmIp_6base646engine15general_purpose6decode14decode_chunk_8",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        131,
+        1
+      ],
+      "candidate_api_ids": [],
+      "file": "src/engine/general_purpose/decode.rs",
+      "name": "_RNvNtNtNtCsafjR9jDfmIp_6base646engine15general_purpose6decode18complete_quads_len",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        66,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/chunked_encoder.rs",
+      "name": "_RNvXs0_NtCsafjR9jDfmIp_6base6415chunked_encoderNtB5_10StringSinkNtB5_4Sink19write_encoded_bytes",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        47,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/display.rs",
+      "name": "_RNvXs0_NtCsafjR9jDfmIp_6base647displayNtB5_13FormatterSinkNtNtB7_15chunked_encoder4Sink19write_encoded_bytes",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        171,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/engine/general_purpose/mod.rs",
+      "name": "_RNvXs_NtNtCsafjR9jDfmIp_6base646engine15general_purposeNtB4_14GeneralPurposeNtB6_6Engine15internal_decode",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        48,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/engine/general_purpose/mod.rs",
+      "name": "_RNvXs_NtNtCsafjR9jDfmIp_6base646engine15general_purposeNtB4_14GeneralPurposeNtB6_6Engine15internal_encode",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        167,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/engine/general_purpose/mod.rs",
+      "name": "_RNvXs_NtNtCsafjR9jDfmIp_6base646engine15general_purposeNtB4_14GeneralPurposeNtB6_6Engine29internal_decoded_len_estimate",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        24,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/engine/general_purpose/decode.rs",
+      "name": "_RNvXs_NtNtNtCsafjR9jDfmIp_6base646engine15general_purpose6decodeNtB4_22GeneralPurposeEstimateNtB8_14DecodeEstimate20decoded_len_estimate",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        28,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/chunked_encoder.rs",
+      "name": "_RINvMNtCsafjR9jDfmIp_6base6415chunked_encoderINtB3_14ChunkedEncoderpE6encodepEB5_",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        69,
+        1
+      ],
+      "candidate_api_ids": [],
+      "file": "src/encode.rs",
+      "name": "_RINvNtCsafjR9jDfmIp_6base646encode19encode_with_paddingpEB4_",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        307,
+        9
+      ],
+      "candidate_api_ids": [],
+      "file": "src/engine/mod.rs",
+      "name": "_RINvNvNtNtCsafjR9jDfmIp_6base646engine6Engine10decode_vec5innerpEB8_",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        358,
+        9
+      ],
+      "candidate_api_ids": [],
+      "file": "src/engine/mod.rs",
+      "name": "_RINvNvNtNtCsafjR9jDfmIp_6base646engine6Engine12decode_slice5innerpEB8_",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        199,
+        9
+      ],
+      "candidate_api_ids": [],
+      "file": "src/engine/mod.rs",
+      "name": "_RINvNvNtNtCsafjR9jDfmIp_6base646engine6Engine12encode_slice5innerpEB8_",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        156,
+        9
+      ],
+      "candidate_api_ids": [],
+      "file": "src/engine/mod.rs",
+      "name": "_RINvNvNtNtCsafjR9jDfmIp_6base646engine6Engine13encode_string5innerpEB8_",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        398,
+        9
+      ],
+      "candidate_api_ids": [],
+      "file": "src/engine/mod.rs",
+      "name": "_RINvNvNtNtCsafjR9jDfmIp_6base646engine6Engine22decode_slice_unchecked5innerpEB8_",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        245,
+        9
+      ],
+      "candidate_api_ids": [],
+      "file": "src/engine/mod.rs",
+      "name": "_RINvNvNtNtCsafjR9jDfmIp_6base646engine6Engine6decode5innerpEB8_",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        116,
+        9
+      ],
+      "candidate_api_ids": [],
+      "file": "src/engine/mod.rs",
+      "name": "_RINvNvNtNtCsafjR9jDfmIp_6base646engine6Engine6encode5innerpEB8_",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        325,
+        36
+      ],
+      "candidate_api_ids": [],
+      "file": "src/engine/mod.rs",
+      "name": "_RNCINvNvNtNtCsafjR9jDfmIp_6base646engine6Engine10decode_vec5innerpE0Ba_",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        409,
+        36
+      ],
+      "candidate_api_ids": [],
+      "file": "src/engine/mod.rs",
+      "name": "_RNCINvNvNtNtCsafjR9jDfmIp_6base646engine6Engine22decode_slice_unchecked5innerpEs_0Ba_",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        254,
+        36
+      ],
+      "candidate_api_ids": [],
+      "file": "src/engine/mod.rs",
+      "name": "_RNCINvNvNtNtCsafjR9jDfmIp_6base646engine6Engine6decode5innerpE0Ba_",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        153,
+        34
+      ],
+      "candidate_api_ids": [],
+      "file": "src/read/decoder.rs",
+      "name": "_RNCNvMs_NtNtCsafjR9jDfmIp_6base644read7decoderINtB6_13DecoderReaderppE13decode_to_buf0Ba_",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        198,
+        27
+      ],
+      "candidate_api_ids": [],
+      "file": "src/read/decoder.rs",
+      "name": "_RNCNvMs_NtNtCsafjR9jDfmIp_6base644read7decoderINtB6_13DecoderReaderppE13decode_to_bufs0_0Ba_",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        183,
+        26
+      ],
+      "candidate_api_ids": [],
+      "file": "src/read/decoder.rs",
+      "name": "_RNCNvMs_NtNtCsafjR9jDfmIp_6base644read7decoderINtB6_13DecoderReaderppE13decode_to_bufs_0Ba_",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        187,
+        28
+      ],
+      "candidate_api_ids": [],
+      "file": "src/write/encoder.rs",
+      "name": "_RNCNvMs_NtNtCsafjR9jDfmIp_6base645write7encoderINtB6_13EncoderWriterppE17write_to_delegate0Ba_",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        378,
+        26
+      ],
+      "candidate_api_ids": [],
+      "file": "src/write/encoder.rs",
+      "name": "_RNCNvXININtNtCsafjR9jDfmIp_6base645write7encoders0_0ppEINtB7_13EncoderWriterppENtNtCsicaZO8UCM9y_3std2io5Write5writes0_0Bb_",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        377,
+        22
+      ],
+      "candidate_api_ids": [],
+      "file": "src/write/encoder.rs",
+      "name": "_RNCNvXININtNtCsafjR9jDfmIp_6base645write7encoders0_0ppEINtB7_13EncoderWriterppENtNtCsicaZO8UCM9y_3std2io5Write5writes_0Bb_",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        24,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/chunked_encoder.rs",
+      "name": "_RNvMNtCsafjR9jDfmIp_6base6415chunked_encoderINtB2_14ChunkedEncoderpE3newB4_",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        140,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/read/decoder.rs",
+      "name": "_RNvMs_NtNtCsafjR9jDfmIp_6base644read7decoderINtB4_13DecoderReaderppE13decode_to_bufB8_",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        96,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/read/decoder.rs",
+      "name": "_RNvMs_NtNtCsafjR9jDfmIp_6base644read7decoderINtB4_13DecoderReaderppE17flush_decoded_bufB8_",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        119,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/read/decoder.rs",
+      "name": "_RNvMs_NtNtCsafjR9jDfmIp_6base644read7decoderINtB4_13DecoderReaderppE18read_from_delegateB8_",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        178,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/write/encoder.rs",
+      "name": "_RNvMs_NtNtCsafjR9jDfmIp_6base645write7encoderINtB4_13EncoderWriterppE17write_to_delegateB8_",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        141,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/write/encoder.rs",
+      "name": "_RNvMs_NtNtCsafjR9jDfmIp_6base645write7encoderINtB4_13EncoderWriterppE21write_final_leftoversB8_",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        211,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/write/encoder.rs",
+      "name": "_RNvMs_NtNtCsafjR9jDfmIp_6base645write7encoderINtB4_13EncoderWriterppE24write_all_encoded_outputB8_",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        130,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/write/encoder_string_writer.rs",
+      "name": "_RNvXININtNtCsafjR9jDfmIp_6base645write21encoder_string_writers3_0pEINtB5_24Utf8SingleCodeUnitWriterpENtNtCsicaZO8UCM9y_3std2io5Write5flushB9_",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        120,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/write/encoder_string_writer.rs",
+      "name": "_RNvXININtNtCsafjR9jDfmIp_6base645write21encoder_string_writers3_0pEINtB5_24Utf8SingleCodeUnitWriterpENtNtCsicaZO8UCM9y_3std2io5Write5writeB9_",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        187,
+        28
+      ],
+      "candidate_api_ids": [],
+      "file": "src/write/encoder.rs",
+      "name": "_RNCNvMs_NtNtCsafjR9jDfmIp_6base645write7encoderINtB6_13EncoderWriterNtNtNtBa_6engine15general_purpose14GeneralPurposeQINtNtCsj0gLuUEfogP_5alloc3vec3VechEE17write_to_delegate0Cs6J6HUz3gwDK_12base64_test1",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        378,
+        26
+      ],
+      "candidate_api_ids": [],
+      "file": "src/write/encoder.rs",
+      "name": "_RNCNvXs0_NtNtCsafjR9jDfmIp_6base645write7encoderINtB7_13EncoderWriterNtNtNtBb_6engine15general_purpose14GeneralPurposeQINtNtCsj0gLuUEfogP_5alloc3vec3VechEENtNtCsicaZO8UCM9y_3std2io5Write5writes0_0Cs6J6HUz3gwDK_12base64_test1",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        377,
+        22
+      ],
+      "candidate_api_ids": [],
+      "file": "src/write/encoder.rs",
+      "name": "_RNCNvXs0_NtNtCsafjR9jDfmIp_6base645write7encoderINtB7_13EncoderWriterNtNtNtBb_6engine15general_purpose14GeneralPurposeQINtNtCsj0gLuUEfogP_5alloc3vec3VechEENtNtCsicaZO8UCM9y_3std2io5Write5writes_0Cs6J6HUz3gwDK_12base64_test1",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        178,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/write/encoder.rs",
+      "name": "_RNvMs_NtNtCsafjR9jDfmIp_6base645write7encoderINtB4_13EncoderWriterNtNtNtB8_6engine15general_purpose14GeneralPurposeQINtNtCsj0gLuUEfogP_5alloc3vec3VechEE17write_to_delegateCs6J6HUz3gwDK_12base64_test1",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        141,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/write/encoder.rs",
+      "name": "_RNvMs_NtNtCsafjR9jDfmIp_6base645write7encoderINtB4_13EncoderWriterNtNtNtB8_6engine15general_purpose14GeneralPurposeQINtNtCsj0gLuUEfogP_5alloc3vec3VechEE21write_final_leftoversCs6J6HUz3gwDK_12base64_test1",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        211,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/write/encoder.rs",
+      "name": "_RNvMs_NtNtCsafjR9jDfmIp_6base645write7encoderINtB4_13EncoderWriterNtNtNtB8_6engine15general_purpose14GeneralPurposeQINtNtCsj0gLuUEfogP_5alloc3vec3VechEE24write_all_encoded_outputCs6J6HUz3gwDK_12base64_test1",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        69,
+        1
+      ],
+      "candidate_api_ids": [],
+      "file": "src/encode.rs",
+      "name": "_RINvNtCsafjR9jDfmIp_6base646encode19encode_with_paddingNtNtNtB4_6engine15general_purpose14GeneralPurposeECs6J6HUz3gwDK_12base64_test1",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        199,
+        9
+      ],
+      "candidate_api_ids": [],
+      "file": "src/engine/mod.rs",
+      "name": "_RINvNvNtNtCsafjR9jDfmIp_6base646engine6Engine12encode_slice5innerNtNtB6_15general_purpose14GeneralPurposeECs6J6HUz3gwDK_12base64_test1",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        153,
+        34
+      ],
+      "candidate_api_ids": [],
+      "file": "src/read/decoder.rs",
+      "name": "_RNCNvMs_NtNtCsafjR9jDfmIp_6base644read7decoderINtB6_13DecoderReaderNtNtNtBa_6engine15general_purpose14GeneralPurposeINtNtNtCsicaZO8UCM9y_3std2io6cursor6CursorRShEE13decode_to_buf0CsfshJriD427J_13base64_test11",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        198,
+        27
+      ],
+      "candidate_api_ids": [],
+      "file": "src/read/decoder.rs",
+      "name": "_RNCNvMs_NtNtCsafjR9jDfmIp_6base644read7decoderINtB6_13DecoderReaderNtNtNtBa_6engine15general_purpose14GeneralPurposeINtNtNtCsicaZO8UCM9y_3std2io6cursor6CursorRShEE13decode_to_bufs0_0CsfshJriD427J_13base64_test11",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        183,
+        26
+      ],
+      "candidate_api_ids": [],
+      "file": "src/read/decoder.rs",
+      "name": "_RNCNvMs_NtNtCsafjR9jDfmIp_6base644read7decoderINtB6_13DecoderReaderNtNtNtBa_6engine15general_purpose14GeneralPurposeINtNtNtCsicaZO8UCM9y_3std2io6cursor6CursorRShEE13decode_to_bufs_0CsfshJriD427J_13base64_test11",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        140,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/read/decoder.rs",
+      "name": "_RNvMs_NtNtCsafjR9jDfmIp_6base644read7decoderINtB4_13DecoderReaderNtNtNtB8_6engine15general_purpose14GeneralPurposeINtNtNtCsicaZO8UCM9y_3std2io6cursor6CursorRShEE13decode_to_bufCsfshJriD427J_13base64_test11",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        96,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/read/decoder.rs",
+      "name": "_RNvMs_NtNtCsafjR9jDfmIp_6base644read7decoderINtB4_13DecoderReaderNtNtNtB8_6engine15general_purpose14GeneralPurposeINtNtNtCsicaZO8UCM9y_3std2io6cursor6CursorRShEE17flush_decoded_bufCsfshJriD427J_13base64_test11",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        119,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/read/decoder.rs",
+      "name": "_RNvMs_NtNtCsafjR9jDfmIp_6base644read7decoderINtB4_13DecoderReaderNtNtNtB8_6engine15general_purpose14GeneralPurposeINtNtNtCsicaZO8UCM9y_3std2io6cursor6CursorRShEE18read_from_delegateCsfshJriD427J_13base64_test11",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        69,
+        1
+      ],
+      "candidate_api_ids": [],
+      "file": "src/encode.rs",
+      "name": "_RINvNtCsafjR9jDfmIp_6base646encode19encode_with_paddingNtNtNtB4_6engine15general_purpose14GeneralPurposeECsg40b4R0z2cN_13base64_test12",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        199,
+        9
+      ],
+      "candidate_api_ids": [],
+      "file": "src/engine/mod.rs",
+      "name": "_RINvNvNtNtCsafjR9jDfmIp_6base646engine6Engine12encode_slice5innerNtNtB6_15general_purpose14GeneralPurposeECsg40b4R0z2cN_13base64_test12",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        187,
+        28
+      ],
+      "candidate_api_ids": [],
+      "file": "src/write/encoder.rs",
+      "name": "_RNCNvMs_NtNtCsafjR9jDfmIp_6base645write7encoderINtB6_13EncoderWriterNtNtNtBa_6engine15general_purpose14GeneralPurposeQINtNtCsj0gLuUEfogP_5alloc3vec3VechEE17write_to_delegate0Csg40b4R0z2cN_13base64_test12",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        378,
+        26
+      ],
+      "candidate_api_ids": [],
+      "file": "src/write/encoder.rs",
+      "name": "_RNCNvXs0_NtNtCsafjR9jDfmIp_6base645write7encoderINtB7_13EncoderWriterNtNtNtBb_6engine15general_purpose14GeneralPurposeQINtNtCsj0gLuUEfogP_5alloc3vec3VechEENtNtCsicaZO8UCM9y_3std2io5Write5writes0_0Csg40b4R0z2cN_13base64_test12",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        377,
+        22
+      ],
+      "candidate_api_ids": [],
+      "file": "src/write/encoder.rs",
+      "name": "_RNCNvXs0_NtNtCsafjR9jDfmIp_6base645write7encoderINtB7_13EncoderWriterNtNtNtBb_6engine15general_purpose14GeneralPurposeQINtNtCsj0gLuUEfogP_5alloc3vec3VechEENtNtCsicaZO8UCM9y_3std2io5Write5writes_0Csg40b4R0z2cN_13base64_test12",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        178,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/write/encoder.rs",
+      "name": "_RNvMs_NtNtCsafjR9jDfmIp_6base645write7encoderINtB4_13EncoderWriterNtNtNtB8_6engine15general_purpose14GeneralPurposeQINtNtCsj0gLuUEfogP_5alloc3vec3VechEE17write_to_delegateCsg40b4R0z2cN_13base64_test12",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        141,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/write/encoder.rs",
+      "name": "_RNvMs_NtNtCsafjR9jDfmIp_6base645write7encoderINtB4_13EncoderWriterNtNtNtB8_6engine15general_purpose14GeneralPurposeQINtNtCsj0gLuUEfogP_5alloc3vec3VechEE21write_final_leftoversCsg40b4R0z2cN_13base64_test12",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        211,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/write/encoder.rs",
+      "name": "_RNvMs_NtNtCsafjR9jDfmIp_6base645write7encoderINtB4_13EncoderWriterNtNtNtB8_6engine15general_purpose14GeneralPurposeQINtNtCsj0gLuUEfogP_5alloc3vec3VechEE24write_all_encoded_outputCsg40b4R0z2cN_13base64_test12",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        116,
+        9
+      ],
+      "candidate_api_ids": [],
+      "file": "src/engine/mod.rs",
+      "name": "_RINvNvNtNtCsafjR9jDfmIp_6base646engine6Engine6encode5innerNtNtB6_15general_purpose14GeneralPurposeECsc2VwGKXvdio_13base64_test13",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        69,
+        1
+      ],
+      "candidate_api_ids": [],
+      "file": "src/encode.rs",
+      "name": "_RINvNtCsafjR9jDfmIp_6base646encode19encode_with_paddingNtNtNtB4_6engine15general_purpose14GeneralPurposeECsc2VwGKXvdio_13base64_test13",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        245,
+        9
+      ],
+      "candidate_api_ids": [],
+      "file": "src/engine/mod.rs",
+      "name": "_RINvNvNtNtCsafjR9jDfmIp_6base646engine6Engine6decode5innerNtNtB6_15general_purpose14GeneralPurposeECs45SGq4GqaHA_13base64_test14",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        116,
+        9
+      ],
+      "candidate_api_ids": [],
+      "file": "src/engine/mod.rs",
+      "name": "_RINvNvNtNtCsafjR9jDfmIp_6base646engine6Engine6encode5innerNtNtB6_15general_purpose14GeneralPurposeECs45SGq4GqaHA_13base64_test14",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        254,
+        36
+      ],
+      "candidate_api_ids": [],
+      "file": "src/engine/mod.rs",
+      "name": "_RNCINvNvNtNtCsafjR9jDfmIp_6base646engine6Engine6decode5innerNtNtB8_15general_purpose14GeneralPurposeE0Cs45SGq4GqaHA_13base64_test14",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        69,
+        1
+      ],
+      "candidate_api_ids": [],
+      "file": "src/encode.rs",
+      "name": "_RINvNtCsafjR9jDfmIp_6base646encode19encode_with_paddingNtNtNtB4_6engine15general_purpose14GeneralPurposeECs45SGq4GqaHA_13base64_test14",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        24,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/chunked_encoder.rs",
+      "name": "_RNvMNtCsafjR9jDfmIp_6base6415chunked_encoderINtB2_14ChunkedEncoderNtNtNtB4_6engine15general_purpose14GeneralPurposeE3newCs9ofo5b4p2ut_13base64_test15",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        199,
+        9
+      ],
+      "candidate_api_ids": [],
+      "file": "src/engine/mod.rs",
+      "name": "_RINvNvNtNtCsafjR9jDfmIp_6base646engine6Engine12encode_slice5innerNtNtB6_15general_purpose14GeneralPurposeECsl308eOAyLnR_13base64_test16",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        130,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/write/encoder_string_writer.rs",
+      "name": "_RNvXs3_NtNtCsafjR9jDfmIp_6base645write21encoder_string_writerINtB5_24Utf8SingleCodeUnitWriterNtNtCsj0gLuUEfogP_5alloc6string6StringENtNtCsicaZO8UCM9y_3std2io5Write5flushCsl308eOAyLnR_13base64_test16",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        120,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/write/encoder_string_writer.rs",
+      "name": "_RNvXs3_NtNtCsafjR9jDfmIp_6base645write21encoder_string_writerINtB5_24Utf8SingleCodeUnitWriterNtNtCsj0gLuUEfogP_5alloc6string6StringENtNtCsicaZO8UCM9y_3std2io5Write5writeCsl308eOAyLnR_13base64_test16",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        187,
+        28
+      ],
+      "candidate_api_ids": [],
+      "file": "src/write/encoder.rs",
+      "name": "_RNCNvMs_NtNtCsafjR9jDfmIp_6base645write7encoderINtB6_13EncoderWriterNtNtNtBa_6engine15general_purpose14GeneralPurposeINtNtB8_21encoder_string_writer24Utf8SingleCodeUnitWriterNtNtCsj0gLuUEfogP_5alloc6string6StringEE17write_to_delegate0Csl308eOAyLnR_13base64_test16",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        378,
+        26
+      ],
+      "candidate_api_ids": [],
+      "file": "src/write/encoder.rs",
+      "name": "_RNCNvXs0_NtNtCsafjR9jDfmIp_6base645write7encoderINtB7_13EncoderWriterNtNtNtBb_6engine15general_purpose14GeneralPurposeINtNtB9_21encoder_string_writer24Utf8SingleCodeUnitWriterNtNtCsj0gLuUEfogP_5alloc6string6StringEENtNtCsicaZO8UCM9y_3std2io5Write5writes0_0Csl308eOAyLnR_13base64_test16",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        377,
+        22
+      ],
+      "candidate_api_ids": [],
+      "file": "src/write/encoder.rs",
+      "name": "_RNCNvXs0_NtNtCsafjR9jDfmIp_6base645write7encoderINtB7_13EncoderWriterNtNtNtBb_6engine15general_purpose14GeneralPurposeINtNtB9_21encoder_string_writer24Utf8SingleCodeUnitWriterNtNtCsj0gLuUEfogP_5alloc6string6StringEENtNtCsicaZO8UCM9y_3std2io5Write5writes_0Csl308eOAyLnR_13base64_test16",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        178,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/write/encoder.rs",
+      "name": "_RNvMs_NtNtCsafjR9jDfmIp_6base645write7encoderINtB4_13EncoderWriterNtNtNtB8_6engine15general_purpose14GeneralPurposeINtNtB6_21encoder_string_writer24Utf8SingleCodeUnitWriterNtNtCsj0gLuUEfogP_5alloc6string6StringEE17write_to_delegateCsl308eOAyLnR_13base64_test16",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        141,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/write/encoder.rs",
+      "name": "_RNvMs_NtNtCsafjR9jDfmIp_6base645write7encoderINtB4_13EncoderWriterNtNtNtB8_6engine15general_purpose14GeneralPurposeINtNtB6_21encoder_string_writer24Utf8SingleCodeUnitWriterNtNtCsj0gLuUEfogP_5alloc6string6StringEE21write_final_leftoversCsl308eOAyLnR_13base64_test16",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        211,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/write/encoder.rs",
+      "name": "_RNvMs_NtNtCsafjR9jDfmIp_6base645write7encoderINtB4_13EncoderWriterNtNtNtB8_6engine15general_purpose14GeneralPurposeINtNtB6_21encoder_string_writer24Utf8SingleCodeUnitWriterNtNtCsj0gLuUEfogP_5alloc6string6StringEE24write_all_encoded_outputCsl308eOAyLnR_13base64_test16",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        69,
+        1
+      ],
+      "candidate_api_ids": [],
+      "file": "src/encode.rs",
+      "name": "_RINvNtCsafjR9jDfmIp_6base646encode19encode_with_paddingNtNtNtB4_6engine15general_purpose14GeneralPurposeECsl308eOAyLnR_13base64_test16",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        69,
+        1
+      ],
+      "candidate_api_ids": [],
+      "file": "src/encode.rs",
+      "name": "_RINvNtCsafjR9jDfmIp_6base646encode19encode_with_paddingNtNtNtB4_6engine15general_purpose14GeneralPurposeECs9qsBf44UvQO_13base64_test17",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        116,
+        9
+      ],
+      "candidate_api_ids": [],
+      "file": "src/engine/mod.rs",
+      "name": "_RINvNvNtNtCsafjR9jDfmIp_6base646engine6Engine6encode5innerNtNtB6_15general_purpose14GeneralPurposeECs9qsBf44UvQO_13base64_test17",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        116,
+        9
+      ],
+      "candidate_api_ids": [],
+      "file": "src/engine/mod.rs",
+      "name": "_RINvNvNtNtCsafjR9jDfmIp_6base646engine6Engine6encode5innerNtNtB6_15general_purpose14GeneralPurposeECsaySk1ZOIT1U_12base64_test2",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        69,
+        1
+      ],
+      "candidate_api_ids": [],
+      "file": "src/encode.rs",
+      "name": "_RINvNtCsafjR9jDfmIp_6base646encode19encode_with_paddingNtNtNtB4_6engine15general_purpose14GeneralPurposeECsaySk1ZOIT1U_12base64_test2",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        153,
+        34
+      ],
+      "candidate_api_ids": [],
+      "file": "src/read/decoder.rs",
+      "name": "_RNCNvMs_NtNtCsafjR9jDfmIp_6base644read7decoderINtB6_13DecoderReaderNtNtNtBa_6engine15general_purpose14GeneralPurposeRShE13decode_to_buf0CsaySk1ZOIT1U_12base64_test2",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        198,
+        27
+      ],
+      "candidate_api_ids": [],
+      "file": "src/read/decoder.rs",
+      "name": "_RNCNvMs_NtNtCsafjR9jDfmIp_6base644read7decoderINtB6_13DecoderReaderNtNtNtBa_6engine15general_purpose14GeneralPurposeRShE13decode_to_bufs0_0CsaySk1ZOIT1U_12base64_test2",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        183,
+        26
+      ],
+      "candidate_api_ids": [],
+      "file": "src/read/decoder.rs",
+      "name": "_RNCNvMs_NtNtCsafjR9jDfmIp_6base644read7decoderINtB6_13DecoderReaderNtNtNtBa_6engine15general_purpose14GeneralPurposeRShE13decode_to_bufs_0CsaySk1ZOIT1U_12base64_test2",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        140,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/read/decoder.rs",
+      "name": "_RNvMs_NtNtCsafjR9jDfmIp_6base644read7decoderINtB4_13DecoderReaderNtNtNtB8_6engine15general_purpose14GeneralPurposeRShE13decode_to_bufCsaySk1ZOIT1U_12base64_test2",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        96,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/read/decoder.rs",
+      "name": "_RNvMs_NtNtCsafjR9jDfmIp_6base644read7decoderINtB4_13DecoderReaderNtNtNtB8_6engine15general_purpose14GeneralPurposeRShE17flush_decoded_bufCsaySk1ZOIT1U_12base64_test2",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        119,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/read/decoder.rs",
+      "name": "_RNvMs_NtNtCsafjR9jDfmIp_6base644read7decoderINtB4_13DecoderReaderNtNtNtB8_6engine15general_purpose14GeneralPurposeRShE18read_from_delegateCsaySk1ZOIT1U_12base64_test2",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        69,
+        1
+      ],
+      "candidate_api_ids": [],
+      "file": "src/encode.rs",
+      "name": "_RINvNtCsafjR9jDfmIp_6base646encode19encode_with_paddingNtNtNtB4_6engine15general_purpose14GeneralPurposeECs2VVG70qlqrp_13base64_test20",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        116,
+        9
+      ],
+      "candidate_api_ids": [],
+      "file": "src/engine/mod.rs",
+      "name": "_RINvNvNtNtCsafjR9jDfmIp_6base646engine6Engine6encode5innerNtNtB6_15general_purpose14GeneralPurposeECs2VVG70qlqrp_13base64_test20",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        24,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/chunked_encoder.rs",
+      "name": "_RNvMNtCsafjR9jDfmIp_6base6415chunked_encoderINtB2_14ChunkedEncoderNtNtNtB4_6engine15general_purpose14GeneralPurposeE3newCs8om3jbbS5dr_12base64_test3",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        130,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/write/encoder_string_writer.rs",
+      "name": "_RNvXs3_NtNtCsafjR9jDfmIp_6base645write21encoder_string_writerINtB5_24Utf8SingleCodeUnitWriterNtNtCsj0gLuUEfogP_5alloc6string6StringENtNtCsicaZO8UCM9y_3std2io5Write5flushCs9rPMpyi9Nho_12base64_test4",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        120,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/write/encoder_string_writer.rs",
+      "name": "_RNvXs3_NtNtCsafjR9jDfmIp_6base645write21encoder_string_writerINtB5_24Utf8SingleCodeUnitWriterNtNtCsj0gLuUEfogP_5alloc6string6StringENtNtCsicaZO8UCM9y_3std2io5Write5writeCs9rPMpyi9Nho_12base64_test4",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        187,
+        28
+      ],
+      "candidate_api_ids": [],
+      "file": "src/write/encoder.rs",
+      "name": "_RNCNvMs_NtNtCsafjR9jDfmIp_6base645write7encoderINtB6_13EncoderWriterNtNtNtBa_6engine15general_purpose14GeneralPurposeINtNtB8_21encoder_string_writer24Utf8SingleCodeUnitWriterNtNtCsj0gLuUEfogP_5alloc6string6StringEE17write_to_delegate0Cs9rPMpyi9Nho_12base64_test4",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        378,
+        26
+      ],
+      "candidate_api_ids": [],
+      "file": "src/write/encoder.rs",
+      "name": "_RNCNvXs0_NtNtCsafjR9jDfmIp_6base645write7encoderINtB7_13EncoderWriterNtNtNtBb_6engine15general_purpose14GeneralPurposeINtNtB9_21encoder_string_writer24Utf8SingleCodeUnitWriterNtNtCsj0gLuUEfogP_5alloc6string6StringEENtNtCsicaZO8UCM9y_3std2io5Write5writes0_0Cs9rPMpyi9Nho_12base64_test4",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        377,
+        22
+      ],
+      "candidate_api_ids": [],
+      "file": "src/write/encoder.rs",
+      "name": "_RNCNvXs0_NtNtCsafjR9jDfmIp_6base645write7encoderINtB7_13EncoderWriterNtNtNtBb_6engine15general_purpose14GeneralPurposeINtNtB9_21encoder_string_writer24Utf8SingleCodeUnitWriterNtNtCsj0gLuUEfogP_5alloc6string6StringEENtNtCsicaZO8UCM9y_3std2io5Write5writes_0Cs9rPMpyi9Nho_12base64_test4",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        178,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/write/encoder.rs",
+      "name": "_RNvMs_NtNtCsafjR9jDfmIp_6base645write7encoderINtB4_13EncoderWriterNtNtNtB8_6engine15general_purpose14GeneralPurposeINtNtB6_21encoder_string_writer24Utf8SingleCodeUnitWriterNtNtCsj0gLuUEfogP_5alloc6string6StringEE17write_to_delegateCs9rPMpyi9Nho_12base64_test4",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        141,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/write/encoder.rs",
+      "name": "_RNvMs_NtNtCsafjR9jDfmIp_6base645write7encoderINtB4_13EncoderWriterNtNtNtB8_6engine15general_purpose14GeneralPurposeINtNtB6_21encoder_string_writer24Utf8SingleCodeUnitWriterNtNtCsj0gLuUEfogP_5alloc6string6StringEE21write_final_leftoversCs9rPMpyi9Nho_12base64_test4",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        211,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/write/encoder.rs",
+      "name": "_RNvMs_NtNtCsafjR9jDfmIp_6base645write7encoderINtB4_13EncoderWriterNtNtNtB8_6engine15general_purpose14GeneralPurposeINtNtB6_21encoder_string_writer24Utf8SingleCodeUnitWriterNtNtCsj0gLuUEfogP_5alloc6string6StringEE24write_all_encoded_outputCs9rPMpyi9Nho_12base64_test4",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        199,
+        9
+      ],
+      "candidate_api_ids": [],
+      "file": "src/engine/mod.rs",
+      "name": "_RINvNvNtNtCsafjR9jDfmIp_6base646engine6Engine12encode_slice5innerNtNtB6_15general_purpose14GeneralPurposeECs9rPMpyi9Nho_12base64_test4",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        69,
+        1
+      ],
+      "candidate_api_ids": [],
+      "file": "src/encode.rs",
+      "name": "_RINvNtCsafjR9jDfmIp_6base646encode19encode_with_paddingNtNtNtB4_6engine15general_purpose14GeneralPurposeECs9rPMpyi9Nho_12base64_test4",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        187,
+        28
+      ],
+      "candidate_api_ids": [],
+      "file": "src/write/encoder.rs",
+      "name": "_RNCNvMs_NtNtCsafjR9jDfmIp_6base645write7encoderINtB6_13EncoderWriterNtNtNtBa_6engine15general_purpose14GeneralPurposeINtNtB8_21encoder_string_writer24Utf8SingleCodeUnitWriterNtNtCsj0gLuUEfogP_5alloc6string6StringEE17write_to_delegate0Cs8aY0S2ewsMo_12base64_test5",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        178,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/write/encoder.rs",
+      "name": "_RNvMs_NtNtCsafjR9jDfmIp_6base645write7encoderINtB4_13EncoderWriterNtNtNtB8_6engine15general_purpose14GeneralPurposeINtNtB6_21encoder_string_writer24Utf8SingleCodeUnitWriterNtNtCsj0gLuUEfogP_5alloc6string6StringEE17write_to_delegateCs8aY0S2ewsMo_12base64_test5",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        141,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/write/encoder.rs",
+      "name": "_RNvMs_NtNtCsafjR9jDfmIp_6base645write7encoderINtB4_13EncoderWriterNtNtNtB8_6engine15general_purpose14GeneralPurposeINtNtB6_21encoder_string_writer24Utf8SingleCodeUnitWriterNtNtCsj0gLuUEfogP_5alloc6string6StringEE21write_final_leftoversCs8aY0S2ewsMo_12base64_test5",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        211,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/write/encoder.rs",
+      "name": "_RNvMs_NtNtCsafjR9jDfmIp_6base645write7encoderINtB4_13EncoderWriterNtNtNtB8_6engine15general_purpose14GeneralPurposeINtNtB6_21encoder_string_writer24Utf8SingleCodeUnitWriterNtNtCsj0gLuUEfogP_5alloc6string6StringEE24write_all_encoded_outputCs8aY0S2ewsMo_12base64_test5",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        199,
+        9
+      ],
+      "candidate_api_ids": [],
+      "file": "src/engine/mod.rs",
+      "name": "_RINvNvNtNtCsafjR9jDfmIp_6base646engine6Engine12encode_slice5innerNtNtB6_15general_purpose14GeneralPurposeECs8aY0S2ewsMo_12base64_test5",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        120,
+        5
+      ],
+      "candidate_api_ids": [],
+      "file": "src/write/encoder_string_writer.rs",
+      "name": "_RNvXs3_NtNtCsafjR9jDfmIp_6base645write21encoder_string_writerINtB5_24Utf8SingleCodeUnitWriterNtNtCsj0gLuUEfogP_5alloc6string6StringENtNtCsicaZO8UCM9y_3std2io5Write5writeCs8aY0S2ewsMo_12base64_test5",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        69,
+        1
+      ],
+      "candidate_api_ids": [],
+      "file": "src/encode.rs",
+      "name": "_RINvNtCsafjR9jDfmIp_6base646encode19encode_with_paddingNtNtNtB4_6engine15general_purpose14GeneralPurposeECs8aY0S2ewsMo_12base64_test5",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        245,
+        9
+      ],
+      "candidate_api_ids": [],
+      "file": "src/engine/mod.rs",
+      "name": "_RINvNvNtNtCsafjR9jDfmIp_6base646engine6Engine6decode5innerNtNtB6_15general_purpose14GeneralPurposeECsc6mvUqOccMx_12base64_test6",
+      "reason": "no_exact_entry"
+    },
+    {
+      "begin": [
+        254,
+        36
+      ],
+      "candidate_api_ids": [],
+      "file": "src/engine/mod.rs",
+      "name": "_RNCINvNvNtNtCsafjR9jDfmIp_6base646engine6Engine6decode5innerNtNtB8_15general_purpose14GeneralPurposeE0Csc6mvUqOccMx_12base64_test6",
+      "reason": "no_exact_entry"
+    }
+  ],
+  "version": "0.22.1"
+}

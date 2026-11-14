@@ -1,0 +1,843 @@
+{
+  "binary_sha256": "4d7b6ac91eb643f77d972c8069118ad4573a14c6a6daaa34eb2ab1986aa543b1",
+  "crate": "ryu",
+  "functions": [
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "new",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 9,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Buffer",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "2",
+      "span": {
+        "begin": [
+          29,
+          5
+        ],
+        "end": [
+          32,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ryu-1.0.23/src/buffer/mod.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "borrow",
+      "owners": [
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "id": 24,
+                          "path": "Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 23,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Buffer",
+          "receiver_publicly_named": true,
+          "trait": "Borrow",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "22",
+      "span": null,
+      "status": "external_definition"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "borrow_mut",
+      "owners": [
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "id": 24,
+                          "path": "Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 27,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Buffer",
+          "receiver_publicly_named": true,
+          "trait": "BorrowMut",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "26",
+      "span": null,
+      "status": "external_definition"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "clone_to_uninit",
+      "owners": [
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "id": 31,
+                          "path": "Clone"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 30,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Buffer",
+          "receiver_publicly_named": true,
+          "trait": "CloneToUninit",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "29",
+      "span": null,
+      "status": "external_definition"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "format",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 9,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Buffer",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "3",
+      "span": {
+        "begin": [
+          47,
+          5
+        ],
+        "end": [
+          53,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ryu-1.0.23/src/buffer/mod.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "into",
+      "owners": [
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              },
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "U"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          },
+                          "id": 33,
+                          "path": "From"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "U"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 35,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Buffer",
+          "receiver_publicly_named": true,
+          "trait": "Into",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "34",
+      "span": null,
+      "status": "external_definition"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "from",
+      "owners": [
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 38,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Buffer",
+          "receiver_publicly_named": true,
+          "trait": "From",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "37",
+      "span": null,
+      "status": "external_definition"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "try_into",
+      "owners": [
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              },
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "U"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          },
+                          "id": 40,
+                          "path": "TryFrom"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "U"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 43,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Buffer",
+          "receiver_publicly_named": true,
+          "trait": "TryInto",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "41",
+      "span": null,
+      "status": "external_definition"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "try_from",
+      "owners": [
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              },
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "U"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          },
+                          "id": 36,
+                          "path": "Into"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "U"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 48,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Buffer",
+          "receiver_publicly_named": true,
+          "trait": "TryFrom",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "47",
+      "span": null,
+      "status": "external_definition"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "type_id",
+      "owners": [
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "outlives": "'static"
+                    },
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "id": 24,
+                          "path": "Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 51,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Buffer",
+          "receiver_publicly_named": true,
+          "trait": "Any",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "49",
+      "span": null,
+      "status": "external_definition"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "clone",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 56,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Buffer",
+          "receiver_publicly_named": true,
+          "trait": "Clone",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "55",
+      "span": {
+        "begin": [
+          87,
+          5
+        ],
+        "end": [
+          89,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ryu-1.0.23/src/buffer/mod.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "default",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 58,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Buffer",
+          "receiver_publicly_named": true,
+          "trait": "Default",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "57",
+      "span": {
+        "begin": [
+          95,
+          5
+        ],
+        "end": [
+          97,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ryu-1.0.23/src/buffer/mod.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": false,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "is_nonfinite",
+      "owners": [
+        {
+          "id": 60,
+          "kind": "trait_declaration",
+          "trait_publicly_named": false
+        }
+      ],
+      "rustdoc_id": "63",
+      "span": {
+        "begin": [
+          110,
+          5
+        ],
+        "end": [
+          110,
+          35
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ryu-1.0.23/src/buffer/mod.rs"
+      },
+      "status": "owner_visibility_or_applicability_unresolved"
+    },
+    {
+      "has_body": false,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "format_nonfinite",
+      "owners": [
+        {
+          "id": 60,
+          "kind": "trait_declaration",
+          "trait_publicly_named": false
+        }
+      ],
+      "rustdoc_id": "64",
+      "span": {
+        "begin": [
+          111,
+          5
+        ],
+        "end": [
+          111,
+          47
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ryu-1.0.23/src/buffer/mod.rs"
+      },
+      "status": "owner_visibility_or_applicability_unresolved"
+    },
+    {
+      "has_body": false,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "write_to_ryu_buffer",
+      "owners": [
+        {
+          "id": 60,
+          "kind": "trait_declaration",
+          "trait_publicly_named": false
+        }
+      ],
+      "rustdoc_id": "65",
+      "span": {
+        "begin": [
+          112,
+          5
+        ],
+        "end": [
+          112,
+          67
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ryu-1.0.23/src/buffer/mod.rs"
+      },
+      "status": "owner_visibility_or_applicability_unresolved"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "format_finite",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 9,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Buffer",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "8",
+      "span": {
+        "begin": [
+          72,
+          5
+        ],
+        "end": [
+          79,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ryu-1.0.23/src/buffer/mod.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"ryu\", \"raw\", \"format64\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "format64",
+      "owners": [],
+      "rustdoc_id": "84",
+      "span": {
+        "begin": [
+          52,
+          1
+        ],
+        "end": [
+          118,
+          2
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ryu-1.0.23/src/pretty/mod.rs"
+      },
+      "status": "publicly_named_function"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 1,
+      "importable_paths_debug": "[ImportablePath { path: Path { components: [\"ryu\", \"raw\", \"format32\"] }, modifiers: Modifiers { doc_hidden: false, deprecated: false } }]",
+      "name": "format32",
+      "owners": [],
+      "rustdoc_id": "88",
+      "span": {
+        "begin": [
+          159,
+          1
+        ],
+        "end": [
+          224,
+          2
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ryu-1.0.23/src/pretty/mod.rs"
+      },
+      "status": "publicly_named_function"
+    }
+  ],
+  "input_doc_sha256": "71477e2142d6b40e99e5a8225807c5c1862513e00856a5737f9039186827bd50",
+  "input_path": "/home/cym/workspace/PLFuzz/output/ryu/doc.json",
+  "policy": "publicly importable paths from existing rustdoc adapter; trait impl obligations remain unresolved",
+  "rustdoc_format": 57,
+  "schema": "graft-public-surface-crosscheck-v1",
+  "universe_sha256": "af7ef0c5755dadd36a805143a7c8f7631c5216b15caad89028f66c86dbe2267d",
+  "version": "1.0.23"
+}

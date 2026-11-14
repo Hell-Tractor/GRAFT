@@ -1,0 +1,40 @@
+{
+  "schema": "graft-runtime-v1",
+  "samples": [
+    {
+      "args": [],
+      "exit_code": 0,
+      "timed_out": false,
+      "target_reached": false,
+      "scalar_arguments": [],
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "0"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "target_reached": false,
+      "scalar_arguments": [],
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "1"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "target_reached": false,
+      "scalar_arguments": [],
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "reached_inputs": 0,
+  "scalar_input_influence": "not_observed",
+  "bounded_probe_passed": false,
+  "scope": "three standalone-wrapper inputs only; marker observations are not complete taint or proof for all inputs; opaque target arguments remain unknown"
+}

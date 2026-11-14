@@ -1,0 +1,23 @@
+{
+  "api_count": 26,
+  "apis_with_obligations": 14,
+  "candidate_parameter_pairs": {
+    "incompatible": 116,
+    "unified_candidate_not_compiler_verified": 17,
+    "unknown_api_feature": 147,
+    "unknown_type_form": 571
+  },
+  "crate": "base64",
+  "no_import_blocker": 8,
+  "rustdoc_sha256": "4b26c9b63d7e70275af7fd278437a9f83e4355e2956f7cd904c574ab3144f88e",
+  "scope": "import support only, not proven constructibility; trait obligations may still be unknown",
+  "unsupported_api_reasons": {
+    "borrowed output requires lifetime analysis": 3,
+    "nominal lifetime argument requires storage analysis": 14,
+    "trait method dispatch/impl specialization": 8,
+    "type alias expansion: std::io::error::Result": 6,
+    "unsupported rustdoc type: dyn_trait": 1,
+    "unsupported rustdoc type: qualified_path": 1
+  },
+  "version": "0.22.1"
+}

@@ -1,0 +1,14 @@
+{
+  "schema": "graft-first-round-readiness-v1",
+  "formal_round": 1,
+  "planned_configurations": 11,
+  "planned_target_slots": 2860,
+  "formal_target_results": 0,
+  "full_round_complete": false,
+  "status": "blocked_by_unimplemented_generation_adapters",
+  "execution_probe_completed": true,
+  "execution_probe": "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/first-round-execution-probe-20261110/result.json",
+  "probe_is_formal_matrix_result": false,
+  "remaining": "Full selector migration, new ablation generation, baseline validity/AFL export and matched cfg proofs; see experiments/week5/README.md",
+  "auto_start_second_round": false
+}

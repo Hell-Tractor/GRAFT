@@ -1,0 +1,31 @@
+{
+  "api_count": 151,
+  "apis_with_obligations": 42,
+  "candidate_parameter_pairs": {
+    "incompatible": 17438,
+    "unified_candidate_not_compiler_verified": 343,
+    "unified_pending_trait_obligations": 122,
+    "unknown_api_feature": 3852,
+    "unknown_type_form": 2215
+  },
+  "crate": "bytes",
+  "no_import_blocker": 42,
+  "rustdoc_sha256": "78ea8faa22e4ff9d27cdacef7a663adad239efc460fedd4ea5288ff1f06de5f1",
+  "scope": "import support only, not proven constructibility; trait obligations may still be unknown",
+  "unsupported_api_reasons": {
+    "associated type binding/constraint": 6,
+    "borrowed output requires lifetime analysis": 38,
+    "direct unsafe call: preconditions require explicit contract": 6,
+    "modified/negative/?Sized trait bound": 2,
+    "nominal lifetime argument requires storage analysis": 3,
+    "outlives/use bound": 1,
+    "static reference requires persistent storage": 1,
+    "synthetic impl Trait parameter": 1,
+    "trait method dispatch/impl specialization": 85,
+    "type alias expansion: core::fmt::Result": 2,
+    "type alias expansion: std::io::error::Result": 4,
+    "unsupported rustdoc type: impl_trait": 1,
+    "unsupported rustdoc type: raw_pointer": 2
+  },
+  "version": "1.11.1"
+}

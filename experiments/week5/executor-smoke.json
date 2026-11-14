@@ -1,0 +1,13 @@
+{
+  "scope": "executor diagnostic only; not a formal 300-second experiment",
+  "afl_statistics": {
+    "run_time": 5,
+    "execs_done": 12792,
+    "saved_crashes": 0,
+    "saved_hangs": 0
+  },
+  "coverage_audit": "executor-smoke-coverage.json",
+  "confirmed_planned_api": "base64::encoded_len",
+  "unique_replayed_inputs": 3,
+  "artifact_root": "/home/cym/workspace/graft-experiments-5min-6rounds-20261109/executor-smoke"
+}

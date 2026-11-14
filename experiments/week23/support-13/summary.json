@@ -1,0 +1,172 @@
+[
+  {
+    "crate": "autocfg",
+    "version": "1.5.0",
+    "api_count": 31,
+    "no_import_blocker": 28,
+    "apis_with_obligations": 1,
+    "candidate_parameter_pairs": {
+      "incompatible": 159,
+      "unified_candidate_not_compiler_verified": 42,
+      "unified_pending_trait_obligations": 24,
+      "unknown_api_feature": 55,
+      "unknown_type_form": 56
+    }
+  },
+  {
+    "crate": "base64",
+    "version": "0.22.1",
+    "api_count": 26,
+    "no_import_blocker": 8,
+    "apis_with_obligations": 14,
+    "candidate_parameter_pairs": {
+      "incompatible": 116,
+      "unified_candidate_not_compiler_verified": 17,
+      "unknown_api_feature": 147,
+      "unknown_type_form": 571
+    }
+  },
+  {
+    "crate": "bumpalo",
+    "version": "3.20.2",
+    "api_count": 44,
+    "no_import_blocker": 0,
+    "apis_with_obligations": 20,
+    "candidate_parameter_pairs": {
+      "incompatible": 620,
+      "unknown_api_feature": 368,
+      "unknown_type_form": 1787
+    }
+  },
+  {
+    "crate": "byteorder",
+    "version": "1.5.0",
+    "api_count": 58,
+    "no_import_blocker": 0,
+    "apis_with_obligations": 2,
+    "candidate_parameter_pairs": {
+      "incompatible": 392,
+      "unknown_api_feature": 8
+    }
+  },
+  {
+    "crate": "bytes",
+    "version": "1.11.1",
+    "api_count": 151,
+    "no_import_blocker": 42,
+    "apis_with_obligations": 42,
+    "candidate_parameter_pairs": {
+      "incompatible": 17438,
+      "unified_candidate_not_compiler_verified": 343,
+      "unified_pending_trait_obligations": 122,
+      "unknown_api_feature": 3852,
+      "unknown_type_form": 2215
+    }
+  },
+  {
+    "crate": "chrono",
+    "version": "0.4.44",
+    "api_count": 505,
+    "no_import_blocker": 234,
+    "apis_with_obligations": 138,
+    "candidate_parameter_pairs": {
+      "incompatible": 194651,
+      "unified_candidate_not_compiler_verified": 3262,
+      "unified_pending_trait_obligations": 2545,
+      "unknown_api_feature": 24486,
+      "unknown_type_form": 67518
+    }
+  },
+  {
+    "crate": "csv",
+    "version": "1.4.0",
+    "api_count": 152,
+    "no_import_blocker": 53,
+    "apis_with_obligations": 65,
+    "candidate_parameter_pairs": {
+      "incompatible": 14814,
+      "unified_candidate_not_compiler_verified": 121,
+      "unified_pending_trait_obligations": 299,
+      "unknown_api_feature": 2718,
+      "unknown_type_form": 7140
+    }
+  },
+  {
+    "crate": "fixedbitset",
+    "version": "0.5.7",
+    "api_count": 91,
+    "no_import_blocker": 39,
+    "apis_with_obligations": 12,
+    "candidate_parameter_pairs": {
+      "incompatible": 1503,
+      "unified_candidate_not_compiler_verified": 78,
+      "unified_pending_trait_obligations": 40,
+      "unknown_api_feature": 737,
+      "unknown_type_form": 3453
+    }
+  },
+  {
+    "crate": "idna",
+    "version": "1.1.0",
+    "api_count": 18,
+    "no_import_blocker": 12,
+    "apis_with_obligations": 2,
+    "candidate_parameter_pairs": {
+      "incompatible": 370,
+      "unified_candidate_not_compiler_verified": 10,
+      "unknown_api_feature": 40,
+      "unknown_type_form": 225
+    }
+  },
+  {
+    "crate": "regex",
+    "version": "1.12.3",
+    "api_count": 210,
+    "no_import_blocker": 49,
+    "apis_with_obligations": 14,
+    "candidate_parameter_pairs": {
+      "incompatible": 26133,
+      "unified_candidate_not_compiler_verified": 74,
+      "unknown_api_feature": 2149,
+      "unknown_type_form": 23444
+    }
+  },
+  {
+    "crate": "ryu",
+    "version": "1.0.23",
+    "api_count": 5,
+    "no_import_blocker": 1,
+    "apis_with_obligations": 2,
+    "candidate_parameter_pairs": {
+      "incompatible": 10,
+      "unknown_api_feature": 8,
+      "unknown_type_form": 6
+    }
+  },
+  {
+    "crate": "time",
+    "version": "0.3.47",
+    "api_count": 397,
+    "no_import_blocker": 297,
+    "apis_with_obligations": 12,
+    "candidate_parameter_pairs": {
+      "incompatible": 132408,
+      "unified_candidate_not_compiler_verified": 7846,
+      "unknown_api_feature": 6116,
+      "unknown_type_form": 12888
+    }
+  },
+  {
+    "crate": "unicode_segmentation",
+    "version": "1.13.2",
+    "api_count": 35,
+    "no_import_blocker": 7,
+    "apis_with_obligations": 0,
+    "candidate_parameter_pairs": {
+      "incompatible": 440,
+      "unified_candidate_not_compiler_verified": 6,
+      "unknown_api_feature": 40,
+      "unknown_type_form": 940
+    }
+  }
+]

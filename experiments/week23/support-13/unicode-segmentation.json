@@ -1,0 +1,21 @@
+{
+  "api_count": 35,
+  "apis_with_obligations": 0,
+  "candidate_parameter_pairs": {
+    "incompatible": 440,
+    "unified_candidate_not_compiler_verified": 6,
+    "unknown_api_feature": 40,
+    "unknown_type_form": 940
+  },
+  "crate": "unicode_segmentation",
+  "no_import_blocker": 7,
+  "rustdoc_sha256": "b0ffd5b4fe9b33644363870c238f3182937e4e0989e760a13544691a338957d4",
+  "scope": "import support only, not proven constructibility; trait obligations may still be unknown",
+  "unsupported_api_reasons": {
+    "borrowed output requires lifetime analysis": 15,
+    "nominal lifetime argument requires storage analysis": 28,
+    "trait method dispatch/impl specialization": 24,
+    "unsupported rustdoc type: qualified_path": 4
+  },
+  "version": "1.13.2"
+}

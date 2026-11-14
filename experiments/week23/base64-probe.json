@@ -1,0 +1,46 @@
+{
+  "schema": "graft-runtime-v1",
+  "samples": [
+    {
+      "args": [],
+      "exit_code": 0,
+      "timed_out": false,
+      "target_reached": true,
+      "scalar_arguments": [
+        "(0, false)"
+      ],
+      "stdout": "[(0, [40, 48, 44, 32, 102, 97, 108, 115, 101, 41])]\n",
+      "stderr": "GRAFT_CALL:0:(0, false)\n"
+    },
+    {
+      "args": [
+        "0"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "target_reached": true,
+      "scalar_arguments": [
+        "(0, false)"
+      ],
+      "stdout": "[(0, [40, 48, 44, 32, 102, 97, 108, 115, 101, 41])]\n",
+      "stderr": "GRAFT_CALL:0:(0, false)\n"
+    },
+    {
+      "args": [
+        "1"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "target_reached": true,
+      "scalar_arguments": [
+        "(72340172838076673, true)"
+      ],
+      "stdout": "[(0, [40, 55, 50, 51, 52, 48, 49, 55, 50, 56, 51, 56, 48, 55, 54, 54, 55, 51, 44, 32, 116, 114, 117, 101, 41])]\n",
+      "stderr": "GRAFT_CALL:0:(72340172838076673, true)\n"
+    }
+  ],
+  "reached_inputs": 3,
+  "scalar_input_influence": "observed",
+  "bounded_probe_passed": true,
+  "scope": "three standalone-wrapper inputs only; marker observations are not complete taint or proof for all inputs; opaque target arguments remain unknown"
+}

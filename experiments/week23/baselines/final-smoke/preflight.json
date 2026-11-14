@@ -1,0 +1,210 @@
+{
+  "scope": "availability and tiny generation smoke only; not a matched benchmark",
+  "source_sha256": "02f864d9b3eebb7b184225d6779a36b22abc8be77bc81544ba727d099c00db82",
+  "historical_containers": [
+    {
+      "command": [
+        "docker",
+        "inspect",
+        "--format",
+        "{{.Name}} image={{.Image}} status={{.State.Status}} mounts={{json .Mounts}}",
+        "rust-rpg"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 0.018789242953062057,
+      "output": "/rust-rpg image=sha256:547a303cca6e3173c190adca45b504e485142cefb7c3362cd2c6ad9f6b19ac16 status=exited mounts=[]\n"
+    },
+    {
+      "command": [
+        "docker",
+        "inspect",
+        "--format",
+        "{{.Name}} image={{.Image}} status={{.State.Status}} mounts={{json .Mounts}}",
+        "rust-rulf"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 0.01927012111991644,
+      "output": "/rust-rulf image=sha256:7ebbdace72a54960620ae26bdb478388ddf690014990863ecc9572ce27e2bf16 status=exited mounts=[{\"Type\":\"bind\",\"Source\":\"/home/cym/workspace/RULF\",\"Destination\":\"/home/jjf/Fuzzing-Target-Generator\",\"Mode\":\"\",\"RW\":true,\"Propagation\":\"rprivate\"}]\n"
+    }
+  ],
+  "rpg_image": {
+    "command": [
+      "docker",
+      "image",
+      "inspect",
+      "--format",
+      "{{.Id}}",
+      "rust-rpg:latest"
+    ],
+    "returncode": 0,
+    "elapsed_seconds": 0.01899094390682876,
+    "output": "sha256:3acc6bf6ec1d9b6b4931bd13e6be32391e6072a8af71e4cbf2d749500a66ce09\n"
+  },
+  "rpg": {
+    "command": [
+      "docker",
+      "run",
+      "--rm",
+      "--user",
+      "1000:1000",
+      "--network",
+      "none",
+      "--read-only",
+      "--cap-drop",
+      "ALL",
+      "--security-opt",
+      "no-new-privileges",
+      "--tmpfs",
+      "/tmp:rw,size=256m",
+      "--mount",
+      "type=bind,src=/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week23/baselines/final-smoke/smoke.rs,dst=/input/smoke.rs,readonly",
+      "--mount",
+      "type=bind,src=/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week23/baselines/final-smoke/rpg,dst=/work",
+      "--workdir",
+      "/work",
+      "-e",
+      "Strategy=bfs",
+      "-e",
+      "strategy=bfs",
+      "-e",
+      "GenericMode=true",
+      "-e",
+      "GenChoose=heuristic",
+      "--entrypoint",
+      "/bin/sh",
+      "rust-rpg:latest",
+      "-c",
+      "/Rust-Lib-Testing/rust1.65/bin/rustc --version && /Rust-Lib-Testing/rust1.65/bin/fuzz-target-generator /input/smoke.rs --crate-name graft_baseline_smoke --edition=2021 --sysroot /Rust-Lib-Testing/rust1.65 -o /work/doc"
+    ],
+    "returncode": 0,
+    "elapsed_seconds": 1.063481407938525,
+    "output": "rustc 1.65.0-dev\nFuzz Target Generator for Rust Libraries: v1.65.0\nTotal function number: 4\nBefore Reachable API Analysis API Number: 3\nBefore Reachable API Analysis Dependencies Number: 1\n>>>>> Reachable API Analysis <<<<<\nAfter Reachable API Analysis API Number: 3\nAfter Reachable API Analysis Dependencies Number: 1\nAPI Pool Set\nAPI FUNCTION 0: graft_baseline_smoke::consume () { }, GENERIC:true\nAPI FUNCTION 1: graft_baseline_smoke::make () { }, GENERIC:false\nAPI FUNCTION 2: graft_baseline_smoke::scalar () { }, GENERIC:false\nAll Generated Sequences:\nSequence.0: \"\", \"\"\nSequence.1: \"1\", \"[ ]\"\nSequence.2: \"2\", \"[ ]\"\nSequence.3: \"1->0\", \"[ ]->[ ]\"\nSequence.4: \"1->1\", \"[ ]->[ ]\"\nSequence.5: \"1->2\", \"[ ]->[ ]\"\nSequence.6: \"1->1->0\", \"[ ]->[ ]->[ ]\"\nSequence.7: \"1->1->1\", \"[ ]->[ ]->[ ]\"\nSequence.8: \"1->1->2\", \"[ ]->[ ]->[ ]\"\n------------------------------------------------------------------------------------------------------------------------------------------------\n|\tTOTAL\t|\tUNSAFE\t|\tRAWPTR\t|\tDROP\t|\tMUTATE\t|\tGENERIC\t|\n|\t3\t|\t0\t|\t0\t|\t0\t|\t0\t|\t1\t|\n------------------------------------------------------------------------------------------------------------------------------------------------\nFUNCTION INDEX LIST <<<<<\n\n\n>>>>> WRITING FILE START\nCRATE TEST DIR: /work/fuzz_target/graft_baseline_smoke_bfs_generic_fuzz\ntargets covered by reverse search: 0\naverage time to fuzz each api = 1\nLIBFUZZER_FUZZ_TARGET_DIR: /work/libfuzzer_target/graft_baseline_smoke_bfs_fuzz\nCRATE API: /work/fuzz_target/graft_baseline_smoke_bfs_api_generic.txt\nCRATE DEPENDENCY: /work/fuzz_target/graft_baseline_smoke_bfs_dependency_generic.txt\n-----------------STATISTICS-----------------\n------------------------------------------------\n|\tTN\t|\tIN\t|\tCN\t|\n|\t3\t|\t2\t|\t0.67\t|\n------------------------------------------------\n|\tUTN\t|\tUIN\t|\tUCN\t|\n|\t0\t|\t0\t|\tNaN\t|\n------------------------------------------------\n|\tTE\t|\tIE\t|\tCE\t|\n|\t1\t|\t1\t|\t1.00\t|\n------------------------------------------------\n|\tUTE\t|\tUIE\t|\tUCE\t|\n|\t0\t|\t0\t|\tNaN\t|\n------------------------------------------------\nCRATE API: /work/fuzz_target/graft_baseline_smoke_bfs_info_generic.xls\nCRATE SEQUENCE: /work/fuzz_target/graft_baseline_smoke_bfs_sequence_generic.txt\nCRATE API GRAPH: /work/fuzz_target/graft_baseline_smoke_bfs_api_graph_generic.txt\nWRITING FILE FINISHED <<<<<\n\nGeneric functions Num: 1\ntotal functions in crate : 3\ntotal test sequences : 9\nTotal Time Used: 9\nFuzz Target Generator exits successfully. Total time cost: 363 ms\n",
+    "generated_test_files": [
+      "rpg/fuzz_target/graft_baseline_smoke_bfs_generic_fuzz/test_files/test_graft_baseline_smoke0.rs"
+    ],
+    "compile_and_replay": {
+      "command": [
+        "docker",
+        "run",
+        "--rm",
+        "--user",
+        "1000:1000",
+        "--network",
+        "none",
+        "--read-only",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges",
+        "--tmpfs",
+        "/tmp:rw,size=256m",
+        "--mount",
+        "type=bind,src=/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week23/baselines/final-smoke/smoke.rs,dst=/input/smoke.rs,readonly",
+        "--mount",
+        "type=bind,src=/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week23/baselines/final-smoke/rpg,dst=/work",
+        "--workdir",
+        "/work",
+        "-e",
+        "Strategy=bfs",
+        "-e",
+        "strategy=bfs",
+        "-e",
+        "GenericMode=true",
+        "-e",
+        "GenChoose=heuristic",
+        "--entrypoint",
+        "/bin/sh",
+        "rust-rpg:latest",
+        "-c",
+        "set -e; /Rust-Lib-Testing/rust1.65/bin/rustc --crate-type lib --crate-name graft_baseline_smoke --edition=2021 /input/smoke.rs -o /tmp/libgraft_baseline_smoke.rlib; printf '\\001' > /tmp/input; for replay in /work/fuzz_target/graft_baseline_smoke_bfs_generic_fuzz/replay_files/*.rs; do /Rust-Lib-Testing/rust1.65/bin/rustc --edition=2021 \"$replay\" --extern graft_baseline_smoke=/tmp/libgraft_baseline_smoke.rlib -o /tmp/replay; /tmp/replay /tmp/input; done"
+      ],
+      "returncode": 126,
+      "elapsed_seconds": 1.2683936229441315,
+      "output": "/bin/sh: 1: /tmp/replay: Permission denied\n"
+    }
+  },
+  "rulf_image": {
+    "command": [
+      "docker",
+      "image",
+      "inspect",
+      "--format",
+      "{{.Id}}",
+      "fuzz-target-generator:v0.1"
+    ],
+    "returncode": 0,
+    "elapsed_seconds": 0.02004999085329473,
+    "output": "sha256:7ebbdace72a54960620ae26bdb478388ddf690014990863ecc9572ce27e2bf16\n"
+  },
+  "rulf": {
+    "command": [
+      "docker",
+      "run",
+      "--rm",
+      "--user",
+      "1000:1000",
+      "--network",
+      "none",
+      "--read-only",
+      "--cap-drop",
+      "ALL",
+      "--security-opt",
+      "no-new-privileges",
+      "--tmpfs",
+      "/tmp:rw,size=256m",
+      "--mount",
+      "type=bind,src=/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week23/baselines/final-smoke/smoke.rs,dst=/input/smoke.rs,readonly",
+      "--mount",
+      "type=bind,src=/home/cym/workspace/RULF,dst=/home/jjf/Fuzzing-Target-Generator,readonly",
+      "--mount",
+      "type=bind,src=/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week23/baselines/final-smoke/rulf,dst=/home/jjf/rulf_work",
+      "--workdir",
+      "/tmp",
+      "--entrypoint",
+      "/bin/sh",
+      "fuzz-target-generator:v0.1",
+      "-c",
+      "/home/jjf/Fuzzing-Target-Generator/build/x86_64-unknown-linux-gnu/stage1/bin/rustc --version && /home/jjf/Fuzzing-Target-Generator/build/x86_64-unknown-linux-gnu/stage2/bin/fuzz-target-generator /input/smoke.rs --crate-name graft_baseline_smoke --edition=2021 --sysroot /home/jjf/Fuzzing-Target-Generator/build/x86_64-unknown-linux-gnu/stage1 -o /tmp/doc"
+    ],
+    "returncode": 0,
+    "elapsed_seconds": 1.0259170590434223,
+    "output": "rustc 1.66.0-dev\nFuzz Target Generator for Rust Libraries: v0.1.0\nFuzz Target Renderer Init\ncrate: graft_baseline_smoke\nusing bfs end point\nafter backward search\ntargets = 8\ntotal length = 17\naverage time to visit = 5.666666666666667\nedge covered by reverse search = 1\n-----------STATISTICS-----------\ntotal nodes: 3\ntotal edges: 1\ncovered nodes: 2\ncovered edges: 1\nnode coverage: 0.6666666666666666\nedge coverage: 1\ntargets covered by reverse search: 0\ntotal targets: 1\nmax length = 0\ntotal length = 2\naverage time to fuzz each api = 1\n--------------------------------\nFuzz Target Generator exits successfully. Total time cost: 347 ms\n",
+    "generated_test_files": [
+      "rulf/graft_baseline_smoke-work/test_files/test_graft_baseline_smoke0.rs"
+    ],
+    "compile_and_replay": {
+      "command": [
+        "docker",
+        "run",
+        "--rm",
+        "--user",
+        "1000:1000",
+        "--network",
+        "none",
+        "--read-only",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges",
+        "--tmpfs",
+        "/tmp:rw,size=256m",
+        "--mount",
+        "type=bind,src=/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week23/baselines/final-smoke/smoke.rs,dst=/input/smoke.rs,readonly",
+        "--mount",
+        "type=bind,src=/home/cym/workspace/RULF,dst=/home/jjf/Fuzzing-Target-Generator,readonly",
+        "--mount",
+        "type=bind,src=/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week23/baselines/final-smoke/rulf,dst=/home/jjf/rulf_work",
+        "--workdir",
+        "/tmp",
+        "--entrypoint",
+        "/bin/sh",
+        "fuzz-target-generator:v0.1",
+        "-c",
+        "set -e; /home/jjf/Fuzzing-Target-Generator/build/x86_64-unknown-linux-gnu/stage1/bin/rustc --crate-type lib --crate-name graft_baseline_smoke --edition=2021 /input/smoke.rs -o /tmp/libgraft_baseline_smoke.rlib; printf '\\001' > /tmp/input; for replay in /home/jjf/rulf_work/graft_baseline_smoke-work/replay_files/*.rs; do /home/jjf/Fuzzing-Target-Generator/build/x86_64-unknown-linux-gnu/stage1/bin/rustc --edition=2021 \"$replay\" --extern graft_baseline_smoke=/tmp/libgraft_baseline_smoke.rlib -o /tmp/replay; /tmp/replay /tmp/input; done"
+      ],
+      "returncode": 1,
+      "elapsed_seconds": 0.6201890930533409,
+      "output": "error[E0425]: cannot find function `graft_baseline_smokemake` in this scope\n --> /home/jjf/rulf_work/graft_baseline_smoke-work/replay_files/replay_graft_baseline_smoke0.rs:8:19\n  |\n8 |     let _local0 = graft_baseline_smokemake(_param0);\n  |                   ^^^^^^^^^^^^^^^^^^^^^^^^ not found in this scope\n\nerror[E0425]: cannot find function `graft_baseline_smokeconsume` in this scope\n --> /home/jjf/rulf_work/graft_baseline_smoke-work/replay_files/replay_graft_baseline_smoke0.rs:9:13\n  |\n9 |     let _ = graft_baseline_smokeconsume(_local0);\n  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^ not found in this scope\n\nerror: aborting due to 2 previous errors\n\nFor more information about this error, try `rustc --explain E0425`.\n"
+    }
+  }
+}

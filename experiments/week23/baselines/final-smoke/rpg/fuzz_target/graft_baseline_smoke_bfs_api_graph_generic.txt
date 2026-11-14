@@ -1,0 +1,1088 @@
+ApiGraph {
+    _crate_name: "graft_baseline_smoke",
+    api_functions: [
+        ApiFunction {
+            full_name: "graft_baseline_smoke::consume",
+            generics: {},
+            inputs: [
+                Path {
+                    path: Path {
+                        res: Def(
+                            Struct,
+                            DefId(0:4 ~ graft_baseline_smoke[323c]::Value),
+                        ),
+                        segments: [
+                            PathSegment {
+                                name: "Value",
+                                args: AngleBracketed {
+                                    args: [],
+                                    bindings: [],
+                                },
+                            },
+                        ],
+                    },
+                },
+            ],
+            output: Some(
+                Primitive(
+                    U8,
+                ),
+            ),
+            _trait_full_path: None,
+            _unsafe_tag: Normal,
+            def_id: DefId(
+                DefId(0:8 ~ graft_baseline_smoke[323c]::consume),
+            ),
+            unsafe_info: {},
+            rawptr_info: {},
+            drop_info: {},
+            mutate_info: {},
+            return_info: {},
+            func_types: {},
+            input_types: [],
+            output_type: None,
+            need_functions: {
+                0: [
+                    1,
+                    1,
+                ],
+            },
+            next_functions: {},
+            weight: 2,
+        },
+        ApiFunction {
+            full_name: "graft_baseline_smoke::make",
+            generics: {},
+            inputs: [
+                Primitive(
+                    U8,
+                ),
+            ],
+            output: Some(
+                Path {
+                    path: Path {
+                        res: Def(
+                            Struct,
+                            DefId(0:4 ~ graft_baseline_smoke[323c]::Value),
+                        ),
+                        segments: [
+                            PathSegment {
+                                name: "Value",
+                                args: AngleBracketed {
+                                    args: [],
+                                    bindings: [],
+                                },
+                            },
+                        ],
+                    },
+                },
+            ),
+            _trait_full_path: None,
+            _unsafe_tag: Normal,
+            def_id: DefId(
+                DefId(0:7 ~ graft_baseline_smoke[323c]::make),
+            ),
+            unsafe_info: {},
+            rawptr_info: {},
+            drop_info: {},
+            mutate_info: {},
+            return_info: {},
+            func_types: {},
+            input_types: [],
+            output_type: None,
+            need_functions: {},
+            next_functions: {
+                (
+                    0,
+                    0,
+                ),
+            },
+            weight: 4,
+        },
+        ApiFunction {
+            full_name: "graft_baseline_smoke::scalar",
+            generics: {},
+            inputs: [
+                Primitive(
+                    U8,
+                ),
+            ],
+            output: Some(
+                Primitive(
+                    U8,
+                ),
+            ),
+            _trait_full_path: None,
+            _unsafe_tag: Normal,
+            def_id: DefId(
+                DefId(0:3 ~ graft_baseline_smoke[323c]::scalar),
+            ),
+            unsafe_info: {},
+            rawptr_info: {},
+            drop_info: {},
+            mutate_info: {},
+            return_info: {},
+            func_types: {},
+            input_types: [],
+            output_type: None,
+            need_functions: {},
+            next_functions: {},
+            weight: 2,
+        },
+    ],
+    api_functions_visited: [
+        true,
+        true,
+        true,
+    ],
+    api_dependencies: [
+        (
+            ApiDependency {
+                output_fun: (
+                    BareFunction,
+                    1,
+                ),
+                input_fun: (
+                    GenericFunction,
+                    0,
+                ),
+                input_param_index: 0,
+                call_type: _DirectCall,
+                parameters: [],
+            },
+            false,
+        ),
+    ],
+    api_sequences: [
+        ApiSequence {
+            functions: [],
+            fuzzable_params: [],
+            _using_traits: [],
+            _unsafe_tag: false,
+            _moved: {},
+            _fuzzable_mut_tag: {},
+            _function_mut_tag: {},
+            _covered_dependencies: {},
+            _control_nums: 0,
+            _pattern_mark: None,
+            generic_map: {},
+            type_annotation: {},
+        },
+        ApiSequence {
+            functions: [
+                ApiCall {
+                    func: (
+                        BareFunction,
+                        1,
+                    ),
+                    params: [
+                        (
+                            _FuzzableType,
+                            0,
+                            _DirectCall,
+                        ),
+                    ],
+                    is_unsafe: false,
+                    is_get_raw_ptr: false,
+                    is_drop: false,
+                    is_mutate: false,
+                    output_type: Some(
+                        Path {
+                            path: Path {
+                                res: Def(
+                                    Struct,
+                                    DefId(0:4 ~ graft_baseline_smoke[323c]::Value),
+                                ),
+                                segments: [
+                                    PathSegment {
+                                        name: "Value",
+                                        args: AngleBracketed {
+                                            args: [],
+                                            bindings: [],
+                                        },
+                                    },
+                                ],
+                            },
+                        },
+                    ),
+                },
+            ],
+            fuzzable_params: [
+                Primitive(
+                    U8,
+                ),
+            ],
+            _using_traits: [],
+            _unsafe_tag: false,
+            _moved: {},
+            _fuzzable_mut_tag: {},
+            _function_mut_tag: {},
+            _covered_dependencies: {},
+            _control_nums: 0,
+            _pattern_mark: None,
+            generic_map: {},
+            type_annotation: {},
+        },
+        ApiSequence {
+            functions: [
+                ApiCall {
+                    func: (
+                        BareFunction,
+                        2,
+                    ),
+                    params: [
+                        (
+                            _FuzzableType,
+                            0,
+                            _DirectCall,
+                        ),
+                    ],
+                    is_unsafe: false,
+                    is_get_raw_ptr: false,
+                    is_drop: false,
+                    is_mutate: false,
+                    output_type: Some(
+                        Primitive(
+                            U8,
+                        ),
+                    ),
+                },
+            ],
+            fuzzable_params: [
+                Primitive(
+                    U8,
+                ),
+            ],
+            _using_traits: [],
+            _unsafe_tag: false,
+            _moved: {},
+            _fuzzable_mut_tag: {},
+            _function_mut_tag: {},
+            _covered_dependencies: {},
+            _control_nums: 0,
+            _pattern_mark: None,
+            generic_map: {},
+            type_annotation: {},
+        },
+        ApiSequence {
+            functions: [
+                ApiCall {
+                    func: (
+                        BareFunction,
+                        1,
+                    ),
+                    params: [
+                        (
+                            _FuzzableType,
+                            0,
+                            _DirectCall,
+                        ),
+                    ],
+                    is_unsafe: false,
+                    is_get_raw_ptr: false,
+                    is_drop: false,
+                    is_mutate: false,
+                    output_type: Some(
+                        Path {
+                            path: Path {
+                                res: Def(
+                                    Struct,
+                                    DefId(0:4 ~ graft_baseline_smoke[323c]::Value),
+                                ),
+                                segments: [
+                                    PathSegment {
+                                        name: "Value",
+                                        args: AngleBracketed {
+                                            args: [],
+                                            bindings: [],
+                                        },
+                                    },
+                                ],
+                            },
+                        },
+                    ),
+                },
+                ApiCall {
+                    func: (
+                        GenericFunction,
+                        0,
+                    ),
+                    params: [
+                        (
+                            _FunctionReturn,
+                            0,
+                            _DirectCall,
+                        ),
+                    ],
+                    is_unsafe: false,
+                    is_get_raw_ptr: false,
+                    is_drop: false,
+                    is_mutate: false,
+                    output_type: Some(
+                        Primitive(
+                            U8,
+                        ),
+                    ),
+                },
+            ],
+            fuzzable_params: [
+                Primitive(
+                    U8,
+                ),
+            ],
+            _using_traits: [],
+            _unsafe_tag: false,
+            _moved: {},
+            _fuzzable_mut_tag: {},
+            _function_mut_tag: {},
+            _covered_dependencies: {
+                (
+                    0,
+                    false,
+                ),
+            },
+            _control_nums: 0,
+            _pattern_mark: None,
+            generic_map: {},
+            type_annotation: {},
+        },
+        ApiSequence {
+            functions: [
+                ApiCall {
+                    func: (
+                        BareFunction,
+                        1,
+                    ),
+                    params: [
+                        (
+                            _FuzzableType,
+                            0,
+                            _DirectCall,
+                        ),
+                    ],
+                    is_unsafe: false,
+                    is_get_raw_ptr: false,
+                    is_drop: false,
+                    is_mutate: false,
+                    output_type: Some(
+                        Path {
+                            path: Path {
+                                res: Def(
+                                    Struct,
+                                    DefId(0:4 ~ graft_baseline_smoke[323c]::Value),
+                                ),
+                                segments: [
+                                    PathSegment {
+                                        name: "Value",
+                                        args: AngleBracketed {
+                                            args: [],
+                                            bindings: [],
+                                        },
+                                    },
+                                ],
+                            },
+                        },
+                    ),
+                },
+                ApiCall {
+                    func: (
+                        BareFunction,
+                        1,
+                    ),
+                    params: [
+                        (
+                            _FuzzableType,
+                            1,
+                            _DirectCall,
+                        ),
+                    ],
+                    is_unsafe: false,
+                    is_get_raw_ptr: false,
+                    is_drop: false,
+                    is_mutate: false,
+                    output_type: Some(
+                        Path {
+                            path: Path {
+                                res: Def(
+                                    Struct,
+                                    DefId(0:4 ~ graft_baseline_smoke[323c]::Value),
+                                ),
+                                segments: [
+                                    PathSegment {
+                                        name: "Value",
+                                        args: AngleBracketed {
+                                            args: [],
+                                            bindings: [],
+                                        },
+                                    },
+                                ],
+                            },
+                        },
+                    ),
+                },
+            ],
+            fuzzable_params: [
+                Primitive(
+                    U8,
+                ),
+                Primitive(
+                    U8,
+                ),
+            ],
+            _using_traits: [],
+            _unsafe_tag: false,
+            _moved: {},
+            _fuzzable_mut_tag: {},
+            _function_mut_tag: {},
+            _covered_dependencies: {},
+            _control_nums: 0,
+            _pattern_mark: None,
+            generic_map: {},
+            type_annotation: {},
+        },
+        ApiSequence {
+            functions: [
+                ApiCall {
+                    func: (
+                        BareFunction,
+                        1,
+                    ),
+                    params: [
+                        (
+                            _FuzzableType,
+                            0,
+                            _DirectCall,
+                        ),
+                    ],
+                    is_unsafe: false,
+                    is_get_raw_ptr: false,
+                    is_drop: false,
+                    is_mutate: false,
+                    output_type: Some(
+                        Path {
+                            path: Path {
+                                res: Def(
+                                    Struct,
+                                    DefId(0:4 ~ graft_baseline_smoke[323c]::Value),
+                                ),
+                                segments: [
+                                    PathSegment {
+                                        name: "Value",
+                                        args: AngleBracketed {
+                                            args: [],
+                                            bindings: [],
+                                        },
+                                    },
+                                ],
+                            },
+                        },
+                    ),
+                },
+                ApiCall {
+                    func: (
+                        BareFunction,
+                        2,
+                    ),
+                    params: [
+                        (
+                            _FuzzableType,
+                            1,
+                            _DirectCall,
+                        ),
+                    ],
+                    is_unsafe: false,
+                    is_get_raw_ptr: false,
+                    is_drop: false,
+                    is_mutate: false,
+                    output_type: Some(
+                        Primitive(
+                            U8,
+                        ),
+                    ),
+                },
+            ],
+            fuzzable_params: [
+                Primitive(
+                    U8,
+                ),
+                Primitive(
+                    U8,
+                ),
+            ],
+            _using_traits: [],
+            _unsafe_tag: false,
+            _moved: {},
+            _fuzzable_mut_tag: {},
+            _function_mut_tag: {},
+            _covered_dependencies: {},
+            _control_nums: 0,
+            _pattern_mark: None,
+            generic_map: {},
+            type_annotation: {},
+        },
+        ApiSequence {
+            functions: [
+                ApiCall {
+                    func: (
+                        BareFunction,
+                        1,
+                    ),
+                    params: [
+                        (
+                            _FuzzableType,
+                            0,
+                            _DirectCall,
+                        ),
+                    ],
+                    is_unsafe: false,
+                    is_get_raw_ptr: false,
+                    is_drop: false,
+                    is_mutate: false,
+                    output_type: Some(
+                        Path {
+                            path: Path {
+                                res: Def(
+                                    Struct,
+                                    DefId(0:4 ~ graft_baseline_smoke[323c]::Value),
+                                ),
+                                segments: [
+                                    PathSegment {
+                                        name: "Value",
+                                        args: AngleBracketed {
+                                            args: [],
+                                            bindings: [],
+                                        },
+                                    },
+                                ],
+                            },
+                        },
+                    ),
+                },
+                ApiCall {
+                    func: (
+                        BareFunction,
+                        1,
+                    ),
+                    params: [
+                        (
+                            _FuzzableType,
+                            1,
+                            _DirectCall,
+                        ),
+                    ],
+                    is_unsafe: false,
+                    is_get_raw_ptr: false,
+                    is_drop: false,
+                    is_mutate: false,
+                    output_type: Some(
+                        Path {
+                            path: Path {
+                                res: Def(
+                                    Struct,
+                                    DefId(0:4 ~ graft_baseline_smoke[323c]::Value),
+                                ),
+                                segments: [
+                                    PathSegment {
+                                        name: "Value",
+                                        args: AngleBracketed {
+                                            args: [],
+                                            bindings: [],
+                                        },
+                                    },
+                                ],
+                            },
+                        },
+                    ),
+                },
+                ApiCall {
+                    func: (
+                        GenericFunction,
+                        0,
+                    ),
+                    params: [
+                        (
+                            _FunctionReturn,
+                            0,
+                            _DirectCall,
+                        ),
+                    ],
+                    is_unsafe: false,
+                    is_get_raw_ptr: false,
+                    is_drop: false,
+                    is_mutate: false,
+                    output_type: Some(
+                        Primitive(
+                            U8,
+                        ),
+                    ),
+                },
+            ],
+            fuzzable_params: [
+                Primitive(
+                    U8,
+                ),
+                Primitive(
+                    U8,
+                ),
+            ],
+            _using_traits: [],
+            _unsafe_tag: false,
+            _moved: {},
+            _fuzzable_mut_tag: {},
+            _function_mut_tag: {},
+            _covered_dependencies: {
+                (
+                    0,
+                    false,
+                ),
+            },
+            _control_nums: 0,
+            _pattern_mark: None,
+            generic_map: {},
+            type_annotation: {},
+        },
+        ApiSequence {
+            functions: [
+                ApiCall {
+                    func: (
+                        BareFunction,
+                        1,
+                    ),
+                    params: [
+                        (
+                            _FuzzableType,
+                            0,
+                            _DirectCall,
+                        ),
+                    ],
+                    is_unsafe: false,
+                    is_get_raw_ptr: false,
+                    is_drop: false,
+                    is_mutate: false,
+                    output_type: Some(
+                        Path {
+                            path: Path {
+                                res: Def(
+                                    Struct,
+                                    DefId(0:4 ~ graft_baseline_smoke[323c]::Value),
+                                ),
+                                segments: [
+                                    PathSegment {
+                                        name: "Value",
+                                        args: AngleBracketed {
+                                            args: [],
+                                            bindings: [],
+                                        },
+                                    },
+                                ],
+                            },
+                        },
+                    ),
+                },
+                ApiCall {
+                    func: (
+                        BareFunction,
+                        1,
+                    ),
+                    params: [
+                        (
+                            _FuzzableType,
+                            1,
+                            _DirectCall,
+                        ),
+                    ],
+                    is_unsafe: false,
+                    is_get_raw_ptr: false,
+                    is_drop: false,
+                    is_mutate: false,
+                    output_type: Some(
+                        Path {
+                            path: Path {
+                                res: Def(
+                                    Struct,
+                                    DefId(0:4 ~ graft_baseline_smoke[323c]::Value),
+                                ),
+                                segments: [
+                                    PathSegment {
+                                        name: "Value",
+                                        args: AngleBracketed {
+                                            args: [],
+                                            bindings: [],
+                                        },
+                                    },
+                                ],
+                            },
+                        },
+                    ),
+                },
+                ApiCall {
+                    func: (
+                        BareFunction,
+                        1,
+                    ),
+                    params: [
+                        (
+                            _FuzzableType,
+                            2,
+                            _DirectCall,
+                        ),
+                    ],
+                    is_unsafe: false,
+                    is_get_raw_ptr: false,
+                    is_drop: false,
+                    is_mutate: false,
+                    output_type: Some(
+                        Path {
+                            path: Path {
+                                res: Def(
+                                    Struct,
+                                    DefId(0:4 ~ graft_baseline_smoke[323c]::Value),
+                                ),
+                                segments: [
+                                    PathSegment {
+                                        name: "Value",
+                                        args: AngleBracketed {
+                                            args: [],
+                                            bindings: [],
+                                        },
+                                    },
+                                ],
+                            },
+                        },
+                    ),
+                },
+            ],
+            fuzzable_params: [
+                Primitive(
+                    U8,
+                ),
+                Primitive(
+                    U8,
+                ),
+                Primitive(
+                    U8,
+                ),
+            ],
+            _using_traits: [],
+            _unsafe_tag: false,
+            _moved: {},
+            _fuzzable_mut_tag: {},
+            _function_mut_tag: {},
+            _covered_dependencies: {},
+            _control_nums: 0,
+            _pattern_mark: None,
+            generic_map: {},
+            type_annotation: {},
+        },
+        ApiSequence {
+            functions: [
+                ApiCall {
+                    func: (
+                        BareFunction,
+                        1,
+                    ),
+                    params: [
+                        (
+                            _FuzzableType,
+                            0,
+                            _DirectCall,
+                        ),
+                    ],
+                    is_unsafe: false,
+                    is_get_raw_ptr: false,
+                    is_drop: false,
+                    is_mutate: false,
+                    output_type: Some(
+                        Path {
+                            path: Path {
+                                res: Def(
+                                    Struct,
+                                    DefId(0:4 ~ graft_baseline_smoke[323c]::Value),
+                                ),
+                                segments: [
+                                    PathSegment {
+                                        name: "Value",
+                                        args: AngleBracketed {
+                                            args: [],
+                                            bindings: [],
+                                        },
+                                    },
+                                ],
+                            },
+                        },
+                    ),
+                },
+                ApiCall {
+                    func: (
+                        BareFunction,
+                        1,
+                    ),
+                    params: [
+                        (
+                            _FuzzableType,
+                            1,
+                            _DirectCall,
+                        ),
+                    ],
+                    is_unsafe: false,
+                    is_get_raw_ptr: false,
+                    is_drop: false,
+                    is_mutate: false,
+                    output_type: Some(
+                        Path {
+                            path: Path {
+                                res: Def(
+                                    Struct,
+                                    DefId(0:4 ~ graft_baseline_smoke[323c]::Value),
+                                ),
+                                segments: [
+                                    PathSegment {
+                                        name: "Value",
+                                        args: AngleBracketed {
+                                            args: [],
+                                            bindings: [],
+                                        },
+                                    },
+                                ],
+                            },
+                        },
+                    ),
+                },
+                ApiCall {
+                    func: (
+                        BareFunction,
+                        2,
+                    ),
+                    params: [
+                        (
+                            _FuzzableType,
+                            2,
+                            _DirectCall,
+                        ),
+                    ],
+                    is_unsafe: false,
+                    is_get_raw_ptr: false,
+                    is_drop: false,
+                    is_mutate: false,
+                    output_type: Some(
+                        Primitive(
+                            U8,
+                        ),
+                    ),
+                },
+            ],
+            fuzzable_params: [
+                Primitive(
+                    U8,
+                ),
+                Primitive(
+                    U8,
+                ),
+                Primitive(
+                    U8,
+                ),
+            ],
+            _using_traits: [],
+            _unsafe_tag: false,
+            _moved: {},
+            _fuzzable_mut_tag: {},
+            _function_mut_tag: {},
+            _covered_dependencies: {},
+            _control_nums: 0,
+            _pattern_mark: None,
+            generic_map: {},
+            type_annotation: {},
+        },
+    ],
+    chosen_sequences: [
+        ApiSequence {
+            functions: [
+                ApiCall {
+                    func: (
+                        BareFunction,
+                        1,
+                    ),
+                    params: [
+                        (
+                            _FuzzableType,
+                            0,
+                            _DirectCall,
+                        ),
+                    ],
+                    is_unsafe: false,
+                    is_get_raw_ptr: false,
+                    is_drop: false,
+                    is_mutate: false,
+                    output_type: Some(
+                        Path {
+                            path: Path {
+                                res: Def(
+                                    Struct,
+                                    DefId(0:4 ~ graft_baseline_smoke[323c]::Value),
+                                ),
+                                segments: [
+                                    PathSegment {
+                                        name: "Value",
+                                        args: AngleBracketed {
+                                            args: [],
+                                            bindings: [],
+                                        },
+                                    },
+                                ],
+                            },
+                        },
+                    ),
+                },
+                ApiCall {
+                    func: (
+                        GenericFunction,
+                        0,
+                    ),
+                    params: [
+                        (
+                            _FunctionReturn,
+                            0,
+                            _DirectCall,
+                        ),
+                    ],
+                    is_unsafe: false,
+                    is_get_raw_ptr: false,
+                    is_drop: false,
+                    is_mutate: false,
+                    output_type: Some(
+                        Primitive(
+                            U8,
+                        ),
+                    ),
+                },
+            ],
+            fuzzable_params: [
+                Primitive(
+                    U8,
+                ),
+            ],
+            _using_traits: [],
+            _unsafe_tag: false,
+            _moved: {},
+            _fuzzable_mut_tag: {},
+            _function_mut_tag: {},
+            _covered_dependencies: {
+                (
+                    0,
+                    false,
+                ),
+            },
+            _control_nums: 0,
+            _pattern_mark: None,
+            generic_map: {},
+            type_annotation: {},
+        },
+    ],
+    api_parameters: [
+        Preluded(
+            PreludedStructure {
+                name: "String",
+                preluded_type: String,
+                implemented_traits: [
+                    "core::fmt::Display",
+                    "core::fmt::Debug",
+                    "core::convert::From",
+                    "core::clone::Clone",
+                    "core::copy::Copy",
+                ],
+                use_functions: [],
+                implemented_functions: [],
+            },
+        ),
+        Struct(
+            ApiStructure {
+                name: "graft_baseline_smoke::Value",
+                is_enum: false,
+                implemented_traits: [
+                    "core::marker::Sync",
+                    "core::panic::unwind_safe::UnwindSafe",
+                    "core::marker::Unpin",
+                    "core::panic::unwind_safe::RefUnwindSafe",
+                    "core::marker::Send",
+                    "core::convert::TryInto",
+                    "core::borrow::BorrowMut",
+                    "core::convert::TryFrom",
+                    "core::convert::From",
+                    "core::borrow::Borrow",
+                    "core::any::Any",
+                    "core::convert::Into",
+                ],
+                is_generic: false,
+                return_functions: [],
+                use_functions: [],
+                clean_ty: None,
+                implemented_functions: [],
+            },
+        ),
+    ],
+    full_name_map: FullNameMap {
+        full_name_map: {
+            DefId(0:7 ~ graft_baseline_smoke[323c]::make): (
+                "graft_baseline_smoke::make",
+                Function,
+            ),
+            DefId(0:0 ~ graft_baseline_smoke[323c]): (
+                "graft_baseline_smoke",
+                Module,
+            ),
+            DefId(0:8 ~ graft_baseline_smoke[323c]::consume): (
+                "graft_baseline_smoke::consume",
+                Function,
+            ),
+            DefId(0:4 ~ graft_baseline_smoke[323c]::Value): (
+                "graft_baseline_smoke::Value",
+                Struct,
+            ),
+            DefId(0:3 ~ graft_baseline_smoke[323c]::scalar): (
+                "graft_baseline_smoke::scalar",
+                Function,
+            ),
+        },
+    },
+    mod_visibility: ModVisibity {
+        crate_name: "graft_baseline_smoke",
+        inner: {
+            "graft_baseline_smoke": Public,
+        },
+    },
+    generic_functions: {
+        "graft_baseline_smoke::consume",
+    },
+    functions_with_unsupported_fuzzable_types: {},
+    generable_types: {
+        Path {
+            path: Path {
+                res: Def(
+                    Struct,
+                    DefId(0:4 ~ graft_baseline_smoke[323c]::Value),
+                ),
+                segments: [
+                    PathSegment {
+                        name: "Value",
+                        args: AngleBracketed {
+                            args: [],
+                            bindings: [],
+                        },
+                    },
+                ],
+            },
+        }: {
+            (
+                1,
+                _DirectCall,
+            ),
+        },
+    },
+    record_sequences: [],
+    copy_structs: [],
+    stop_list: [],
+    api_generation_map: {},
+    refuse_api_map: {},
+    type_generation_map: {},
+    total_weight: 8,
+}

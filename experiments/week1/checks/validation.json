@@ -1,0 +1,101 @@
+{
+  "date": "2026-11-09",
+  "python_unit_tests": 23,
+  "rust_llvm_coverage_fixture_passed": true,
+  "public_surface_fixture_assertions": 7,
+  "public_surface_crates_completed": 13,
+  "cargo_check_all_targets_offline_locked_passed": true,
+  "motivating_example_runtime_and_compile_fail_passed": true,
+  "git_diff_check_passed": true,
+  "historical_document_integrity": [
+    {
+      "crate": "autocfg",
+      "sha256": "7811276466102d4032788ff88229932432cc3503ecf5edad89fe5508a73009fa",
+      "matches_frozen_input": true
+    },
+    {
+      "crate": "base64",
+      "sha256": "79e9ce890114d65c30b7e3e3bcadd65c0a4fb66fe4ddceb8a47c7c9e15d93b8c",
+      "matches_frozen_input": true
+    },
+    {
+      "crate": "bumpalo",
+      "sha256": "d014e5c730978eaa91d4a1c1e73128d72f8ab1a84a1c66c5adf5c8588dae6fcc",
+      "matches_frozen_input": true
+    },
+    {
+      "crate": "byteorder",
+      "sha256": "b48b516b863754e6414267fb8a7b5495d87aaad2146585c9ccd573dc9d8af319",
+      "matches_frozen_input": true
+    },
+    {
+      "crate": "bytes",
+      "sha256": "d02a73c2913df148691e6ea3722c7fe1441c32b813d27e5a2b93823998921006",
+      "matches_frozen_input": true
+    },
+    {
+      "crate": "chrono",
+      "sha256": "a91279ebe3512a099f5fac326d25dcaa640e2a6776ffc0619047e80cc8ac7afb",
+      "matches_frozen_input": true
+    },
+    {
+      "crate": "csv",
+      "sha256": "b676099ab19406adff24ec07dc65c21e060f3ce4da372fc14a9cce943c488fd9",
+      "matches_frozen_input": true
+    },
+    {
+      "crate": "fixedbitset",
+      "sha256": "6cbe8ea3f2bf8d69d98f50005409bbec81fa59210a6b18632cb4f4d1b9b4db0a",
+      "matches_frozen_input": true
+    },
+    {
+      "crate": "idna",
+      "sha256": "52d0b654300df104baad63f0c3f572824ddc2132a255eb74f1b84202ee1c9e74",
+      "matches_frozen_input": true
+    },
+    {
+      "crate": "regex",
+      "sha256": "e304897139514505a524ad997477677206ccbfadf1ff9a012a621d7c07ed9bd0",
+      "matches_frozen_input": true
+    },
+    {
+      "crate": "ryu",
+      "sha256": "71477e2142d6b40e99e5a8225807c5c1862513e00856a5737f9039186827bd50",
+      "matches_frozen_input": true
+    },
+    {
+      "crate": "time",
+      "sha256": "4b1663425576fd2ed693fa05d697280f0c2330b331ad8a67e31d53eb1c4688f0",
+      "matches_frozen_input": true
+    },
+    {
+      "crate": "unicode-segmentation",
+      "sha256": "e7ab07dc1bed970ea1f4b1c3818394bf2a88ac71310e5570a0de24b09c2edec3",
+      "matches_frozen_input": true
+    }
+  ],
+  "paper_pdf_sha256": "8e5aa38ad75063c5d9f51e9689f908ce37ba79ba075d81fd25be3e302d5b7650",
+  "paper_sources_sha256": {
+    "main.tex": "ef69f892a49ea16bdbfa571b12f89679a10492d78728b9626f8aed6b29fd2361",
+    "preamble.tex": "88f337588a95eea1d72756a8d07657c400b5ca126927e1ea8fdc199255b96930",
+    "references.bib": "00b13a84eac6cf9a563e0035baaee4c727d1765d4549fd2fa15583a8f386bf56",
+    "frontmatter/llncs.tex": "4608fdfa9746dd971ad9e046a0d2bb876acddd6dcaaab612642b840a2880b5e0",
+    "chapters/acknowledgements.tex": "b524ea4fb1ff6aa64b2786baafa5061e238d7699d5fada93fb55ce97c913cdf9",
+    "chapters/approach.tex": "a94af7abc8265ea6f65e7e1d89f704659c91941709a3477e64ebce3c0ba4ccb7",
+    "chapters/background.tex": "eedee1dc4825629d6747448bb7ef5194e964e7973cabd6b6d729cc639a79dfbf",
+    "chapters/conclusion.tex": "1ef412322b9d6149adcd0c6745cf7455a2f15e7ee60de70f579f0801384c7e8a",
+    "chapters/evaluation.tex": "ee52b6cd7489192e150b5131287a43f3f9eeccbd83aef89a032557218957784f",
+    "chapters/introduction.tex": "42d889fc6106a0a0076abb3f2fa5082e7252ea72b40daea139acd4d70880b2cb",
+    "chapters/related_work.tex": "f186b53fe8cf8743f075ea6763d333f580d359665d09017fb499946dfe290d32",
+    "examples/buffer.rs": "5f94cfcbcbf06affa5923e787c316c5dc27d38f8e1ff1811de5db735c926a8fb",
+    "image/api_graph.dot": "f62cd5af46e10c5796c9d109b10ae4717ac70a6bdbc03538a15f03e7c77603d4",
+    "image/api_graph.pdf": "1b3021dc8b215053cd96d4f3eea4f96a6f6115af134666c1e84b31f3f54deecd"
+  },
+  "limitations": [
+    "diagnostic recounts do not revalidate original budgets or replace controlled experiments",
+    "publicly named body definitions are a scoped denominator, not complete Rust callable discovery",
+    "three visibility analyses use separately hashed doctest-only normalization views",
+    "baseline generation environments still require compatibility work",
+    "paper is a compiled working draft with layout warnings, not a submission-ready result"
+  ]
+}

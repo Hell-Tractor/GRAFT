@@ -1,0 +1,7 @@
+[package]
+name = "graft_checked_target"
+version = "0.0.0"
+edition = "2024"
+
+[dependencies]
+"base64" = { package = "base64", version = "=0.22.1", default-features = true, features = [] }

@@ -1,0 +1,25 @@
+{
+  "schema": "graft-first-round-and-paper-check-v1",
+  "full_matrix_round_complete": false,
+  "execution_probe_complete": true,
+  "seconds": 300,
+  "afl_executions": 956031,
+  "corpus_replay_exit_code": 0,
+  "planned_api_entry_confirmed": true,
+  "formal_rounds_completed": 0,
+  "paper_build_exit_code": 0,
+  "missing_characters": false,
+  "undefined_references": false,
+  "overfull_boxes": 9,
+  "pdf": "/home/cym/workspace/GRAFT-2.0/GRAFTPaper/out/week6-first-round/main.pdf",
+  "pdf_sha256": "03e497ca2670f3f2d63745e2cb161759cb9eb5edc5600d06699cbbae861892d5",
+  "source_sha256": {
+    "chapters/measurement_protocol.tex": "91d95b61f8e7a2d301a529c1c899e0df9b39bc4a8dfc526800edf92566e32b94",
+    "chapters/evaluation.tex": "16986b1fb311d063ad92b66872e1feaafab633de5c748ff0200e2439542a1f34",
+    "chapters/approach.tex": "85ff8b9e9206226c91413f2fee56d43194438910fae2f4e518aeda45739256ca",
+    "chapters/introduction.tex": "169b70c90fd48892733d5aa6719c2c42c10a25577ee0c17294948f6bd3b2288d",
+    "chapters/related_work.tex": "0e0c8f3de5767a26aa76292b83e8cf35e97950758c127ae8454e61d71acce71a",
+    "chapters/generated/first-round-execution-probe.tex": "4de0e1440a60544d128d9e6bc87e04b99863ab53ef6ec6aee61d2d5cba22711a"
+  },
+  "formal_blockers": "New generation/ablation adapters and matched build proofs remain incomplete; no round-2 launch."
+}

@@ -1,0 +1,25 @@
+{
+  "api_count": 397,
+  "apis_with_obligations": 12,
+  "candidate_parameter_pairs": {
+    "incompatible": 132408,
+    "unified_candidate_not_compiler_verified": 7846,
+    "unknown_api_feature": 6116,
+    "unknown_type_form": 12888
+  },
+  "crate": "time",
+  "no_import_blocker": 297,
+  "rustdoc_sha256": "823663d3ceefd2610153c23560e908769472766b2efd542664835a7910236e41",
+  "scope": "import support only, not proven constructibility; trait obligations may still be unknown",
+  "unsupported_api_reasons": {
+    "associated type binding/constraint": 2,
+    "borrowed output requires lifetime analysis": 1,
+    "nominal lifetime argument requires storage analysis": 14,
+    "static reference requires persistent storage": 1,
+    "trait method dispatch/impl specialization": 99,
+    "type alias expansion: core::fmt::Result": 6,
+    "unsupported rustdoc type: dyn_trait": 1,
+    "unsupported rustdoc type: qualified_path": 2
+  },
+  "version": "0.3.47"
+}

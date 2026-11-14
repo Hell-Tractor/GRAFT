@@ -1,0 +1,242 @@
+{
+  "attempted_crates": 13,
+  "binary_sha256": "4d7b6ac91eb643f77d972c8069118ad4573a14c6a6daaa34eb2ab1986aa543b1",
+  "commands": [
+    {
+      "command": [
+        "rustdoc",
+        "+nightly",
+        "/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week1/fixtures/public_surface.rs",
+        "--crate-name",
+        "public_surface",
+        "--crate-version",
+        "0.1.0",
+        "--edition",
+        "2024",
+        "--document-private-items",
+        "--output-format",
+        "json",
+        "-Z",
+        "unstable-options",
+        "-o",
+        "experiments/week1/public_surface/fixture"
+      ],
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "/tmp/graft-week1-target/debug/audit_public_surface",
+        "experiments/week1/public_surface/fixture/public_surface.json",
+        "experiments/week1/public_surface/fixture/crosscheck.json"
+      ],
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "/tmp/graft-week1-target/debug/audit_public_surface",
+        "experiments/week1/public_surface/fixture/public_surface.json",
+        "experiments/week1/public_surface/fixture/repeat.json"
+      ],
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "/tmp/graft-week1-target/debug/audit_public_surface",
+        "/home/cym/workspace/PLFuzz/output/autocfg/doc.json",
+        "experiments/week1/public_surface/autocfg.json"
+      ],
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "/tmp/graft-week1-target/debug/audit_public_surface",
+        "/home/cym/workspace/PLFuzz/output/base64/doc.json",
+        "experiments/week1/public_surface/base64.json"
+      ],
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "/tmp/graft-week1-target/debug/audit_public_surface",
+        "/home/cym/workspace/PLFuzz/output/bumpalo/doc.json",
+        "experiments/week1/public_surface/bumpalo.json"
+      ],
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "/tmp/graft-week1-target/debug/audit_public_surface",
+        "/home/cym/workspace/PLFuzz/output/byteorder/doc.json",
+        "experiments/week1/public_surface/byteorder.json"
+      ],
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "/tmp/graft-week1-target/debug/audit_public_surface",
+        "/home/cym/workspace/PLFuzz/output/bytes/doc.json",
+        "experiments/week1/public_surface/bytes.json"
+      ],
+      "exit_code": 101,
+      "stderr": "\nthread 'main' (168) panicked at /home/cym/workspace/trustfall-rustdoc-adapter/src/attributes.rs:410:13:\nString `#[doc(test(attr(deny(warnings, rust_2018_idioms))))` cannot be parsed as an attribute because it is not closed with a square bracket.\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "/tmp/graft-week1-target/debug/audit_public_surface",
+        "experiments/week1/public_surface/normalized_inputs/bytes.json",
+        "experiments/week1/public_surface/bytes.json"
+      ],
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "/tmp/graft-week1-target/debug/audit_public_surface",
+        "/home/cym/workspace/PLFuzz/output/chrono/doc.json",
+        "experiments/week1/public_surface/chrono.json"
+      ],
+      "exit_code": 101,
+      "stderr": "\nthread 'main' (170) panicked at /home/cym/workspace/trustfall-rustdoc-adapter/src/attributes.rs:410:13:\nString `#[doc(test(attr(deny(warnings))))` cannot be parsed as an attribute because it is not closed with a square bracket.\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "/tmp/graft-week1-target/debug/audit_public_surface",
+        "experiments/week1/public_surface/normalized_inputs/chrono.json",
+        "experiments/week1/public_surface/chrono.json"
+      ],
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "/tmp/graft-week1-target/debug/audit_public_surface",
+        "/home/cym/workspace/PLFuzz/output/csv/doc.json",
+        "experiments/week1/public_surface/csv.json"
+      ],
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "/tmp/graft-week1-target/debug/audit_public_surface",
+        "/home/cym/workspace/PLFuzz/output/fixedbitset/doc.json",
+        "experiments/week1/public_surface/fixedbitset.json"
+      ],
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "/tmp/graft-week1-target/debug/audit_public_surface",
+        "/home/cym/workspace/PLFuzz/output/idna/doc.json",
+        "experiments/week1/public_surface/idna.json"
+      ],
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "/tmp/graft-week1-target/debug/audit_public_surface",
+        "/home/cym/workspace/PLFuzz/output/regex/doc.json",
+        "experiments/week1/public_surface/regex.json"
+      ],
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "/tmp/graft-week1-target/debug/audit_public_surface",
+        "/home/cym/workspace/PLFuzz/output/ryu/doc.json",
+        "experiments/week1/public_surface/ryu.json"
+      ],
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "/tmp/graft-week1-target/debug/audit_public_surface",
+        "/home/cym/workspace/PLFuzz/output/time/doc.json",
+        "experiments/week1/public_surface/time.json"
+      ],
+      "exit_code": 101,
+      "stderr": "\nthread 'main' (177) panicked at /home/cym/workspace/trustfall-rustdoc-adapter/src/attributes.rs:410:13:\nString `#[doc(test(attr(deny(warnings))))` cannot be parsed as an attribute because it is not closed with a square bracket.\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "/tmp/graft-week1-target/debug/audit_public_surface",
+        "experiments/week1/public_surface/normalized_inputs/time.json",
+        "experiments/week1/public_surface/time.json"
+      ],
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "/tmp/graft-week1-target/debug/audit_public_surface",
+        "/home/cym/workspace/PLFuzz/output/unicode-segmentation/doc.json",
+        "experiments/week1/public_surface/unicode-segmentation.json"
+      ],
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": ""
+    }
+  ],
+  "fixture_assertions": 7,
+  "fixture_passed": true,
+  "limitations": [
+    "trait impl applicability is not solved",
+    "naming visibility is not constructibility or runtime reachability",
+    "opaque receiver and blanket impl cases remain explicit review items"
+  ],
+  "mapping_script_sha256": "4c86dd0ae689ceddf66e8eaa351b959385fe7ed55f93b0b19648a32527652b9a",
+  "rustdoc_toolchain": {
+    "command": [
+      "rustdoc",
+      "+nightly",
+      "/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week1/fixtures/public_surface.rs",
+      "--crate-name",
+      "public_surface",
+      "--crate-version",
+      "0.1.0",
+      "--edition",
+      "2024",
+      "--document-private-items",
+      "--output-format",
+      "json",
+      "-Z",
+      "unstable-options",
+      "-o",
+      "experiments/week1/public_surface/fixture"
+    ],
+    "exit_code": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  "script_sha256": "94e1a45bd0023458e15987a42db15c009a41e1e6506a8b1b0d6b00fb2fc76c9b",
+  "successful_crates": 13
+}

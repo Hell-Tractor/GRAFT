@@ -1,0 +1,46 @@
+{
+  "fixture_source": "pub fn bump(x: u8) -> u8 { x.wrapping_add(1) }",
+  "attempts": [
+    {
+      "command": [
+        "/home/cym/workspace/RULF/build/x86_64-unknown-linux-gnu/stage2/bin/fuzz-target-generator",
+        "--crate-name",
+        "week1_smoke",
+        "--crate-type",
+        "lib",
+        "--edition=2021",
+        "/tmp/graft-rulf-smoke-l6gbn7_w/lib.rs",
+        "-o",
+        "/tmp/graft-rulf-smoke-l6gbn7_w/generated"
+      ],
+      "exit_code": 1,
+      "stdout": "Fuzz Target Generator for Rust Libraries: v0.1.0\nFuzz Target Generator exits successfully. Total time cost: 467 ms\n",
+      "stderr": "error[E0463]: can't find crate for `std`\n\nerror: Compilation failed, aborting rustdoc\n\nerror: aborting due to 2 previous errors\n\nFor more information about this error, try `rustc --explain E0463`.\n",
+      "generated_files": [
+        "lib.rs"
+      ]
+    },
+    {
+      "command": [
+        "/home/cym/workspace/RULF/build/x86_64-unknown-linux-gnu/stage2/bin/fuzz-target-generator",
+        "--sysroot",
+        "/home/cym/workspace/RULF/build/x86_64-unknown-linux-gnu/stage1",
+        "--crate-name",
+        "week1_smoke",
+        "--crate-type",
+        "lib",
+        "--edition=2021",
+        "/tmp/graft-rulf-smoke-d74f9cae/lib.rs",
+        "-o",
+        "/tmp/graft-rulf-smoke-d74f9cae/generated"
+      ],
+      "exit_code": 101,
+      "stdout": "Fuzz Target Generator for Rust Libraries: v0.1.0\nFuzz Target Renderer Init\ncrate: week1_smoke\nusing bfs end point\nafter backward search\ntargets = 1\ntotal length = 1\naverage time to visit = 1\nedge covered by reverse search = 0\n-----------STATISTICS-----------\ntotal nodes: 1\ntotal edges: 0\ncovered nodes: 1\ncovered edges: 0\nnode coverage: 1\nedge coverage: NaN\ntargets covered by reverse search: 0\ntotal targets: 1\nmax length = 0\ntotal length = 1\naverage time to fuzz each api = 1\n--------------------------------\n",
+      "stderr": "thread 'rustc' panicked at 'called `Result::unwrap()` on an `Err` value: Os { code: 30, kind: ReadOnlyFilesystem, message: \"Read-only file system\" }', src/librustdoc/fuzz_target/file_util.rs:195:30\nstack backtrace:\n   0:     0x7f2cfb9147af - <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt::h78ec7e37165513a1\n   1:     0x7f2cfb97dcde - core::fmt::write::h216388437f078508\n   2:     0x7f2cfb8dc5d5 - std::io::Write::write_fmt::h417a2d9989b6bf41\n   3:     0x7f2cfb914565 - std::sys_common::backtrace::print::hc4cb3903a933606d\n   4:     0x7f2cfb8f126f - std::panicking::default_hook::{{closure}}::h42a1bc9928edbf43\n   5:     0x7f2cfb8f0f28 - std::panicking::default_hook::hbac19f23d5679998\n   6:     0x7f2cfc39fdc7 - rustc_driver[8f315f1c1c579988]::DEFAULT_HOOK::{closure#0}::{closure#0}\n   7:     0x7f2cfb8f19ec - std::panicking::rust_panic_with_hook::hacc0e752cae7b63f\n   8:     0x7f2cfb914b07 - std::panicking::begin_panic_handler::{{closure}}::hd4f689b4238819f5\n   9:     0x7f2cfb9148fc - std::sys_common::backtrace::__rust_end_short_backtrace::h1a90d66d53ca8c0b\n  10:     0x7f2cfb8f1562 - rust_begin_unwind\n  11:     0x7f2cfb8b7893 - core::panicking::panic_fmt::hccb21e26f011a19a\n  12:     0x7f2cfb8b7ca3 - core::result::unwrap_failed::h3a694e02f51eedba\n  13:     0x560ec1c9e37c - rustdoc[71c8f002224237c]::fuzz_target::file_util::ensure_empty_dir\n  14:     0x560ec1c9fb11 - <rustdoc[71c8f002224237c]::fuzz_target::fuzz_target_renderer::FuzzTargetRenderer as rustdoc[71c8f002224237c]::formats::renderer::FormatRenderer>::after_krate\n  15:     0x560ec1beb724 - rustdoc[71c8f002224237c]::formats::renderer::run_format::<rustdoc[71c8f002224237c]::fuzz_target::fuzz_target_renderer::FuzzTargetRenderer>\n  16:     0x560ec1af1f75 - rustdoc[71c8f002224237c]::run_renderer::<rustdoc[71c8f002224237c]::fuzz_target::fuzz_target_renderer::FuzzTargetRenderer>\n  17:     0x560ec1bf6d92 - <rustc_interface[74d9aa78434e2f06]::passes::QueryContext>::enter::<rustdoc[71c8f002224237c]::fuzz_target_generator_main_args::{closure#1}::{closure#0}::{closure#1}, core[852bc5f1216e8527]::result::Result<(), rustc_errors[64021ddc24c935b7]::ErrorGuaranteed>>\n  18:     0x560ec1cf12d4 - <rustc_interface[74d9aa78434e2f06]::interface::Compiler>::enter::<rustdoc[71c8f002224237c]::fuzz_target_generator_main_args::{closure#1}::{closure#0}, core[852bc5f1216e8527]::result::Result<(), rustc_errors[64021ddc24c935b7]::ErrorGuaranteed>>\n  19:     0x560ec1d6c9b3 - rustc_span[71e87260798b5fe7]::with_source_map::<core[852bc5f1216e8527]::result::Result<(), rustc_errors[64021ddc24c935b7]::ErrorGuaranteed>, rustc_interface[74d9aa78434e2f06]::interface::run_compiler<core[852bc5f1216e8527]::result::Result<(), rustc_errors[64021ddc24c935b7]::ErrorGuaranteed>, rustdoc[71c8f002224237c]::fuzz_target_generator_main_args::{closure#1}>::{closure#0}::{closure#1}>\n  20:     0x560ec1b8a623 - std[43e26e04c2d46daf]::sys_common::backtrace::__rust_begin_short_backtrace::<rustc_interface[74d9aa78434e2f06]::util::run_in_thread_pool_with_globals<rustc_interface[74d9aa78434e2f06]::interface::run_compiler<core[852bc5f1216e8527]::result::Result<(), rustc_errors[64021ddc24c935b7]::ErrorGuaranteed>, rustdoc[71c8f002224237c]::fuzz_target_generator_main_args::{closure#1}>::{closure#0}, core[852bc5f1216e8527]::result::Result<(), rustc_errors[64021ddc24c935b7]::ErrorGuaranteed>>::{closure#0}::{closure#0}, core[852bc5f1216e8527]::result::Result<(), rustc_errors[64021ddc24c935b7]::ErrorGuaranteed>>\n  21:     0x560ec1c0e7a4 - <<std[43e26e04c2d46daf]::thread::Builder>::spawn_unchecked_<rustc_interface[74d9aa78434e2f06]::util::run_in_thread_pool_with_globals<rustc_interface[74d9aa78434e2f06]::interface::run_compiler<core[852bc5f1216e8527]::result::Result<(), rustc_errors[64021ddc24c935b7]::ErrorGuaranteed>, rustdoc[71c8f002224237c]::fuzz_target_generator_main_args::{closure#1}>::{closure#0}, core[852bc5f1216e8527]::result::Result<(), rustc_errors[64021ddc24c935b7]::ErrorGuaranteed>>::{closure#0}::{closure#0}, core[852bc5f1216e8527]::result::Result<(), rustc_errors[64021ddc24c935b7]::ErrorGuaranteed>>::{closure#1} as core[852bc5f1216e8527]::ops::function::FnOnce<()>>::call_once::{shim:vtable#0}\n  22:     0x7f2cfb91d663 - std::sys::unix::thread::Thread::new::thread_start::h1b6a7c222aaaaea9\n  23:     0x7f2cfb48b529 - start_thread\n  24:     0x7f2cfb510710 - clone3\n  25:                0x0 - <unknown>\n\nerror: internal compiler error: unexpected panic\n\nnote: the compiler unexpectedly panicked. this is a bug.\n\nnote: we would appreciate a bug report: https://github.com/rust-lang/rust/issues/new?labels=C-bug%2C+I-ICE%2C+T-compiler&template=ice.md\n\nnote: rustc 1.66.0-dev running on x86_64-unknown-linux-gnu\n\nnote: compiler flags: --crate-type lib\n\nquery stack during panic:\nend of query stack\n",
+      "generated_files": [
+        "lib.rs"
+      ]
+    }
+  ],
+  "scope": "host smoke only; not a benchmark or historical reproduction"
+}

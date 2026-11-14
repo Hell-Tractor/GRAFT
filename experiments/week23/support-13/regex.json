@@ -1,0 +1,25 @@
+{
+  "api_count": 210,
+  "apis_with_obligations": 14,
+  "candidate_parameter_pairs": {
+    "incompatible": 26133,
+    "unified_candidate_not_compiler_verified": 74,
+    "unknown_api_feature": 2149,
+    "unknown_type_form": 23444
+  },
+  "crate": "regex",
+  "no_import_blocker": 49,
+  "rustdoc_sha256": "3ce0da5f34363803c9f79acc4b458c28735be0da3da427d96842fb391e9377ba",
+  "scope": "import support only, not proven constructibility; trait obligations may still be unknown",
+  "unsupported_api_reasons": {
+    "associated type binding/constraint": 4,
+    "borrowed output requires lifetime analysis": 67,
+    "const generic parameter": 2,
+    "modified/negative/?Sized trait bound": 4,
+    "nominal lifetime argument requires storage analysis": 96,
+    "outlives/use bound": 4,
+    "symbolic const array length": 2,
+    "trait method dispatch/impl specialization": 53
+  },
+  "version": "1.12.3"
+}

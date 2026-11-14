@@ -1,0 +1,13 @@
+--- a/src/librustdoc/fuzz_target/fuzz_target_renderer.rs
++++ b/src/librustdoc/fuzz_target/fuzz_target_renderer.rs
+@@ -80,7 +80,9 @@
+         debug_str.push_str(&format!("\n vis: {:?}", item.visibility));
+         debug_str.push_str(&format!("\n item kind: {:?}", item.kind));
+         //println!("{}", debug_str);
+-        let full_name: String = join_with_double_colon(&self.current) + item.name.unwrap().as_str();
++        let mut full_path = self.current.clone();
++        full_path.push(item.name.unwrap());
++        let full_name: String = join_with_double_colon(&full_path);
+         if let ItemKind::FunctionItem(ref func) = *item.kind {
+             //println!("func = {:?}", func);
+             let decl = func.decl.clone();

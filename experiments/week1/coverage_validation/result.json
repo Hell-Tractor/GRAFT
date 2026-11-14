@@ -1,0 +1,283 @@
+{
+  "apis": [
+    {
+      "api_id": "1953a248d75902e9e63cd8d2d8dbb8c185aa864ded8e1a93a87eb7a7b2b31d9f",
+      "candidate": true,
+      "file": "src/lib.rs",
+      "function_records": 1,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": 1,
+      "name": "same_line_left",
+      "name_filtered": false,
+      "public_name_body_definition": false,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "covered"
+    },
+    {
+      "api_id": "217dbc71f7e0966702996ff83c07ed8de3f2ad9c1d659d34c9b5c96eaec1196d",
+      "candidate": true,
+      "file": "src/lib.rs",
+      "function_records": 2,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": 1,
+      "name": "read",
+      "name_filtered": false,
+      "public_name_body_definition": false,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "covered"
+    },
+    {
+      "api_id": "223a15947e238d95ec1e765fd5fe0d1978c55b28605bf758161ccd64c21246e9",
+      "candidate": true,
+      "file": "src/lib.rs",
+      "function_records": 1,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": 1,
+      "name": "entered",
+      "name_filtered": false,
+      "public_name_body_definition": false,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "covered"
+    },
+    {
+      "api_id": "365323057dbf97413a2aa7b4af4afe5196f182200bd378ae0d66885af4d7b531",
+      "candidate": true,
+      "file": "src/lib.rs",
+      "function_records": 1,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": 0,
+      "name": "uncalled",
+      "name_filtered": false,
+      "public_name_body_definition": false,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "observed_zero"
+    },
+    {
+      "api_id": "3bf856c67cf8b38e9b48a243c4d593a1a7978ef4b53c218cfede91a72f14cfa9",
+      "candidate": true,
+      "file": "src/lib.rs",
+      "function_records": 3,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": 1,
+      "name": "generic",
+      "name_filtered": false,
+      "public_name_body_definition": false,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "covered"
+    },
+    {
+      "api_id": "6299d63b12240647c6d3a4127aeaa129bc45c651c84b644c4f3fd9547f87fdf3",
+      "candidate": false,
+      "file": null,
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "type_id",
+      "name_filtered": false,
+      "public_name_body_definition": false,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    },
+    {
+      "api_id": "64e2dcf1ae15898bad96572f4d0379a39d52a5ed0b265be99860b4cfb733e78d",
+      "candidate": false,
+      "file": null,
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "try_into",
+      "name_filtered": false,
+      "public_name_body_definition": false,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    },
+    {
+      "api_id": "6bf2b837cfdc99eb5a9903a65beca0756132a7af6ecf81a224a845ee168c92b8",
+      "candidate": true,
+      "file": "src/lib.rs",
+      "function_records": 1,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": 0,
+      "name": "same_line_right",
+      "name_filtered": false,
+      "public_name_body_definition": false,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "observed_zero"
+    },
+    {
+      "api_id": "963e8ef85dea64c28c878eaafbae3fcf5046fcda019500956a049ee80de1ffe7",
+      "candidate": false,
+      "file": null,
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "from",
+      "name_filtered": false,
+      "public_name_body_definition": false,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    },
+    {
+      "api_id": "a3688d87b0b684b56876cd9d0408df0f9324633bcfa37f5cf2b917ef2d5cfdb2",
+      "candidate": true,
+      "file": "src/lib.rs",
+      "function_records": 1,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": 1,
+      "name": "reexported",
+      "name_filtered": false,
+      "public_name_body_definition": false,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "covered"
+    },
+    {
+      "api_id": "b80cb47c12c7a524eeee82cb6ca4d1540327bb531bddff4acab4c0b80eddf981",
+      "candidate": false,
+      "file": null,
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "borrow_mut",
+      "name_filtered": false,
+      "public_name_body_definition": false,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    },
+    {
+      "api_id": "c629841b84d34b2c057b4181bf842093aeb12bd2e7345abd9af69c7cb6b2dacb",
+      "candidate": true,
+      "file": "src/lib.rs",
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "macro_api",
+      "name_filtered": false,
+      "public_name_body_definition": false,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    },
+    {
+      "api_id": "ca503598500c4f4586a569cf52024cd0823bb0c01e05e604d5babe957975ac77",
+      "candidate": true,
+      "file": "src/lib.rs",
+      "function_records": 2,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": 1,
+      "name": "new",
+      "name_filtered": false,
+      "public_name_body_definition": false,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "covered"
+    },
+    {
+      "api_id": "cbe6cfaf821b52d37e96e89829db6b3bf83ed33d294c517ac3397f9363105d01",
+      "candidate": false,
+      "file": null,
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "borrow",
+      "name_filtered": false,
+      "public_name_body_definition": false,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    },
+    {
+      "api_id": "de36affffac9e5aa58fd6ba1b4a6476d2736146973767904a70591f442b70812",
+      "candidate": false,
+      "file": null,
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "into",
+      "name_filtered": false,
+      "public_name_body_definition": false,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    },
+    {
+      "api_id": "e9f3c06f510c81945475fb3ab41a7b2a4f2bf8ace54601dd083254fbf75728c5",
+      "candidate": false,
+      "file": null,
+      "function_records": 0,
+      "historical_row_multiplicity": 0,
+      "max_execution_count": null,
+      "name": "try_from",
+      "name_filtered": false,
+      "public_name_body_definition": false,
+      "public_surface_review_item": false,
+      "selected": false,
+      "status": "unresolved"
+    }
+  ],
+  "crate": "coverage-fixture",
+  "groups": {
+    "historical_selected": {
+      "confirmed_coverage_percent": null,
+      "covered": 0,
+      "observed_zero": 0,
+      "total": 0,
+      "unresolved": 0
+    },
+    "historical_selected_rows_with_duplicates": {
+      "confirmed_coverage_percent": null,
+      "covered": 0,
+      "observed_zero": 0,
+      "total": 0,
+      "unresolved": 0
+    },
+    "local_callable_candidates_name_filtered": {
+      "confirmed_coverage_percent": 66.66666666666667,
+      "covered": 6,
+      "observed_zero": 2,
+      "total": 9,
+      "unresolved": 1
+    },
+    "local_callable_candidates_unfiltered": {
+      "confirmed_coverage_percent": 66.66666666666667,
+      "covered": 6,
+      "observed_zero": 2,
+      "total": 9,
+      "unresolved": 1
+    }
+  },
+  "has_function_records": true,
+  "legacy_segment_diagnostic": {
+    "covered_rows": 0,
+    "percent": null,
+    "total_rows": 0,
+    "validity": "historical line-region rule, not validated API-entry coverage"
+  },
+  "mapping_policy": "unique_exact_function_entry_position_v1",
+  "schema": "graft-coverage-audit-v1",
+  "status": "conservative_existing_export_audit_not_new_fuzzing_result",
+  "universe_sha256": "bb5f60601fad20c228dcc736f7113a6f7a49ae3386eb6fbbec4f4f735966e72d",
+  "unmatched_functions": [
+    {
+      "begin": [
+        37,
+        24
+      ],
+      "candidate_api_ids": [],
+      "file": "src/lib.rs",
+      "name": "_RNvCsjuFPtrpt5WS_16coverage_fixture9macro_api",
+      "reason": "no_exact_entry"
+    }
+  ],
+  "version": "0.1.0"
+}

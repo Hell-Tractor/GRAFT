@@ -1,0 +1,19 @@
+error[E0308]: mismatched types
+  --> /tmp/graft-checked-tests-1281/combine-conflict/main.rs:1:46
+   |
+ 1 | fn main(){checked_fixture::combine(vec![1u8],checked_fixture::buffer_i32(2));}
+   |           ------------------------           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `Buffer<u8>`, found `Buffer<i32>`
+   |           |
+   |           arguments to this function are incorrect
+   |
+   = note: expected struct `Buffer<u8>`
+              found struct `Buffer<i32>`
+note: function defined here
+  --> /home/cym/workspace/GRAFT-2.0/GRAFTTool/tests/fixtures/checked_fixture.rs:76:8
+   |
+76 | pub fn combine<T>(_: Vec<T>, _: Buffer<T>) {}
+   |        ^^^^^^^
+
+error: aborting due to 1 previous error
+
+For more information about this error, try `rustc --explain E0308`.

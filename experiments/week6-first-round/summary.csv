@@ -1,0 +1,2 @@
+crate,version,seconds,run_time,execs_done,saved_crashes,saved_hangs,path,total,covered,observed_zero,unresolved,confirmed_coverage_percent
+base64,0.22.1,300,300,956031,0,0,/home/cym/workspace/graft-experiments-5min-6rounds-20261109/first-round-execution-probe-20261110/afl/default/fuzzer_stats,76,1,52,23,1.3157894736842106

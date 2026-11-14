@@ -1,0 +1,1932 @@
+{
+  "apis": [
+    {
+      "api_id": "26f5651ba528471fa2755efa3f07046768a0146a1c60e426a0ddc13b47656fef",
+      "begin": null,
+      "deprecated": false,
+      "end": null,
+      "exclusion_reasons": [
+        "external_definition"
+      ],
+      "file": null,
+      "historical_name_filter": true,
+      "historical_row_multiplicity": 0,
+      "local_callable_candidate": false,
+      "mapping_limitations": [
+        "unresolved_source_path",
+        "no_source_span"
+      ],
+      "name": "try_from",
+      "original_file": null,
+      "owners": [
+        {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "id": 1,
+              "path": "Buffer"
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              },
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "U"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          },
+                          "id": 36,
+                          "path": "Into"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "U"
+                  }
+                }
+              }
+            ]
+          },
+          "is_synthetic": false,
+          "trait": {
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "U"
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            },
+            "id": 40,
+            "path": "TryFrom"
+          }
+        }
+      ],
+      "public_name_body_definition": false,
+      "public_surface_review_item": false,
+      "public_surface_status": "external_definition",
+      "rustdoc_id": "47",
+      "selected_by_historical_doc": false,
+      "signature": {
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "value",
+              {
+                "generic": "U"
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "generic": "T"
+                      }
+                    },
+                    {
+                      "type": {
+                        "qualified_path": {
+                          "args": null,
+                          "name": "Error",
+                          "self_type": {
+                            "generic": "T"
+                          },
+                          "trait": {
+                            "args": {
+                              "angle_bracketed": {
+                                "args": [
+                                  {
+                                    "type": {
+                                      "generic": "U"
+                                    }
+                                  }
+                                ],
+                                "constraints": []
+                              }
+                            },
+                            "id": 40,
+                            "path": "TryFrom"
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "id": 42,
+              "path": "Result"
+            }
+          }
+        }
+      },
+      "source_sha256": null
+    },
+    {
+      "api_id": "3f0fc63ddfed26fb15c566fcb7e04035728cd39c76c2ee4c5a0a003dbe76cf3b",
+      "begin": [
+        95,
+        5
+      ],
+      "deprecated": false,
+      "end": [
+        97,
+        6
+      ],
+      "exclusion_reasons": [],
+      "file": "src/buffer/mod.rs",
+      "historical_name_filter": true,
+      "historical_row_multiplicity": 0,
+      "local_callable_candidate": true,
+      "mapping_limitations": [],
+      "name": "default",
+      "original_file": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ryu-1.0.23/src/buffer/mod.rs",
+      "owners": [
+        {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "id": 1,
+              "path": "Buffer"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "is_synthetic": false,
+          "trait": {
+            "args": null,
+            "id": 59,
+            "path": "Default"
+          }
+        }
+      ],
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "public_surface_status": "trait_method_on_publicly_named_receiver",
+      "rustdoc_id": "57",
+      "selected_by_historical_doc": false,
+      "signature": {
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [],
+          "is_c_variadic": false,
+          "output": {
+            "generic": "Self"
+          }
+        }
+      },
+      "source_sha256": "e29fea93a1af8e3a25e2045489f4264cf50e708c0b2edfcb51ec95582e63fcd0"
+    },
+    {
+      "api_id": "454302238845aa2a0fde76440ce78ed4c8bfa02436107bbc9b9b812f006b5d27",
+      "begin": null,
+      "deprecated": false,
+      "end": null,
+      "exclusion_reasons": [
+        "external_definition"
+      ],
+      "file": null,
+      "historical_name_filter": true,
+      "historical_row_multiplicity": 0,
+      "local_callable_candidate": false,
+      "mapping_limitations": [
+        "unresolved_source_path",
+        "no_source_span"
+      ],
+      "name": "borrow",
+      "original_file": null,
+      "owners": [
+        {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "id": 1,
+              "path": "Buffer"
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "id": 24,
+                          "path": "Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "is_synthetic": false,
+          "trait": {
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "T"
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            },
+            "id": 25,
+            "path": "Borrow"
+          }
+        }
+      ],
+      "public_name_body_definition": false,
+      "public_surface_review_item": false,
+      "public_surface_status": "external_definition",
+      "rustdoc_id": "22",
+      "selected_by_historical_doc": false,
+      "signature": {
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "borrowed_ref": {
+              "is_mutable": false,
+              "lifetime": null,
+              "type": {
+                "generic": "T"
+              }
+            }
+          }
+        }
+      },
+      "source_sha256": null
+    },
+    {
+      "api_id": "5e0c7fab874ac667fcbfe4a8778e1d271d1dd604e19cc22ed359061672ffd58f",
+      "begin": [
+        87,
+        5
+      ],
+      "deprecated": false,
+      "end": [
+        89,
+        6
+      ],
+      "exclusion_reasons": [],
+      "file": "src/buffer/mod.rs",
+      "historical_name_filter": true,
+      "historical_row_multiplicity": 0,
+      "local_callable_candidate": true,
+      "mapping_limitations": [],
+      "name": "clone",
+      "original_file": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ryu-1.0.23/src/buffer/mod.rs",
+      "owners": [
+        {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "id": 1,
+              "path": "Buffer"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "is_synthetic": false,
+          "trait": {
+            "args": null,
+            "id": 31,
+            "path": "Clone"
+          }
+        }
+      ],
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "public_surface_status": "trait_method_on_publicly_named_receiver",
+      "rustdoc_id": "55",
+      "selected_by_historical_doc": false,
+      "signature": {
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "generic": "Self"
+          }
+        }
+      },
+      "source_sha256": "e29fea93a1af8e3a25e2045489f4264cf50e708c0b2edfcb51ec95582e63fcd0"
+    },
+    {
+      "api_id": "8c80188418ebf4a6cfb275f9bc600397b48ad63be68175d1b973f9dea9250a7b",
+      "begin": [
+        52,
+        1
+      ],
+      "deprecated": false,
+      "end": [
+        118,
+        2
+      ],
+      "exclusion_reasons": [],
+      "file": "src/pretty/mod.rs",
+      "historical_name_filter": false,
+      "historical_row_multiplicity": 1,
+      "local_callable_candidate": true,
+      "mapping_limitations": [],
+      "name": "format64",
+      "original_file": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ryu-1.0.23/src/pretty/mod.rs",
+      "owners": [],
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "public_surface_status": "publicly_named_function",
+      "rustdoc_id": "84",
+      "selected_by_historical_doc": true,
+      "signature": {
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": true
+        },
+        "sig": {
+          "inputs": [
+            [
+              "f",
+              {
+                "primitive": "f64"
+              }
+            ],
+            [
+              "result",
+              {
+                "raw_pointer": {
+                  "is_mutable": true,
+                  "type": {
+                    "primitive": "u8"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "primitive": "usize"
+          }
+        }
+      },
+      "source_sha256": "49b0701a2f7b896e3ff23221761a48b4445a048d9ae63207d8934ff1969de795"
+    },
+    {
+      "api_id": "8cee2641b45d310d43b07b9032cb19fbae8fdb534156061cefaa08c4a164c0e4",
+      "begin": [
+        29,
+        5
+      ],
+      "deprecated": false,
+      "end": [
+        32,
+        6
+      ],
+      "exclusion_reasons": [],
+      "file": "src/buffer/mod.rs",
+      "historical_name_filter": false,
+      "historical_row_multiplicity": 1,
+      "local_callable_candidate": true,
+      "mapping_limitations": [],
+      "name": "new",
+      "original_file": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ryu-1.0.23/src/buffer/mod.rs",
+      "owners": [
+        {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "id": 1,
+              "path": "Buffer"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "is_synthetic": false,
+          "trait": null
+        }
+      ],
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "public_surface_status": "method_on_publicly_named_receiver",
+      "rustdoc_id": "2",
+      "selected_by_historical_doc": true,
+      "signature": {
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [],
+          "is_c_variadic": false,
+          "output": {
+            "generic": "Self"
+          }
+        }
+      },
+      "source_sha256": "e29fea93a1af8e3a25e2045489f4264cf50e708c0b2edfcb51ec95582e63fcd0"
+    },
+    {
+      "api_id": "a09e418f876a71dabea748d40c564064b6977024b27c846ad840c852c295b002",
+      "begin": null,
+      "deprecated": false,
+      "end": null,
+      "exclusion_reasons": [
+        "external_definition"
+      ],
+      "file": null,
+      "historical_name_filter": true,
+      "historical_row_multiplicity": 0,
+      "local_callable_candidate": false,
+      "mapping_limitations": [
+        "unresolved_source_path",
+        "no_source_span"
+      ],
+      "name": "try_into",
+      "original_file": null,
+      "owners": [
+        {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "id": 1,
+              "path": "Buffer"
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              },
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "U"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          },
+                          "id": 40,
+                          "path": "TryFrom"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "U"
+                  }
+                }
+              }
+            ]
+          },
+          "is_synthetic": false,
+          "trait": {
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "U"
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            },
+            "id": 44,
+            "path": "TryInto"
+          }
+        }
+      ],
+      "public_name_body_definition": false,
+      "public_surface_review_item": false,
+      "public_surface_status": "external_definition",
+      "rustdoc_id": "41",
+      "selected_by_historical_doc": false,
+      "signature": {
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "generic": "Self"
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "generic": "U"
+                      }
+                    },
+                    {
+                      "type": {
+                        "qualified_path": {
+                          "args": null,
+                          "name": "Error",
+                          "self_type": {
+                            "generic": "U"
+                          },
+                          "trait": {
+                            "args": {
+                              "angle_bracketed": {
+                                "args": [
+                                  {
+                                    "type": {
+                                      "generic": "T"
+                                    }
+                                  }
+                                ],
+                                "constraints": []
+                              }
+                            },
+                            "id": 40,
+                            "path": "TryFrom"
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "id": 42,
+              "path": "Result"
+            }
+          }
+        }
+      },
+      "source_sha256": null
+    },
+    {
+      "api_id": "a56f394c7dd2dc7815ea4d9e8f7aacc314e8e919a82dbe8fee10d4d41254c06b",
+      "begin": null,
+      "deprecated": false,
+      "end": null,
+      "exclusion_reasons": [
+        "external_definition"
+      ],
+      "file": null,
+      "historical_name_filter": true,
+      "historical_row_multiplicity": 0,
+      "local_callable_candidate": false,
+      "mapping_limitations": [
+        "unresolved_source_path",
+        "no_source_span"
+      ],
+      "name": "clone_to_uninit",
+      "original_file": null,
+      "owners": [
+        {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "id": 1,
+              "path": "Buffer"
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "id": 31,
+                          "path": "Clone"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "is_synthetic": false,
+          "trait": {
+            "args": null,
+            "id": 32,
+            "path": "CloneToUninit"
+          }
+        }
+      ],
+      "public_name_body_definition": false,
+      "public_surface_review_item": false,
+      "public_surface_status": "external_definition",
+      "rustdoc_id": "29",
+      "selected_by_historical_doc": false,
+      "signature": {
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": true
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ],
+            [
+              "dest",
+              {
+                "raw_pointer": {
+                  "is_mutable": true,
+                  "type": {
+                    "primitive": "u8"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": null
+        }
+      },
+      "source_sha256": null
+    },
+    {
+      "api_id": "a86279f5e31459466fb5ed5ef98fc32bdbc43205fc63f68eb9b7853f297e4abb",
+      "begin": null,
+      "deprecated": false,
+      "end": null,
+      "exclusion_reasons": [
+        "external_definition"
+      ],
+      "file": null,
+      "historical_name_filter": true,
+      "historical_row_multiplicity": 0,
+      "local_callable_candidate": false,
+      "mapping_limitations": [
+        "unresolved_source_path",
+        "no_source_span"
+      ],
+      "name": "borrow_mut",
+      "original_file": null,
+      "owners": [
+        {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "id": 1,
+              "path": "Buffer"
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "id": 24,
+                          "path": "Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "is_synthetic": false,
+          "trait": {
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "T"
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            },
+            "id": 28,
+            "path": "BorrowMut"
+          }
+        }
+      ],
+      "public_name_body_definition": false,
+      "public_surface_review_item": false,
+      "public_surface_status": "external_definition",
+      "rustdoc_id": "26",
+      "selected_by_historical_doc": false,
+      "signature": {
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": true,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "borrowed_ref": {
+              "is_mutable": true,
+              "lifetime": null,
+              "type": {
+                "generic": "T"
+              }
+            }
+          }
+        }
+      },
+      "source_sha256": null
+    },
+    {
+      "api_id": "c1368d7843fe78e623e8cb71c0317ccb2b6d56499ff61993eecbaeb7e37e829b",
+      "begin": null,
+      "deprecated": false,
+      "end": null,
+      "exclusion_reasons": [
+        "external_definition"
+      ],
+      "file": null,
+      "historical_name_filter": true,
+      "historical_row_multiplicity": 0,
+      "local_callable_candidate": false,
+      "mapping_limitations": [
+        "unresolved_source_path",
+        "no_source_span"
+      ],
+      "name": "into",
+      "original_file": null,
+      "owners": [
+        {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "id": 1,
+              "path": "Buffer"
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              },
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "U"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          },
+                          "id": 33,
+                          "path": "From"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "U"
+                  }
+                }
+              }
+            ]
+          },
+          "is_synthetic": false,
+          "trait": {
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "U"
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            },
+            "id": 36,
+            "path": "Into"
+          }
+        }
+      ],
+      "public_name_body_definition": false,
+      "public_surface_review_item": false,
+      "public_surface_status": "external_definition",
+      "rustdoc_id": "34",
+      "selected_by_historical_doc": false,
+      "signature": {
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "generic": "Self"
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "generic": "U"
+          }
+        }
+      },
+      "source_sha256": null
+    },
+    {
+      "api_id": "c1c67e5022901e87720bb049c854280c5f4589e22d426dd8bc7c51fe154c989b",
+      "begin": [
+        112,
+        5
+      ],
+      "deprecated": false,
+      "end": [
+        112,
+        67
+      ],
+      "exclusion_reasons": [
+        "not_public_or_trait_impl",
+        "trait_declaration_requires_surface_review",
+        "no_body"
+      ],
+      "file": "src/buffer/mod.rs",
+      "historical_name_filter": false,
+      "historical_row_multiplicity": 0,
+      "local_callable_candidate": false,
+      "mapping_limitations": [],
+      "name": "write_to_ryu_buffer",
+      "original_file": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ryu-1.0.23/src/buffer/mod.rs",
+      "owners": [
+        {
+          "trait_declaration": "Sealed"
+        }
+      ],
+      "public_name_body_definition": false,
+      "public_surface_review_item": true,
+      "public_surface_status": "owner_visibility_or_applicability_unresolved",
+      "rustdoc_id": "65",
+      "selected_by_historical_doc": false,
+      "signature": {
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": false,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": true
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "generic": "Self"
+              }
+            ],
+            [
+              "result",
+              {
+                "raw_pointer": {
+                  "is_mutable": true,
+                  "type": {
+                    "primitive": "u8"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "primitive": "usize"
+          }
+        }
+      },
+      "source_sha256": "e29fea93a1af8e3a25e2045489f4264cf50e708c0b2edfcb51ec95582e63fcd0"
+    },
+    {
+      "api_id": "c4fb973d39689c6b291167dff31c855af826bc874502590388899895ed7d00ba",
+      "begin": [
+        47,
+        5
+      ],
+      "deprecated": false,
+      "end": [
+        53,
+        6
+      ],
+      "exclusion_reasons": [],
+      "file": "src/buffer/mod.rs",
+      "historical_name_filter": false,
+      "historical_row_multiplicity": 1,
+      "local_callable_candidate": true,
+      "mapping_limitations": [],
+      "name": "format",
+      "original_file": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ryu-1.0.23/src/buffer/mod.rs",
+      "owners": [
+        {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "id": 1,
+              "path": "Buffer"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "is_synthetic": false,
+          "trait": null
+        }
+      ],
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "public_surface_status": "method_on_publicly_named_receiver",
+      "rustdoc_id": "3",
+      "selected_by_historical_doc": true,
+      "signature": {
+        "generics": {
+          "params": [
+            {
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "id": 4,
+                          "path": "Float"
+                        }
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              },
+              "name": "F"
+            }
+          ],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": true,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ],
+            [
+              "f",
+              {
+                "generic": "F"
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "borrowed_ref": {
+              "is_mutable": false,
+              "lifetime": null,
+              "type": {
+                "primitive": "str"
+              }
+            }
+          }
+        }
+      },
+      "source_sha256": "e29fea93a1af8e3a25e2045489f4264cf50e708c0b2edfcb51ec95582e63fcd0"
+    },
+    {
+      "api_id": "df2f4ed3abc86bbbd46dcecdfebf7400b8f531d7dcf4de296cbcb26150c285fc",
+      "begin": null,
+      "deprecated": false,
+      "end": null,
+      "exclusion_reasons": [
+        "external_definition"
+      ],
+      "file": null,
+      "historical_name_filter": true,
+      "historical_row_multiplicity": 0,
+      "local_callable_candidate": false,
+      "mapping_limitations": [
+        "unresolved_source_path",
+        "no_source_span"
+      ],
+      "name": "from",
+      "original_file": null,
+      "owners": [
+        {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "id": 1,
+              "path": "Buffer"
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": []
+          },
+          "is_synthetic": false,
+          "trait": {
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "generic": "T"
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            },
+            "id": 33,
+            "path": "From"
+          }
+        }
+      ],
+      "public_name_body_definition": false,
+      "public_surface_review_item": false,
+      "public_surface_status": "external_definition",
+      "rustdoc_id": "37",
+      "selected_by_historical_doc": false,
+      "signature": {
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "t",
+              {
+                "generic": "T"
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "generic": "T"
+          }
+        }
+      },
+      "source_sha256": null
+    },
+    {
+      "api_id": "e3657102ca86262e8c53a1572d7a437cb18a4de9aea3ccaa87486c08dcd4cd61",
+      "begin": [
+        110,
+        5
+      ],
+      "deprecated": false,
+      "end": [
+        110,
+        35
+      ],
+      "exclusion_reasons": [
+        "not_public_or_trait_impl",
+        "trait_declaration_requires_surface_review",
+        "no_body"
+      ],
+      "file": "src/buffer/mod.rs",
+      "historical_name_filter": false,
+      "historical_row_multiplicity": 0,
+      "local_callable_candidate": false,
+      "mapping_limitations": [],
+      "name": "is_nonfinite",
+      "original_file": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ryu-1.0.23/src/buffer/mod.rs",
+      "owners": [
+        {
+          "trait_declaration": "Sealed"
+        }
+      ],
+      "public_name_body_definition": false,
+      "public_surface_review_item": true,
+      "public_surface_status": "owner_visibility_or_applicability_unresolved",
+      "rustdoc_id": "63",
+      "selected_by_historical_doc": false,
+      "signature": {
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": false,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "generic": "Self"
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "primitive": "bool"
+          }
+        }
+      },
+      "source_sha256": "e29fea93a1af8e3a25e2045489f4264cf50e708c0b2edfcb51ec95582e63fcd0"
+    },
+    {
+      "api_id": "e7bd79aa78b8cd2192bc472bf324463de397e594c59be376441a8aad268c55eb",
+      "begin": [
+        72,
+        5
+      ],
+      "deprecated": false,
+      "end": [
+        79,
+        6
+      ],
+      "exclusion_reasons": [],
+      "file": "src/buffer/mod.rs",
+      "historical_name_filter": false,
+      "historical_row_multiplicity": 1,
+      "local_callable_candidate": true,
+      "mapping_limitations": [],
+      "name": "format_finite",
+      "original_file": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ryu-1.0.23/src/buffer/mod.rs",
+      "owners": [
+        {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "id": 1,
+              "path": "Buffer"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "is_synthetic": false,
+          "trait": null
+        }
+      ],
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "public_surface_status": "method_on_publicly_named_receiver",
+      "rustdoc_id": "8",
+      "selected_by_historical_doc": true,
+      "signature": {
+        "generics": {
+          "params": [
+            {
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "id": 4,
+                          "path": "Float"
+                        }
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              },
+              "name": "F"
+            }
+          ],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": true,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ],
+            [
+              "f",
+              {
+                "generic": "F"
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "borrowed_ref": {
+              "is_mutable": false,
+              "lifetime": null,
+              "type": {
+                "primitive": "str"
+              }
+            }
+          }
+        }
+      },
+      "source_sha256": "e29fea93a1af8e3a25e2045489f4264cf50e708c0b2edfcb51ec95582e63fcd0"
+    },
+    {
+      "api_id": "f0403eb3b28721bed6024a621baf8477f2beec64fc5c05bf8c43e7f712efd75a",
+      "begin": [
+        111,
+        5
+      ],
+      "deprecated": false,
+      "end": [
+        111,
+        47
+      ],
+      "exclusion_reasons": [
+        "not_public_or_trait_impl",
+        "trait_declaration_requires_surface_review",
+        "no_body"
+      ],
+      "file": "src/buffer/mod.rs",
+      "historical_name_filter": false,
+      "historical_row_multiplicity": 0,
+      "local_callable_candidate": false,
+      "mapping_limitations": [],
+      "name": "format_nonfinite",
+      "original_file": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ryu-1.0.23/src/buffer/mod.rs",
+      "owners": [
+        {
+          "trait_declaration": "Sealed"
+        }
+      ],
+      "public_name_body_definition": false,
+      "public_surface_review_item": true,
+      "public_surface_status": "owner_visibility_or_applicability_unresolved",
+      "rustdoc_id": "64",
+      "selected_by_historical_doc": false,
+      "signature": {
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": false,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "generic": "Self"
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "borrowed_ref": {
+              "is_mutable": false,
+              "lifetime": "'static",
+              "type": {
+                "primitive": "str"
+              }
+            }
+          }
+        }
+      },
+      "source_sha256": "e29fea93a1af8e3a25e2045489f4264cf50e708c0b2edfcb51ec95582e63fcd0"
+    },
+    {
+      "api_id": "f607c6b67eaf13d02a60e6da3afcb1f826329f059e0e656a4560cc65aa12e65f",
+      "begin": [
+        159,
+        1
+      ],
+      "deprecated": false,
+      "end": [
+        224,
+        2
+      ],
+      "exclusion_reasons": [],
+      "file": "src/pretty/mod.rs",
+      "historical_name_filter": false,
+      "historical_row_multiplicity": 1,
+      "local_callable_candidate": true,
+      "mapping_limitations": [],
+      "name": "format32",
+      "original_file": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ryu-1.0.23/src/pretty/mod.rs",
+      "owners": [],
+      "public_name_body_definition": true,
+      "public_surface_review_item": false,
+      "public_surface_status": "publicly_named_function",
+      "rustdoc_id": "88",
+      "selected_by_historical_doc": true,
+      "signature": {
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": true
+        },
+        "sig": {
+          "inputs": [
+            [
+              "f",
+              {
+                "primitive": "f32"
+              }
+            ],
+            [
+              "result",
+              {
+                "raw_pointer": {
+                  "is_mutable": true,
+                  "type": {
+                    "primitive": "u8"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "primitive": "usize"
+          }
+        }
+      },
+      "source_sha256": "49b0701a2f7b896e3ff23221761a48b4445a048d9ae63207d8934ff1969de795"
+    },
+    {
+      "api_id": "fd1aaf8483a411f1e5ce6c71625a4391d436580eefe43ac90097363220c676aa",
+      "begin": null,
+      "deprecated": false,
+      "end": null,
+      "exclusion_reasons": [
+        "external_definition"
+      ],
+      "file": null,
+      "historical_name_filter": true,
+      "historical_row_multiplicity": 0,
+      "local_callable_candidate": false,
+      "mapping_limitations": [
+        "unresolved_source_path",
+        "no_source_span"
+      ],
+      "name": "type_id",
+      "original_file": null,
+      "owners": [
+        {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "id": 1,
+              "path": "Buffer"
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "outlives": "'static"
+                    },
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "id": 24,
+                          "path": "Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "is_synthetic": false,
+          "trait": {
+            "args": null,
+            "id": 52,
+            "path": "Any"
+          }
+        }
+      ],
+      "public_name_body_definition": false,
+      "public_surface_review_item": false,
+      "public_surface_status": "external_definition",
+      "rustdoc_id": "49",
+      "selected_by_historical_doc": false,
+      "signature": {
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": null,
+              "id": 50,
+              "path": "TypeId"
+            }
+          }
+        }
+      },
+      "source_sha256": null
+    }
+  ],
+  "crate": "ryu",
+  "filter_names": [
+    "add",
+    "as_mut",
+    "as_ref",
+    "bit_and",
+    "bit_or",
+    "bit_xor",
+    "borrow",
+    "borrow_mut",
+    "clone",
+    "clone_from",
+    "clone_into",
+    "clone_to_uninit",
+    "default",
+    "deref",
+    "deref_mut",
+    "deserialize",
+    "deserialize_with",
+    "div",
+    "drop",
+    "eq",
+    "fmt",
+    "from",
+    "ge",
+    "gt",
+    "into",
+    "into_iter",
+    "iter",
+    "iter_mut",
+    "le",
+    "lt",
+    "mul",
+    "ne",
+    "neg",
+    "not",
+    "rem",
+    "serialize",
+    "serialize_with",
+    "shl",
+    "shr",
+    "sub",
+    "to_owned",
+    "to_string",
+    "try_from",
+    "try_into",
+    "type_id"
+  ],
+  "historical_apidoc_rows": 5,
+  "historical_duplicate_rows": 0,
+  "includes_private": false,
+  "input_doc_sha256": "71477e2142d6b40e99e5a8225807c5c1862513e00856a5737f9039186827bd50",
+  "original_universe_sha256": "af7ef0c5755dadd36a805143a7c8f7631c5216b15caad89028f66c86dbe2267d",
+  "public_surface_policy": {
+    "crosscheck_semantic_sha256": "f7bc0421d8aa6c1235231f456a138722c951e62e61313db67c97152da24f409c",
+    "declarations_without_body": "separately reported; not an instrumentable function definition",
+    "impl_obligations": "included syntactically; no satisfiability or constructibility guarantee",
+    "name": "publicly_named_crate_owned_function_definitions_with_body_v1",
+    "source": "rustdoc adapter publicly importable paths and associated receiver/trait owners",
+    "unknown_items": "retained separately for sensitivity, not silently classified public or private"
+  },
+  "rustdoc_format": 57,
+  "schema": "graft-api-snapshot-v1",
+  "source_root": null,
+  "status": "frozen_historical_audit_not_validated_public_surface",
+  "surface_limitations": [
+    "module/reexport visibility and impl usability require review",
+    "generic instantiations are not separate API items",
+    "external trait bodies remain explicit historical entries"
+  ],
+  "universe_sha256": "658ede759a3b84e5ebf65c982dd5b574e184f73f141134186bf6cff2cf6fa397",
+  "version": "1.0.23"
+}

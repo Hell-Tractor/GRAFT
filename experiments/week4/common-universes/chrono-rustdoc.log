@@ -1,0 +1,5 @@
+   Compiling autocfg v1.5.0
+    Checking iana-time-zone v0.1.65
+   Compiling num-traits v0.2.19
+ Documenting chrono v0.4.44
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.67s

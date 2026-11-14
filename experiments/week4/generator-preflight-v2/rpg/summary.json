@@ -1,0 +1,1044 @@
+[
+  {
+    "crate": "autocfg",
+    "version": "1.5.0",
+    "tool": "rpg",
+    "scope": "default-feature generator compatibility and first-two-replay compilation; not a coverage run",
+    "generation": {
+      "command": [
+        "/Rust-Lib-Testing/rust1.65/bin/cargo",
+        "--config",
+        "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/.cargo/config.toml",
+        "doc",
+        "--manifest-path",
+        "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/Cargo.toml",
+        "--frozen",
+        "--offline",
+        "--jobs",
+        "8",
+        "--no-deps",
+        "--package",
+        "autocfg@1.5.0"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "seconds": 0.619456266053021,
+      "log": "/results/autocfg/generation.log"
+    },
+    "generated_target_count": 25,
+    "generated_replay_count": 25,
+    "generated_target_sha256": {
+      "/results/autocfg/fuzz_target/autocfg_bfs_generic_fuzz/test_files/test_autocfg0.rs": "b727337f0a4a73a62c4438bcf4ba71b12e856db23b5334b62725f3d8c506bf4f",
+      "/results/autocfg/fuzz_target/autocfg_bfs_generic_fuzz/test_files/test_autocfg1.rs": "f312d22c688e4d87fca9f2e7aea28a1e5bdea8ce9b121938344009e60a571948",
+      "/results/autocfg/fuzz_target/autocfg_bfs_generic_fuzz/test_files/test_autocfg10.rs": "e33c93261b9bd5237fb3cf019825e6746769eb741a4e82473f831429b34c2ca0",
+      "/results/autocfg/fuzz_target/autocfg_bfs_generic_fuzz/test_files/test_autocfg11.rs": "ebe3ec32226c3f9630d7031385d09ffb8cd88c6b4bf226e7903552733cbcbd22",
+      "/results/autocfg/fuzz_target/autocfg_bfs_generic_fuzz/test_files/test_autocfg12.rs": "f2ea2b929e63547b4ca3c81de1414a7a819ad811ce32ff967acee0ad985e0abf",
+      "/results/autocfg/fuzz_target/autocfg_bfs_generic_fuzz/test_files/test_autocfg13.rs": "ef6530b00f4b683b5d5d93b985f083fa71af4b7a113f1205d14eb1a411b9a60c",
+      "/results/autocfg/fuzz_target/autocfg_bfs_generic_fuzz/test_files/test_autocfg14.rs": "6605e5a8a59ff89104d1a788acabd47cb99e1f23f0931c7e2c65ea7d2599031d",
+      "/results/autocfg/fuzz_target/autocfg_bfs_generic_fuzz/test_files/test_autocfg15.rs": "cc137ff6e8d0750773a9dc91cb2bc3e7a84e7020ce043318fa1071e5953235e2",
+      "/results/autocfg/fuzz_target/autocfg_bfs_generic_fuzz/test_files/test_autocfg16.rs": "ae3d18030786209cde361ef4274690d5ddd5cb83240a9a14df22eadb3b650aa8",
+      "/results/autocfg/fuzz_target/autocfg_bfs_generic_fuzz/test_files/test_autocfg17.rs": "ae838544154f7001da9f8b30c4c74782f0676c73ce1a12607bed89119f4c5d59",
+      "/results/autocfg/fuzz_target/autocfg_bfs_generic_fuzz/test_files/test_autocfg18.rs": "f4ea540024879396fddc247b9bf714c305c62d65da1fc3330eb715a20f78fbea",
+      "/results/autocfg/fuzz_target/autocfg_bfs_generic_fuzz/test_files/test_autocfg19.rs": "0f708e5f0c7e6b5aa6a99b4be9eba93ab8039a93ab880fdf096da40351c75e85",
+      "/results/autocfg/fuzz_target/autocfg_bfs_generic_fuzz/test_files/test_autocfg2.rs": "d525fd6d6b60aa6e3ae715d3abf70ff6e30c85bd81a46007442744b3d9d74958",
+      "/results/autocfg/fuzz_target/autocfg_bfs_generic_fuzz/test_files/test_autocfg20.rs": "bb940e4ce6988e8894f589725600a54576061737aae308f349cb475ef51e1c45",
+      "/results/autocfg/fuzz_target/autocfg_bfs_generic_fuzz/test_files/test_autocfg21.rs": "63b40dec4994b1a24d4b0a8af6bec8dd5114dc444d2fdb737887471d19f1dafc",
+      "/results/autocfg/fuzz_target/autocfg_bfs_generic_fuzz/test_files/test_autocfg22.rs": "f7f9951edfca038c6d223c01d79a56d4d158af0c397a4c4e085f1897bcfb788f",
+      "/results/autocfg/fuzz_target/autocfg_bfs_generic_fuzz/test_files/test_autocfg23.rs": "0890ad0d0a9a55cc729736555e3e5fed34d1cbab9c6f6c1849b30d3daf2777bf",
+      "/results/autocfg/fuzz_target/autocfg_bfs_generic_fuzz/test_files/test_autocfg24.rs": "15a82e2c0821fddecb281668828820e5694638e6eb56cbaa57a6edcb1bc16166",
+      "/results/autocfg/fuzz_target/autocfg_bfs_generic_fuzz/test_files/test_autocfg3.rs": "4cc530a6a134996523c99db4e6060b3d84188c8d9276625bfd57dc377175c08d",
+      "/results/autocfg/fuzz_target/autocfg_bfs_generic_fuzz/test_files/test_autocfg4.rs": "e28570f8ffc83244a35784e326b502d119bba1356a670501ec2db56b2c443345",
+      "/results/autocfg/fuzz_target/autocfg_bfs_generic_fuzz/test_files/test_autocfg5.rs": "fa1b2547d8d024525a7874deb4edab3024c0476010e77821729016fbf8ae10c4",
+      "/results/autocfg/fuzz_target/autocfg_bfs_generic_fuzz/test_files/test_autocfg6.rs": "cd35bff19e72df85abc4386c8ca970e1c1d54e88913554faaf9ad251a8f42365",
+      "/results/autocfg/fuzz_target/autocfg_bfs_generic_fuzz/test_files/test_autocfg7.rs": "c394841a11183aac68e9d18be7289dd159c6966d079c49fdb0de75b3170508f4",
+      "/results/autocfg/fuzz_target/autocfg_bfs_generic_fuzz/test_files/test_autocfg8.rs": "39b05b1e25ec40c4d737fbf0329b8f7b8aae6e6cb9d978c185a893ea0b00b0c3",
+      "/results/autocfg/fuzz_target/autocfg_bfs_generic_fuzz/test_files/test_autocfg9.rs": "702ae041ef419420a901cd790b6fd434850f954a46dea9b4e7cd2aefe1f5aaa3"
+    },
+    "replay_compilation": [
+      {
+        "command": [
+          "/Rust-Lib-Testing/rust1.65/bin/rustc",
+          "--edition=2021",
+          "/results/autocfg/fuzz_target/autocfg_bfs_generic_fuzz/replay_files/replay_autocfg0.rs",
+          "--extern",
+          "autocfg=/build/debug/deps/libautocfg-51123c3875ce9427.rlib",
+          "-L",
+          "dependency=/build/debug/deps",
+          "-o",
+          "/results/autocfg/replay-0"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.18879340193234384,
+        "log": "/results/autocfg/compile-0.log"
+      },
+      {
+        "command": [
+          "/Rust-Lib-Testing/rust1.65/bin/rustc",
+          "--edition=2021",
+          "/results/autocfg/fuzz_target/autocfg_bfs_generic_fuzz/replay_files/replay_autocfg1.rs",
+          "--extern",
+          "autocfg=/build/debug/deps/libautocfg-51123c3875ce9427.rlib",
+          "-L",
+          "dependency=/build/debug/deps",
+          "-o",
+          "/results/autocfg/replay-1"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.18620772589929402,
+        "log": "/results/autocfg/compile-1.log"
+      }
+    ],
+    "replay_execution": "not_run: unsafe contracts / parsing assumptions of generated real-library harnesses not yet reviewed"
+  },
+  {
+    "crate": "base64",
+    "version": "0.22.1",
+    "tool": "rpg",
+    "scope": "default-feature generator compatibility and first-two-replay compilation; not a coverage run",
+    "generation": {
+      "command": [
+        "/Rust-Lib-Testing/rust1.65/bin/cargo",
+        "--config",
+        "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/.cargo/config.toml",
+        "doc",
+        "--manifest-path",
+        "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/Cargo.toml",
+        "--frozen",
+        "--offline",
+        "--jobs",
+        "8",
+        "--no-deps",
+        "--package",
+        "base64@0.22.1"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "seconds": 0.5332098128274083,
+      "log": "/results/base64/generation.log"
+    },
+    "generated_target_count": 4,
+    "generated_replay_count": 4,
+    "generated_target_sha256": {
+      "/results/base64/fuzz_target/base64_bfs_generic_fuzz/test_files/test_base640.rs": "6b3af88e6adbf1313e141c074c91758632da60babe1b30e8f4a2a2d65845e743",
+      "/results/base64/fuzz_target/base64_bfs_generic_fuzz/test_files/test_base641.rs": "c7a89aeb3af0f28efdcf344800afaeac03d3a58bcc0e302d6b46a4f06c982e92",
+      "/results/base64/fuzz_target/base64_bfs_generic_fuzz/test_files/test_base642.rs": "2504be64ea2219ca2b30765b63471798efb803a3809b511caba989517497c5c5",
+      "/results/base64/fuzz_target/base64_bfs_generic_fuzz/test_files/test_base643.rs": "aed56abe69e9151fd6b4a3e96592768164a60153c26860bc7e638ec53f579615"
+    },
+    "replay_compilation": [
+      {
+        "command": [
+          "/Rust-Lib-Testing/rust1.65/bin/rustc",
+          "--edition=2021",
+          "/results/base64/fuzz_target/base64_bfs_generic_fuzz/replay_files/replay_base640.rs",
+          "--extern",
+          "base64=/build/debug/deps/libbase64-081bcb328dc1f830.rlib",
+          "-L",
+          "dependency=/build/debug/deps",
+          "-o",
+          "/results/base64/replay-0"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.16971346992067993,
+        "log": "/results/base64/compile-0.log"
+      },
+      {
+        "command": [
+          "/Rust-Lib-Testing/rust1.65/bin/rustc",
+          "--edition=2021",
+          "/results/base64/fuzz_target/base64_bfs_generic_fuzz/replay_files/replay_base641.rs",
+          "--extern",
+          "base64=/build/debug/deps/libbase64-081bcb328dc1f830.rlib",
+          "-L",
+          "dependency=/build/debug/deps",
+          "-o",
+          "/results/base64/replay-1"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.1692171199247241,
+        "log": "/results/base64/compile-1.log"
+      }
+    ],
+    "replay_execution": "not_run: unsafe contracts / parsing assumptions of generated real-library harnesses not yet reviewed"
+  },
+  {
+    "crate": "bumpalo",
+    "version": "3.14.0",
+    "tool": "rpg",
+    "scope": "default-feature generator compatibility and first-two-replay compilation; not a coverage run",
+    "generation": {
+      "command": [
+        "/Rust-Lib-Testing/rust1.65/bin/cargo",
+        "--config",
+        "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/.cargo/config.toml",
+        "doc",
+        "--manifest-path",
+        "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/Cargo.toml",
+        "--frozen",
+        "--offline",
+        "--jobs",
+        "8",
+        "--no-deps",
+        "--package",
+        "bumpalo@3.14.0"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "seconds": 1.2127452048007399,
+      "log": "/results/bumpalo/generation.log"
+    },
+    "generated_target_count": 10,
+    "generated_replay_count": 10,
+    "generated_target_sha256": {
+      "/results/bumpalo/fuzz_target/bumpalo_bfs_generic_fuzz/test_files/test_bumpalo0.rs": "c8f281002b06132206140a1e93194304112ba76a169c56b3c0b15e3a998a3ca0",
+      "/results/bumpalo/fuzz_target/bumpalo_bfs_generic_fuzz/test_files/test_bumpalo1.rs": "0c73bd687341db8134b090448f5b28bfd167fd9c5395682141581ac2adcf0fa9",
+      "/results/bumpalo/fuzz_target/bumpalo_bfs_generic_fuzz/test_files/test_bumpalo2.rs": "41a8e2f674896f946bf80f7f93b5047258f49148d11a7e208c953a99e2225bbd",
+      "/results/bumpalo/fuzz_target/bumpalo_bfs_generic_fuzz/test_files/test_bumpalo3.rs": "f58b3bcb16d7ed37de0085197a20cb77342a906c3ac45ce32ea7ae256ca3ba51",
+      "/results/bumpalo/fuzz_target/bumpalo_bfs_generic_fuzz/test_files/test_bumpalo4.rs": "0da064c3a6ba4fcccdb98a7a196398c313c310db77e4f1b1df711bbd014fa369",
+      "/results/bumpalo/fuzz_target/bumpalo_bfs_generic_fuzz/test_files/test_bumpalo5.rs": "d02b6aa4dc75ed7351eba540a226ce3f3c570260e4f80cd9662df5e0ad9cbdcc",
+      "/results/bumpalo/fuzz_target/bumpalo_bfs_generic_fuzz/test_files/test_bumpalo6.rs": "4c1065909acdaea313d8da37b190fb57f8fa66c72cf16b647c562c21f10c052d",
+      "/results/bumpalo/fuzz_target/bumpalo_bfs_generic_fuzz/test_files/test_bumpalo7.rs": "0f86a1fcd52d92bd92d060844e3e6692cbbbc441aaee7dee00b3af6a84ff2e70",
+      "/results/bumpalo/fuzz_target/bumpalo_bfs_generic_fuzz/test_files/test_bumpalo8.rs": "5bbfa3e89696a294ddb4d1422dec370e7d05e4ac1408449036adbf1f30ee32ad",
+      "/results/bumpalo/fuzz_target/bumpalo_bfs_generic_fuzz/test_files/test_bumpalo9.rs": "fe086dd9b85b323a682c136eda29c2a684bbc3f6f8fa9b5e777f151f94eb656b"
+    },
+    "replay_compilation": [
+      {
+        "command": [
+          "/Rust-Lib-Testing/rust1.65/bin/rustc",
+          "--edition=2021",
+          "/results/bumpalo/fuzz_target/bumpalo_bfs_generic_fuzz/replay_files/replay_bumpalo0.rs",
+          "--extern",
+          "bumpalo=/build/debug/deps/libbumpalo-7d86cec4ca148279.rlib",
+          "-L",
+          "dependency=/build/debug/deps",
+          "-o",
+          "/results/bumpalo/replay-0"
+        ],
+        "returncode": 1,
+        "timed_out": false,
+        "seconds": 0.04019513912498951,
+        "log": "/results/bumpalo/compile-0.log"
+      },
+      {
+        "command": [
+          "/Rust-Lib-Testing/rust1.65/bin/rustc",
+          "--edition=2021",
+          "/results/bumpalo/fuzz_target/bumpalo_bfs_generic_fuzz/replay_files/replay_bumpalo1.rs",
+          "--extern",
+          "bumpalo=/build/debug/deps/libbumpalo-7d86cec4ca148279.rlib",
+          "-L",
+          "dependency=/build/debug/deps",
+          "-o",
+          "/results/bumpalo/replay-1"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.1721017260570079,
+        "log": "/results/bumpalo/compile-1.log"
+      }
+    ],
+    "replay_execution": "not_run: unsafe contracts / parsing assumptions of generated real-library harnesses not yet reviewed"
+  },
+  {
+    "crate": "byteorder",
+    "version": "1.5.0",
+    "tool": "rpg",
+    "scope": "default-feature generator compatibility and first-two-replay compilation; not a coverage run",
+    "generation": {
+      "command": [
+        "/Rust-Lib-Testing/rust1.65/bin/cargo",
+        "--config",
+        "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/.cargo/config.toml",
+        "doc",
+        "--manifest-path",
+        "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/Cargo.toml",
+        "--frozen",
+        "--offline",
+        "--jobs",
+        "8",
+        "--no-deps",
+        "--package",
+        "byteorder@1.5.0"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "seconds": 0.4910465411376208,
+      "log": "/results/byteorder/generation.log"
+    },
+    "generated_target_count": 12,
+    "generated_replay_count": 12,
+    "generated_target_sha256": {
+      "/results/byteorder/fuzz_target/byteorder_bfs_generic_fuzz/test_files/test_byteorder0.rs": "13fe6cc0f001b0eabf2b03bb1e506a34669f60814b063da4217d99f5b4e087da",
+      "/results/byteorder/fuzz_target/byteorder_bfs_generic_fuzz/test_files/test_byteorder1.rs": "fcfde8048396ae0abd834231eaa31567ee791fa080109746a8be8f6d407d37af",
+      "/results/byteorder/fuzz_target/byteorder_bfs_generic_fuzz/test_files/test_byteorder10.rs": "ee8fc73fafb3ce1364ff2c1b91e5a22ecd62725e16c89e6a6db77d4aad9374db",
+      "/results/byteorder/fuzz_target/byteorder_bfs_generic_fuzz/test_files/test_byteorder11.rs": "780890fdef84e8cb5780d4b1ab779027f7655dca76afd0c6cf8fb3d86ad9c9a0",
+      "/results/byteorder/fuzz_target/byteorder_bfs_generic_fuzz/test_files/test_byteorder2.rs": "4c93dfa7f7161cfe7978ada2baae2ec1870ffa0405d26dd9d73cf6e706ae7937",
+      "/results/byteorder/fuzz_target/byteorder_bfs_generic_fuzz/test_files/test_byteorder3.rs": "6620731828bdc9e135b4d9f9969a80950172dc67b0091b928c0df715cbf1fbb9",
+      "/results/byteorder/fuzz_target/byteorder_bfs_generic_fuzz/test_files/test_byteorder4.rs": "acea7bcb2f88a3a59892a31c90bcfe2b876e85c7a9f23b2fa6c37dc2e43cbec2",
+      "/results/byteorder/fuzz_target/byteorder_bfs_generic_fuzz/test_files/test_byteorder5.rs": "88412b70e3c5e8335fefcd70ab5ec75e402c992e8a3640f38c1fedef6f757189",
+      "/results/byteorder/fuzz_target/byteorder_bfs_generic_fuzz/test_files/test_byteorder6.rs": "7d224ab47857d60fb5c492a35c15bd11cdb6dbe204e98316bcb03e285366b6cc",
+      "/results/byteorder/fuzz_target/byteorder_bfs_generic_fuzz/test_files/test_byteorder7.rs": "78de1c5d84653267e8bc0fbf39bc3c1d201ed28a1aa39e942fa057ed130b6074",
+      "/results/byteorder/fuzz_target/byteorder_bfs_generic_fuzz/test_files/test_byteorder8.rs": "e95971403490511797b66c96785a27c37e56a2cc13a82fc41641a6075ec481b4",
+      "/results/byteorder/fuzz_target/byteorder_bfs_generic_fuzz/test_files/test_byteorder9.rs": "5c65dabbdac7e83ca2467cd7dc17461ba2c0ae0f3b3b58b8dbcad356545d50a3"
+    },
+    "replay_compilation": [
+      {
+        "command": [
+          "/Rust-Lib-Testing/rust1.65/bin/rustc",
+          "--edition=2021",
+          "/results/byteorder/fuzz_target/byteorder_bfs_generic_fuzz/replay_files/replay_byteorder0.rs",
+          "--extern",
+          "byteorder=/build/debug/deps/libbyteorder-cc4e3dfe75154d63.rlib",
+          "-L",
+          "dependency=/build/debug/deps",
+          "-o",
+          "/results/byteorder/replay-0"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.16468181600794196,
+        "log": "/results/byteorder/compile-0.log"
+      },
+      {
+        "command": [
+          "/Rust-Lib-Testing/rust1.65/bin/rustc",
+          "--edition=2021",
+          "/results/byteorder/fuzz_target/byteorder_bfs_generic_fuzz/replay_files/replay_byteorder1.rs",
+          "--extern",
+          "byteorder=/build/debug/deps/libbyteorder-cc4e3dfe75154d63.rlib",
+          "-L",
+          "dependency=/build/debug/deps",
+          "-o",
+          "/results/byteorder/replay-1"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.1630263589322567,
+        "log": "/results/byteorder/compile-1.log"
+      }
+    ],
+    "replay_execution": "not_run: unsafe contracts / parsing assumptions of generated real-library harnesses not yet reviewed"
+  },
+  {
+    "crate": "bytes",
+    "version": "1.11.1",
+    "tool": "rpg",
+    "scope": "default-feature generator compatibility and first-two-replay compilation; not a coverage run",
+    "generation": {
+      "command": [
+        "/Rust-Lib-Testing/rust1.65/bin/cargo",
+        "--config",
+        "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/.cargo/config.toml",
+        "doc",
+        "--manifest-path",
+        "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/Cargo.toml",
+        "--frozen",
+        "--offline",
+        "--jobs",
+        "8",
+        "--no-deps",
+        "--package",
+        "bytes@1.11.1"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "seconds": 23.027949953917414,
+      "log": "/results/bytes/generation.log"
+    },
+    "generated_target_count": 33,
+    "generated_replay_count": 33,
+    "generated_target_sha256": {
+      "/results/bytes/fuzz_target/bytes_bfs_generic_fuzz/test_files/test_bytes0.rs": "ff21f993f7c3bab7b0c5368169844270d07c7c6cb453e5d60080b2dd0f927b85",
+      "/results/bytes/fuzz_target/bytes_bfs_generic_fuzz/test_files/test_bytes1.rs": "d56840c9a25acb3dda35a0d4fb5b3e3aa6375412a6a089a915c6a950a092e905",
+      "/results/bytes/fuzz_target/bytes_bfs_generic_fuzz/test_files/test_bytes10.rs": "5a0e56f2d48ee9112941846c5f66c5a15a4eeb9f2bc26805a1ccf5cbaf852341",
+      "/results/bytes/fuzz_target/bytes_bfs_generic_fuzz/test_files/test_bytes11.rs": "2ad1d091bf3faad6b2d091ec707340aef6a8cdfa56740f55db9a1e3277fe7489",
+      "/results/bytes/fuzz_target/bytes_bfs_generic_fuzz/test_files/test_bytes12.rs": "02358d8d7be52faf286d91777c62acad3ffbd20fbe6e1127ad626759610700fc",
+      "/results/bytes/fuzz_target/bytes_bfs_generic_fuzz/test_files/test_bytes13.rs": "97a31bebe75bb40f1178414d7e35061a98a74e67d2c1be7f6bef00aec17c0de2",
+      "/results/bytes/fuzz_target/bytes_bfs_generic_fuzz/test_files/test_bytes14.rs": "ebffeca00ec8966bf1a7a45b57900025c9dd3a9490ade8f55e528afff32951ef",
+      "/results/bytes/fuzz_target/bytes_bfs_generic_fuzz/test_files/test_bytes15.rs": "283f05a896d0ee1aff1116364e137a3e2aeab7205b0f91d76a5ed3ad28ab7e92",
+      "/results/bytes/fuzz_target/bytes_bfs_generic_fuzz/test_files/test_bytes16.rs": "cfd4028f609f3ccaf037ed63e9e93720a98ebefcab13b2304803490ac6905e1e",
+      "/results/bytes/fuzz_target/bytes_bfs_generic_fuzz/test_files/test_bytes17.rs": "6be353173d852095b32fc901e0a5df0795392411b127d5130205f93eeb37aec4",
+      "/results/bytes/fuzz_target/bytes_bfs_generic_fuzz/test_files/test_bytes18.rs": "c70c1f85c8227c281dcb032b87ab64598eee129347b90580767fc14a84646ec0",
+      "/results/bytes/fuzz_target/bytes_bfs_generic_fuzz/test_files/test_bytes19.rs": "3f9a844609fee435f052e5b132782e36992309a9b4d7c2a0e3bdd6c25a0677b4",
+      "/results/bytes/fuzz_target/bytes_bfs_generic_fuzz/test_files/test_bytes2.rs": "53cb25a3fc702836ba8de8ee12687919ec62723cb2b7669435c7c0e7797a6e47",
+      "/results/bytes/fuzz_target/bytes_bfs_generic_fuzz/test_files/test_bytes20.rs": "5dcb948149f4159df783b5809d15576ef43d7c116625e62f4ba6fd1aa711e0a9",
+      "/results/bytes/fuzz_target/bytes_bfs_generic_fuzz/test_files/test_bytes21.rs": "6ee43f0bf7205752b3fb98058eaedb3976b37dc932f571e645f975e13214f090",
+      "/results/bytes/fuzz_target/bytes_bfs_generic_fuzz/test_files/test_bytes22.rs": "7f57b5c2b78c58efc013ea05a1a7e91d7ade833c700fa8a39453669da8a1816f",
+      "/results/bytes/fuzz_target/bytes_bfs_generic_fuzz/test_files/test_bytes23.rs": "3a77f2916417b27441bda194c5f4bea4e4db458c06ec53fcb4b653f332c4624d",
+      "/results/bytes/fuzz_target/bytes_bfs_generic_fuzz/test_files/test_bytes24.rs": "6213a8495bc78201860b924f84bdb359aad5dbc280a5b5d5224716adadd5db98",
+      "/results/bytes/fuzz_target/bytes_bfs_generic_fuzz/test_files/test_bytes25.rs": "5af57938313aa9e981c0581f47c3d7575d511b31d55ced4c31d76cfc43a8c842",
+      "/results/bytes/fuzz_target/bytes_bfs_generic_fuzz/test_files/test_bytes26.rs": "458487f0f4cfc94f038166d1cb980a0831684416264b3e16bc7147c925e9e7e3",
+      "/results/bytes/fuzz_target/bytes_bfs_generic_fuzz/test_files/test_bytes27.rs": "5704709c129411da47d696dadc2c5ac867db8406e4026092cc829b53ec5080f8",
+      "/results/bytes/fuzz_target/bytes_bfs_generic_fuzz/test_files/test_bytes28.rs": "2ddd9858f0d66eddacea0b152ab72a2125a71451486488b3408d5ced6f80985d",
+      "/results/bytes/fuzz_target/bytes_bfs_generic_fuzz/test_files/test_bytes29.rs": "1080b119c61a9ad677df54316ec1ded3edcc9101c02414d7c595c763867c59ec",
+      "/results/bytes/fuzz_target/bytes_bfs_generic_fuzz/test_files/test_bytes3.rs": "1bc0522e0c37589a882a7d6b0bc896cf3241a88e65051f3c532ede262014b28d",
+      "/results/bytes/fuzz_target/bytes_bfs_generic_fuzz/test_files/test_bytes30.rs": "0ab95255d9a8764dd2dc2114f8c04dd3037ab7649712dbf3aacb323496ddc343",
+      "/results/bytes/fuzz_target/bytes_bfs_generic_fuzz/test_files/test_bytes31.rs": "34cbf5f77efbe62237ccc769487db977974bd4bd907ce5028b3c7ad435150660",
+      "/results/bytes/fuzz_target/bytes_bfs_generic_fuzz/test_files/test_bytes32.rs": "024151483dd910985e6f195a1aacb2a31c67196632703c4002047faaf76ef132",
+      "/results/bytes/fuzz_target/bytes_bfs_generic_fuzz/test_files/test_bytes4.rs": "a774290394a7f08d63b8d4e380bee7b219851d09436ff2af63148ee2a5508239",
+      "/results/bytes/fuzz_target/bytes_bfs_generic_fuzz/test_files/test_bytes5.rs": "73ff9b72ee953502444d25453e14f51a147bb66af1407c18dc2e918bd9079ae9",
+      "/results/bytes/fuzz_target/bytes_bfs_generic_fuzz/test_files/test_bytes6.rs": "98a132cf8ae331c11f997c02194780cebeeaf0e9cf4518526a930c4fb7dd12dc",
+      "/results/bytes/fuzz_target/bytes_bfs_generic_fuzz/test_files/test_bytes7.rs": "a73a54f12dd720787068ca18270a7b93d59132d7e906c335663d4b780e554c2a",
+      "/results/bytes/fuzz_target/bytes_bfs_generic_fuzz/test_files/test_bytes8.rs": "b4b9dc1db01ea0b5d2b7a24ae38501b6c79a3d04e35395aca9fdc7aec92e7205",
+      "/results/bytes/fuzz_target/bytes_bfs_generic_fuzz/test_files/test_bytes9.rs": "e4e051b0ccfa5075b3e0d10f95f6a23d11c1044dc863bced2def522c86be4906"
+    },
+    "replay_compilation": [
+      {
+        "command": [
+          "/Rust-Lib-Testing/rust1.65/bin/rustc",
+          "--edition=2021",
+          "/results/bytes/fuzz_target/bytes_bfs_generic_fuzz/replay_files/replay_bytes0.rs",
+          "--extern",
+          "bytes=/build/debug/deps/libbytes-adebdf42ba421290.rlib",
+          "-L",
+          "dependency=/build/debug/deps",
+          "-o",
+          "/results/bytes/replay-0"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.18316764594055712,
+        "log": "/results/bytes/compile-0.log"
+      },
+      {
+        "command": [
+          "/Rust-Lib-Testing/rust1.65/bin/rustc",
+          "--edition=2021",
+          "/results/bytes/fuzz_target/bytes_bfs_generic_fuzz/replay_files/replay_bytes1.rs",
+          "--extern",
+          "bytes=/build/debug/deps/libbytes-adebdf42ba421290.rlib",
+          "-L",
+          "dependency=/build/debug/deps",
+          "-o",
+          "/results/bytes/replay-1"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.1959833069704473,
+        "log": "/results/bytes/compile-1.log"
+      }
+    ],
+    "replay_execution": "not_run: unsafe contracts / parsing assumptions of generated real-library harnesses not yet reviewed"
+  },
+  {
+    "crate": "chrono",
+    "version": "0.4.19",
+    "tool": "rpg",
+    "scope": "default-feature generator compatibility and first-two-replay compilation; not a coverage run",
+    "generation": {
+      "command": [
+        "/Rust-Lib-Testing/rust1.65/bin/cargo",
+        "--config",
+        "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/.cargo/config.toml",
+        "doc",
+        "--manifest-path",
+        "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/Cargo.toml",
+        "--frozen",
+        "--offline",
+        "--jobs",
+        "8",
+        "--no-deps",
+        "--package",
+        "chrono@0.4.19"
+      ],
+      "returncode": null,
+      "timed_out": true,
+      "seconds": 60.06088527594693,
+      "log": "/results/chrono/generation.log"
+    },
+    "generated_target_count": 0,
+    "generated_replay_count": 0,
+    "generated_target_sha256": {},
+    "replay_compilation": [],
+    "replay_execution": "not_run: unsafe contracts / parsing assumptions of generated real-library harnesses not yet reviewed"
+  },
+  {
+    "crate": "csv",
+    "version": "1.3.1",
+    "tool": "rpg",
+    "scope": "default-feature generator compatibility and first-two-replay compilation; not a coverage run",
+    "generation": {
+      "command": [
+        "/Rust-Lib-Testing/rust1.65/bin/cargo",
+        "--config",
+        "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/.cargo/config.toml",
+        "doc",
+        "--manifest-path",
+        "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/Cargo.toml",
+        "--frozen",
+        "--offline",
+        "--jobs",
+        "8",
+        "--no-deps",
+        "--package",
+        "csv@1.3.1"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "seconds": 31.062178750056773,
+      "log": "/results/csv/generation.log"
+    },
+    "generated_target_count": 38,
+    "generated_replay_count": 38,
+    "generated_target_sha256": {
+      "/results/csv/fuzz_target/csv_bfs_generic_fuzz/test_files/test_csv0.rs": "967efb348f0b22bd1da7a3383a863447c430b2c63b0b5cad2de028a570c3dd5c",
+      "/results/csv/fuzz_target/csv_bfs_generic_fuzz/test_files/test_csv1.rs": "7bfb58c0ec65e607f18ae392d485bf5bd308a853c60411c4b9868b79f34b50cc",
+      "/results/csv/fuzz_target/csv_bfs_generic_fuzz/test_files/test_csv10.rs": "79c453ea4d78b55e276df2b22ac41ba080209068d177de64c8b86a804f6017f1",
+      "/results/csv/fuzz_target/csv_bfs_generic_fuzz/test_files/test_csv11.rs": "9f4fb74994bd3963b0887ae50502cf543cb77018a92f9e44122082b0cf86d567",
+      "/results/csv/fuzz_target/csv_bfs_generic_fuzz/test_files/test_csv12.rs": "238830e1ccc9e831316a4f025160614d45a382d357434a4df2891d295c004e7e",
+      "/results/csv/fuzz_target/csv_bfs_generic_fuzz/test_files/test_csv13.rs": "b3ccb2df2b7e08fdc6c52d62d8ed6b060568a8d0e3b6770f333340cbdf26fc30",
+      "/results/csv/fuzz_target/csv_bfs_generic_fuzz/test_files/test_csv14.rs": "b80c608364276d6a646bc9e35decc73c26e3ede40783e02033e826005d1261a7",
+      "/results/csv/fuzz_target/csv_bfs_generic_fuzz/test_files/test_csv15.rs": "6dd1a38c0745430c16f8f26b912b7c6ceaefa906082846cce413b179ba19c916",
+      "/results/csv/fuzz_target/csv_bfs_generic_fuzz/test_files/test_csv16.rs": "ad5566956847ec02c89cbaf1938879e8d3765aa3119eef6dd4e8711f35ae2293",
+      "/results/csv/fuzz_target/csv_bfs_generic_fuzz/test_files/test_csv17.rs": "9cfb9f47ce7489840e9abc229d6db4b8ed5a83740c7abf11ad8910f2b23cce4e",
+      "/results/csv/fuzz_target/csv_bfs_generic_fuzz/test_files/test_csv18.rs": "70046dd496962095e626c4935215c60c976191c40ff1d8c6ccce7423aaa96625",
+      "/results/csv/fuzz_target/csv_bfs_generic_fuzz/test_files/test_csv19.rs": "5f1b144cafb48e25929b0d53442559c033b8beeadf71f21dc6a6d9627613eee1",
+      "/results/csv/fuzz_target/csv_bfs_generic_fuzz/test_files/test_csv2.rs": "95d44f04b029f5d60b3006cccc820f45b9d32e06bef0232abf084c31bccbb8bb",
+      "/results/csv/fuzz_target/csv_bfs_generic_fuzz/test_files/test_csv20.rs": "65325d7d9ef330e57a558a729a1500ea76a3ba78b58660ac74fa1c66e6b0f23a",
+      "/results/csv/fuzz_target/csv_bfs_generic_fuzz/test_files/test_csv21.rs": "d8480c6d5cb197444bbefc8d1aef051e1bc5bfd3513e428d1df61b34b70cb1f9",
+      "/results/csv/fuzz_target/csv_bfs_generic_fuzz/test_files/test_csv22.rs": "6c74caf5f7f9fc842a7c5c1082a405f1c5f3d6a2531d892bef67e578ed2adf5b",
+      "/results/csv/fuzz_target/csv_bfs_generic_fuzz/test_files/test_csv23.rs": "7759cd2e8c078616afd81b48cc779b6cf996d04537d1a1dc7864b57f00b62fe4",
+      "/results/csv/fuzz_target/csv_bfs_generic_fuzz/test_files/test_csv24.rs": "554d35739cc4473287c9adec99974408fe01f20ec60020f9f66de791b0415f5c",
+      "/results/csv/fuzz_target/csv_bfs_generic_fuzz/test_files/test_csv25.rs": "e30b411a0e15a268761f5563dd06814b0f3c3c722fdff71eec882922c58818f5",
+      "/results/csv/fuzz_target/csv_bfs_generic_fuzz/test_files/test_csv26.rs": "1705e4fb6da9bd1a8a6ffeda7feac54f5a91a4ea876989c07193d1aa437d8e5f",
+      "/results/csv/fuzz_target/csv_bfs_generic_fuzz/test_files/test_csv27.rs": "74c83876fb9d73cad128a58c250071f1b695b0afeb5caf3d60926201ca36142c",
+      "/results/csv/fuzz_target/csv_bfs_generic_fuzz/test_files/test_csv28.rs": "2f9ad8358b581c5ccd2ca9f4f57aefce9d306008fb7898c59e094d9b6ab866a2",
+      "/results/csv/fuzz_target/csv_bfs_generic_fuzz/test_files/test_csv29.rs": "7708a2c88d30ea93d3408b36254e526a0af3732e7f56b4d5e8dbfe9aad2205e8",
+      "/results/csv/fuzz_target/csv_bfs_generic_fuzz/test_files/test_csv3.rs": "77ef600472f6098c3b28809acdd86dd9d1311f219d3c4b80f2bf1f8b77d1ac36",
+      "/results/csv/fuzz_target/csv_bfs_generic_fuzz/test_files/test_csv30.rs": "6465643299330f669b433dde0ce57daa982cdf0bae3dedaf3cee48c57f57761a",
+      "/results/csv/fuzz_target/csv_bfs_generic_fuzz/test_files/test_csv31.rs": "c707a8c032f205b9b609e670040c69771e578f3de0955ccf992efdfee5e67895",
+      "/results/csv/fuzz_target/csv_bfs_generic_fuzz/test_files/test_csv32.rs": "39a602c7fdffe567a551cdaf1d5b2983f0098b60f950fdaa183fa1714b813dd8",
+      "/results/csv/fuzz_target/csv_bfs_generic_fuzz/test_files/test_csv33.rs": "dff1dc4201da43450900aac40b6ac982cd8e91de1017983945191b445e5c113a",
+      "/results/csv/fuzz_target/csv_bfs_generic_fuzz/test_files/test_csv34.rs": "eb7d050774decd0b6be726f802392c1e35742201811be9587546954ebca160a2",
+      "/results/csv/fuzz_target/csv_bfs_generic_fuzz/test_files/test_csv35.rs": "8c21ee63e51f26fba2f8a42b105fefa2d775240d7f5c636b8b2e0fe18cb7d69b",
+      "/results/csv/fuzz_target/csv_bfs_generic_fuzz/test_files/test_csv36.rs": "32b72e5ec91ebd9d2f07ce964fd0202dea581ceeb3137c912c7f5a9292019a68",
+      "/results/csv/fuzz_target/csv_bfs_generic_fuzz/test_files/test_csv37.rs": "631e9c994fd158b6be651f72ecfb863faf79ba69e03c227f8bc0064895548d54",
+      "/results/csv/fuzz_target/csv_bfs_generic_fuzz/test_files/test_csv4.rs": "7c4edd8f4748e25eb3c72429db08367866ce5a9daa29dd490b7d3f1354de9bc7",
+      "/results/csv/fuzz_target/csv_bfs_generic_fuzz/test_files/test_csv5.rs": "f8f9c90a59de4ce3590b46de444e447c42844653da6cf731af845e02ce61cb51",
+      "/results/csv/fuzz_target/csv_bfs_generic_fuzz/test_files/test_csv6.rs": "77721e211e650d090f3913a9bbdf48f9cbfeec031fa2bb19dc58aa843582f31c",
+      "/results/csv/fuzz_target/csv_bfs_generic_fuzz/test_files/test_csv7.rs": "895f03c0dac8d10a8aba71581187eb6f4d59a71a995091fcca0679bd870265a8",
+      "/results/csv/fuzz_target/csv_bfs_generic_fuzz/test_files/test_csv8.rs": "3fc093996251c29f6aa00247c276802fa8933555bc762aa1b1de50d711f510ea",
+      "/results/csv/fuzz_target/csv_bfs_generic_fuzz/test_files/test_csv9.rs": "a7fcb653916654bab815e52efb5e45546b2e172039ec44d953318a61ead51675"
+    },
+    "replay_compilation": [
+      {
+        "command": [
+          "/Rust-Lib-Testing/rust1.65/bin/rustc",
+          "--edition=2021",
+          "/results/csv/fuzz_target/csv_bfs_generic_fuzz/replay_files/replay_csv0.rs",
+          "--extern",
+          "csv=/build/debug/deps/libcsv-1fd139e3b9881376.rlib",
+          "-L",
+          "dependency=/build/debug/deps",
+          "-o",
+          "/results/csv/replay-0"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.2038554099854082,
+        "log": "/results/csv/compile-0.log"
+      },
+      {
+        "command": [
+          "/Rust-Lib-Testing/rust1.65/bin/rustc",
+          "--edition=2021",
+          "/results/csv/fuzz_target/csv_bfs_generic_fuzz/replay_files/replay_csv1.rs",
+          "--extern",
+          "csv=/build/debug/deps/libcsv-1fd139e3b9881376.rlib",
+          "-L",
+          "dependency=/build/debug/deps",
+          "-o",
+          "/results/csv/replay-1"
+        ],
+        "returncode": 1,
+        "timed_out": false,
+        "seconds": 0.043641196098178625,
+        "log": "/results/csv/compile-1.log"
+      }
+    ],
+    "replay_execution": "not_run: unsafe contracts / parsing assumptions of generated real-library harnesses not yet reviewed"
+  },
+  {
+    "crate": "fixedbitset",
+    "version": "0.5.7",
+    "tool": "rpg",
+    "scope": "default-feature generator compatibility and first-two-replay compilation; not a coverage run",
+    "generation": {
+      "command": [
+        "/Rust-Lib-Testing/rust1.65/bin/cargo",
+        "--config",
+        "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/.cargo/config.toml",
+        "doc",
+        "--manifest-path",
+        "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/Cargo.toml",
+        "--frozen",
+        "--offline",
+        "--jobs",
+        "8",
+        "--no-deps",
+        "--package",
+        "fixedbitset@0.5.7"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "seconds": 5.831320641096681,
+      "log": "/results/fixedbitset/generation.log"
+    },
+    "generated_target_count": 28,
+    "generated_replay_count": 28,
+    "generated_target_sha256": {
+      "/results/fixedbitset/fuzz_target/fixedbitset_bfs_generic_fuzz/test_files/test_fixedbitset0.rs": "ddc60ed948ae590061cbeb3fec5d6efad7e58e3a4164798a8da15d1a36c9f97f",
+      "/results/fixedbitset/fuzz_target/fixedbitset_bfs_generic_fuzz/test_files/test_fixedbitset1.rs": "dea245ef7b3a4dcbdeff36343278fe636135d9b5d2030b92f47bf727733d6052",
+      "/results/fixedbitset/fuzz_target/fixedbitset_bfs_generic_fuzz/test_files/test_fixedbitset10.rs": "9a4aef6804d303b0b2f7a5e0065138f4127778b8cfec000367be3f484fd616c4",
+      "/results/fixedbitset/fuzz_target/fixedbitset_bfs_generic_fuzz/test_files/test_fixedbitset11.rs": "20a06c76b273fc2bba248035dc947333e882e99af3a0841a5fa74c29d741c162",
+      "/results/fixedbitset/fuzz_target/fixedbitset_bfs_generic_fuzz/test_files/test_fixedbitset12.rs": "4818fc58d627a4b7ab4121517b561ecc2ab69fef8d977116510310c8d89d044d",
+      "/results/fixedbitset/fuzz_target/fixedbitset_bfs_generic_fuzz/test_files/test_fixedbitset13.rs": "c7b406e6dd21429cafc0b14cc2a75741ac5c0b0551a17e856745a591c3d6af7a",
+      "/results/fixedbitset/fuzz_target/fixedbitset_bfs_generic_fuzz/test_files/test_fixedbitset14.rs": "bdd876858817889fb956d7437cb36b68474400da769c127930be2a817ad13389",
+      "/results/fixedbitset/fuzz_target/fixedbitset_bfs_generic_fuzz/test_files/test_fixedbitset15.rs": "f211b60fa41f0202330d3c1f13bfeb62bc74a68ca70d150588e1aa7d917212b8",
+      "/results/fixedbitset/fuzz_target/fixedbitset_bfs_generic_fuzz/test_files/test_fixedbitset16.rs": "06ac0b4818ee5f0eb9d007540b172bd260678b9770e8ca4d591dc0c9baa5a90c",
+      "/results/fixedbitset/fuzz_target/fixedbitset_bfs_generic_fuzz/test_files/test_fixedbitset17.rs": "6ab07d4ad9ba1075b3e07c301cf161c0f55290ee5e700db99175aa3575841e3e",
+      "/results/fixedbitset/fuzz_target/fixedbitset_bfs_generic_fuzz/test_files/test_fixedbitset18.rs": "05e1132ca704dc7c16e58a88b5eb8480aff2e6b8b43ca51350a5d3ff55481d22",
+      "/results/fixedbitset/fuzz_target/fixedbitset_bfs_generic_fuzz/test_files/test_fixedbitset19.rs": "0c3cace0d764a4c70ae2c59c57456b17d8c528fd813470970039d06178d16d4a",
+      "/results/fixedbitset/fuzz_target/fixedbitset_bfs_generic_fuzz/test_files/test_fixedbitset2.rs": "677dbf6ea67f83c0add4060d19298323b6c315ae3c7979c1b9c1d579b4301f11",
+      "/results/fixedbitset/fuzz_target/fixedbitset_bfs_generic_fuzz/test_files/test_fixedbitset20.rs": "e0f92a7663ce913a1def121efaca392d8efe0321358c60c6415330c5061ca589",
+      "/results/fixedbitset/fuzz_target/fixedbitset_bfs_generic_fuzz/test_files/test_fixedbitset21.rs": "b48b8eda3db97cb3d7dff2eb6446cd5989527e90da6a4225fc80534b1ab77b75",
+      "/results/fixedbitset/fuzz_target/fixedbitset_bfs_generic_fuzz/test_files/test_fixedbitset22.rs": "182031ceddefa5a4cfd2ed590d7e6a9784234aa09c6f1c925d10ccaa39fc2e63",
+      "/results/fixedbitset/fuzz_target/fixedbitset_bfs_generic_fuzz/test_files/test_fixedbitset23.rs": "ae52763540f8cfabcc7d940fc7138cb5c5dea23ce2a9eef18a8fdf931f5ffda6",
+      "/results/fixedbitset/fuzz_target/fixedbitset_bfs_generic_fuzz/test_files/test_fixedbitset24.rs": "59393c2875331fc8ae40e7df39f4a22ca574477e2125891ab91b066537ec4ddd",
+      "/results/fixedbitset/fuzz_target/fixedbitset_bfs_generic_fuzz/test_files/test_fixedbitset25.rs": "fe556c4545837ef75348124e677b281fbb2f12a0e63c02c43a869b18280179b1",
+      "/results/fixedbitset/fuzz_target/fixedbitset_bfs_generic_fuzz/test_files/test_fixedbitset26.rs": "c735bb819e303ab38fcf9cf67660ba5f690d31a36a6b0fd9b6dc09bdef249364",
+      "/results/fixedbitset/fuzz_target/fixedbitset_bfs_generic_fuzz/test_files/test_fixedbitset27.rs": "4233111d12fa29faf0174f0bff14f1a4e7a81ad06eb7cdc4ad3e1ae0df484ac6",
+      "/results/fixedbitset/fuzz_target/fixedbitset_bfs_generic_fuzz/test_files/test_fixedbitset3.rs": "6e388943894bf5d8cc5d5549d5709f15964428b6cc2cb7fde1b9e02ab4628e33",
+      "/results/fixedbitset/fuzz_target/fixedbitset_bfs_generic_fuzz/test_files/test_fixedbitset4.rs": "fe0062d9f230c38b4127a0ac470995f9dc03ff2b547ea57951cdcda9df73260b",
+      "/results/fixedbitset/fuzz_target/fixedbitset_bfs_generic_fuzz/test_files/test_fixedbitset5.rs": "6c0780c64a71c2168bf9fe299b44229c4c3b7b9493cfa8bb1fcbf3e84beb947f",
+      "/results/fixedbitset/fuzz_target/fixedbitset_bfs_generic_fuzz/test_files/test_fixedbitset6.rs": "a5a9d735e426e75cd4ee70dc11cdfb3686cbf4887151488588ee3d7a52bd2014",
+      "/results/fixedbitset/fuzz_target/fixedbitset_bfs_generic_fuzz/test_files/test_fixedbitset7.rs": "ed16e84c039a6ffbed22c8f0066e2049a1346b1c380f70f311c4fab7549c838e",
+      "/results/fixedbitset/fuzz_target/fixedbitset_bfs_generic_fuzz/test_files/test_fixedbitset8.rs": "1843276a93a57e0ad3de457b529242cd918c7604566c38bc08c76395498dc8af",
+      "/results/fixedbitset/fuzz_target/fixedbitset_bfs_generic_fuzz/test_files/test_fixedbitset9.rs": "f775e65d29a4e49c80a3d5d2c8d59c8e422bb3e705944742a0ec1737c6fc6c44"
+    },
+    "replay_compilation": [
+      {
+        "command": [
+          "/Rust-Lib-Testing/rust1.65/bin/rustc",
+          "--edition=2021",
+          "/results/fixedbitset/fuzz_target/fixedbitset_bfs_generic_fuzz/replay_files/replay_fixedbitset0.rs",
+          "--extern",
+          "fixedbitset=/build/debug/deps/libfixedbitset-79c87a0dc293cfde.rlib",
+          "-L",
+          "dependency=/build/debug/deps",
+          "-o",
+          "/results/fixedbitset/replay-0"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.16898219101130962,
+        "log": "/results/fixedbitset/compile-0.log"
+      },
+      {
+        "command": [
+          "/Rust-Lib-Testing/rust1.65/bin/rustc",
+          "--edition=2021",
+          "/results/fixedbitset/fuzz_target/fixedbitset_bfs_generic_fuzz/replay_files/replay_fixedbitset1.rs",
+          "--extern",
+          "fixedbitset=/build/debug/deps/libfixedbitset-79c87a0dc293cfde.rlib",
+          "-L",
+          "dependency=/build/debug/deps",
+          "-o",
+          "/results/fixedbitset/replay-1"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.1704679881222546,
+        "log": "/results/fixedbitset/compile-1.log"
+      }
+    ],
+    "replay_execution": "not_run: unsafe contracts / parsing assumptions of generated real-library harnesses not yet reviewed"
+  },
+  {
+    "crate": "idna",
+    "version": "0.5.0",
+    "tool": "rpg",
+    "scope": "default-feature generator compatibility and first-two-replay compilation; not a coverage run",
+    "generation": {
+      "command": [
+        "/Rust-Lib-Testing/rust1.65/bin/cargo",
+        "--config",
+        "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/.cargo/config.toml",
+        "doc",
+        "--manifest-path",
+        "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/Cargo.toml",
+        "--frozen",
+        "--offline",
+        "--jobs",
+        "8",
+        "--no-deps",
+        "--package",
+        "idna@0.5.0"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "seconds": 1.9597370568662882,
+      "log": "/results/idna/generation.log"
+    },
+    "generated_target_count": 7,
+    "generated_replay_count": 7,
+    "generated_target_sha256": {
+      "/results/idna/fuzz_target/idna_bfs_generic_fuzz/test_files/test_idna0.rs": "fd9bc2adc1bcf1881bad1572429ea802c5847bc74936ae7eb8ff01525773afc7",
+      "/results/idna/fuzz_target/idna_bfs_generic_fuzz/test_files/test_idna1.rs": "534488b1acf4846ed53cbef76c3158f0a817e563168d0079ed5e6d4f67ce2175",
+      "/results/idna/fuzz_target/idna_bfs_generic_fuzz/test_files/test_idna2.rs": "c7cda4992683f81104b4c3635fdb2603775c1a3c6ef532485115a9f195a43e4b",
+      "/results/idna/fuzz_target/idna_bfs_generic_fuzz/test_files/test_idna3.rs": "53df628b97b30358984e2502c744a3b8d4baa22a3fe5b1613f859c8599fa9591",
+      "/results/idna/fuzz_target/idna_bfs_generic_fuzz/test_files/test_idna4.rs": "1d4d6c710b7c55ebf08efb0b830e5cccf6833661c4b3543b56134df2f0a5fec8",
+      "/results/idna/fuzz_target/idna_bfs_generic_fuzz/test_files/test_idna5.rs": "b75cb74e700f981341ea6f66c980d6018f8067838ef59b1540e1b4007291cb06",
+      "/results/idna/fuzz_target/idna_bfs_generic_fuzz/test_files/test_idna6.rs": "bc0d08c5df7d9e2a09dc5553cd2431eaeaffc19b0dffb7bed0cf9a4f45da862a"
+    },
+    "replay_compilation": [
+      {
+        "command": [
+          "/Rust-Lib-Testing/rust1.65/bin/rustc",
+          "--edition=2021",
+          "/results/idna/fuzz_target/idna_bfs_generic_fuzz/replay_files/replay_idna0.rs",
+          "--extern",
+          "idna=/build/debug/deps/libidna-5ca90bd70f6ae451.rlib",
+          "-L",
+          "dependency=/build/debug/deps",
+          "-o",
+          "/results/idna/replay-0"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.21352119208313525,
+        "log": "/results/idna/compile-0.log"
+      },
+      {
+        "command": [
+          "/Rust-Lib-Testing/rust1.65/bin/rustc",
+          "--edition=2021",
+          "/results/idna/fuzz_target/idna_bfs_generic_fuzz/replay_files/replay_idna1.rs",
+          "--extern",
+          "idna=/build/debug/deps/libidna-5ca90bd70f6ae451.rlib",
+          "-L",
+          "dependency=/build/debug/deps",
+          "-o",
+          "/results/idna/replay-1"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.2121192989870906,
+        "log": "/results/idna/compile-1.log"
+      }
+    ],
+    "replay_execution": "not_run: unsafe contracts / parsing assumptions of generated real-library harnesses not yet reviewed"
+  },
+  {
+    "crate": "regex",
+    "version": "1.6.0",
+    "tool": "rpg",
+    "scope": "default-feature generator compatibility and first-two-replay compilation; not a coverage run",
+    "generation": {
+      "command": [
+        "/Rust-Lib-Testing/rust1.65/bin/cargo",
+        "--config",
+        "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/.cargo/config.toml",
+        "doc",
+        "--manifest-path",
+        "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/Cargo.toml",
+        "--frozen",
+        "--offline",
+        "--jobs",
+        "8",
+        "--no-deps",
+        "--package",
+        "regex@1.6.0"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "seconds": 36.41033059102483,
+      "log": "/results/regex/generation.log"
+    },
+    "generated_target_count": 68,
+    "generated_replay_count": 68,
+    "generated_target_sha256": {
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex0.rs": "635710af87eb7c64d0da5fe97b016a9c35ae7d1b624cae6f4444608dcd81e1ea",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex1.rs": "6919ae4f75bbcfd071ba37d2d0330327076ee18303d39d147aa39c15197f37b4",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex10.rs": "cc86749f7c3741f6a02cf6a73d07fabddf221d6fa6350186fe8cf2f62d865a6c",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex11.rs": "6bfeeedbc5defcef4a9abd04dd7f759465b8f70b00f42b1aacfd2665c9b85201",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex12.rs": "e535e190477169332a7c91152dcfe3f36b58eb9ca1faad6bce7cf000db27a1bb",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex13.rs": "b17db729d449646d8eaf3e0ca8d4f4470538ab83a27c9c51d5959d70c5a2acb2",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex14.rs": "a83741fd36a4293272cedca038e883dba192003a8547c601f127388a77bde6a4",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex15.rs": "f5dc42ad7cf49c07ea196d350e9440b42f8338681823bdec111759c3ddc06f3a",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex16.rs": "90f4829a590ff316cd96b2fc6ad74885c31bd836e3108b36f4bdd18fbb35ab2d",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex17.rs": "f5085a7d4d21a1e74eec1de5458a75b5c5c59b4a15885dcb9f73cbd3f7605b35",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex18.rs": "38ca741e4291569ad8c64533104ee89f8d76e24d22e1b5ea59aafbf9015b55eb",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex19.rs": "3cf81c701a6d0d2604cfeabd339b7350338dd4d0944092242769756fbc683f9a",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex2.rs": "07c5473ab778fffd8c6e1932afa43d01268e64d2b426c733e4d2869ac73194cc",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex20.rs": "c537a2f3e99f112291b43c01e3d7ec67e84ed3693db43a7c68b6817e606c5ca5",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex21.rs": "f979c99b229c14ae8f885057392848135788dfc9001667cceb3f65ff8e7c4429",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex22.rs": "902312143576df70af805377eff42f264a909ec8031e5d0cfd7a62edeb412396",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex23.rs": "f1c6b4fa1bfbad9567811da33548a683454b1c1f10a1bc5e66aae09e69b02e51",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex24.rs": "7b6bdaf6efe541f97a51a3b8a486e2348f0e412085e60983d6eabca427d9e8ed",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex25.rs": "fa1d9d0910e6c5bbd4fee0a8df209b65e0a57240ad5b80f28ce2112fdefe8844",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex26.rs": "0c777c67943c1a1881c5e59fb061c26e472d11b357b332173b54dd21d693764a",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex27.rs": "962eecb4ca4f66e7132928c7be09486ec83ef12b86d535df208ee99e4d87f259",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex28.rs": "1a2559103a0c8ee48156d56c71b1a295c475b3441a364871b208a5a4476c97f2",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex29.rs": "88db9f1c659784702df7027fb85e2181a4a1a396297b620740559ee4156a5716",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex3.rs": "0b1f0fd735896917b1bbef61debe85a3b58d0570a249e422bece508e7db19af8",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex30.rs": "6e2360fe7ded7dd6c93be318f69c423399d62a485154327522bd3b57bb7a65ac",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex31.rs": "0df3e7091697b4b676f2efe7a612262cbead383ec47012db631ab16797888997",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex32.rs": "2d191fce8fa7fb00a491282dff14e449ac919051575b1cb035ab7c6ef759cd98",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex33.rs": "bbe680678f421cc80e500d1bc2e62496748b10f08b930c2135ad7fb66c229dad",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex34.rs": "1df92a9f81c0a828ea39867701fe53c203b4f829cc7cdb823d7140cd5e3c24a1",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex35.rs": "5b229b6b5b8721374164e6a7de5bbde9e2791fe8f94e7d8f3e2a31e5e860f938",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex36.rs": "258d1e71efd60c9ca02ce4d921bbccfdc8457c725eff7930efab8c976d053389",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex37.rs": "9ab889b1f01699716570915a9f68f389a103f77b444678610b4328a6cd20e822",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex38.rs": "0737afbe9d634cb2596ebe89a29906492d8249ea7c3822d64d60c5ad81727c37",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex39.rs": "fe4858afc685ae39a671ae9abf7d8f946d5942a73fbdd9148930a9bbbe7d3df6",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex4.rs": "210b0811b8b1582b5e1828c4bacc1e35385ec7a865104a6e96ed2ad2b2840dc3",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex40.rs": "1531a982bed29a5d8528ce18cf539114fabfbc9e0ff9c2511145fbe4566d2108",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex41.rs": "3ba7e2be6f68504de72dc8f179a449bcac7a19ed89d55577a0d0d32fbee86d67",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex42.rs": "a4235d34d3b24bc07d6019a27ee48c7a8e1b0f6a5fc7228963435a7943b45393",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex43.rs": "373cdb62d6e113bcf4cb864101331a16d7758360e9cbc3867950e95b1095e7e7",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex44.rs": "e5cad15872a39c80002a9770dd3f87130f95b05cc5f0ca4014f0ead6e4e061fc",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex45.rs": "668fa7f62b652d7f80a7568af11d7731b8cf40d635bc4354eb56578015e40d0d",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex46.rs": "08d658b9d86ad65e410c75a18e75e999af14f10b679657804f2ab3d68ab58530",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex47.rs": "4a1a7914f0ff531cadf774564f268b148fd6c1dcd5543a843491c917d8e84c70",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex48.rs": "21acbfc907a21044976d5d702bd12df403e287dc8a83fc9b6fc779a03c0c3ad8",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex49.rs": "78d578f1f6dca04858b22caaec8b4acac01c563e3e01040e58aeea54264b0104",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex5.rs": "03bfbd4b121c5ca9992dba6f627743cabf43087447d6350cc2ad7a2c3eba4be0",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex50.rs": "12ad08f60b2f6272478bb2587281adc41e4ac3273af7f8da978287400a1f1908",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex51.rs": "80aadbf332701dce52db676f618e85f00101fa0a0006bb43a7fd68ab6470df5c",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex52.rs": "23c783fa64c92f68bb72d877cae65f1013a5928470aba15b266b4721c54044e0",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex53.rs": "8e9be7e336e9396cd1d0e41764f5721289cc8059ac2eaf2d96c0f14cfaba7bef",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex54.rs": "16f27c4e7617364212678dd4bc6a23a331e880564325294d11b285d7f83728e3",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex55.rs": "dab5f026e0251211325bb280d599fd5bcd4dd2158ec3921a741f1bcc784123c4",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex56.rs": "5856028572b0bfe233c1978de302aa4c5746f293fe5fa8a1969ade5a3dc4c49c",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex57.rs": "b862d340da650b1ac74e045704fb5467f53cffd634603280220ca28123564235",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex58.rs": "41baf4f3475d48018be214e8cfea1c811b34419b24246c35b94ac7a9393cb853",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex59.rs": "f4fc284685034320ebefd44eb0e915aa7c51d2ff5d1c5ccecd9d3fef51c835fd",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex6.rs": "cc3d9e88905bf6fb0f945c66b95c1fed5cfed244d4705bb51194f0704b1968fe",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex60.rs": "e41fe58f391e3d917744dd3fd2dea2f3aa2c87417bed8456c84799db4b7b703a",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex61.rs": "95f20742360300326f239f8ec2635473e68e8411c65434a436e4885c3375d3cc",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex62.rs": "7ac360a206c9bb006dff5e6847ace16032e7d3300dcba30d05654b5943841a24",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex63.rs": "8af30c2500d1e0bbdbf3aad1a57208db6bacf899453d82ee0734fe5051e2fb6b",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex64.rs": "8caec71cb6115ab69c3f18c9ef11563679e4dc2c173129a3cd99f793e56b150a",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex65.rs": "4b42962000d3b2f7bd6669131dc399a86bd889b16fe4e281ac3d844f556e9a65",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex66.rs": "e5d1bd908c7ccee3d7d471601b7d9a70b6de829bfe0d085e441c7d708d59b9e2",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex67.rs": "13f14e68b36c4d52b951b8c4d89b66b76e7ed0a89b8c25171d7cb6e34d93f1d2",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex7.rs": "7f629bffd467f6d50a2fd53bbb720e0482b93ab586d285df315ced270efbf298",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex8.rs": "1266e6d893c53516e81c8e4b35d97b3d179f5f1d2aa731e94a01076e51e74563",
+      "/results/regex/fuzz_target/regex_bfs_generic_fuzz/test_files/test_regex9.rs": "85216d8a7ed849b8234b8394296e39b336d4503acc2537d316f0fff01285b4c0"
+    },
+    "replay_compilation": [
+      {
+        "command": [
+          "/Rust-Lib-Testing/rust1.65/bin/rustc",
+          "--edition=2021",
+          "/results/regex/fuzz_target/regex_bfs_generic_fuzz/replay_files/replay_regex0.rs",
+          "--extern",
+          "regex=/build/debug/deps/libregex-4debfe3cc3ca2805.rlib",
+          "-L",
+          "dependency=/build/debug/deps",
+          "-o",
+          "/results/regex/replay-0"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.4333443930372596,
+        "log": "/results/regex/compile-0.log"
+      },
+      {
+        "command": [
+          "/Rust-Lib-Testing/rust1.65/bin/rustc",
+          "--edition=2021",
+          "/results/regex/fuzz_target/regex_bfs_generic_fuzz/replay_files/replay_regex1.rs",
+          "--extern",
+          "regex=/build/debug/deps/libregex-4debfe3cc3ca2805.rlib",
+          "-L",
+          "dependency=/build/debug/deps",
+          "-o",
+          "/results/regex/replay-1"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.42352387914434075,
+        "log": "/results/regex/compile-1.log"
+      }
+    ],
+    "replay_execution": "not_run: unsafe contracts / parsing assumptions of generated real-library harnesses not yet reviewed"
+  },
+  {
+    "crate": "ryu",
+    "version": "1.0.20",
+    "tool": "rpg",
+    "scope": "default-feature generator compatibility and first-two-replay compilation; not a coverage run",
+    "generation": {
+      "command": [
+        "/Rust-Lib-Testing/rust1.65/bin/cargo",
+        "--config",
+        "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/.cargo/config.toml",
+        "doc",
+        "--manifest-path",
+        "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/Cargo.toml",
+        "--frozen",
+        "--offline",
+        "--jobs",
+        "8",
+        "--no-deps",
+        "--package",
+        "ryu@1.0.20"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "seconds": 0.35256064496934414,
+      "log": "/results/ryu/generation.log"
+    },
+    "generated_target_count": 2,
+    "generated_replay_count": 2,
+    "generated_target_sha256": {
+      "/results/ryu/fuzz_target/ryu_bfs_generic_fuzz/test_files/test_ryu0.rs": "9de7aa0455291cda861e77acd97497605f30b3883a7424ade47f57bb42b2761a",
+      "/results/ryu/fuzz_target/ryu_bfs_generic_fuzz/test_files/test_ryu1.rs": "7bb0d258d863c2b597cc9872ccea9a6c42ca39be5d0aa0957b0451d4468f5b9f"
+    },
+    "replay_compilation": [
+      {
+        "command": [
+          "/Rust-Lib-Testing/rust1.65/bin/rustc",
+          "--edition=2021",
+          "/results/ryu/fuzz_target/ryu_bfs_generic_fuzz/replay_files/replay_ryu0.rs",
+          "--extern",
+          "ryu=/build/debug/deps/libryu-8766dfc74aaf0f74.rlib",
+          "-L",
+          "dependency=/build/debug/deps",
+          "-o",
+          "/results/ryu/replay-0"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.17984681809321046,
+        "log": "/results/ryu/compile-0.log"
+      },
+      {
+        "command": [
+          "/Rust-Lib-Testing/rust1.65/bin/rustc",
+          "--edition=2021",
+          "/results/ryu/fuzz_target/ryu_bfs_generic_fuzz/replay_files/replay_ryu1.rs",
+          "--extern",
+          "ryu=/build/debug/deps/libryu-8766dfc74aaf0f74.rlib",
+          "-L",
+          "dependency=/build/debug/deps",
+          "-o",
+          "/results/ryu/replay-1"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.17181188892573118,
+        "log": "/results/ryu/compile-1.log"
+      }
+    ],
+    "replay_execution": "not_run: unsafe contracts / parsing assumptions of generated real-library harnesses not yet reviewed"
+  },
+  {
+    "crate": "time",
+    "version": "0.3.9",
+    "tool": "rpg",
+    "scope": "default-feature generator compatibility and first-two-replay compilation; not a coverage run",
+    "generation": {
+      "command": [
+        "/Rust-Lib-Testing/rust1.65/bin/cargo",
+        "--config",
+        "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/.cargo/config.toml",
+        "doc",
+        "--manifest-path",
+        "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/Cargo.toml",
+        "--frozen",
+        "--offline",
+        "--jobs",
+        "8",
+        "--no-deps",
+        "--package",
+        "time@0.3.9"
+      ],
+      "returncode": null,
+      "timed_out": true,
+      "seconds": 60.05157196591608,
+      "log": "/results/time/generation.log"
+    },
+    "generated_target_count": 0,
+    "generated_replay_count": 0,
+    "generated_target_sha256": {},
+    "replay_compilation": [],
+    "replay_execution": "not_run: unsafe contracts / parsing assumptions of generated real-library harnesses not yet reviewed"
+  },
+  {
+    "crate": "unicode-segmentation",
+    "version": "1.10.1",
+    "tool": "rpg",
+    "scope": "default-feature generator compatibility and first-two-replay compilation; not a coverage run",
+    "generation": {
+      "command": [
+        "/Rust-Lib-Testing/rust1.65/bin/cargo",
+        "--config",
+        "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/.cargo/config.toml",
+        "doc",
+        "--manifest-path",
+        "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/Cargo.toml",
+        "--frozen",
+        "--offline",
+        "--jobs",
+        "8",
+        "--no-deps",
+        "--package",
+        "unicode-segmentation@1.10.1"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "seconds": 0.4852632808033377,
+      "log": "/results/unicode-segmentation/generation.log"
+    },
+    "generated_target_count": 3,
+    "generated_replay_count": 3,
+    "generated_target_sha256": {
+      "/results/unicode-segmentation/fuzz_target/unicode_segmentation_bfs_generic_fuzz/test_files/test_unicode_segmentation0.rs": "26b9d3c45a9730644045ddd2d3b920111b92b15d6bf7308ea995e7d93e5c4130",
+      "/results/unicode-segmentation/fuzz_target/unicode_segmentation_bfs_generic_fuzz/test_files/test_unicode_segmentation1.rs": "4afcf4c5aa6c0a4acf9829635f054849b8397623d41a7e7d666df95f52fce6c8",
+      "/results/unicode-segmentation/fuzz_target/unicode_segmentation_bfs_generic_fuzz/test_files/test_unicode_segmentation2.rs": "17b7670e08e31d3c31480e16bbe94fb4506188946ef6e1d42b7134aa416b323a"
+    },
+    "replay_compilation": [
+      {
+        "command": [
+          "/Rust-Lib-Testing/rust1.65/bin/rustc",
+          "--edition=2021",
+          "/results/unicode-segmentation/fuzz_target/unicode_segmentation_bfs_generic_fuzz/replay_files/replay_unicode_segmentation0.rs",
+          "--extern",
+          "unicode_segmentation=/build/debug/deps/libunicode_segmentation-95b612717f96a2ca.rlib",
+          "-L",
+          "dependency=/build/debug/deps",
+          "-o",
+          "/results/unicode-segmentation/replay-0"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.17239676206372678,
+        "log": "/results/unicode-segmentation/compile-0.log"
+      },
+      {
+        "command": [
+          "/Rust-Lib-Testing/rust1.65/bin/rustc",
+          "--edition=2021",
+          "/results/unicode-segmentation/fuzz_target/unicode_segmentation_bfs_generic_fuzz/replay_files/replay_unicode_segmentation1.rs",
+          "--extern",
+          "unicode_segmentation=/build/debug/deps/libunicode_segmentation-95b612717f96a2ca.rlib",
+          "-L",
+          "dependency=/build/debug/deps",
+          "-o",
+          "/results/unicode-segmentation/replay-1"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "seconds": 0.18198303109966218,
+        "log": "/results/unicode-segmentation/compile-1.log"
+      }
+    ],
+    "replay_execution": "not_run: unsafe contracts / parsing assumptions of generated real-library harnesses not yet reviewed"
+  }
+]

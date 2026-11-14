@@ -1,0 +1,9 @@
+error[E0507]: cannot move out of `*_local1` which is behind a mutable reference
+  --> /results/bumpalo/fuzz_target/bumpalo_bfs_generic_fuzz/replay_files/replay_bumpalo0.rs:18:42
+   |
+18 |     bumpalo::Bump::try_alloc(&(_local0) ,*(_local1));
+   |                                          ^^^^^^^^^^ move occurs because `*_local1` has type `String`, which does not implement the `Copy` trait
+
+error: aborting due to previous error
+
+For more information about this error, try `rustc --explain E0507`.

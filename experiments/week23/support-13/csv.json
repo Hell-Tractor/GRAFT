@@ -1,0 +1,26 @@
+{
+  "api_count": 152,
+  "apis_with_obligations": 65,
+  "candidate_parameter_pairs": {
+    "incompatible": 14814,
+    "unified_candidate_not_compiler_verified": 121,
+    "unified_pending_trait_obligations": 299,
+    "unknown_api_feature": 2718,
+    "unknown_type_form": 7140
+  },
+  "crate": "csv",
+  "no_import_blocker": 53,
+  "rustdoc_sha256": "6d39a028d60300d232d67c6cab821228d7b5cb0283264872c233ade1f389d3cd",
+  "scope": "import support only, not proven constructibility; trait obligations may still be unknown",
+  "unsupported_api_reasons": {
+    "associated type binding/constraint": 5,
+    "borrowed output requires lifetime analysis": 62,
+    "nominal lifetime argument requires storage analysis": 23,
+    "trait method dispatch/impl specialization": 24,
+    "type alias expansion: csv::Result": 22,
+    "type alias expansion: std::io::error::Result": 1,
+    "unsupported rustdoc type: dyn_trait": 1,
+    "unsupported rustdoc type: qualified_path": 1
+  },
+  "version": "1.4.0"
+}

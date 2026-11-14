@@ -1,0 +1,27 @@
+{
+  "schema": "graft-generation-v1",
+  "started_unix_ms": 1794231675144,
+  "max_repairs": 0,
+  "accepted": false,
+  "attempts": [
+    {
+      "index": 0,
+      "is_repair": false,
+      "response": {
+        "content": "fn main(){}",
+        "model": "offline-mock",
+        "immutable_revision": "fixture-v1",
+        "input_tokens": null,
+        "output_tokens": null,
+        "cost": 0.0
+      },
+      "latency_ms": 0,
+      "source_sha256": "31e5dcd37dc8ea480e4b39c30682a12fcb22b5bce61d46ea10b3d7ae92e3ed0e",
+      "plan_retained": false,
+      "compiled": true,
+      "diagnostics": "expected one immutable graft_body and at most one wrapper main"
+    }
+  ],
+  "backend_error": null,
+  "runtime_status": "separate_probe_required"
+}

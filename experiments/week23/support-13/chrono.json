@@ -1,0 +1,33 @@
+{
+  "api_count": 505,
+  "apis_with_obligations": 138,
+  "candidate_parameter_pairs": {
+    "incompatible": 194651,
+    "unified_candidate_not_compiler_verified": 3262,
+    "unified_pending_trait_obligations": 2545,
+    "unknown_api_feature": 24486,
+    "unknown_type_form": 67518
+  },
+  "crate": "chrono",
+  "no_import_blocker": 234,
+  "rustdoc_sha256": "bcbe557c2bb44141a0d30e10e20c0dc53534b3ae539cb250c829623f1ed63c15",
+  "scope": "import support only, not proven constructibility; trait obligations may still be unknown",
+  "unsupported_api_reasons": {
+    "associated type binding/constraint": 15,
+    "borrowed output requires lifetime analysis": 5,
+    "const generic parameter": 1,
+    "modified/negative/?Sized trait bound": 1,
+    "nominal lifetime argument requires storage analysis": 21,
+    "parenthesized/function trait arguments": 1,
+    "static reference requires persistent storage": 1,
+    "symbolic const array length": 1,
+    "synthetic impl Trait parameter": 2,
+    "trait method dispatch/impl specialization": 198,
+    "type alias expansion: chrono::MappedLocalTime": 13,
+    "type alias expansion: chrono::ParseResult": 46,
+    "type alias expansion: core::fmt::Result": 1,
+    "unsupported rustdoc type: impl_trait": 2,
+    "unsupported rustdoc type: qualified_path": 23
+  },
+  "version": "0.4.44"
+}

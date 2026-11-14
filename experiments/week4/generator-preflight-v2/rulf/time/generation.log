@@ -1,0 +1,27 @@
+    Checking num_threads v0.1.7
+ Documenting time v0.3.9
+Fuzz Target Generator for Rust Libraries: v0.1.0
+Fuzz Target Renderer Init
+crate: time
+using bfs end point
+reverse search can not cover more nodes
+after backward search
+targets = 39807
+total length = 118369
+average time to visit = 580.2401960784314
+edge covered by reverse search = 1503
+-----------STATISTICS-----------
+total nodes: 206
+total edges: 3607
+covered nodes: 203
+covered edges: 258
+node coverage: 0.9854368932038835
+edge coverage: 0.07152758525090103
+targets covered by reverse search: 11
+total targets: 148
+max length = 5
+total length = 443
+average time to fuzz each api = 2.1822660098522166
+--------------------------------
+Fuzz Target Generator exits successfully. Total time cost: 12289 ms
+    Finished dev [unoptimized + debuginfo] target(s) in 12.36s

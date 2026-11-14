@@ -1,0 +1,5392 @@
+{
+  "binary_sha256": "4d7b6ac91eb643f77d972c8069118ad4573a14c6a6daaa34eb2ab1986aa543b1",
+  "crate": "bumpalo",
+  "functions": [
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "clone",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [
+                      {
+                        "trait_bound": {
+                          "generic_params": [],
+                          "modifier": "none",
+                          "trait": {
+                            "args": null,
+                            "id": 26,
+                            "path": "$crate::clone::Clone"
+                          }
+                        }
+                      }
+                    ],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "E"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 101,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "AllocOrInitError<E>",
+          "receiver_publicly_named": true,
+          "trait": "Clone",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "100",
+      "span": {
+        "begin": [
+          37,
+          10
+        ],
+        "end": [
+          37,
+          15
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "eq",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [
+                      {
+                        "trait_bound": {
+                          "generic_params": [],
+                          "modifier": "none",
+                          "trait": {
+                            "args": null,
+                            "id": 64,
+                            "path": "$crate::cmp::PartialEq"
+                          }
+                        }
+                      }
+                    ],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "E"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 104,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "AllocOrInitError<E>",
+          "receiver_publicly_named": true,
+          "trait": "PartialEq",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "103",
+      "span": {
+        "begin": [
+          37,
+          17
+        ],
+        "end": [
+          37,
+          26
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "fmt",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [
+                      {
+                        "trait_bound": {
+                          "generic_params": [],
+                          "modifier": "none",
+                          "trait": {
+                            "args": null,
+                            "id": 71,
+                            "path": "$crate::fmt::Debug"
+                          }
+                        }
+                      }
+                    ],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "E"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 107,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "AllocOrInitError<E>",
+          "receiver_publicly_named": true,
+          "trait": "Debug",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "106",
+      "span": {
+        "begin": [
+          37,
+          32
+        ],
+        "end": [
+          37,
+          37
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "fmt",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [
+                      {
+                        "trait_bound": {
+                          "generic_params": [],
+                          "modifier": "none",
+                          "trait": {
+                            "args": null,
+                            "id": 56,
+                            "path": "Display"
+                          }
+                        }
+                      }
+                    ],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "E"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 109,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "AllocOrInitError<E>",
+          "receiver_publicly_named": true,
+          "trait": "Display",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "108",
+      "span": {
+        "begin": [
+          54,
+          5
+        ],
+        "end": [
+          59,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "alloc",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "const": {
+                    "default": null,
+                    "type": {
+                      "primitive": "usize"
+                    }
+                  }
+                },
+                "name": "MIN_ALIGN"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 165,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "112",
+      "span": {
+        "begin": [
+          1028,
+          5
+        ],
+        "end": [
+          1030,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "set_allocation_limit",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "const": {
+                    "default": null,
+                    "type": {
+                      "primitive": "usize"
+                    }
+                  }
+                },
+                "name": "MIN_ALIGN"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 165,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "113",
+      "span": {
+        "begin": [
+          796,
+          5
+        ],
+        "end": [
+          798,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "new",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 119,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<1>",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "115",
+      "span": {
+        "begin": [
+          543,
+          5
+        ],
+        "end": [
+          545,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "try_new",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 119,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<1>",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "116",
+      "span": {
+        "begin": [
+          555,
+          5
+        ],
+        "end": [
+          557,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "with_capacity",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 119,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<1>",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "117",
+      "span": {
+        "begin": [
+          572,
+          5
+        ],
+        "end": [
+          574,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "try_with_capacity",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 119,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<1>",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "118",
+      "span": {
+        "begin": [
+          590,
+          5
+        ],
+        "end": [
+          592,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "with_min_align",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "const": {
+                    "default": null,
+                    "type": {
+                      "primitive": "usize"
+                    }
+                  }
+                },
+                "name": "MIN_ALIGN"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 165,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "120",
+      "span": {
+        "begin": [
+          625,
+          5
+        ],
+        "end": [
+          639,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "with_min_align_and_capacity",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "const": {
+                    "default": null,
+                    "type": {
+                      "primitive": "usize"
+                    }
+                  }
+                },
+                "name": "MIN_ALIGN"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 165,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "121",
+      "span": {
+        "begin": [
+          671,
+          5
+        ],
+        "end": [
+          673,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "try_with_min_align_and_capacity",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "const": {
+                    "default": null,
+                    "type": {
+                      "primitive": "usize"
+                    }
+                  }
+                },
+                "name": "MIN_ALIGN"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 165,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "122",
+      "span": {
+        "begin": [
+          708,
+          5
+        ],
+        "end": [
+          740,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "min_align",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "const": {
+                    "default": null,
+                    "type": {
+                      "primitive": "usize"
+                    }
+                  }
+                },
+                "name": "MIN_ALIGN"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 165,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "123",
+      "span": {
+        "begin": [
+          756,
+          5
+        ],
+        "end": [
+          758,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "allocation_limit",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "const": {
+                    "default": null,
+                    "type": {
+                      "primitive": "usize"
+                    }
+                  }
+                },
+                "name": "MIN_ALIGN"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 165,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "124",
+      "span": {
+        "begin": [
+          777,
+          5
+        ],
+        "end": [
+          779,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "reset",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "const": {
+                    "default": null,
+                    "type": {
+                      "primitive": "usize"
+                    }
+                  }
+                },
+                "name": "MIN_ALIGN"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 165,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "126",
+      "span": {
+        "begin": [
+          971,
+          5
+        ],
+        "end": [
+          1011,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "try_alloc",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "const": {
+                    "default": null,
+                    "type": {
+                      "primitive": "usize"
+                    }
+                  }
+                },
+                "name": "MIN_ALIGN"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 165,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "127",
+      "span": {
+        "begin": [
+          1047,
+          5
+        ],
+        "end": [
+          1049,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "alloc_with",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "const": {
+                    "default": null,
+                    "type": {
+                      "primitive": "usize"
+                    }
+                  }
+                },
+                "name": "MIN_ALIGN"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 165,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "128",
+      "span": {
+        "begin": [
+          1071,
+          5
+        ],
+        "end": [
+          1101,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "try_alloc_with",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "const": {
+                    "default": null,
+                    "type": {
+                      "primitive": "usize"
+                    }
+                  }
+                },
+                "name": "MIN_ALIGN"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 165,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "130",
+      "span": {
+        "begin": [
+          1123,
+          5
+        ],
+        "end": [
+          1155,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "alloc_try_with",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "const": {
+                    "default": null,
+                    "type": {
+                      "primitive": "usize"
+                    }
+                  }
+                },
+                "name": "MIN_ALIGN"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 165,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "131",
+      "span": {
+        "begin": [
+          1194,
+          5
+        ],
+        "end": [
+          1261,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "alloc_slice_copy",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "const": {
+                    "default": null,
+                    "type": {
+                      "primitive": "usize"
+                    }
+                  }
+                },
+                "name": "MIN_ALIGN"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 165,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "132",
+      "span": {
+        "begin": [
+          1386,
+          5
+        ],
+        "end": [
+          1397,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "try_alloc_slice_copy",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "const": {
+                    "default": null,
+                    "type": {
+                      "primitive": "usize"
+                    }
+                  }
+                },
+                "name": "MIN_ALIGN"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 165,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "134",
+      "span": {
+        "begin": [
+          1415,
+          5
+        ],
+        "end": [
+          1426,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "alloc_slice_clone",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "const": {
+                    "default": null,
+                    "type": {
+                      "primitive": "usize"
+                    }
+                  }
+                },
+                "name": "MIN_ALIGN"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 165,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "135",
+      "span": {
+        "begin": [
+          1454,
+          5
+        ],
+        "end": [
+          1468,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "try_alloc_slice_clone",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "const": {
+                    "default": null,
+                    "type": {
+                      "primitive": "usize"
+                    }
+                  }
+                },
+                "name": "MIN_ALIGN"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 165,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "136",
+      "span": {
+        "begin": [
+          1472,
+          5
+        ],
+        "end": [
+          1486,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "alloc_str",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "const": {
+                    "default": null,
+                    "type": {
+                      "primitive": "usize"
+                    }
+                  }
+                },
+                "name": "MIN_ALIGN"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 165,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "137",
+      "span": {
+        "begin": [
+          1502,
+          5
+        ],
+        "end": [
+          1508,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "try_alloc_str",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "const": {
+                    "default": null,
+                    "type": {
+                      "primitive": "usize"
+                    }
+                  }
+                },
+                "name": "MIN_ALIGN"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 165,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "138",
+      "span": {
+        "begin": [
+          1526,
+          5
+        ],
+        "end": [
+          1532,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "alloc_slice_fill_with",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "const": {
+                    "default": null,
+                    "type": {
+                      "primitive": "usize"
+                    }
+                  }
+                },
+                "name": "MIN_ALIGN"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 165,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "139",
+      "span": {
+        "begin": [
+          1552,
+          5
+        ],
+        "end": [
+          1568,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "alloc_slice_try_fill_with",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "const": {
+                    "default": null,
+                    "type": {
+                      "primitive": "usize"
+                    }
+                  }
+                },
+                "name": "MIN_ALIGN"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 165,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "141",
+      "span": {
+        "begin": [
+          1597,
+          5
+        ],
+        "end": [
+          1620,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "try_alloc_slice_fill_with",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "const": {
+                    "default": null,
+                    "type": {
+                      "primitive": "usize"
+                    }
+                  }
+                },
+                "name": "MIN_ALIGN"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 165,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "142",
+      "span": {
+        "begin": [
+          1642,
+          5
+        ],
+        "end": [
+          1662,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "alloc_slice_fill_copy",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "const": {
+                    "default": null,
+                    "type": {
+                      "primitive": "usize"
+                    }
+                  }
+                },
+                "name": "MIN_ALIGN"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 165,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "143",
+      "span": {
+        "begin": [
+          1681,
+          5
+        ],
+        "end": [
+          1683,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "try_alloc_slice_fill_copy",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "const": {
+                    "default": null,
+                    "type": {
+                      "primitive": "usize"
+                    }
+                  }
+                },
+                "name": "MIN_ALIGN"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 165,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "144",
+      "span": {
+        "begin": [
+          1687,
+          5
+        ],
+        "end": [
+          1693,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "alloc_slice_fill_clone",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "const": {
+                    "default": null,
+                    "type": {
+                      "primitive": "usize"
+                    }
+                  }
+                },
+                "name": "MIN_ALIGN"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 165,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "145",
+      "span": {
+        "begin": [
+          1715,
+          5
+        ],
+        "end": [
+          1717,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "try_alloc_slice_fill_clone",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "const": {
+                    "default": null,
+                    "type": {
+                      "primitive": "usize"
+                    }
+                  }
+                },
+                "name": "MIN_ALIGN"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 165,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "146",
+      "span": {
+        "begin": [
+          1721,
+          5
+        ],
+        "end": [
+          1727,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "alloc_slice_fill_iter",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "const": {
+                    "default": null,
+                    "type": {
+                      "primitive": "usize"
+                    }
+                  }
+                },
+                "name": "MIN_ALIGN"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 165,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "147",
+      "span": {
+        "begin": [
+          1747,
+          5
+        ],
+        "end": [
+          1756,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "alloc_slice_try_fill_iter",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "const": {
+                    "default": null,
+                    "type": {
+                      "primitive": "usize"
+                    }
+                  }
+                },
+                "name": "MIN_ALIGN"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 165,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "150",
+      "span": {
+        "begin": [
+          1786,
+          5
+        ],
+        "end": [
+          1795,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "try_alloc_slice_fill_iter",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "const": {
+                    "default": null,
+                    "type": {
+                      "primitive": "usize"
+                    }
+                  }
+                },
+                "name": "MIN_ALIGN"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 165,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "151",
+      "span": {
+        "begin": [
+          1811,
+          5
+        ],
+        "end": [
+          1820,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "alloc_slice_fill_default",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "const": {
+                    "default": null,
+                    "type": {
+                      "primitive": "usize"
+                    }
+                  }
+                },
+                "name": "MIN_ALIGN"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 165,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "152",
+      "span": {
+        "begin": [
+          1841,
+          5
+        ],
+        "end": [
+          1843,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "try_alloc_slice_fill_default",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "const": {
+                    "default": null,
+                    "type": {
+                      "primitive": "usize"
+                    }
+                  }
+                },
+                "name": "MIN_ALIGN"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 165,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "154",
+      "span": {
+        "begin": [
+          1847,
+          5
+        ],
+        "end": [
+          1852,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "alloc_layout",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "const": {
+                    "default": null,
+                    "type": {
+                      "primitive": "usize"
+                    }
+                  }
+                },
+                "name": "MIN_ALIGN"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 165,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "155",
+      "span": {
+        "begin": [
+          1864,
+          5
+        ],
+        "end": [
+          1866,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "try_alloc_layout",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "const": {
+                    "default": null,
+                    "type": {
+                      "primitive": "usize"
+                    }
+                  }
+                },
+                "name": "MIN_ALIGN"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 165,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "157",
+      "span": {
+        "begin": [
+          1879,
+          5
+        ],
+        "end": [
+          1885,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "chunk_capacity",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "const": {
+                    "default": null,
+                    "type": {
+                      "primitive": "usize"
+                    }
+                  }
+                },
+                "name": "MIN_ALIGN"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 165,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "158",
+      "span": {
+        "begin": [
+          1995,
+          5
+        ],
+        "end": [
+          2000,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "iter_allocated_chunks",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "const": {
+                    "default": null,
+                    "type": {
+                      "primitive": "usize"
+                    }
+                  }
+                },
+                "name": "MIN_ALIGN"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 165,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "159",
+      "span": {
+        "begin": [
+          2149,
+          5
+        ],
+        "end": [
+          2156,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "iter_allocated_chunks_raw",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "const": {
+                    "default": null,
+                    "type": {
+                      "primitive": "usize"
+                    }
+                  }
+                },
+                "name": "MIN_ALIGN"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 165,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "161",
+      "span": {
+        "begin": [
+          2175,
+          5
+        ],
+        "end": [
+          2180,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "allocated_bytes",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "const": {
+                    "default": null,
+                    "type": {
+                      "primitive": "usize"
+                    }
+                  }
+                },
+                "name": "MIN_ALIGN"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 165,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "163",
+      "span": {
+        "begin": [
+          2204,
+          5
+        ],
+        "end": [
+          2208,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "allocated_bytes_including_metadata",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "const": {
+                    "default": null,
+                    "type": {
+                      "primitive": "usize"
+                    }
+                  }
+                },
+                "name": "MIN_ALIGN"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 165,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "164",
+      "span": {
+        "begin": [
+          2214,
+          5
+        ],
+        "end": [
+          2218,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "borrow",
+      "owners": [
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "id": 19,
+                          "path": "Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 18,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "AllocErr",
+          "receiver_publicly_named": true,
+          "trait": "Borrow",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "id": 19,
+                          "path": "Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 90,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "AllocOrInitError<E>",
+          "receiver_publicly_named": true,
+          "trait": "Borrow",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "id": 19,
+                          "path": "Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 171,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": "Borrow",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "id": 19,
+                          "path": "Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 194,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "ChunkIter<'a, MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": "Borrow",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "id": 19,
+                          "path": "Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 222,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "ChunkRawIter<'a, MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": "Borrow",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "17",
+      "span": null,
+      "status": "external_definition"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "fmt",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "const": {
+                    "default": null,
+                    "type": {
+                      "primitive": "usize"
+                    }
+                  }
+                },
+                "name": "MIN_ALIGN"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 179,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": "Debug",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "178",
+      "span": {
+        "begin": [
+          291,
+          10
+        ],
+        "end": [
+          291,
+          15
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "default",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "const": {
+                    "default": null,
+                    "type": {
+                      "primitive": "usize"
+                    }
+                  }
+                },
+                "name": "MIN_ALIGN"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 181,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": "Default",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "180",
+      "span": {
+        "begin": [
+          381,
+          5
+        ],
+        "end": [
+          383,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "drop",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "const": {
+                    "default": null,
+                    "type": {
+                      "primitive": "usize"
+                    }
+                  }
+                },
+                "name": "MIN_ALIGN"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 183,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": "Drop",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "182",
+      "span": {
+        "begin": [
+          387,
+          5
+        ],
+        "end": [
+          391,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "into_iter",
+      "owners": [
+        {
+          "blanket_impl": {
+            "generic": "I"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "I"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "id": 202,
+                          "path": "Iterator"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "I"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 205,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "ChunkIter<'a, MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": "IntoIterator",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "I"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "I"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "id": 202,
+                          "path": "Iterator"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "I"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 229,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "ChunkRawIter<'a, MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": "IntoIterator",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "204",
+      "span": null,
+      "status": "external_definition"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "fmt",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "lifetime": {
+                    "outlives": []
+                  }
+                },
+                "name": "'a"
+              },
+              {
+                "kind": {
+                  "const": {
+                    "default": null,
+                    "type": {
+                      "primitive": "usize"
+                    }
+                  }
+                },
+                "name": "MIN_ALIGN"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 207,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "ChunkIter<'a, MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": "Debug",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "206",
+      "span": {
+        "begin": [
+          2388,
+          10
+        ],
+        "end": [
+          2388,
+          15
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "borrow_mut",
+      "owners": [
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "id": 19,
+                          "path": "Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 22,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "AllocErr",
+          "receiver_publicly_named": true,
+          "trait": "BorrowMut",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "id": 19,
+                          "path": "Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 91,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "AllocOrInitError<E>",
+          "receiver_publicly_named": true,
+          "trait": "BorrowMut",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "id": 19,
+                          "path": "Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 172,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": "BorrowMut",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "id": 19,
+                          "path": "Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 195,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "ChunkIter<'a, MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": "BorrowMut",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "id": 19,
+                          "path": "Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 223,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "ChunkRawIter<'a, MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": "BorrowMut",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "21",
+      "span": null,
+      "status": "external_definition"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "next",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "lifetime": {
+                    "outlives": []
+                  }
+                },
+                "name": "'a"
+              },
+              {
+                "kind": {
+                  "const": {
+                    "default": null,
+                    "type": {
+                      "primitive": "usize"
+                    }
+                  }
+                },
+                "name": "MIN_ALIGN"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 211,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "ChunkIter<'a, MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": "Iterator",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "210",
+      "span": {
+        "begin": [
+          2397,
+          5
+        ],
+        "end": [
+          2403,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "fmt",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "lifetime": {
+                    "outlives": []
+                  }
+                },
+                "name": "'a"
+              },
+              {
+                "kind": {
+                  "const": {
+                    "default": null,
+                    "type": {
+                      "primitive": "usize"
+                    }
+                  }
+                },
+                "name": "MIN_ALIGN"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 231,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "ChunkRawIter<'a, MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": "Debug",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "230",
+      "span": {
+        "begin": [
+          2419,
+          10
+        ],
+        "end": [
+          2419,
+          15
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "next",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "const": {
+                    "default": null,
+                    "type": {
+                      "primitive": "usize"
+                    }
+                  }
+                },
+                "name": "MIN_ALIGN"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 234,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "ChunkRawIter<'_, MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": "Iterator",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "233",
+      "span": {
+        "begin": [
+          2427,
+          5
+        ],
+        "end": [
+          2437,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "clone_to_uninit",
+      "owners": [
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "id": 26,
+                          "path": "Clone"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 25,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "AllocErr",
+          "receiver_publicly_named": true,
+          "trait": "CloneToUninit",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "id": 26,
+                          "path": "Clone"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 92,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "AllocOrInitError<E>",
+          "receiver_publicly_named": true,
+          "trait": "CloneToUninit",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "24",
+      "span": null,
+      "status": "external_definition"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "into",
+      "owners": [
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              },
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "U"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          },
+                          "id": 28,
+                          "path": "From"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "U"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 30,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "AllocErr",
+          "receiver_publicly_named": true,
+          "trait": "Into",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              },
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "U"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          },
+                          "id": 28,
+                          "path": "From"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "U"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 93,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "AllocOrInitError<E>",
+          "receiver_publicly_named": true,
+          "trait": "Into",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              },
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "U"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          },
+                          "id": 28,
+                          "path": "From"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "U"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 173,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": "Into",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              },
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "U"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          },
+                          "id": 28,
+                          "path": "From"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "U"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 196,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "ChunkIter<'a, MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": "Into",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              },
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "U"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          },
+                          "id": 28,
+                          "path": "From"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "U"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 224,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "ChunkRawIter<'a, MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": "Into",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "29",
+      "span": null,
+      "status": "external_definition"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "from",
+      "owners": [
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 33,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "AllocErr",
+          "receiver_publicly_named": true,
+          "trait": "From",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 94,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "AllocOrInitError<E>",
+          "receiver_publicly_named": true,
+          "trait": "From",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 174,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": "From",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 197,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "ChunkIter<'a, MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": "From",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 225,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "ChunkRawIter<'a, MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": "From",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "32",
+      "span": null,
+      "status": "external_definition"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "try_into",
+      "owners": [
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              },
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "U"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          },
+                          "id": 35,
+                          "path": "TryFrom"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "U"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 38,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "AllocErr",
+          "receiver_publicly_named": true,
+          "trait": "TryInto",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              },
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "U"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          },
+                          "id": 35,
+                          "path": "TryFrom"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "U"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 95,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "AllocOrInitError<E>",
+          "receiver_publicly_named": true,
+          "trait": "TryInto",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              },
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "U"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          },
+                          "id": 35,
+                          "path": "TryFrom"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "U"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 175,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": "TryInto",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              },
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "U"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          },
+                          "id": 35,
+                          "path": "TryFrom"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "U"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 198,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "ChunkIter<'a, MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": "TryInto",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              },
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "U"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          },
+                          "id": 35,
+                          "path": "TryFrom"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "U"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 226,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "ChunkRawIter<'a, MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": "TryInto",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "36",
+      "span": null,
+      "status": "external_definition"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "try_from",
+      "owners": [
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              },
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "U"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          },
+                          "id": 31,
+                          "path": "Into"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "U"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 43,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "AllocErr",
+          "receiver_publicly_named": true,
+          "trait": "TryFrom",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              },
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "U"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          },
+                          "id": 31,
+                          "path": "Into"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "U"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 96,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "AllocOrInitError<E>",
+          "receiver_publicly_named": true,
+          "trait": "TryFrom",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              },
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "U"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          },
+                          "id": 31,
+                          "path": "Into"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "U"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 176,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": "TryFrom",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              },
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "U"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          },
+                          "id": 31,
+                          "path": "Into"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "U"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 199,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "ChunkIter<'a, MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": "TryFrom",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              },
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "U"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          },
+                          "id": 31,
+                          "path": "Into"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "U"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 227,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "ChunkRawIter<'a, MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": "TryFrom",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "42",
+      "span": null,
+      "status": "external_definition"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "type_id",
+      "owners": [
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "outlives": "'static"
+                    },
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "id": 19,
+                          "path": "Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 46,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "AllocErr",
+          "receiver_publicly_named": true,
+          "trait": "Any",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "outlives": "'static"
+                    },
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "id": 19,
+                          "path": "Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 97,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "AllocOrInitError<E>",
+          "receiver_publicly_named": true,
+          "trait": "Any",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "outlives": "'static"
+                    },
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "id": 19,
+                          "path": "Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 177,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": "Any",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "outlives": "'static"
+                    },
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "id": 19,
+                          "path": "Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 200,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "ChunkIter<'a, MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": "Any",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "outlives": "'static"
+                    },
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "id": 19,
+                          "path": "Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 228,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "ChunkRawIter<'a, MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": "Any",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "44",
+      "span": null,
+      "status": "external_definition"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "to_owned",
+      "owners": [
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "id": 26,
+                          "path": "Clone"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 51,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "AllocErr",
+          "receiver_publicly_named": true,
+          "trait": "ToOwned",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "id": 26,
+                          "path": "Clone"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 98,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "AllocOrInitError<E>",
+          "receiver_publicly_named": true,
+          "trait": "ToOwned",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "49",
+      "span": null,
+      "status": "external_definition"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "clone_into",
+      "owners": [
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "id": 26,
+                          "path": "Clone"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 51,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "AllocErr",
+          "receiver_publicly_named": true,
+          "trait": "ToOwned",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "id": 26,
+                          "path": "Clone"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 98,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "AllocOrInitError<E>",
+          "receiver_publicly_named": true,
+          "trait": "ToOwned",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "50",
+      "span": null,
+      "status": "external_definition"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "to_string",
+      "owners": [
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "id": 56,
+                          "path": "Display"
+                        }
+                      }
+                    },
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "id": 19,
+                          "path": "Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 55,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "AllocErr",
+          "receiver_publicly_named": true,
+          "trait": "ToString",
+          "trait_publicly_named": true
+        },
+        {
+          "blanket_impl": {
+            "generic": "T"
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "T"
+              }
+            ],
+            "where_predicates": [
+              {
+                "bound_predicate": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "id": 56,
+                          "path": "Display"
+                        }
+                      }
+                    },
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "id": 19,
+                          "path": "Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "generic_params": [],
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ]
+          },
+          "id": 99,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "AllocOrInitError<E>",
+          "receiver_publicly_named": true,
+          "trait": "ToString",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "53",
+      "span": null,
+      "status": "external_definition"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "clone",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 59,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "AllocErr",
+          "receiver_publicly_named": true,
+          "trait": "Clone",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "58",
+      "span": {
+        "begin": [
+          106,
+          10
+        ],
+        "end": [
+          106,
+          15
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/alloc.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "eq",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 63,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "AllocErr",
+          "receiver_publicly_named": true,
+          "trait": "PartialEq",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "62",
+      "span": {
+        "begin": [
+          106,
+          17
+        ],
+        "end": [
+          106,
+          26
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/alloc.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "fmt",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 70,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "AllocErr",
+          "receiver_publicly_named": true,
+          "trait": "Debug",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "67",
+      "span": {
+        "begin": [
+          106,
+          32
+        ],
+        "end": [
+          106,
+          37
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/alloc.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "fmt",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "id": 73,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "AllocErr",
+          "receiver_publicly_named": true,
+          "trait": "Display",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "72",
+      "span": {
+        "begin": [
+          112,
+          5
+        ],
+        "end": [
+          114,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/alloc.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "from",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                },
+                "name": "E"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 75,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "AllocOrInitError<E>",
+          "receiver_publicly_named": true,
+          "trait": "From",
+          "trait_publicly_named": true
+        }
+      ],
+      "rustdoc_id": "74",
+      "span": {
+        "begin": [
+          49,
+          5
+        ],
+        "end": [
+          51,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "trait_method_on_publicly_named_receiver"
+    },
+    {
+      "has_body": true,
+      "importable_path_count": 0,
+      "importable_paths_debug": "[]",
+      "name": "try_alloc_try_with",
+      "owners": [
+        {
+          "blanket_impl": null,
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "const": {
+                    "default": null,
+                    "type": {
+                      "primitive": "usize"
+                    }
+                  }
+                },
+                "name": "MIN_ALIGN"
+              }
+            ],
+            "where_predicates": []
+          },
+          "id": 165,
+          "is_negative": false,
+          "is_synthetic": false,
+          "kind": "impl",
+          "receiver": "Bump<MIN_ALIGN>",
+          "receiver_publicly_named": true,
+          "trait": null,
+          "trait_publicly_named": null
+        }
+      ],
+      "rustdoc_id": "83",
+      "span": {
+        "begin": [
+          1302,
+          5
+        ],
+        "end": [
+          1369,
+          6
+        ],
+        "filename": "/home/cym/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bumpalo-3.20.2/src/lib.rs"
+      },
+      "status": "method_on_publicly_named_receiver"
+    }
+  ],
+  "input_doc_sha256": "d014e5c730978eaa91d4a1c1e73128d72f8ab1a84a1c66c5adf5c8588dae6fcc",
+  "input_path": "/home/cym/workspace/PLFuzz/output/bumpalo/doc.json",
+  "policy": "publicly importable paths from existing rustdoc adapter; trait impl obligations remain unresolved",
+  "rustdoc_format": 57,
+  "schema": "graft-public-surface-crosscheck-v1",
+  "universe_sha256": "9be3c646417132be5a5b7869b8457826f383cf31c79ed62de83487b870fa3532",
+  "version": "3.20.2"
+}

@@ -1,0 +1,31 @@
+{
+  "schema": "graft-model-cost-policy-v1",
+  "revision": "20261110-pro-no-thinking-v1",
+  "model": "deepseek-v4-pro",
+  "endpoint": "https://api.deepseek.com/chat/completions",
+  "thinking": {"type": "disabled"},
+  "temperature": 0.0,
+  "max_calls_per_target": 2,
+  "max_output_tokens": 3072,
+  "min_output_tokens": 512,
+  "max_prompt_utf8_bytes": 14000,
+  "message_overhead_token_allowance": 512,
+  "documentation_utf8_bytes": 2600,
+  "analysis_utf8_bytes": 2000,
+  "diagnostics_utf8_bytes": 1400,
+  "target_budget_cny": "0.24",
+  "crate_budget_cny": "4.80",
+  "max_llm_targets_per_crate": 20,
+  "rate_snapshot": {
+    "checked_date": "2026-11-10",
+    "currency": "CNY",
+    "source": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
+    "cache_hit_per_million": "0.30",
+    "cache_miss_per_million": "9.0",
+    "output_per_million": "27.0",
+    "basis": "Peak rates, used conservatively even off-peak. Recheck before changing models or prices."
+  },
+  "failure_policy": "Reject over-budget/context requests locally; do not retry transport errors, empty content or truncated output. Missing usage retains the full reservation.",
+  "statistics": "Report both cost per attempted slot and total generation cost / admitted targets. Never treat a budget rejection as algorithmic zero coverage.",
+  "comparability": "Apply the same model, thinking mode, output limit and money limit to all LLM arms. Keep older high-thinking measurements in their original batch."
+}

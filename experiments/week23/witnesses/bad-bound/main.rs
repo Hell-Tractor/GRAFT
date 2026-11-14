@@ -1,0 +1,1 @@
+fn main(){checked_fixture::needs_tag(1i32);}

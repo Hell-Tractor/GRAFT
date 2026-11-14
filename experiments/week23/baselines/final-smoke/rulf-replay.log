@@ -1,0 +1,15 @@
+error[E0425]: cannot find function `graft_baseline_smokemake` in this scope
+ --> /home/jjf/rulf_work/graft_baseline_smoke-work/replay_files/replay_graft_baseline_smoke0.rs:8:19
+  |
+8 |     let _local0 = graft_baseline_smokemake(_param0);
+  |                   ^^^^^^^^^^^^^^^^^^^^^^^^ not found in this scope
+
+error[E0425]: cannot find function `graft_baseline_smokeconsume` in this scope
+ --> /home/jjf/rulf_work/graft_baseline_smoke-work/replay_files/replay_graft_baseline_smoke0.rs:9:13
+  |
+9 |     let _ = graft_baseline_smokeconsume(_local0);
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^ not found in this scope
+
+error: aborting due to 2 previous errors
+
+For more information about this error, try `rustc --explain E0425`.

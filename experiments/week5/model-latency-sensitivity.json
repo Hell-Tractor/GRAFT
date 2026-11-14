@@ -1,0 +1,19 @@
+{
+  "scope": "two requests from one calibration, not a throughput estimate",
+  "observed_seconds": [
+    54.522,
+    44.179
+  ],
+  "observed_mean_seconds": 49.3505,
+  "assumed_parallel_requests": 16,
+  "all_variants_initial_requests": 10920,
+  "all_variants_request_cap": 43680,
+  "initial_only_hours_if_mean_generalized": 9.356032291666667,
+  "cap_hours_if_mean_generalized": 37.42412916666667,
+  "fuzzing_schedule_hours_separate": 26,
+  "notes": [
+    "No throughput or completion guarantee from one target.",
+    "Repair builds and corpus replay excluded.",
+    "Fresh generation assumed each round; no-repair shares Full first response."
+  ]
+}

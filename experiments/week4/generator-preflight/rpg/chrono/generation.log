@@ -1,0 +1,62 @@
+ Documenting chrono v0.4.44
+Fuzz Target Generator for Rust Libraries: v1.65.0
+Total function number: 1183
+Before Reachable API Analysis API Number: 364
+Before Reachable API Analysis Dependencies Number: 7029
+>>>>> Reachable API Analysis <<<<<
+After Reachable API Analysis API Number: 354
+After Reachable API Analysis Dependencies Number: 6712
+API Pool Set
+param chrono::naive::NaiveDateDaysIterator is meet
+thread 'rustc' panicked at 'index out of bounds: the len is 0 but the index is 0', src/tools/fuzz-target-generator/src/fuzz_target/api_graph.rs:4794:98
+stack backtrace:
+   0:     0x7f5b78c99280 - <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt::haa1ac267d96ece15
+   1:     0x7f5b78d000fe - core::fmt::write::h85e2e5e4bd3b44cc
+   2:     0x7f5b78c6aa45 - std::io::Write::write_fmt::heb15af2369c8cc9b
+   3:     0x7f5b78c747f4 - std::panicking::default_hook::{{closure}}::hf1d46a050ea2f17c
+   4:     0x7f5b78c74441 - std::panicking::default_hook::h22854d6238bfb43d
+   5:     0x7f5b79934426 - rustc_driver[79c3ab233b9a6654]::DEFAULT_HOOK::{closure#0}::{closure#0}
+   6:     0x7f5b78c7509d - std::panicking::rust_panic_with_hook::h6634bbadcc71cee8
+   7:     0x7f5b78c99877 - std::panicking::begin_panic_handler::{{closure}}::hf9e4ab0b4d049b34
+   8:     0x7f5b78c993cc - std::sys_common::backtrace::__rust_end_short_backtrace::h427ec39dfb567f21
+   9:     0x7f5b78c74ce2 - rust_begin_unwind
+  10:     0x7f5b78c3b1e3 - core::panicking::panic_fmt::heeb3b1f504c6a55e
+  11:     0x7f5b78c3b122 - core::panicking::panic_bounds_check::h5222d372dcef5088
+  12:     0x5595f6a59b0b - <fuzz_target_generator[c3e46cd5cfc07d99]::fuzz_target::api_graph::ApiGraph>::sequence_add_fun
+  13:     0x5595f6a4b1ec - <fuzz_target_generator[c3e46cd5cfc07d99]::fuzz_target::api_graph::ApiGraph>::bfs
+  14:     0x5595f6a30c75 - <fuzz_target_generator[c3e46cd5cfc07d99]::fuzz_target::api_graph::ApiGraph>::generate_all_possible_sequences
+  15:     0x5595f6a302ff - <fuzz_target_generator[c3e46cd5cfc07d99]::fuzz_target::api_graph::ApiGraph>::default_generate_sequences
+  16:     0x5595f69de278 - fuzz_target_generator[b5445345280b12b7]::fuzz_target_generator_run_format::<rustdoc[6d7ee3a362269234]::html::render::context::Context>
+  17:     0x5595f69d8882 - fuzz_target_generator[b5445345280b12b7]::fuzz_target_generator_run_renderer::<rustdoc[6d7ee3a362269234]::html::render::context::Context>
+  18:     0x5595f6953398 - <rustc_session[4fd6af44e006d69c]::session::Session>::time::<core[ef755ff5b65afa0e]::result::Result<(), rustc_errors[e1bd0a6243c71245]::ErrorGuaranteed>, fuzz_target_generator[b5445345280b12b7]::fuzz_target_generator_main_options::{closure#0}::{closure#0}::{closure#1}::{closure#1}>
+  19:     0x5595f69e8b91 - <rustc_interface[a05560dbe8d2663d]::passes::QueryContext>::enter::<fuzz_target_generator[b5445345280b12b7]::fuzz_target_generator_main_options::{closure#0}::{closure#0}::{closure#1}, core[ef755ff5b65afa0e]::result::Result<(), rustc_errors[e1bd0a6243c71245]::ErrorGuaranteed>>
+  20:     0x5595f69709bb - <rustc_interface[a05560dbe8d2663d]::interface::Compiler>::enter::<fuzz_target_generator[b5445345280b12b7]::fuzz_target_generator_main_options::{closure#0}::{closure#0}, core[ef755ff5b65afa0e]::result::Result<(), rustc_errors[e1bd0a6243c71245]::ErrorGuaranteed>>
+  21:     0x5595f69edf01 - rustc_span[eab1b6fab739e816]::with_source_map::<core[ef755ff5b65afa0e]::result::Result<(), rustc_errors[e1bd0a6243c71245]::ErrorGuaranteed>, rustc_interface[a05560dbe8d2663d]::interface::create_compiler_and_run<core[ef755ff5b65afa0e]::result::Result<(), rustc_errors[e1bd0a6243c71245]::ErrorGuaranteed>, fuzz_target_generator[b5445345280b12b7]::fuzz_target_generator_main_options::{closure#0}>::{closure#1}>
+  22:     0x5595f69714de - rustc_interface[a05560dbe8d2663d]::interface::create_compiler_and_run::<core[ef755ff5b65afa0e]::result::Result<(), rustc_errors[e1bd0a6243c71245]::ErrorGuaranteed>, fuzz_target_generator[b5445345280b12b7]::fuzz_target_generator_main_options::{closure#0}>
+  23:     0x5595f69da0a3 - fuzz_target_generator[b5445345280b12b7]::fuzz_target_generator_main_options
+  24:     0x5595f6954bbb - <scoped_tls[1a39c7ed17410cc3]::ScopedKey<rustc_span[eab1b6fab739e816]::SessionGlobals>>::set::<fuzz_target_generator[b5445345280b12b7]::fuzz_target_generator_main_args::{closure#0}, core[ef755ff5b65afa0e]::result::Result<(), rustc_errors[e1bd0a6243c71245]::ErrorGuaranteed>>
+  25:     0x5595f69f2270 - std[65cc05859238035b]::sys_common::backtrace::__rust_begin_short_backtrace::<rustc_interface[a05560dbe8d2663d]::util::run_in_thread_pool_with_globals<fuzz_target_generator[b5445345280b12b7]::fuzz_target_generator_main_args::{closure#0}, core[ef755ff5b65afa0e]::result::Result<(), rustc_errors[e1bd0a6243c71245]::ErrorGuaranteed>>::{closure#0}, core[ef755ff5b65afa0e]::result::Result<(), rustc_errors[e1bd0a6243c71245]::ErrorGuaranteed>>
+  26:     0x5595f695d54c - <<std[65cc05859238035b]::thread::Builder>::spawn_unchecked_<rustc_interface[a05560dbe8d2663d]::util::run_in_thread_pool_with_globals<fuzz_target_generator[b5445345280b12b7]::fuzz_target_generator_main_args::{closure#0}, core[ef755ff5b65afa0e]::result::Result<(), rustc_errors[e1bd0a6243c71245]::ErrorGuaranteed>>::{closure#0}, core[ef755ff5b65afa0e]::result::Result<(), rustc_errors[e1bd0a6243c71245]::ErrorGuaranteed>>::{closure#1} as core[ef755ff5b65afa0e]::ops::function::FnOnce<()>>::call_once::{shim:vtable#0}
+  27:     0x7f5b78c4a0f3 - std::sys::unix::thread::Thread::new::thread_start::h1b17c6fb346b566f
+  28:     0x7f5b78bb3609 - start_thread
+  29:     0x7f5b7896c353 - clone
+  30:                0x0 - <unknown>
+
+error: internal compiler error: unexpected panic
+
+note: the compiler unexpectedly panicked. this is a bug.
+
+note: we would appreciate a bug report: https://github.com/rust-lang/rust/issues/new?labels=C-bug%2C+I-ICE%2C+T-compiler&template=ice.md
+
+note: rustc 1.65.0-dev running on x86_64-unknown-linux-gnu
+
+note: compiler flags: --crate-type lib
+
+note: some of the compiler flags provided by cargo are hidden
+
+query stack during panic:
+end of query stack
+error: could not document `chrono`
+
+Caused by:
+  process didn't exit successfully: `/opt/output-wrapper.py --edition=2021 --crate-type lib --crate-name chrono /home/cym/workspace/graft-baseline-port-20261109/vendor/chrono-0.4.44/src/lib.rs --cap-lints allow -o /build/doc --cfg 'feature="alloc"' --cfg 'feature="clock"' --cfg 'feature="default"' --cfg 'feature="iana-time-zone"' --cfg 'feature="js-sys"' --cfg 'feature="now"' --cfg 'feature="oldtime"' --cfg 'feature="std"' --cfg 'feature="wasm-bindgen"' --cfg 'feature="wasmbind"' --cfg 'feature="winapi"' --cfg 'feature="windows-link"' --error-format=json --json=diagnostic-rendered-ansi,artifacts,future-incompat -C metadata=b50ef76d48d5c2b1 -L dependency=/build/debug/deps --extern iana_time_zone=/build/debug/deps/libiana_time_zone-f3e260b228f48e4f.rmeta --extern num_traits=/build/debug/deps/libnum_traits-d70545b26c86fac7.rmeta --sysroot /Rust-Lib-Testing/rust1.65 --crate-version 0.4.44` (exit status: 101)

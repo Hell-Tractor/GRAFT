@@ -1,0 +1,10 @@
+warning: unused import: `base64::engine::Engine`
+  --> /home/jjf/rulf_work/base64-work/replay_files/replay_base640.rs:24:5
+   |
+24 | use base64::engine::Engine;
+   |     ^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` on by default
+
+warning: 1 warning emitted
+

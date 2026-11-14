@@ -1,0 +1,626 @@
+[
+  {
+    "cargo_lock_sha256": "290b534b8957b4469626ed803ab2b1fb29c6da57ad208c4d4f400804c3c1a8ea",
+    "crate": "autocfg",
+    "features": "package defaults, shared aggregate lock, Linux x86_64",
+    "public_name_body_definitions": 35,
+    "raw_rustdoc_path": "/home/cym/workspace/graft-baseline-port-20261109/frozen-rustdoc/autocfg-1.5.0.json",
+    "raw_rustdoc_sha256": "3114dc756a12fb7c7bb0f81050499559fcd4fa159366cf0e31718623a098a273",
+    "review_items": 13,
+    "root_manifest_sha256": "65a8e3317ef9ccf5c0b6013991790ccfd7b2b729ea0aac86ff488e82e3ad462b",
+    "rustdoc": {
+      "command": [
+        "cargo",
+        "+nightly",
+        "rustdoc",
+        "--frozen",
+        "--offline",
+        "--jobs",
+        "16",
+        "--package",
+        "autocfg@1.5.0",
+        "--lib",
+        "--",
+        "-Z",
+        "unstable-options",
+        "--output-format",
+        "json",
+        "--document-private-items",
+        "--crate-version",
+        "1.5.0"
+      ],
+      "log": "autocfg-rustdoc.log",
+      "returncode": 0,
+      "seconds": 0.33312840783037245
+    },
+    "status": "frozen",
+    "surface": {
+      "command": [
+        "/tmp/graft-week1-target/debug/audit_public_surface",
+        "/home/cym/workspace/graft-baseline-port-20261109/frozen-rustdoc/autocfg-1.5.0.json",
+        "/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week4/common-universes/autocfg-surface.json"
+      ],
+      "log": "autocfg-surface.log",
+      "returncode": 0,
+      "seconds": 0.05889926920644939
+    },
+    "universe_sha256": "127a31d368edbd6dedb4898e30dbb86cb59493a73d7bc230aee8d86fe55ad61b",
+    "version": "1.5.0"
+  },
+  {
+    "cargo_lock_sha256": "290b534b8957b4469626ed803ab2b1fb29c6da57ad208c4d4f400804c3c1a8ea",
+    "crate": "base64",
+    "features": "package defaults, shared aggregate lock, Linux x86_64",
+    "public_name_body_definitions": 76,
+    "raw_rustdoc_path": "/home/cym/workspace/graft-baseline-port-20261109/frozen-rustdoc/base64-0.22.1.json",
+    "raw_rustdoc_sha256": "76585cce72ec7a7fcd9ea58dfc8d14bc73f462c1532bd2f5ffe08bb0e188410a",
+    "review_items": 8,
+    "root_manifest_sha256": "65a8e3317ef9ccf5c0b6013991790ccfd7b2b729ea0aac86ff488e82e3ad462b",
+    "rustdoc": {
+      "command": [
+        "cargo",
+        "+nightly",
+        "rustdoc",
+        "--frozen",
+        "--offline",
+        "--jobs",
+        "16",
+        "--package",
+        "base64@0.22.1",
+        "--lib",
+        "--",
+        "-Z",
+        "unstable-options",
+        "--output-format",
+        "json",
+        "--document-private-items",
+        "--crate-version",
+        "0.22.1"
+      ],
+      "log": "base64-rustdoc.log",
+      "returncode": 0,
+      "seconds": 0.6302692368626595
+    },
+    "status": "frozen",
+    "surface": {
+      "command": [
+        "/tmp/graft-week1-target/debug/audit_public_surface",
+        "/home/cym/workspace/graft-baseline-port-20261109/frozen-rustdoc/base64-0.22.1.json",
+        "/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week4/common-universes/base64-surface.json"
+      ],
+      "log": "base64-surface.log",
+      "returncode": 0,
+      "seconds": 0.13173489714972675
+    },
+    "universe_sha256": "31ac19064908191a156419a24aea237b426073d77d523f228864771cab2a61be",
+    "version": "0.22.1"
+  },
+  {
+    "cargo_lock_sha256": "290b534b8957b4469626ed803ab2b1fb29c6da57ad208c4d4f400804c3c1a8ea",
+    "crate": "bumpalo",
+    "features": "package defaults, shared aggregate lock, Linux x86_64",
+    "public_name_body_definitions": 44,
+    "raw_rustdoc_path": "/home/cym/workspace/graft-baseline-port-20261109/frozen-rustdoc/bumpalo-3.14.0.json",
+    "raw_rustdoc_sha256": "c07a64e3adc87f9aa7a422ceb61323df991e17360c641cb477755e311236ce92",
+    "review_items": 32,
+    "root_manifest_sha256": "65a8e3317ef9ccf5c0b6013991790ccfd7b2b729ea0aac86ff488e82e3ad462b",
+    "rustdoc": {
+      "command": [
+        "cargo",
+        "+nightly",
+        "rustdoc",
+        "--frozen",
+        "--offline",
+        "--jobs",
+        "16",
+        "--package",
+        "bumpalo@3.14.0",
+        "--lib",
+        "--",
+        "-Z",
+        "unstable-options",
+        "--output-format",
+        "json",
+        "--document-private-items",
+        "--crate-version",
+        "3.14.0"
+      ],
+      "log": "bumpalo-rustdoc.log",
+      "returncode": 0,
+      "seconds": 0.27484654285945
+    },
+    "status": "frozen",
+    "surface": {
+      "command": [
+        "/tmp/graft-week1-target/debug/audit_public_surface",
+        "/home/cym/workspace/graft-baseline-port-20261109/frozen-rustdoc/bumpalo-3.14.0.json",
+        "/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week4/common-universes/bumpalo-surface.json"
+      ],
+      "log": "bumpalo-surface.log",
+      "returncode": 0,
+      "seconds": 0.07214422477409244
+    },
+    "universe_sha256": "64a63cdcc27403be8a0e061e2b82058dc1165e70e38b8bd979efcb74e9805695",
+    "version": "3.14.0"
+  },
+  {
+    "cargo_lock_sha256": "290b534b8957b4469626ed803ab2b1fb29c6da57ad208c4d4f400804c3c1a8ea",
+    "crate": "byteorder",
+    "features": "package defaults, shared aggregate lock, Linux x86_64",
+    "public_name_body_definitions": 162,
+    "raw_rustdoc_path": "/home/cym/workspace/graft-baseline-port-20261109/frozen-rustdoc/byteorder-1.5.0.json",
+    "raw_rustdoc_sha256": "b7c6ccb316ea2fe947c170aece0d45e434a8938d314d8d3d9715deddd53d4cb1",
+    "review_items": 0,
+    "root_manifest_sha256": "65a8e3317ef9ccf5c0b6013991790ccfd7b2b729ea0aac86ff488e82e3ad462b",
+    "rustdoc": {
+      "command": [
+        "cargo",
+        "+nightly",
+        "rustdoc",
+        "--frozen",
+        "--offline",
+        "--jobs",
+        "16",
+        "--package",
+        "byteorder@1.5.0",
+        "--lib",
+        "--",
+        "-Z",
+        "unstable-options",
+        "--output-format",
+        "json",
+        "--document-private-items",
+        "--crate-version",
+        "1.5.0"
+      ],
+      "log": "byteorder-rustdoc.log",
+      "returncode": 0,
+      "seconds": 0.3510201608296484
+    },
+    "status": "frozen",
+    "surface": {
+      "command": [
+        "/tmp/graft-week1-target/debug/audit_public_surface",
+        "/home/cym/workspace/graft-baseline-port-20261109/frozen-rustdoc/byteorder-1.5.0.json",
+        "/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week4/common-universes/byteorder-surface.json"
+      ],
+      "log": "byteorder-surface.log",
+      "returncode": 0,
+      "seconds": 0.07729565282352269
+    },
+    "universe_sha256": "e891570136ef1d81530e9cb7b77634c815835daa9a7fea946afcf2d53bd1f258",
+    "version": "1.5.0"
+  },
+  {
+    "cargo_lock_sha256": "290b534b8957b4469626ed803ab2b1fb29c6da57ad208c4d4f400804c3c1a8ea",
+    "crate": "bytes",
+    "features": "package defaults, shared aggregate lock, Linux x86_64",
+    "public_name_body_definitions": 491,
+    "raw_rustdoc_path": "/home/cym/workspace/graft-baseline-port-20261109/frozen-rustdoc/bytes-1.11.1.json",
+    "raw_rustdoc_sha256": "08cbf978ace68731d19482d9764284b161b7f0a9a6f7963a88b270189577a1a0",
+    "review_items": 115,
+    "root_manifest_sha256": "65a8e3317ef9ccf5c0b6013991790ccfd7b2b729ea0aac86ff488e82e3ad462b",
+    "rustdoc": {
+      "command": [
+        "cargo",
+        "+nightly",
+        "rustdoc",
+        "--frozen",
+        "--offline",
+        "--jobs",
+        "16",
+        "--package",
+        "bytes@1.11.1",
+        "--lib",
+        "--",
+        "-Z",
+        "unstable-options",
+        "--output-format",
+        "json",
+        "--document-private-items",
+        "--crate-version",
+        "1.11.1"
+      ],
+      "log": "bytes-rustdoc.log",
+      "returncode": 0,
+      "seconds": 0.41395307588391006
+    },
+    "status": "frozen",
+    "surface": {
+      "command": [
+        "/tmp/graft-week1-target/debug/audit_public_surface",
+        "/home/cym/workspace/graft-baseline-port-20261109/frozen-rustdoc/bytes-1.11.1.json",
+        "/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week4/common-universes/bytes-surface.json"
+      ],
+      "log": "bytes-surface.log",
+      "returncode": 0,
+      "seconds": 0.2965921969152987
+    },
+    "universe_sha256": "2ab444b03843fd309e2730a35e3a916fa26f0a45af3254c339534a4ba98651c7",
+    "version": "1.11.1"
+  },
+  {
+    "cargo_lock_sha256": "290b534b8957b4469626ed803ab2b1fb29c6da57ad208c4d4f400804c3c1a8ea",
+    "crate": "chrono",
+    "features": "package defaults, shared aggregate lock, Linux x86_64",
+    "public_name_body_definitions": 759,
+    "raw_rustdoc_path": "/home/cym/workspace/graft-baseline-port-20261109/frozen-rustdoc/chrono-0.4.44.json",
+    "raw_rustdoc_sha256": "8f94b2e12996f20c2d104e2a5c9b6a7f9779c253879deca241e641a266e79d9d",
+    "review_items": 70,
+    "root_manifest_sha256": "65a8e3317ef9ccf5c0b6013991790ccfd7b2b729ea0aac86ff488e82e3ad462b",
+    "rustdoc": {
+      "command": [
+        "cargo",
+        "+nightly",
+        "rustdoc",
+        "--frozen",
+        "--offline",
+        "--jobs",
+        "16",
+        "--package",
+        "chrono@0.4.44",
+        "--lib",
+        "--",
+        "-Z",
+        "unstable-options",
+        "--output-format",
+        "json",
+        "--document-private-items",
+        "--crate-version",
+        "0.4.44"
+      ],
+      "log": "chrono-rustdoc.log",
+      "returncode": 0,
+      "seconds": 1.689027972985059
+    },
+    "status": "frozen",
+    "surface": {
+      "command": [
+        "/tmp/graft-week1-target/debug/audit_public_surface",
+        "/home/cym/workspace/graft-baseline-port-20261109/frozen-rustdoc/chrono-0.4.44.json",
+        "/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week4/common-universes/chrono-surface.json"
+      ],
+      "log": "chrono-surface.log",
+      "returncode": 0,
+      "seconds": 0.6703720421064645
+    },
+    "universe_sha256": "08f4eb4ad212a7f9f1f55ca2cd9367987f50f2a380c91357ed1b41a96691eabb",
+    "version": "0.4.44"
+  },
+  {
+    "cargo_lock_sha256": "290b534b8957b4469626ed803ab2b1fb29c6da57ad208c4d4f400804c3c1a8ea",
+    "crate": "csv",
+    "features": "package defaults, shared aggregate lock, Linux x86_64",
+    "public_name_body_definitions": 222,
+    "raw_rustdoc_path": "/home/cym/workspace/graft-baseline-port-20261109/frozen-rustdoc/csv-1.3.1.json",
+    "raw_rustdoc_sha256": "53774c0321f139a1c821dd49801adacf5eb3e83ddc253fb5dde46452a1834fcf",
+    "review_items": 177,
+    "root_manifest_sha256": "65a8e3317ef9ccf5c0b6013991790ccfd7b2b729ea0aac86ff488e82e3ad462b",
+    "rustdoc": {
+      "command": [
+        "cargo",
+        "+nightly",
+        "rustdoc",
+        "--frozen",
+        "--offline",
+        "--jobs",
+        "16",
+        "--package",
+        "csv@1.3.1",
+        "--lib",
+        "--",
+        "-Z",
+        "unstable-options",
+        "--output-format",
+        "json",
+        "--document-private-items",
+        "--crate-version",
+        "1.3.1"
+      ],
+      "log": "csv-rustdoc.log",
+      "returncode": 0,
+      "seconds": 2.0892772239167243
+    },
+    "status": "frozen",
+    "surface": {
+      "command": [
+        "/tmp/graft-week1-target/debug/audit_public_surface",
+        "/home/cym/workspace/graft-baseline-port-20261109/frozen-rustdoc/csv-1.3.1.json",
+        "/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week4/common-universes/csv-surface.json"
+      ],
+      "log": "csv-surface.log",
+      "returncode": 0,
+      "seconds": 0.33533723396249115
+    },
+    "universe_sha256": "1cc3439c9937c1149a527a06b6998c9264f4d030eae950442ca97eb0499ae7eb",
+    "version": "1.3.1"
+  },
+  {
+    "cargo_lock_sha256": "290b534b8957b4469626ed803ab2b1fb29c6da57ad208c4d4f400804c3c1a8ea",
+    "crate": "fixedbitset",
+    "features": "package defaults, shared aggregate lock, Linux x86_64",
+    "public_name_body_definitions": 105,
+    "raw_rustdoc_path": "/home/cym/workspace/graft-baseline-port-20261109/frozen-rustdoc/fixedbitset-0.5.7.json",
+    "raw_rustdoc_sha256": "2e124ca922c6713006006ffd64e7fb8fc13f4db842d8b24c70cbd93df0aaf141",
+    "review_items": 20,
+    "root_manifest_sha256": "65a8e3317ef9ccf5c0b6013991790ccfd7b2b729ea0aac86ff488e82e3ad462b",
+    "rustdoc": {
+      "command": [
+        "cargo",
+        "+nightly",
+        "rustdoc",
+        "--frozen",
+        "--offline",
+        "--jobs",
+        "16",
+        "--package",
+        "fixedbitset@0.5.7",
+        "--lib",
+        "--",
+        "-Z",
+        "unstable-options",
+        "--output-format",
+        "json",
+        "--document-private-items",
+        "--crate-version",
+        "0.5.7"
+      ],
+      "log": "fixedbitset-rustdoc.log",
+      "returncode": 0,
+      "seconds": 0.2786970401648432
+    },
+    "status": "frozen",
+    "surface": {
+      "command": [
+        "/tmp/graft-week1-target/debug/audit_public_surface",
+        "/home/cym/workspace/graft-baseline-port-20261109/frozen-rustdoc/fixedbitset-0.5.7.json",
+        "/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week4/common-universes/fixedbitset-surface.json"
+      ],
+      "log": "fixedbitset-surface.log",
+      "returncode": 0,
+      "seconds": 0.0851704329252243
+    },
+    "universe_sha256": "9a4870dd1171aee903e5db7dfc3245cd699f458ca691655678b52e2a52c804a2",
+    "version": "0.5.7"
+  },
+  {
+    "cargo_lock_sha256": "290b534b8957b4469626ed803ab2b1fb29c6da57ad208c4d4f400804c3c1a8ea",
+    "crate": "idna",
+    "features": "package defaults, shared aggregate lock, Linux x86_64",
+    "public_name_body_definitions": 25,
+    "raw_rustdoc_path": "/home/cym/workspace/graft-baseline-port-20261109/frozen-rustdoc/idna-0.5.0.json",
+    "raw_rustdoc_sha256": "3a97afe62402c5ccafb5e150daac971529ddf36156c7e6cac1dd60cd6daaa876",
+    "review_items": 7,
+    "root_manifest_sha256": "65a8e3317ef9ccf5c0b6013991790ccfd7b2b729ea0aac86ff488e82e3ad462b",
+    "rustdoc": {
+      "command": [
+        "cargo",
+        "+nightly",
+        "rustdoc",
+        "--frozen",
+        "--offline",
+        "--jobs",
+        "16",
+        "--package",
+        "idna@0.5.0",
+        "--lib",
+        "--",
+        "-Z",
+        "unstable-options",
+        "--output-format",
+        "json",
+        "--document-private-items",
+        "--crate-version",
+        "0.5.0"
+      ],
+      "log": "idna-rustdoc.log",
+      "returncode": 0,
+      "seconds": 0.8513783400412649
+    },
+    "status": "frozen",
+    "surface": {
+      "command": [
+        "/tmp/graft-week1-target/debug/audit_public_surface",
+        "/home/cym/workspace/graft-baseline-port-20261109/frozen-rustdoc/idna-0.5.0.json",
+        "/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week4/common-universes/idna-surface.json"
+      ],
+      "log": "idna-surface.log",
+      "returncode": 0,
+      "seconds": 0.07414262997917831
+    },
+    "universe_sha256": "a8c9e9911d358f4af570086ec65d6fcd58a9482882b61c8cca1fe1b0007f5b8f",
+    "version": "0.5.0"
+  },
+  {
+    "cargo_lock_sha256": "290b534b8957b4469626ed803ab2b1fb29c6da57ad208c4d4f400804c3c1a8ea",
+    "crate": "regex",
+    "features": "package defaults, shared aggregate lock, Linux x86_64",
+    "public_name_body_definitions": 322,
+    "raw_rustdoc_path": "/home/cym/workspace/graft-baseline-port-20261109/frozen-rustdoc/regex-1.12.3.json",
+    "raw_rustdoc_sha256": "6d0e95b94ce02b5583b7384784ce831491c0a1f97b1fdc3d1f536890c86bf803",
+    "review_items": 5,
+    "root_manifest_sha256": "65a8e3317ef9ccf5c0b6013991790ccfd7b2b729ea0aac86ff488e82e3ad462b",
+    "rustdoc": {
+      "command": [
+        "cargo",
+        "+nightly",
+        "rustdoc",
+        "--frozen",
+        "--offline",
+        "--jobs",
+        "16",
+        "--package",
+        "regex@1.12.3",
+        "--lib",
+        "--",
+        "-Z",
+        "unstable-options",
+        "--output-format",
+        "json",
+        "--document-private-items",
+        "--crate-version",
+        "1.12.3"
+      ],
+      "log": "regex-rustdoc.log",
+      "returncode": 0,
+      "seconds": 2.5773822250775993
+    },
+    "status": "frozen",
+    "surface": {
+      "command": [
+        "/tmp/graft-week1-target/debug/audit_public_surface",
+        "/home/cym/workspace/graft-baseline-port-20261109/frozen-rustdoc/regex-1.12.3.json",
+        "/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week4/common-universes/regex-surface.json"
+      ],
+      "log": "regex-surface.log",
+      "returncode": 0,
+      "seconds": 0.2896779498551041
+    },
+    "universe_sha256": "503d7515d8cfdf32f28ad1a5b9e65b73ba5c6bb4d94d9f736180f99080e3b4e6",
+    "version": "1.12.3"
+  },
+  {
+    "cargo_lock_sha256": "290b534b8957b4469626ed803ab2b1fb29c6da57ad208c4d4f400804c3c1a8ea",
+    "crate": "ryu",
+    "features": "package defaults, shared aggregate lock, Linux x86_64",
+    "public_name_body_definitions": 7,
+    "raw_rustdoc_path": "/home/cym/workspace/graft-baseline-port-20261109/frozen-rustdoc/ryu-1.0.20.json",
+    "raw_rustdoc_sha256": "05b2274f48b6da874d3998586066a1d278034ed39869e5a70868bbd93468526b",
+    "review_items": 9,
+    "root_manifest_sha256": "65a8e3317ef9ccf5c0b6013991790ccfd7b2b729ea0aac86ff488e82e3ad462b",
+    "rustdoc": {
+      "command": [
+        "cargo",
+        "+nightly",
+        "rustdoc",
+        "--frozen",
+        "--offline",
+        "--jobs",
+        "16",
+        "--package",
+        "ryu@1.0.20",
+        "--lib",
+        "--",
+        "-Z",
+        "unstable-options",
+        "--output-format",
+        "json",
+        "--document-private-items",
+        "--crate-version",
+        "1.0.20"
+      ],
+      "log": "ryu-rustdoc.log",
+      "returncode": 0,
+      "seconds": 0.23431234993040562
+    },
+    "status": "frozen",
+    "surface": {
+      "command": [
+        "/tmp/graft-week1-target/debug/audit_public_surface",
+        "/home/cym/workspace/graft-baseline-port-20261109/frozen-rustdoc/ryu-1.0.20.json",
+        "/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week4/common-universes/ryu-surface.json"
+      ],
+      "log": "ryu-surface.log",
+      "returncode": 0,
+      "seconds": 0.029805402038618922
+    },
+    "universe_sha256": "6fbccc0778145a0180ce8c1f1174801997165b59e4f635476f72a94ecc56e310",
+    "version": "1.0.20"
+  },
+  {
+    "cargo_lock_sha256": "290b534b8957b4469626ed803ab2b1fb29c6da57ad208c4d4f400804c3c1a8ea",
+    "crate": "time",
+    "features": "package defaults, shared aggregate lock, Linux x86_64",
+    "public_name_body_definitions": 481,
+    "raw_rustdoc_path": "/home/cym/workspace/graft-baseline-port-20261109/frozen-rustdoc/time-0.3.23.json",
+    "raw_rustdoc_sha256": "9550f355cc2ac302d404dc02fd7313a7093bb89835409ab922c8a02256280ac5",
+    "review_items": 84,
+    "root_manifest_sha256": "65a8e3317ef9ccf5c0b6013991790ccfd7b2b729ea0aac86ff488e82e3ad462b",
+    "rustdoc": {
+      "command": [
+        "cargo",
+        "+nightly",
+        "rustdoc",
+        "--frozen",
+        "--offline",
+        "--jobs",
+        "16",
+        "--package",
+        "time@0.3.23",
+        "--lib",
+        "--",
+        "-Z",
+        "unstable-options",
+        "--output-format",
+        "json",
+        "--document-private-items",
+        "--crate-version",
+        "0.3.23"
+      ],
+      "log": "time-rustdoc.log",
+      "returncode": 0,
+      "seconds": 0.4540978108998388
+    },
+    "status": "frozen",
+    "surface": {
+      "command": [
+        "/tmp/graft-week1-target/debug/audit_public_surface",
+        "/home/cym/workspace/graft-baseline-port-20261109/frozen-rustdoc/time-0.3.23.json",
+        "/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week4/common-universes/time-surface.json"
+      ],
+      "log": "time-surface.log",
+      "returncode": 0,
+      "seconds": 0.2977692289277911
+    },
+    "universe_sha256": "d0bcc01b525a76a932eaffffadc215e9b52c6298bbd9f8256974c81e6449e8ad",
+    "version": "0.3.23"
+  },
+  {
+    "cargo_lock_sha256": "290b534b8957b4469626ed803ab2b1fb29c6da57ad208c4d4f400804c3c1a8ea",
+    "crate": "unicode-segmentation",
+    "features": "package defaults, shared aggregate lock, Linux x86_64",
+    "public_name_body_definitions": 53,
+    "raw_rustdoc_path": "/home/cym/workspace/graft-baseline-port-20261109/frozen-rustdoc/unicode-segmentation-1.10.1.json",
+    "raw_rustdoc_sha256": "5be90f5db8c118f6d0fdd7aef2beca15a8ae3de28df01b9a0ab8f2c74ac8dd18",
+    "review_items": 32,
+    "root_manifest_sha256": "65a8e3317ef9ccf5c0b6013991790ccfd7b2b729ea0aac86ff488e82e3ad462b",
+    "rustdoc": {
+      "command": [
+        "cargo",
+        "+nightly",
+        "rustdoc",
+        "--frozen",
+        "--offline",
+        "--jobs",
+        "16",
+        "--package",
+        "unicode-segmentation@1.10.1",
+        "--lib",
+        "--",
+        "-Z",
+        "unstable-options",
+        "--output-format",
+        "json",
+        "--document-private-items",
+        "--crate-version",
+        "1.10.1"
+      ],
+      "log": "unicode-segmentation-rustdoc.log",
+      "returncode": 0,
+      "seconds": 0.3311184961348772
+    },
+    "status": "frozen",
+    "surface": {
+      "command": [
+        "/tmp/graft-week1-target/debug/audit_public_surface",
+        "/home/cym/workspace/graft-baseline-port-20261109/frozen-rustdoc/unicode-segmentation-1.10.1.json",
+        "/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week4/common-universes/unicode-segmentation-surface.json"
+      ],
+      "log": "unicode-segmentation-surface.log",
+      "returncode": 0,
+      "seconds": 0.1362834561150521
+    },
+    "universe_sha256": "96e9a2403a563bb3c5852619ea60a9913720cd2abca123b1b303d0869f374183",
+    "version": "1.10.1"
+  }
+]

@@ -1,0 +1,11 @@
+warning: unused `Result` that must be used
+  --> /results/idna/fuzz_target/idna_bfs_generic_fuzz/replay_files/replay_idna1.rs:16:5
+   |
+16 |     idna::domain_to_ascii_strict(_param0);
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(unused_must_use)]` on by default
+   = note: this `Result` may be an `Err` variant, which should be handled
+
+warning: 1 warning emitted
+

@@ -1,0 +1,26 @@
+ Documenting fixedbitset v0.5.7
+Fuzz Target Generator for Rust Libraries: v0.1.0
+Fuzz Target Renderer Init
+crate: fixedbitset
+using bfs end point
+reverse search can not cover more nodes
+after backward search
+targets = 1709
+total length = 5064
+average time to visit = 120.57142857142857
+edge covered by reverse search = 100
+-----------STATISTICS-----------
+total nodes: 43
+total edges: 140
+covered nodes: 42
+covered edges: 57
+node coverage: 0.9767441860465116
+edge coverage: 0.40714285714285714
+targets covered by reverse search: 0
+total targets: 24
+max length = 0
+total length = 70
+average time to fuzz each api = 1.6666666666666667
+--------------------------------
+Fuzz Target Generator exits successfully. Total time cost: 362 ms
+    Finished dev [unoptimized + debuginfo] target(s) in 0.41s

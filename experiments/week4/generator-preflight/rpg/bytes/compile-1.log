@@ -1,0 +1,11 @@
+warning: unused return value of `BytesMut::split_off` that must be used
+  --> /results/bytes/fuzz_target/bytes_bfs_generic_fuzz/replay_files/replay_bytes1.rs:37:5
+   |
+37 |     bytes::BytesMut::split_off(&mut (_local0) ,_param0);
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(unused_must_use)]` on by default
+   = note: consider BytesMut::truncate if you don't need the other half
+
+warning: 1 warning emitted
+

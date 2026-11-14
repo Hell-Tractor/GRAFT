@@ -1,0 +1,2 @@
+rustc 1.66.0-dev
+/opt/graft-patched/fuzz-target-generator: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.34' not found (required by /opt/graft-patched/fuzz-target-generator)

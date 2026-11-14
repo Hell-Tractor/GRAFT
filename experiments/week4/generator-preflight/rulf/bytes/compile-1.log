@@ -1,0 +1,16 @@
+error[E0521]: borrowed data escapes outside of function
+  --> /home/jjf/rulf_work/bytes-work/replay_files/replay_bytes1.rs:36:23
+   |
+35 | fn test_function1(_param0 :&[u8] ,_param1 :usize) {
+   |                   -------  - let's call the lifetime of this reference `'1`
+   |                   |
+   |                   `_param0` is a reference that is only valid in the function body
+36 |     let mut _local0 = bytes::Bytes::from_static(_param0);
+   |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |                       |
+   |                       `_param0` escapes the function body here
+   |                       argument requires that `'1` must outlive `'static`
+
+error: aborting due to previous error
+
+For more information about this error, try `rustc --explain E0521`.

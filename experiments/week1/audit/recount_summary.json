@@ -1,0 +1,1892 @@
+[
+  {
+    "crate": "ryu",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 100.0,
+        "covered": 5,
+        "observed_zero": 0,
+        "total": 5,
+        "unresolved": 0
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 100.0,
+        "covered": 5,
+        "observed_zero": 0,
+        "total": 5,
+        "unresolved": 0
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 100.0,
+        "covered": 5,
+        "observed_zero": 0,
+        "total": 5,
+        "unresolved": 0
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 71.42857142857143,
+        "covered": 5,
+        "observed_zero": 2,
+        "total": 7,
+        "unresolved": 0
+      }
+    },
+    "report": "recounts/GRAFT-ryu.json",
+    "tool": "GRAFT"
+  },
+  {
+    "crate": "bumpalo",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 100.0,
+        "covered": 44,
+        "observed_zero": 0,
+        "total": 44,
+        "unresolved": 0
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 100.0,
+        "covered": 44,
+        "observed_zero": 0,
+        "total": 44,
+        "unresolved": 0
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 100.0,
+        "covered": 44,
+        "observed_zero": 0,
+        "total": 44,
+        "unresolved": 0
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 77.58620689655173,
+        "covered": 45,
+        "observed_zero": 4,
+        "total": 58,
+        "unresolved": 9
+      }
+    },
+    "report": "recounts/GRAFT-bumpalo.json",
+    "tool": "GRAFT"
+  },
+  {
+    "crate": "base64",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 92.3076923076923,
+        "covered": 24,
+        "observed_zero": 2,
+        "total": 26,
+        "unresolved": 0
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 92.3076923076923,
+        "covered": 24,
+        "observed_zero": 2,
+        "total": 26,
+        "unresolved": 0
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 72.22222222222223,
+        "covered": 26,
+        "observed_zero": 10,
+        "total": 36,
+        "unresolved": 0
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 40.0,
+        "covered": 28,
+        "observed_zero": 19,
+        "total": 70,
+        "unresolved": 23
+      }
+    },
+    "report": "recounts/GRAFT-base64.json",
+    "tool": "GRAFT"
+  },
+  {
+    "crate": "regex",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 52.38095238095238,
+        "covered": 110,
+        "observed_zero": 100,
+        "total": 210,
+        "unresolved": 0
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 52.38095238095238,
+        "covered": 110,
+        "observed_zero": 100,
+        "total": 210,
+        "unresolved": 0
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 46.610169491525426,
+        "covered": 110,
+        "observed_zero": 126,
+        "total": 236,
+        "unresolved": 0
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 35.0,
+        "covered": 112,
+        "observed_zero": 154,
+        "total": 320,
+        "unresolved": 54
+      }
+    },
+    "report": "recounts/GRAFT-regex.json",
+    "tool": "GRAFT"
+  },
+  {
+    "crate": "idna",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 83.33333333333333,
+        "covered": 15,
+        "observed_zero": 3,
+        "total": 18,
+        "unresolved": 0
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 83.33333333333333,
+        "covered": 15,
+        "observed_zero": 3,
+        "total": 18,
+        "unresolved": 0
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 57.69230769230769,
+        "covered": 15,
+        "observed_zero": 11,
+        "total": 26,
+        "unresolved": 0
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 30.612244897959183,
+        "covered": 15,
+        "observed_zero": 16,
+        "total": 49,
+        "unresolved": 18
+      }
+    },
+    "report": "recounts/GRAFT-idna.json",
+    "tool": "GRAFT"
+  },
+  {
+    "crate": "fixedbitset",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 56.043956043956044,
+        "covered": 51,
+        "observed_zero": 40,
+        "total": 91,
+        "unresolved": 0
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 56.043956043956044,
+        "covered": 51,
+        "observed_zero": 40,
+        "total": 91,
+        "unresolved": 0
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 53.68421052631579,
+        "covered": 51,
+        "observed_zero": 44,
+        "total": 95,
+        "unresolved": 0
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 51.45631067961165,
+        "covered": 53,
+        "observed_zero": 49,
+        "total": 103,
+        "unresolved": 1
+      }
+    },
+    "report": "recounts/GRAFT-fixedbitset.json",
+    "tool": "GRAFT"
+  },
+  {
+    "crate": "chrono",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 77.82178217821782,
+        "covered": 393,
+        "observed_zero": 61,
+        "total": 505,
+        "unresolved": 51
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 77.99227799227799,
+        "covered": 404,
+        "observed_zero": 63,
+        "total": 518,
+        "unresolved": 51
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 73.88059701492537,
+        "covered": 396,
+        "observed_zero": 89,
+        "total": 536,
+        "unresolved": 51
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 58.50340136054422,
+        "covered": 430,
+        "observed_zero": 154,
+        "total": 735,
+        "unresolved": 151
+      }
+    },
+    "report": "recounts/GRAFT-chrono.json",
+    "tool": "GRAFT"
+  },
+  {
+    "crate": "time",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 51.13350125944584,
+        "covered": 203,
+        "observed_zero": 168,
+        "total": 397,
+        "unresolved": 26
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 49.877750611246945,
+        "covered": 204,
+        "observed_zero": 179,
+        "total": 409,
+        "unresolved": 26
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 46.559633027522935,
+        "covered": 203,
+        "observed_zero": 207,
+        "total": 436,
+        "unresolved": 26
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 37.18166383701188,
+        "covered": 219,
+        "observed_zero": 297,
+        "total": 589,
+        "unresolved": 73
+      }
+    },
+    "report": "recounts/GRAFT-time.json",
+    "tool": "GRAFT"
+  },
+  {
+    "crate": "autocfg",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 74.19354838709677,
+        "covered": 23,
+        "observed_zero": 8,
+        "total": 31,
+        "unresolved": 0
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 74.19354838709677,
+        "covered": 23,
+        "observed_zero": 8,
+        "total": 31,
+        "unresolved": 0
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 74.19354838709677,
+        "covered": 23,
+        "observed_zero": 8,
+        "total": 31,
+        "unresolved": 0
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 65.71428571428571,
+        "covered": 23,
+        "observed_zero": 9,
+        "total": 35,
+        "unresolved": 3
+      }
+    },
+    "report": "recounts/GRAFT-autocfg.json",
+    "tool": "GRAFT"
+  },
+  {
+    "crate": "bytes",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 70.86092715231788,
+        "covered": 107,
+        "observed_zero": 32,
+        "total": 151,
+        "unresolved": 12
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 71.05263157894737,
+        "covered": 108,
+        "observed_zero": 32,
+        "total": 152,
+        "unresolved": 12
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 28.17258883248731,
+        "covered": 111,
+        "observed_zero": 55,
+        "total": 394,
+        "unresolved": 228
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 27.659574468085108,
+        "covered": 130,
+        "observed_zero": 98,
+        "total": 470,
+        "unresolved": 242
+      }
+    },
+    "report": "recounts/GRAFT-bytes.json",
+    "tool": "GRAFT"
+  },
+  {
+    "crate": "unicode-segmentation",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 65.71428571428571,
+        "covered": 23,
+        "observed_zero": 12,
+        "total": 35,
+        "unresolved": 0
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 65.71428571428571,
+        "covered": 23,
+        "observed_zero": 12,
+        "total": 35,
+        "unresolved": 0
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 61.36363636363637,
+        "covered": 27,
+        "observed_zero": 17,
+        "total": 44,
+        "unresolved": 0
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 42.1875,
+        "covered": 27,
+        "observed_zero": 17,
+        "total": 64,
+        "unresolved": 20
+      }
+    },
+    "report": "recounts/GRAFT-unicode-segmentation.json",
+    "tool": "GRAFT"
+  },
+  {
+    "crate": "byteorder",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 24.137931034482758,
+        "covered": 14,
+        "observed_zero": 2,
+        "total": 58,
+        "unresolved": 42
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 24.137931034482758,
+        "covered": 14,
+        "observed_zero": 2,
+        "total": 58,
+        "unresolved": 42
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 24.137931034482758,
+        "covered": 14,
+        "observed_zero": 2,
+        "total": 58,
+        "unresolved": 42
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 21.21212121212121,
+        "covered": 14,
+        "observed_zero": 2,
+        "total": 66,
+        "unresolved": 50
+      }
+    },
+    "report": "recounts/GRAFT-byteorder.json",
+    "tool": "GRAFT"
+  },
+  {
+    "crate": "base64",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 7.6923076923076925,
+        "covered": 2,
+        "observed_zero": 24,
+        "total": 26,
+        "unresolved": 0
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 7.6923076923076925,
+        "covered": 2,
+        "observed_zero": 24,
+        "total": 26,
+        "unresolved": 0
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 5.555555555555555,
+        "covered": 2,
+        "observed_zero": 34,
+        "total": 36,
+        "unresolved": 0
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 2.857142857142857,
+        "covered": 2,
+        "observed_zero": 45,
+        "total": 70,
+        "unresolved": 23
+      }
+    },
+    "report": "recounts/RULF-base64.json",
+    "tool": "RULF"
+  },
+  {
+    "crate": "regex",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 14.761904761904763,
+        "covered": 31,
+        "observed_zero": 179,
+        "total": 210,
+        "unresolved": 0
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 14.761904761904763,
+        "covered": 31,
+        "observed_zero": 179,
+        "total": 210,
+        "unresolved": 0
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 13.135593220338983,
+        "covered": 31,
+        "observed_zero": 205,
+        "total": 236,
+        "unresolved": 0
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 9.6875,
+        "covered": 31,
+        "observed_zero": 235,
+        "total": 320,
+        "unresolved": 54
+      }
+    },
+    "report": "recounts/RULF-regex.json",
+    "tool": "RULF"
+  },
+  {
+    "crate": "fixedbitset",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 10.989010989010989,
+        "covered": 10,
+        "observed_zero": 81,
+        "total": 91,
+        "unresolved": 0
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 10.989010989010989,
+        "covered": 10,
+        "observed_zero": 81,
+        "total": 91,
+        "unresolved": 0
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 10.526315789473685,
+        "covered": 10,
+        "observed_zero": 85,
+        "total": 95,
+        "unresolved": 0
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 10.679611650485437,
+        "covered": 11,
+        "observed_zero": 91,
+        "total": 103,
+        "unresolved": 1
+      }
+    },
+    "report": "recounts/RULF-fixedbitset.json",
+    "tool": "RULF"
+  },
+  {
+    "crate": "chrono",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 5.9405940594059405,
+        "covered": 30,
+        "observed_zero": 424,
+        "total": 505,
+        "unresolved": 51
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 5.7915057915057915,
+        "covered": 30,
+        "observed_zero": 437,
+        "total": 518,
+        "unresolved": 51
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 5.597014925373134,
+        "covered": 30,
+        "observed_zero": 455,
+        "total": 536,
+        "unresolved": 51
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 4.217687074829932,
+        "covered": 31,
+        "observed_zero": 553,
+        "total": 735,
+        "unresolved": 151
+      }
+    },
+    "report": "recounts/RULF-chrono.json",
+    "tool": "RULF"
+  },
+  {
+    "crate": "autocfg",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 3.225806451612903,
+        "covered": 1,
+        "observed_zero": 30,
+        "total": 31,
+        "unresolved": 0
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 3.225806451612903,
+        "covered": 1,
+        "observed_zero": 30,
+        "total": 31,
+        "unresolved": 0
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 3.225806451612903,
+        "covered": 1,
+        "observed_zero": 30,
+        "total": 31,
+        "unresolved": 0
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 2.857142857142857,
+        "covered": 1,
+        "observed_zero": 31,
+        "total": 35,
+        "unresolved": 3
+      }
+    },
+    "report": "recounts/RULF-autocfg.json",
+    "tool": "RULF"
+  },
+  {
+    "crate": "bytes",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 17.880794701986755,
+        "covered": 27,
+        "observed_zero": 112,
+        "total": 151,
+        "unresolved": 12
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 17.763157894736842,
+        "covered": 27,
+        "observed_zero": 113,
+        "total": 152,
+        "unresolved": 12
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 6.852791878172589,
+        "covered": 27,
+        "observed_zero": 139,
+        "total": 394,
+        "unresolved": 228
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 7.23404255319149,
+        "covered": 34,
+        "observed_zero": 194,
+        "total": 470,
+        "unresolved": 242
+      }
+    },
+    "report": "recounts/RULF-bytes.json",
+    "tool": "RULF"
+  },
+  {
+    "crate": "byteorder",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 17.24137931034483,
+        "covered": 10,
+        "observed_zero": 0,
+        "total": 58,
+        "unresolved": 48
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 17.24137931034483,
+        "covered": 10,
+        "observed_zero": 0,
+        "total": 58,
+        "unresolved": 48
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 17.24137931034483,
+        "covered": 10,
+        "observed_zero": 0,
+        "total": 58,
+        "unresolved": 48
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 15.151515151515152,
+        "covered": 10,
+        "observed_zero": 0,
+        "total": 66,
+        "unresolved": 56
+      }
+    },
+    "report": "recounts/RULF-byteorder.json",
+    "tool": "RULF"
+  },
+  {
+    "crate": "ryu",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 0.0,
+        "covered": 0,
+        "observed_zero": 5,
+        "total": 5,
+        "unresolved": 0
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 0.0,
+        "covered": 0,
+        "observed_zero": 5,
+        "total": 5,
+        "unresolved": 0
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 0.0,
+        "covered": 0,
+        "observed_zero": 5,
+        "total": 5,
+        "unresolved": 0
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 0.0,
+        "covered": 0,
+        "observed_zero": 7,
+        "total": 7,
+        "unresolved": 0
+      }
+    },
+    "report": "recounts/RPG-merged-ryu.json",
+    "tool": "RPG-merged"
+  },
+  {
+    "crate": "bumpalo",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 40.90909090909091,
+        "covered": 18,
+        "observed_zero": 26,
+        "total": 44,
+        "unresolved": 0
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 40.90909090909091,
+        "covered": 18,
+        "observed_zero": 26,
+        "total": 44,
+        "unresolved": 0
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 40.90909090909091,
+        "covered": 18,
+        "observed_zero": 26,
+        "total": 44,
+        "unresolved": 0
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 32.758620689655174,
+        "covered": 19,
+        "observed_zero": 30,
+        "total": 58,
+        "unresolved": 9
+      }
+    },
+    "report": "recounts/RPG-merged-bumpalo.json",
+    "tool": "RPG-merged"
+  },
+  {
+    "crate": "base64",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 26.923076923076923,
+        "covered": 7,
+        "observed_zero": 19,
+        "total": 26,
+        "unresolved": 0
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 26.923076923076923,
+        "covered": 7,
+        "observed_zero": 19,
+        "total": 26,
+        "unresolved": 0
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 19.444444444444443,
+        "covered": 7,
+        "observed_zero": 29,
+        "total": 36,
+        "unresolved": 0
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 10.0,
+        "covered": 7,
+        "observed_zero": 40,
+        "total": 70,
+        "unresolved": 23
+      }
+    },
+    "report": "recounts/RPG-merged-base64.json",
+    "tool": "RPG-merged"
+  },
+  {
+    "crate": "regex",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 39.04761904761905,
+        "covered": 82,
+        "observed_zero": 128,
+        "total": 210,
+        "unresolved": 0
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 39.04761904761905,
+        "covered": 82,
+        "observed_zero": 128,
+        "total": 210,
+        "unresolved": 0
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 34.74576271186441,
+        "covered": 82,
+        "observed_zero": 154,
+        "total": 236,
+        "unresolved": 0
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 26.5625,
+        "covered": 85,
+        "observed_zero": 181,
+        "total": 320,
+        "unresolved": 54
+      }
+    },
+    "report": "recounts/RPG-merged-regex.json",
+    "tool": "RPG-merged"
+  },
+  {
+    "crate": "fixedbitset",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 51.64835164835165,
+        "covered": 47,
+        "observed_zero": 44,
+        "total": 91,
+        "unresolved": 0
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 51.64835164835165,
+        "covered": 47,
+        "observed_zero": 44,
+        "total": 91,
+        "unresolved": 0
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 49.473684210526315,
+        "covered": 47,
+        "observed_zero": 48,
+        "total": 95,
+        "unresolved": 0
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 46.601941747572816,
+        "covered": 48,
+        "observed_zero": 54,
+        "total": 103,
+        "unresolved": 1
+      }
+    },
+    "report": "recounts/RPG-merged-fixedbitset.json",
+    "tool": "RPG-merged"
+  },
+  {
+    "crate": "time",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 46.34760705289673,
+        "covered": 184,
+        "observed_zero": 187,
+        "total": 397,
+        "unresolved": 26
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 44.987775061124694,
+        "covered": 184,
+        "observed_zero": 199,
+        "total": 409,
+        "unresolved": 26
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 42.43119266055046,
+        "covered": 185,
+        "observed_zero": 225,
+        "total": 436,
+        "unresolved": 26
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 31.918505942275043,
+        "covered": 188,
+        "observed_zero": 328,
+        "total": 589,
+        "unresolved": 73
+      }
+    },
+    "report": "recounts/RPG-merged-time.json",
+    "tool": "RPG-merged"
+  },
+  {
+    "crate": "autocfg",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 19.35483870967742,
+        "covered": 6,
+        "observed_zero": 25,
+        "total": 31,
+        "unresolved": 0
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 19.35483870967742,
+        "covered": 6,
+        "observed_zero": 25,
+        "total": 31,
+        "unresolved": 0
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 19.35483870967742,
+        "covered": 6,
+        "observed_zero": 25,
+        "total": 31,
+        "unresolved": 0
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 17.142857142857142,
+        "covered": 6,
+        "observed_zero": 26,
+        "total": 35,
+        "unresolved": 3
+      }
+    },
+    "report": "recounts/RPG-merged-autocfg.json",
+    "tool": "RPG-merged"
+  },
+  {
+    "crate": "unicode-segmentation",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 20.0,
+        "covered": 7,
+        "observed_zero": 28,
+        "total": 35,
+        "unresolved": 0
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 20.0,
+        "covered": 7,
+        "observed_zero": 28,
+        "total": 35,
+        "unresolved": 0
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 15.909090909090908,
+        "covered": 7,
+        "observed_zero": 37,
+        "total": 44,
+        "unresolved": 0
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 10.9375,
+        "covered": 7,
+        "observed_zero": 37,
+        "total": 64,
+        "unresolved": 20
+      }
+    },
+    "report": "recounts/RPG-merged-unicode-segmentation.json",
+    "tool": "RPG-merged"
+  },
+  {
+    "crate": "byteorder",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 20.689655172413794,
+        "covered": 12,
+        "observed_zero": 0,
+        "total": 58,
+        "unresolved": 46
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 20.689655172413794,
+        "covered": 12,
+        "observed_zero": 0,
+        "total": 58,
+        "unresolved": 46
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 20.689655172413794,
+        "covered": 12,
+        "observed_zero": 0,
+        "total": 58,
+        "unresolved": 46
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 18.181818181818183,
+        "covered": 12,
+        "observed_zero": 0,
+        "total": 66,
+        "unresolved": 54
+      }
+    },
+    "report": "recounts/RPG-merged-byteorder.json",
+    "tool": "RPG-merged"
+  },
+  {
+    "crate": "ryu",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 0.0,
+        "covered": 0,
+        "observed_zero": 5,
+        "total": 5,
+        "unresolved": 0
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 0.0,
+        "covered": 0,
+        "observed_zero": 5,
+        "total": 5,
+        "unresolved": 0
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 0.0,
+        "covered": 0,
+        "observed_zero": 5,
+        "total": 5,
+        "unresolved": 0
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 0.0,
+        "covered": 0,
+        "observed_zero": 7,
+        "total": 7,
+        "unresolved": 0
+      }
+    },
+    "report": "recounts/RPG-bfs-ryu.json",
+    "tool": "RPG-bfs"
+  },
+  {
+    "crate": "bumpalo",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 40.90909090909091,
+        "covered": 18,
+        "observed_zero": 26,
+        "total": 44,
+        "unresolved": 0
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 40.90909090909091,
+        "covered": 18,
+        "observed_zero": 26,
+        "total": 44,
+        "unresolved": 0
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 40.90909090909091,
+        "covered": 18,
+        "observed_zero": 26,
+        "total": 44,
+        "unresolved": 0
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 32.758620689655174,
+        "covered": 19,
+        "observed_zero": 30,
+        "total": 58,
+        "unresolved": 9
+      }
+    },
+    "report": "recounts/RPG-bfs-bumpalo.json",
+    "tool": "RPG-bfs"
+  },
+  {
+    "crate": "base64",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 23.076923076923077,
+        "covered": 6,
+        "observed_zero": 20,
+        "total": 26,
+        "unresolved": 0
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 23.076923076923077,
+        "covered": 6,
+        "observed_zero": 20,
+        "total": 26,
+        "unresolved": 0
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 16.666666666666668,
+        "covered": 6,
+        "observed_zero": 30,
+        "total": 36,
+        "unresolved": 0
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 8.571428571428571,
+        "covered": 6,
+        "observed_zero": 41,
+        "total": 70,
+        "unresolved": 23
+      }
+    },
+    "report": "recounts/RPG-bfs-base64.json",
+    "tool": "RPG-bfs"
+  },
+  {
+    "crate": "regex",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 23.80952380952381,
+        "covered": 50,
+        "observed_zero": 160,
+        "total": 210,
+        "unresolved": 0
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 23.80952380952381,
+        "covered": 50,
+        "observed_zero": 160,
+        "total": 210,
+        "unresolved": 0
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 21.1864406779661,
+        "covered": 50,
+        "observed_zero": 186,
+        "total": 236,
+        "unresolved": 0
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 16.25,
+        "covered": 52,
+        "observed_zero": 214,
+        "total": 320,
+        "unresolved": 54
+      }
+    },
+    "report": "recounts/RPG-bfs-regex.json",
+    "tool": "RPG-bfs"
+  },
+  {
+    "crate": "fixedbitset",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 32.967032967032964,
+        "covered": 30,
+        "observed_zero": 61,
+        "total": 91,
+        "unresolved": 0
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 32.967032967032964,
+        "covered": 30,
+        "observed_zero": 61,
+        "total": 91,
+        "unresolved": 0
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 31.57894736842105,
+        "covered": 30,
+        "observed_zero": 65,
+        "total": 95,
+        "unresolved": 0
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 30.097087378640776,
+        "covered": 31,
+        "observed_zero": 71,
+        "total": 103,
+        "unresolved": 1
+      }
+    },
+    "report": "recounts/RPG-bfs-fixedbitset.json",
+    "tool": "RPG-bfs"
+  },
+  {
+    "crate": "autocfg",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 19.35483870967742,
+        "covered": 6,
+        "observed_zero": 25,
+        "total": 31,
+        "unresolved": 0
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 19.35483870967742,
+        "covered": 6,
+        "observed_zero": 25,
+        "total": 31,
+        "unresolved": 0
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 19.35483870967742,
+        "covered": 6,
+        "observed_zero": 25,
+        "total": 31,
+        "unresolved": 0
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 17.142857142857142,
+        "covered": 6,
+        "observed_zero": 26,
+        "total": 35,
+        "unresolved": 3
+      }
+    },
+    "report": "recounts/RPG-bfs-autocfg.json",
+    "tool": "RPG-bfs"
+  },
+  {
+    "crate": "byteorder",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 20.689655172413794,
+        "covered": 12,
+        "observed_zero": 0,
+        "total": 58,
+        "unresolved": 46
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 20.689655172413794,
+        "covered": 12,
+        "observed_zero": 0,
+        "total": 58,
+        "unresolved": 46
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 20.689655172413794,
+        "covered": 12,
+        "observed_zero": 0,
+        "total": 58,
+        "unresolved": 46
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 18.181818181818183,
+        "covered": 12,
+        "observed_zero": 0,
+        "total": 66,
+        "unresolved": 54
+      }
+    },
+    "report": "recounts/RPG-bfs-byteorder.json",
+    "tool": "RPG-bfs"
+  },
+  {
+    "crate": "fixedbitset",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 79.12087912087912,
+        "covered": 72,
+        "observed_zero": 19,
+        "total": 91,
+        "unresolved": 0
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 79.12087912087912,
+        "covered": 72,
+        "observed_zero": 19,
+        "total": 91,
+        "unresolved": 0
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 78.94736842105263,
+        "covered": 75,
+        "observed_zero": 20,
+        "total": 95,
+        "unresolved": 0
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 78.64077669902913,
+        "covered": 81,
+        "observed_zero": 21,
+        "total": 103,
+        "unresolved": 1
+      }
+    },
+    "report": "recounts/deepSURF-fixedbitset.json",
+    "tool": "deepSURF"
+  },
+  {
+    "crate": "chrono",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 59.40594059405941,
+        "covered": 300,
+        "observed_zero": 154,
+        "total": 505,
+        "unresolved": 51
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 58.68725868725869,
+        "covered": 304,
+        "observed_zero": 163,
+        "total": 518,
+        "unresolved": 51
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 57.83582089552239,
+        "covered": 310,
+        "observed_zero": 175,
+        "total": 536,
+        "unresolved": 51
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 50.06802721088435,
+        "covered": 368,
+        "observed_zero": 216,
+        "total": 735,
+        "unresolved": 151
+      }
+    },
+    "report": "recounts/deepSURF-chrono.json",
+    "tool": "deepSURF"
+  },
+  {
+    "crate": "bytes",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 51.65562913907285,
+        "covered": 78,
+        "observed_zero": 61,
+        "total": 151,
+        "unresolved": 12
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 51.31578947368421,
+        "covered": 78,
+        "observed_zero": 62,
+        "total": 152,
+        "unresolved": 12
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 22.081218274111674,
+        "covered": 87,
+        "observed_zero": 79,
+        "total": 394,
+        "unresolved": 228
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 29.78723404255319,
+        "covered": 140,
+        "observed_zero": 88,
+        "total": 470,
+        "unresolved": 242
+      }
+    },
+    "report": "recounts/deepSURF-bytes.json",
+    "tool": "deepSURF"
+  },
+  {
+    "crate": "byteorder",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 13.793103448275861,
+        "covered": 8,
+        "observed_zero": 0,
+        "total": 58,
+        "unresolved": 50
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 13.793103448275861,
+        "covered": 8,
+        "observed_zero": 0,
+        "total": 58,
+        "unresolved": 50
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 13.793103448275861,
+        "covered": 8,
+        "observed_zero": 0,
+        "total": 58,
+        "unresolved": 50
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 12.121212121212121,
+        "covered": 8,
+        "observed_zero": 0,
+        "total": 66,
+        "unresolved": 58
+      }
+    },
+    "report": "recounts/deepSURF-byteorder.json",
+    "tool": "deepSURF"
+  },
+  {
+    "crate": "base64",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 61.53846153846154,
+        "covered": 16,
+        "observed_zero": 10,
+        "total": 26,
+        "unresolved": 0
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 61.53846153846154,
+        "covered": 16,
+        "observed_zero": 10,
+        "total": 26,
+        "unresolved": 0
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 44.44444444444444,
+        "covered": 16,
+        "observed_zero": 20,
+        "total": 36,
+        "unresolved": 0
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 25.714285714285715,
+        "covered": 18,
+        "observed_zero": 29,
+        "total": 70,
+        "unresolved": 23
+      }
+    },
+    "report": "recounts/ablation-no-generic-base64.json",
+    "tool": "ablation-no-generic"
+  },
+  {
+    "crate": "byteorder",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 12.068965517241379,
+        "covered": 7,
+        "observed_zero": 0,
+        "total": 58,
+        "unresolved": 51
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 12.068965517241379,
+        "covered": 7,
+        "observed_zero": 0,
+        "total": 58,
+        "unresolved": 51
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 12.068965517241379,
+        "covered": 7,
+        "observed_zero": 0,
+        "total": 58,
+        "unresolved": 51
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 10.606060606060606,
+        "covered": 7,
+        "observed_zero": 0,
+        "total": 66,
+        "unresolved": 59
+      }
+    },
+    "report": "recounts/ablation-no-generic-byteorder.json",
+    "tool": "ablation-no-generic"
+  },
+  {
+    "crate": "fixedbitset",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 15.384615384615385,
+        "covered": 14,
+        "observed_zero": 77,
+        "total": 91,
+        "unresolved": 0
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 15.384615384615385,
+        "covered": 14,
+        "observed_zero": 77,
+        "total": 91,
+        "unresolved": 0
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 14.736842105263158,
+        "covered": 14,
+        "observed_zero": 81,
+        "total": 95,
+        "unresolved": 0
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 14.563106796116505,
+        "covered": 15,
+        "observed_zero": 87,
+        "total": 103,
+        "unresolved": 1
+      }
+    },
+    "report": "recounts/ablation-no-generic-fixedbitset.json",
+    "tool": "ablation-no-generic"
+  },
+  {
+    "crate": "time",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 36.77581863979849,
+        "covered": 146,
+        "observed_zero": 225,
+        "total": 397,
+        "unresolved": 26
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 35.696821515892424,
+        "covered": 146,
+        "observed_zero": 237,
+        "total": 409,
+        "unresolved": 26
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 33.48623853211009,
+        "covered": 146,
+        "observed_zero": 264,
+        "total": 436,
+        "unresolved": 26
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 25.806451612903224,
+        "covered": 152,
+        "observed_zero": 364,
+        "total": 589,
+        "unresolved": 73
+      }
+    },
+    "report": "recounts/ablation-no-generic-time.json",
+    "tool": "ablation-no-generic"
+  },
+  {
+    "crate": "regex",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 14.285714285714286,
+        "covered": 30,
+        "observed_zero": 180,
+        "total": 210,
+        "unresolved": 0
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 14.285714285714286,
+        "covered": 30,
+        "observed_zero": 180,
+        "total": 210,
+        "unresolved": 0
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 12.711864406779661,
+        "covered": 30,
+        "observed_zero": 206,
+        "total": 236,
+        "unresolved": 0
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 9.6875,
+        "covered": 31,
+        "observed_zero": 235,
+        "total": 320,
+        "unresolved": 54
+      }
+    },
+    "report": "recounts/ablation-no-generic-regex.json",
+    "tool": "ablation-no-generic"
+  },
+  {
+    "crate": "base64",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 69.23076923076923,
+        "covered": 18,
+        "observed_zero": 8,
+        "total": 26,
+        "unresolved": 0
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 69.23076923076923,
+        "covered": 18,
+        "observed_zero": 8,
+        "total": 26,
+        "unresolved": 0
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 52.77777777777778,
+        "covered": 19,
+        "observed_zero": 17,
+        "total": 36,
+        "unresolved": 0
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 28.571428571428573,
+        "covered": 20,
+        "observed_zero": 27,
+        "total": 70,
+        "unresolved": 23
+      }
+    },
+    "report": "recounts/ablation-no-graph-base64.json",
+    "tool": "ablation-no-graph"
+  },
+  {
+    "crate": "byteorder",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 20.689655172413794,
+        "covered": 12,
+        "observed_zero": 0,
+        "total": 58,
+        "unresolved": 46
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 20.689655172413794,
+        "covered": 12,
+        "observed_zero": 0,
+        "total": 58,
+        "unresolved": 46
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 20.689655172413794,
+        "covered": 12,
+        "observed_zero": 0,
+        "total": 58,
+        "unresolved": 46
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 18.181818181818183,
+        "covered": 12,
+        "observed_zero": 0,
+        "total": 66,
+        "unresolved": 54
+      }
+    },
+    "report": "recounts/ablation-no-graph-byteorder.json",
+    "tool": "ablation-no-graph"
+  },
+  {
+    "crate": "fixedbitset",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 48.35164835164835,
+        "covered": 44,
+        "observed_zero": 47,
+        "total": 91,
+        "unresolved": 0
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 48.35164835164835,
+        "covered": 44,
+        "observed_zero": 47,
+        "total": 91,
+        "unresolved": 0
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 48.421052631578945,
+        "covered": 46,
+        "observed_zero": 49,
+        "total": 95,
+        "unresolved": 0
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 45.63106796116505,
+        "covered": 47,
+        "observed_zero": 55,
+        "total": 103,
+        "unresolved": 1
+      }
+    },
+    "report": "recounts/ablation-no-graph-fixedbitset.json",
+    "tool": "ablation-no-graph"
+  },
+  {
+    "crate": "time",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 11.335012594458439,
+        "covered": 45,
+        "observed_zero": 326,
+        "total": 397,
+        "unresolved": 26
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 11.00244498777506,
+        "covered": 45,
+        "observed_zero": 338,
+        "total": 409,
+        "unresolved": 26
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 10.321100917431192,
+        "covered": 45,
+        "observed_zero": 365,
+        "total": 436,
+        "unresolved": 26
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 7.6400679117147705,
+        "covered": 45,
+        "observed_zero": 471,
+        "total": 589,
+        "unresolved": 73
+      }
+    },
+    "report": "recounts/ablation-no-graph-time.json",
+    "tool": "ablation-no-graph"
+  },
+  {
+    "crate": "regex",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 36.666666666666664,
+        "covered": 77,
+        "observed_zero": 133,
+        "total": 210,
+        "unresolved": 0
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 36.666666666666664,
+        "covered": 77,
+        "observed_zero": 133,
+        "total": 210,
+        "unresolved": 0
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 33.47457627118644,
+        "covered": 79,
+        "observed_zero": 157,
+        "total": 236,
+        "unresolved": 0
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 25.0,
+        "covered": 80,
+        "observed_zero": 186,
+        "total": 320,
+        "unresolved": 54
+      }
+    },
+    "report": "recounts/ablation-no-graph-regex.json",
+    "tool": "ablation-no-graph"
+  },
+  {
+    "crate": "base64",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 80.76923076923077,
+        "covered": 21,
+        "observed_zero": 5,
+        "total": 26,
+        "unresolved": 0
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 80.76923076923077,
+        "covered": 21,
+        "observed_zero": 5,
+        "total": 26,
+        "unresolved": 0
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 63.888888888888886,
+        "covered": 23,
+        "observed_zero": 13,
+        "total": 36,
+        "unresolved": 0
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 37.142857142857146,
+        "covered": 26,
+        "observed_zero": 21,
+        "total": 70,
+        "unresolved": 23
+      }
+    },
+    "report": "recounts/ablation-no-topo-base64.json",
+    "tool": "ablation-no-topo"
+  },
+  {
+    "crate": "byteorder",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 8.620689655172415,
+        "covered": 5,
+        "observed_zero": 0,
+        "total": 58,
+        "unresolved": 53
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 8.620689655172415,
+        "covered": 5,
+        "observed_zero": 0,
+        "total": 58,
+        "unresolved": 53
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 8.620689655172415,
+        "covered": 5,
+        "observed_zero": 0,
+        "total": 58,
+        "unresolved": 53
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 7.575757575757576,
+        "covered": 5,
+        "observed_zero": 0,
+        "total": 66,
+        "unresolved": 61
+      }
+    },
+    "report": "recounts/ablation-no-topo-byteorder.json",
+    "tool": "ablation-no-topo"
+  },
+  {
+    "crate": "fixedbitset",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 35.16483516483517,
+        "covered": 32,
+        "observed_zero": 59,
+        "total": 91,
+        "unresolved": 0
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 35.16483516483517,
+        "covered": 32,
+        "observed_zero": 59,
+        "total": 91,
+        "unresolved": 0
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 35.78947368421053,
+        "covered": 34,
+        "observed_zero": 61,
+        "total": 95,
+        "unresolved": 0
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 34.95145631067961,
+        "covered": 36,
+        "observed_zero": 66,
+        "total": 103,
+        "unresolved": 1
+      }
+    },
+    "report": "recounts/ablation-no-topo-fixedbitset.json",
+    "tool": "ablation-no-topo"
+  },
+  {
+    "crate": "time",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 41.05793450881612,
+        "covered": 163,
+        "observed_zero": 208,
+        "total": 397,
+        "unresolved": 26
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 40.34229828850856,
+        "covered": 165,
+        "observed_zero": 218,
+        "total": 409,
+        "unresolved": 26
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 37.38532110091743,
+        "covered": 163,
+        "observed_zero": 247,
+        "total": 436,
+        "unresolved": 26
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 29.202037351443124,
+        "covered": 172,
+        "observed_zero": 344,
+        "total": 589,
+        "unresolved": 73
+      }
+    },
+    "report": "recounts/ablation-no-topo-time.json",
+    "tool": "ablation-no-topo"
+  },
+  {
+    "crate": "regex",
+    "groups": {
+      "historical_selected": {
+        "confirmed_coverage_percent": 41.904761904761905,
+        "covered": 88,
+        "observed_zero": 122,
+        "total": 210,
+        "unresolved": 0
+      },
+      "historical_selected_rows_with_duplicates": {
+        "confirmed_coverage_percent": 41.904761904761905,
+        "covered": 88,
+        "observed_zero": 122,
+        "total": 210,
+        "unresolved": 0
+      },
+      "local_callable_candidates_name_filtered": {
+        "confirmed_coverage_percent": 37.28813559322034,
+        "covered": 88,
+        "observed_zero": 148,
+        "total": 236,
+        "unresolved": 0
+      },
+      "local_callable_candidates_unfiltered": {
+        "confirmed_coverage_percent": 28.125,
+        "covered": 90,
+        "observed_zero": 176,
+        "total": 320,
+        "unresolved": 54
+      }
+    },
+    "report": "recounts/ablation-no-topo-regex.json",
+    "tool": "ablation-no-topo"
+  }
+]

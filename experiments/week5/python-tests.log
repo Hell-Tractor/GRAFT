@@ -1,0 +1,55 @@
+test_empty_coverage_is_invalid_evidence_not_zero (test_audit_experiments.ArtifactAuditTests) ... ok
+test_missing_artifact_directory_stays_explicitly_missing (test_audit_experiments.ArtifactAuditTests) ... ok
+test_no_stats_does_not_mean_zero_worker_budget (test_audit_experiments.ArtifactAuditTests) ... ok
+test_target_presence_and_surviving_worker_duration_are_distinct (test_audit_experiments.ArtifactAuditTests) ... ok
+test_version_and_archive_checksum_come_from_target_lock (test_audit_experiments.ArtifactAuditTests) ... ok
+test_missing_msrv_does_not_claim_compilation (test_baseline_compatibility.CompatibilityPolicyTests) ... ok
+test_reject_edition_2024 (test_baseline_compatibility.CompatibilityPolicyTests) ... ok
+test_reject_newer_declared_msrv (test_baseline_compatibility.CompatibilityPolicyTests) ... ok
+test_all_llvm_data_records_are_read (test_coverage_snapshot.CoverageSnapshotTests) ... ok
+test_duplicate_apidoc_rows_are_reported (test_coverage_snapshot.CoverageSnapshotTests) ... ok
+test_freeze_rejects_mismatched_document_identity (test_coverage_snapshot.CoverageSnapshotTests) ... ok
+test_function_only_version_mismatch_is_rejected (test_coverage_snapshot.CoverageSnapshotTests) ... ok
+test_generic_instantiations_count_as_one_api (test_coverage_snapshot.CoverageSnapshotTests) ... ok
+test_legacy_line_control_exposes_same_line_overcount (test_coverage_snapshot.CoverageSnapshotTests) ... ok
+test_mismatched_version_is_rejected (test_coverage_snapshot.CoverageSnapshotTests) ... ok
+test_named_filter_is_separate_from_frozen_selected_pool (test_coverage_snapshot.CoverageSnapshotTests) ... ok
+test_no_basename_fallback (test_coverage_snapshot.CoverageSnapshotTests) ... ok
+test_public_surface_groups_keep_unmapped_definitions_in_denominator (test_coverage_snapshot.CoverageSnapshotTests) ... ok
+test_relative_path_traversal_is_not_normalized (test_coverage_snapshot.CoverageSnapshotTests) ... ok
+test_same_line_functions_do_not_share_coverage (test_coverage_snapshot.CoverageSnapshotTests) ... ok
+test_segments_cannot_substitute_for_entry_counts (test_coverage_snapshot.CoverageSnapshotTests) ... ok
+test_shared_entry_span_is_ambiguous (test_coverage_snapshot.CoverageSnapshotTests) ... ok
+test_tampered_snapshot_is_rejected (test_coverage_snapshot.CoverageSnapshotTests) ... ok
+test_zero_count_is_distinct_from_missing_record (test_coverage_snapshot.CoverageSnapshotTests) ... ok
+test_env_file_is_parsed_as_data_not_executed (test_experiment_entry.EntryTests) ... ok
+test_missing_or_duplicate_key_is_rejected (test_experiment_entry.EntryTests) ... ok
+test_task_config_has_one_token_limit_and_no_copied_secret (test_experiment_entry.EntryTests) ... ok
+test_average_rounds_instead_of_union_and_sd_not_zero_at_n_one (test_experiment_rounds.ExperimentRoundsTests) ... ok
+test_generation_failure_stays_in_fixed_slot_denominator (test_experiment_rounds.ExperimentRoundsTests) ... ok
+test_incomplete_round_excluded_from_mean_but_counted_attempted (test_experiment_rounds.ExperimentRoundsTests) ... ok
+test_infrastructure_failure_is_missing_not_zero (test_experiment_rounds.ExperimentRoundsTests) ... ok
+test_interrupted_run_not_restarted_with_another_300_seconds (test_experiment_rounds.ExperimentRoundsTests) ... ok
+test_missing_slot_cannot_complete_round (test_experiment_rounds.ExperimentRoundsTests) ... ok
+test_no_silent_drop_or_duplicate_of_failure_slots (test_experiment_rounds.ExperimentRoundsTests) ... ok
+test_paper_build_failure_restores_include_and_does_not_publish_pointer (test_experiment_rounds.ExperimentRoundsTests) ... ok
+test_pending_blocks_launch (test_experiment_rounds.ExperimentRoundsTests) ... ok
+test_replay_corpus_requires_afl_queue_and_deduplicates_exact_bytes (test_experiment_rounds.ExperimentRoundsTests) ... ok
+test_round_barriers_cost_more_than_pooled_lower_bound (test_experiment_rounds.ExperimentRoundsTests) ... ok
+test_seeds_paired_across_methods_but_separate_rounds_and_slots (test_experiment_rounds.ExperimentRoundsTests) ... ok
+test_successful_round_publishes_csv_stats_pdf_identity (test_experiment_rounds.ExperimentRoundsTests) ... ok
+test_union_targets_within_round_without_double_count (test_experiment_rounds.ExperimentRoundsTests) ... ok
+test_unknown_coverage_id_rejected (test_experiment_rounds.ExperimentRoundsTests) ... ok
+test_unsafe_screen_is_not_confused_by_known_replay_file_read (test_experiment_rounds.ExperimentRoundsTests) ... ok
+test_bundle_cannot_split (test_experiment_time.ExperimentTimeTests) ... ok
+test_duration_budget_includes_reserves (test_experiment_time.ExperimentTimeTests) ... ok
+test_full_not_replaced_by_reduced_scope (test_experiment_time.ExperimentTimeTests) ... ok
+test_master_follower_charged (test_experiment_time.ExperimentTimeTests) ... ok
+test_no_feasible_bundle (test_experiment_time.ExperimentTimeTests) ... ok
+test_correct_or_unrecognized_attributes_stay_unchanged (test_public_surface.DoctestAnalysisViewTests) ... ok
+test_only_known_doctest_attribute_is_closed_in_a_copy (test_public_surface.DoctestAnalysisViewTests) ... ok
+
+----------------------------------------------------------------------
+Ran 50 tests in 0.031s
+
+OK

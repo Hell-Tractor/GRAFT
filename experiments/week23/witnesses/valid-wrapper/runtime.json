@@ -1,0 +1,46 @@
+{
+  "schema": "graft-runtime-v1",
+  "samples": [
+    {
+      "args": [],
+      "exit_code": 0,
+      "timed_out": false,
+      "target_reached": true,
+      "scalar_arguments": [
+        "(0,)"
+      ],
+      "stdout": "[(0, [40, 48, 44, 41])]\n",
+      "stderr": "GRAFT_CALL:0:(0,)\n"
+    },
+    {
+      "args": [
+        "0"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "target_reached": true,
+      "scalar_arguments": [
+        "(0,)"
+      ],
+      "stdout": "[(0, [40, 48, 44, 41])]\n",
+      "stderr": "GRAFT_CALL:0:(0,)\n"
+    },
+    {
+      "args": [
+        "1"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "target_reached": true,
+      "scalar_arguments": [
+        "(1,)"
+      ],
+      "stdout": "[(0, [40, 49, 44, 41])]\n",
+      "stderr": "GRAFT_CALL:0:(1,)\n"
+    }
+  ],
+  "reached_inputs": 3,
+  "scalar_input_influence": "observed",
+  "bounded_probe_passed": true,
+  "scope": "three standalone-wrapper inputs only; marker observations are not complete taint or proof for all inputs; opaque target arguments remain unknown"
+}

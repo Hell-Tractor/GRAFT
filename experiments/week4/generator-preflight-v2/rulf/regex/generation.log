@@ -1,0 +1,29 @@
+    Checking memchr v2.8.3
+    Checking regex-syntax v0.6.27
+    Checking aho-corasick v0.7.18
+ Documenting regex v1.6.0
+Fuzz Target Generator for Rust Libraries: v0.1.0
+Fuzz Target Renderer Init
+crate: regex
+using bfs end point
+reverse search can not cover more nodes
+after backward search
+targets = 1569
+total length = 4608
+average time to visit = 66.78260869565217
+edge covered by reverse search = 78
+-----------STATISTICS-----------
+total nodes: 116
+total edges: 511
+covered nodes: 63
+covered edges: 56
+node coverage: 0.5431034482758621
+edge coverage: 0.1095890410958904
+targets covered by reverse search: 0
+total targets: 39
+max length = 0
+total length = 103
+average time to fuzz each api = 1.6349206349206349
+--------------------------------
+Fuzz Target Generator exits successfully. Total time cost: 907 ms
+    Finished dev [unoptimized + debuginfo] target(s) in 2.73s

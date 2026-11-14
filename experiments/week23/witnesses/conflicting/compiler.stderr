@@ -1,0 +1,19 @@
+error[E0308]: mismatched types
+  --> /tmp/graft-checked-tests-1281/conflicting/main.rs:1:61
+   |
+ 1 | fn main(){checked_fixture::same(checked_fixture::left_u8(1),checked_fixture::right_i32(2));}
+   |           ---------------------                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `Right<u8>`, found `Right<i32>`
+   |           |
+   |           arguments to this function are incorrect
+   |
+   = note: expected struct `checked_fixture::Right<u8>`
+              found struct `checked_fixture::Right<i32>`
+note: function defined here
+  --> /home/cym/workspace/GRAFT-2.0/GRAFTTool/tests/fixtures/checked_fixture.rs:15:8
+   |
+15 | pub fn same<T>(_: Left<T>, _: Right<T>) {}
+   |        ^^^^
+
+error: aborting due to 1 previous error
+
+For more information about this error, try `rustc --explain E0308`.

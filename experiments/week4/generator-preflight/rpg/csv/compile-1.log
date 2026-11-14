@@ -1,0 +1,11 @@
+error[E0596]: cannot borrow `*_local1` as mutable, as it is behind a `&` reference
+  --> /results/csv/fuzz_target/csv_bfs_generic_fuzz/replay_files/replay_csv1.rs:38:33
+   |
+37 |     let mut _local1 = csv::StringRecord::as_byte_record(&(_local0));
+   |         ----------- consider changing this binding's type to be: `&mut ByteRecord`
+38 |     csv::ByteRecord::push_field(&mut (*(_local1)) ,_param2);
+   |                                 ^^^^^^^^^^^^^^^^^ `_local1` is a `&` reference, so the data it refers to cannot be borrowed as mutable
+
+error: aborting due to previous error
+
+For more information about this error, try `rustc --explain E0596`.

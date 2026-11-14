@@ -1,0 +1,1 @@
+[S] graft_baseline_smoke::nested::make ==[DirectCall]=> graft_baseline_smoke::nested::consume-0

@@ -1,0 +1,17 @@
+warning: the item `TryInto` is imported redundantly
+ --> /home/jjf/rulf_work/ryu-work/replay_files/replay_ryu0.rs:8:9
+  |
+8 |     use std::convert::TryInto;
+  |         ^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+error[E0606]: casting `&u8` as `*mut u8` is invalid
+  --> /home/jjf/rulf_work/ryu-work/replay_files/replay_ryu0.rs:16:45
+   |
+16 |         let _ = ryu::raw::format64(_param0 ,&(_param1) as *mut u8);
+   |                                             ^^^^^^^^^^^^^^^^^^^^^
+
+error: aborting due to previous error; 1 warning emitted
+
+For more information about this error, try `rustc --explain E0606`.

@@ -1,0 +1,23 @@
+warning: the item `TryInto` is imported redundantly
+   --> /results/ryu/fuzz_target/ryu_bfs_generic_fuzz/replay_files/replay_ryu0.rs:8:9
+    |
+8   |     use std::convert::TryInto;
+    |         ^^^^^^^^^^^^^^^^^^^^^
+    |
+   ::: /Rust-Lib-Testing/src/rust/library/std/src/prelude/mod.rs:133:13
+    |
+133 |     pub use core::prelude::rust_2021::*;
+    |             --------------------------- the item `TryInto` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: unused return value of `format64` that must be used
+  --> /results/ryu/fuzz_target/ryu_bfs_generic_fuzz/replay_files/replay_ryu0.rs:16:9
+   |
+16 |         ryu::raw::format64(_param0 ,_param1 as *mut u8);
+   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(unused_must_use)]` on by default
+
+warning: 2 warnings emitted
+

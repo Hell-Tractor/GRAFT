@@ -1,0 +1,10 @@
+{
+  "crate": "base64",
+  "version": "0.22.1",
+  "compile_status": "passed",
+  "command": "cargo build --locked --offline --manifest-path experiments/week23/base64-target/Cargo.toml",
+  "manifest_sha256": "6227eb6751603ab2cb2f8662211ea684069f3589b4471d22a9423c1d1707254e",
+  "lock_sha256": "a4576d612b23c6ef6d59ff98ba9ed3edc5a459d661a0f2e94da6a9a9863557a8",
+  "source_sha256": "54148fd924d8db76e14eb93ba813af8280f85e3bfdf8a3e50306194b27266657",
+  "notes": "Standalone validation executable, no AFL instrumentation or sanitizers in this smoke. Feature declaration: defaults enabled; original documentation build feature flags not independently recovered."
+}

@@ -1,0 +1,20 @@
+{
+  "api_count": 18,
+  "apis_with_obligations": 2,
+  "candidate_parameter_pairs": {
+    "incompatible": 370,
+    "unified_candidate_not_compiler_verified": 10,
+    "unknown_api_feature": 40,
+    "unknown_type_form": 225
+  },
+  "crate": "idna",
+  "no_import_blocker": 12,
+  "rustdoc_sha256": "acb7d124c323aaaa2a8c9fc2c6d2bddaba7003deb9bfb3f2e5ddf6dc82e04239",
+  "scope": "import support only, not proven constructibility; trait obligations may still be unknown",
+  "unsupported_api_reasons": {
+    "modified/negative/?Sized trait bound": 1,
+    "nominal lifetime argument requires storage analysis": 5,
+    "parenthesized/function trait arguments": 2
+  },
+  "version": "1.1.0"
+}

@@ -1,0 +1,619 @@
+{
+  "schema": "graft-walltime-budget-v1",
+  "deadline_hours": 24,
+  "observed_logical_cpus": 64,
+  "observed_physical_cores": 32,
+  "observed_recommended_logical_slots": 56,
+  "logical_120_scenario_is_counterfactual": true,
+  "generation_build_replay_overhead_note": "Six-hour placeholder reserve must be calibrated before a run; model latency, corpus sizes, builds and generation counts are not yet measured. No unconditional 24-hour completion guarantee.",
+  "resource_fairness_note": "Natural topology charges deepSURF two workers and other tools one: it estimates cost but is not a resource-matched controlled comparison. Final manifests must equalize total worker budgets or validate equal worker roles.",
+  "groups": [
+    {
+      "name": "main_formal",
+      "scope": "13 crates, 4 tools, 20 targets, 10 joint repetitions by default; deepSURF master+follower charged together",
+      "groups": [
+        {
+          "method": "GRAFT",
+          "runs": 2600,
+          "workers": 1
+        },
+        {
+          "method": "RULF",
+          "runs": 2600,
+          "workers": 1
+        },
+        {
+          "method": "RPG",
+          "runs": 2600,
+          "workers": 1
+        },
+        {
+          "method": "deepSURF",
+          "runs": 2600,
+          "workers": 2
+        }
+      ]
+    },
+    {
+      "name": "all_variants_formal",
+      "scope": "All 8 generation variants plus 3 external baselines; Full shared; generation-batch and AFL-seed dimensions need further explicit decomposition",
+      "groups": [
+        {
+          "method": "GRAFT",
+          "runs": 2600,
+          "workers": 1
+        },
+        {
+          "method": "RULF",
+          "runs": 2600,
+          "workers": 1
+        },
+        {
+          "method": "RPG",
+          "runs": 2600,
+          "workers": 1
+        },
+        {
+          "method": "deepSURF",
+          "runs": 2600,
+          "workers": 2
+        },
+        {
+          "method": "LLM-only",
+          "runs": 2600,
+          "workers": 1
+        },
+        {
+          "method": "random-API+LLM",
+          "runs": 2600,
+          "workers": 1
+        },
+        {
+          "method": "syntactic+LLM",
+          "runs": 2600,
+          "workers": 1
+        },
+        {
+          "method": "no-cross-argument-unification",
+          "runs": 2600,
+          "workers": 1
+        },
+        {
+          "method": "random-target",
+          "runs": 2600,
+          "workers": 1
+        },
+        {
+          "method": "no-repair",
+          "runs": 2600,
+          "workers": 1
+        },
+        {
+          "method": "deterministic-emitter",
+          "runs": 2600,
+          "workers": 1
+        }
+      ]
+    },
+    {
+      "name": "main_exploratory_10_targets_3_repeats",
+      "scope": "Reduced exploratory scope only; cannot replace the preregistered 10-20-repeat formal comparison",
+      "groups": [
+        {
+          "method": "GRAFT",
+          "runs": 390,
+          "workers": 1
+        },
+        {
+          "method": "RULF",
+          "runs": 390,
+          "workers": 1
+        },
+        {
+          "method": "RPG",
+          "runs": 390,
+          "workers": 1
+        },
+        {
+          "method": "deepSURF",
+          "runs": 390,
+          "workers": 2
+        }
+      ]
+    }
+  ],
+  "estimates": [
+    {
+      "scenario": "main_formal",
+      "harness_runs": 10400,
+      "worker_runs": 13000,
+      "slots": 28,
+      "equal_duration_waves": 465,
+      "30_min_fuzz_lower_bound_hours": 232.14285714285714,
+      "30_min_feasible_fuzz_hours": 232.5,
+      "60_min_feasible_fuzz_hours": 465,
+      "30_min_with_reserves_hours": 240.5,
+      "max_seconds_per_harness_within_deadline": 123,
+      "overhead_reserve_hours": 6,
+      "margin_hours": 2,
+      "overhead_is_measured": false,
+      "scope": "13 crates, 4 tools, 20 targets, 10 joint repetitions by default; deepSURF master+follower charged together"
+    },
+    {
+      "scenario": "main_formal",
+      "harness_runs": 10400,
+      "worker_runs": 13000,
+      "slots": 56,
+      "equal_duration_waves": 233,
+      "30_min_fuzz_lower_bound_hours": 116.07142857142857,
+      "30_min_feasible_fuzz_hours": 116.5,
+      "60_min_feasible_fuzz_hours": 233,
+      "30_min_with_reserves_hours": 124.5,
+      "max_seconds_per_harness_within_deadline": 247,
+      "overhead_reserve_hours": 6,
+      "margin_hours": 2,
+      "overhead_is_measured": false,
+      "scope": "13 crates, 4 tools, 20 targets, 10 joint repetitions by default; deepSURF master+follower charged together"
+    },
+    {
+      "scenario": "main_formal",
+      "harness_runs": 10400,
+      "worker_runs": 13000,
+      "slots": 64,
+      "equal_duration_waves": 204,
+      "30_min_fuzz_lower_bound_hours": 101.5625,
+      "30_min_feasible_fuzz_hours": 102.0,
+      "60_min_feasible_fuzz_hours": 204,
+      "30_min_with_reserves_hours": 110.0,
+      "max_seconds_per_harness_within_deadline": 282,
+      "overhead_reserve_hours": 6,
+      "margin_hours": 2,
+      "overhead_is_measured": false,
+      "scope": "13 crates, 4 tools, 20 targets, 10 joint repetitions by default; deepSURF master+follower charged together"
+    },
+    {
+      "scenario": "main_formal",
+      "harness_runs": 10400,
+      "worker_runs": 13000,
+      "slots": 120,
+      "equal_duration_waves": 109,
+      "30_min_fuzz_lower_bound_hours": 54.166666666666664,
+      "30_min_feasible_fuzz_hours": 54.5,
+      "60_min_feasible_fuzz_hours": 109,
+      "30_min_with_reserves_hours": 62.5,
+      "max_seconds_per_harness_within_deadline": 528,
+      "overhead_reserve_hours": 6,
+      "margin_hours": 2,
+      "overhead_is_measured": false,
+      "scope": "13 crates, 4 tools, 20 targets, 10 joint repetitions by default; deepSURF master+follower charged together"
+    },
+    {
+      "scenario": "all_variants_formal",
+      "harness_runs": 28600,
+      "worker_runs": 31200,
+      "slots": 28,
+      "equal_duration_waves": 1115,
+      "30_min_fuzz_lower_bound_hours": 557.1428571428571,
+      "30_min_feasible_fuzz_hours": 557.5,
+      "60_min_feasible_fuzz_hours": 1115,
+      "30_min_with_reserves_hours": 565.5,
+      "max_seconds_per_harness_within_deadline": 51,
+      "overhead_reserve_hours": 6,
+      "margin_hours": 2,
+      "overhead_is_measured": false,
+      "scope": "All 8 generation variants plus 3 external baselines; Full shared; generation-batch and AFL-seed dimensions need further explicit decomposition"
+    },
+    {
+      "scenario": "all_variants_formal",
+      "harness_runs": 28600,
+      "worker_runs": 31200,
+      "slots": 56,
+      "equal_duration_waves": 558,
+      "30_min_fuzz_lower_bound_hours": 278.57142857142856,
+      "30_min_feasible_fuzz_hours": 279.0,
+      "60_min_feasible_fuzz_hours": 558,
+      "30_min_with_reserves_hours": 287.0,
+      "max_seconds_per_harness_within_deadline": 103,
+      "overhead_reserve_hours": 6,
+      "margin_hours": 2,
+      "overhead_is_measured": false,
+      "scope": "All 8 generation variants plus 3 external baselines; Full shared; generation-batch and AFL-seed dimensions need further explicit decomposition"
+    },
+    {
+      "scenario": "all_variants_formal",
+      "harness_runs": 28600,
+      "worker_runs": 31200,
+      "slots": 64,
+      "equal_duration_waves": 488,
+      "30_min_fuzz_lower_bound_hours": 243.75,
+      "30_min_feasible_fuzz_hours": 244.0,
+      "60_min_feasible_fuzz_hours": 488,
+      "30_min_with_reserves_hours": 252.0,
+      "max_seconds_per_harness_within_deadline": 118,
+      "overhead_reserve_hours": 6,
+      "margin_hours": 2,
+      "overhead_is_measured": false,
+      "scope": "All 8 generation variants plus 3 external baselines; Full shared; generation-batch and AFL-seed dimensions need further explicit decomposition"
+    },
+    {
+      "scenario": "all_variants_formal",
+      "harness_runs": 28600,
+      "worker_runs": 31200,
+      "slots": 120,
+      "equal_duration_waves": 260,
+      "30_min_fuzz_lower_bound_hours": 130.0,
+      "30_min_feasible_fuzz_hours": 130.0,
+      "60_min_feasible_fuzz_hours": 260,
+      "30_min_with_reserves_hours": 138.0,
+      "max_seconds_per_harness_within_deadline": 221,
+      "overhead_reserve_hours": 6,
+      "margin_hours": 2,
+      "overhead_is_measured": false,
+      "scope": "All 8 generation variants plus 3 external baselines; Full shared; generation-batch and AFL-seed dimensions need further explicit decomposition"
+    },
+    {
+      "scenario": "main_exploratory_10_targets_3_repeats",
+      "harness_runs": 1560,
+      "worker_runs": 1950,
+      "slots": 28,
+      "equal_duration_waves": 70,
+      "30_min_fuzz_lower_bound_hours": 34.82142857142857,
+      "30_min_feasible_fuzz_hours": 35.0,
+      "60_min_feasible_fuzz_hours": 70,
+      "30_min_with_reserves_hours": 43.0,
+      "max_seconds_per_harness_within_deadline": 822,
+      "overhead_reserve_hours": 6,
+      "margin_hours": 2,
+      "overhead_is_measured": false,
+      "scope": "Reduced exploratory scope only; cannot replace the preregistered 10-20-repeat formal comparison"
+    },
+    {
+      "scenario": "main_exploratory_10_targets_3_repeats",
+      "harness_runs": 1560,
+      "worker_runs": 1950,
+      "slots": 56,
+      "equal_duration_waves": 35,
+      "30_min_fuzz_lower_bound_hours": 17.410714285714285,
+      "30_min_feasible_fuzz_hours": 17.5,
+      "60_min_feasible_fuzz_hours": 35,
+      "30_min_with_reserves_hours": 25.5,
+      "max_seconds_per_harness_within_deadline": 1645,
+      "overhead_reserve_hours": 6,
+      "margin_hours": 2,
+      "overhead_is_measured": false,
+      "scope": "Reduced exploratory scope only; cannot replace the preregistered 10-20-repeat formal comparison"
+    },
+    {
+      "scenario": "main_exploratory_10_targets_3_repeats",
+      "harness_runs": 1560,
+      "worker_runs": 1950,
+      "slots": 64,
+      "equal_duration_waves": 31,
+      "30_min_fuzz_lower_bound_hours": 15.234375,
+      "30_min_feasible_fuzz_hours": 15.5,
+      "60_min_feasible_fuzz_hours": 31,
+      "30_min_with_reserves_hours": 23.5,
+      "max_seconds_per_harness_within_deadline": 1858,
+      "overhead_reserve_hours": 6,
+      "margin_hours": 2,
+      "overhead_is_measured": false,
+      "scope": "Reduced exploratory scope only; cannot replace the preregistered 10-20-repeat formal comparison"
+    },
+    {
+      "scenario": "main_exploratory_10_targets_3_repeats",
+      "harness_runs": 1560,
+      "worker_runs": 1950,
+      "slots": 120,
+      "equal_duration_waves": 17,
+      "30_min_fuzz_lower_bound_hours": 8.125,
+      "30_min_feasible_fuzz_hours": 8.5,
+      "60_min_feasible_fuzz_hours": 17,
+      "30_min_with_reserves_hours": 16.5,
+      "max_seconds_per_harness_within_deadline": 3388,
+      "overhead_reserve_hours": 6,
+      "margin_hours": 2,
+      "overhead_is_measured": false,
+      "scope": "Reduced exploratory scope only; cannot replace the preregistered 10-20-repeat formal comparison"
+    }
+  ],
+  "equal_workers_sensitivity": [
+    {
+      "scenario": "main_formal_equal_1_workers",
+      "harness_runs": 10400,
+      "worker_runs": 10400,
+      "slots": 28,
+      "equal_duration_waves": 372,
+      "30_min_fuzz_lower_bound_hours": 185.71428571428572,
+      "30_min_feasible_fuzz_hours": 186.0,
+      "60_min_feasible_fuzz_hours": 372,
+      "30_min_with_reserves_hours": 194.0,
+      "max_seconds_per_harness_within_deadline": 154,
+      "overhead_reserve_hours": 6,
+      "margin_hours": 2,
+      "overhead_is_measured": false,
+      "scope": "Equal worker count per harness is a scheduling sensitivity only; instrumented roles still need validation."
+    },
+    {
+      "scenario": "main_formal_equal_1_workers",
+      "harness_runs": 10400,
+      "worker_runs": 10400,
+      "slots": 56,
+      "equal_duration_waves": 186,
+      "30_min_fuzz_lower_bound_hours": 92.85714285714286,
+      "30_min_feasible_fuzz_hours": 93.0,
+      "60_min_feasible_fuzz_hours": 186,
+      "30_min_with_reserves_hours": 101.0,
+      "max_seconds_per_harness_within_deadline": 309,
+      "overhead_reserve_hours": 6,
+      "margin_hours": 2,
+      "overhead_is_measured": false,
+      "scope": "Equal worker count per harness is a scheduling sensitivity only; instrumented roles still need validation."
+    },
+    {
+      "scenario": "main_formal_equal_1_workers",
+      "harness_runs": 10400,
+      "worker_runs": 10400,
+      "slots": 64,
+      "equal_duration_waves": 163,
+      "30_min_fuzz_lower_bound_hours": 81.25,
+      "30_min_feasible_fuzz_hours": 81.5,
+      "60_min_feasible_fuzz_hours": 163,
+      "30_min_with_reserves_hours": 89.5,
+      "max_seconds_per_harness_within_deadline": 353,
+      "overhead_reserve_hours": 6,
+      "margin_hours": 2,
+      "overhead_is_measured": false,
+      "scope": "Equal worker count per harness is a scheduling sensitivity only; instrumented roles still need validation."
+    },
+    {
+      "scenario": "main_formal_equal_1_workers",
+      "harness_runs": 10400,
+      "worker_runs": 10400,
+      "slots": 120,
+      "equal_duration_waves": 87,
+      "30_min_fuzz_lower_bound_hours": 43.333333333333336,
+      "30_min_feasible_fuzz_hours": 43.5,
+      "60_min_feasible_fuzz_hours": 87,
+      "30_min_with_reserves_hours": 51.5,
+      "max_seconds_per_harness_within_deadline": 662,
+      "overhead_reserve_hours": 6,
+      "margin_hours": 2,
+      "overhead_is_measured": false,
+      "scope": "Equal worker count per harness is a scheduling sensitivity only; instrumented roles still need validation."
+    },
+    {
+      "scenario": "main_formal_equal_2_workers",
+      "harness_runs": 10400,
+      "worker_runs": 20800,
+      "slots": 28,
+      "equal_duration_waves": 743,
+      "30_min_fuzz_lower_bound_hours": 371.42857142857144,
+      "30_min_feasible_fuzz_hours": 371.5,
+      "60_min_feasible_fuzz_hours": 743,
+      "30_min_with_reserves_hours": 379.5,
+      "max_seconds_per_harness_within_deadline": 77,
+      "overhead_reserve_hours": 6,
+      "margin_hours": 2,
+      "overhead_is_measured": false,
+      "scope": "Equal worker count per harness is a scheduling sensitivity only; instrumented roles still need validation."
+    },
+    {
+      "scenario": "main_formal_equal_2_workers",
+      "harness_runs": 10400,
+      "worker_runs": 20800,
+      "slots": 56,
+      "equal_duration_waves": 372,
+      "30_min_fuzz_lower_bound_hours": 185.71428571428572,
+      "30_min_feasible_fuzz_hours": 186.0,
+      "60_min_feasible_fuzz_hours": 372,
+      "30_min_with_reserves_hours": 194.0,
+      "max_seconds_per_harness_within_deadline": 154,
+      "overhead_reserve_hours": 6,
+      "margin_hours": 2,
+      "overhead_is_measured": false,
+      "scope": "Equal worker count per harness is a scheduling sensitivity only; instrumented roles still need validation."
+    },
+    {
+      "scenario": "main_formal_equal_2_workers",
+      "harness_runs": 10400,
+      "worker_runs": 20800,
+      "slots": 64,
+      "equal_duration_waves": 325,
+      "30_min_fuzz_lower_bound_hours": 162.5,
+      "30_min_feasible_fuzz_hours": 162.5,
+      "60_min_feasible_fuzz_hours": 325,
+      "30_min_with_reserves_hours": 170.5,
+      "max_seconds_per_harness_within_deadline": 177,
+      "overhead_reserve_hours": 6,
+      "margin_hours": 2,
+      "overhead_is_measured": false,
+      "scope": "Equal worker count per harness is a scheduling sensitivity only; instrumented roles still need validation."
+    },
+    {
+      "scenario": "main_formal_equal_2_workers",
+      "harness_runs": 10400,
+      "worker_runs": 20800,
+      "slots": 120,
+      "equal_duration_waves": 174,
+      "30_min_fuzz_lower_bound_hours": 86.66666666666667,
+      "30_min_feasible_fuzz_hours": 87.0,
+      "60_min_feasible_fuzz_hours": 174,
+      "30_min_with_reserves_hours": 95.0,
+      "max_seconds_per_harness_within_deadline": 331,
+      "overhead_reserve_hours": 6,
+      "margin_hours": 2,
+      "overhead_is_measured": false,
+      "scope": "Equal worker count per harness is a scheduling sensitivity only; instrumented roles still need validation."
+    },
+    {
+      "scenario": "all_variants_formal_equal_1_workers",
+      "harness_runs": 28600,
+      "worker_runs": 28600,
+      "slots": 28,
+      "equal_duration_waves": 1022,
+      "30_min_fuzz_lower_bound_hours": 510.7142857142857,
+      "30_min_feasible_fuzz_hours": 511.0,
+      "60_min_feasible_fuzz_hours": 1022,
+      "30_min_with_reserves_hours": 519.0,
+      "max_seconds_per_harness_within_deadline": 56,
+      "overhead_reserve_hours": 6,
+      "margin_hours": 2,
+      "overhead_is_measured": false,
+      "scope": "Equal worker count per harness is a scheduling sensitivity only; instrumented roles still need validation."
+    },
+    {
+      "scenario": "all_variants_formal_equal_1_workers",
+      "harness_runs": 28600,
+      "worker_runs": 28600,
+      "slots": 56,
+      "equal_duration_waves": 511,
+      "30_min_fuzz_lower_bound_hours": 255.35714285714286,
+      "30_min_feasible_fuzz_hours": 255.5,
+      "60_min_feasible_fuzz_hours": 511,
+      "30_min_with_reserves_hours": 263.5,
+      "max_seconds_per_harness_within_deadline": 112,
+      "overhead_reserve_hours": 6,
+      "margin_hours": 2,
+      "overhead_is_measured": false,
+      "scope": "Equal worker count per harness is a scheduling sensitivity only; instrumented roles still need validation."
+    },
+    {
+      "scenario": "all_variants_formal_equal_1_workers",
+      "harness_runs": 28600,
+      "worker_runs": 28600,
+      "slots": 64,
+      "equal_duration_waves": 447,
+      "30_min_fuzz_lower_bound_hours": 223.4375,
+      "30_min_feasible_fuzz_hours": 223.5,
+      "60_min_feasible_fuzz_hours": 447,
+      "30_min_with_reserves_hours": 231.5,
+      "max_seconds_per_harness_within_deadline": 128,
+      "overhead_reserve_hours": 6,
+      "margin_hours": 2,
+      "overhead_is_measured": false,
+      "scope": "Equal worker count per harness is a scheduling sensitivity only; instrumented roles still need validation."
+    },
+    {
+      "scenario": "all_variants_formal_equal_1_workers",
+      "harness_runs": 28600,
+      "worker_runs": 28600,
+      "slots": 120,
+      "equal_duration_waves": 239,
+      "30_min_fuzz_lower_bound_hours": 119.16666666666667,
+      "30_min_feasible_fuzz_hours": 119.5,
+      "60_min_feasible_fuzz_hours": 239,
+      "30_min_with_reserves_hours": 127.5,
+      "max_seconds_per_harness_within_deadline": 241,
+      "overhead_reserve_hours": 6,
+      "margin_hours": 2,
+      "overhead_is_measured": false,
+      "scope": "Equal worker count per harness is a scheduling sensitivity only; instrumented roles still need validation."
+    },
+    {
+      "scenario": "all_variants_formal_equal_2_workers",
+      "harness_runs": 28600,
+      "worker_runs": 57200,
+      "slots": 28,
+      "equal_duration_waves": 2043,
+      "30_min_fuzz_lower_bound_hours": 1021.4285714285714,
+      "30_min_feasible_fuzz_hours": 1021.5,
+      "60_min_feasible_fuzz_hours": 2043,
+      "30_min_with_reserves_hours": 1029.5,
+      "max_seconds_per_harness_within_deadline": 28,
+      "overhead_reserve_hours": 6,
+      "margin_hours": 2,
+      "overhead_is_measured": false,
+      "scope": "Equal worker count per harness is a scheduling sensitivity only; instrumented roles still need validation."
+    },
+    {
+      "scenario": "all_variants_formal_equal_2_workers",
+      "harness_runs": 28600,
+      "worker_runs": 57200,
+      "slots": 56,
+      "equal_duration_waves": 1022,
+      "30_min_fuzz_lower_bound_hours": 510.7142857142857,
+      "30_min_feasible_fuzz_hours": 511.0,
+      "60_min_feasible_fuzz_hours": 1022,
+      "30_min_with_reserves_hours": 519.0,
+      "max_seconds_per_harness_within_deadline": 56,
+      "overhead_reserve_hours": 6,
+      "margin_hours": 2,
+      "overhead_is_measured": false,
+      "scope": "Equal worker count per harness is a scheduling sensitivity only; instrumented roles still need validation."
+    },
+    {
+      "scenario": "all_variants_formal_equal_2_workers",
+      "harness_runs": 28600,
+      "worker_runs": 57200,
+      "slots": 64,
+      "equal_duration_waves": 894,
+      "30_min_fuzz_lower_bound_hours": 446.875,
+      "30_min_feasible_fuzz_hours": 447.0,
+      "60_min_feasible_fuzz_hours": 894,
+      "30_min_with_reserves_hours": 455.0,
+      "max_seconds_per_harness_within_deadline": 64,
+      "overhead_reserve_hours": 6,
+      "margin_hours": 2,
+      "overhead_is_measured": false,
+      "scope": "Equal worker count per harness is a scheduling sensitivity only; instrumented roles still need validation."
+    },
+    {
+      "scenario": "all_variants_formal_equal_2_workers",
+      "harness_runs": 28600,
+      "worker_runs": 57200,
+      "slots": 120,
+      "equal_duration_waves": 477,
+      "30_min_fuzz_lower_bound_hours": 238.33333333333334,
+      "30_min_feasible_fuzz_hours": 238.5,
+      "60_min_feasible_fuzz_hours": 477,
+      "30_min_with_reserves_hours": 246.5,
+      "max_seconds_per_harness_within_deadline": 120,
+      "overhead_reserve_hours": 6,
+      "margin_hours": 2,
+      "overhead_is_measured": false,
+      "scope": "Equal worker count per harness is a scheduling sensitivity only; instrumented roles still need validation."
+    }
+  ],
+  "generation_sensitivity": {
+    "assumptions": "10 independent joint generation batches per target, 16 concurrent model requests, up to 3 repairs after initial except no-repair. deepSURF cap provisionally matched to 4; actual cap must be configured. Latencies are unmeasured scenarios.",
+    "main_model_calls_initial": 5200,
+    "main_model_calls_cap": 20800,
+    "all_variants_model_calls_initial": 20800,
+    "all_variants_model_calls_cap": 75400,
+    "all_variants_hours_at_16_requests": [
+      {
+        "seconds_per_request": 5,
+        "initial_only_hours": 1.8055555555555556,
+        "at_call_cap_hours": 6.545138888888889
+      },
+      {
+        "seconds_per_request": 20,
+        "initial_only_hours": 7.222222222222222,
+        "at_call_cap_hours": 26.180555555555557
+      },
+      {
+        "seconds_per_request": 60,
+        "initial_only_hours": 21.666666666666668,
+        "at_call_cap_hours": 78.54166666666667
+      }
+    ],
+    "compilation_sensitivity": {
+      "parallel_compilers": 8,
+      "distinct_main_targets_upper_bound": 10400,
+      "distinct_all_variants_targets_upper_bound": 28600,
+      "hours_at_1_10_60_seconds_per_target": {
+        "main": [
+          0.3611111111111111,
+          3.611111111111111,
+          21.666666666666668
+        ],
+        "all": [
+          0.9930555555555556,
+          9.930555555555555,
+          59.583333333333336
+        ]
+      },
+      "note": "Cache reuse may reduce counts; generation-batch and AFL-seed dimensions must be explicit."
+    }
+  }
+}

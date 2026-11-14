@@ -1,0 +1,7 @@
+   Compiling autocfg v1.5.0
+   Compiling libc v0.2.191
+   Compiling num-traits v0.2.19
+    Checking num-integer v0.1.47
+    Checking time v0.1.45
+ Documenting chrono v0.4.19
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.59s

@@ -1,0 +1,9 @@
+{
+  "endpoint": "https://api.deepseek.com/models",
+  "http_status": 200,
+  "seconds": 0.26842163410037756,
+  "model_ids": [
+    "deepseek-flash",
+    "deepseek-v4-pro"
+  ]
+}

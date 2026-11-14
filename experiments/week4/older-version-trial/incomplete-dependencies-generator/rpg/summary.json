@@ -1,0 +1,101 @@
+[
+  {
+    "crate": "chrono",
+    "version": "0.4.19",
+    "tool": "rpg",
+    "scope": "default-feature generator compatibility and first-two-replay compilation; not a coverage run",
+    "generation": {
+      "command": [
+        "/Rust-Lib-Testing/rust1.65/bin/cargo",
+        "--config",
+        "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/.cargo/config.toml",
+        "doc",
+        "--manifest-path",
+        "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/Cargo.toml",
+        "--frozen",
+        "--offline",
+        "--jobs",
+        "8",
+        "--no-deps",
+        "--package",
+        "chrono@0.4.19"
+      ],
+      "returncode": 101,
+      "timed_out": false,
+      "seconds": 0.01340514700859785,
+      "log": "/results/chrono/generation.log"
+    },
+    "generated_target_count": 0,
+    "generated_replay_count": 0,
+    "generated_target_sha256": {},
+    "replay_compilation": [],
+    "replay_compile_blocker": "missing/ambiguous cached rlib; do not guess library identity",
+    "replay_execution": "not_run: unsafe contracts / parsing assumptions of generated real-library harnesses not yet reviewed"
+  },
+  {
+    "crate": "regex",
+    "version": "1.6.0",
+    "tool": "rpg",
+    "scope": "default-feature generator compatibility and first-two-replay compilation; not a coverage run",
+    "generation": {
+      "command": [
+        "/Rust-Lib-Testing/rust1.65/bin/cargo",
+        "--config",
+        "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/.cargo/config.toml",
+        "doc",
+        "--manifest-path",
+        "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/Cargo.toml",
+        "--frozen",
+        "--offline",
+        "--jobs",
+        "8",
+        "--no-deps",
+        "--package",
+        "regex@1.6.0"
+      ],
+      "returncode": 101,
+      "timed_out": false,
+      "seconds": 0.012055414030328393,
+      "log": "/results/regex/generation.log"
+    },
+    "generated_target_count": 0,
+    "generated_replay_count": 0,
+    "generated_target_sha256": {},
+    "replay_compilation": [],
+    "replay_compile_blocker": "missing/ambiguous cached rlib; do not guess library identity",
+    "replay_execution": "not_run: unsafe contracts / parsing assumptions of generated real-library harnesses not yet reviewed"
+  },
+  {
+    "crate": "time",
+    "version": "0.3.9",
+    "tool": "rpg",
+    "scope": "default-feature generator compatibility and first-two-replay compilation; not a coverage run",
+    "generation": {
+      "command": [
+        "/Rust-Lib-Testing/rust1.65/bin/cargo",
+        "--config",
+        "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/.cargo/config.toml",
+        "doc",
+        "--manifest-path",
+        "/home/cym/workspace/graft-baseline-port-20261109/joint-compatibility-v2/Cargo.toml",
+        "--frozen",
+        "--offline",
+        "--jobs",
+        "8",
+        "--no-deps",
+        "--package",
+        "time@0.3.9"
+      ],
+      "returncode": 101,
+      "timed_out": false,
+      "seconds": 0.013592642033472657,
+      "log": "/results/time/generation.log"
+    },
+    "generated_target_count": 0,
+    "generated_replay_count": 0,
+    "generated_target_sha256": {},
+    "replay_compilation": [],
+    "replay_compile_blocker": "missing/ambiguous cached rlib; do not guess library identity",
+    "replay_execution": "not_run: unsafe contracts / parsing assumptions of generated real-library harnesses not yet reviewed"
+  }
+]

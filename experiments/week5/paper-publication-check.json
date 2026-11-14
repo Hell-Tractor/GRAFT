@@ -1,0 +1,9 @@
+{
+  "scope": "synthetic publisher integration test only; actual paper/data unchanged",
+  "passed": true,
+  "configurations_tested": 11,
+  "csv_rows": 143,
+  "pdf_build_returncode": 0,
+  "actual_include_sha256": "1bb179701a8e426cfe31b71f5db04b7bc8a7f4602ecd46bbaf254c17fc2f0b20",
+  "test_pdf_discarded": true
+}

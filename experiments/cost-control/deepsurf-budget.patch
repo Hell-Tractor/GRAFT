@@ -1,0 +1,83 @@
+--- deepsurf-port/generator/src/main.rs (before cost policy)
++++ deepsurf-port/generator/src/main.rs
+@@ -425,7 +425,7 @@
+                 break llm_urapis;
+             }
+             Err(e) => {
+-                if e.to_string().contains("Empty model response") {
++                if (e.to_string().contains("Empty model response") || e.to_string().contains("GRAFT_BUDGET_")) {
+                     println!("[LLM-CFG]: Empty response is non-retryable: {e}");
+                     return Err(e.into());
+                 }
+@@ -565,13 +565,13 @@
+             let mut conn_attempts = 0;
+             let improved_harness = loop { // connection attempts
+                 conn_attempts += 1;
+-                match surf_get_improved_harness(&client, Some(static_prompt.clone()), dynamic_prompt.clone()).await {
++                match surf_get_improved_harness(&client, Some(static_prompt.clone()), dynamic_prompt.clone(), &llm_urapi).await {
+                     Ok(improved_harness) => {
+                         // We got a successful value, break out of the loop
+                         break improved_harness;
+                     }
+                     Err(e) => {
+-                        if e.to_string().contains("Empty model response") {
++                        if (e.to_string().contains("Empty model response") || e.to_string().contains("GRAFT_BUDGET_")) {
+                             println!("[{llm_urapi}]: Empty response is non-retryable: {e}");
+                             LLM_COVERED_URAPIS.lock().unwrap().extend(covered_urapis);
+                             return Err(e.into());
+@@ -1258,13 +1258,13 @@
+             let mut conn_attempts = 0;
+             let improved_harness = loop { // connection attempts
+                 conn_attempts += 1;
+-                match surf_get_improved_harness(&client, Some(static_prompt.clone()), dynamic_prompt.clone()).await {
++                match surf_get_improved_harness(&client, Some(static_prompt.clone()), dynamic_prompt.clone(), urapi_def_id).await {
+                     Ok(improved_harness) => {
+                         // We got a successful value, break out of the loop
+                         break improved_harness;
+                     }
+                     Err(e) => {
+-                        if e.to_string().contains("Empty model response") {
++                        if (e.to_string().contains("Empty model response") || e.to_string().contains("GRAFT_BUDGET_")) {
+                             println!("[{urapi_def_id}]: Empty response is non-retryable: {e}");
+                             LLM_COVERED_URAPIS.lock().unwrap().extend(covered_urapis);
+                             return Err(e.into());
+@@ -1709,7 +1709,8 @@
+ async fn surf_get_improved_harness(
+     client: &OpenAIClient, 
+     system_prompt: Option<String>, 
+-    user_prompt: String
++    user_prompt: String,
++    budget_target: &str
+ ) -> Result<String, Box<dyn std::error::Error>> {
+ 
+     let mut messages = Vec::new();
+@@ -1749,7 +1750,28 @@
+         fs::write(dir.join(format!("{}-request.json",audit_id)),serde_json::to_vec_pretty(&msg_req)?)?;
+     }
+     let call_start=Instant::now();
+-    let response_result = client.chat_completion(msg_req).await;
++    let response_result = if let Ok(policy)=env::var("GRAFT_MODEL_COST_POLICY") {
++        let directory=audit_dir.as_ref().ok_or("GRAFT_BUDGET_CONTEXT: metrics directory is required")?;
++        let mut hasher=DefaultHasher::new(); budget_target.hash(&mut hasher);
++        let target_ledger=directory.join(format!("target-{:x}-cost.json",hasher.finish()));
++        let crate_ledger=directory.join("crate-model-cost.json");
++        let request_path=directory.join(format!("{}-request.json",audit_id));
++        let response_path=directory.join(format!("{}-cost-result.json",audit_id));
++        let output=Command::new("python3")
++            .arg("/opt/graft-scripts/costed_model_request.py")
++            .arg("--native").arg("--policy").arg(policy)
++            .arg("--request").arg(&request_path).arg("--response").arg(&response_path)
++            .arg("--target-ledger").arg(&target_ledger).arg("--crate-ledger").arg(&crate_ledger)
++            .output()?;
++        if !output.status.success() {
++            return Err(format!("GRAFT_BUDGET_CLIENT: {}",String::from_utf8_lossy(&output.stderr)).into());
++        }
++        let response:chat_completion::ChatCompletionResponse=serde_json::from_slice(&fs::read(response_path)?)?;
++        if response.choices.iter().any(|c|c.finish_reason==Some(chat_completion::FinishReason::length)) {
++            return Err("GRAFT_BUDGET_TRUNCATED: no paid retry of truncated output".into());
++        }
++        Ok(response)
++    } else { client.chat_completion(msg_req).await };
+     if let Some(ref dir)=audit_dir {
+         let timing=serde_json::json!({"seconds":call_start.elapsed().as_secs_f64(),"success":response_result.is_ok(),"model":LLM_BACKEND.to_string()});
+         fs::write(dir.join(format!("{}-timing.json",audit_id)),serde_json::to_vec_pretty(&timing)?)?;

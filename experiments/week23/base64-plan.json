@@ -1,0 +1,64 @@
+{
+  "status": "planned",
+  "plan": {
+    "schema": "graft-plan-v1",
+    "crate_name": "base64",
+    "crate_version": "0.22.1",
+    "package_name": "base64",
+    "features": [],
+    "default_features": true,
+    "rustdoc_sha256": "4b26c9b63d7e70275af7fd278437a9f83e4355e2956f7cd904c574ab3144f88e",
+    "target": "395",
+    "steps": [
+      {
+        "kind": "input",
+        "value": 0,
+        "ty": {
+          "kind": "primitive",
+          "name": "usize"
+        }
+      },
+      {
+        "kind": "input",
+        "value": 1,
+        "ty": {
+          "kind": "primitive",
+          "name": "bool"
+        }
+      },
+      {
+        "kind": "call",
+        "instance": 0,
+        "api": "395",
+        "path": "base64::encoded_len",
+        "type_args": [],
+        "substitution": {},
+        "args": [
+          {
+            "value": 0,
+            "adapter": "move"
+          },
+          {
+            "value": 1,
+            "adapter": "move"
+          }
+        ],
+        "value": 2,
+        "ty": {
+          "kind": "nominal",
+          "identity": "4b26c9b63d7e70275af7fd278437a9f83e4355e2956f7cd904c574ab3144f88e:crate2:item396:core::option::Option",
+          "path": "core::option::Option",
+          "args": [
+            {
+              "kind": "primitive",
+              "name": "usize"
+            }
+          ]
+        }
+      }
+    ],
+    "obligations": [],
+    "unresolved": [],
+    "search_nodes": 3
+  }
+}

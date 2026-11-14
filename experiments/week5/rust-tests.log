@@ -1,0 +1,70 @@
+   Compiling graft v0.1.0 (/home/cym/workspace/GRAFT-2.0/GRAFTTool)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.03s
+     Running unittests src/lib.rs (/tmp/graft-week1-target/debug/deps/graft-3547cc71cb318b0b)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/bin/audit_public_surface.rs (/tmp/graft-week1-target/debug/deps/audit_public_surface-be216ae0149585c6)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (/tmp/graft-week1-target/debug/deps/graft-27df7c1ceb2ba1e0)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/bin/graft-plan.rs (/tmp/graft-week1-target/debug/deps/graft_plan-4c612fca40e55226)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/checked.rs (/tmp/graft-week1-target/debug/deps/checked-d5844568ff702b71)
+
+running 32 tests
+test primitives_are_not_wildcards ... ok
+test occurs_check ... ok
+test scoped_unification_and_transaction ... ok
+test unknown_is_explicit ... ok
+test wrappers_are_not_equal ... ok
+test pinned_manifest ... ok
+test unsupported_predicates_never_drop ... ok
+test rootless_cycle_and_budget ... ok
+test distinct_trait_identity ... ok
+test backend_failure_is_recorded ... ok
+test common_manifest_preserves_identity_and_rejects_pin_feature_changes ... ok
+test zero_repairs_means_one_initial_call ... ok
+test conditional_impl_wrong_type_not_proven ... ok
+test conflicting_generics_rejected ... ok
+test generic_inherent_methods_resolve_self_and_owner ... ok
+test conditional_impl_proven ... ok
+test reserves_borrow_during_later_dependency_construction ... ok
+test backtracks_cyclic_producer ... ok
+test ast_gate_rejects_compiling_deletion_and_constant_input ... ok
+test consistent_generics_compile ... ok
+test independent_instances_compile ... ok
+test runtime_reaches_target_and_scalar_input_influences_argument ... ok
+test nested_containers_compile ... ok
+test runtime_probe_accepts_actual_byte_wrapper ... ok
+test shared_borrows_reuse_values ... ok
+test borrow_conflicts_get_fresh_values ... ok
+test moved_values_are_not_reused ... ok
+test review_combine_counterexample_replans ... ok
+test runtime_probe_rejects_unused_core_and_constant_wrapper_input ... ok
+test slices_and_arrays_compile ... ok
+test repair_includes_code_constraints_and_budget ... ok
+test success_branches_and_failure_exit ... ok
+
+test result: ok. 32 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.69s
+
+   Doc-tests graft
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

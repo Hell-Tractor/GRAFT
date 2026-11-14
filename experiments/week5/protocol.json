@@ -1,0 +1,204 @@
+{
+  "schema": "graft-short-budget-protocol-v1",
+  "status": "preparing; formal targets not ready",
+  "user_duration_decision": "300 seconds per target, six repetitions; after each round update statistics and paper",
+  "user_scope_decision": "all 11 configurations continuously; exceeding previous 24-hour limit explicitly authorized",
+  "seconds_per_target": 300,
+  "rounds": 6,
+  "target_slots": 20,
+  "methods": [
+    "GRAFT",
+    "RULF",
+    "RPG",
+    "deepSURF",
+    "LLM-only",
+    "random-API+LLM",
+    "syntactic+LLM",
+    "no-cross-argument-unification",
+    "random-target",
+    "no-repair",
+    "deterministic-emitter"
+  ],
+  "versions": {
+    "autocfg": "1.5.0",
+    "base64": "0.22.1",
+    "bumpalo": "3.14.0",
+    "byteorder": "1.5.0",
+    "bytes": "1.11.1",
+    "chrono": "0.4.19",
+    "csv": "1.3.1",
+    "fixedbitset": "0.5.7",
+    "idna": "0.5.0",
+    "regex": "1.6.0",
+    "ryu": "1.0.20",
+    "time": "0.3.9",
+    "unicode-segmentation": "1.10.1"
+  },
+  "common_versions": {
+    "path": "/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week4/common-versions.json",
+    "sha256": "30d8b20ac41a2e46754b53546ad1fddad9993de5f2359fbaa1b77b1cbef61466"
+  },
+  "shared_lock": {
+    "path": "/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week4/shared-project/Cargo.lock",
+    "sha256": "0f9c3c695a2fc41ba38af211412a70675a3d0ce0b0098a1ffa959b3823b5b6f1"
+  },
+  "universes": {
+    "autocfg": {
+      "path": "/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week4/common-universes-v2/api_universes/autocfg.json",
+      "sha256": "592b64c20da450748286478d917164e5997c8b0a82fa842170a57c38a4ee19be"
+    },
+    "base64": {
+      "path": "/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week4/common-universes-v2/api_universes/base64.json",
+      "sha256": "96a9d751880877211ef4e43912b4e6ba275d9ef728f6d89a227d904e5b6d2552"
+    },
+    "bumpalo": {
+      "path": "/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week4/common-universes-v2/api_universes/bumpalo.json",
+      "sha256": "caff29da8b0d8086a6995e47687f9f171496190fd45d6a6a7790fa92d7a33734"
+    },
+    "byteorder": {
+      "path": "/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week4/common-universes-v2/api_universes/byteorder.json",
+      "sha256": "d10d49359dd7eea05efa3719f27f25e7b2c0a82512b3d9b8a13cc95030b478a5"
+    },
+    "bytes": {
+      "path": "/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week4/common-universes-v2/api_universes/bytes.json",
+      "sha256": "ea0c16086712d4f39d4a65c54bad49e7080f185548a33d902f0501714e999137"
+    },
+    "chrono": {
+      "path": "/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week4/common-universes-v2/api_universes/chrono.json",
+      "sha256": "ecdf9e59bb0143a4e9911dd0de2b502ee638be3da81f209012e903ad89798fee"
+    },
+    "csv": {
+      "path": "/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week4/common-universes-v2/api_universes/csv.json",
+      "sha256": "df3281c9421b8b5ebfc80f2c729006c5eeba9c4686eaed320484adc50fe772b0"
+    },
+    "fixedbitset": {
+      "path": "/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week4/common-universes-v2/api_universes/fixedbitset.json",
+      "sha256": "27bb16be82969a96d59488b966bacf17bb75aa914426fa2549fae2ae84c7a71f"
+    },
+    "idna": {
+      "path": "/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week4/common-universes-v2/api_universes/idna.json",
+      "sha256": "e2238b3d5e995c7eb5cb8649edab7cca4d426f13b1dba8054ff9ed992d2fbd46"
+    },
+    "regex": {
+      "path": "/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week4/common-universes-v2/api_universes/regex.json",
+      "sha256": "11d0f7fdd47502c159f9b40bf28db18646cfc6cfe6bb0fb337779d846abff59d"
+    },
+    "ryu": {
+      "path": "/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week4/common-universes-v2/api_universes/ryu.json",
+      "sha256": "fb3e37bf3e1520fcd832e93f579c43bbb2dacd429c45480f8ef132929f37b755"
+    },
+    "time": {
+      "path": "/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week4/common-universes-v2/api_universes/time.json",
+      "sha256": "9b5dbd51f73cf51a79d76a73bfa4d414501bfae501b8859ce667005cc4947905"
+    },
+    "unicode-segmentation": {
+      "path": "/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week4/common-universes-v2/api_universes/unicode-segmentation.json",
+      "sha256": "4d4cc21a6cb5977d389ab3620e651588e0bd641c4c70baac579945abaf903e85"
+    }
+  },
+  "max_workers": 56,
+  "workers_per_target": 1,
+  "observed_cpu_affinity": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63
+  ],
+  "worker_policy": "Controlled single AFL worker for every configuration; deepSURF export to this common executor must first be validated. Native double-worker topology is reported separately as a cost scenario.",
+  "root_seed": 20261109,
+  "generation_repetitions": 6,
+  "afl_seeds_per_generation": 1,
+  "repetition_policy": "Independent generation batch and fresh AFL corpus each round. Deterministic generators may reproduce identical hashes; record this. no-repair shares the first Full response in each matched slot. Do not count shared responses as independent generations.",
+  "failure_policy": "Keep all slots and all failures. Unprepared/unknown validity blocks launch; genuine recorded generation/compilation/no-target outcomes remain in round statistics; infrastructure gaps remain incomplete, never zeroed.",
+  "coverage_policy": "Exact function-entry evidence against public named definitions with bodies; union targets within a crate/round, average rounds without unioning them; unresolved mappings stay in denominator.",
+  "round_barrier": "Finish target runs and replay; save raw and cumulative statistics; update paper and build PDF successfully before starting next round.",
+  "hard_wall_deadline_seconds": null,
+  "previous_wall_limit_seconds": 86400,
+  "replay_timeout_seconds": 1800,
+  "generation_adapter_status": "Full policy migration and new ablation adapters still incomplete; never reuse legacy heuristic targets as checked Full",
+  "instrumentation_cfg_status": "pending final shared build; current universes use dev rustdoc",
+  "model": "deepseek-v4-pro",
+  "model_revision": "not exposed by current backend; save alias and raw responses",
+  "model_request_concurrency_limit": 16,
+  "max_repairs_after_initial": 3,
+  "paper": "/home/cym/workspace/GRAFT-2.0/GRAFTPaper",
+  "version_policy": "Uniformly downgrade all configurations together if necessary; immutable snapshots and lock changes require a new batch identity.",
+  "pass_gates": [
+    "sealed source and executable",
+    "unsafe contracts and side effects reviewed",
+    "actual input-to-call probe",
+    "same versions lock features and instrumentation cfg",
+    "verified replay-to-coverage adapter"
+  ],
+  "tectonic": "/home/cym/workspace/latex-tools/tectonic-0.17.0/tectonic",
+  "tectonic_cache": "/home/cym/workspace/latex-tools/cache/tectonic",
+  "model_endpoint": "https://api.deepseek.com/chat/completions",
+  "model_selection": "User authorized DeepSeek official service for every LLM arm; v4-pro is listed by the authenticated models endpoint.",
+  "credential_source": "~/.config/go-exit/deepseek.env:DEEPSEEK_API_KEY; child environment only, never persisted",
+  "shared_manifest": {
+    "path": "/home/cym/workspace/GRAFT-2.0/GRAFTTool/experiments/week4/shared-project/Cargo.toml",
+    "sha256": "42d605e7e1af6458274a37fd2306e29ed27b5baf7add191e60272d79098fc294"
+  },
+  "user_outbound_authorization": "Explicitly authorized for all six rounds: public crate API documentation, GRAFT plans, generated target source to DeepSeek official service for generation and repair.",
+  "operator_start_policy": "User will invoke scripts; do not start further model calibration or formal fuzzing automatically."
+}

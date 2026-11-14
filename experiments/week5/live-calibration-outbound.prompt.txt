@@ -1,0 +1,76 @@
+Render the following pinned SequencePlan as Rust. The deterministic graft_body function below is immutable: preserve its AST, including actual calls, order, type arguments, value bindings, branches, and input decoding. You may format/comment it and add one main wrapper. The standalone main must parse each command-line argument as a u8, pass those bytes (or empty bytes if no arguments) to graft_body, and print the returned trace. It will be probed on empty, 0, and 1 inputs with a three-second timeout. No other top-level items or crate attributes. Unsupported operations require replanning, never target deletion, constant substitution, version changes, or unsafe workarounds. Return Rust source only. Compilation, plan retention, and runtime reachability are separate outcomes.
+PLAN:
+{
+  "schema": "graft-plan-v1",
+  "crate_name": "base64",
+  "crate_version": "0.22.1",
+  "package_name": "base64",
+  "features": [],
+  "default_features": true,
+  "rustdoc_sha256": "2ed06d2a8e659b9e24e7bb151e2acb230c9f79258488e85b52fd66483ef81b0f",
+  "target": "514",
+  "steps": [
+    {
+      "kind": "input",
+      "value": 0,
+      "ty": {
+        "kind": "primitive",
+        "name": "usize"
+      }
+    },
+    {
+      "kind": "input",
+      "value": 1,
+      "ty": {
+        "kind": "primitive",
+        "name": "bool"
+      }
+    },
+    {
+      "kind": "call",
+      "instance": 0,
+      "api": "514",
+      "path": "base64::encoded_len",
+      "type_args": [],
+      "substitution": {},
+      "args": [
+        {
+          "value": 0,
+          "adapter": "move"
+        },
+        {
+          "value": 1,
+          "adapter": "move"
+        }
+      ],
+      "value": 2,
+      "ty": {
+        "kind": "nominal",
+        "identity": "2ed06d2a8e659b9e24e7bb151e2acb230c9f79258488e85b52fd66483ef81b0f:crate2:item134:core::option::Option",
+        "path": "core::option::Option",
+        "args": [
+          {
+            "kind": "primitive",
+            "name": "usize"
+          }
+        ]
+      }
+    }
+  ],
+  "obligations": [],
+  "unresolved": [],
+  "search_nodes": 3
+}
+IMMUTABLE CORE:
+extern crate alloc;
+#[allow(unused_mut, unused_variables)]
+pub fn graft_body(data: &[u8]) -> Vec<(usize, Vec<u8>)> {
+let mut trace = Vec::new();
+let mut v0: usize = usize::from_le_bytes(core::array::from_fn(|i| data.get((0 + i) % data.len().max(1)).copied().unwrap_or(0)));
+let mut v1: bool = data.get(16 % data.len().max(1)).copied().unwrap_or(0) & 1 != 0;
+let observed_0 = format!("{:?}", (v0, v1,)).into_bytes();
+let mut v2: core::option::Option<usize> = base64::encoded_len(v0, v1);
+if std::env::var_os("GRAFT_TRACE").is_some() { eprintln!("GRAFT_CALL:0:{}", String::from_utf8_lossy(&observed_0)); }
+trace.push((0, observed_0));
+trace
+}

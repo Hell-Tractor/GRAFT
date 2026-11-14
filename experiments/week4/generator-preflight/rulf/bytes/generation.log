@@ -1,0 +1,26 @@
+ Documenting bytes v1.11.1
+Fuzz Target Generator for Rust Libraries: v0.1.0
+Fuzz Target Renderer Init
+crate: bytes
+using bfs end point
+reverse search can not cover more nodes
+after backward search
+targets = 3342
+total length = 9893
+average time to visit = 201.89795918367346
+edge covered by reverse search = 175
+-----------STATISTICS-----------
+total nodes: 89
+total edges: 351
+covered nodes: 49
+covered edges: 55
+node coverage: 0.550561797752809
+edge coverage: 0.15669515669515668
+targets covered by reverse search: 0
+total targets: 33
+max length = 0
+total length = 99
+average time to fuzz each api = 2.020408163265306
+--------------------------------
+Fuzz Target Generator exits successfully. Total time cost: 1236 ms
+    Finished dev [unoptimized + debuginfo] target(s) in 1.28s

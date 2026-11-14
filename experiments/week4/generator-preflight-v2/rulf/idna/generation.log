@@ -1,0 +1,29 @@
+    Checking tinyvec v1.13.3
+    Checking unicode-bidi v0.3.18
+    Checking unicode-normalization v0.1.25
+ Documenting idna v0.5.0
+Fuzz Target Generator for Rust Libraries: v0.1.0
+Fuzz Target Renderer Init
+crate: idna
+using bfs end point
+reverse search can not cover more nodes
+after backward search
+targets = 399
+total length = 1134
+average time to visit = 162
+edge covered by reverse search = 0
+-----------STATISTICS-----------
+total nodes: 18
+total edges: 61
+covered nodes: 7
+covered edges: 0
+node coverage: 0.3888888888888889
+edge coverage: 0
+targets covered by reverse search: 0
+total targets: 7
+max length = 0
+total length = 7
+average time to fuzz each api = 1
+--------------------------------
+Fuzz Target Generator exits successfully. Total time cost: 549 ms
+    Finished dev [unoptimized + debuginfo] target(s) in 1.41s

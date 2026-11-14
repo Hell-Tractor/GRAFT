@@ -1,0 +1,10 @@
+{
+  "compiled": 1421,
+  "configured_successful_target_hours": 2317.0,
+  "covered": 1369,
+  "generated": 1467,
+  "macro_api_percent": 80.75662611035364,
+  "micro_api_percent": 78.45272206303724,
+  "note": "recomputed historical claims; not revalidated execution measurements",
+  "total": 1745
+}
